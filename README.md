@@ -4,8 +4,10 @@
 
 **Autor:** Mauro Risonho de Paula Assumpção  
 **Data de Criação:** 5 de Dezembro de 2025  
+**Última Atualização:** 5 de Dezembro de 2025 - Fase 2 Concluída  
 **Licença:** MIT License  
-**Área:** Computação Neuromórfica aplicada à Cybersecurity Bancária
+**Área:** Computação Neuromórfica aplicada à Cybersecurity Bancária  
+**Status:** 🟢 Fase 2 Completa - Otimização e Performance
 
 ---
 
@@ -295,6 +297,63 @@ for message in consumer:
     if result['is_fraud']:
         producer.send('fraud-alerts', result)
 ```
+
+---
+
+## 🛠️ Roadmap
+
+### ✅ Fase 1 - Proof of Concept (Q4 2025) - CONCLUÍDA
+- [x] Implementação base com Brian2
+- [x] Encoding schemes (rate, temporal, population, latency)
+- [x] STDP learning rule
+- [x] LIF neuron models
+- [x] Pipeline end-to-end
+- [x] Notebooks demonstrativos
+- [x] Documentação técnica
+
+### ✅ Fase 2 - Otimização e Performance (Q4 2025) - CONCLUÍDA
+- [x] Integração com dataset real (Credit Card Fraud)
+- [x] Otimização de hiperparâmetros (Grid/Random/Bayesian)
+- [x] Performance profiling e benchmarking
+- [x] Advanced encoding strategies (Adaptive, Burst, Phase, Rank Order, Ensemble)
+- [x] Framework de comparação com ML tradicional
+- [x] Suite de testes abrangente (45+ tests)
+
+### 🚧 Fase 3 - Produção (Q1-Q2 2026) - PLANEJADA
+- [ ] API REST completa com FastAPI
+- [ ] Integração com Kafka para streaming
+- [ ] Containerização Docker otimizada
+- [ ] Monitoramento e logging (Prometheus/Grafana)
+- [ ] CI/CD pipeline
+- [ ] Documentação de deploy
+- [ ] Benchmark contra XGBoost/Random Forest
+- [ ] Explicabilidade (SHAP para SNNs)
+
+### 🔮 Fase 4 - Hardware Neuromórfico (Q3 2026) - FUTURA
+- [ ] Integração com Intel Loihi 2
+- [ ] Deploy em IBM TrueNorth
+- [ ] Otimização para BrainScaleS
+- [ ] Comparação de eficiência energética
+- [ ] Análise de consumo vs. acurácia
+
+---
+
+## 📊 Status do Projeto
+
+| Componente | Status | Fase |
+|------------|--------|------|
+| Core SNN Engine | ✅ Completo | 1 |
+| Spike Encoders | ✅ Completo | 1, 2 |
+| STDP Learning | ✅ Completo | 1 |
+| Dataset Integration | ✅ Completo | 2 |
+| Hyperparameter Optimization | ✅ Completo | 2 |
+| Performance Profiling | ✅ Completo | 2 |
+| Model Comparison | ✅ Completo | 2 |
+| Testing Suite | ✅ Completo | 2 |
+| Production API | 🚧 Planejada | 3 |
+| Hardware Neuromorphic | 🔮 Futura | 4 |
+
+**Progresso Geral:** 60% (Fases 1 e 2 completas)
 
 ---
 
