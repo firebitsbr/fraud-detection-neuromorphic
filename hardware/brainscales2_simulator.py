@@ -15,6 +15,11 @@ Features:
 
 Author: Mauro Risonho de Paula Assumpção
 Date: December 5, 2025
+License: MIT License
+"""
+
+Author: Mauro Risonho de Paula Assumpção
+Date: December 5, 2025
 """
 
 import numpy as np

@@ -5,6 +5,7 @@ Provides a simple interface to interact with the fraud detection REST API.
 
 Author: Mauro Risonho de Paula Assumpção
 Date: December 5, 2025
+License: MIT License
 """
 
 import requests

@@ -10,6 +10,7 @@ Compares energy efficiency across different neuromorphic platforms:
 
 Author: Mauro Risonho de Paula Assumpção
 Date: December 5, 2025
+License: MIT License
 """
 
 import numpy as np

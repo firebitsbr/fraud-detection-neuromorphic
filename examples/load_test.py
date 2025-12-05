@@ -5,6 +5,7 @@ Tests API performance under various load conditions.
 
 Author: Mauro Risonho de Paula Assumpção
 Date: December 5, 2025
+License: MIT License
 """
 
 import asyncio

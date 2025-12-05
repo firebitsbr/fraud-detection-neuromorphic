@@ -6,6 +6,7 @@ Provides seamless deployment from simulation to physical hardware.
 
 Author: Mauro Risonho de Paula Assumpção
 Date: December 5, 2025
+License: MIT License
 """
 
 import numpy as np
