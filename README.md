@@ -106,25 +106,52 @@ Nosso sistema codifica **features de transação em spikes temporais** e usa uma
 
 ## 🚀 Como Executar
 
-### Opção 1: Docker (Recomendado)
+### ⚡ Quick Start - Docker (Recomendado)
+
+**Execução completa em 3 comandos:**
 
 ```bash
-# Clone o repositório
+# 1. Clone o repositório
 git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
-cd 01_fraud_neuromorphic
+cd fraud-detection-neuromorphic
 
-# Build da imagem
-cd docker
-docker build -t fraud-neuromorphic .
+# 2. Inicie todos os serviços
+./start-local.sh
+# ou
+make start
 
-# Executar
-docker run -p 8888:8888 fraud-neuromorphic
-
-# Acessar JupyterLab
-# http://localhost:8888
+# 3. Acesse os serviços
+# API Principal:  http://localhost:8000
+# JupyterLab:     http://localhost:8888
+# Grafana:        http://localhost:3000 (admin/admin)
+# Prometheus:     http://localhost:9090
 ```
 
-### Opção 2: Instalação Local
+**Serviços incluídos:**
+- 🌐 API REST (porta 8000)
+- 💻 Loihi 2 Simulator (porta 8001)
+- 🧠 BrainScaleS-2 Emulator (porta 8002)
+- ⚙️ Cluster Controller (porta 8003)
+- 📊 Grafana + Prometheus (monitoramento)
+- 🗄️ Redis (cache)
+
+📘 **Documentação completa:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)  
+⚡ **Referência rápida:** [QUICKSTART.md](QUICKSTART.md)
+
+### Opção 2: Docker Compose Manual
+
+```bash
+# Build e start
+docker-compose up -d
+
+# Ver logs
+docker-compose logs -f
+
+# Parar
+docker-compose down
+```
+
+### Opção 3: Instalação Local (Sem Docker)
 
 ```bash
 # Criar ambiente virtual
@@ -139,6 +166,38 @@ python src/main.py
 
 # Ou explorar notebooks
 jupyter lab notebooks/
+```
+
+---
+
+## 🧪 Testando o Sistema
+
+### Health Check
+```bash
+curl http://localhost:8000/health
+```
+
+### Predição de Fraude
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 1500.50,
+    "merchant": "Electronics Store",
+    "location": "New York",
+    "time": "2025-12-05T10:30:00Z"
+  }'
+```
+
+**Resposta:**
+```json
+{
+  "fraud_probability": 0.85,
+  "is_fraud": true,
+  "confidence": 0.92,
+  "inference_time_ms": 2.3,
+  "chip_used": "loihi2"
+}
 ```
 
 ---
