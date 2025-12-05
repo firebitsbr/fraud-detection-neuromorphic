@@ -1,0 +1,37 @@
+# BrainScaleS-2 Analog Simulator Docker Image
+# Software emulation of BrainScaleS-2 analog neuromorphic hardware
+
+FROM python:3.10-slim
+
+LABEL maintainer="Mauro Risonho de Paula Assumpção"
+LABEL description="BrainScaleS-2 Analog Neuromorphic Simulator"
+LABEL version="1.0.0"
+
+WORKDIR /app
+
+# Install dependencies including scipy for ODE integration
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    gfortran \
+    libopenblas-dev \
+    liblapack-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt scipy
+
+# Copy simulator code
+COPY hardware/brainscales2_simulator.py /app/hardware/
+COPY src/ /app/src/
+
+EXPOSE 8001
+
+ENV PYTHONUNBUFFERED=1
+ENV BRAINSCALES_SPEEDUP=1000
+ENV LOG_LEVEL=INFO
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import hardware.brainscales2_simulator; print('OK')" || exit 1
+
+CMD ["python", "-m", "hardware.brainscales2_simulator"]

@@ -1,0 +1,45 @@
+# Loihi 2 Simulator Docker Image
+# Software emulation of Intel Loihi 2 neuromorphic chip
+
+FROM python:3.10-slim
+
+LABEL maintainer="Mauro Risonho de Paula Assumpção"
+LABEL description="Loihi 2 Neuromorphic Chip Simulator"
+LABEL version="1.0.0"
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    make \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy simulator code
+COPY hardware/loihi2_simulator.py /app/hardware/
+COPY hardware/loihi_adapter.py /app/hardware/
+COPY src/ /app/src/
+
+# Expose port for API (if needed)
+EXPOSE 8000
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV LOIHI_SIMULATION_MODE=1
+ENV LOG_LEVEL=INFO
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import hardware.loihi2_simulator; print('OK')" || exit 1
+
+# Default command: Run benchmark
+CMD ["python", "-m", "hardware.loihi2_simulator"]

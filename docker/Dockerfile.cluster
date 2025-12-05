@@ -1,0 +1,34 @@
+# Distributed Cluster Controller Docker Image
+# Manages multi-chip neuromorphic cluster
+
+FROM python:3.10-slim
+
+LABEL maintainer="Mauro Risonho de Paula Assumpção"
+LABEL description="Distributed Neuromorphic Cluster Controller"
+LABEL version="1.0.0"
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy cluster code
+COPY scaling/distributed_cluster.py /app/scaling/
+COPY hardware/ /app/hardware/
+COPY src/ /app/src/
+
+EXPOSE 8002
+
+ENV PYTHONUNBUFFERED=1
+ENV LOAD_BALANCING_STRATEGY=least_loaded
+ENV NUM_WORKERS=8
+ENV LOG_LEVEL=INFO
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import scaling.distributed_cluster; print('OK')" || exit 1
+
+CMD ["python", "-m", "scaling.distributed_cluster"]
