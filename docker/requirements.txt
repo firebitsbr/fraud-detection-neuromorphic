@@ -1,0 +1,72 @@
+# Requirements for Neuromorphic Fraud Detection System
+#
+# Description: Lista completa de dependências Python necessárias para executar
+#              o sistema de detecção de fraude neuromórfica.
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
+#
+# Installation: pip install -r requirements.txt
+
+# Core Scientific Computing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Brian2 - Spiking Neural Network Simulator
+brian2>=2.5.1
+
+# NEST Simulator (optional - for large-scale simulations)
+# nest-simulator>=3.5  # Uncomment if needed
+
+# PyTorch - For preprocessing and feature engineering
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Machine Learning Utilities
+scikit-learn>=1.3.0
+
+# Jupyter and Interactive Computing
+jupyterlab>=4.0.0
+ipykernel>=6.25.0
+ipywidgets>=8.1.0
+notebook>=7.0.0
+
+# Data Visualization
+plotly>=5.17.0
+bokeh>=3.2.0
+
+# API and Web Framework (for deployment)
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Data Streaming (optional - for Kafka integration)
+kafka-python>=2.0.2
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Code Quality
+black>=23.7.0
+flake8>=6.1.0
+mypy>=1.5.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3
+tqdm>=4.66.0
+
+# Configuration Management
+pyyaml>=6.0.1
+python-dotenv>=1.0.0
+
+# Monitoring and Logging
+loguru>=0.7.0
+
+# Performance Profiling
+memory-profiler>=0.61.0
+line-profiler>=4.1.0
