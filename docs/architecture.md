@@ -4,6 +4,7 @@
 
 **Autor:** Mauro Risonho de Paula Assumpção  
 **Data de Criação:** 5 de Dezembro de 2025  
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
 **Licença:** MIT License
 
 ---

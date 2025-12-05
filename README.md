@@ -5,6 +5,7 @@
 **Autor:** Mauro Risonho de Paula Assumpção  
 **Data de Criação:** 5 de Dezembro de 2025  
 **Última Atualização:** 5 de Dezembro de 2025 - Fase 5 Concluída  
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
 **Licença:** MIT License  
 **Área:** Computação Neuromórfica aplicada à Cybersecurity Bancária  
 **Status:** 🟢 Fase 5 Completa - Distributed Scaling & Multi-Chip
@@ -446,6 +447,7 @@ for message in consumer:
 
 **Mauro Risonho de Paula Assumpção**  
 Especialista em Computação Neuromórfica e Cybersecurity  
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
 [GitHub](https://github.com/maurorisonho) | [LinkedIn](https://linkedin.com/in/maurorisonho)
 
 ---

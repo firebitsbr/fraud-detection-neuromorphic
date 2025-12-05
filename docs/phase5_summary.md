@@ -2,7 +2,8 @@
 
 **Status:** ✅ Complete  
 **Date:** December 5, 2025  
-**Author:** Mauro Risonho de Paula Assumpção
+**Author:** Mauro Risonho de Paula Assumpção  
+**Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ---
 
