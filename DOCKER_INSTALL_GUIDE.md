@@ -12,6 +12,22 @@ Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas op
 
 ### Fedora / RHEL / CentOS
 
+#### Opção 1: Script Automatizado (Recomendado) ⚡
+
+```bash
+# Baixar e executar script
+cd /path/to/fraud-detection-neuromorphic
+sudo ./install-docker-fedora.sh
+
+# Fazer logout/login ou executar
+newgrp docker
+
+# Testar
+docker run hello-world
+```
+
+#### Opção 2: Instalação Manual
+
 ```bash
 # 1. Remover versões antigas (se existirem)
 sudo dnf remove docker \
@@ -30,7 +46,7 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
 # 3. Instalar Docker Engine
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # 4. Iniciar e habilitar Docker
 sudo systemctl start docker

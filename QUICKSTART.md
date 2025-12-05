@@ -19,6 +19,17 @@ make start
 
 ## 📦 Requisitos
 
+### Docker Não Instalado?
+
+**Fedora/RHEL:**
+```bash
+sudo ./install-docker-fedora.sh
+newgrp docker
+```
+
+**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
+
+### Requisitos Mínimos
 - Docker 20.10+
 - Docker Compose 2.0+
 - 8GB RAM, 10GB disco
