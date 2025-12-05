@@ -17,7 +17,7 @@ Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas op
 ```bash
 # Baixar e executar script
 cd /path/to/fraud-detection-neuromorphic
-sudo ./install-docker-fedora.sh
+sudo ./scripts/install-docker-fedora.sh
 
 # Fazer logout/login ou executar
 newgrp docker
@@ -465,9 +465,9 @@ Após instalar Docker com sucesso:
 
 ## 📖 Documentação do Projeto
 
-- **Quick Start:** [QUICKSTART.md](QUICKSTART.md)
+- **Quick Start:** [QUICKSTART.md](../QUICKSTART.md)
 - **Guia Docker Completo:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
-- **README Principal:** [README.md](README.md)
+- **README Principal:** [README.md](../README.md)
 
 ---
 

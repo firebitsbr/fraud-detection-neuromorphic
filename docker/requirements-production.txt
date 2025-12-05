@@ -1,6 +1,10 @@
 # Production Requirements for Neuromorphic Fraud Detection API
+#
+# Description: Production dependencies for API
+#
 # Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
+# Created: December 5, 2025
+# License: MIT License
 
 # Core Framework
 fastapi==0.104.1

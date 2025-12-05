@@ -1,6 +1,10 @@
 # Prometheus Configuration for Fraud Detection Monitoring
+#
+# Description: Configuration for Prometheus monitoring
+#
 # Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
+# Created: December 5, 2025
+# License: MIT License
 
 global:
   scrape_interval: 15s

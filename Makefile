@@ -14,6 +14,9 @@ GREEN := \033[0;32m
 YELLOW := \033[1;33m
 NC := \033[0m
 
+# Detect Docker Compose command (v2 uses 'docker compose', v1 uses '$(COMPOSE_CMD)')
+COMPOSE_CMD := $(shell docker compose version > /dev/null 2>&1 && echo 'docker compose' || echo '$(COMPOSE_CMD)')
+
 help: ## Mostra esta mensagem de ajuda
 	@echo "$(BLUE)╔═══════════════════════════════════════════════════════╗$(NC)"
 	@echo "$(BLUE)║  Neuromorphic Fraud Detection - Comandos Make        ║$(NC)"
@@ -24,13 +27,13 @@ help: ## Mostra esta mensagem de ajuda
 
 start: ## Inicia todos os serviços Docker
 	@echo "$(GREEN)→ Iniciando serviços...$(NC)"
-	@docker-compose up -d
+	@$(COMPOSE_CMD) up -d
 	@echo "$(GREEN)✓ Serviços iniciados!$(NC)"
 	@make status
 
 stop: ## Para todos os serviços Docker
 	@echo "$(YELLOW)→ Parando serviços...$(NC)"
-	@docker-compose down
+	@$(COMPOSE_CMD) down
 	@echo "$(GREEN)✓ Serviços parados!$(NC)"
 
 restart: ## Reinicia todos os serviços
@@ -38,18 +41,18 @@ restart: ## Reinicia todos os serviços
 	@make start
 
 logs: ## Mostra logs em tempo real
-	@docker-compose logs -f
+	@$(COMPOSE_CMD) logs -f
 
 build: ## Reconstrói todas as imagens Docker
 	@echo "$(YELLOW)→ Reconstruindo imagens...$(NC)"
-	@docker-compose build --no-cache
+	@$(COMPOSE_CMD) build --no-cache
 	@echo "$(GREEN)✓ Imagens reconstruídas!$(NC)"
 
 build-start: build start ## Reconstrói e inicia
 
 clean: ## Para serviços e remove volumes
 	@echo "$(YELLOW)→ Limpando sistema...$(NC)"
-	@docker-compose down -v
+	@$(COMPOSE_CMD) down -v
 	@echo "$(GREEN)✓ Sistema limpo!$(NC)"
 
 clean-all: clean ## Limpeza completa (incluindo imagens)
@@ -60,7 +63,7 @@ clean-all: clean ## Limpeza completa (incluindo imagens)
 status: ## Mostra status dos containers
 	@echo ""
 	@echo "$(BLUE)Status dos Serviços:$(NC)"
-	@docker-compose ps
+	@$(COMPOSE_CMD) ps
 	@echo ""
 
 health: ## Verifica saúde dos serviços
@@ -81,31 +84,31 @@ health: ## Verifica saúde dos serviços
 
 test: ## Executa testes
 	@echo "$(BLUE)→ Executando testes...$(NC)"
-	@docker-compose exec fraud_api pytest tests/ -v
+	@$(COMPOSE_CMD) exec fraud_api pytest tests/ -v
 	@echo "$(GREEN)✓ Testes completos!$(NC)"
 
 test-coverage: ## Executa testes com cobertura
 	@echo "$(BLUE)→ Executando testes com cobertura...$(NC)"
-	@docker-compose exec fraud_api pytest tests/ --cov=src --cov=api --cov-report=html
+	@$(COMPOSE_CMD) exec fraud_api pytest tests/ --cov=src --cov=api --cov-report=html
 	@echo "$(GREEN)✓ Relatório gerado em htmlcov/index.html$(NC)"
 
 shell-api: ## Abre shell no container da API
-	@docker-compose exec fraud_api bash
+	@$(COMPOSE_CMD) exec fraud_api bash
 
 shell-loihi: ## Abre shell no Loihi simulator
-	@docker-compose exec loihi_simulator bash
+	@$(COMPOSE_CMD) exec loihi_simulator bash
 
 shell-cluster: ## Abre shell no cluster controller
-	@docker-compose exec cluster_controller bash
+	@$(COMPOSE_CMD) exec cluster_controller bash
 
 logs-api: ## Mostra logs da API
-	@docker-compose logs -f fraud_api
+	@$(COMPOSE_CMD) logs -f fraud_api
 
 logs-loihi: ## Mostra logs do Loihi
-	@docker-compose logs -f loihi_simulator
+	@$(COMPOSE_CMD) logs -f loihi_simulator
 
 logs-cluster: ## Mostra logs do cluster
-	@docker-compose logs -f cluster_controller
+	@$(COMPOSE_CMD) logs -f cluster_controller
 
 urls: ## Mostra URLs dos serviços
 	@echo ""
@@ -125,7 +128,7 @@ urls: ## Mostra URLs dos serviços
 
 dev: ## Modo desenvolvimento (com reload automático)
 	@echo "$(BLUE)→ Iniciando em modo desenvolvimento...$(NC)"
-	@docker-compose up
+	@$(COMPOSE_CMD) up
 
 load-test: ## Executa teste de carga
 	@echo "$(BLUE)→ Executando teste de carga...$(NC)"
@@ -133,7 +136,7 @@ load-test: ## Executa teste de carga
 
 benchmark: ## Executa benchmarks de performance
 	@echo "$(BLUE)→ Executando benchmarks...$(NC)"
-	@docker-compose exec fraud_api python tests/test_scaling.py
+	@$(COMPOSE_CMD) exec fraud_api python tests/test_scaling.py
 
 monitor: ## Abre Grafana para monitoramento
 	@echo "$(GREEN)→ Abrindo Grafana...$(NC)"
@@ -141,7 +144,7 @@ monitor: ## Abre Grafana para monitoramento
 
 install-deps: ## Instala dependências locais (sem Docker)
 	@echo "$(BLUE)→ Instalando dependências...$(NC)"
-	@pip install -r docker/requirements.txt
+	@pip install -r requirements.txt
 	@echo "$(GREEN)✓ Dependências instaladas!$(NC)"
 
 format: ## Formata código com Black

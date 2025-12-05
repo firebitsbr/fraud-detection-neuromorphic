@@ -58,7 +58,12 @@ check_docker() {
 }
 
 check_docker_compose() {
-    if ! command -v docker-compose &> /dev/null && ! docker compose version &> /dev/null; then
+    # Try modern 'docker compose' first, then legacy 'docker-compose'
+    if docker compose version &> /dev/null; then
+        COMPOSE_CMD="docker compose"
+    elif command -v docker-compose &> /dev/null; then
+        COMPOSE_CMD="docker-compose"
+    else
         print_error "Docker Compose não está instalado!"
         echo "Instale o Docker Compose: https://docs.docker.com/compose/install/"
         exit 1
@@ -77,10 +82,10 @@ start_services() {
     
     if [ "$1" == "--build" ]; then
         print_info "Reconstruindo imagens..."
-        docker-compose build --no-cache
+        $COMPOSE_CMD build --no-cache
     fi
     
-    docker-compose up -d
+    $COMPOSE_CMD up -d
     
     print_success "Serviços iniciados!"
     echo ""
@@ -111,24 +116,24 @@ start_services() {
 
 stop_services() {
     print_info "Parando serviços..."
-    docker-compose down
+    $COMPOSE_CMD down
     print_success "Serviços parados!"
 }
 
 stop_services_and_clean() {
     print_warning "Parando serviços e removendo volumes..."
-    docker-compose down -v
+    $COMPOSE_CMD down -v
     print_success "Serviços parados e volumes removidos!"
 }
 
 view_logs() {
     print_info "Visualizando logs (Ctrl+C para sair)..."
-    docker-compose logs -f
+    $COMPOSE_CMD logs -f
 }
 
 show_status() {
     print_info "Status dos serviços:"
-    docker-compose ps
+    $COMPOSE_CMD ps
 }
 
 show_usage() {

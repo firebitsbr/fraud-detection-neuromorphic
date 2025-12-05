@@ -8,7 +8,7 @@
 
 ## 🎯 Documentação Principal
 
-### [README.md](README.md)
+### [README.md](../README.md)
 **Visão geral completa do projeto**
 - Descrição do sistema
 - Arquitetura neuromórfica
@@ -22,7 +22,7 @@
 
 ## 🐳 Docker - Execução Local
 
-### [QUICKSTART.md](QUICKSTART.md) ⚡ COMECE AQUI!
+### [QUICKSTART.md](../QUICKSTART.md) ⚡ COMECE AQUI!
 **Guia de início rápido - 3 comandos para rodar tudo**
 - Execução em 3 passos
 - Comandos principais (Make)
@@ -167,11 +167,11 @@
 ## 📊 Como Navegar
 
 ### Para Começar Rapidamente
-1. ✅ [QUICKSTART.md](QUICKSTART.md) - 3 comandos
+1. ✅ [QUICKSTART.md](../QUICKSTART.md) - 3 comandos
 2. ✅ [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md) - Se precisar instalar Docker
 
 ### Para Desenvolvedores
-1. 📖 [README.md](README.md) - Entender o projeto
+1. 📖 [README.md](../README.md) - Entender o projeto
 2. 📖 [docs/explanation.md](docs/explanation.md) - Fundamentos
 3. 📖 [docs/architecture.md](docs/architecture.md) - Arquitetura
 4. 🐳 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Setup completo
@@ -183,7 +183,7 @@
 3. 🐳 [DOCKER_IMPLEMENTATION_SUMMARY.md](DOCKER_IMPLEMENTATION_SUMMARY.md) - Resumo técnico
 
 ### Para Pesquisa Acadêmica
-1. 📖 [README.md](README.md) - Overview
+1. 📖 [README.md](../README.md) - Overview
 2. 📖 [docs/explanation.md](docs/explanation.md) - Teoria
 3. 📊 [docs/PHASE3_COMPLETE.md](docs/PHASE3_COMPLETE.md) - Infrastructure
 4. 📊 [docs/PHASE4_COMPLETE.md](docs/PHASE4_COMPLETE.md) - Hardware
@@ -237,7 +237,7 @@ README.md (seções: Visão Geral, Caso de Uso, Resultados)
 👉 [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
 
 ### Preciso rodar o projeto agora
-👉 [QUICKSTART.md](QUICKSTART.md)
+👉 [QUICKSTART.md](../QUICKSTART.md)
 
 ### Preciso entender SNNs
 👉 [docs/explanation.md](docs/explanation.md)
@@ -255,7 +255,7 @@ README.md (seções: Visão Geral, Caso de Uso, Resultados)
 👉 [docs/architecture.md](docs/architecture.md)
 
 ### Preciso ver os resultados
-👉 [README.md](README.md) → Seção "Resultados"
+👉 [README.md](../README.md) → Seção "Resultados"
 
 ### Preciso troubleshooting
 👉 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) → Seção "Solução de Problemas"

@@ -1,8 +1,12 @@
 version: '3.8'
 
 # Docker Compose for Neuromorphic Fraud Detection Production Stack
+#
+# Description: Production stack configuration
+#
 # Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
+# Created: December 5, 2025
+# License: MIT License
 
 services:
   # Zookeeper for Kafka

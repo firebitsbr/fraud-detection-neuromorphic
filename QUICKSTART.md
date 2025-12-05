@@ -23,11 +23,11 @@ make start
 
 **Fedora/RHEL:**
 ```bash
-sudo ./install-docker-fedora.sh
+sudo ./scripts/install-docker-fedora.sh
 newgrp docker
 ```
 
-**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
+**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](docs/DOCKER_INSTALL_GUIDE.md)
 
 ### Requisitos Mínimos
 - Docker 20.10+
@@ -112,7 +112,7 @@ curl -X POST http://localhost:8000/predict \
 
 ## 🔗 Documentação Completa
 
-📘 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Guia completo
+📘 [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia completo
 
 ## 📝 Arquitetura
 

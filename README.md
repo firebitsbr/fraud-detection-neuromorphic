@@ -135,7 +135,7 @@ make start
 - 📊 Grafana + Prometheus (monitoramento)
 - 🗄️ Redis (cache)
 
-📘 **Documentação completa:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)  
+📘 **Documentação completa:** [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md)  
 ⚡ **Referência rápida:** [QUICKSTART.md](QUICKSTART.md)
 
 ### Opção 2: Docker Compose Manual
@@ -159,7 +159,7 @@ python3.10 -m venv venv
 source venv/bin/activate
 
 # Instalar dependências
-pip install -r docker/requirements.txt
+pip install -r requirements.txt
 
 # Executar pipeline principal
 python src/main.py

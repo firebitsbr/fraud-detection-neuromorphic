@@ -1,5 +1,10 @@
 # Loihi 2 Simulator Docker Image
-# Software emulation of Intel Loihi 2 neuromorphic chip
+#
+# Description: Software emulation of Intel Loihi 2 neuromorphic chip
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
 
 FROM python:3.10-slim
 

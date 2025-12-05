@@ -3,6 +3,7 @@
 # Production Deployment Script
 # Author: Mauro Risonho de Paula Assumpção
 # Date: December 5, 2025
+# License: MIT License
 # Description: Deploy Neuromorphic Fraud Detection stack to production
 
 set -e

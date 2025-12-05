@@ -1,5 +1,10 @@
 # Phase 5: Multi-Chip Distributed Neuromorphic Cluster
-# Complete stack for scalable fraud detection
+#
+# Description: Complete stack for scalable fraud detection
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
 
 version: '3.8'
 

@@ -1,5 +1,10 @@
 # BrainScaleS-2 Analog Simulator Docker Image
-# Software emulation of BrainScaleS-2 analog neuromorphic hardware
+#
+# Description: Software emulation of BrainScaleS-2 analog neuromorphic hardware
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
 
 FROM python:3.10-slim
 

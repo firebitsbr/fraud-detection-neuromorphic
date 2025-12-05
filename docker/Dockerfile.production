@@ -1,5 +1,10 @@
 # Production Dockerfile for Neuromorphic Fraud Detection API
-# Multi-stage build for optimized image size
+#
+# Description: Multi-stage build for optimized image size
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
 
 # Stage 1: Build stage
 FROM python:3.10-slim as builder
