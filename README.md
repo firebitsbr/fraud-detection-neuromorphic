@@ -110,7 +110,7 @@ Nosso sistema codifica **features de transação em spikes temporais** e usa uma
 
 ```bash
 # Clone o repositório
-git clone <seu-repo>
+git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd 01_fraud_neuromorphic
 
 # Build da imagem

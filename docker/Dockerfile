@@ -30,26 +30,31 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements
-COPY requirements.txt .
+# Copy requirements - use CI version or full version
+COPY docker/requirements.txt /app/requirements.txt
 
 # Install Python dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r /app/requirements.txt
 
 # Copy project files
-COPY ../src /app/src
-COPY ../notebooks /app/notebooks
+COPY src /app/src
+COPY api /app/api
+COPY notebooks /app/notebooks
+COPY hardware /app/hardware
+COPY scaling /app/scaling
+COPY tests /app/tests
 
 # Create directories for models and data
-RUN mkdir -p /app/models /app/data
+RUN mkdir -p /app/models /app/data /app/logs
 
-# Expose JupyterLab port
-EXPOSE 8888
+# Expose ports
+EXPOSE 8888 8000
 
 # Set environment variables
 ENV PYTHONPATH=/app
 ENV JUPYTER_ENABLE_LAB=yes
+ENV FLASK_APP=api/app.py
 
 # Default command: Start JupyterLab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
