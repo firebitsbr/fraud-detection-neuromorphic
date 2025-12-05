@@ -1,0 +1,324 @@
+# Examples - Fraud Detection API
+
+This directory contains example scripts for interacting with the fraud detection system.
+
+## Contents
+
+1. **`api_client.py`** - Python client library for the REST API
+2. **`load_test.py`** - Load testing suite
+3. **`kafka_producer_example.py`** - Kafka transaction producer
+4. **`notebooks/`** - Jupyter notebooks with interactive examples
+
+---
+
+## Prerequisites
+
+```bash
+# Install required packages
+pip install requests aiohttp kafka-python
+```
+
+---
+
+## 1. API Client (`api_client.py`)
+
+Simple Python client for interacting with the REST API.
+
+### Basic Usage
+
+```python
+from api_client import FraudDetectionClient
+
+# Initialize client
+client = FraudDetectionClient("http://localhost:8000")
+
+# Single prediction
+transaction = {
+    "time": 12345,
+    "amount": 150.00,
+    "v1": 0.5, "v2": -1.2, ..., "v28": 0.3
+}
+
+result = client.predict(transaction)
+print(f"Fraud: {result['is_fraud']}")
+print(f"Score: {result['fraud_score']:.4f}")
+
+# Batch prediction
+transactions = [transaction1, transaction2, ...]
+results = client.predict_batch(transactions)
+
+# Get metrics
+metrics = client.get_metrics()
+print(f"Avg Latency: {metrics['latency_ms']['avg']:.2f}ms")
+```
+
+### Run Demo
+
+```bash
+# Make sure API is running
+docker-compose -f docker/docker-compose.production.yml up -d
+
+# Run demo
+python examples/api_client.py
+```
+
+Expected output:
+```
+=== Fraud Detection API Client Demo ===
+
+1. Checking API health...
+   Status: healthy
+   Uptime: 123.5s
+   Model: True
+
+2. Getting model information...
+   Type: SNN
+   Version: 1.0.0
+
+3. Testing single prediction...
+   Fraud Detected: False
+   Fraud Score: 0.1234
+   Latency: 15.23ms
+
+...
+```
+
+---
+
+## 2. Load Testing (`load_test.py`)
+
+Comprehensive load testing suite for performance evaluation.
+
+### Run Load Tests
+
+```bash
+# Run full test suite
+python examples/load_test.py
+```
+
+### Test Scenarios
+
+1. **Warm-up** - 10 requests to initialize
+2. **Burst Load** - 100 concurrent requests
+3. **Sustained Load** - 10 req/s for 30s
+4. **High Throughput** - 500 concurrent requests
+5. **Batch Predictions** - 50 batches of 100 transactions
+
+### Expected Output
+
+```
+============================================================
+Test: Burst Load (100 concurrent)
+============================================================
+Total Requests:       100
+Successful:           100
+Failed:               0
+Success Rate:         100.00%
+Total Duration:       2.34s
+Requests/Second:      42.74
+
+Latency Metrics:
+  Average:            23.45ms
+  P95:                45.67ms
+  P99:                56.78ms
+============================================================
+```
+
+### Custom Tests
+
+```python
+from load_test import LoadTester
+import asyncio
+
+async def custom_test():
+    tester = LoadTester("http://localhost:8000")
+    
+    # Test 1000 concurrent requests
+    result = await tester.run_concurrent_requests(1000)
+    
+    # Test sustained 50 req/s for 60s
+    result = await tester.run_sustained_load(
+        duration_s=60,
+        requests_per_second=50
+    )
+
+asyncio.run(custom_test())
+```
+
+---
+
+## 3. Kafka Producer (`kafka_producer_example.py`)
+
+Simulate transaction streams for real-time fraud detection.
+
+### Stream Mode
+
+Continuous transaction stream:
+
+```bash
+python examples/kafka_producer_example.py \
+    --mode stream \
+    --broker localhost:9092 \
+    --topic transactions \
+    --rate 10.0 \
+    --duration 60
+```
+
+Parameters:
+- `--broker`: Kafka broker address
+- `--topic`: Topic name
+- `--rate`: Transactions per second
+- `--duration`: Duration in seconds
+
+### Batch Mode
+
+Send a batch of transactions:
+
+```bash
+python examples/kafka_producer_example.py \
+    --mode batch \
+    --broker localhost:9092 \
+    --topic transactions \
+    --count 1000
+```
+
+### Expected Output
+
+```
+Starting transaction stream...
+  Topic: transactions
+  Rate: 10.0 txn/s
+  Duration: 60s
+  Press Ctrl+C to stop
+
+Sent 10 transactions...
+Sent 20 transactions...
+...
+
+==================================================
+Producer Statistics:
+==================================================
+Total Sent:       600
+Errors:           0
+Duration:         60.12s
+Actual Rate:      9.98 txn/s
+==================================================
+```
+
+---
+
+## Integration Examples
+
+### End-to-End Pipeline
+
+```bash
+# 1. Start all services
+docker-compose -f docker/docker-compose.production.yml up -d
+
+# 2. Wait for services to be ready
+sleep 30
+
+# 3. Start Kafka consumer
+docker logs -f fraud_detection_consumer
+
+# 4. In another terminal, produce transactions
+python examples/kafka_producer_example.py \
+    --mode stream \
+    --rate 5.0 \
+    --duration 300
+
+# 5. Monitor via Grafana
+open http://localhost:3000
+```
+
+### API + Kafka Combined
+
+```python
+from api_client import FraudDetectionClient
+from kafka import KafkaConsumer
+import json
+
+# API client for batch processing
+api_client = FraudDetectionClient()
+
+# Kafka consumer for real-time alerts
+consumer = KafkaConsumer(
+    'fraud_alerts',
+    bootstrap_servers='localhost:9092',
+    value_deserializer=lambda m: json.loads(m.decode('utf-8'))
+)
+
+# Process alerts
+for message in consumer:
+    alert = message.value
+    print(f"FRAUD ALERT: Transaction {alert['transaction_id']}")
+    print(f"  Amount: ${alert['amount']:.2f}")
+    print(f"  Score: {alert['fraud_score']:.4f}")
+```
+
+---
+
+## Performance Benchmarks
+
+Expected performance on recommended hardware (8 cores, 16GB RAM):
+
+| Test Scenario | Throughput | Avg Latency | P95 Latency |
+|--------------|------------|-------------|-------------|
+| Single requests | 40-50 req/s | 20-25ms | 40-50ms |
+| Batch (100) | 5-10 batch/s | 150-200ms | 250-300ms |
+| Concurrent (100) | 50-60 req/s | 150-200ms | 300-400ms |
+| Kafka stream | 100+ msg/s | 10-15ms | 25-30ms |
+
+---
+
+## Troubleshooting
+
+### Connection Refused
+
+```bash
+# Check if API is running
+curl http://localhost:8000/health
+
+# Check Docker containers
+docker ps
+
+# Restart services
+docker-compose -f docker/docker-compose.production.yml restart
+```
+
+### Kafka Connection Issues
+
+```bash
+# Check Kafka logs
+docker logs fraud_detection_kafka
+
+# List topics
+docker exec fraud_detection_kafka kafka-topics \
+    --list --bootstrap-server localhost:9092
+
+# Create topic if missing
+docker exec fraud_detection_kafka kafka-topics \
+    --create --bootstrap-server localhost:9092 \
+    --topic transactions --partitions 3 --replication-factor 1
+```
+
+### High Latency
+
+- Increase API workers: `API_WORKERS=8`
+- Scale API instances: `docker-compose up -d --scale fraud_detection_api=4`
+- Reduce batch size
+- Check system resources: `docker stats`
+
+---
+
+## Additional Resources
+
+- **API Documentation**: `docs/API.md`
+- **Deployment Guide**: `docs/DEPLOYMENT.md`
+- **Architecture**: `docs/architecture.md`
+- **Phase 2 Summary**: `docs/phase2_summary.md`
+
+---
+
+**Author:** Mauro Risonho de Paula Assumpção  
+**Date:** December 5, 2025
