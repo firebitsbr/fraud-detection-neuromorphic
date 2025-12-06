@@ -5,12 +5,12 @@ Description: Este módulo implementa diversas estratégias de codificação de s
              para converter features de transações bancárias em trens de spikes
              temporais para processamento em Spiking Neural Networks (SNNs).
 
-Author: Mauro Risonho de Paula Assumpção
-Created: December 5, 2025
-License: MIT License
-
-This module implements various spike encoding strategies to convert
-transaction features into temporal spike trains for SNN processing.
+Autor: Mauro Risonho de Paula Assumpção
+Email: mauro.risonho@gmail.com
+LinkedIn: https://www.linkedin.com/in/maurorisonho
+GitHub: https://github.com/maurorisonho
+Data de Criação: Dezembro 2025
+Licença: MIT
 """
 
 import numpy as np

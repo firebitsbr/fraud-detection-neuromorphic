@@ -16,6 +16,7 @@ import json
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import itertools
+from tqdm.auto import tqdm
 
 
 @dataclass
@@ -159,7 +160,10 @@ class GridSearchOptimizer:
         best_score = -np.inf
         best_params = None
         
-        for i, combination in enumerate(all_combinations):
+        # Progress bar for grid search
+        pbar = tqdm(enumerate(all_combinations), total=len(all_combinations), desc="Grid Search")
+        
+        for i, combination in pbar:
             params = dict(zip(param_names, combination))
             
             try:
@@ -175,8 +179,14 @@ class GridSearchOptimizer:
                     best_score = score
                     best_params = params
                     
+                # Update progress bar
+                pbar.set_postfix({
+                    'best_score': f'{best_score:.4f}',
+                    'current': f'{score:.4f}'
+                })
+                    
                 if (i + 1) % 10 == 0:
-                    print(f"Trial {i+1}/{len(all_combinations)}: "
+                    tqdm.write(f"Trial {i+1}/{len(all_combinations)}: "
                           f"Current best = {best_score:.4f}")
                     
             except Exception as e:
@@ -242,7 +252,10 @@ class RandomSearchOptimizer:
         best_score = -np.inf
         best_params = None
         
-        for i in range(n_trials):
+        # Progress bar for random search
+        pbar = tqdm(range(n_trials), desc="Random Search")
+        
+        for i in pbar:
             # Sample random parameters
             params = {
                 name: np.random.choice(values)
@@ -256,6 +269,16 @@ class RandomSearchOptimizer:
                     'params': params,
                     'score': float(score),
                     'trial': i
+                })
+                
+                if score > best_score:
+                    best_score = score
+                    best_params = params
+                
+                # Update progress bar
+                pbar.set_postfix({
+                    'best_score': f'{best_score:.4f}',
+                    'current': f'{score:.4f}'
                 })
                 
                 if score > best_score:

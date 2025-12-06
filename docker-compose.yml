@@ -1,199 +1,97 @@
-
-# Docker Compose for Local Development
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
-# License: MIT License
+# Docker Compose - Detecção de Fraude Neuromórfica
 #
-# Usage:
-#   docker-compose up -d              # Start all services
-#   docker-compose logs -f api        # View API logs
-#   docker-compose down               # Stop all services
-#   docker-compose down -v            # Stop and remove volumes
+# Descrição: Orquestração de 3 serviços containerizados para sistema completo
+#            de detecção de fraude: API (FastAPI), Notebooks (JupyterLab) e
+#            Interface Web (Streamlit). Todos expostos apenas em localhost.
+#
+# Autor: Mauro Risonho de Paula Assumpção
+# Email: mauro.risonho@gmail.com
+# LinkedIn: https://www.linkedin.com/in/maurorisonho
+# GitHub: https://github.com/maurorisonho
+# Data de Criação: Dezembro 2025
+# Licença: MIT
+
+version: '3.8'
 
 services:
-  # Base Image (built first, shared by all services)
-  base_image:
+  # ========== FASTAPI REST API ==========
+  fraud-api:
     build:
       context: .
-      dockerfile: docker/Dockerfile.base
-    image: fraud-detection-base:latest
-    command: /bin/true
-    restart: "no"
-
-  # Fraud Detection API Service
-  fraud_detection_api:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    depends_on:
-      - base_image
-    container_name: fraud_api
+      dockerfile: Dockerfile
+    container_name: neuromorphic-fraud-api
     ports:
-      - "127.0.0.1:8000:8000"
-      - "127.0.0.1:8888:8888"  # JupyterLab
+      - "127.0.0.1:8000:8000"  # API REST
     environment:
       - PYTHONUNBUFFERED=1
-      - MODEL_PATH=/app/models/fraud_snn.pkl
       - LOG_LEVEL=INFO
-      - FLASK_ENV=development
     volumes:
-      - ./src:/app/src
-      - ./api:/app/api
-      - ./notebooks:/app/notebooks
-      - ./models:/app/models
-      - ./data:/app/data
-      - ./logs:/app/logs
-    command: python api/main.py
+      - ./src:/app/src:ro
+      - ./api.py:/app/api.py:ro
     networks:
-      - fraud_detection_network
+      - neuromorphic-net
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/v1/health')"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 15s
+    labels:
+      - "com.neuromorphic.service=api"
+      - "com.neuromorphic.project=01_fraud_neuromorphic"
 
-  # Loihi 2 Simulator
-  loihi_simulator:
+  # ========== JUPYTER LAB ==========
+  jupyter-lab:
     build:
       context: .
-      dockerfile: docker/Dockerfile.loihi
-    depends_on:
-      - base_image
-    container_name: fraud_loihi
+      dockerfile: Dockerfile.jupyter
+    container_name: neuromorphic-jupyter
     ports:
-      - "127.0.0.1:8001:8001"
+      - "127.0.0.1:8888:8888"  # Jupyter Lab
     environment:
+      - JUPYTER_ENABLE_LAB=yes
       - PYTHONUNBUFFERED=1
-      - NUM_CORES=128
-      - ENERGY_MODEL=enabled
     volumes:
-      - ./hardware:/app/hardware
-      - ./models:/app/models
-      - ./logs:/app/logs
+      - ./notebooks:/workspace/notebooks
+      - ./src:/workspace/src
+      - ./data:/workspace/data
+      - ./tests:/workspace/tests
     networks:
-      - fraud_detection_network
+      - neuromorphic-net
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 1G
+    labels:
+      - "com.neuromorphic.service=jupyter"
+      - "com.neuromorphic.project=01_fraud_neuromorphic"
 
-  # BrainScaleS-2 Emulator
-  brainscales_emulator:
+  # ========== WEB INTERFACE (STREAMLIT) ==========
+  web-interface:
     build:
       context: .
-      dockerfile: docker/Dockerfile.brainscales
-    depends_on:
-      - base_image
-    container_name: fraud_brainscales
+      dockerfile: Dockerfile.streamlit
+    container_name: neuromorphic-web
     ports:
-      - "127.0.0.1:8002:8002"
+      - "127.0.0.1:8501:8501"  # Streamlit UI
     environment:
-      - PYTHONUNBUFFERED=1
-      - SPEEDUP_FACTOR=1000
-      - ANALOG_NOISE=enabled
+      - API_URL=http://fraud-api:8000
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
     volumes:
-      - ./hardware:/app/hardware
-      - ./models:/app/models
-      - ./logs:/app/logs
-    networks:
-      - fraud_detection_network
-    restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 1G
-
-  # Distributed Cluster Controller
-  cluster_controller:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.cluster
+      - ./web:/app/web:ro
     depends_on:
-      - base_image
-      - loihi_simulator
-      - brainscales_emulator
-    container_name: fraud_cluster
-    ports:
-      - "127.0.0.1:8003:8003"
-    environment:
-      - PYTHONUNBUFFERED=1
-      - LOAD_BALANCING=energy_efficient
-      - WORKER_THREADS=4
-    volumes:
-      - ./scaling:/app/scaling
-      - ./hardware:/app/hardware
-      - ./models:/app/models
-      - ./logs:/app/logs
+      - fraud-api
     networks:
-      - fraud_detection_network
+      - neuromorphic-net
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '4'
-          memory: 2G
-
-  # Redis (for caching and queuing)
-  redis:
-    image: redis:7-alpine
-    container_name: fraud_redis
-    ports:
-      - "127.0.0.1:6379:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - fraud_detection_network
-    restart: unless-stopped
-    command: redis-server --appendonly yes
-
-  # Prometheus (monitoring)
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: fraud_prometheus
-    ports:
-      - "127.0.0.1:9090:9090"
-    volumes:
-      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    networks:
-      - fraud_detection_network
-    restart: unless-stopped
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-
-  # Grafana (visualization)
-  grafana:
-    image: grafana/grafana:latest
-    container_name: fraud_grafana
-    ports:
-      - "127.0.0.1:3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_USERS_ALLOW_SIGN_UP=false
-    volumes:
-      - grafana_data:/var/lib/grafana
-    depends_on:
-      - prometheus
-    networks:
-      - fraud_detection_network
-    restart: unless-stopped
+    labels:
+      - "com.neuromorphic.service=web"
+      - "com.neuromorphic.project=01_fraud_neuromorphic"
 
 networks:
-  fraud_detection_network:
+  neuromorphic-net:
     driver: bridge
-    name: fraud_detection_network
+    name: neuromorphic-network
 
 volumes:
-  redis_data:
-    name: fraud_redis_data
-  prometheus_data:
-    name: fraud_prometheus_data
-  grafana_data:
-    name: fraud_grafana_data
+  data:
+    name: neuromorphic-data

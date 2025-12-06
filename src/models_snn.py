@@ -5,12 +5,12 @@ Description: Implementa modelos de Spiking Neural Networks (SNNs) usando neurôn
              Leaky Integrate-and-Fire (LIF) com aprendizado STDP para detecção
              de fraude neuromórfica em transações bancárias.
 
-Author: Mauro Risonho de Paula Assumpção
-Created: December 5, 2025
-License: MIT License
-
-Implements Leaky Integrate-and-Fire (LIF) neurons with STDP learning
-for neuromorphic fraud detection in banking transactions.
+Autor: Mauro Risonho de Paula Assumpção
+Email: mauro.risonho@gmail.com
+LinkedIn: https://www.linkedin.com/in/maurorisonho
+GitHub: https://github.com/maurorisonho
+Data de Criação: Dezembro 2025
+Licença: MIT
 """
 
 import numpy as np

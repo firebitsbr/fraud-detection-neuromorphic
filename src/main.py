@@ -6,12 +6,12 @@ Description: Pipeline completo de ponta a ponta para detecção de transações
              Integra extração de features, codificação de spikes, inferência
              SNN e motor de decisão.
 
-Author: Mauro Risonho de Paula Assumpção
-Created: December 5, 2025
-License: MIT License
-
-Complete end-to-end pipeline for detecting fraudulent banking transactions
-using Spiking Neural Networks.
+Autor: Mauro Risonho de Paula Assumpção
+Email: mauro.risonho@gmail.com
+LinkedIn: https://www.linkedin.com/in/maurorisonho
+GitHub: https://github.com/maurorisonho
+Data de Criação: Dezembro 2025
+Licença: MIT
 """
 
 import numpy as np
