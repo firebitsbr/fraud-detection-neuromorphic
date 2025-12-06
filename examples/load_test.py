@@ -16,6 +16,7 @@ import statistics
 from typing import List, Dict
 from dataclasses import dataclass, field
 import json
+from tqdm.auto import tqdm
 
 
 @dataclass
@@ -201,7 +202,10 @@ class LoadTester:
         async with aiohttp.ClientSession() as session:
             start_time = time.time()
             
-            for _ in range(num_batches):
+            # Progress bar for batch requests
+            pbar = tqdm(range(num_batches), desc="Batch Requests", unit="batch")
+            
+            for _ in pbar:
                 transactions = [self.generate_transaction() for _ in range(batch_size)]
                 batch_start = time.time()
                 
@@ -217,6 +221,10 @@ class LoadTester:
                         if response.status == 200:
                             result.successful_requests += 1
                             result.latencies_ms.append(latency_ms)
+                            pbar.set_postfix({
+                                'success': result.successful_requests,
+                                'avg_latency': f'{statistics.mean(result.latencies_ms):.1f}ms'
+                            })
                         else:
                             result.failed_requests += 1
                             result.errors.append(f"HTTP {response.status}")
@@ -224,6 +232,7 @@ class LoadTester:
                     result.failed_requests += 1
                     result.errors.append(str(e))
             
+            pbar.close()
             result.total_duration_s = time.time() - start_time
         
         return result

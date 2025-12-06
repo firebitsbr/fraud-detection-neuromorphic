@@ -18,6 +18,7 @@ from brian2 import *
 from typing import List, Tuple, Dict, Any, Optional
 import pickle
 from pathlib import Path
+from tqdm import tqdm
 
 
 class FraudSNN:
@@ -282,29 +283,29 @@ class FraudSNN:
         """
         print(f"Training SNN with STDP for {epochs} epochs...")
         
-        for epoch in range(epochs):
-            epoch_correct = 0
-            
-            # Shuffle data
-            np.random.shuffle(spike_data)
-            
-            for spike_times, spike_indices, label in spike_data:
-                # Forward pass
-                result = self.forward(spike_times, spike_indices, duration)
+        with tqdm(total=epochs, desc="🧠 Treinando Brian2", unit="epoch") as pbar:
+            for epoch in range(epochs):
+                epoch_correct = 0
                 
-                # Check if prediction is correct
-                if result['prediction'] == label:
-                    epoch_correct += 1
+                # Shuffle data
+                np.random.shuffle(spike_data)
                 
-                # STDP happens automatically in Brian2 synapses
-                # Optional: Apply reward modulation here
-            
-            accuracy = epoch_correct / len(spike_data)
-            
-            if epoch % 10 == 0:
-                print(f"Epoch {epoch}/{epochs}, Accuracy: {accuracy:.2%}")
+                for spike_times, spike_indices, label in spike_data:
+                    # Forward pass
+                    result = self.forward(spike_times, spike_indices, duration)
+                    
+                    # Check if prediction is correct
+                    if result['prediction'] == label:
+                        epoch_correct += 1
+                    
+                    # STDP happens automatically in Brian2 synapses
+                    # Optional: Apply reward modulation here
+                
+                accuracy = epoch_correct / len(spike_data)
+                pbar.set_postfix({'accuracy': f'{accuracy:.2%}'})
+                pbar.update(1)
         
-        print("Training complete!")
+        print("✅ Training complete!")
     
     def predict(self, spike_times: np.ndarray, spike_indices: np.ndarray,
                 duration: float = 0.1) -> Dict[str, Any]:

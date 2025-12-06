@@ -930,7 +930,7 @@ Contribuições são muito bem-vindas! 🎉
 
 ### Hardware Neuromórfico
 
-- **Intel Loihi 2**: [intel.com/loihi](https://intel.com/loihi)
+- **Intel Loihi 2**: [intel.com/loihi](https://www.intel.com.br/content/www/br/pt/research/neuromorphic-computing-loihi-2-technology-brief.html)
 - **IBM TrueNorth**: [research.ibm.com/truenorth](https://research.ibm.com/truenorth)
 - **BrainScaleS-2**: [brainscales.kip.uni-heidelberg.de](https://brainscales.kip.uni-heidelberg.de)
 

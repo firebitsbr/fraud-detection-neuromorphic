@@ -103,7 +103,7 @@ class FraudSNNTorch(nn.Module):
                     beta=beta,
                     threshold=threshold,
                     spike_grad=spike_grad_fn,
-                    init_hidden=True,
+                    init_hidden=False,  # Manual state management
                     reset_mechanism="subtract"
                 )
             )
@@ -131,14 +131,11 @@ class FraudSNNTorch(nn.Module):
         batch_size = x.size(0)
         num_steps = x.size(1)
         
-        # Initialize membrane potentials
-        mem_layers = []
-        for lif in self.lif_layers:
-            mem_layers.append(lif.init_leaky())
+        # Initialize membrane potentials for all layers
+        mem = [lif.init_leaky() for lif in self.lif_layers]
         
         # Record output spikes
         spk_rec = []
-        mem_rec = []
         
         # Iterate through time steps
         for step in range(num_steps):
@@ -153,20 +150,17 @@ class FraudSNNTorch(nn.Module):
                     cur = self.dropout_layers[i](cur)
                 
                 # LIF neuron dynamics
-                spk, mem = lif(cur, mem_layers[i])
-                mem_layers[i] = mem
+                spk_out_layer, mem[i] = lif(cur, mem[i])
                 
-                x_step = spk  # Spikes become input to next layer
+                x_step = spk_out_layer  # Spikes become input to next layer
             
-            # Record output
-            spk_rec.append(spk)
-            mem_rec.append(mem)
+            # Record output layer spikes
+            spk_rec.append(spk_out_layer)
         
         # Stack time dimension
         spk_out = torch.stack(spk_rec, dim=0)  # [time_steps, batch, output_size]
-        mem_out = torch.stack(mem_rec, dim=0)
         
-        return spk_out, mem_out
+        return spk_out, None  # mem not available with init_hidden=True
     
     def train_model(
         self,
