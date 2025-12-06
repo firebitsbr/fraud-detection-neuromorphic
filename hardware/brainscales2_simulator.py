@@ -18,10 +18,6 @@ Date: December 5, 2025
 License: MIT License
 """
 
-Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-"""
-
 import numpy as np
 import time
 import json
@@ -454,36 +450,107 @@ class BrainScaleS2Simulator:
         return output_probs
 
 
+def run_http_server(simulator: BrainScaleS2Simulator, port: int = 8002):
+    """Run HTTP server for simulator API."""
+    from fastapi import FastAPI
+    from fastapi.responses import JSONResponse
+    import uvicorn
+    from datetime import datetime
+    
+    app = FastAPI(title="BrainScaleS-2 Simulator API", version="1.0.0")
+    
+    # Store statistics
+    stats = {
+        'start_time': datetime.now().isoformat(),
+        'total_inferences': 0,
+        'last_benchmark': None
+    }
+    
+    @app.get("/")
+    async def root():
+        return {
+            "service": "BrainScaleS-2 Analog Neuromorphic Simulator",
+            "version": "1.0.0",
+            "status": "online",
+            "endpoints": ["/health", "/stats", "/inference"]
+        }
+    
+    @app.get("/health")
+    async def health():
+        wafer = simulator.wafers[0]
+        return {
+            "status": "healthy",
+            "simulator": "BrainScaleS-2",
+            "wafers": len(simulator.wafers),
+            "neurons": wafer.config.num_neurons,
+            "uptime": stats['total_inferences'],
+            "speedup": wafer.config.speedup_factor
+        }
+    
+    @app.get("/stats")
+    async def get_stats():
+        wafer = simulator.wafers[0]
+        return {
+            "start_time": stats['start_time'],
+            "total_inferences": stats['total_inferences'],
+            "last_benchmark": stats['last_benchmark'],
+            "wafer_config": {
+                "num_neurons": wafer.config.num_neurons,
+                "num_synapses_per_neuron": wafer.config.num_synapses_per_neuron,
+                "speedup_factor": wafer.config.speedup_factor,
+                "static_power_w": wafer.config.static_power_w,
+                "dynamic_power_per_spike_w": wafer.config.dynamic_power_per_spike_w
+            }
+        }
+    
+    @app.post("/inference")
+    async def run_inference(num_samples: int = 10):
+        """Run inference with specified number of samples."""
+        logger.info(f"Running {num_samples} inferences via API...")
+        
+        wafer = simulator.wafers[0]
+        results = []
+        
+        for i in range(num_samples):
+            # Generate random input
+            input_data = np.random.randn(30)
+            result = wafer.run_inference(input_data, duration=0.01)
+            
+            results.append({
+                'total_spikes': result['total_spikes'],
+                'energy_uj': result['total_energy_j'] * 1e6,
+                'hardware_time_us': result['hardware_time_s'] * 1e6
+            })
+            stats['total_inferences'] += 1
+        
+        # Calculate averages
+        avg_energy = np.mean([r['energy_uj'] for r in results])
+        avg_time = np.mean([r['hardware_time_us'] for r in results])
+        
+        return {
+            "num_inferences": num_samples,
+            "avg_energy_uj": float(avg_energy),
+            "avg_hardware_time_us": float(avg_time),
+            "results": results
+        }
+    
+    logger.info(f"Starting BrainScaleS-2 HTTP server on port {port}...")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
+
+
 # Example usage
 if __name__ == "__main__":
     print("=" * 70)
     print("BrainScaleS-2 Analog Neuromorphic Simulator")
+    print("HTTP API Server Mode")
     print("=" * 70)
     
     # Create simulator
     simulator = BrainScaleS2Simulator(num_wafers=1)
     
     # Load model
+    logger.info("Loading fraud detection model...")
     simulator.load_fraud_detection_model()
     
-    # Run benchmark
-    print("\nRunning benchmark...")
-    wafer = simulator.wafers[0]
-    benchmark_results = wafer.benchmark(num_inferences=100, input_size=30)
-    
-    print("\n" + "=" * 70)
-    print("BENCHMARK RESULTS")
-    print("=" * 70)
-    for key, value in benchmark_results.items():
-        print(f"{key:30s}: {value}")
-    
-    # Export statistics
-    wafer.export_statistics("brainscales2_stats.json")
-    
-    print("\n" + "=" * 70)
-    print("KEY ADVANTAGES")
-    print("=" * 70)
-    print("- Ultra-low latency: Sub-microsecond inference")
-    print("- High speedup: 1000x faster than biological time")
-    print("- Analog efficiency: ~5 pJ per spike (vs 20 pJ digital)")
-    print("- Continuous dynamics: True analog neural computation")
+    # Run HTTP server
+    run_http_server(simulator, port=8002)

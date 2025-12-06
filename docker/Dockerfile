@@ -7,7 +7,7 @@
 # Created: December 5, 2025
 # License: MIT License
 
-FROM python:3.10-slim
+FROM fraud-detection-base:latest
 
 LABEL maintainer="Mauro Risonho de Paula Assumpção"
 LABEL description="Neuromorphic Fraud Detection - Docker Container"
@@ -17,25 +17,7 @@ LABEL license="MIT"
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    gfortran \
-    libopenblas-dev \
-    liblapack-dev \
-    pkg-config \
-    git \
-    wget \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements - use CI version or full version
-COPY requirements.txt /app/requirements.txt
-
-# Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r /app/requirements.txt
+# Dependencies are already installed in base image
 
 # Copy project files
 COPY src /app/src
@@ -52,9 +34,9 @@ RUN mkdir -p /app/models /app/data /app/logs
 EXPOSE 8888 8000
 
 # Set environment variables
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/app:/app/src
 ENV JUPYTER_ENABLE_LAB=yes
-ENV FLASK_APP=api/app.py
+ENV FLASK_APP=api/main.py
 
 # Default command: Start JupyterLab
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]

@@ -6,7 +6,7 @@
 # Created: December 5, 2025
 # License: MIT License
 
-FROM python:3.10-slim
+FROM fraud-detection-base:latest
 
 LABEL maintainer="Mauro Risonho de Paula Assumpção"
 LABEL description="Loihi 2 Neuromorphic Chip Simulator"
@@ -15,19 +15,7 @@ LABEL version="1.0.0"
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    make \
-    git \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements
-COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Dependencies are already installed in base image
 
 # Copy simulator code
 COPY hardware/loihi2_simulator.py /app/hardware/
@@ -38,6 +26,7 @@ COPY src/ /app/src/
 EXPOSE 8000
 
 # Set environment variables
+ENV PYTHONPATH=/app:/app/src
 ENV PYTHONUNBUFFERED=1
 ENV LOIHI_SIMULATION_MODE=1
 ENV LOG_LEVEL=INFO

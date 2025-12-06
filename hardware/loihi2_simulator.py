@@ -18,10 +18,6 @@ Date: December 5, 2025
 License: MIT License
 """
 
-Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-"""
-
 import numpy as np
 import time
 import json
@@ -516,36 +512,109 @@ def create_fraud_detection_model() -> Dict[str, Any]:
     return model
 
 
+def run_http_server(simulator: Loihi2Simulator, port: int = 8001):
+    """Run HTTP server for simulator API."""
+    from fastapi import FastAPI
+    from fastapi.responses import JSONResponse
+    import uvicorn
+    from datetime import datetime
+    
+    app = FastAPI(title="Loihi 2 Simulator API", version="1.0.0")
+    
+    # Store statistics
+    stats = {
+        'start_time': datetime.now().isoformat(),
+        'total_inferences': 0,
+        'last_benchmark': None
+    }
+    
+    @app.get("/")
+    async def root():
+        return {
+            "service": "Intel Loihi 2 Neuromorphic Simulator",
+            "version": "1.0.0",
+            "status": "online",
+            "endpoints": ["/health", "/stats", "/inference"]
+        }
+    
+    @app.get("/health")
+    async def health():
+        utilization = simulator.get_resource_utilization()
+        return {
+            "status": "healthy",
+            "simulator": "Loihi 2",
+            "cores": simulator.config.num_cores,
+            "neurons": simulator.config.total_neurons,
+            "uptime": stats['total_inferences'],
+            "utilization": utilization
+        }
+    
+    @app.get("/stats")
+    async def get_stats():
+        utilization = simulator.get_resource_utilization()
+        return {
+            "start_time": stats['start_time'],
+            "total_inferences": stats['total_inferences'],
+            "last_benchmark": stats['last_benchmark'],
+            "chip_config": {
+                "num_cores": simulator.config.num_cores,
+                "total_neurons": simulator.config.total_neurons,
+                "clock_frequency": simulator.config.clock_frequency
+            },
+            "resource_utilization": utilization
+        }
+    
+    @app.post("/inference")
+    async def run_inference(num_samples: int = 10):
+        """Run inference with specified number of samples."""
+        logger.info(f"Running {num_samples} inferences via API...")
+        
+        results = []
+        for i in range(num_samples):
+            # Generate random input spikes
+            input_spikes = {}
+            for neuron in range(30):
+                num_spikes = np.random.randint(1, 10)
+                spike_times = np.sort(np.random.uniform(0, 0.01, num_spikes))
+                input_spikes[neuron] = spike_times.tolist()
+            
+            result = simulator.run_inference(input_spikes, duration=0.01)
+            results.append({
+                'total_spikes': result['total_spikes'],
+                'energy_uj': result['total_energy_j'] * 1e6,
+                'latency_ms': result['real_time_s'] * 1000
+            })
+            stats['total_inferences'] += 1
+        
+        # Calculate averages
+        avg_energy = np.mean([r['energy_uj'] for r in results])
+        avg_latency = np.mean([r['latency_ms'] for r in results])
+        
+        return {
+            "num_inferences": num_samples,
+            "avg_energy_uj": float(avg_energy),
+            "avg_latency_ms": float(avg_latency),
+            "results": results
+        }
+    
+    logger.info(f"Starting Loihi 2 HTTP server on port {port}...")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
+
+
 # Example usage
 if __name__ == "__main__":
     print("=" * 70)
-    print("Loihi 2 Simulator - Docker-based Emulation")
+    print("Intel Loihi 2 Neuromorphic Chip Simulator")
+    print("HTTP API Server Mode")
     print("=" * 70)
     
     # Create simulator
     simulator = Loihi2Simulator()
     
     # Load fraud detection model
+    logger.info("Loading fraud detection model...")
     model = create_fraud_detection_model()
     simulator.load_model(model)
     
-    # Run benchmark
-    print("\nRunning benchmark...")
-    benchmark_results = simulator.benchmark(num_inferences=100, input_size=30)
-    
-    print("\n" + "=" * 70)
-    print("BENCHMARK RESULTS")
-    print("=" * 70)
-    for key, value in benchmark_results.items():
-        print(f"{key:30s}: {value}")
-    
-    # Export statistics
-    simulator.export_statistics("loihi2_simulator_stats.json")
-    
-    # Resource utilization
-    utilization = simulator.get_resource_utilization()
-    print("\n" + "=" * 70)
-    print("RESOURCE UTILIZATION")
-    print("=" * 70)
-    for key, value in utilization.items():
-        print(f"{key:30s}: {value:.4f}")
+    # Run HTTP server
+    run_http_server(simulator, port=8001)

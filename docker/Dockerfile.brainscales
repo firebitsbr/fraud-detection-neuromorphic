@@ -6,7 +6,7 @@
 # Created: December 5, 2025
 # License: MIT License
 
-FROM python:3.10-slim
+FROM fraud-detection-base:latest
 
 LABEL maintainer="Mauro Risonho de Paula Assumpção"
 LABEL description="BrainScaleS-2 Analog Neuromorphic Simulator"
@@ -14,17 +14,7 @@ LABEL version="1.0.0"
 
 WORKDIR /app
 
-# Install dependencies including scipy for ODE integration
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    gfortran \
-    libopenblas-dev \
-    liblapack-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt scipy
+# Dependencies are already installed in base image
 
 # Copy simulator code
 COPY hardware/brainscales2_simulator.py /app/hardware/
@@ -32,6 +22,7 @@ COPY src/ /app/src/
 
 EXPOSE 8001
 
+ENV PYTHONPATH=/app:/app/src
 ENV PYTHONUNBUFFERED=1
 ENV BRAINSCALES_SPEEDUP=1000
 ENV LOG_LEVEL=INFO

@@ -82,11 +82,15 @@ class FraudSNN:
     def _build_network(self):
         """Build the SNN architecture using Brian2."""
         
+        # Set global clock para resolução temporal fina (necessário para múltiplos spikes)
+        defaultclock.dt = 0.01 * ms  # 10 microsegundos
+        
         # 1. INPUT LAYER (Spike Generator Group)
+        # Inicializa com arrays vazios mas com unidades corretas
         self.layers['input'] = SpikeGeneratorGroup(
             self.input_size, 
-            indices=[], 
-            times=[]
+            indices=np.array([]), 
+            times=np.array([]) * ms  # Adiciona unidade de tempo
         )
         
         # 2. HIDDEN LAYERS (LIF neurons)
@@ -170,6 +174,9 @@ class FraudSNN:
             list(self.monitors.values())
         )
         self.network = Network(network_objects)
+        
+        # Store initial state for restoration
+        self.network.store()
     
     def _create_synapse_with_stdp(self, source, target, connectivity=True):
         """

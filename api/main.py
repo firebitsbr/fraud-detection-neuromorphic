@@ -78,11 +78,7 @@ async def startup_event():
             logger.info(f"Loading pre-trained model from {model_path}")
             # pipeline.load_model(model_path)  # Implement if needed
         else:
-            logger.warning("No pre-trained model found. Training with synthetic data...")
-            from src.main import generate_synthetic_transactions
-            train_data = generate_synthetic_transactions(n_samples=1000)
-            pipeline.train(train_data)
-            logger.info("Pipeline trained successfully")
+            logger.warning("No pre-trained model found. Using untrained SNN (train via /train endpoint)")
         
         logger.info("API started successfully")
         

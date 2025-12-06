@@ -11,15 +11,26 @@
 #   docker-compose down -v            # Stop and remove volumes
 
 services:
+  # Base Image (built first, shared by all services)
+  base_image:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.base
+    image: fraud-detection-base:latest
+    command: /bin/true
+    restart: "no"
+
   # Fraud Detection API Service
   fraud_detection_api:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    depends_on:
+      - base_image
     container_name: fraud_api
     ports:
-      - "8000:8000"
-      - "8888:8888"  # JupyterLab
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8888:8888"  # JupyterLab
     environment:
       - PYTHONUNBUFFERED=1
       - MODEL_PATH=/app/models/fraud_snn.pkl
@@ -32,7 +43,7 @@ services:
       - ./models:/app/models
       - ./data:/app/data
       - ./logs:/app/logs
-    command: python api/app.py
+    command: python api/main.py
     networks:
       - fraud_detection_network
     restart: unless-stopped
@@ -48,9 +59,11 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.loihi
+    depends_on:
+      - base_image
     container_name: fraud_loihi
     ports:
-      - "8001:8001"
+      - "127.0.0.1:8001:8001"
     environment:
       - PYTHONUNBUFFERED=1
       - NUM_CORES=128
@@ -73,9 +86,11 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.brainscales
+    depends_on:
+      - base_image
     container_name: fraud_brainscales
     ports:
-      - "8002:8002"
+      - "127.0.0.1:8002:8002"
     environment:
       - PYTHONUNBUFFERED=1
       - SPEEDUP_FACTOR=1000
@@ -98,9 +113,13 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.cluster
+    depends_on:
+      - base_image
+      - loihi_simulator
+      - brainscales_emulator
     container_name: fraud_cluster
     ports:
-      - "8003:8003"
+      - "127.0.0.1:8003:8003"
     environment:
       - PYTHONUNBUFFERED=1
       - LOAD_BALANCING=energy_efficient
@@ -110,9 +129,6 @@ services:
       - ./hardware:/app/hardware
       - ./models:/app/models
       - ./logs:/app/logs
-    depends_on:
-      - loihi_simulator
-      - brainscales_emulator
     networks:
       - fraud_detection_network
     restart: unless-stopped
@@ -127,7 +143,7 @@ services:
     image: redis:7-alpine
     container_name: fraud_redis
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -140,7 +156,7 @@ services:
     image: prom/prometheus:latest
     container_name: fraud_prometheus
     ports:
-      - "9090:9090"
+      - "127.0.0.1:9090:9090"
     volumes:
       - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
@@ -156,7 +172,7 @@ services:
     image: grafana/grafana:latest
     container_name: fraud_grafana
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin

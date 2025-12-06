@@ -55,6 +55,8 @@ COPY src/ ./src/
 COPY api/ ./api/
 COPY models/ ./models/
 
+ENV PYTHONPATH=/app:/app/src
+
 # Create non-root user
 RUN useradd -m -u 1000 appuser && \
     chown -R appuser:appuser /app

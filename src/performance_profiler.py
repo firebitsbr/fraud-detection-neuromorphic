@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from contextlib import contextmanager
 import json
 from datetime import datetime
-import platform
+import platform as platform_module
 
 
 @dataclass
@@ -53,8 +53,8 @@ class PerformanceMetrics:
     
     # System info
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
-    platform: str = field(default_factory=platform.platform)
-    python_version: str = field(default_factory=platform.python_version)
+    platform: str = field(default_factory=platform_module.platform)
+    python_version: str = field(default_factory=platform_module.python_version)
     
     def to_dict(self) -> Dict:
         """Convert to dictionary."""

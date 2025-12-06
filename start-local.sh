@@ -71,6 +71,16 @@ check_docker_compose() {
     print_success "Docker Compose encontrado"
 }
 
+build_base_image() {
+    print_info "Construindo imagem base (isso pode demorar na primeira vez)..."
+    if docker build -f docker/Dockerfile.base -t fraud-detection-base:latest .; then
+        print_success "Imagem base construída com sucesso!"
+    else
+        print_error "Falha ao construir imagem base."
+        exit 1
+    fi
+}
+
 create_directories() {
     print_info "Criando diretórios necessários..."
     mkdir -p models data logs
@@ -164,24 +174,30 @@ case "${1:-start}" in
         check_docker
         check_docker_compose
         create_directories
+        build_base_image
         start_services
         ;;
     --build)
         check_docker
         check_docker_compose
         create_directories
+        build_base_image
         start_services "--build"
         ;;
     --stop)
+        check_docker_compose
         stop_services
         ;;
     --clean)
+        check_docker_compose
         stop_services_and_clean
         ;;
     --logs)
+        check_docker_compose
         view_logs
         ;;
     --status)
+        check_docker_compose
         show_status
         ;;
     --help)

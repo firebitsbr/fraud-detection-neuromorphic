@@ -32,6 +32,7 @@ COPY src/encoders.py /app/src/
 
 # No exposed ports for edge (local only)
 
+ENV PYTHONPATH=/app:/app/src
 ENV PYTHONUNBUFFERED=1
 ENV EDGE_MODE=1
 ENV LOG_LEVEL=WARNING

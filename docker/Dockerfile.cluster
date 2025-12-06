@@ -6,7 +6,7 @@
 # Created: December 5, 2025
 # License: MIT License
 
-FROM python:3.10-slim
+FROM fraud-detection-base:latest
 
 LABEL maintainer="Mauro Risonho de Paula Assumpção"
 LABEL description="Distributed Neuromorphic Cluster Controller"
@@ -14,12 +14,7 @@ LABEL version="1.0.0"
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Dependencies are already installed in base image
 
 # Copy cluster code
 COPY scaling/distributed_cluster.py /app/scaling/
@@ -28,6 +23,7 @@ COPY src/ /app/src/
 
 EXPOSE 8002
 
+ENV PYTHONPATH=/app:/app/src
 ENV PYTHONUNBUFFERED=1
 ENV LOAD_BALANCING_STRATEGY=least_loaded
 ENV NUM_WORKERS=8

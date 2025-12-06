@@ -18,10 +18,6 @@ Date: December 5, 2025
 License: MIT License
 """
 
-Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-"""
-
 import numpy as np
 import time
 import json
@@ -520,54 +516,125 @@ class DistributedNeuromorphicCluster:
         logger.info(f"Statistics exported to {filepath}")
 
 
+def run_http_server(cluster: DistributedNeuromorphicCluster, port: int = 8003):
+    """Run HTTP server for cluster controller API."""
+    from fastapi import FastAPI
+    from fastapi.responses import JSONResponse
+    import uvicorn
+    from datetime import datetime
+    
+    app = FastAPI(title="Distributed Cluster Controller API", version="1.0.0")
+    
+    # Store statistics
+    stats = {
+        'start_time': datetime.now().isoformat(),
+        'total_inferences': 0,
+        'last_benchmark': None
+    }
+    
+    @app.get("/")
+    async def root():
+        return {
+            "service": "Distributed Neuromorphic Cluster Controller",
+            "version": "1.0.0",
+            "status": "online",
+            "endpoints": ["/health", "/stats", "/inference", "/cluster"]
+        }
+    
+    @app.get("/health")
+    async def health():
+        status = cluster.get_cluster_status()
+        return {
+            "status": "healthy",
+            "cluster": "Distributed Multi-Chip",
+            "chips": len(cluster.chips),
+            "workers": cluster.num_workers if hasattr(cluster, 'num_workers') else 0,
+            "total_capacity": status['total_capacity_tps'],
+            "uptime": stats['total_inferences']
+        }
+    
+    @app.get("/stats")
+    async def get_stats():
+        status = cluster.get_cluster_status()
+        return {
+            "start_time": stats['start_time'],
+            "total_inferences": stats['total_inferences'],
+            "last_benchmark": stats['last_benchmark'],
+            "cluster_status": status
+        }
+    
+    @app.get("/cluster")
+    async def get_cluster_info():
+        """Get detailed cluster configuration."""
+        chips_info = []
+        for chip_type, chip_list in cluster.chips.items():
+            for chip in chip_list:
+                chips_info.append({
+                    "type": chip_type.value,
+                    "id": chip.chip_id,
+                    "capacity": chip.max_capacity,
+                    "metrics": chip.metrics
+                })
+        
+        return {
+            "load_balancing": cluster.load_balancing_strategy,
+            "chips": chips_info
+        }
+    
+    @app.post("/inference")
+    async def run_inference(num_samples: int = 10):
+        """Run inference with specified number of samples."""
+        logger.info(f"Running {num_samples} inferences via API...")
+        
+        # Generate random transactions
+        transactions = []
+        for i in range(num_samples):
+            transaction = {
+                'id': f'txn_{i}',
+                'features': np.random.randn(30).tolist(),
+                'timestamp': datetime.now().isoformat()
+            }
+            transactions.append(transaction)
+        
+        # Process in cluster
+        results = cluster.process_batch(transactions)
+        stats['total_inferences'] += num_samples
+        
+        # Calculate metrics
+        total_energy = sum(r['energy_j'] for r in results)
+        avg_latency = np.mean([r['latency_s'] for r in results])
+        
+        return {
+            "num_inferences": num_samples,
+            "total_energy_j": float(total_energy),
+            "avg_latency_ms": float(avg_latency * 1000),
+            "results": results[:10]  # Return first 10 for brevity
+        }
+    
+    logger.info(f"Starting Cluster Controller HTTP server on port {port}...")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
+
+
 # Example usage
 if __name__ == "__main__":
     print("=" * 70)
     print("Multi-Chip Distributed Neuromorphic Processing")
+    print("HTTP API Server Mode")
     print("=" * 70)
     
     # Create cluster with mixed chips
     cluster = DistributedNeuromorphicCluster(load_balancing_strategy="least_loaded")
     
     # Add chips
+    logger.info("Configuring cluster...")
     cluster.add_chip(ChipType.LOIHI2, "loihi_0", max_capacity=500)
     cluster.add_chip(ChipType.LOIHI2, "loihi_1", max_capacity=500)
     cluster.add_chip(ChipType.BRAINSCALES2, "brainscales_0", max_capacity=1000)
     cluster.add_chip(ChipType.TRUENORTH, "truenorth_0", max_capacity=300)
     
     # Start workers
+    logger.info("Starting workers...")
     cluster.start_workers(num_workers=8)
     
-    # Run benchmark
-    print("\nRunning cluster benchmark...")
-    benchmark_results = cluster.benchmark(num_transactions=1000, batch_size=50)
-    
-    print("\n" + "=" * 70)
-    print("BENCHMARK RESULTS")
-    print("=" * 70)
-    for key, value in benchmark_results.items():
-        if key != 'chip_utilization':
-            print(f"{key:30s}: {value}")
-    
-    print("\nChip Utilization:")
-    for chip_id, util in benchmark_results['chip_utilization'].items():
-        print(f"  {chip_id:20s}: {util:.2%}")
-    
-    # Get cluster status
-    status = cluster.get_cluster_status()
-    print("\n" + "=" * 70)
-    print("CLUSTER STATUS")
-    print("=" * 70)
-    print(f"Total Capacity: {status['total_capacity_tps']} TPS")
-    print(f"Total Processed: {status['total_processed']:,}")
-    print(f"Total Energy: {status['total_energy_j']:.3f} J")
-    
-    # Export statistics
-    cluster.export_statistics("cluster_stats.json")
-    
-    # Stop workers
-    cluster.stop_workers()
-    
-    print("\n" + "=" * 70)
-    print("Distributed cluster benchmark complete!")
-    print("=" * 70)
+    # Run HTTP server
+    run_http_server(cluster, port=8003)
