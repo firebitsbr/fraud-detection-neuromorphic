@@ -5,9 +5,14 @@
 #
 # Author: Mauro Risonho de Paula Assumpção
 # Created: December 5, 2025
+# Updated: December 2025 (Production-ready version)
 # License: MIT License
 #
 # Installation: pip install -r requirements.txt
+
+# ============================================================================
+# CORE DEPENDENCIES
+# ============================================================================
 
 # Core Scientific Computing
 numpy>=1.24.0
@@ -16,12 +21,13 @@ scipy>=1.10.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 
-# Brian2 - Spiking Neural Network Simulator (biological approach)
+# Brian2 - Spiking Neural Network Simulator (LEGACY - migrating to PyTorch)
 brian2>=2.5.1
 
-# snnTorch - PyTorch-based SNN Framework (deep learning approach)
+# snnTorch - PyTorch-based SNN Framework (PRIMARY - Production)
 snntorch>=0.7.0
 torch>=2.0.0
+torchvision>=0.15.0
 
 # NEST Simulator (optional - for large-scale simulations)
 # nest-simulator>=3.5  # Uncomment if needed
@@ -29,25 +35,137 @@ torch>=2.0.0
 # Machine Learning Utilities
 scikit-learn>=1.3.0
 
-# Jupyter and Interactive Computing
+# ============================================================================
+# DATA PROCESSING & KAGGLE INTEGRATION
+# ============================================================================
+
+# Kaggle dataset download
+kaggle>=1.5.16
+
+# Feature engineering
+category-encoders>=2.6.0
+
+# Missing value imputation
+missingno>=0.5.2
+
+# ============================================================================
+# EXPLAINABILITY (LGPD/GDPR Compliance)
+# ============================================================================
+
+# SHAP (SHapley Additive exPlanations)
+shap>=0.43.0
+
+# Feature importance
+lime>=0.2.0.1
+
+# ============================================================================
+# PERFORMANCE OPTIMIZATION
+# ============================================================================
+
+# Model quantization & optimization
+onnx>=1.15.0
+onnxruntime>=1.16.0
+onnxruntime-gpu>=1.16.0  # GPU acceleration
+
+# Result caching
+redis>=5.0.0
+hiredis>=2.2.3  # Faster Redis protocol
+
+# Job scheduling
+joblib>=1.3.0
+
+# ============================================================================
+# SECURITY
+# ============================================================================
+
+# OAuth2 & JWT
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+python-multipart>=0.0.6
+
+# Password hashing
+bcrypt>=4.1.0
+
+# Rate limiting
+python-redis-rate-limit>=0.0.7
+
+# ============================================================================
+# API & WEB FRAMEWORK
+# ============================================================================
+
+# FastAPI (Primary API framework)
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Flask (Legacy support)
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# ============================================================================
+# DATA STREAMING
+# ============================================================================
+
+# Kafka integration
+kafka-python>=2.0.2
+confluent-kafka>=2.3.0
+
+# ============================================================================
+# MONITORING & OBSERVABILITY
+# ============================================================================
+
+# Prometheus metrics
+prometheus-client>=0.19.0
+prometheus-flask-exporter>=0.22.0
+
+# Structured logging
+structlog>=23.2.0
+python-json-logger>=2.0.7
+
+# ============================================================================
+# CLOUD & INFRASTRUCTURE
+# ============================================================================
+
+# AWS SDK
+boto3>=1.29.0
+botocore>=1.32.0
+
+# Kubernetes client
+kubernetes>=28.0.0
+
+# ============================================================================
+# JUPYTER & INTERACTIVE COMPUTING
+# ============================================================================
+
 jupyterlab>=4.0.0
 ipykernel>=6.25.0
 ipywidgets>=8.1.0
 notebook>=7.0.0
 
-# Data Visualization
+# ============================================================================
+# DATA VISUALIZATION
+# ============================================================================
+
 plotly>=5.17.0
 bokeh>=3.2.0
 
-# API and Web Framework (for deployment)
-flask>=2.3.0
-flask-cors>=4.0.0
-fastapi>=0.104.0
-uvicorn>=0.24.0
-pydantic>=2.5.0
+# ============================================================================
+# TESTING & QUALITY
+# ============================================================================
 
-# Data Streaming (optional - for Kafka integration)
-kafka-python>=2.0.2
+# Unit testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+
+# Code quality
+black>=23.12.0
+flake8>=6.1.0
+mypy>=1.7.0
+
+# Load testing
+locust>=2.18.0
 
 # Testing
 pytest>=7.4.0
