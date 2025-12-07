@@ -1,16 +1,14 @@
 """
-Spike Encoders for Fraud Detection
-
-Description: Este módulo implementa diversas estratégias de codificação de spikes
-             para converter features de transações bancárias em trens de spikes
-             temporais para processamento em Spiking Neural Networks (SNNs).
+Este módulo implementa diversas estratégias de codificação de spikes
+para converter features de transações bancárias em trens de spikes
+temporais para processamento em Spiking Neural Networks (SNNs).
 
 Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
 """
 
 import numpy as np
@@ -70,9 +68,24 @@ class RateEncoder:
         
         # Generate Poisson spike train
         n_spikes = np.random.poisson(rate * self.duration)
+        
+        if n_spikes == 0:
+            return []
+        
+        # Generate spikes with minimum spacing to avoid Brian2 dt conflicts
+        # Brian2 dt = 0.1ms = 0.0001s, use 2x margin
+        min_spacing = 0.0002  # 200 microseconds minimum spacing
+        
+        # Generate uniformly distributed spikes with guaranteed spacing
         spike_times = np.sort(np.random.uniform(0, self.duration, n_spikes))
         
-        return spike_times.tolist()
+        # Remove spikes that are too close together
+        filtered_spikes = [spike_times[0]]
+        for spike in spike_times[1:]:
+            if spike - filtered_spikes[-1] >= min_spacing:
+                filtered_spikes.append(spike)
+        
+        return filtered_spikes
     
     def encode_batch(self, values: np.ndarray, min_val: float = 0.0,
                      max_val: float = 10000.0) -> List[List[float]]:
@@ -443,11 +456,43 @@ class TransactionEncoder:
             all_neuron_indices.extend(indices)
             neuron_offset += 1
         
-        # Sort by time
+        # Sort by time and neuron index
         if all_spike_times:
-            order = np.argsort(all_spike_times)
-            spike_times = np.array(all_spike_times)[order]
-            neuron_indices = np.array(all_neuron_indices)[order]
+            # Convert to arrays for processing
+            spike_times = np.array(all_spike_times)
+            neuron_indices = np.array(all_neuron_indices)
+            
+            # Sort by time first, then by neuron index
+            order = np.lexsort((neuron_indices, spike_times))
+            spike_times = spike_times[order]
+            neuron_indices = neuron_indices[order]
+            
+            # CRITICAL: Remove duplicate (neuron, timestep) pairs
+            # Brian2 dt = 0.1ms, round to timesteps
+            dt_brian2 = 0.0001  # 100 microseconds
+            
+            # Quantize to integer timesteps
+            # Use round to nearest, similar to Brian2
+            timesteps = np.round(spike_times / dt_brian2).astype(int)
+            
+            # Filter duplicates
+            unique_keys = set()
+            filtered_times = []
+            filtered_indices = []
+            
+            for i in range(len(spike_times)):
+                # Key is (neuron_idx, timestep)
+                key = (neuron_indices[i], timesteps[i])
+                if key not in unique_keys:
+                    unique_keys.add(key)
+                    # Store the QUANTIZED time to ensure consistency
+                    # This forces the spike to be exactly on the grid
+                    quantized_time = timesteps[i] * dt_brian2
+                    filtered_times.append(quantized_time)
+                    filtered_indices.append(neuron_indices[i])
+            
+            spike_times = np.array(filtered_times)
+            neuron_indices = np.array(filtered_indices)
         else:
             spike_times = np.array([])
             neuron_indices = np.array([])

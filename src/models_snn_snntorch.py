@@ -1,16 +1,14 @@
 """
-Spiking Neural Network Models for Fraud Detection using snnTorch
-
-Description: Implementação alternativa usando snnTorch (PyTorch-based) para SNNs.
-             Oferece melhor integração com deep learning, treinamento com backprop,
-             e suporte nativo para GPUs.
+Implementação alternativa usando snnTorch (PyTorch-based) para SNNs.
+Oferece melhor integração com deep learning, treinamento com backprop,
+e suporte nativo para GPUs.
 
 Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
 
 Vantagens do snnTorch:
 - ✅ Integração com PyTorch (GPU support)

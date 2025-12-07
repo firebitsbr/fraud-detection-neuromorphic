@@ -18,7 +18,7 @@ services:
   fraud-api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile.api
     container_name: neuromorphic-fraud-api
     ports:
       - "127.0.0.1:8000:8000"  # API REST
@@ -27,7 +27,6 @@ services:
       - LOG_LEVEL=INFO
     volumes:
       - ./src:/app/src:ro
-      - ./api.py:/app/api.py:ro
     networks:
       - neuromorphic-net
     restart: unless-stopped
@@ -45,7 +44,7 @@ services:
   jupyter-lab:
     build:
       context: .
-      dockerfile: Dockerfile.jupyter
+      dockerfile: docker/Dockerfile.jupyter
     container_name: neuromorphic-jupyter
     ports:
       - "127.0.0.1:8888:8888"  # Jupyter Lab
@@ -68,7 +67,7 @@ services:
   web-interface:
     build:
       context: .
-      dockerfile: Dockerfile.streamlit
+      dockerfile: docker/Dockerfile.streamlit
     container_name: neuromorphic-web
     ports:
       - "127.0.0.1:8501:8501"  # Streamlit UI

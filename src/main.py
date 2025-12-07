@@ -1,17 +1,15 @@
 """
-Main Pipeline for Neuromorphic Fraud Detection
-
-Description: Pipeline completo de ponta a ponta para detecção de transações
-             bancárias fraudulentas usando Redes Neurais Spiking (SNNs).
-             Integra extração de features, codificação de spikes, inferência
-             SNN e motor de decisão.
+Pipeline completo de ponta a ponta para detecção de transações
+bancárias fraudulentas usando Redes Neurais Spiking (SNNs).
+Integra extração de features, codificação de spikes, inferência
+SNN e motor de decisão.
 
 Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
 """
 
 import numpy as np
@@ -21,6 +19,7 @@ from pathlib import Path
 import json
 import time
 from datetime import datetime
+from tqdm.auto import tqdm
 
 from encoders import TransactionEncoder, SpikeEncoding
 from models_snn import FraudSNN
@@ -269,7 +268,7 @@ class FraudDetectionPipeline:
             List of prediction results
         """
         results = []
-        for transaction in transactions:
+        for transaction in tqdm(transactions, desc="Predicting Batch"):
             result = self.predict(transaction)
             results.append(result)
         return results
@@ -289,7 +288,7 @@ class FraudDetectionPipeline:
         # Prepare spike data
         spike_data = []
         
-        for idx, row in training_data.iterrows():
+        for idx, row in tqdm(training_data.iterrows(), total=len(training_data), desc="Preparing Data"):
             # Convert row to transaction dict
             transaction = row.to_dict()
             
@@ -322,7 +321,7 @@ class FraudDetectionPipeline:
         y_true = []
         y_pred = []
         
-        for idx, row in test_data.iterrows():
+        for idx, row in tqdm(test_data.iterrows(), total=len(test_data), desc="Evaluating"):
             transaction = row.to_dict()
             result = self.predict(transaction)
             

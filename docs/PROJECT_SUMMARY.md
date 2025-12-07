@@ -16,8 +16,8 @@ Implementação completa de **Detecção de Fraude Neuromórfica** com:
 ### ✅ 1. Testes Unitários
 
 **Arquivos Criados:**
-- `tests/test_models_snn.py` (133 linhas)
-- `tests/test_main.py` (236 linhas)
+- `../tests/test_models_snn.py` (133 linhas)
+- `../tests/test_main.py` (236 linhas)
 
 **Cobertura:**
 - 23 testes automatizados
@@ -33,7 +33,7 @@ pytest tests/ -v
 
 ### ✅ 2. API REST com FastAPI
 
-**Arquivo:** `api.py` (445 linhas)
+**Arquivo:** `../src/api_server.py` (445 linhas)
 
 **Endpoints:**
 ```
@@ -87,19 +87,19 @@ POST /api/v1/train        - Retreinar modelo
 **Serviços:**
 
 1. **fraud-api** (FastAPI)
-   - Dockerfile: `Dockerfile`
+   - Dockerfile: `../Dockerfile`
    - Port: `127.0.0.1:8000` (localhost only)
    - Workers: 2 (Uvicorn)
    - Health check ativo
 
 2. **jupyter-lab** (JupyterLab)
-   - Dockerfile: `Dockerfile.jupyter`
+   - Dockerfile: `../Dockerfile.jupyter`
    - Port: `127.0.0.1:8888` (localhost only)
    - Sem autenticação (dev mode)
    - Notebooks interativos
 
 3. **web-interface** (Streamlit)
-   - Dockerfile: `Dockerfile.streamlit`
+   - Dockerfile: `../Dockerfile.streamlit`
    - Port: `127.0.0.1:8501` (localhost only)
    - Dashboard interativo
    - Conecta-se ao fraud-api
@@ -128,13 +128,13 @@ docker compose down
 - Volumes read-only quando possível
 - Network isolada (bridge)
 
-**Documentação:** `docs/DOCKER_DEPLOYMENT.md`
+**Documentação:** `DOCKER_DEPLOYMENT.md`
 
 ---
 
 ### ✅ 4. Benchmark de Hardware (Loihi)
 
-**Arquivo:** `hardware/loihi_simulator.py` (380 linhas)
+**Arquivo:** `../hardware/loihi_simulator.py` (380 linhas)
 
 **Classes:**
 - `LoihiSpecs`: Especificações do Intel Loihi 2
@@ -151,7 +151,7 @@ docker compose down
 - Async event-driven
 ```
 
-**Notebook:** `notebooks/loihi_benchmark.ipynb`
+**Notebook:** `../notebooks/loihi_benchmark.ipynb`
 
 **Métricas Comparadas:**
 1. **Latência** (ms por inferência)
@@ -182,19 +182,19 @@ docker compose down
 source .venv/bin/activate
 
 # 2. Instalar dependências
-pip install -r requirements.txt
+pip install -r ../requirements.txt
 
 # 3. Executar testes
 pytest tests/ -v
 
 # 4. Iniciar API
-uvicorn api:app --reload --host 127.0.0.1 --port 8000
+uvicorn src.api_server:app --reload --host 127.0.0.1 --port 8000
 
 # 5. Iniciar Streamlit
-streamlit run web/app.py
+streamlit run ../web/app.py
 
 # 6. Abrir Jupyter
-jupyter lab notebooks/
+jupyter lab ../notebooks/
 ```
 
 ### Docker (Recomendado)
@@ -245,11 +245,13 @@ Energia/inferência: ~0.05 mJ (1500x melhor)
 
 ```
 01_fraud_neuromorphic/
-├── api.py                      # FastAPI REST API
+├── src/
+│   ├── api_server.py           # FastAPI REST API
 ├── docker-compose.yml          # Orchestration
-├── Dockerfile                  # API container
-├── Dockerfile.jupyter          # Jupyter container
-├── Dockerfile.streamlit        # Web UI container
+├── docker/
+│   ├── Dockerfile.api          # API container
+│   ├── Dockerfile.jupyter      # Jupyter container
+│   ├── Dockerfile.streamlit    # Web UI container
 ├── requirements.txt
 │
 ├── src/
@@ -297,7 +299,7 @@ pytest tests/ -v
 ### Executar com Cobertura
 
 ```bash
-pytest tests/ --cov=src --cov-report=html
+pytest ../tests/ --cov=src --cov-report=html
 open htmlcov/index.html
 ```
 
@@ -305,13 +307,13 @@ open htmlcov/index.html
 
 ```bash
 # Testes de modelo SNN
-pytest tests/test_models_snn.py -v
+pytest ../tests/test_models_snn.py -v
 
 # Testes de pipeline
-pytest tests/test_main.py -v
+pytest ../tests/test_main.py -v
 
 # Testes de encoders
-pytest tests/test_encoders.py -v
+pytest ../tests/test_encoders.py -v
 ```
 
 ---

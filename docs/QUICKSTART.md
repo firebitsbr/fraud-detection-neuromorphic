@@ -8,7 +8,7 @@ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
 # 2. Inicie o sistema
-./start-local.sh
+./scripts/start-local.sh
 # ou
 make start
 
@@ -23,11 +23,11 @@ make start
 
 **Fedora/RHEL:**
 ```bash
-sudo ./scripts/install-docker-fedora.sh
+sudo ../scripts/install-docker-fedora.sh
 newgrp docker
 ```
 
-**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](docs/DOCKER_INSTALL_GUIDE.md)
+**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
 
 ### Requisitos Mínimos
 - Docker 20.10+

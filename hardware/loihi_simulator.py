@@ -1,16 +1,14 @@
 """
-Intel Loihi 2 Hardware Simulator
-
-Descrição: Simula as constraints e métricas de performance do chip neuromórfico
-          Loihi 2 para comparação com implementação em CPU/GPU tradicional.
-          Modela latência, energia, potência e throughput.
+Simula as constraints e métricas de performance do chip neuromórfico
+Loihi 2 para comparação com implementação em CPU/GPU tradicional.
+Modela latência, energia, potência e throughput.
 
 Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
 
 Referências:
 - Intel Loihi 2: https://www.intel.com/content/www/us/en/research/neuromorphic-computing.html

@@ -68,11 +68,11 @@
 
 ### Via Script Bash
 ```bash
-./start-local.sh           # Iniciar
-./start-local.sh --build   # Reconstruir e iniciar
-./start-local.sh --logs    # Ver logs
-./start-local.sh --stop    # Parar
-./start-local.sh --clean   # Limpar tudo
+./scripts/start-local.sh           # Iniciar
+./scripts/start-local.sh --build   # Reconstruir e iniciar
+./scripts/start-local.sh --logs    # Ver logs
+./scripts/start-local.sh --stop    # Parar
+./scripts/start-local.sh --clean   # Limpar tudo
 ```
 
 ### Via Makefile

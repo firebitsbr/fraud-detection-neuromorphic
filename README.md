@@ -33,6 +33,7 @@
 - [Usando a API REST](#-usando-a-api-rest)
 - [Testes e Validação](#-testes-e-validação)
 - [Resultados e Benchmarks](#-resultados-e-benchmarks)
+- [Documentação Detalhada](#-documentação-detalhada)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Tecnologias](#-tecnologias)
 - [Roadmap](#️-roadmap)
@@ -173,7 +174,8 @@ projeto/
 │   └── dataset_loader.py # Carregamento de dados
 ├── hardware/
 │   └── loihi_simulator.py # Simulador Intel Loihi 2
-├── api.py                # REST API (FastAPI)
+├── src/
+│   ├── api_server.py          # REST API (FastAPI)
 ├── notebooks/
 │   ├── 01_stdp_example.ipynb      # Teoria STDP
 │   ├── 02_demo.ipynb              # Demo completo
@@ -707,6 +709,18 @@ Loihi 2:      | 0.19 mJ  ← 1,678,450x mais eficiente!
 
 ---
 
+## 📚 Documentação Detalhada
+
+Para guias detalhados de instalação, arquitetura e deployment, consulte a pasta `docs/`:
+
+- [**Índice da Documentação**](docs/DOCS_INDEX.md)
+- [Guia de Instalação Docker](docs/DOCKER_INSTALL_GUIDE.md)
+- [Setup Local](docs/DOCKER_LOCAL_SETUP.md)
+- [Arquitetura do Sistema](docs/architecture.md)
+- [Explicação Teórica](docs/explanation.md)
+
+---
+
 ## 📁 Estrutura do Projeto
 
 ```
@@ -718,7 +732,12 @@ fraud-detection-neuromorphic/
 ├── 📄 docker-compose.yml           # Orquestração Docker
 ├── 📄 Makefile                     # Comandos úteis
 │
-├── 🐍 api.py                       # FastAPI REST server
+├── 📂 docs/                        # Documentação detalhada
+│   ├── DOCS_INDEX.md              # Índice da documentação
+│   └── ...
+│
+├── src/
+│   ├── api_server.py              # FastAPI REST server
 ├── 🐳 Dockerfile                   # Container API
 ├── 🐳 Dockerfile.jupyter           # Container Jupyter
 ├── 🐳 Dockerfile.streamlit         # Container UI

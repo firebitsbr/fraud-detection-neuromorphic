@@ -88,7 +88,7 @@ docker compose build
 Ou use o script de start que já existe:
 
 ```bash
-./start-local.sh
+./scripts/start-local.sh
 ```
 
 ## 📝 Logs

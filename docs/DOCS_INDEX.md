@@ -22,7 +22,7 @@
 
 ## 🐳 Docker - Execução Local
 
-### [QUICKSTART.md](../QUICKSTART.md) ⚡ COMECE AQUI!
+### [QUICKSTART.md](QUICKSTART.md) ⚡ COMECE AQUI!
 **Guia de início rápido - 3 comandos para rodar tudo**
 - Execução em 3 passos
 - Comandos principais (Make)
@@ -68,7 +68,7 @@
 
 ## 📖 Documentação Técnica
 
-### [docs/explanation.md](docs/explanation.md)
+### [explanation.md](explanation.md)
 **Explicação detalhada do sistema**
 - Fundamentos de SNNs
 - Arquitetura do pipeline
@@ -76,14 +76,14 @@
 - Comparação com DNNs
 - Casos de uso
 
-### [docs/architecture.md](docs/architecture.md)
+### [architecture.md](architecture.md)
 **Arquitetura técnica completa**
 - Fluxo de dados
 - Componentes do sistema
 - Especificações técnicas
 - Diagramas detalhados
 
-### [docs/API.md](docs/API.md)
+### [API.md](API.md)
 **Documentação da API REST**
 - Endpoints disponíveis
 - Formato de requisições
@@ -91,7 +91,7 @@
 - Exemplos de uso
 - Autenticação
 
-### [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+### [DEPLOYMENT.md](DEPLOYMENT.md)
 **Guia de deployment em produção**
 - Estratégias de deployment
 - Kubernetes/Cloud
@@ -103,7 +103,7 @@
 
 ## 🎓 Relatórios de Fases
 
-### [docs/PHASE3_COMPLETE.md](docs/PHASE3_COMPLETE.md)
+### [PHASE3_COMPLETE.md](PHASE3_COMPLETE.md)
 **Fase 3: Production Infrastructure & Deployment**
 - Kafka streaming
 - API REST completa
@@ -112,7 +112,7 @@
 - Monitoramento Prometheus/Grafana
 - 459 linhas
 
-### [docs/PHASE4_COMPLETE.md](docs/PHASE4_COMPLETE.md)
+### [PHASE4_COMPLETE.md](PHASE4_COMPLETE.md)
 **Fase 4: Hardware Integration & Energy Optimization**
 - Integração Intel Loihi 2
 - Benchmark de energia
@@ -121,7 +121,7 @@
 - Otimizações
 - 561 linhas
 
-### [docs/phase5_summary.md](docs/phase5_summary.md)
+### [phase5_summary.md](phase5_summary.md)
 **Fase 5: Distributed Scaling & Multi-Chip Infrastructure**
 - Simuladores de hardware (Loihi 2, BrainScaleS-2)
 - Cluster distribuído
@@ -130,9 +130,9 @@
 - 673 linhas
 
 ### Summaries de Outras Fases
-- [docs/phase2_summary.md](docs/phase2_summary.md) - Optimization & Performance
-- [docs/phase3_summary.md](docs/phase3_summary.md) - Production Infrastructure
-- [docs/phase4_summary.md](docs/phase4_summary.md) - Hardware Integration
+- [phase2_summary.md](phase2_summary.md) - Optimization & Performance
+- [phase3_summary.md](phase3_summary.md) - Production Infrastructure
+- [phase4_summary.md](phase4_summary.md) - Hardware Integration
 
 ---
 
@@ -160,7 +160,7 @@
 
 ### Build & Scripts
 - `Makefile` - 25+ comandos úteis
-- `start-local.sh` - Script de inicialização automatizada
+- `scripts/start-local.sh` - Script de inicialização automatizada
 
 ---
 

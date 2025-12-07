@@ -195,7 +195,6 @@ Os seguintes diretórios são montados para desenvolvimento:
 fraud-api:
   volumes:
     - ./src:/app/src:ro         # Código fonte (read-only)
-    - ./api.py:/app/api.py:ro   # API (read-only)
 
 jupyter-lab:
   volumes:
@@ -205,7 +204,7 @@ jupyter-lab:
     - ./tests:/workspace/tests
 ```
 
-**Nota**: Mudanças em `src/` e `api.py` requerem rebuild ou restart do container.
+**Nota**: Mudanças em `src/` e `src/api_server.py` requerem rebuild ou restart do container.
 
 ### Portas
 

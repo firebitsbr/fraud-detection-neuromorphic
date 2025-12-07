@@ -238,7 +238,7 @@ docker ps -a
 cd /path/to/fraud-detection-neuromorphic
 
 # Executar script de início
-./start-local.sh
+./scripts/start-local.sh
 
 # Ou usar Make
 make start
@@ -442,7 +442,7 @@ Após instalar Docker com sucesso:
 
 3. **Iniciar sistema:**
    ```bash
-   ./start-local.sh
+   ./scripts/start-local.sh
    # ou
    make start
    ```

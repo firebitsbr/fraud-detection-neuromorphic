@@ -1,16 +1,14 @@
 """
-Spiking Neural Network Models for Fraud Detection
-
-Description: Implementa modelos de Spiking Neural Networks (SNNs) usando neurônios
-             Leaky Integrate-and-Fire (LIF) com aprendizado STDP para detecção
-             de fraude neuromórfica em transações bancárias.
+Implementa modelos de Spiking Neural Networks (SNNs) usando neurônios
+Leaky Integrate-and-Fire (LIF) com aprendizado STDP para detecção
+de fraude neuromórfica em transações bancárias.
 
 Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
 """
 
 import numpy as np
@@ -83,8 +81,9 @@ class FraudSNN:
     def _build_network(self):
         """Build the SNN architecture using Brian2."""
         
-        # Set global clock para resolução temporal fina (necessário para múltiplos spikes)
-        defaultclock.dt = 0.01 * ms  # 10 microsegundos
+        # Set global clock para resolução temporal mais grossa para evitar conflitos
+        # Aumentado de 0.01ms para 0.1ms (100 microsegundos)
+        defaultclock.dt = 0.1 * ms  # 100 microsegundos
         
         # 1. INPUT LAYER (Spike Generator Group)
         # Inicializa com arrays vazios mas com unidades corretas
@@ -240,20 +239,32 @@ class FraudSNN:
         Returns:
             Dictionary with output spike counts and rates
         """
-        # Reset network state
-        self.network.restore()
+        # Use the persistent network to ensure weights are preserved and updated (STDP)
         
-        # Set input spikes
-        self.layers['input'].set_spikes(
-            indices=spike_indices.astype(int),
-            times=spike_times * second
-        )
+        # 1. Prepare input spikes
+        # We must offset times by current network time because we are running continuously
+        current_time = self.network.t
+        self.layers['input'].set_spikes(spike_indices, spike_times * second + current_time)
         
-        # Run simulation
+        # 2. Create temporary monitor for this run
+        # We add it dynamically to capture only this run's spikes
+        temp_monitor = SpikeMonitor(self.layers['output'])
+        self.network.add(temp_monitor)
+        
+        # 3. Reset neuron potentials (optional, but good for independent samples)
+        # We iterate over hidden and output layers
+        for layer_name, layer in self.layers.items():
+            if layer_name != 'input' and hasattr(layer, 'v'):
+                layer.v = layer.namespace['v_rest']
+        
+        # 4. Run simulation
         self.network.run(duration * second)
         
-        # Collect output
-        output_spikes = self.monitors['output_spikes']
+        # 5. Remove monitor
+        self.network.remove(temp_monitor)
+        
+        # 6. Collect output
+        output_spikes = temp_monitor
         
         # Count spikes per output neuron
         spike_counts = np.zeros(self.output_size)

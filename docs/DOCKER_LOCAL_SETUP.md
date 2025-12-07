@@ -52,7 +52,7 @@ cd fraud-detection-neuromorphic
 
 ```bash
 # Opção A: Usando o script automatizado (recomendado)
-./start-local.sh
+./scripts/start-local.sh
 
 # Opção B: Usando Docker Compose diretamente
 docker-compose up -d
@@ -76,29 +76,29 @@ Aguarde ~30 segundos para os serviços iniciarem, então acesse:
 
 ## 🔧 Comandos Disponíveis
 
-### Script Automatizado (`start-local.sh`)
+### Script Automatizado (`scripts/start-local.sh`)
 
 ```bash
 # Iniciar sistema
-./start-local.sh
+./scripts/start-local.sh
 
 # Reconstruir imagens e iniciar
-./start-local.sh --build
+./scripts/start-local.sh --build
 
 # Visualizar logs em tempo real
-./start-local.sh --logs
+./scripts/start-local.sh --logs
 
 # Ver status dos containers
-./start-local.sh --status
+./scripts/start-local.sh --status
 
 # Parar sistema
-./start-local.sh --stop
+./scripts/start-local.sh --stop
 
 # Parar e limpar volumes
-./start-local.sh --clean
+./scripts/start-local.sh --clean
 
 # Ajuda
-./start-local.sh --help
+./scripts/start-local.sh --help
 ```
 
 ### Docker Compose Direto
@@ -268,7 +268,7 @@ docker stats
 
 ```bash
 # Dar permissão de execução
-chmod +x start-local.sh
+chmod +x scripts/start-local.sh
 ```
 
 ---
@@ -307,23 +307,23 @@ rate(fraud_detected_total[5m])
 
 ```bash
 # 1. Iniciar sistema
-./start-local.sh
+./scripts/start-local.sh
 
 # 2. Fazer alterações no código
 # (edite arquivos em src/)
 
 # 3. Reconstruir e reiniciar
-./start-local.sh --build
+./scripts/start-local.sh --build
 
 # 4. Ver logs
-./start-local.sh --logs
+./scripts/start-local.sh --logs
 ```
 
 ### Testes de Carga
 
 ```bash
 # 1. Iniciar sistema
-./start-local.sh
+./scripts/start-local.sh
 
 # 2. Executar load test
 python examples/load_test.py
@@ -355,10 +355,10 @@ python
 
 ```bash
 # Parar containers (mantém volumes)
-./start-local.sh --stop
+./scripts/start-local.sh --stop
 
 # Parar e remover volumes
-./start-local.sh --clean
+./scripts/start-local.sh --clean
 ```
 
 ### Remover Tudo
