@@ -128,12 +128,8 @@ class FraudSNNPyTorch(nn.Module):
                 if isinstance(layer, nn.Linear):
                     spk = layer(spk)
                 elif isinstance(layer, snn.Leaky):
-                    if mem_layers[mem_idx] is None:
-                        # Initialize membrane potential on first pass
-                        spk, mem_layers[mem_idx] = layer(spk)
-                    else:
-                        # Use existing membrane potential
-                        spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
+                    # Always pass membrane state (initialized as None on first call)
+                    spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
                     layer_spikes.append(spk)
                     mem_idx += 1
             
