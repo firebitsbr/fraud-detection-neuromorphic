@@ -1,0 +1,9 @@
+# Phase 5: Edge Device Requirements (Minimal)
+#
+# Description: Lightweight dependencies for edge deployment
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
+
+numpy>=1.24.0,<2.0.0

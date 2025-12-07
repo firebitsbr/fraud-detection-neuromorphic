@@ -1,0 +1,189 @@
+# Phase 5: Multi-Chip Distributed Neuromorphic Cluster
+#
+# Description: Complete stack for scalable fraud detection
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
+
+version: '3.8'
+
+services:
+  # Loihi 2 Simulator Instances (2x for redundancy)
+  loihi-chip-0:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.loihi
+    container_name: loihi_chip_0
+    environment:
+      - CHIP_ID=loihi_0
+      - MAX_CAPACITY=500
+      - LOG_LEVEL=INFO
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "python", "-c", "import hardware.loihi2_simulator; print('OK')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  loihi-chip-1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.loihi
+    container_name: loihi_chip_1
+    environment:
+      - CHIP_ID=loihi_1
+      - MAX_CAPACITY=500
+      - LOG_LEVEL=INFO
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+
+  # BrainScaleS-2 Simulator Instance
+  brainscales-chip-0:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.brainscales
+    container_name: brainscales_chip_0
+    environment:
+      - CHIP_ID=brainscales_0
+      - MAX_CAPACITY=1000
+      - SPEEDUP_FACTOR=1000
+      - LOG_LEVEL=INFO
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+
+  # Distributed Cluster Controller
+  cluster-controller:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.cluster
+    container_name: cluster_controller
+    ports:
+      - "8002:8002"
+    environment:
+      - LOAD_BALANCING_STRATEGY=least_loaded
+      - NUM_WORKERS=8
+      - LOG_LEVEL=INFO
+    networks:
+      - neuromorphic-net
+    depends_on:
+      - loihi-chip-0
+      - loihi-chip-1
+      - brainscales-chip-0
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 2G
+    volumes:
+      - cluster-stats:/app/stats
+
+  # Edge Device Simulator (for testing)
+  edge-device:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.edge
+    container_name: edge_device
+    environment:
+      - EDGE_MODE=1
+      - CHIP_ID=edge_0
+      - LOG_LEVEL=WARNING
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  # Monitoring: Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus_phase5
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-phase5.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=7d'
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+
+  # Monitoring: Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_phase5
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=neuromorphic
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana-dashboards:/etc/grafana/provisioning/dashboards
+    networks:
+      - neuromorphic-net
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  # Redis for distributed coordination
+  redis:
+    image: redis:7-alpine
+    container_name: redis_phase5
+    ports:
+      - "6379:6379"
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+
+networks:
+  neuromorphic-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
+
+volumes:
+  cluster-stats:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  redis-data:
+    driver: local

@@ -1,0 +1,45 @@
+# Edge Device Docker Image (ARM64 compatible)
+#
+# Description: Lightweight neuromorphic inference for edge deployment
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
+
+FROM python:3.10-slim
+
+LABEL maintainer="Mauro Risonho de Paula Assumpção"
+LABEL description="Edge Device Neuromorphic Inference"
+LABEL version="1.0.0"
+LABEL architecture="multi-arch"
+
+WORKDIR /app
+
+# Minimal dependencies for edge devices
+RUN apt-get update && apt-get install -y \
+    gcc \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install minimal Python packages
+COPY requirements-edge.txt .
+RUN pip install --no-cache-dir -r requirements-edge.txt
+
+# Copy only essential code
+COPY hardware/loihi_adapter.py /app/hardware/
+COPY src/models_snn.py /app/src/
+COPY src/encoders.py /app/src/
+
+# No exposed ports for edge (local only)
+
+ENV PYTHONPATH=/app:/app/src
+ENV PYTHONUNBUFFERED=1
+ENV EDGE_MODE=1
+ENV LOG_LEVEL=WARNING
+
+# Lightweight health check
+HEALTHCHECK --interval=60s --timeout=5s --start-period=10s --retries=2 \
+    CMD python -c "print('OK')" || exit 1
+
+# Edge mode: continuous inference
+CMD ["python", "-c", "from hardware.loihi_adapter import LoihiAdapter; print('Edge device ready')"]

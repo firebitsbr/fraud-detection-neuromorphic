@@ -1,0 +1,33 @@
+# BrainScaleS-2 Analog Simulator Docker Image
+#
+# Description: Software emulation of BrainScaleS-2 analog neuromorphic hardware
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Created: December 5, 2025
+# License: MIT License
+
+FROM fraud-detection-base:latest
+
+LABEL maintainer="Mauro Risonho de Paula Assumpção"
+LABEL description="BrainScaleS-2 Analog Neuromorphic Simulator"
+LABEL version="1.0.0"
+
+WORKDIR /app
+
+# Dependencies are already installed in base image
+
+# Copy simulator code
+COPY hardware/brainscales2_simulator.py /app/hardware/
+COPY src/ /app/src/
+
+EXPOSE 8001
+
+ENV PYTHONPATH=/app:/app/src
+ENV PYTHONUNBUFFERED=1
+ENV BRAINSCALES_SPEEDUP=1000
+ENV LOG_LEVEL=INFO
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import hardware.brainscales2_simulator; print('OK')" || exit 1
+
+CMD ["python", "-m", "hardware.brainscales2_simulator"]
