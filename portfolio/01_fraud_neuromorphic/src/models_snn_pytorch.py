@@ -73,11 +73,11 @@ class FraudSNNPyTorch(nn.Module):
             # Linear layer
             layers.append(nn.Linear(layer_sizes[i], layer_sizes[i+1]))
             
-            # LIF neuron
+            # LIF neuron (init_hidden=False to manually manage state)
             layers.append(snn.Leaky(
                 beta=beta,
                 spike_grad=spike_grad_fn,
-                init_hidden=True
+                init_hidden=False
             ))
         
         self.layers = nn.ModuleList(layers)
@@ -103,11 +103,12 @@ class FraudSNNPyTorch(nn.Module):
         """
         batch_size = x.shape[0]
         
-        # Initialize membrane potentials
+        # Initialize membrane potentials for all LIF layers
         mem_layers = []
         for layer in self.layers:
             if isinstance(layer, snn.Leaky):
-                mem = layer.init_leaky()
+                # Get the next linear layer size to determine membrane shape
+                mem = None  # Will be initialized on first call
                 mem_layers.append(mem)
         
         # Record output spikes
@@ -127,7 +128,12 @@ class FraudSNNPyTorch(nn.Module):
                 if isinstance(layer, nn.Linear):
                     spk = layer(spk)
                 elif isinstance(layer, snn.Leaky):
-                    spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
+                    if mem_layers[mem_idx] is None:
+                        # Initialize membrane potential on first pass
+                        spk, mem_layers[mem_idx] = layer(spk)
+                    else:
+                        # Use existing membrane potential
+                        spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
                     layer_spikes.append(spk)
                     mem_idx += 1
             
