@@ -1,0 +1,248 @@
+# Docker Compose - Neuromorphic Fraud Detection System
+#
+# Production-ready deployment on Ubuntu 24.04.3 LTS Server Minimal
+# Complete microservices architecture with monitoring and scaling
+#
+# Author: Mauro Risonho de Paula Assumpção
+# Email: mauro.risonho@gmail.com
+# LinkedIn: linkedin.com/in/maurorisonho
+# GitHub: github.com/maurorisonho
+# Date: December 2025
+# License: MIT
+
+version: '3.8'
+
+services:
+  # ========== FASTAPI REST API ==========
+  fraud-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    image: fraud-detection-api:ubuntu24.04
+    container_name: neuromorphic-fraud-api
+    ports:
+      - "8000:8000"  # API REST
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - LOG_LEVEL=INFO
+      - WORKERS=4
+      - MAX_REQUESTS=1000
+      - MAX_REQUESTS_JITTER=100
+    volumes:
+      - ./models:/app/models:ro
+      - ./logs:/app/logs
+      - api-cache:/app/.cache
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c 'import socket; s=socket.socket(); s.connect((\"localhost\", 8000)); s.close()' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.neuromorphic.service=api"
+      - "com.neuromorphic.version=1.0.0"
+    command: ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+
+  # ========== JUPYTER LAB ==========
+  jupyter-lab:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.jupyter
+    image: fraud-detection-jupyter:ubuntu24.04
+    container_name: neuromorphic-jupyter
+    ports:
+      - "8888:8888"  # Jupyter Lab
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - PYTHONUNBUFFERED=1
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN:-neuromorphic2025}
+    volumes:
+      - ./notebooks:/workspace/notebooks
+      - ./src:/workspace/src:ro
+      - ./data:/workspace/data
+      - ./models:/workspace/models
+      - jupyter-data:/home/appuser/.jupyter
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8888/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    labels:
+      - "com.neuromorphic.service=jupyter"
+      - "com.neuromorphic.version=1.0.0"
+
+  # ========== WEB INTERFACE (STREAMLIT) ==========
+  web-interface:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.streamlit
+    image: fraud-detection-web:ubuntu24.04
+    container_name: neuromorphic-web
+    ports:
+      - "8501:8501"  # Streamlit UI
+    environment:
+      - API_URL=http://fraud-api:8000
+      - STREAMLIT_SERVER_PORT=8501
+      - STREAMLIT_SERVER_ADDRESS=0.0.0.0
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    volumes:
+      - ./web:/app/web:ro
+      - streamlit-cache:/app/.streamlit
+    depends_on:
+      fraud-api:
+        condition: service_healthy
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8501/_stcore/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    labels:
+      - "com.neuromorphic.service=web"
+      - "com.neuromorphic.version=1.0.0"
+
+  # ========== REDIS CACHE ==========
+  redis:
+    image: redis:7.4-alpine
+    container_name: neuromorphic-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis-data:/data
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    labels:
+      - "com.neuromorphic.service=cache"
+      - "com.neuromorphic.version=1.0.0"
+
+  # ========== PROMETHEUS MONITORING ==========
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neuromorphic-prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    labels:
+      - "com.neuromorphic.service=monitoring"
+      - "com.neuromorphic.version=1.0.0"
+
+  # ========== GRAFANA DASHBOARDS ==========
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neuromorphic-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-neuromorphic2025}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_ROOT_URL=http://localhost:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+    labels:
+      - "com.neuromorphic.service=dashboard"
+      - "com.neuromorphic.version=1.0.0"
+
+networks:
+  neuromorphic-net:
+    driver: bridge
+    name: neuromorphic-network
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  api-cache:
+    name: neuromorphic-api-cache
+  jupyter-data:
+    name: neuromorphic-jupyter-data
+  streamlit-cache:
+    name: neuromorphic-streamlit-cache
+  redis-data:
+    name: neuromorphic-redis-data
+  prometheus-data:
+    name: neuromorphic-prometheus-data
+  grafana-data:
+    name: neuromorphic-grafana-data
