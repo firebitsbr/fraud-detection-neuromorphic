@@ -110,7 +110,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.12-venv \
     libopenblas0 \
     libgomp1 \
-    libhdf5-103 \
+    libhdf5-103-1t64 \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
@@ -120,7 +120,7 @@ COPY --from=builder /opt/venv /opt/venv
 
 # Create app directory and user
 RUN groupadd -r appuser && \
-    useradd -r -g appuser -u 1000 -m -s /bin/bash appuser
+    useradd -r -g appuser -m -s /bin/bash appuser
 
 WORKDIR /app
 
