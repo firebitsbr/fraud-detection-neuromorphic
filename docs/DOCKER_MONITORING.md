@@ -16,7 +16,7 @@ Você pediu **VÁRIAS VEZES** para ver o que está acontecendo dentro do Docker 
 ### Opção 1: Script com Progresso Visual (RECOMENDADO)
 
 ```bash
-cd /home/test/Downloads/github/Projeto-Neuromorfico-X/portfolio/01_fraud_neuromorphic
+cd /path/to/fraud-detection-neuromorphic/portfolio/01_fraud_neuromorphic
 ./scripts/build_with_progress.sh
 ```
 

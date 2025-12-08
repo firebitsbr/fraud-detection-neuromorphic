@@ -12,12 +12,16 @@ import unittest
 import numpy as np
 import sys
 import os
+from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# Add src directory to path
+project_root = Path(__file__).parent.parent
+src_path = project_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
-from src.main import FraudDetectionPipeline, generate_synthetic_transactions
-from src.dataset_loader import SyntheticDataGenerator
+from main import FraudDetectionPipeline, generate_synthetic_transactions
+from dataset_loader import SyntheticDataGenerator
 
 
 class TestFraudDetectionPipeline(unittest.TestCase):
@@ -163,7 +167,7 @@ class TestModelIntegration(unittest.TestCase):
     
     def test_encoder_model_integration(self):
         """Test integration between encoder and model."""
-        from src.encoders import TransactionEncoder
+        from encoders import TransactionEncoder
         
         encoder = TransactionEncoder()
         

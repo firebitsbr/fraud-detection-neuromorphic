@@ -31,9 +31,9 @@ import logging
 # Importar pipeline
 import sys
 from pathlib import Path
-# sys.path.insert(0, str(Path(__file__).parent / 'src')) # Removed as file is now in src/
+# File is now in src/, so we import directly from the same directory
 
-from src.main import FraudDetectionPipeline, generate_synthetic_transactions
+from main import FraudDetectionPipeline, generate_synthetic_transactions
 import pandas as pd
 
 # Configurar logging

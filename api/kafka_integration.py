@@ -16,9 +16,13 @@ from datetime import datetime
 import asyncio
 import sys
 import os
+from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# Add src directory to path
+project_root = Path(__file__).parent.parent
+src_path = project_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
 try:
     from kafka import KafkaProducer, KafkaConsumer
@@ -28,7 +32,7 @@ except ImportError:
     KAFKA_AVAILABLE = False
     logging.warning("kafka-python not installed. Kafka integration unavailable.")
 
-from src.main import FraudDetectionPipeline
+from main import FraudDetectionPipeline
 
 # Configure logging
 logging.basicConfig(
@@ -301,7 +305,7 @@ class KafkaTransactionProducer:
             n_transactions: Number of transactions to generate
             fraud_ratio: Proportion of fraudulent transactions
         """
-        from src.main import generate_synthetic_transactions
+        from main import generate_synthetic_transactions
         
         logger.info(f"Generating {n_transactions} transactions...")
         

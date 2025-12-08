@@ -21,12 +21,16 @@ from datetime import datetime
 import logging
 import sys
 import os
+from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# Add src directory to path
+project_root = Path(__file__).parent.parent
+src_path = project_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
-from src.main import FraudDetectionPipeline
-from src.performance_profiler import PerformanceProfiler
+from main import FraudDetectionPipeline
+from performance_profiler import PerformanceProfiler
 from api.models import (Transaction, TransactionBatch, PredictionResponse,
                        BatchPredictionResponse, HealthResponse, MetricsResponse)
 from api.monitoring import monitoring_service, metrics_collector
@@ -268,7 +272,7 @@ async def train_model(background_tasks: BackgroundTasks):
     def train_task():
         try:
             logger.info("Starting model retraining...")
-            from src.main import generate_synthetic_transactions
+            from main import generate_synthetic_transactions
             train_data = generate_synthetic_transactions(n_samples=5000)
             pipeline.train(train_data)
             logger.info("Model retraining completed")

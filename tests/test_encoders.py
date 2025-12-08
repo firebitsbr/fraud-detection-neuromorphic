@@ -12,13 +12,17 @@ import unittest
 import numpy as np
 import sys
 import os
+from pathlib import Path
 
-# Add parent directory to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+# Add src directory to path
+project_root = Path(__file__).parent.parent
+src_path = project_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
-from src.encoders import (RateEncoder, TemporalEncoder, PopulationEncoder,
+from encoders import (RateEncoder, TemporalEncoder, PopulationEncoder,
                           LatencyEncoder, TransactionEncoder)
-from src.advanced_encoders import (AdaptiveRateEncoder, BurstEncoder,
+from advanced_encoders import (AdaptiveRateEncoder, BurstEncoder,
                                    PhaseEncoder, RankOrderEncoder,
                                    EnsembleEncoder, SpikeTrainAnalyzer)
 

@@ -20,7 +20,13 @@ from pathlib import Path
 
 # Import Phase 5 components
 import sys
-sys.path.append(str(Path(__file__).parent.parent))
+from pathlib import Path
+
+# Add src directory to path
+project_root = Path(__file__).parent.parent
+src_path = project_root / 'src'
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
 
 from hardware.loihi2_simulator import Loihi2Simulator, ChipConfig
 from hardware.brainscales2_simulator import BrainScaleS2Simulator
