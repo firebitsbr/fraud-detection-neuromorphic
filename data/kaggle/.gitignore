@@ -1,0 +1,7 @@
+# Large Kaggle dataset files (>100MB) - Download separately
+test_transaction.csv
+train_transaction.csv
+
+# Instructions:
+# Download from: https://www.kaggle.com/c/ieee-fraud-detection/data
+# Or run: python scripts/download_kaggle_dataset.py
