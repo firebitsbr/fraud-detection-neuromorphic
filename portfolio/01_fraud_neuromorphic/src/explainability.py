@@ -29,6 +29,7 @@ import seaborn as sns
 from dataclasses import dataclass
 import shap
 import logging
+from tqdm.auto import tqdm
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -112,10 +113,26 @@ class SHAPExplainer:
         self.model = model
         self.feature_names = feature_names
         
-        # Create SHAP explainer
+        # Create wrapper model that returns only output (not tuple)
+        class ModelWrapper(nn.Module):
+            def __init__(self, model):
+                super().__init__()
+                self.model = model
+            
+            def forward(self, x):
+                # Handle both tuple and tensor returns
+                output = self.model(x)
+                if isinstance(output, tuple):
+                    return output[0]  # Return only the output tensor
+                return output
+        
+        wrapped_model = ModelWrapper(model)
+        wrapped_model.train()  # Enable gradient computation
+        
+        # Create SHAP explainer with wrapped model
         # Use GradientExplainer for neural networks
         self.explainer = shap.GradientExplainer(
-            model,
+            wrapped_model,
             background_data
         )
     
@@ -126,8 +143,9 @@ class SHAPExplainer:
         Returns:
             shap_values: [num_features] - contribution of each feature
         """
-        with torch.no_grad():
-            shap_values = self.explainer.shap_values(transaction)
+        # GradientExplainer needs gradients enabled
+        transaction_with_grad = transaction.clone().detach().requires_grad_(True)
+        shap_values = self.explainer.shap_values(transaction_with_grad)
         
         # If multi-class, take fraud class (index 1)
         if isinstance(shap_values, list):
@@ -213,7 +231,7 @@ class AblationExplainer:
         method: str = 'zero'
     ) -> Dict[str, float]:
         """
-        Calculate feature importance via ablation
+        Calculate feature importance via ablation with progress tracking
         
         Args:
             transaction: Input [1, num_features]
@@ -231,7 +249,12 @@ class AblationExplainer:
         
         importance = {}
         
-        for i, feature_name in enumerate(self.feature_names):
+        # Progress bar for feature ablation
+        for i, feature_name in tqdm(enumerate(self.feature_names), 
+                                     total=len(self.feature_names),
+                                     desc="🔬 Análise de ablação", 
+                                     unit="feature",
+                                     leave=False):
             # Ablate feature i
             ablated = transaction.clone()
             ablated[0, i] = 0.0 if method == 'zero' else transaction[:, i].mean()
@@ -408,12 +431,20 @@ class CounterfactualGenerator:
         if baseline_pred == target_class:
             return None  # Already in target class
         
-        # Iteratively modify features
-        for iteration in range(max_iterations):
+        # Iteratively modify features with progress tracking
+        pbar = tqdm(range(max_iterations), 
+                   desc=f"🔄 Buscando contrafactual (alvo={target_class})", 
+                   unit="iter",
+                   leave=False)
+        
+        for iteration in pbar:
             # Get current prediction
             with torch.no_grad():
                 current_pred = self.model.predict(counterfactual).item()
                 current_proba = self.model.predict_proba(counterfactual)[0, target_class].item()
+            
+            # Update progress bar with current probability
+            pbar.set_postfix({'prob': f'{current_proba:.3f}'})
             
             # Check if flipped
             if current_pred == target_class and current_proba > 0.7:
@@ -426,6 +457,7 @@ class CounterfactualGenerator:
                     if len(changes) >= max_changes:
                         break
                 
+                pbar.close()
                 return {
                     'changes': changes,
                     'confidence': current_proba

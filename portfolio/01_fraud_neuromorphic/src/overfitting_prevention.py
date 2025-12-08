@@ -26,6 +26,7 @@ from typing import List, Tuple, Dict, Optional
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
 import logging
+from tqdm.auto import tqdm
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -91,7 +92,7 @@ class DataAugmenter:
         sampling_ratio: float = 1.0
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """
-        SMOTE: Synthetic Minority Over-sampling Technique
+        SMOTE: Synthetic Minority Over-sampling Technique with progress tracking
         
         Method:
         1. Find k nearest neighbors of minority class
@@ -118,7 +119,11 @@ class DataAugmenter:
         n_synthetic = int(len(X_fraud) * sampling_ratio)
         X_synthetic = []
         
-        for _ in range(n_synthetic):
+        # Progress bar for synthetic sample generation
+        for _ in tqdm(range(n_synthetic), 
+                     desc="🧬 Gerando amostras sintéticas (SMOTE)", 
+                     unit="sample",
+                     leave=False):
             # Random sample
             idx = np.random.randint(0, len(X_fraud))
             sample = X_fraud[idx]
@@ -337,7 +342,7 @@ class CrossValidator:
         epochs: int = 50
     ) -> Dict[str, float]:
         """
-        Perform K-fold cross-validation
+        Perform K-fold cross-validation with progress tracking
         
         Returns:
             {
@@ -349,7 +354,11 @@ class CrossValidator:
         splits = self.split(X, y)
         fold_scores = []
         
-        for fold_idx, (X_train, X_val, y_train, y_val) in enumerate(splits):
+        # Progress bar for folds
+        for fold_idx, (X_train, X_val, y_train, y_val) in tqdm(enumerate(splits),
+                                                                 total=len(splits),
+                                                                 desc="📊 Cross-validation",
+                                                                 unit="fold"):
             logger.info(f"Fold {fold_idx + 1}/{self.n_folds}")
             
             # Create fresh model
@@ -359,7 +368,11 @@ class CrossValidator:
             optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
             criterion = nn.CrossEntropyLoss()
             
-            for epoch in range(epochs):
+            # Progress bar for epochs
+            for epoch in tqdm(range(epochs), 
+                            desc=f"  Treinando fold {fold_idx + 1}", 
+                            unit="epoch",
+                            leave=False):
                 model.train()
                 optimizer.zero_grad()
                 

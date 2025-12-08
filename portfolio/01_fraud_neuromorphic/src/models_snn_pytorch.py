@@ -26,6 +26,7 @@ import numpy as np
 from typing import List, Tuple, Dict, Any, Optional
 from pathlib import Path
 import time
+from tqdm.auto import tqdm
 
 
 class FraudSNNPyTorch(nn.Module):
@@ -188,14 +189,17 @@ class FraudSNNPyTorch(nn.Module):
         num_steps: int = 25
     ) -> Dict[str, float]:
         """
-        Training loop for one epoch
+        Training loop for one epoch with progress tracking
         """
         self.train()
         total_loss = 0.0
         correct = 0
         total = 0
         
-        for batch_idx, (data, targets) in enumerate(train_loader):
+        # Progress bar for batches
+        pbar = tqdm(train_loader, desc="🎓 Treinando", unit="batch", leave=False)
+        
+        for batch_idx, (data, targets) in enumerate(pbar):
             data = data.to(self.device)
             targets = targets.to(self.device)
             
@@ -215,6 +219,13 @@ class FraudSNNPyTorch(nn.Module):
             predictions = torch.argmax(output, dim=1)
             correct += (predictions == targets).sum().item()
             total += targets.size(0)
+            
+            # Update progress bar with metrics
+            current_acc = correct / total if total > 0 else 0
+            pbar.set_postfix({
+                'loss': f'{loss.item():.4f}',
+                'acc': f'{current_acc:.4f}'
+            })
         
         metrics = {
             'loss': total_loss / len(train_loader),
@@ -355,24 +366,34 @@ class BatchInferenceEngine:
     
     def predict_batch(self, transactions: List[torch.Tensor]) -> List[int]:
         """
-        Batch inference
+        Batch inference with progress bar
         """
-        batch_tensor = torch.stack(transactions)
-        predictions = self.model.predict(batch_tensor)
+        all_predictions = []
         
-        return predictions.cpu().tolist()
+        # Process in batches with progress
+        for i in tqdm(range(0, len(transactions), self.batch_size), 
+                     desc="🔮 Predição em lote", 
+                     unit="batch"):
+            batch_transactions = transactions[i:i + self.batch_size]
+            batch_tensor = torch.stack(batch_transactions)
+            predictions = self.model.predict(batch_tensor)
+            all_predictions.extend(predictions.cpu().tolist())
+        
+        return all_predictions
 
 
-def benchmark_pytorch_vs_brian2():
+def benchmark_pytorch_vs_brian2(device: str = 'cpu'):
     """
-    Benchmark comparison
+    Benchmark comparison with progress tracking
+    
+    Args:
+        device: Device to run benchmark on ('cpu' or 'cuda')
     """
     print("=" * 60)
     print("Benchmark: PyTorch SNN vs Brian2 SNN")
     print("=" * 60)
     
     # Create models
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
     pytorch_model = FraudSNNPyTorch(
         input_size=256,
         hidden_sizes=[128, 64],
@@ -384,17 +405,17 @@ def benchmark_pytorch_vs_brian2():
     batch_sizes = [1, 8, 16, 32, 64]
     num_steps = 25
     
-    for batch_size in batch_sizes:
+    for batch_size in tqdm(batch_sizes, desc="📊 Testando tamanhos de batch", unit="batch"):
         test_input = torch.randn(batch_size, 256).to(device)
         
         # Warmup
-        for _ in range(10):
+        for _ in tqdm(range(10), desc=f"  Aquecimento (batch={batch_size})", leave=False):
             _ = pytorch_model.predict(test_input, num_steps)
         
         # Benchmark
         start = time.time()
         iterations = 100
-        for _ in range(iterations):
+        for _ in tqdm(range(iterations), desc=f"  Executando benchmark", leave=False):
             _ = pytorch_model.predict(test_input, num_steps)
         
         elapsed = (time.time() - start) * 1000  # ms
