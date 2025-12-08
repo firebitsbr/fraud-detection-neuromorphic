@@ -1,12 +1,12 @@
 """
-Monitoring and Metrics Collection
-
-This module provides comprehensive monitoring and metrics collection
-for the fraud detection API.
+API monitoring, metrics collection, and alerting.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import time

@@ -1,11 +1,12 @@
 """
-Load Testing Script for Fraud Detection API
-
-Tests API performance under various load conditions.
+Load testing script for API endpoints.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import asyncio

@@ -1,11 +1,12 @@
 """
-Integration Tests for Fraud Detection Pipeline
-
-This module contains integration tests for the complete fraud detection pipeline.
+End-to-end integration tests.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import unittest

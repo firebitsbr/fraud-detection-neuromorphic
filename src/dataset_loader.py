@@ -1,12 +1,12 @@
 """
-Dataset Loader Module - Real Credit Card Fraud Dataset Integration
-
-This module provides utilities for downloading, loading, and preprocessing
-real-world credit card fraud datasets for neuromorphic fraud detection.
+Dataset loading and preprocessing utilities.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import os

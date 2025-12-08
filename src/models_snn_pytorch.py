@@ -1,19 +1,12 @@
 """
-PyTorch SNN Implementation for Production
-Substitui Brian2 com snnTorch para performance em GPU
+PyTorch-based SNN implementation for fraud detection.
 
-VANTAGENS sobre Brian2:
-- 10-20x mais rápido (GPU-accelerated)
-- Latência: 10-20ms vs 100ms
-- Escalável horizontalmente
-- Suporte a batch inference
-- JIT compilation
-- Menor consumo de memória
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-Data: Dezembro 2025
-Licença: MIT
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import torch

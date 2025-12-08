@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
 """
+Module: build_monitor.py
+
+Author: Mauro Risonho de Paula Assumpção
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
+"""
+
+"""
 Docker Build Progress Monitor
 ==============================
 

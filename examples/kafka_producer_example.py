@@ -1,11 +1,12 @@
 """
-Example Kafka Producer for Fraud Detection
-
-Simulates transaction stream for real-time fraud detection.
+Example Kafka producer for transactions.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import json

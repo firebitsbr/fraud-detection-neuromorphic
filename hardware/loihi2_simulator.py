@@ -1,21 +1,12 @@
 """
-Loihi 2 Hardware Simulator - Docker-based Emulation
-===================================================
-
-Complete software emulation of Intel Loihi 2 neuromorphic chip behavior.
-Designed for development and testing without physical hardware.
-
-Features:
-- Realistic spike-based computation
-- Multi-core simulation (128 cores)
-- Energy tracking with hardware-accurate models
-- Network-on-chip communication emulation
-- Configurable latency and power models
-- Compatible with NxSDK API subset
+Intel Loihi 2 advanced simulator.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

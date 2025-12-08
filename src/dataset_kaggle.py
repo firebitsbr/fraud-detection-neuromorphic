@@ -1,17 +1,12 @@
 """
-Kaggle IEEE-CIS Fraud Detection Dataset Integration
-Substitui dataset sintético com dados reais de 590k transações
+Kaggle IEEE Fraud Detection dataset loader.
 
-Dataset: IEEE-CIS Fraud Detection (2019)
-- 590.540 transações
-- 434 features
-- 3,5% taxa de fraude
-- Dados de pagamentos online (Vesta Corporation)
-
-Download: https://www.kaggle.com/c/ieee-fraud-detection/data
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import pandas as pd

@@ -1,12 +1,12 @@
 """
-Performance Profiling and Benchmarking Tools
-
-This module provides comprehensive profiling and benchmarking utilities for
-analyzing and optimizing neuromorphic fraud detection performance.
+Performance profiling and benchmarking tools.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import time

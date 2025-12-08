@@ -1,12 +1,12 @@
 """
-Intel Loihi 2 Adapter for Neuromorphic Fraud Detection
-
-Converts Brian2 SNN models to Intel Loihi 2 neuromorphic hardware format.
-Provides seamless deployment from simulation to physical hardware.
+Intel Loihi 2 hardware adapter.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

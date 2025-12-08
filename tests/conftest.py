@@ -1,11 +1,12 @@
 """
-Pytest configuration file
-
-This module configures pytest and sets up import paths for testing.
+Pytest configuration and fixtures.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 6, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import sys

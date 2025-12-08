@@ -1,21 +1,12 @@
 """
-Explainability Module for SNN Fraud Detection
-Implementa SHAP, ablation analysis e spike pattern visualization
+Model explainability and interpretability tools.
 
-Compliance:
-- LGPD (Lei Geral de Proteção de Dados - Brasil)
-- GDPR (General Data Protection Regulation - EU)
-- Direito à explicação (Art. 20 LGPD)
-
-Técnicas:
-1. SHAP (SHapley Additive exPlanations)
-2. Ablation Analysis (feature removal)
-3. Spike Pattern Visualization
-4. Feature Attribution
-5. Counterfactual Explanations
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import torch

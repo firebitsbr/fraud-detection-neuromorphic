@@ -1,21 +1,12 @@
 """
-Multi-Chip Distributed Neuromorphic Processing
-==============================================
-
-Distributed fraud detection across multiple neuromorphic chips.
-Enables massive scalability for high-throughput transaction processing.
-
-Features:
-- Multi-chip load balancing
-- Inter-chip communication protocols
-- Fault tolerance and redundancy
-- Dynamic workload distribution
-- Heterogeneous chip support (Loihi + BrainScaleS)
-- Cluster monitoring and analytics
+Multi-chip distributed neuromorphic processing.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

@@ -1,21 +1,12 @@
 """
-Cost Optimization Module
-Auto-scaling, spot instances, edge deployment, monitoring
+Cloud cost optimization and auto-scaling strategies.
 
-Current costs: $2.4M/year
-Target: $1.2M/year (50% reduction)
-
-Strategies:
-1. Auto-scaling (scale to demand)
-2. Spot instances (90% cheaper)
-3. Edge computing (reduce cloud costs)
-4. Model quantization (smaller infra)
-5. Batch processing (higher utilization)
-6. Reserved instances (long-term discount)
-7. Cost monitoring & alerting
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import boto3

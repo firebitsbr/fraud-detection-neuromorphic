@@ -1,14 +1,12 @@
 """
-Security Hardening Module
-OAuth2, rate limiting, PII sanitization, adversarial defense
+Security hardening and authentication utilities.
 
-Compliance:
-- LGPD (Lei Geral de Proteção de Dados)
-- PCI DSS (Payment Card Industry Data Security Standard)
-- OWASP Top 10
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import hashlib

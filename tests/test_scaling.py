@@ -1,13 +1,12 @@
 """
-Comprehensive Scaling Test Suite for Phase 5
-============================================
-
-Tests multi-chip distributed processing, load balancing,
-fault tolerance, and scalability benchmarks.
+Scalability and distributed processing tests.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

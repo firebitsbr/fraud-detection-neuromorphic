@@ -1,22 +1,12 @@
 """
-Overfitting Prevention Module
-Regularização, data augmentation, early stopping
+Overfitting prevention and regularization methods.
 
-Problema atual:
-- 41.088 parâmetros vs 1.000 samples = 41:1 ratio
-- Ideal: 1:10 ratio = 410k samples needed
-- Overfitting severo!
-
-Soluções:
-1. Data augmentation (aumentar dataset virtual)
-2. L1/L2 regularization (penalizar pesos grandes)
-3. Dropout (desativar neurônios aleatoriamente)
-4. Early stopping (parar antes de overfit)
-5. Reduzir complexidade do modelo
-6. Cross-validation
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import torch

@@ -1,20 +1,12 @@
 """
-Performance Optimization Module
-Batch processing, quantização, caching, e otimizações de inferência
+Performance optimization techniques.
 
-Target: <10ms latência, >1000 TPS throughput
-
-Técnicas:
-1. Batch inference com agrupamento dinâmico
-2. Model quantization (FP32 → INT8)
-3. TorchScript JIT compilation
-4. ONNX Runtime optimization
-5. Result caching
-6. Async processing
-7. GPU kernel optimization
-
-Autor: Mauro Risonho de Paula Assumpção
+Author: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import torch

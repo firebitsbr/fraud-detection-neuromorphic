@@ -1,12 +1,12 @@
 """
-Hyperparameter Optimization Module for Neuromorphic Fraud Detection
-
-This module provides automated hyperparameter tuning capabilities for the
-Spiking Neural Network fraud detection system using various optimization strategies.
+Hyperparameter optimization for SNNs.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

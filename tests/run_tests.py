@@ -1,11 +1,12 @@
 """
-Test Runner - Execute All Tests
-
-This script runs all unit and integration tests for the fraud detection system.
+Test runner with reporting.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import sys

@@ -1,11 +1,12 @@
 """
-Model Deployment to Neuromorphic Hardware
-
-Converts trained Brian2 models to neuromorphic hardware formats.
+Model deployment to neuromorphic hardware.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

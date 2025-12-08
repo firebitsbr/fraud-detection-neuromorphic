@@ -1,12 +1,12 @@
 """
-FastAPI REST API for Neuromorphic Fraud Detection
-
-This module provides a production-ready REST API for real-time fraud detection
-using Spiking Neural Networks.
+FastAPI REST API for neuromorphic fraud detection.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends

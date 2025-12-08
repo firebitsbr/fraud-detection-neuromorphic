@@ -1,21 +1,12 @@
 """
-BrainScaleS-2 Analog Neuromorphic Simulator
-===========================================
-
-Software emulation of BrainScaleS-2 analog neuromorphic hardware.
-Ultra-fast analog neural processing with 1000x biological speedup.
-
-Features:
-- Analog neuron and synapse emulation
-- Sub-microsecond inference
-- Continuous-time dynamics
-- Mixed-signal circuit modeling
-- Power-law energy scaling
-- Physical process noise simulation
+BrainScaleS-2 neuromorphic hardware simulator.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import numpy as np

@@ -1,11 +1,12 @@
 """
-Python Client Library for Fraud Detection API
-
-Provides a simple interface to interact with the fraud detection REST API.
+Example API client for fraud detection.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import requests

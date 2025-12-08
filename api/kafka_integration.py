@@ -1,12 +1,12 @@
 """
-Kafka Integration for Real-Time Stream Processing
-
-This module provides Kafka producer and consumer for real-time
-fraud detection on transaction streams.
+Kafka streaming integration for real-time detection.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import json

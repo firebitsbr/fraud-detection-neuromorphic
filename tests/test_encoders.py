@@ -1,11 +1,12 @@
 """
-Unit Tests for Spike Encoders
-
-This module contains comprehensive unit tests for all spike encoding strategies.
+Unit tests for spike encoders.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 import unittest

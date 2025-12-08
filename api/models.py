@@ -1,11 +1,12 @@
 """
-Pydantic Models for API Request/Response
-
-This module defines all data models used in the REST API.
+Pydantic models for API request/response validation.
 
 Author: Mauro Risonho de Paula Assumpção
-Date: December 5, 2025
-License: MIT License
+Email: mauro.risonho@gmail.com
+LinkedIn: linkedin.com/in/maurorisonho
+GitHub: github.com/maurorisonho
+Date: December 2025
+License: MIT
 """
 
 from pydantic import BaseModel, Field, validator
