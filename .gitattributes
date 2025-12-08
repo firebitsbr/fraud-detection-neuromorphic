@@ -1,2 +1,4 @@
 portfolio/01_fraud_neuromorphic/data/kaggle/*.csv filter=lfs diff=lfs merge=lfs -text
 portfolio/01_fraud_neuromorphic/notebooks/*.zip filter=lfs diff=lfs merge=lfs -text
+data/kaggle/*.csv filter=lfs diff=lfs merge=lfs -text
+*.pth filter=lfs diff=lfs merge=lfs -text
