@@ -21,7 +21,20 @@ This project uses the **IEEE-CIS Fraud Detection** dataset from Kaggle.
 
 ## 🔽 How to Download Large Files
 
-### Option 1: Using the Download Script (Recommended)
+### Option 1: Interactive Manual Setup (Recommended) ⭐
+
+```bash
+python scripts/manual_kaggle_setup.py
+```
+
+**Features:**
+- 🌐 Opens browser automatically
+- 🔍 Auto-detects downloaded files
+- 📦 Extracts ZIP files automatically
+- ✅ Validates all files
+- 🎨 Colorful progress display
+
+### Option 2: Using Kaggle API (Advanced)
 
 ```bash
 # Install Kaggle API
@@ -36,13 +49,13 @@ pip install kaggle
 python scripts/download_kaggle_dataset.py
 ```
 
-### Option 2: Manual Download
+### Option 3: Manual Download (Simple)
 
 1. Visit: https://www.kaggle.com/c/ieee-fraud-detection/data
-2. Download `test_transaction.csv` and `train_transaction.csv`
-3. Place files in `data/kaggle/` directory
+2. Click "Download All" or download individually
+3. Extract files to `data/kaggle/` directory
 
-### Option 3: Use Helper Script
+### Option 4: Legacy Helper Script
 
 ```bash
 python scripts/manual_download_helper.py
