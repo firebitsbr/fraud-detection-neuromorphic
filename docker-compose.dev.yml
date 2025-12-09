@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  fraud-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fraud-detection-dev
+    ports:
+      - "8000:8000"  # API
+      - "8888:8888"  # Jupyter (caso queira usar)
+    volumes:
+      - .:/app:cached
+      - ./notebooks:/app/notebooks:cached
+      - ./models:/app/models:cached
+      - ./data:/app/data:cached
+      - venv-cache:/opt/venv
+    environment:
+      - PYTHONPATH=/app:/app/src
+      - PATH=/opt/venv/bin:$PATH
+    working_dir: /app
+    command: sleep infinity
+    networks:
+      - neuromorphic-net
+
+networks:
+  neuromorphic-net:
+    driver: bridge
+
+volumes:
+  venv-cache:

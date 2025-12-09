@@ -1,0 +1,21 @@
+# Dockerfile para desenvolvimento com SSH
+FROM fraud-detection-api:ubuntu24.04
+
+# Instalar SSH server
+USER root
+RUN apt-get update && apt-get install -y openssh-server && \
+    mkdir /var/run/sshd && \
+    echo 'appuser:neuromorphic2025' | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+# Expor porta SSH
+EXPOSE 22
+
+# Instalar Jupyter kernel
+RUN /opt/venv/bin/pip install ipykernel jupyter
+
+USER appuser
+
+# Start SSH
+CMD ["/usr/sbin/sshd", "-D"]
