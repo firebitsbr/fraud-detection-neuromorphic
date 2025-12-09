@@ -1,0 +1,52 @@
+# Dockerfile para acesso remoto via SSH
+FROM fraud-detection-api:ubuntu24.04
+
+USER root
+
+# Instalar SSH e ferramentas
+RUN apt-get update && \
+    apt-get install -y \
+    openssh-server \
+    sudo \
+    curl \
+    git \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar SSH
+RUN mkdir /var/run/sshd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
+
+# Adicionar appuser ao sudoers
+RUN echo 'appuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Configurar senha para appuser
+RUN echo 'appuser:neuromorphic2025' | chpasswd
+
+# Instalar Jupyter kernel e ferramentas
+RUN /opt/venv/bin/pip install --no-cache-dir \
+    ipykernel \
+    ipython \
+    jupyter \
+    jupyterlab
+
+# Criar diretório SSH para appuser
+RUN mkdir -p /home/appuser/.ssh && \
+    chown -R appuser:appuser /home/appuser/.ssh && \
+    chmod 700 /home/appuser/.ssh
+
+USER appuser
+WORKDIR /app
+
+# Expor portas
+EXPOSE 22 8000 8888
+
+# Script de inicialização
+USER root
+COPY docker/entrypoint-remote.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]

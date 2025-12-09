@@ -144,7 +144,7 @@ monitor: ## Abre Grafana para monitoramento
 
 install-deps: ## Instala dependências locais (sem Docker)
 	@echo "$(BLUE)→ Instalando dependências...$(NC)"
-	@pip install -r requirements.txt
+	@pip install -r requirements/requirements.txt
 	@echo "$(GREEN)✓ Dependências instaladas!$(NC)"
 
 format: ## Formata código com Black

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  fraud-remote:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.remote
+    container_name: fraud-detection-remote
+    hostname: fraud-docker
+    ports:
+      - "2222:22"      # SSH
+      - "8000:8000"    # API
+      - "8888:8888"    # Jupyter Lab
+    volumes:
+      - .:/app:cached
+      - ./notebooks:/app/notebooks:cached
+      - ./models:/app/models:cached
+      - ./data:/app/data:cached
+      - venv-cache:/opt/venv
+    environment:
+      - PYTHONPATH=/app:/app/src
+      - PATH=/opt/venv/bin:$PATH
+      - JUPYTER_ENABLE_LAB=yes
+    networks:
+      - neuromorphic-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pgrep", "sshd"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  neuromorphic-net:
+    driver: bridge
+
+volumes:
+  venv-cache:

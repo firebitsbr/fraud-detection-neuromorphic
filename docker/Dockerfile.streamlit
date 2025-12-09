@@ -35,7 +35,7 @@ RUN useradd -m -u 1000 streamuser && \
 WORKDIR /app
 
 # Copiar requirements
-COPY --chown=streamuser:streamuser requirements.txt .
+COPY --chown=streamuser:streamuser requirements/requirements.txt .
 
 # Instalar dependências Python
 RUN pip install --no-cache-dir --upgrade pip && \

@@ -202,7 +202,7 @@ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
 # 2️⃣ Inicie todos os serviços
-docker-compose up -d
+docker compose -f config/docker-compose.yml up -d
 
 # 3️⃣ Acesse os serviços
 echo "✅ Serviços disponíveis:"
@@ -225,8 +225,10 @@ curl http://localhost:8000/health
 ### Parar Serviços
 
 ```bash
-docker-compose down
+docker compose -f config/docker-compose.yml down
 ```
+
+---
 
 ---
 
@@ -278,7 +280,7 @@ source .venv/bin/activate
 pip install --upgrade pip
 
 # Instalar dependências
-pip install -r requirements.txt
+pip install -r requirements/requirements.txt
 
 # Verificar instalação
 python -c "import brian2; print('✅ Brian2 instalado:', brian2.__version__)"
@@ -422,7 +424,7 @@ Kernel → Restart & Clear Output
 
 ```bash
 # Opção 1: Usando Docker
-docker-compose up -d
+docker compose -f config/docker-compose.yml up -d
 
 # Opção 2: Localmente
 source .venv/bin/activate
@@ -723,24 +725,45 @@ Para guias detalhados de instalação, arquitetura e deployment, consulte a past
 
 ## 📁 Estrutura do Projeto
 
+> 📝 **Ver estrutura completa**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
+
 ```
 fraud-detection-neuromorphic/
 │
 ├── 📄 README.md                    # Este arquivo
 ├── 📄 LICENSE                      # Licença MIT
-├── 📄 requirements.txt             # Dependências Python
-├── 📄 docker-compose.yml           # Orquestração Docker
 ├── 📄 Makefile                     # Comandos úteis
+├── 📄 PROJECT_STRUCTURE.md         # Estrutura detalhada
+│
+├── 📦 requirements/                # Dependências Python
+│   ├── requirements.txt            # Dependências principais
+│   ├── requirements-ci.txt         # CI/CD
+│   ├── requirements-edge.txt       # Edge computing
+│   └── requirements-production.txt # Produção
+│
+├── ⚙️  config/                      # Configurações
+│   ├── docker-compose.yml          # Orquestração Docker
+│   ├── docker-compose.dev.yml      # Dev Containers
+│   ├── docker-compose.remote.yml   # Acesso remoto
+│   ├── docker-compose.production.yml # Produção
+│   └── .devcontainer/              # VS Code Dev Containers
+│
+├── 🚀 deployment/                  # Scripts de deployment
+│   ├── deploy.sh
+│   ├── deploy-production.sh
+│   └── deploy-remote.sh
 │
 ├── 📂 docs/                        # Documentação detalhada
 │   ├── DOCS_INDEX.md              # Índice da documentação
+│   ├── QUICKSTART_DOCKER.md       # Quick start Docker
+│   ├── QUICKSTART_VSCODE.md       # Quick start VS Code
 │   └── ...
 │
-├── src/
-│   ├── api_server.py              # FastAPI REST server
-├── 🐳 Dockerfile                   # Container API
-├── 🐳 Dockerfile.jupyter           # Container Jupyter
-├── 🐳 Dockerfile.streamlit         # Container UI
+├── 🐳 docker/                      # Containers Docker
+│   ├── Dockerfile                  # Dockerfile principal
+│   ├── Dockerfile.api              # Container API
+│   ├── Dockerfile.jupyter          # Container Jupyter
+│   └── Dockerfile.streamlit        # Container UI
 │
 ├── 📂 src/                         # Código-fonte principal
 │   ├── main.py                    # Pipeline completo

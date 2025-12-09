@@ -28,7 +28,7 @@ WORKDIR /app
 
 # Install Python dependencies
 # Copiamos o requirements.txt para a imagem base
-COPY requirements.txt .
+COPY requirements/requirements.txt .
 
 # Upgrade pip and install dependencies
 # Usamos --no-cache-dir para manter a imagem leve
