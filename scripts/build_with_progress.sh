@@ -1,13 +1,14 @@
 #!/bin/bash
 #
-# Build Docker com Progresso Visual em Tempo Real
+# **Descrição:** Build Docker com Progresso Visual em Tempo Real. Script que mostra EXATAMENTE o que está acontecendo dentro do Docker durante o build, com barras de progresso e status detalhado.
 #
-# Description: Script que mostra EXATAMENTE o que está acontecendo dentro do Docker
-#              durante o build, com barras de progresso e status detalhado.
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 6, 2025
-# License: MIT License
 
 set -e
 

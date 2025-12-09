@@ -1,11 +1,14 @@
 #!/bin/bash
 #
-# Setup Python Virtual Environment for GPU (NVIDIA GTX 1060)
+# **Descrição:** Setup Python Virtual Environment for GPU (NVIDIA GTX 1060). Creates a .venv using Python 3.12 and installs PyTorch with CUDA support.
 #
-# Description: Creates a .venv using Python 3.12 and installs PyTorch with CUDA support.
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 2025
 
 set -e
 

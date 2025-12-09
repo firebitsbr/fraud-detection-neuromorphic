@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Script para parar os serviços Docker e Containerd no Ubuntu 24.04.3.
-Útil para liberar recursos ou realizar manutenções profundas.
+**Descrição:** Script para parar os serviços Docker e Containerd no Ubuntu 24.04.3. Útil para liberar recursos ou realizar manutenções profundas.
 
-Autor: Mauro Risonho de Paula Assumpção
-Data: Dezembro 2025
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import subprocess

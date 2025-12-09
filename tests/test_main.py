@@ -1,16 +1,12 @@
 """
-Testes Unitários para Pipeline Principal
+**Descrição:** Suite de testes para validar geração de dados sintéticos, pipeline de detecção de fraude, integração end-to-end e métricas de performance.
 
-Descrição: Suite de testes para validar geração de dados sintéticos,
-          pipeline de detecção de fraude, integração end-to-end e
-          métricas de performance.
-
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import pytest

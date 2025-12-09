@@ -1,6 +1,13 @@
 #!/bin/bash
 #
-# Entrypoint for remote access container
+# **Descrição:** Entrypoint for remote access container.
+#
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
 #
 
 set -e

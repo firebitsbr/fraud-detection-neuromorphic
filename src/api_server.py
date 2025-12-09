@@ -1,15 +1,12 @@
 """
-FastAPI REST API para Detecção de Fraude Neuromórfica
+**Descrição:** API REST completa para inferência de fraude usando Spiking Neural Networks. Oferece endpoints para predição individual, lote, treinamento e métricas.
 
-Descrição: API REST completa para inferência de fraude usando Spiking Neural Networks.
-          Oferece endpoints para predição individual, lote, treinamento e métricas.
-
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 
 Endpoints:
 - POST /api/v1/predict - Predição de fraude em transação

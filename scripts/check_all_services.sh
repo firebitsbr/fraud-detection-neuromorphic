@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# **Descrição:** Script para verificar o status de todos os serviços do projeto.
+#
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
+#
 
 # Cores
 RED='\033[0;31m'

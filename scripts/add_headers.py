@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """
-Script to add standardized headers to Python files.
+**Descrição:** Script para adicionar cabeçalhos padronizados aos arquivos Python.
 
-Adds author information and file description to all Python files in the project.
-
-Author: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: linkedin.com/in/maurorisonho
-GitHub: github.com/maurorisonho
-Date: December 2025
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import os
@@ -19,12 +18,13 @@ from pathlib import Path
 HEADER_TEMPLATE = '''"""
 {description}
 
-Author: Mauro Risonho de Paula Assumpção
+Autor: Mauro Risonho de Paula Assumpção
 Email: mauro.risonho@gmail.com
-LinkedIn: linkedin.com/in/maurorisonho
-GitHub: github.com/maurorisonho
-Date: December 2025
-License: MIT
+Linkedin: https://www.linkedin.com/in/maurorisonho
+github: https://github.com/maurorisonho
+Data de criação: Dezembro 2025
+LICENSE MIT
+Desenvolvimento: Humano + Desenvolvimento por AI Assitida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 '''
 

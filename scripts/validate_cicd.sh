@@ -1,4 +1,15 @@
 #!/bin/bash
+#
+# **Descrição:** Script de validação do pipeline CI/CD.
+#
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
+#
+
 # CI/CD Validation Script
 set -e
 

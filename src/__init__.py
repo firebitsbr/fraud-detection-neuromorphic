@@ -1,15 +1,12 @@
 """
-Fraud Detection Neuromorphic - Core Modules
+**Descrição:** Pacote principal contendo os módulos core para detecção de fraude usando Spiking Neural Networks (SNNs) com STDP learning.
 
-Descrição: Pacote principal contendo os módulos core para detecção de fraude
-          usando Spiking Neural Networks (SNNs) com STDP learning.
-
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 
 Módulos:
     - main: Pipeline principal de detecção de fraude

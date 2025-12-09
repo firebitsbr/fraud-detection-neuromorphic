@@ -1,14 +1,12 @@
 """
-Implementação alternativa usando snnTorch (PyTorch-based) para SNNs.
-Oferece melhor integração com deep learning, treinamento com backprop,
-e suporte nativo para GPUs.
+**Descrição:** Implementação alternativa usando snnTorch (PyTorch-based) para SNNs. Oferece melhor integração com deep learning, treinamento com backprop, e suporte nativo para GPUs.
 
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-Linkedin: https://www.linkedin.com/in/maurorisonho
-github: https://github.com/maurorisonho
-Data de criação: Dezembro 2025
-LICENSE MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 
 Vantagens do snnTorch:
 - ✅ Integração com PyTorch (GPU support)

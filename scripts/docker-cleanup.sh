@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 #
-# Docker Cleanup Script - Remove old containers, images and volumes
+# **Descrição:** Docker Cleanup Script - Remove old containers, images and volumes.
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: linkedin.com/in/maurorisonho
-# GitHub: github.com/maurorisonho
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
+#
 
 set -euo pipefail
 

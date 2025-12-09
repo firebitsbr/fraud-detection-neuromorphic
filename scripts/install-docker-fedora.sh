@@ -1,12 +1,13 @@
 #!/bin/bash
-
-# Docker Installation Script for Fedora
 #
-# Description: Script automatizado para instalar Docker no Fedora
+# **Descrição:** Script automatizado para instalar Docker no Fedora.
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
-# License: MIT License
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
 #
 # Usage: sudo ./install-docker-fedora.sh
 

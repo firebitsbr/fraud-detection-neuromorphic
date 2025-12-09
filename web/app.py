@@ -1,16 +1,12 @@
 """
-Streamlit Web Interface para Detecção de Fraude Neuromórfica
+**Descrição:** Streamlit Web Interface para Detecção de Fraude Neuromórfica. Interface web interativa para demonstração do sistema de detecção de fraude. Oferece análise individual, em lote, estatísticas e visualizações em tempo real.
 
-Descrição: Interface web interativa para demonstração do sistema de detecção
-          de fraude. Oferece análise individual, em lote, estatísticas e
-          visualizações em tempo real.
-
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import streamlit as st

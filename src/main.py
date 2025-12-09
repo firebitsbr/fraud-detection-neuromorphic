@@ -1,15 +1,12 @@
 """
-Pipeline completo de ponta a ponta para detecção de transações
-bancárias fraudulentas usando Redes Neurais Spiking (SNNs).
-Integra extração de features, codificação de spikes, inferência
-SNN e motor de decisão.
+**Descrição:** Pipeline completo de ponta a ponta para detecção de transações bancárias fraudulentas usando Redes Neurais Spiking (SNNs). Integra extração de features, codificação de spikes, inferência SNN e motor de decisão.
 
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-Linkedin: https://www.linkedin.com/in/maurorisonho
-github: https://github.com/maurorisonho
-Data de criação: Dezembro 2025
-LICENSE MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import numpy as np

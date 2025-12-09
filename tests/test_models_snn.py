@@ -1,16 +1,12 @@
 """
-Testes Unitários para Modelos SNN
+**Descrição:** Suite de testes para validar a implementação dos modelos de Spiking Neural Networks, incluindo inicialização, arquitetura, pesos e comportamento de neurônios LIF.
 
-Descrição: Suite de testes para validar a implementação dos modelos de
-          Spiking Neural Networks, incluindo inicialização, arquitetura,
-          pesos e comportamento de neurônios LIF.
-
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-LinkedIn: https://www.linkedin.com/in/maurorisonho
-GitHub: https://github.com/maurorisonho
-Data de Criação: Dezembro 2025
-Licença: MIT
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 
 import pytest

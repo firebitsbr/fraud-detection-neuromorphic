@@ -1,12 +1,13 @@
 #!/bin/bash
-
-# Neuromorphic Fraud Detection - Local Docker Startup Script
 #
-# Description: Script para inicializar o sistema completo localmente usando Docker.
+# **Descrição:** Neuromorphic Fraud Detection - Local Docker Startup Script. Script para inicializar o sistema completo localmente usando Docker.
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
-# License: MIT License
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT License
+# **Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+# - Claude Sonnet 4.5
+# - Gemini 3 Pro Preview
 #
 # Usage:
 #   ./start-local.sh          # Start all services
