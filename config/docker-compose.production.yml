@@ -1,13 +1,13 @@
 # Docker Compose - Neuromorphic Fraud Detection System
 #
-# Production-ready deployment on Ubuntu 24.04.3 LTS Server Minimal
+# **Descrição:** Production-ready deployment on Ubuntu 24.04.3 LTS Server Minimal
 # Complete microservices architecture with monitoring and scaling
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: linkedin.com/in/maurorisonho
-# GitHub: github.com/maurorisonho
-# Date: December 2025
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** linkedin.com/in/maurorisonho
+# **GitHub:** github.com/maurorisonho
+# **Data de Criação:** 5 de Dezembro de 2025
 # License: MIT
 
 version: '3.8'

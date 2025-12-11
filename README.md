@@ -5,7 +5,11 @@
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Completo-brightgreen.svg)]()
 
-**Sistema de detecção de fraude em tempo real usando Spiking Neural Networks (SNNs) e hardware neuromórfico Intel Loihi 2**
+**Descrição:** Sistema de detecção de fraude em tempo real usando Spiking Neural Networks (SNNs) e hardware neuromórfico Intel Loihi 2
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
 
 ---
 

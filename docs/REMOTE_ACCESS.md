@@ -1,5 +1,10 @@
 # Remote VS Code Access - Docker Deployment Guide
 
+**Descrição:** Guia de acesso remoto via VS Code.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## 🚀 Deployment Completo
 
 Este guia configura acesso remoto ao ambiente Docker via VS Code.

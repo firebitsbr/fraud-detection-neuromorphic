@@ -1,8 +1,10 @@
 # 🔍 Análise Crítica do Projeto - O que Pode Dar Certo e Errado
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** Dezembro 2025  
-**Versão:** 1.0  
+**Descrição:** Análise crítica do projeto.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Versão:** 1.0
 **Licença:** MIT
 
 ---

@@ -1,6 +1,9 @@
 # Neuromorphic Hardware Integration
 
-This directory contains adapters and tools for deploying SNN models to neuromorphic hardware platforms.
+**Descrição:** This directory contains adapters and tools for deploying SNN models to neuromorphic hardware platforms.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 
 ## Supported Platforms
 

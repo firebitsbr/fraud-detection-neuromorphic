@@ -1,5 +1,10 @@
 # 🐳 Docker Deployment Guide
 
+**Descrição:** Docker Deployment Guide
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## Arquitetura
 
 O sistema é composto por 3 serviços containerizados:

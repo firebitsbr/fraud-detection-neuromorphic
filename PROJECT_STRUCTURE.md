@@ -1,5 +1,10 @@
 # 📁 Estrutura do Projeto - Fraud Detection Neuromorphic
 
+**Descrição:** Estrutura do projeto.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## 🎯 Visão Geral
 
 Projeto organizado em módulos funcionais para facilitar navegação e manutenção.

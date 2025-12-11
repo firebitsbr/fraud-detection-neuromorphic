@@ -1,10 +1,12 @@
 # 🎉 Phase 3 Complete - Final Report
 
-**Project:** Neuromorphic Fraud Detection System  
-**Author:** Mauro Risonho de Paula Assumpção  
-**Completion Date:** December 5, 2025  
-**Commit Hash:** 2c763b3  
-**Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic
+**Descrição:** Relatório final da Fase 3.
+
+**Projeto:** Neuromorphic Fraud Detection System
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Conclusão:** 5 de Dezembro de 2025
+**Commit Hash:** 2c763b3
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ---
 

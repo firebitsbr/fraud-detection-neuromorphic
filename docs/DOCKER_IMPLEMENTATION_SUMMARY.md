@@ -1,5 +1,10 @@
 # 🎉 Setup Docker Local - Implementação Completa
 
+**Descrição:** Resumo da implementação do setup Docker local.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## ✅ Arquivos Criados
 
 ### 1. **docker-compose.yml** (Configuração Principal)

@@ -1,7 +1,11 @@
 # ✅ Correção de Erros Pylance - Notebooks
 
-**Data**: 2025-01-27  
-**Status**: ✅ **CONCLUÍDO**
+**Descrição:** Relatório de correção de erros Pylance.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Data de Correção:** 2025-01-27
+**Status:** ✅ **CONCLUÍDO**
 
 ---
 

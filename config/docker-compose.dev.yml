@@ -1,5 +1,10 @@
 version: '3.8'
 
+# **Descrição:** Docker Compose for Development
+#
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 5 de Dezembro de 2025
+
 services:
   fraud-dev:
     build:

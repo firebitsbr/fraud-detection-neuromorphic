@@ -1,5 +1,10 @@
 # 🚀 Quick Start - VS Code Remote Development
 
+**Descrição:** Guia rápido para desenvolvimento remoto com VS Code.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## ✅ Status Atual
 
 **Container dev já está rodando!**

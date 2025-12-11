@@ -1,14 +1,14 @@
 # Streamlit Web Interface
 #
-# Descrição: Container Docker para interface web Streamlit de demonstração
+# **Descrição:** Container Docker para interface web Streamlit de demonstração
 #            do sistema de detecção de fraude neuromórfico.
 #
-# Autor: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: https://www.linkedin.com/in/maurorisonho
-# GitHub: https://github.com/maurorisonho
-# Data de Criação: Dezembro 2025
-# Licença: MIT
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** https://www.linkedin.com/in/maurorisonho
+# **GitHub:** https://github.com/maurorisonho
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT
 
 FROM python:3.13-slim
 

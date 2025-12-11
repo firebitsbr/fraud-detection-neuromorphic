@@ -1,6 +1,9 @@
 # Test Suite
 
-Este diretório contém testes abrangentes para o sistema de detecção de fraude neuromórfico.
+**Descrição:** Este diretório contém testes abrangentes para o sistema de detecção de fraude neuromórfico.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 
 ## Estrutura de Testes
 

@@ -1,5 +1,10 @@
 # ⚡ Quick Start - Docker Local
 
+**Descrição:** Guia rápido de execução local com Docker.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 **Execução local em 3 comandos:**
 
 ```bash

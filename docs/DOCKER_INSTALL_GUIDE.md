@@ -1,7 +1,9 @@
 # 🐳 Guia de Instalação do Docker
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** 5 de Dezembro de 2025  
+**Descrição:** Guia de instalação do Docker e Docker Compose.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 **Licença:** MIT License
 
 Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas operacionais.

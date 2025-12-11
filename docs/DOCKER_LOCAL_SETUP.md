@@ -1,8 +1,10 @@
 # 🚀 Guia de Execução Local com Docker
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** 5 de Dezembro de 2025  
-**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
+**Descrição:** Guia de execução local com Docker.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 **Licença:** MIT License
 
 Este guia explica como executar o sistema completo de detecção de fraude neuromórfica localmente usando Docker.

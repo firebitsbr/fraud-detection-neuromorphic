@@ -1,8 +1,11 @@
 
 # Docker Compose for Neuromorphic Fraud Detection
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 6, 2025
-# License: MIT License
+#
+# **Descrição:** Docker Compose for Neuromorphic Fraud Detection
+#
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Data de Criação:** 6 de Dezembro de 2025
+# **Licença:** MIT License
 #
 # Services:
 #   - fraud-api: FastAPI REST API (port 8000)

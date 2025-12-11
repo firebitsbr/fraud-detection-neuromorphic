@@ -1,14 +1,14 @@
 # Dockerfile para API de Detecção de Fraude Neuromórfica
 #
-# Descrição: Container Docker para FastAPI REST API de detecção de fraude
+# **Descrição:** Container Docker para FastAPI REST API de detecção de fraude
 #            usando Spiking Neural Networks com Brian2.
 #
-# Autor: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: https://www.linkedin.com/in/maurorisonho
-# GitHub: https://github.com/maurorisonho
-# Data de Criação: Dezembro 2025
-# Licença: MIT
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** https://www.linkedin.com/in/maurorisonho
+# **GitHub:** https://github.com/maurorisonho
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT
 
 FROM python:3.13-slim
 

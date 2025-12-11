@@ -1,8 +1,10 @@
 # SOLUTIONS IMPLEMENTATION SUMMARY
 ## Resolução dos 7 Problemas Críticos
 
-**Data:** Dezembro 2025  
-**Autor:** Mauro Risonho de Paula Assumpção  
+**Descrição:** Resumo da implementação das soluções para os problemas críticos.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 **Projeto:** Fraud Detection Neuromorphic
 
 ---

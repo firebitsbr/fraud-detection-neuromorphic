@@ -1,5 +1,10 @@
 # Quick Start - Docker Deployment
 
+**Descrição:** Quick start guide for Docker deployment.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 **Deploy Neuromorphic Fraud Detection in 5 minutes on Ubuntu 24.04 LTS**
 
 ## Prerequisites

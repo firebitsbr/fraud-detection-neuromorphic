@@ -1,5 +1,10 @@
 # HTTP Endpoints - Projeto Neuromórfico
 
+**Descrição:** Documentação dos endpoints HTTP do projeto.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## ✅ Status: TODAS AS PORTAS FUNCIONANDO
 
 Todas as 4 portas agora possuem servidores HTTP com FastAPI respondendo corretamente.

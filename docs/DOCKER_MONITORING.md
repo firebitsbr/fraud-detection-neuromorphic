@@ -1,5 +1,10 @@
 # 🔍 Monitoramento Visual de Build Docker
 
+**Descrição:** Monitoramento visual de build Docker.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 ## ⚠️ PROBLEMA RESOLVIDO
 
 Você pediu **VÁRIAS VEZES** para ver o que está acontecendo dentro do Docker durante o build, e agora está resolvido!

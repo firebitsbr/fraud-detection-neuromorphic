@@ -1,7 +1,9 @@
 # 🔐 Configuração de Secrets do GitHub Actions
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** 5 de Dezembro de 2025  
+**Descrição:** Guia de configuração de secrets do GitHub Actions.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 **Licença:** MIT License
 
 Este guia explica como configurar secrets opcionais para o CI/CD pipeline.

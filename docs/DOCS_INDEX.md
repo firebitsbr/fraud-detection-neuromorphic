@@ -1,7 +1,10 @@
 # 📚 Índice de Documentação - Fraud Detection Neuromorphic
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
+**Descrição:** Índice de documentação do projeto.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 **Licença:** MIT License
 
 ---

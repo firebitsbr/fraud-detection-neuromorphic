@@ -1,13 +1,13 @@
 # Docker Compose - Detecção de Fraude Neuromórfica
 #
-# Descrição: Orquestração de 3 serviços containerizados para sistema completo
+# **Descrição:** Orquestração de 3 serviços containerizados para sistema completo
 #            de detecção de fraude: API (FastAPI), Notebooks (JupyterLab) e
 #            Interface Web (Streamlit). Todos expostos apenas em localhost.
 #
-# Autor: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: https://www.linkedin.com/in/maurorisonho
-# GitHub: https://github.com/maurorisonho
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** https://www.linkedin.com/in/maurorisonho
+# **GitHub:** https://github.com/maurorisonho
 # Data de Criação: Dezembro 2025
 # Licença: MIT
 

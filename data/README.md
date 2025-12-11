@@ -1,8 +1,11 @@
 # Dataset Directory
 
-## 📊 Kaggle IEEE Fraud Detection Dataset
+**Descrição:** This project uses the **IEEE-CIS Fraud Detection** dataset from Kaggle.
 
-This project uses the **IEEE-CIS Fraud Detection** dataset from Kaggle.
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
+## 📊 Kaggle IEEE Fraud Detection Dataset
 
 ### Files in this directory:
 

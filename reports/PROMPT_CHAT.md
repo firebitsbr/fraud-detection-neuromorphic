@@ -1,3 +1,10 @@
+# Prompt Chat
+
+**Descrição:** Prompt original para geração do projeto.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+
 Quero que você atue como gerador automático de projetos completos de portfólio em Computação Neuromórfica aplicada à Cybersecurity Bancária e Fintechs.
 Seu objetivo é criar todos os projetos, com código, documentação, Docker, notebooks e exemplos reais.
 

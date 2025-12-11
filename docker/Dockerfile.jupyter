@@ -1,14 +1,14 @@
 # Dockerfile para JupyterLab - Desenvolvimento Neuromórfico
 #
-# Descrição: Container Docker para ambiente JupyterLab com suporte a
+# **Descrição:** Container Docker para ambiente JupyterLab com suporte a
 #            notebooks de desenvolvimento e experimentação SNN.
 #
-# Autor: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: https://www.linkedin.com/in/maurorisonho
-# GitHub: https://github.com/maurorisonho
-# Data de Criação: Dezembro 2025
-# Licença: MIT
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** https://www.linkedin.com/in/maurorisonho
+# **GitHub:** https://github.com/maurorisonho
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT
 
 FROM python:3.13-slim
 

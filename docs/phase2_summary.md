@@ -1,9 +1,11 @@
 # Phase 2 - Optimization and Performance (COMPLETED)
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** December 5, 2025  
-**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
-**Status:** ✅ Concluído  
+**Descrição:** Resumo da Fase 2 - Otimização e Performance.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
+**Status:** ✅ Concluído
 
 ---
 

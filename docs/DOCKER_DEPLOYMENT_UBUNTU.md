@@ -1,10 +1,10 @@
 # Docker Deployment Guide - Ubuntu 24.04 LTS
 
-Complete production deployment guide for the Neuromorphic Fraud Detection System.
+**Descrição:** Complete production deployment guide for the Neuromorphic Fraud Detection System.
 
-**Author:** Mauro Risonho de Paula Assumpção  
-**Email:** mauro.risonho@gmail.com  
-**LinkedIn:** [linkedin.com/in/maurorisonho](https://linkedin.com/in/maurorisonho)  
+**Autor:** Mauro Risonho de Paula Assumpção
+**Email:** mauro.risonho@gmail.com
+**LinkedIn:** [linkedin.com/in/maurorisonho](https://linkedin.com/in/maurorisonho)
 **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho)
 
 ---

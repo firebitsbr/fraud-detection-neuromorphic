@@ -1,14 +1,14 @@
 # Neuromorphic Fraud Detection - Production Dockerfile
 # Base image: Ubuntu 24.04.3 LTS Server Minimal
 #
-# Multi-stage build for optimized production image
+# **Descrição:** Multi-stage build for optimized production image
 #
-# Author: Mauro Risonho de Paula Assumpção
-# Email: mauro.risonho@gmail.com
-# LinkedIn: linkedin.com/in/maurorisonho
-# GitHub: github.com/maurorisonho
-# Date: December 2025
-# License: MIT
+# **Autor:** Mauro Risonho de Paula Assumpção
+# **Email:** mauro.risonho@gmail.com
+# **LinkedIn:** linkedin.com/in/maurorisonho
+# **GitHub:** github.com/maurorisonho
+# **Data de Criação:** 5 de Dezembro de 2025
+# **Licença:** MIT
 
 # ============================================================================
 # Stage 1: Builder - Compile dependencies

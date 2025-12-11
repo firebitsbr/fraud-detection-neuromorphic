@@ -1,10 +1,10 @@
 # API Documentation
 
-**Neuromorphic Fraud Detection REST API**
+**Descrição:** Neuromorphic Fraud Detection REST API
 
-Author: Mauro Risonho de Paula Assumpção  
-Version: 2.0.0  
-Date: December 5, 2025
+**Autor:** Mauro Risonho de Paula Assumpção
+**Versão:** 2.0.0
+**Data de Criação:** 5 de Dezembro de 2025
 
 ---
 

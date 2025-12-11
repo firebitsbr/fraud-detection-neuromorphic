@@ -1,6 +1,9 @@
 # Examples - Fraud Detection API
 
-This directory contains example scripts for interacting with the fraud detection system.
+**Descrição:** This directory contains example scripts for interacting with the fraud detection system.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
 
 ## Contents
 

@@ -1,8 +1,12 @@
 # Relatório de Validação de Notebooks - Projeto Neuromorphic X
 
-**Data**: 2025-01-27  
-**Ambiente**: Python 3.13.9 (.venv) + Kernel Python 3.14.0  
-**Escopo**: Validação completa dos notebooks do projeto
+**Descrição:** Relatório de validação de notebooks.
+
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Data de Validação:** 2025-01-27
+**Ambiente:** Python 3.13.9 (.venv) + Kernel Python 3.14.0
+**Escopo:** Validação completa dos notebooks do projeto
 
 ---
 
