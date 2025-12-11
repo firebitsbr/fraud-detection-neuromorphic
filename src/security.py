@@ -222,17 +222,20 @@ class AdversarialDefense:
         Method: FGSM (Fast Gradient Sign Method) detection
         """
         self.model.eval()
-        transaction.requires_grad = True
         
-        # Forward pass
-        output = self.model.predict_proba(transaction)
-        loss = output[0, 1]  # Fraud probability
+        # Clone tensor and enable gradients
+        transaction_grad = transaction.clone().detach().requires_grad_(True)
+        
+        # Forward pass (bypass predict_proba to enable gradients)
+        output, _ = self.model.forward(transaction_grad)
+        proba = torch.softmax(output, dim=1)
+        loss = proba[0, 1]  # Fraud probability
         
         # Backward pass
         loss.backward()
         
         # Check gradient magnitude
-        grad_magnitude = torch.abs(transaction.grad).max().item()
+        grad_magnitude = torch.abs(transaction_grad.grad).max().item()
         
         if grad_magnitude > epsilon:
             logger.warning(f"Adversarial attack detected: gradient magnitude {grad_magnitude:.4f}")
