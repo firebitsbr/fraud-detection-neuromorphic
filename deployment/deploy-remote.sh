@@ -34,7 +34,7 @@ read -p "Opção [1-3]: " choice
 case $choice in
     1)
         echo -e "\n${GREEN}🚀 Deploying Dev Container...${NC}"
-        sudo docker compose -f docker-compose.dev.yml up -d
+        sudo docker compose -f config/docker-compose.dev.yml up -d
         
         echo -e "\n${GREEN}✅ Container deployed!${NC}"
         echo ""

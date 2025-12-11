@@ -40,11 +40,9 @@ def build_with_progress():
     """Build Docker images with visual progress tracking."""
     
     steps = [
-        ("Base Image", "docker compose build base_image", 600),  # ~10 min (only once)
-        ("API Service", "docker compose build fraud_detection_api", 60),  # ~1 min (fast after base)
-        ("Loihi Simulator", "docker compose build loihi_simulator", 60),
-        ("BrainScaleS Emulator", "docker compose build brainscales_emulator", 60),
-        ("Cluster Controller", "docker compose build cluster_controller", 60),
+        ("API Service", "docker compose -f config/docker-compose.yml build fraud-api", 120),
+        ("Jupyter Lab", "docker compose -f config/docker-compose.yml build jupyter-lab", 120),
+        ("Web Interface", "docker compose -f config/docker-compose.yml build web-interface", 60),
     ]
     
     with Progress(

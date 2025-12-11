@@ -21,7 +21,7 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-COMPOSE_FILE="docker-compose.production.yml"
+COMPOSE_FILE="config/docker-compose.production.yml"
 PROJECT_NAME="neuromorphic-fraud-detection"
 BACKUP_DIR="./backups"
 LOG_FILE="./logs/deployment.log"

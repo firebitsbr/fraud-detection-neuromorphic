@@ -16,15 +16,14 @@ from pathlib import Path
 
 # Standard header template
 HEADER_TEMPLATE = '''"""
-{description}
+**Descrição:** {description}
 
-Autor: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
-Linkedin: https://www.linkedin.com/in/maurorisonho
-github: https://github.com/maurorisonho
-Data de criação: Dezembro 2025
-LICENSE MIT
-Desenvolvimento: Humano + Desenvolvimento por AI Assitida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Autor:** Mauro Risonho de Paula Assumpção
+**Data de Criação:** 5 de Dezembro de 2025
+**Licença:** MIT License
+**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+- Claude Sonnet 4.5
+- Gemini 3 Pro Preview
 """
 '''
 

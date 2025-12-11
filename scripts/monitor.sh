@@ -13,7 +13,7 @@
 set -euo pipefail
 
 PROJECT_NAME="neuromorphic-fraud-detection"
-COMPOSE_FILE="docker-compose.production.yml"
+COMPOSE_FILE="config/docker-compose.production.yml"
 
 # Colors
 RED='\033[0;31m'
