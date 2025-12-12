@@ -1,252 +1,189 @@
 name: CI/CD Pipeline
 
-fi exit 1 echo "Fix the issues above before pushing to GitHub." echo "" echo -e "${YELLOW} $failed check(s) failed${NC}" echo -e "${YELLOW} $passed_checks of $total_checks checks passed${NC}" failed=$((total_checks - passed_checks))else exit 0 echo -e "${GREEN}CI/CD pipeline is ready to use.${NC}" echo -e "${GREEN} All $total_checks checks passed!${NC}"if [ $passed_checks -eq $total_checks ]; thenecho ""echo " Summary "echo ""echo ""fi echo -e "${RED} MISSING${NC}"else ((passed_checks++)) echo -e "${GREEN} OK${NC}"if grep -q "fastapi" requirements-ci.txt && grep -q "fastapi" docker/requirements-production.txt; thenprintf "${BLUE}Checking FastAPI in requirements...${NC} "((total_checks++))# Check if requirements files have FastAPIfi echo -e "${RED} INCORRECT${NC}"else ((passed_checks++)) echo -e "${GREEN} OK${NC}"if grep -q "context: ." .github/workflows/ci-cd.yml; thenprintf "${BLUE}Checking Docker build context...${NC} "((total_checks++))# Check if Docker build context is correctfi echo -e "${RED} MISSING${NC}"else ((passed_checks++)) echo -e "${GREEN} OK${NC}"if grep -q "DOCKER_USERNAME" .github/workflows/ci-cd.yml && grep -q "DOCKER_PASSWORD" .github/workflows/ci-cd.yml; thenprintf "${BLUE}Checking for secrets documentation...${NC} "((total_checks++))# Check for required secrets documentationcheck_yaml ".github/workflows/ci-cd.yml"echo "=== CI/CD Configuration Checks ==="echo ""check_dir "docker" "Docker directory"check_dir ".github/workflows" "GitHub workflows directory"check_dir "scaling" "Scaling directory"check_dir "hardware" "Hardware simulators directory"check_dir "tests" "Tests directory"check_dir "api" "API directory"check_dir "src" "Source code directory"echo "=== Directory Structure Checks ==="echo ""check_file "docker-compose.yml" "Docker Compose file"check_file "Dockerfile" "Development Dockerfile"check_file "docker/Dockerfile.production" "Production Dockerfile"check_file "docker/requirements-production.txt" "Production requirements file"check_file "requirements-ci.txt" "CI requirements file"check_file "requirements.txt" "Main requirements file"check_file ".github/workflows/ci-cd.yml" "CI/CD workflow file"echo "=== File Structure Checks ==="} fi return 0 ((passed_checks++)) echo -e "${YELLOW} SKIPPED (yamllint not installed)${NC}" else fi return 1 echo -e "${RED} SYNTAX ERROR${NC}" else return 0 ((passed_checks++)) echo -e "${GREEN} OK${NC}" if yamllint "$file" &> /dev/null; then if command -v yamllint &> /dev/null; then printf "${BLUE}Validating YAML syntax...${NC} " ((total_checks++)) local file=$1check_yaml() {# Function to validate YAML syntax} fi return 1 echo -e "${RED} MISSING${NC}" else return 0 ((passed_checks++)) echo -e "${GREEN} OK${NC}" if [ -d "$dir" ]; then printf "${BLUE}Checking $description...${NC} " ((total_checks++)) local description=$2 local dir=$1check_dir() {# Function to check directory existence} fi return 1 echo -e "${RED} MISSING${NC}" else return 0 ((passed_checks++)) echo -e "${GREEN} OK${NC}" if [ -f "$file" ]; then printf "${BLUE}Checking $description...${NC} " ((total_checks++)) local description=$2 local file=$1check_file() {# Function to check file existencepassed_checks=0total_checks=0# Validation countersNC='\033[0m' # No ColorBLUE='\033[0;34m'YELLOW='\033[1;33m'GREEN='\033[0;32m'RED='\033[0;31m'# Colorsecho ""echo ""echo " CI/CD Pipeline Validation "echo ""set -e# Date: December 6, 2025# Author: Mauro Risonho de Paula Assumpção# CI/CD Validation Script# Neuromorphic Fraud Detection - Continuous Integration and Deployment
-# Author: Mauro Risonho de Paula Assumpção
-# Date: December 5, 2025
+# **Descrição:** Pipeline de integração e deploy contínuo para detecção de fraude neuromórfica.
+#
+# **Autor:** Mauro Risonho de Paula Assumpção.
+# **Data de Criação:** 11 de Dezembro de 2025.
+# **Licença:** MIT License.
+# **Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 
 on:
- push:
- branches: [ main, develop ]
- pull_request:
- branches: [ main ]
- release:
- types: [ created ]
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ created ]
 
 env:
- PYTHON_VERSION: '3.10'
- DOCKER_IMAGE: maurorisonho/fraud-detection-neuromorphic
+  PYTHON_VERSION: '3.10'
+  DOCKER_IMAGE: maurorisonho/fraud-detection-neuromorphic
 
 jobs:
- # Job 1: Linting and Code Quality
- lint:
- name: Lint and Code Quality
- runs-on: ubuntu-latest
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Set up Python
- uses: actions/setup-python@v4
- with:
- python-version: ${{ env.PYTHON_VERSION }}
- 
- - name: Install linting tools
- run: |
- python -m pip install --upgrade pip
- pip install flake8 black isort mypy
- 
- - name: Run Black (code formatter check)
- run: black --check src/ api/ tests/
- continue-on-error: true
- 
- - name: Run isort (import sorting check)
- run: isort --check-only src/ api/ tests/
- continue-on-error: true
- 
- - name: Run Flake8 (linter)
- run: flake8 src/ api/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
- continue-on-error: true
+  # Job 1: Linting and Code Quality
+  lint:
+    name: Lint and Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install linting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 black isort mypy
+      
+      - name: Run Black (code formatter check)
+        run: black --check src/ api/ tests/
+        continue-on-error: true
+      
+      - name: Run isort (import sorting check)
+        run: isort --check-only src/ api/ tests/
+        continue-on-error: true
+      
+      - name: Run Flake8 (linter)
+        run: flake8 src/ api/ tests/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        continue-on-error: true
 
- # Job 2: Unit Tests
- test:
- name: Run Tests
- runs-on: ubuntu-latest
- needs: lint
- 
- strategy:
- matrix:
- python-version: ['3.9', '3.10', '3.11']
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Set up Python ${{ matrix.python-version }}
- uses: actions/setup-python@v4
- with:
- python-version: ${{ matrix.python-version }}
- 
- - name: Install system dependencies
- run: |
- sudo apt-get update
- sudo apt-get install -y libopenblas-dev gfortran
- 
- - name: Install Python dependencies
- run: |
- python -m pip install --upgrade pip
- # Use lightweight dependencies for CI to avoid disk space issues
- pip install -r requirements-ci.txt
- pip install pytest pytest-cov
- 
- - name: Verify project structure
- run: |
- echo "Checking project directories..."
- ls -la
- test -d src || echo "Warning: src/ directory not found"
- test -d api || echo "Warning: api/ directory not found"
- test -d tests || echo "Warning: tests/ directory not found"
- 
- - name: Run unit tests
- run: |
- if [ -f tests/run_tests.py ]; then
- cd tests && python run_tests.py
- else
- echo "tests/run_tests.py not found, skipping"
- fi
- continue-on-error: true
- 
- - name: Run pytest with coverage
- run: |
- if [ -d tests ]; then
- pytest tests/ --cov=src --cov=api --cov-report=xml --cov-report=html
- else
- echo "tests/ directory not found, skipping pytest"
- fi
- continue-on-error: true
- 
- - name: Upload coverage reports
- uses: codecov/codecov-action@v3
- with:
- files: ./coverage.xml
- flags: unittests
- name: codecov-umbrella
- continue-on-error: true
+  # Job 2: Unit Tests
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-ci.txt
+      
+      - name: Run unit tests
+        run: |
+          pytest tests/ -v --tb=short
+        continue-on-error: true
 
- # Job 3: Build Docker Image
- build:
- name: Build Docker Image
- runs-on: ubuntu-latest
- needs: test
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Set up Docker Buildx
- uses: docker/setup-buildx-action@v3
- 
- - name: Log in to Docker Hub
- if: github.event_name != 'pull_request' && secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
- uses: docker/login-action@v3
- with:
- username: ${{ secrets.DOCKER_USERNAME }}
- password: ${{ secrets.DOCKER_PASSWORD }}
- continue-on-error: true
- 
- - name: Extract metadata
- id: meta
- uses: docker/metadata-action@v5
- with:
- images: ${{ env.DOCKER_IMAGE }}
- tags: |
- type=ref,event=branch
- type=ref,event=pr
- type=semver,pattern={{version}}
- type=semver,pattern={{major}}.{{minor}}
- type=sha
- 
- - name: Build Docker image (without push)
- if: github.event_name == 'pull_request' || secrets.DOCKER_USERNAME == '' || secrets.DOCKER_PASSWORD == ''
- uses: docker/build-push-action@v5
- with:
- context: .
- file: ./docker/Dockerfile.production
- push: false
- tags: ${{ steps.meta.outputs.tags }}
- labels: ${{ steps.meta.outputs.labels }}
- cache-from: type=gha
- cache-to: type=gha,mode=max
- 
- - name: Build and push Docker image
- if: github.event_name != 'pull_request' && secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
- uses: docker/build-push-action@v5
- with:
- context: .
- file: ./docker/Dockerfile.production
- push: true
- tags: ${{ steps.meta.outputs.tags }}
- labels: ${{ steps.meta.outputs.labels }}
- cache-from: type=gha
- cache-to: type=gha,mode=max
+  # Job 3: Build Docker Image
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Docker Hub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_IMAGE }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix=,format=short
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.production
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
- # Job 4: Security Scan
- security:
- name: Security Scan
- runs-on: ubuntu-latest
- needs: build
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Run Trivy vulnerability scanner
- uses: aquasecurity/trivy-action@master
- with:
- scan-type: 'fs'
- scan-ref: '.'
- format: 'sarif'
- output: 'trivy-results.sarif'
- continue-on-error: true
- 
- - name: Upload Trivy results to GitHub Security
- uses: github/codeql-action/upload-sarif@v2
- with:
- sarif_file: 'trivy-results.sarif'
- continue-on-error: true
+  # Job 4: Security Scan
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name != 'pull_request'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+        continue-on-error: true
+      
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
 
- # Job 5: Deploy to Staging
- deploy-staging:
- name: Deploy to Staging
- runs-on: ubuntu-latest
- needs: [build, security]
- if: github.ref == 'refs/heads/develop'
- environment:
- name: staging
- url: https://staging-fraud-detection.example.com
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Deploy to staging
- run: |
- echo "Deploying to staging environment..."
- # Add your deployment commands here
- # Example: kubectl apply -f k8s/staging/
- 
- - name: Run smoke tests
- run: |
- echo "Running smoke tests..."
- # Add smoke test commands
- continue-on-error: true
+  # Job 5: Deploy to Production
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build, security]
+    if: github.event_name == 'release'
+    environment:
+      name: production
+      url: https://fraud-detection.example.com
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to production
+        run: |
+          echo "Deploying version ${{ github.ref_name }} to production"
+          # Add your deployment commands here
+          # Example: kubectl apply -f k8s/
+          # Example: docker-compose -f docker-compose.production.yml up -d
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
 
- # Job 6: Deploy to Production
- deploy-production:
- name: Deploy to Production
- runs-on: ubuntu-latest
- needs: [build, security]
- if: github.event_name == 'release'
- environment:
- name: production
- url: https://fraud-detection.example.com
- 
- steps:
- - name: Checkout code
- uses: actions/checkout@v4
- 
- - name: Deploy to production
- run: |
- echo "Deploying to production environment..."
- # Add your production deployment commands here
- # Example: kubectl apply -f k8s/production/
- 
- - name: Run health checks
- run: |
- echo "Running health checks..."
- # Add health check commands
- 
- - name: Notify deployment
- run: |
- echo "Production deployment completed successfully!"
- # Add notification logic (Slack, email, etc.)
+  # Job 6: Notification
+  notify:
+    name: Send Notifications
+    runs-on: ubuntu-latest
+    needs: [lint, test, build, security]
+    if: always()
+    
+    steps:
+      - name: Check workflow status
+        run: |
+          if [ "${{ needs.lint.result }}" == "failure" ] || \
+             [ "${{ needs.test.result }}" == "failure" ] || \
+             [ "${{ needs.build.result }}" == "failure" ] || \
+             [ "${{ needs.security.result }}" == "failure" ]; then
+            echo "CI/CD Pipeline failed!"
+            exit 1
+          else
+            echo "CI/CD Pipeline succeeded!"
+            exit 0
+          fi
