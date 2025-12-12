@@ -1,4 +1,4 @@
-# 🐳 Guia de Instalação do Docker
+# Guia de Instalação do Docker
 
 **Descrição:** Guia de instalação do Docker e Docker Compose.
 
@@ -10,11 +10,11 @@ Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas op
 
 ---
 
-## 🐧 Linux
+## Linux
 
 ### Fedora / RHEL / CentOS
 
-#### Opção 1: Script Automatizado (Recomendado) ⚡
+#### Opção 1: Script Automatizado (Recomendado) 
 
 ```bash
 # Baixar e executar script
@@ -33,15 +33,15 @@ docker run hello-world
 ```bash
 # 1. Remover versões antigas (se existirem)
 sudo dnf remove docker \
-    docker-client \
-    docker-client-latest \
-    docker-common \
-    docker-latest \
-    docker-latest-logrotate \
-    docker-logrotate \
-    docker-selinux \
-    docker-engine-selinux \
-    docker-engine
+ docker-client \
+ docker-client-latest \
+ docker-common \
+ docker-latest \
+ docker-latest-logrotate \
+ docker-logrotate \
+ docker-selinux \
+ docker-engine-selinux \
+ docker-engine
 
 # 2. Adicionar repositório oficial Docker
 sudo dnf -y install dnf-plugins-core
@@ -74,11 +74,11 @@ sudo apt-get update
 
 # 2. Instalar dependências
 sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+ apt-transport-https \
+ ca-certificates \
+ curl \
+ gnupg \
+ lsb-release
 
 # 3. Adicionar chave GPG oficial Docker
 sudo mkdir -m 0755 -p /etc/apt/keyrings
@@ -86,8 +86,8 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 
 # 4. Configurar repositório
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # 5. Instalar Docker Engine
 sudo apt-get update
@@ -128,7 +128,7 @@ docker compose version
 
 ---
 
-## 🍎 macOS
+## macOS
 
 ### Via Docker Desktop (Recomendado)
 
@@ -166,7 +166,7 @@ docker compose version
 
 ---
 
-## 🪟 Windows
+## Windows
 
 ### Windows 10/11 Pro, Enterprise, Education
 
@@ -211,7 +211,7 @@ docker --version
 
 ---
 
-## ✅ Verificação da Instalação
+## Verificação da Instalação
 
 ### Teste Básico
 
@@ -253,7 +253,7 @@ make status
 
 ---
 
-## 🔧 Configuração Pós-Instalação
+## Configuração Pós-Instalação
 
 ### Permissões (Linux)
 
@@ -273,10 +273,10 @@ docker run hello-world
 1. Abrir Docker Desktop
 2. Settings → Resources
 3. Configurar:
-   - **CPUs:** 4+ recomendado
-   - **Memory:** 8GB+ recomendado
-   - **Disk:** 20GB+ recomendado
-   - **Swap:** 2GB
+ - **CPUs:** 4+ recomendado
+ - **Memory:** 8GB+ recomendado
+ - **Disk:** 20GB+ recomendado
+ - **Swap:** 2GB
 
 ### Configurar Daemon (Linux)
 
@@ -285,17 +285,17 @@ docker run hello-world
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<EOF
 {
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3"
-  },
-  "default-address-pools": [
-    {
-      "base": "172.17.0.0/16",
-      "size": 24
-    }
-  ]
+ "log-driver": "json-file",
+ "log-opts": {
+ "max-size": "10m",
+ "max-file": "3"
+ },
+ "default-address-pools": [
+ {
+ "base": "172.17.0.0/16",
+ "size": 24
+ }
+ ]
 }
 EOF
 
@@ -305,7 +305,7 @@ sudo systemctl restart docker
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Docker não inicia (Linux)
 
@@ -365,7 +365,7 @@ netstat -tulpn | grep 8000
 
 ---
 
-## 🔍 Comandos Úteis
+## Comandos Úteis
 
 ### Gerenciamento Básico
 
@@ -390,7 +390,7 @@ docker rmi <image_id>
 
 # Ver logs
 docker logs <container_id>
-docker logs -f <container_id>  # Follow mode
+docker logs -f <container_id> # Follow mode
 ```
 
 ### Limpeza
@@ -427,36 +427,36 @@ docker system df
 
 ---
 
-## 📚 Próximos Passos
+## Próximos Passos
 
 Após instalar Docker com sucesso:
 
 1. **Testar instalação:**
-   ```bash
-   docker run hello-world
-   ```
+ ```bash
+ docker run hello-world
+ ```
 
 2. **Clonar o projeto:**
-   ```bash
-   git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
-   cd fraud-detection-neuromorphic
-   ```
+ ```bash
+ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
+ cd fraud-detection-neuromorphic
+ ```
 
 3. **Iniciar sistema:**
-   ```bash
-   ./scripts/start-local.sh
-   # ou
-   make start
-   ```
+ ```bash
+ ./scripts/start-local.sh
+ # ou
+ make start
+ ```
 
 4. **Acessar serviços:**
-   - API: http://localhost:8000
-   - Grafana: http://localhost:3000
-   - Prometheus: http://localhost:9090
+ - API: http://localhost:8000
+ - Grafana: http://localhost:3000
+ - Prometheus: http://localhost:9090
 
 ---
 
-## 🔗 Referências Oficiais
+## Referências Oficiais
 
 - **Docker Docs:** https://docs.docker.com/
 - **Docker Hub:** https://hub.docker.com/
@@ -465,7 +465,7 @@ Após instalar Docker com sucesso:
 
 ---
 
-## 📖 Documentação do Projeto
+## Documentação do Projeto
 
 - **Quick Start:** [QUICKSTART.md](../QUICKSTART.md)
 - **Guia Docker Completo:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
@@ -473,6 +473,6 @@ Após instalar Docker com sucesso:
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
 **Licença:** MIT

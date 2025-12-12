@@ -1,22 +1,22 @@
-# 🔍 Monitoramento Visual de Build Docker
+# Monitoramento Visual de Build Docker
 
 **Descrição:** Monitoramento visual de build Docker.
 
 **Autor:** Mauro Risonho de Paula Assumpção
 **Data de Criação:** 5 de Dezembro de 2025
 
-## ⚠️ PROBLEMA RESOLVIDO
+## PROBLEMA RESOLVIDO
 
 Você pediu **VÁRIAS VEZES** para ver o que está acontecendo dentro do Docker durante o build, e agora está resolvido!
 
-## 🎯 O Problema
+## O Problema
 
 - Build demora 5-15 minutos
 - Você não via nada acontecendo
 - Impossível saber se travou ou está progredindo
 - Sem feedback visual
 
-## ✅ Solução Implementada
+## Solução Implementada
 
 ### Opção 1: Script com Progresso Visual (RECOMENDADO)
 
@@ -26,13 +26,13 @@ cd /path/to/fraud-detection-neuromorphic/portfolio/01_fraud_neuromorphic
 ```
 
 **O que você verá:**
-- 🐳 Estágio atual do build
-- 📦 Cada pacote sendo baixado
-- 💾 Tamanho dos downloads
-- ⚙️ Compilação de pacotes
-- ✅ Status de sucesso/erro
-- 📊 Informações da imagem final
-- 📝 Log completo salvo
+- Estágio atual do build
+- Cada pacote sendo baixado
+- Tamanho dos downloads
+- Compilação de pacotes
+- Status de sucesso/erro
+- Informações da imagem final
+- Log completo salvo
 
 ### Opção 2: Docker Compose com Progresso Detalhado
 
@@ -50,39 +50,37 @@ docker compose build base_image
 
 Mostra progresso resumido (o que estava sendo usado antes).
 
-## 📊 Exemplo de Output
+## Exemplo de Output
 
 ```
-╔════════════════════════════════════════════════════════════════╗
-║        DOCKER BUILD COM MONITORAMENTO EM TEMPO REAL           ║
-║  Sistema de Detecção de Fraude Neuromorfico                   ║
-╚════════════════════════════════════════════════════════════════╝
 
-📦 Iniciando build da imagem base...
+ DOCKER BUILD COM MONITORAMENTO EM TEMPO REAL 
+ Sistema de Detecção de Fraude Neuromorfico 
 
-🐳 Baixando imagem base Python...
+ Iniciando build da imagem base...
 
-📦 Instalando dependências do sistema...
-  ↓ Baixando: numpy
-    └─ Tamanho: 16.8 MB
-  ↓ Baixando: pandas
-    └─ Tamanho: 12.8 MB
-  ↓ Baixando: scipy
-    └─ Tamanho: 37.7 MB
+ Baixando imagem base Python...
 
-⚙️  Instalando pacotes...
-  🔨 Compilando: brian2
+ Instalando dependências do sistema...
+ ↓ Baixando: numpy
+ Tamanho: 16.8 MB
+ ↓ Baixando: pandas
+ Tamanho: 12.8 MB
+ ↓ Baixando: scipy
+ Tamanho: 37.7 MB
 
-✅ Pacotes instalados com sucesso!
+ Instalando pacotes...
+ Compilando: brian2
 
-💾 Salvando imagem...
+ Pacotes instalados com sucesso!
 
-╔════════════════════════════════════════════════════════════════╗
-║                  ✅ BUILD CONCLUÍDO COM SUCESSO!               ║
-╚════════════════════════════════════════════════════════════════╝
+ Salvando imagem...
+
+ BUILD CONCLUÍDO COM SUCESSO! 
+
 ```
 
-## 🚀 Próximos Passos
+## Próximos Passos
 
 Depois que o build base terminar, construa os serviços:
 
@@ -96,11 +94,11 @@ Ou use o script de start que já existe:
 ./scripts/start-local.sh
 ```
 
-## 📝 Logs
+## Logs
 
 Todos os builds salvam logs em `/tmp/docker_build_*.log` para consulta posterior.
 
-## ❓ Por que demorou tanto para implementar isso?
+## Por que demorou tanto para implementar isso?
 
 Você está certo! Pediu várias vezes e eu deveria ter implementado logo na primeira vez. Desculpe pela demora.
 

@@ -1,4 +1,4 @@
-# 📚 Índice de Documentação - Fraud Detection Neuromorphic
+# Índice de Documentação - Fraud Detection Neuromorphic
 
 **Descrição:** Índice de documentação do projeto.
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 🎯 Documentação Principal
+## Documentação Principal
 
 ### [README.md](../README.md)
 **Visão geral completa do projeto**
@@ -23,9 +23,9 @@
 
 ---
 
-## 🐳 Docker - Execução Local
+## Docker - Execução Local
 
-### [QUICKSTART.md](QUICKSTART.md) ⚡ COMECE AQUI!
+### [QUICKSTART.md](QUICKSTART.md) COMECE AQUI!
 **Guia de início rápido - 3 comandos para rodar tudo**
 - Execução em 3 passos
 - Comandos principais (Make)
@@ -69,7 +69,7 @@
 
 ---
 
-## 📖 Documentação Técnica
+## Documentação Técnica
 
 ### [explanation.md](explanation.md)
 **Explicação detalhada do sistema**
@@ -104,7 +104,7 @@
 
 ---
 
-## 🎓 Relatórios de Fases
+## Relatórios de Fases
 
 ### [PHASE3_COMPLETE.md](PHASE3_COMPLETE.md)
 **Fase 3: Production Infrastructure & Deployment**
@@ -139,7 +139,7 @@
 
 ---
 
-## 🔧 Arquivos de Configuração
+## Arquivos de Configuração
 
 ### Docker
 - `docker-compose.yml` - Orquestração de 7 serviços
@@ -167,63 +167,63 @@
 
 ---
 
-## 📊 Como Navegar
+## Como Navegar
 
 ### Para Começar Rapidamente
-1. ✅ [QUICKSTART.md](../QUICKSTART.md) - 3 comandos
-2. ✅ [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md) - Se precisar instalar Docker
+1. [QUICKSTART.md](../QUICKSTART.md) - 3 comandos
+2. [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md) - Se precisar instalar Docker
 
 ### Para Desenvolvedores
-1. 📖 [README.md](../README.md) - Entender o projeto
-2. 📖 [docs/explanation.md](docs/explanation.md) - Fundamentos
-3. 📖 [docs/architecture.md](docs/architecture.md) - Arquitetura
-4. 🐳 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Setup completo
-5. 📖 [docs/API.md](docs/API.md) - API Reference
+1. [README.md](../README.md) - Entender o projeto
+2. [docs/explanation.md](docs/explanation.md) - Fundamentos
+3. [docs/architecture.md](docs/architecture.md) - Arquitetura
+4. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Setup completo
+5. [docs/API.md](docs/API.md) - API Reference
 
 ### Para Deployment
-1. 🐳 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Ambiente local
-2. 📖 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) - Produção
-3. 🐳 [DOCKER_IMPLEMENTATION_SUMMARY.md](DOCKER_IMPLEMENTATION_SUMMARY.md) - Resumo técnico
+1. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Ambiente local
+2. [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) - Produção
+3. [DOCKER_IMPLEMENTATION_SUMMARY.md](DOCKER_IMPLEMENTATION_SUMMARY.md) - Resumo técnico
 
 ### Para Pesquisa Acadêmica
-1. 📖 [README.md](../README.md) - Overview
-2. 📖 [docs/explanation.md](docs/explanation.md) - Teoria
-3. 📊 [docs/PHASE3_COMPLETE.md](docs/PHASE3_COMPLETE.md) - Infrastructure
-4. 📊 [docs/PHASE4_COMPLETE.md](docs/PHASE4_COMPLETE.md) - Hardware
-5. 📊 [docs/phase5_summary.md](docs/phase5_summary.md) - Scaling
+1. [README.md](../README.md) - Overview
+2. [docs/explanation.md](docs/explanation.md) - Teoria
+3. [docs/PHASE3_COMPLETE.md](docs/PHASE3_COMPLETE.md) - Infrastructure
+4. [docs/PHASE4_COMPLETE.md](docs/PHASE4_COMPLETE.md) - Hardware
+5. [docs/phase5_summary.md](docs/phase5_summary.md) - Scaling
 
 ---
 
-## 🎯 Mapa de Uso por Perfil
+## Mapa de Uso por Perfil
 
-### 👨‍💻 Desenvolvedor Junior
+### ‍ Desenvolvedor Junior
 ```
 QUICKSTART.md → DOCKER_INSTALL_GUIDE.md → README.md → docs/API.md
 ```
 
-### 👨‍💻 Desenvolvedor Senior
+### ‍ Desenvolvedor Senior
 ```
 README.md → docs/architecture.md → DOCKER_LOCAL_SETUP.md → docs/API.md
 ```
 
-### 🚀 DevOps/SRE
+### DevOps/SRE
 ```
 DOCKER_IMPLEMENTATION_SUMMARY.md → DOCKER_LOCAL_SETUP.md → docs/DEPLOYMENT.md
 ```
 
-### 🎓 Pesquisador/Acadêmico
+### Pesquisador/Acadêmico
 ```
 README.md → docs/explanation.md → docs/PHASE4_COMPLETE.md → docs/phase5_summary.md
 ```
 
-### 👔 Product Manager/Business
+### Product Manager/Business
 ```
 README.md (seções: Visão Geral, Caso de Uso, Resultados)
 ```
 
 ---
 
-## 📈 Estatísticas da Documentação
+## Estatísticas da Documentação
 
 - **Total de arquivos:** 20+
 - **Linhas de documentação:** ~4,500+
@@ -234,38 +234,38 @@ README.md (seções: Visão Geral, Caso de Uso, Resultados)
 
 ---
 
-## 🔍 Busca Rápida
+## Busca Rápida
 
 ### Preciso instalar Docker
-👉 [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
+ [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
 
 ### Preciso rodar o projeto agora
-👉 [QUICKSTART.md](../QUICKSTART.md)
+ [QUICKSTART.md](../QUICKSTART.md)
 
 ### Preciso entender SNNs
-👉 [docs/explanation.md](docs/explanation.md)
+ [docs/explanation.md](docs/explanation.md)
 
 ### Preciso integrar a API
-👉 [docs/API.md](docs/API.md)
+ [docs/API.md](docs/API.md)
 
 ### Preciso fazer deploy
-👉 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+ [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ### Preciso configurar Docker em detalhes
-👉 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
+ [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
 
 ### Preciso entender a arquitetura
-👉 [docs/architecture.md](docs/architecture.md)
+ [docs/architecture.md](docs/architecture.md)
 
 ### Preciso ver os resultados
-👉 [README.md](../README.md) → Seção "Resultados"
+ [README.md](../README.md) → Seção "Resultados"
 
 ### Preciso troubleshooting
-👉 [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) → Seção "Solução de Problemas"
+ [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) → Seção "Solução de Problemas"
 
 ---
 
-## 🆘 Suporte
+## Suporte
 
 ### Issues GitHub
 https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
@@ -276,12 +276,12 @@ https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
 
 ---
 
-## 📄 Licença
+## Licença
 
 MIT License - Todos os documentos e código
 
 ---
 
-**Última atualização:** 5 de Dezembro de 2025  
-**Versão do Projeto:** 1.0.0 (Phase 5 Complete)  
-**Status:** 🟢 Produção Ready
+**Última atualização:** 5 de Dezembro de 2025 
+**Versão do Projeto:** 1.0.0 (Phase 5 Complete) 
+**Status:** Produção Ready

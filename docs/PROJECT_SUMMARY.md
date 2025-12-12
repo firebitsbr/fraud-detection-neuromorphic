@@ -1,11 +1,11 @@
-# ✅ Projeto 01 - Finalizado
+# Projeto 01 - Finalizado
 
 **Descrição:** Resumo final do projeto.
 
 **Autor:** Mauro Risonho de Paula Assumpção
 **Data de Criação:** 5 de Dezembro de 2025
 
-## 🎯 Objetivo Alcançado
+## Objetivo Alcançado
 
 Implementação completa de **Detecção de Fraude Neuromórfica** com:
 - Spiking Neural Networks (Brian2)
@@ -16,9 +16,9 @@ Implementação completa de **Detecção de Fraude Neuromórfica** com:
 
 ---
 
-## 📊 Melhorias Implementadas (Opção A)
+## Melhorias Implementadas (Opção A)
 
-### ✅ 1. Testes Unitários
+### 1. Testes Unitários
 
 **Arquivos Criados:**
 - `../tests/test_models_snn.py` (133 linhas)
@@ -36,19 +36,19 @@ pytest tests/ -v
 
 ---
 
-### ✅ 2. API REST com FastAPI
+### 2. API REST com FastAPI
 
 **Arquivo:** `../src/api_server.py` (445 linhas)
 
 **Endpoints:**
 ```
-GET  /                    - Informações da API
-GET  /api/v1/health       - Health check
-GET  /api/v1/stats        - Estatísticas da rede neural
-GET  /api/v1/metrics      - Métricas do sistema
-POST /api/v1/predict      - Predição individual
+GET / - Informações da API
+GET /api/v1/health - Health check
+GET /api/v1/stats - Estatísticas da rede neural
+GET /api/v1/metrics - Métricas do sistema
+POST /api/v1/predict - Predição individual
 POST /api/v1/batch-predict - Predições em lote
-POST /api/v1/train        - Retreinar modelo
+POST /api/v1/train - Retreinar modelo
 ```
 
 **Features:**
@@ -65,49 +65,49 @@ POST /api/v1/train        - Retreinar modelo
 
 ---
 
-### ✅ 3. Docker Deployment
+### 3. Docker Deployment
 
 **Arquitetura: 3 Serviços Containerizados**
 
 ```
-┌─────────────────────────────────────────┐
-│        Docker Compose Stack             │
-│                                         │
-│  ┌────────────┐  ┌──────────────────┐  │
-│  │ fraud-api  │  │  jupyter-lab     │  │
-│  │ (FastAPI)  │  │  (JupyterLab)    │  │
-│  │ Port: 8000 │  │  Port: 8888      │  │
-│  └──────┬─────┘  └──────────────────┘  │
-│         │                               │
-│  ┌──────▼──────┐                       │
-│  │web-interface│                       │
-│  │ (Streamlit) │                       │
-│  │ Port: 8501  │                       │
-│  └─────────────┘                       │
-│                                         │
-│    neuromorphic-net (bridge)            │
-└─────────────────────────────────────────┘
+
+ Docker Compose Stack 
+ 
+ 
+ fraud-api jupyter-lab 
+ (FastAPI) (JupyterLab) 
+ Port: 8000 Port: 8888 
+ 
+ 
+ 
+ web-interface 
+ (Streamlit) 
+ Port: 8501 
+ 
+ 
+ neuromorphic-net (bridge) 
+
 ```
 
 **Serviços:**
 
 1. **fraud-api** (FastAPI)
-   - Dockerfile: `../Dockerfile`
-   - Port: `127.0.0.1:8000` (localhost only)
-   - Workers: 2 (Uvicorn)
-   - Health check ativo
+ - Dockerfile: `../Dockerfile`
+ - Port: `127.0.0.1:8000` (localhost only)
+ - Workers: 2 (Uvicorn)
+ - Health check ativo
 
 2. **jupyter-lab** (JupyterLab)
-   - Dockerfile: `../Dockerfile.jupyter`
-   - Port: `127.0.0.1:8888` (localhost only)
-   - Sem autenticação (dev mode)
-   - Notebooks interativos
+ - Dockerfile: `../Dockerfile.jupyter`
+ - Port: `127.0.0.1:8888` (localhost only)
+ - Sem autenticação (dev mode)
+ - Notebooks interativos
 
 3. **web-interface** (Streamlit)
-   - Dockerfile: `../Dockerfile.streamlit`
-   - Port: `127.0.0.1:8501` (localhost only)
-   - Dashboard interativo
-   - Conecta-se ao fraud-api
+ - Dockerfile: `../Dockerfile.streamlit`
+ - Port: `127.0.0.1:8501` (localhost only)
+ - Dashboard interativo
+ - Conecta-se ao fraud-api
 
 **Comandos:**
 ```bash
@@ -137,7 +137,7 @@ docker compose down
 
 ---
 
-### ✅ 4. Benchmark de Hardware (Loihi)
+### 4. Benchmark de Hardware (Loihi)
 
 **Arquivo:** `../hardware/loihi_simulator.py` (380 linhas)
 
@@ -178,7 +178,7 @@ docker compose down
 
 ---
 
-## 🚀 Como Usar
+## Como Usar
 
 ### Desenvolvimento Local
 
@@ -209,10 +209,10 @@ jupyter lab ../notebooks/
 docker compose up -d
 
 # Acessar serviços
-# - API:       http://127.0.0.1:8000
-# - API Docs:  http://127.0.0.1:8000/docs
-# - Jupyter:   http://127.0.0.1:8888
-# - Web UI:    http://127.0.0.1:8501
+# - API: http://127.0.0.1:8000
+# - API Docs: http://127.0.0.1:8000/docs
+# - Jupyter: http://127.0.0.1:8888
+# - Web UI: http://127.0.0.1:8501
 
 # Verificar health
 curl http://127.0.0.1:8000/api/v1/health
@@ -223,77 +223,77 @@ docker compose down
 
 ---
 
-## 📈 Performance
+## Performance
 
 ### Métricas Atuais (CPU - Brian2)
 
 ```
-Latência Média:    ~10-15 ms
-Throughput:        ~70-100 TPS
-Acurácia:          ~92-95%
+Latência Média: ~10-15 ms
+Throughput: ~70-100 TPS
+Acurácia: ~92-95%
 Precisão (Fraude): ~85-90%
-Recall (Fraude):   ~80-88%
+Recall (Fraude): ~80-88%
 ```
 
 ### Métricas Projetadas (Loihi 2)
 
 ```
-Latência:          ~1-2 ms (5-10x melhor)
-Throughput:        ~500-1000 TPS (7-10x melhor)
-Potência:          ~30-50 mW (1300x melhor vs 65W CPU)
+Latência: ~1-2 ms (5-10x melhor)
+Throughput: ~500-1000 TPS (7-10x melhor)
+Potência: ~30-50 mW (1300x melhor vs 65W CPU)
 Energia/inferência: ~0.05 mJ (1500x melhor)
 ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 01_fraud_neuromorphic/
-├── src/
-│   ├── api_server.py           # FastAPI REST API
-├── docker-compose.yml          # Orchestration
-├── docker/
-│   ├── Dockerfile.api          # API container
-│   ├── Dockerfile.jupyter      # Jupyter container
-│   ├── Dockerfile.streamlit    # Web UI container
-├── requirements.txt
-│
-├── src/
-│   ├── __init__.py
-│   ├── main.py                 # Pipeline principal
-│   ├── models_snn.py           # SNN implementation
-│   └── encoders.py             # Rate/Temporal/Population encoders
-│
-├── tests/
-│   ├── test_models_snn.py      # ✅ NEW
-│   ├── test_main.py            # ✅ NEW
-│   ├── test_encoders.py
-│   ├── test_integration.py
-│   └── test_scaling.py
-│
-├── notebooks/
-│   ├── demo.ipynb              # Demonstração completa
-│   ├── stdp_example.ipynb      # STDP learning
-│   └── loihi_benchmark.ipynb   # ✅ NEW: Hardware comparison
-│
-├── hardware/
-│   ├── __init__.py             # ✅ NEW
-│   └── loihi_simulator.py      # ✅ NEW: Loihi 2 simulator
-│
-├── web/
-│   └── app.py                  # ✅ NEW: Streamlit dashboard
-│
-├── docs/
-│   └── DOCKER_DEPLOYMENT.md    # ✅ NEW: Docker guide
-│
-└── data/
-    └── (gerado dinamicamente)
+ src/
+ api_server.py # FastAPI REST API
+ docker-compose.yml # Orchestration
+ docker/
+ Dockerfile.api # API container
+ Dockerfile.jupyter # Jupyter container
+ Dockerfile.streamlit # Web UI container
+ requirements.txt
+
+ src/
+ __init__.py
+ main.py # Pipeline principal
+ models_snn.py # SNN implementation
+ encoders.py # Rate/Temporal/Population encoders
+
+ tests/
+ test_models_snn.py # NEW
+ test_main.py # NEW
+ test_encoders.py
+ test_integration.py
+ test_scaling.py
+
+ notebooks/
+ demo.ipynb # Demonstração completa
+ stdp_example.ipynb # STDP learning
+ loihi_benchmark.ipynb # NEW: Hardware comparison
+
+ hardware/
+ __init__.py # NEW
+ loihi_simulator.py # NEW: Loihi 2 simulator
+
+ web/
+ app.py # NEW: Streamlit dashboard
+
+ docs/
+ DOCKER_DEPLOYMENT.md # NEW: Docker guide
+
+ data/
+ (gerado dinamicamente)
 ```
 
 ---
 
-## 🧪 Testes
+## Testes
 
 ### Executar Todos os Testes
 
@@ -323,7 +323,7 @@ pytest ../tests/test_encoders.py -v
 
 ---
 
-## 📚 Documentação
+## Documentação
 
 ### API
 
@@ -334,34 +334,34 @@ pytest ../tests/test_encoders.py -v
 ### Notebooks
 
 1. **demo.ipynb**: Demonstração end-to-end
-   - Geração de dados sintéticos
-   - Treinamento com STDP
-   - Avaliação de performance
-   - Visualizações
+ - Geração de dados sintéticos
+ - Treinamento com STDP
+ - Avaliação de performance
+ - Visualizações
 
 2. **stdp_example.ipynb**: Aprendizado biológico
-   - LIF neuron demonstration
-   - STDP weight updates
-   - Temporal patterns
+ - LIF neuron demonstration
+ - STDP weight updates
+ - Temporal patterns
 
 3. **loihi_benchmark.ipynb**: Hardware comparison
-   - CPU benchmarking
-   - Loihi simulation
-   - Comparative analysis
-   - Scalability tests
+ - CPU benchmarking
+ - Loihi simulation
+ - Comparative analysis
+ - Scalability tests
 
 ### Docker
 
 - **DOCKER_DEPLOYMENT.md**: Guia completo de deployment
-  - Quick start
-  - Comandos úteis
-  - Configuração
-  - Troubleshooting
-  - Production deployment
+ - Quick start
+ - Comandos úteis
+ - Configuração
+ - Troubleshooting
+ - Production deployment
 
 ---
 
-## 🔬 Tecnologias
+## Tecnologias
 
 | Categoria | Tecnologia | Versão |
 |-----------|-----------|--------|
@@ -376,40 +376,40 @@ pytest ../tests/test_encoders.py -v
 
 ---
 
-## 🎓 Conceitos Implementados
+## Conceitos Implementados
 
 ### Neurociência Computacional
-- ✅ Spiking Neural Networks (SNNs)
-- ✅ Leaky Integrate-and-Fire (LIF) neurons
-- ✅ STDP (Spike-Timing-Dependent Plasticity)
-- ✅ Rate encoding
-- ✅ Temporal encoding
-- ✅ Population encoding
+- Spiking Neural Networks (SNNs)
+- Leaky Integrate-and-Fire (LIF) neurons
+- STDP (Spike-Timing-Dependent Plasticity)
+- Rate encoding
+- Temporal encoding
+- Population encoding
 
 ### Machine Learning
-- ✅ Binary classification (fraud vs legitimate)
-- ✅ Confusion matrix analysis
-- ✅ Precision, Recall, F1-score
-- ✅ Cross-validation ready
+- Binary classification (fraud vs legitimate)
+- Confusion matrix analysis
+- Precision, Recall, F1-score
+- Cross-validation ready
 
 ### Software Engineering
-- ✅ REST API design
-- ✅ Containerization (Docker)
-- ✅ Unit testing (pytest)
-- ✅ Type hints (Pydantic)
-- ✅ Logging
-- ✅ Health checks
-- ✅ CORS middleware
+- REST API design
+- Containerization (Docker)
+- Unit testing (pytest)
+- Type hints (Pydantic)
+- Logging
+- Health checks
+- CORS middleware
 
 ### Hardware Awareness
-- ✅ Loihi 2 specifications
-- ✅ Energy modeling
-- ✅ Latency analysis
-- ✅ Scalability testing
+- Loihi 2 specifications
+- Energy modeling
+- Latency analysis
+- Scalability testing
 
 ---
 
-## 🚧 Próximos Passos (Futuro)
+## Próximos Passos (Futuro)
 
 ### 1. Implementação Real em Loihi
 - [ ] Migrar de Brian2 para Intel Lava (Loihi SDK)
@@ -438,7 +438,7 @@ pytest ../tests/test_encoders.py -v
 
 ---
 
-## 📊 Métricas do Projeto
+## Métricas do Projeto
 
 | Métrica | Valor |
 |---------|-------|
@@ -453,7 +453,7 @@ pytest ../tests/test_encoders.py -v
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
 Este projeto é parte do **Neuromorphic X Portfolio** e está completo para demonstração.
 
@@ -464,13 +464,13 @@ Para sugestões ou melhorias:
 
 ---
 
-## 📄 Licença
+## Licença
 
 MIT License - Projeto educacional de demonstração
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Mauro Risonho de Paula Assumpção**
 
@@ -480,11 +480,11 @@ MIT License - Projeto educacional de demonstração
 
 ---
 
-## 🏆 Status
+## Status
 
 **Projeto 01 de 10** no Portfólio Neuromorphic X
 
-✅ **100% COMPLETO**
+ **100% COMPLETO**
 
 **Data de Conclusão**: Dezembro 2025
 

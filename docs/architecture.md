@@ -2,9 +2,9 @@
 
 **Descrição:** Documentação técnica completa da arquitetura do sistema de detecção de fraude neuromórfica, incluindo fluxo de dados, componentes, e especificações técnicas.
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data de Criação:** 5 de Dezembro de 2025  
-**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**Data de Criação:** 5 de Dezembro de 2025 
+**Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
 **Licença:** MIT License
 
 ---
@@ -12,87 +12,87 @@
 ## Visão Geral da Arquitetura
 
 ```
-┌──────────────────────────────────────────────────────────────────────┐
-│                    TRANSACTION INPUT LAYER                            │
-│  (JSON API / Kafka Stream / Database Trigger)                        │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                    FEATURE EXTRACTION MODULE                          │
-│  • Amount, Timestamp, Geolocation                                    │
-│  • Merchant Category, Device Fingerprint                             │
-│  • Historical Frequency, User Behavior                               │
-│  • Temporal Features (hour, day-of-week, velocity)                   │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                    SPIKE ENCODING LAYER                               │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌────────────┐ │
-│  │Rate Encoder │  │Temporal     │  │Population   │  │Latency     │ │
-│  │             │  │Encoder      │  │Encoder      │  │Encoder     │ │
-│  │Value→Freq   │  │Time→Spike   │  │Geo→Neurons  │  │Val→Timing  │ │
-│  └─────────────┘  └─────────────┘  └─────────────┘  └────────────┘ │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│              SPIKING NEURAL NETWORK (SNN)                            │
-│                                                                       │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │ INPUT LAYER (256 neurons)                                    │   │
-│  │ [Spike generators receiving encoded features]                │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│                            │                                          │
-│                            ▼                                          │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │ HIDDEN LAYER 1 (128 LIF neurons)                             │   │
-│  │ • Leaky Integrate-and-Fire dynamics                          │   │
-│  │ • STDP learning rule                                         │   │
-│  │ • Lateral inhibition                                         │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│                            │                                          │
-│                            ▼                                          │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │ HIDDEN LAYER 2 (64 LIF neurons)                              │   │
-│  │ • Higher-level feature detection                             │   │
-│  │ • Temporal pattern integration                               │   │
-│  │ • STDP plasticity                                            │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│                            │                                          │
-│                            ▼                                          │
-│  ┌──────────────────────────────────────────────────────────────┐   │
-│  │ OUTPUT LAYER (2 neurons)                                     │   │
-│  │ [Neuron 0: Legitimate]  [Neuron 1: Fraudulent]              │   │
-│  │ Decision based on spike rate and timing                      │   │
-│  └──────────────────────────────────────────────────────────────┘   │
-│                                                                       │
-│  Network Properties:                                                 │
-│  • Total Neurons: 450                                                │
-│  • Total Synapses: ~40,000 (sparse connectivity)                     │
-│  • Simulation Time: 100ms per transaction                            │
-│  • Learning: Online STDP + homeostatic plasticity                    │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                    DECISION ENGINE                                    │
-│  • Spike rate decoding                                               │
-│  • Confidence calculation                                            │
-│  • Adaptive threshold                                                │
-│  • Risk score generation                                             │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    ▼
-┌──────────────────────────────────────────────────────────────────────┐
-│                    OUTPUT / ACTION LAYER                              │
-│  • ALLOW transaction                                                 │
-│  • BLOCK transaction                                                 │
-│  • REQUEST additional authentication (MFA)                           │
-│  • FLAG for manual review                                            │
-│  • LOG to SIEM                                                       │
-└──────────────────────────────────────────────────────────────────────┘
+
+ TRANSACTION INPUT LAYER 
+ (JSON API / Kafka Stream / Database Trigger) 
+
+ 
+ 
+
+ FEATURE EXTRACTION MODULE 
+ • Amount, Timestamp, Geolocation 
+ • Merchant Category, Device Fingerprint 
+ • Historical Frequency, User Behavior 
+ • Temporal Features (hour, day-of-week, velocity) 
+
+ 
+ 
+
+ SPIKE ENCODING LAYER 
+ 
+ Rate Encoder Temporal Population Latency 
+ Encoder Encoder Encoder 
+ Value→Freq Time→Spike Geo→Neurons Val→Timing 
+ 
+
+ 
+ 
+
+ SPIKING NEURAL NETWORK (SNN) 
+ 
+ 
+ INPUT LAYER (256 neurons) 
+ [Spike generators receiving encoded features] 
+ 
+ 
+ 
+ 
+ HIDDEN LAYER 1 (128 LIF neurons) 
+ • Leaky Integrate-and-Fire dynamics 
+ • STDP learning rule 
+ • Lateral inhibition 
+ 
+ 
+ 
+ 
+ HIDDEN LAYER 2 (64 LIF neurons) 
+ • Higher-level feature detection 
+ • Temporal pattern integration 
+ • STDP plasticity 
+ 
+ 
+ 
+ 
+ OUTPUT LAYER (2 neurons) 
+ [Neuron 0: Legitimate] [Neuron 1: Fraudulent] 
+ Decision based on spike rate and timing 
+ 
+ 
+ Network Properties: 
+ • Total Neurons: 450 
+ • Total Synapses: ~40,000 (sparse connectivity) 
+ • Simulation Time: 100ms per transaction 
+ • Learning: Online STDP + homeostatic plasticity 
+
+ 
+ 
+
+ DECISION ENGINE 
+ • Spike rate decoding 
+ • Confidence calculation 
+ • Adaptive threshold 
+ • Risk score generation 
+
+ 
+ 
+
+ OUTPUT / ACTION LAYER 
+ • ALLOW transaction 
+ • BLOCK transaction 
+ • REQUEST additional authentication (MFA) 
+ • FLAG for manual review 
+ • LOG to SIEM 
+
 ```
 
 ---
@@ -109,14 +109,14 @@
 **Formato de Entrada:**
 ```json
 {
-  "id": "txn_123456",
-  "amount": 5000.00,
-  "timestamp": "2025-12-05T14:30:00Z",
-  "merchant_category": "electronics",
-  "location": {"lat": -23.5505, "lon": -46.6333},
-  "device_id": "abc123xyz",
-  "user_id": "user_8472",
-  "metadata": {...}
+ "id": "txn_123456",
+ "amount": 5000.00,
+ "timestamp": "2025-12-05T14:30:00Z",
+ "merchant_category": "electronics",
+ "location": {"lat": -23.5505, "lon": -46.6333},
+ "device_id": "abc123xyz",
+ "user_id": "user_8472",
+ "metadata": {...}
 }
 ```
 
@@ -139,8 +139,8 @@
 #### 3.1 Rate Encoding
 ```
 Valor da transação → Frequência de spikes
-$100   → 1 spike/100ms
-$5000  → 50 spikes/100ms
+$100 → 1 spike/100ms
+$5000 → 50 spikes/100ms
 ```
 
 **Implementação:**
@@ -162,8 +162,8 @@ Timestamp → Posição temporal do spike
 #### 3.3 Population Encoding
 ```
 Geolocalização → Ativação de população de neurônios
-São Paulo    → Neurônios [120-135] ativos
-Nova York    → Neurônios [200-215] ativos
+São Paulo → Neurônios [120-135] ativos
+Nova York → Neurônios [200-215] ativos
 ```
 
 **Propriedades:**
@@ -205,10 +205,10 @@ Baixa prioridade → spike em t=95ms
 
 **Regra de Aprendizado:**
 ```
-Se t_post - t_pre > 0:  # Post dispara após Pre
-    Δw = A_pre * exp(-Δt / τ_pre)     # Potenciação (LTP)
+Se t_post - t_pre > 0: # Post dispara após Pre
+ Δw = A_pre * exp(-Δt / τ_pre) # Potenciação (LTP)
 Senão:
-    Δw = A_post * exp(Δt / τ_post)    # Depressão (LTD)
+ Δw = A_post * exp(Δt / τ_post) # Depressão (LTD)
 ```
 
 **Parâmetros:**
@@ -235,15 +235,15 @@ Senão:
 
 **Decodificação de Spikes:**
 ```python
-fraud_rate = spike_count_neuron1 / duration  # Hz
-legit_rate = spike_count_neuron0 / duration  # Hz
+fraud_rate = spike_count_neuron1 / duration # Hz
+legit_rate = spike_count_neuron0 / duration # Hz
 
 if fraud_rate > legit_rate + threshold:
-    decision = "FRAUD"
-    confidence = fraud_rate / (fraud_rate + legit_rate)
+ decision = "FRAUD"
+ confidence = fraud_rate / (fraud_rate + legit_rate)
 else:
-    decision = "LEGITIMATE"
-    confidence = legit_rate / (fraud_rate + legit_rate)
+ decision = "LEGITIMATE"
+ confidence = legit_rate / (fraud_rate + legit_rate)
 ```
 
 **Threshold Adaptativo:**
@@ -265,38 +265,38 @@ else:
 
 ```
 Transaction (JSON)
-     │
-     ├─> Feature Extraction
-     │        │
-     │        ├─> Amount: $5000 → log(5000) = 3.7
-     │        ├─> Location: (lat, lon) → normalized
-     │        ├─> Timestamp: ISO8601 → Unix + hour
-     │        └─> Category: "electronics" → 3
-     │
-     ├─> Spike Encoding
-     │        │
-     │        ├─> Rate: 3.7 → 50 spikes @ random times
-     │        ├─> Temporal: 14h30 → spike @ t=52.5ms
-     │        ├─> Population: (lat,lon) → neurons [120-135]
-     │        └─> Latency: category 3 → spike @ t=30ms
-     │
-     ├─> SNN Simulation (100ms)
-     │        │
-     │        ├─> Input spikes → Hidden1 (128 LIF)
-     │        ├─> Hidden1 → Hidden2 (64 LIF)
-     │        ├─> Hidden2 → Output (2 neurons)
-     │        │
-     │        ├─> During simulation: STDP updates weights
-     │        └─> Output: [Neuron0: 5 spikes, Neuron1: 23 spikes]
-     │
-     ├─> Decision
-     │        │
-     │        ├─> Fraud rate: 230 Hz (23 spikes / 0.1s)
-     │        ├─> Legit rate: 50 Hz
-     │        ├─> Confidence: 82%
-     │        └─> Decision: FRAUD
-     │
-     └─> Action: BLOCK + Alert Security Team
+ 
+ > Feature Extraction
+ 
+ > Amount: $5000 → log(5000) = 3.7
+ > Location: (lat, lon) → normalized
+ > Timestamp: ISO8601 → Unix + hour
+ > Category: "electronics" → 3
+ 
+ > Spike Encoding
+ 
+ > Rate: 3.7 → 50 spikes @ random times
+ > Temporal: 14h30 → spike @ t=52.5ms
+ > Population: (lat,lon) → neurons [120-135]
+ > Latency: category 3 → spike @ t=30ms
+ 
+ > SNN Simulation (100ms)
+ 
+ > Input spikes → Hidden1 (128 LIF)
+ > Hidden1 → Hidden2 (64 LIF)
+ > Hidden2 → Output (2 neurons)
+ 
+ > During simulation: STDP updates weights
+ > Output: [Neuron0: 5 spikes, Neuron1: 23 spikes]
+ 
+ > Decision
+ 
+ > Fraud rate: 230 Hz (23 spikes / 0.1s)
+ > Legit rate: 50 Hz
+ > Confidence: 82%
+ > Decision: FRAUD
+ 
+ > Action: BLOCK + Alert Security Team
 ```
 
 ---
@@ -346,22 +346,22 @@ Transaction (JSON)
 ### Opção 1: Cloud-based (AWS/Azure)
 ```
 [API Gateway] → [Lambda/Function] → [SNN Container] → [Response]
-                                    ↓
-                              [DynamoDB/CosmosDB]
+ ↓
+ [DynamoDB/CosmosDB]
 ```
 
 ### Opção 2: On-premise (Banco)
 ```
 [Core Banking] → [Kafka] → [SNN Cluster] → [Decision Bus]
-                              ↓
-                        [SIEM / SOC]
+ ↓
+ [SIEM / SOC]
 ```
 
 ### Opção 3: Hybrid (Edge + Cloud)
 ```
 [Mobile App] → [Edge SNN (Loihi)] → [Basic Decision]
-                     ↓ (complex cases)
-               [Cloud SNN] → [Advanced Analysis]
+ ↓ (complex cases)
+ [Cloud SNN] → [Advanced Analysis]
 ```
 
 ---
@@ -369,10 +369,10 @@ Transaction (JSON)
 ## Roadmap de Implementação
 
 ### Fase 1: Proof-of-Concept (Concluído)
-- ✅ Implementação em Brian2
-- ✅ Dataset sintético
-- ✅ Treinamento STDP
-- ✅ Avaliação básica
+- Implementação em Brian2
+- Dataset sintético
+- Treinamento STDP
+- Avaliação básica
 
 ### Fase 2: Otimização
 - [ ] Migrar para NEST (larga escala)
@@ -394,5 +394,5 @@ Transaction (JSON)
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção  
+**Autor:** Mauro Risonho de Paula Assumpção 
 **Projeto:** Detecção de Fraude Neuromórfica para Bancos e Fintechs

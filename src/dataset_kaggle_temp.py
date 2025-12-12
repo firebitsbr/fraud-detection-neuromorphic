@@ -177,14 +177,14 @@ class FraudDatasetPreprocessor:
 
     def select_features(self, X: pd.DataFrame, y: pd.Series) -> pd.DataFrame:
     """
-        Select top N most important features
+ Select top N most important features
 
-        Methods:
-        1. Remove high missing rate (>80%)
-        2. Remove low variance
-        3. Select by mutual information
-        4. Final: 64 features
-        """
+ Methods:
+ 1. Remove high missing rate (>80%)
+ 2. Remove low variance
+ 3. Select by mutual information
+ 4. Final: 64 features
+ """
     print(f" Selecionando top {self.target_features} features...")
 
     X = X.copy()
@@ -245,16 +245,16 @@ class FraudDatasetPreprocessor:
         fit: bool = True
     ) -> np.ndarray:
     """
-        Full preprocessing pipeline with progress tracking
+ Full preprocessing pipeline with progress tracking
 
-        Args:
-        X: Raw features
-        y: Labels (required for feature selection in fit mode)
-        fit: Whether to fit transformers or use existing
+ Args:
+ X: Raw features
+ y: Labels (required for feature selection in fit mode)
+ fit: Whether to fit transformers or use existing
 
-        Returns:
-        X_processed: Normalized features [samples, 64]
-        """
+ Returns:
+ X_processed: Normalized features [samples, 64]
+ """
     # Engineer features
     X = self.engineer_features(X)
 

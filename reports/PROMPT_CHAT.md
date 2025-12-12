@@ -10,7 +10,7 @@ Seu objetivo é criar todos os projetos, com código, documentação, Docker, no
 
 Use o meu nome: Mauro Risonho de Paula Assumpção e prepare o portfólio para publicação no GitHub.
 
-🎯 OBJETIVO GERAL
+ OBJETIVO GERAL
 
 Crie 10 projetos completos, cada um representando um caso de uso diferente de Computação Neuromórfica aplicada à Cybersecurity em bancos e fintechs, incluindo:
 
@@ -27,28 +27,28 @@ Crie 10 projetos completos, cada um representando um caso de uso diferente de Co
 
 Cada projeto deve ser criado como um repositório independente dentro de uma pasta /portfolio.
 
-📁 ESTRUTURA DOS PROJETOS (igual para todos)
+ ESTRUTURA DOS PROJETOS (igual para todos)
 
 Para cada caso de uso, gerar automaticamente:
 
 /portfolio/
-   /01_fraud_neuromorphic/
-       README.md
-       src/
-          main.py
-          encoders.py
-          models_snn.py
-       notebooks/
-          demo.ipynb
-          stdp_example.ipynb
-       docker/
-          Dockerfile
-          requirements.txt
-       docs/
-          architecture.png
-          explanation.md
+ /01_fraud_neuromorphic/
+ README.md
+ src/
+ main.py
+ encoders.py
+ models_snn.py
+ notebooks/
+ demo.ipynb
+ stdp_example.ipynb
+ docker/
+ Dockerfile
+ requirements.txt
+ docs/
+ architecture.png
+ explanation.md
 
-📘 REQUISITOS DE CADA PROJETO
+ REQUISITOS DE CADA PROJETO
 1. README.md
 
 Inclua:
@@ -123,7 +123,7 @@ Diagramas de fluxo
 
 Explicação do caso de uso para bancos e fintechs
 
-📌 OUTRAS INSTRUÇÕES IMPORTANTES
+ OUTRAS INSTRUÇÕES IMPORTANTES
 → Trabalhe projeto por projeto
 
 Antes de gerar todo o portfólio, pergunte:

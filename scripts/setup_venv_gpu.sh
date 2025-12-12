@@ -24,19 +24,19 @@ echo -e "${YELLOW}=== Setting up Development Environment for NVIDIA GTX 1060 ===
 PYTHON_CMD="/usr/bin/python3.12"
 
 if [ ! -f "$PYTHON_CMD" ]; then
-    echo -e "${RED}Error: Python 3.12 not found at $PYTHON_CMD${NC}"
-    echo "Checking for other python3 versions..."
-    PYTHON_CMD=$(which python3)
-    VERSION=$($PYTHON_CMD --version)
-    echo -e "${YELLOW}Using $PYTHON_CMD ($VERSION)${NC}"
+ echo -e "${RED}Error: Python 3.12 not found at $PYTHON_CMD${NC}"
+ echo "Checking for other python3 versions..."
+ PYTHON_CMD=$(which python3)
+ VERSION=$($PYTHON_CMD --version)
+ echo -e "${YELLOW}Using $PYTHON_CMD ($VERSION)${NC}"
 else
-    echo -e "${GREEN}Found Python 3.12 at $PYTHON_CMD${NC}"
+ echo -e "${GREEN}Found Python 3.12 at $PYTHON_CMD${NC}"
 fi
 
 # 2. Create .venv
 if [ -d ".venv" ]; then
-    echo -e "${YELLOW}Removing existing .venv...${NC}"
-    rm -rf .venv
+ echo -e "${YELLOW}Removing existing .venv...${NC}"
+ rm -rf .venv
 fi
 
 echo -e "${YELLOW}Creating virtual environment (.venv)...${NC}"
@@ -55,9 +55,9 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 # 5. Install Project Requirements
 echo -e "${YELLOW}Installing project requirements...${NC}"
 if [ -f "requirements/requirements.txt" ]; then
-    pip install -r requirements/requirements.txt
+ pip install -r requirements/requirements.txt
 else
-    echo -e "${RED}Warning: requirements/requirements.txt not found!${NC}"
+ echo -e "${RED}Warning: requirements/requirements.txt not found!${NC}"
 fi
 
 # 6. Verify Installation
@@ -69,11 +69,11 @@ print(f'Python: {sys.version}')
 print(f'PyTorch: {torch.__version__}')
 print(f'CUDA Available: {torch.cuda.is_available()}')
 if torch.cuda.is_available():
-    print(f'GPU: {torch.cuda.get_device_name(0)}')
-    print(f'CUDA Version: {torch.version.cuda}')
+ print(f'GPU: {torch.cuda.get_device_name(0)}')
+ print(f'CUDA Version: {torch.version.cuda}')
 else:
-    print('WARNING: CUDA not available!')
+ print('WARNING: CUDA not available!')
 "
 
-echo -e "\n${GREEN}✅ Environment setup complete!${NC}"
+echo -e "\n${GREEN} Environment setup complete!${NC}"
 echo -e "To activate, run: ${YELLOW}source .venv/bin/activate${NC}"

@@ -1,4 +1,4 @@
-# 🚀 Guia de Execução Local com Docker
+# Guia de Execução Local com Docker
 
 **Descrição:** Guia de execução local com Docker.
 
@@ -11,26 +11,26 @@ Este guia explica como executar o sistema completo de detecção de fraude neuro
 
 ---
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 ### Software Necessário
 
 1. **Docker** (versão 20.10+)
-   - **Linux:** `curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh`
-   - **Windows/Mac:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+ - **Linux:** `curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh`
+ - **Windows/Mac:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 2. **Docker Compose** (versão 2.0+)
-   - Geralmente incluído no Docker Desktop
-   - Linux: `sudo apt-get install docker-compose-plugin`
+ - Geralmente incluído no Docker Desktop
+ - Linux: `sudo apt-get install docker-compose-plugin`
 
 3. **Git**
-   ```bash
-   # Ubuntu/Debian
-   sudo apt-get install git
-   
-   # macOS
-   brew install git
-   ```
+ ```bash
+ # Ubuntu/Debian
+ sudo apt-get install git
+ 
+ # macOS
+ brew install git
+ ```
 
 ### Requisitos de Hardware
 
@@ -41,7 +41,7 @@ Este guia explica como executar o sistema completo de detecção de fraude neuro
 
 ---
 
-## 🎯 Início Rápido (3 Passos)
+## Início Rápido (3 Passos)
 
 ### 1. Clone o Repositório
 
@@ -76,7 +76,7 @@ Aguarde ~30 segundos para os serviços iniciarem, então acesse:
 
 ---
 
-## 🔧 Comandos Disponíveis
+## Comandos Disponíveis
 
 ### Script Automatizado (`scripts/start-local.sh`)
 
@@ -133,46 +133,46 @@ docker-compose ps
 
 ---
 
-## 📦 Arquitetura dos Containers
+## Arquitetura dos Containers
 
 ### Serviços Principais
 
 1. **fraud_api** - API Principal
-   - Porta: 8000
-   - Framework: Flask
-   - Função: Endpoint REST para detecção de fraude
+ - Porta: 8000
+ - Framework: Flask
+ - Função: Endpoint REST para detecção de fraude
 
 2. **loihi_simulator** - Simulador Loihi 2
-   - Porta: 8001
-   - Cores: 128 neuromorphic cores
-   - Função: Simula hardware Intel Loihi 2
+ - Porta: 8001
+ - Cores: 128 neuromorphic cores
+ - Função: Simula hardware Intel Loihi 2
 
 3. **brainscales_emulator** - Emulador BrainScaleS-2
-   - Porta: 8002
-   - Speedup: 1000x
-   - Função: Simula hardware analógico BrainScaleS-2
+ - Porta: 8002
+ - Speedup: 1000x
+ - Função: Simula hardware analógico BrainScaleS-2
 
 4. **cluster_controller** - Controlador de Cluster
-   - Porta: 8003
-   - Função: Orquestra processamento distribuído
+ - Porta: 8003
+ - Função: Orquestra processamento distribuído
 
 ### Serviços de Infraestrutura
 
 5. **redis** - Cache e Filas
-   - Porta: 6379
-   - Função: Cache de resultados e filas de mensagens
+ - Porta: 6379
+ - Função: Cache de resultados e filas de mensagens
 
 6. **prometheus** - Monitoramento
-   - Porta: 9090
-   - Função: Coleta métricas de performance
+ - Porta: 9090
+ - Função: Coleta métricas de performance
 
 7. **grafana** - Visualização
-   - Porta: 3000
-   - Função: Dashboards de monitoramento
+ - Porta: 3000
+ - Função: Dashboards de monitoramento
 
 ---
 
-## 🧪 Testando o Sistema
+## Testando o Sistema
 
 ### 1. Health Check da API
 
@@ -183,9 +183,9 @@ curl http://localhost:8000/health
 **Resposta esperada:**
 ```json
 {
-  "status": "healthy",
-  "timestamp": "2025-12-05T10:30:00Z",
-  "version": "1.0.0"
+ "status": "healthy",
+ "timestamp": "2025-12-05T10:30:00Z",
+ "version": "1.0.0"
 }
 ```
 
@@ -193,23 +193,23 @@ curl http://localhost:8000/health
 
 ```bash
 curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "amount": 1500.50,
-    "merchant": "Electronics Store",
-    "location": "New York",
-    "time": "2025-12-05T10:30:00Z"
-  }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "amount": 1500.50,
+ "merchant": "Electronics Store",
+ "location": "New York",
+ "time": "2025-12-05T10:30:00Z"
+ }'
 ```
 
 **Resposta esperada:**
 ```json
 {
-  "fraud_probability": 0.85,
-  "is_fraud": true,
-  "confidence": 0.92,
-  "inference_time_ms": 2.3,
-  "chip_used": "loihi2"
+ "fraud_probability": 0.85,
+ "is_fraud": true,
+ "confidence": 0.92,
+ "inference_time_ms": 2.3,
+ "chip_used": "loihi2"
 }
 ```
 
@@ -228,7 +228,7 @@ docker-compose logs -f
 
 ---
 
-## 🐛 Solução de Problemas
+## Solução de Problemas
 
 ### Problema: Container não inicia
 
@@ -275,16 +275,16 @@ chmod +x scripts/start-local.sh
 
 ---
 
-## 📊 Monitoramento
+## Monitoramento
 
 ### Grafana Dashboards
 
 1. Acesse http://localhost:3000
 2. Login: `admin` / Password: `admin`
 3. Dashboards disponíveis:
-   - **Fraud Detection Overview:** Métricas gerais
-   - **Neuromorphic Performance:** Performance dos chips
-   - **API Metrics:** Latência e throughput
+ - **Fraud Detection Overview:** Métricas gerais
+ - **Neuromorphic Performance:** Performance dos chips
+ - **API Metrics:** Latência e throughput
 
 ### Prometheus Queries
 
@@ -303,7 +303,7 @@ rate(fraud_detected_total[5m])
 
 ---
 
-## 🔄 Workflows Comuns
+## Workflows Comuns
 
 ### Desenvolvimento
 
@@ -351,7 +351,7 @@ python
 
 ---
 
-## 🧹 Limpeza
+## Limpeza
 
 ### Parar Sistema
 
@@ -378,7 +378,7 @@ docker system prune -a --volumes
 
 ---
 
-## 📝 Configuração Avançada
+## Configuração Avançada
 
 ### Variáveis de Ambiente
 
@@ -413,18 +413,18 @@ Edite `docker-compose.yml`:
 
 ```yaml
 deploy:
-  resources:
-    limits:
-      cpus: '4'      # Aumentar CPUs
-      memory: 4G     # Aumentar memória
-    reservations:
-      cpus: '2'
-      memory: 2G
+ resources:
+ limits:
+ cpus: '4' # Aumentar CPUs
+ memory: 4G # Aumentar memória
+ reservations:
+ cpus: '2'
+ memory: 2G
 ```
 
 ---
 
-## 🔗 Links Úteis
+## Links Úteis
 
 - **Documentação Completa:** [docs/README.md](docs/README.md)
 - **API Reference:** [docs/API.md](docs/API.md)
@@ -433,7 +433,7 @@ deploy:
 
 ---
 
-## 🆘 Suporte
+## Suporte
 
 ### Issues no GitHub
 https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
@@ -456,10 +456,10 @@ docker-compose logs > logs.txt
 
 ---
 
-## 📄 Licença
+## Licença
 
 MIT License - Veja [LICENSE](LICENSE) para detalhes.
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**GitHub:** https://github.com/maurorisonho  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**GitHub:** https://github.com/maurorisonho 
 **LinkedIn:** https://linkedin.com/in/maurorisonho

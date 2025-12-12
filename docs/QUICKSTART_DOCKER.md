@@ -78,24 +78,24 @@ docker compose logs -f fraud-api
 ## Architecture
 
 ```
-┌─────────────────────────────────────────┐
-│  FastAPI (8000) - Fraud Detection API  │
-│  ├─ 4 Uvicorn workers                   │
-│  ├─ SNN inference (Brian2 + snnTorch)  │
-│  └─ Redis caching                       │
-├─────────────────────────────────────────┤
-│  Jupyter Lab (8888) - Research Env     │
-│  ├─ Interactive notebooks              │
-│  └─ Pre-installed ML/SNN libraries     │
-├─────────────────────────────────────────┤
-│  Streamlit (8501) - Web Dashboard      │
-│  ├─ Real-time predictions              │
-│  └─ Model performance metrics          │
-├─────────────────────────────────────────┤
-│  Redis (6379) - Caching Layer          │
-│  Prometheus (9090) - Metrics           │
-│  Grafana (3000) - Visualization        │
-└─────────────────────────────────────────┘
+
+ FastAPI (8000) - Fraud Detection API 
+ 4 Uvicorn workers 
+ SNN inference (Brian2 + snnTorch) 
+ Redis caching 
+
+ Jupyter Lab (8888) - Research Env 
+ Interactive notebooks 
+ Pre-installed ML/SNN libraries 
+
+ Streamlit (8501) - Web Dashboard 
+ Real-time predictions 
+ Model performance metrics 
+
+ Redis (6379) - Caching Layer 
+ Prometheus (9090) - Metrics 
+ Grafana (3000) - Visualization 
+
 ```
 
 ## Troubleshooting
@@ -123,6 +123,6 @@ See [DOCKER_DEPLOYMENT_UBUNTU.md](DOCKER_DEPLOYMENT_UBUNTU.md) for complete guid
 
 ---
 
-**Author:** Mauro Risonho de Paula Assumpção  
-**Email:** mauro.risonho@gmail.com  
+**Author:** Mauro Risonho de Paula Assumpção 
+**Email:** mauro.risonho@gmail.com 
 **GitHub:** [maurorisonho](https://github.com/maurorisonho)

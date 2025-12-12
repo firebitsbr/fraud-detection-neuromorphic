@@ -10,7 +10,7 @@
 ### `test_encoders.py`
 Testes unitários para todos os encoders de spike:
 - Rate Encoder
-- Temporal Encoder  
+- Temporal Encoder 
 - Population Encoder
 - Latency Encoder
 - Transaction Encoder
@@ -49,23 +49,23 @@ python -m unittest test_encoders.TestRateEncoder
 
 Os testes cobrem:
 
-✅ **Encoders de Spike**
+ **Encoders de Spike**
 - Validação de geração de spike trains
 - Verificação de propriedades temporais
 - Comparação entre estratégias de encoding
 
-✅ **Pipeline de Detecção**
+ **Pipeline de Detecção**
 - Extração de features
 - Pré-processamento
 - Treinamento e predição
 - Métricas de avaliação
 
-✅ **Integração de Componentes**
+ **Integração de Componentes**
 - Encoder → Model
 - Data → Pipeline → Predictions
 - Batch processing
 
-✅ **Performance**
+ **Performance**
 - Latência de predição
 - Throughput de processamento
 - Uso de memória
@@ -79,9 +79,9 @@ pip install numpy pandas scikit-learn brian2
 ## Resultados Esperados
 
 Todos os testes devem passar com sucesso:
-- ✅ Unit tests para encoders
-- ✅ Integration tests para pipeline
-- ⚠️ Alguns testes podem ser ignorados (skipped) se Brian2 não estiver disponível
+- Unit tests para encoders
+- Integration tests para pipeline
+- Alguns testes podem ser ignorados (skipped) se Brian2 não estiver disponível
 
 ## Contribuindo
 
@@ -94,6 +94,6 @@ Ao adicionar novos módulos, crie testes correspondentes:
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Data:** December 5, 2025  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**Data:** December 5, 2025 
 **License:** MIT

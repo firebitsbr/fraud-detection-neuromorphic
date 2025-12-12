@@ -5,7 +5,7 @@
 **Autor:** Mauro Risonho de Paula Assumpção
 **Data de Criação:** 5 de Dezembro de 2025
 
-## 🚀 Deployment Completo
+## Deployment Completo
 
 Este guia configura acesso remoto ao ambiente Docker via VS Code.
 
@@ -51,14 +51,14 @@ USER root
 
 # Instalar SSH
 RUN apt-get update && \
-    apt-get install -y openssh-server sudo && \
-    mkdir /var/run/sshd && \
-    echo 'appuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+ apt-get install -y openssh-server sudo && \
+ mkdir /var/run/sshd && \
+ echo 'appuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Configurar SSH
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
-    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
-    sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+ sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+ sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 
 # Senha para appuser
 RUN echo 'appuser:neuromorphic2025' | chpasswd
@@ -82,30 +82,30 @@ CMD sudo /usr/sbin/sshd -D
 version: '3.8'
 
 services:
-  fraud-remote:
-    build:
-      context: .
-      dockerfile: Dockerfile.remote
-    container_name: fraud-detection-remote
-    ports:
-      - "2222:22"      # SSH
-      - "8000:8000"    # API
-      - "8888:8888"    # Jupyter (opcional)
-    volumes:
-      - .:/app:cached
-      - ./notebooks:/app/notebooks:cached
-      - ./models:/app/models:cached
-      - ./data:/app/data:cached
-    environment:
-      - PYTHONPATH=/app:/app/src
-      - PATH=/opt/venv/bin:$PATH
-    networks:
-      - neuromorphic-net
-    restart: unless-stopped
+ fraud-remote:
+ build:
+ context: .
+ dockerfile: Dockerfile.remote
+ container_name: fraud-detection-remote
+ ports:
+ - "2222:22" # SSH
+ - "8000:8000" # API
+ - "8888:8888" # Jupyter (opcional)
+ volumes:
+ - .:/app:cached
+ - ./notebooks:/app/notebooks:cached
+ - ./models:/app/models:cached
+ - ./data:/app/data:cached
+ environment:
+ - PYTHONPATH=/app:/app/src
+ - PATH=/opt/venv/bin:$PATH
+ networks:
+ - neuromorphic-net
+ restart: unless-stopped
 
 networks:
-  neuromorphic-net:
-    driver: bridge
+ neuromorphic-net:
+ driver: bridge
 ```
 
 ### Passo 3: Deploy
@@ -128,11 +128,11 @@ code --install-extension ms-vscode-remote.remote-ssh
 **2. Configurar SSH (`~/.ssh/config`):**
 ```
 Host fraud-docker
-    HostName localhost
-    User appuser
-    Port 2222
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
+ HostName localhost
+ User appuser
+ Port 2222
+ StrictHostKeyChecking no
+ UserKnownHostsFile /dev/null
 ```
 
 **3. Conectar no VS Code:**
@@ -170,7 +170,7 @@ tar -xf vscode_cli.tar.gz
 - Abra VS Code em qualquer máquina
 - `Ctrl+Shift+P` → `Remote-Tunnels: Connect to Tunnel`
 - Selecione seu tunnel
-- Pronto! Acesso remoto via internet ✅
+- Pronto! Acesso remoto via internet 
 
 ---
 
@@ -178,9 +178,9 @@ tar -xf vscode_cli.tar.gz
 
 | Feature | Dev Containers | Remote SSH | Remote Tunnels |
 |---------|---------------|------------|----------------|
-| **Acesso Local** | ✅ | ✅ | ✅ |
-| **Acesso Remoto LAN** | ❌ | ✅ | ✅ |
-| **Acesso Internet** | ❌ | ⚠️ (VPN) | ✅ |
+| **Acesso Local** | | | |
+| **Acesso Remoto LAN** | | | |
+| **Acesso Internet** | | (VPN) | |
 | **Configuração** | Simples | Média | Simples |
 | **Segurança** | Alta | Alta | Alta |
 | **Port Forwarding** | Automático | Manual | Automático |
@@ -325,15 +325,15 @@ sudo ufw allow from 192.168.0.0/16 to any port 2222
 
 ## Próximos Passos
 
-✅ Container deployed  
-✅ VS Code configurado  
-✅ SSH habilitado  
-✅ Notebooks acessíveis  
+ Container deployed 
+ VS Code configurado 
+ SSH habilitado 
+ Notebooks acessíveis 
 
-**Pronto para desenvolver remotamente!** 🚀
+**Pronto para desenvolver remotamente!** 
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Projeto:** Neuromorphic Fraud Detection  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**Projeto:** Neuromorphic Fraud Detection 
 **Data:** Dezembro 2025

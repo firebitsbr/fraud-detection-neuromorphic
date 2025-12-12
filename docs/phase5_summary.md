@@ -1,38 +1,38 @@
-# 🚀 Phase 5: Scaling & Multi-Chip Distribution
+# Phase 5: Scaling & Multi-Chip Distribution
 
 **Descrição:** Resumo da Fase 5 - Escalabilidade e Distribuição Multi-Chip.
 
-**Status:** ✅ Complete
+**Status:** Complete
 **Data de Criação:** 5 de Dezembro de 2025
 **Autor:** Mauro Risonho de Paula Assumpção
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ---
 
-## 📋 Overview
+## Overview
 
 Phase 5 implements **distributed neuromorphic computing** with Docker-based hardware emulation, enabling massive scalability without physical neuromorphic chips. This phase provides a complete production-ready infrastructure for deploying fraud detection at scale.
 
 ### Key Achievements
 
-✅ **Hardware Simulators**
+ **Hardware Simulators**
 - Complete Loihi 2 chip simulator (128 cores, 1M neurons)
 - BrainScaleS-2 analog emulator (1000x speedup)
 - Multi-core processing with Network-on-Chip
 
-✅ **Distributed Processing**
+ **Distributed Processing**
 - Multi-chip load balancing (4 strategies)
 - Fault tolerance and redundancy
 - Dynamic workload distribution
 - Heterogeneous chip support
 
-✅ **Docker Infrastructure**
+ **Docker Infrastructure**
 - 4 specialized Docker images
 - Complete docker-compose stack
 - Edge device support (ARM64)
 - Production monitoring (Prometheus + Grafana)
 
-✅ **Scaling Test Suite**
+ **Scaling Test Suite**
 - Single chip benchmarks
 - Distributed scaling tests
 - Load balancing comparison
@@ -41,47 +41,45 @@ Phase 5 implements **distributed neuromorphic computing** with Docker-based hard
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│           DISTRIBUTED NEUROMORPHIC CLUSTER                   │
-└─────────────────────────────────────────────────────────────┘
 
-┌──────────────────────────────────────────────────────────────┐
-│                    CLUSTER CONTROLLER                         │
-│  - Load Balancing (4 strategies)                             │
-│  - Task Queue Management                                      │
-│  - Health Monitoring                                          │
-│  - Worker Thread Pool                                         │
-└───────────────┬──────────────────────────────────────────────┘
-                │
-        ┌───────┴────────┬─────────────┬──────────────┐
-        ▼                ▼             ▼              ▼
-┌─────────────┐  ┌─────────────┐  ┌──────────┐  ┌──────────┐
-│  Loihi 2    │  │  Loihi 2    │  │BrainScale│  │ TrueNorth│
-│  Chip 0     │  │  Chip 1     │  │  s-2     │  │  Chip    │
-│             │  │             │  │          │  │          │
-│ 128 cores   │  │ 128 cores   │  │ 512 neur │  │ 4K cores │
-│ 1M neurons  │  │ 1M neurons  │  │ 1000x ⚡ │  │ 1M neur  │
-│             │  │             │  │          │  │          │
-│ 0.05 µJ/inf │  │ 0.05 µJ/inf │  │ 0.03 µJ  │  │ 0.08 µJ  │
-└─────────────┘  └─────────────┘  └──────────┘  └──────────┘
+ DISTRIBUTED NEUROMORPHIC CLUSTER 
 
-                    ┌──────────────┐
-                    │  Redis Cache │
-                    │  Coordination│
-                    └──────────────┘
+ CLUSTER CONTROLLER 
+ - Load Balancing (4 strategies) 
+ - Task Queue Management 
+ - Health Monitoring 
+ - Worker Thread Pool 
 
-            ┌────────────┐      ┌─────────────┐
-            │ Prometheus │─────▶│   Grafana   │
-            │ Monitoring │      │  Dashboards │
-            └────────────┘      └─────────────┘
+ 
+ 
+ 
+ 
+ Loihi 2 Loihi 2 BrainScale TrueNorth
+ Chip 0 Chip 1 s-2 Chip 
+ 
+ 128 cores 128 cores 512 neur 4K cores 
+ 1M neurons 1M neurons 1000x 1M neur 
+ 
+ 0.05 µJ/inf 0.05 µJ/inf 0.03 µJ 0.08 µJ 
+ 
+
+ 
+ Redis Cache 
+ Coordination
+ 
+
+ 
+ Prometheus Grafana 
+ Monitoring Dashboards 
+ 
 ```
 
 ---
 
-## 🐳 Docker Components
+## Docker Components
 
 ### 1. Loihi 2 Simulator (`Dockerfile.loihi`)
 
@@ -179,7 +177,7 @@ LOG_LEVEL=WARNING
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Build Docker Images
 
@@ -224,7 +222,7 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ---
 
-## 📊 Performance Results
+## Performance Results
 
 ### Single Chip Benchmarks
 
@@ -264,11 +262,11 @@ docker exec -it cluster_controller python tests/test_scaling.py
 | **1 Chip Failure** | 6,100 TPS | 24% |
 | **2 Chip Failures** | 4,200 TPS | 48% |
 
-**✅ Graceful Degradation:** System remains operational with reduced capacity
+** Graceful Degradation:** System remains operational with reduced capacity
 
 ---
 
-## 🔧 Load Balancing Strategies
+## Load Balancing Strategies
 
 ### 1. Least Loaded
 
@@ -331,34 +329,34 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ---
 
-## 🧪 Scaling Tests
+## Scaling Tests
 
 ### Test Suite Components
 
 1. **Single Chip Throughput**
-   - Individual chip benchmarks
-   - Performance characterization
-   - Energy profiling
+ - Individual chip benchmarks
+ - Performance characterization
+ - Energy profiling
 
 2. **Distributed Scaling**
-   - Scaling from 1 to 8 chips
-   - Linear scaling verification
-   - Efficiency calculation
+ - Scaling from 1 to 8 chips
+ - Linear scaling verification
+ - Efficiency calculation
 
 3. **Load Balancing Comparison**
-   - All 4 strategies tested
-   - Throughput, latency, energy
-   - Utilization analysis
+ - All 4 strategies tested
+ - Throughput, latency, energy
+ - Utilization analysis
 
 4. **Fault Tolerance**
-   - Simulated chip failures
-   - Graceful degradation
-   - Recovery behavior
+ - Simulated chip failures
+ - Graceful degradation
+ - Recovery behavior
 
 5. **Stress Test**
-   - Sustained load (60s)
-   - Peak throughput
-   - Stability metrics
+ - Sustained load (60s)
+ - Peak throughput
+ - Stability metrics
 
 ### Running Tests
 
@@ -368,8 +366,8 @@ python tests/test_scaling.py
 
 # Individual tests
 python -c "from tests.test_scaling import ScalingTestSuite; \
-           suite = ScalingTestSuite(); \
-           suite.test_distributed_scaling()"
+ suite = ScalingTestSuite(); \
+ suite.test_distributed_scaling()"
 
 # View results
 cat scaling_results/complete_test_results.json
@@ -379,19 +377,19 @@ cat scaling_results/complete_test_results.json
 
 ```
 scaling_results/
-├── single_chip_throughput.json
-├── distributed_scaling.json
-├── load_balancing.json
-├── fault_tolerance.json
-├── stress_test.json
-├── complete_test_results.json
-├── scaling_curve.png
-└── load_balancing_comparison.png
+ single_chip_throughput.json
+ distributed_scaling.json
+ load_balancing.json
+ fault_tolerance.json
+ stress_test.json
+ complete_test_results.json
+ scaling_curve.png
+ load_balancing_comparison.png
 ```
 
 ---
 
-## 🌐 Production Deployment
+## Production Deployment
 
 ### Deployment Scenarios
 
@@ -399,9 +397,9 @@ scaling_results/
 
 ```yaml
 Configuration:
-  - 1x Loihi 2 chip
-  - Docker on single server
-  - No redundancy
+ - 1x Loihi 2 chip
+ - Docker on single server
+ - No redundancy
 
 Cost: ~$500/month
 Power: 50 mW
@@ -412,10 +410,10 @@ Latency: 10ms
 
 ```yaml
 Configuration:
-  - 2x Loihi 2 chips
-  - 1x BrainScaleS-2 chip
-  - Load balancer
-  - Full monitoring
+ - 2x Loihi 2 chips
+ - 1x BrainScaleS-2 chip
+ - Load balancer
+ - Full monitoring
 
 Cost: ~$2,000/month
 Power: 150 mW
@@ -426,11 +424,11 @@ Latency: 5ms (avg)
 
 ```yaml
 Configuration:
-  - 20x Loihi 2 chips
-  - 10x BrainScaleS-2 chips
-  - Multi-region deployment
-  - Redis cluster
-  - Kafka streaming
+ - 20x Loihi 2 chips
+ - 10x BrainScaleS-2 chips
+ - Multi-region deployment
+ - Redis cluster
+ - Kafka streaming
 
 Cost: ~$20,000/month
 Power: 1.5 W total
@@ -449,15 +447,15 @@ Latency: <10ms (P99)
 
 ---
 
-## 🔐 Security & Compliance
+## Security & Compliance
 
 ### Security Features
 
-✅ **Network Isolation:** All chips on private Docker network  
-✅ **No External Ports:** Chips only accessible via controller  
-✅ **Health Checks:** Automatic failure detection  
-✅ **Rate Limiting:** Prevent overload  
-✅ **Audit Logging:** Complete transaction history  
+ **Network Isolation:** All chips on private Docker network 
+ **No External Ports:** Chips only accessible via controller 
+ **Health Checks:** Automatic failure detection 
+ **Rate Limiting:** Prevent overload 
+ **Audit Logging:** Complete transaction history 
 
 ### Compliance
 
@@ -468,7 +466,7 @@ Latency: <10ms (P99)
 
 ---
 
-## 📈 Monitoring & Observability
+## Monitoring & Observability
 
 ### Prometheus Metrics
 
@@ -489,23 +487,23 @@ neuromorphic_chip_health_status
 ### Grafana Dashboards
 
 1. **Cluster Overview**
-   - Total throughput
-   - Active chips
-   - System health
+ - Total throughput
+ - Active chips
+ - System health
 
 2. **Chip Details**
-   - Per-chip utilization
-   - Energy consumption
-   - Failure alerts
+ - Per-chip utilization
+ - Energy consumption
+ - Failure alerts
 
 3. **Performance Analysis**
-   - Latency percentiles
-   - Throughput trends
-   - Scaling efficiency
+ - Latency percentiles
+ - Throughput trends
+ - Scaling efficiency
 
 ---
 
-## 🚧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -540,7 +538,7 @@ docker-compose up -d --scale loihi-chip-0=2
 
 ---
 
-## 🎯 Future Enhancements
+## Future Enhancements
 
 ### Phase 5.1: Physical Hardware Integration
 
@@ -565,7 +563,7 @@ docker-compose up -d --scale loihi-chip-0=2
 
 ---
 
-## 📚 References
+## References
 
 ### Hardware Simulators
 
@@ -581,7 +579,7 @@ docker-compose up -d --scale loihi-chip-0=2
 
 ---
 
-## 👨‍💻 Usage Examples
+## ‍ Usage Examples
 
 ### Example 1: Submit Single Transaction
 
@@ -596,10 +594,10 @@ cluster.start_workers(num_workers=4)
 
 # Submit transaction
 txn = Transaction(
-    transaction_id="txn_001",
-    features=np.random.randn(30),
-    timestamp=time.time(),
-    priority=0
+ transaction_id="txn_001",
+ features=np.random.randn(30),
+ timestamp=time.time(),
+ priority=0
 )
 cluster.submit_transaction(txn)
 
@@ -613,8 +611,8 @@ print(f"Fraud detected: {results[0].is_fraud}")
 ```python
 # Submit batch
 batch = [
-    Transaction(f"txn_{i}", np.random.randn(30), time.time())
-    for i in range(1000)
+ Transaction(f"txn_{i}", np.random.randn(30), time.time())
+ for i in range(1000)
 ]
 cluster.submit_batch(batch)
 
@@ -639,19 +637,19 @@ cluster.export_statistics("cluster_stats.json")
 
 ---
 
-## ✅ Phase 5 Summary
+## Phase 5 Summary
 
-**Status:** 🟢 **COMPLETE**
+**Status:** **COMPLETE**
 
 ### Deliverables
 
-✅ 2 Hardware simulators (900+ lines)  
-✅ Distributed cluster system (700+ lines)  
-✅ 4 Docker images  
-✅ Complete docker-compose stack  
-✅ Scaling test suite (600+ lines)  
-✅ Production monitoring  
-✅ Comprehensive documentation  
+ 2 Hardware simulators (900+ lines) 
+ Distributed cluster system (700+ lines) 
+ 4 Docker images 
+ Complete docker-compose stack 
+ Scaling test suite (600+ lines) 
+ Production monitoring 
+ Comprehensive documentation 
 
 ### Performance Achieved
 
@@ -668,8 +666,8 @@ cluster.export_statistics("cluster_stats.json")
 
 ---
 
-**Phase 5 enables fraud detection at any scale - from edge devices to global data centers!** 🚀🌍
+**Phase 5 enables fraud detection at any scale - from edge devices to global data centers!** 
 
 ---
 
-**Next:** Physical hardware deployment (Phase 5.1) or project completion! ✨
+**Next:** Physical hardware deployment (Phase 5.1) or project completion! 

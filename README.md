@@ -1,4 +1,4 @@
-# 🧠 Detecção de Fraude Neuromórfica em Transações Bancárias
+# Detecção de Fraude Neuromórfica em Transações Bancárias
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Brian2](https://img.shields.io/badge/Brian2-2.5%2B-green.svg)](https://brian2.readthedocs.io/)
@@ -13,24 +13,24 @@
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Mauro Risonho de Paula Assumpção**
 
-📧 **Email:** mauro.risonho@gmail.com  
-💼 **LinkedIn:** [linkedin.com/in/maurorisonho](https://www.linkedin.com/in/maurorisonho)  
-🐙 **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho)  
-📅 **Data:** Dezembro 2025  
-📜 **Licença:** MIT  
-🎯 **Área:** Computação Neuromórfica | FinTech | Cybersecurity
+ **Email:** mauro.risonho@gmail.com 
+ **LinkedIn:** [linkedin.com/in/maurorisonho](https://www.linkedin.com/in/maurorisonho) 
+ **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho) 
+ **Data:** Dezembro 2025 
+ **Licença:** MIT 
+ **Área:** Computação Neuromórfica | FinTech | Cybersecurity
 
 ---
 
-## 📑 Índice
+## Índice
 
 - [Visão Geral](#-visão-geral)
 - [Por Que Computação Neuromórfica?](#-por-que-computação-neuromórfica)
-- [Arquitetura do Sistema](#️-arquitetura-do-sistema)
+- [Arquitetura do Sistema](#-arquitetura-do-sistema)
 - [Instalação Rápida](#-instalação-rápida-docker)
 - [Instalação Manual](#-instalação-manual-passo-a-passo)
 - [Executando os Notebooks](#-executando-os-notebooks)
@@ -40,27 +40,27 @@
 - [Documentação Detalhada](#-documentação-detalhada)
 - [Estrutura do Projeto](#-estrutura-do-projeto)
 - [Tecnologias](#-tecnologias)
-- [Roadmap](#️-roadmap)
+- [Roadmap](#-roadmap)
 - [Contribuindo](#-contribuindo)
 - [Referências](#-referências)
 
 ---
 
-## 🎯 Visão Geral
+## Visão Geral
 
 Sistema completo de **detecção de fraude bancária** usando **Spiking Neural Networks (SNNs)** - redes neurais que funcionam como o cérebro humano, processando informação através de pulsos elétricos temporais (spikes).
 
-### 🌟 Diferenciais
+### Diferenciais
 
 | Característica | Valor | Comparação |
 |---------------|-------|------------|
-| ⚡ **Latência** | < 101 ms | 47.9x mais rápido que CPU |
-| 🔋 **Consumo Energético** | 0.19 mJ | 1,678,450x mais eficiente |
-| 💪 **Throughput** | 9.9 TPS | 47.7x superior |
-| 🎯 **Acurácia** | 97.8% | Equivalente a DNNs |
-| 🔥 **Potência** | 665 mW | 97.7x menos que CPU |
+| **Latência** | < 101 ms | 47.9x mais rápido que CPU |
+| **Consumo Energético** | 0.19 mJ | 1,678,450x mais eficiente |
+| **Throughput** | 9.9 TPS | 47.7x superior |
+| **Acurácia** | 97.8% | Equivalente a DNNs |
+| **Potência** | 665 mW | 97.7x menos que CPU |
 
-### 💡 Por Que Este Projeto é Importante?
+### Por Que Este Projeto é Importante?
 
 Bancos e fintechs processam **milhões de transações por segundo**. Sistemas tradicionais consomem muita energia e têm latência alta. **SNNs rodando em hardware neuromórfico** (como Intel Loihi 2) oferecem:
 
@@ -71,22 +71,22 @@ Bancos e fintechs processam **milhões de transações por segundo**. Sistemas t
 
 ---
 
-## 🧬 Por Que Computação Neuromórfica?
+## Por Que Computação Neuromórfica?
 
 ### O Problema com IA Tradicional
 
 ```
-🖥️ Deep Neural Networks (DNNs)
-├─ Consomem muita energia (GPUs: 70W+)
-├─ Processam em lotes (batch processing)
-├─ Latência alta (100ms+)
-└─ Não exploram temporalidade nativa
+ Deep Neural Networks (DNNs)
+ Consomem muita energia (GPUs: 70W+)
+ Processam em lotes (batch processing)
+ Latência alta (100ms+)
+ Não exploram temporalidade nativa
 
-💡 Spiking Neural Networks (SNNs)
-├─ Ultra-eficientes (50mW)
-├─ Processamento assíncrono (event-driven)
-├─ Latência ultra-baixa (<10ms)
-└─ Processamento temporal nativo
+ Spiking Neural Networks (SNNs)
+ Ultra-eficientes (50mW)
+ Processamento assíncrono (event-driven)
+ Latência ultra-baixa (<10ms)
+ Processamento temporal nativo
 ```
 
 ### Como Funcionam SNNs?
@@ -97,99 +97,99 @@ output = activation(weights @ inputs + bias)
 
 # Neurônio LIF (SNN) - Processa TEMPO
 if membrane_potential > threshold:
-    emit_spike(time=current_time)
-    membrane_potential = reset_value
+ emit_spike(time=current_time)
+ membrane_potential = reset_value
 ```
 
 **Analogia:** Pense em neurônios como alarmes de incêndio. Em vez de medir continuamente a temperatura (DNN), eles **disparam** quando detectam fumaça (evento temporal).
 
 ---
 
-## 🏗️ Arquitetura do Sistema
+## Arquitetura do Sistema
 
 ### Pipeline Completo
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│          🏦 TRANSAÇÃO BANCÁRIA (JSON/API)                │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│  📊 EXTRAÇÃO DE FEATURES (src/main.py)                   │
-│  ├─ amount: R$ 5.000,00                                 │
-│  ├─ timestamp: 2025-12-06 14:32:15                      │
-│  ├─ merchant: "Loja Eletrônicos XYZ"                    │
-│  ├─ location: (-23.55, -46.63) [São Paulo]              │
-│  ├─ device_id: "abc123"                                 │
-│  └─ daily_frequency: 8 transações hoje                  │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│  ⚡ CODIFICAÇÃO EM SPIKES (src/encoders.py)              │
-│  ├─ Rate Encoder:     R$5000 → 50 spikes/s             │
-│  ├─ Temporal Encoder: 14h32 → spike em t=52320ms       │
-│  └─ Population:       SP → neurônios [120-130] ativos  │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│  🧠 SPIKING NEURAL NETWORK (src/models_snn.py)          │
-│                                                         │
-│  ┌─────────────────────────────────────────┐           │
-│  │  Input Layer: 256 neurônios             │           │
-│  │  (recebem spikes codificados)           │           │
-│  └────────────┬────────────────────────────┘           │
-│               ↓                                         │
-│  ┌─────────────────────────────────────────┐           │
-│  │  Hidden Layer 1: 128 LIF neurons        │           │
-│  │  τ=20ms, V_thresh=-50mV                 │           │
-│  └────────────┬────────────────────────────┘           │
-│               ↓                                         │
-│  ┌─────────────────────────────────────────┐           │
-│  │  Hidden Layer 2: 64 LIF neurons         │           │
-│  │  τ=20ms, V_thresh=-50mV                 │           │
-│  └────────────┬────────────────────────────┘           │
-│               ↓                                         │
-│  ┌─────────────────────────────────────────┐           │
-│  │  Output: 2 neurônios                    │           │
-│  │  ├─ Neurônio 0: "Legítima"              │           │
-│  │  └─ Neurônio 1: "Fraudulenta"           │           │
-│  └─────────────────────────────────────────┘           │
-│                                                         │
-│  Aprendizado: STDP + Homeostasis                       │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│  🎯 DECISÃO FINAL                                        │
-│  ├─ Taxa de spikes: Output[1] > Output[0]?             │
-│  ├─ Threshold: 0.5 (adaptativo)                        │
-│  ├─ Confidence: 0.92                                    │
-│  └─ Resultado: ⚠️ FRAUDE DETECTADA                      │
-└─────────────────────────────────────────────────────────┘
+
+ TRANSAÇÃO BANCÁRIA (JSON/API) 
+
+ ↓
+
+ EXTRAÇÃO DE FEATURES (src/main.py) 
+ amount: R$ 5.000,00 
+ timestamp: 2025-12-06 14:32:15 
+ merchant: "Loja Eletrônicos XYZ" 
+ location: (-23.55, -46.63) [São Paulo] 
+ device_id: "abc123" 
+ daily_frequency: 8 transações hoje 
+
+ ↓
+
+ CODIFICAÇÃO EM SPIKES (src/encoders.py) 
+ Rate Encoder: R$5000 → 50 spikes/s 
+ Temporal Encoder: 14h32 → spike em t=52320ms 
+ Population: SP → neurônios [120-130] ativos 
+
+ ↓
+
+ SPIKING NEURAL NETWORK (src/models_snn.py) 
+ 
+ 
+ Input Layer: 256 neurônios 
+ (recebem spikes codificados) 
+ 
+ ↓ 
+ 
+ Hidden Layer 1: 128 LIF neurons 
+ τ=20ms, V_thresh=-50mV 
+ 
+ ↓ 
+ 
+ Hidden Layer 2: 64 LIF neurons 
+ τ=20ms, V_thresh=-50mV 
+ 
+ ↓ 
+ 
+ Output: 2 neurônios 
+ Neurônio 0: "Legítima" 
+ Neurônio 1: "Fraudulenta" 
+ 
+ 
+ Aprendizado: STDP + Homeostasis 
+
+ ↓
+
+ DECISÃO FINAL 
+ Taxa de spikes: Output[1] > Output[0]? 
+ Threshold: 0.5 (adaptativo) 
+ Confidence: 0.92 
+ Resultado: FRAUDE DETECTADA 
+
 ```
 
 ### Componentes Principais
 
 ```
 projeto/
-├── src/
-│   ├── main.py           # Pipeline principal
-│   ├── models_snn.py     # Implementação da SNN
-│   ├── encoders.py       # Conversão para spikes
-│   └── dataset_loader.py # Carregamento de dados
-├── hardware/
-│   └── loihi_simulator.py # Simulador Intel Loihi 2
-├── src/
-│   ├── api_server.py          # REST API (FastAPI)
-├── notebooks/
-│   ├── 01_stdp_example.ipynb      # Teoria STDP
-│   ├── 02_demo.ipynb              # Demo completo
-│   └── 03_loihi_benchmark.ipynb   # Benchmark hardware
-└── tests/                # Testes unitários
+ src/
+ main.py # Pipeline principal
+ models_snn.py # Implementação da SNN
+ encoders.py # Conversão para spikes
+ dataset_loader.py # Carregamento de dados
+ hardware/
+ loihi_simulator.py # Simulador Intel Loihi 2
+ src/
+ api_server.py # REST API (FastAPI)
+ notebooks/
+ 01_stdp_example.ipynb # Teoria STDP
+ 02_demo.ipynb # Demo completo
+ 03_loihi_benchmark.ipynb # Benchmark hardware
+ tests/ # Testes unitários
 ```
 
 ---
 
-## 🚀 Instalação Rápida (Docker)
+## Instalação Rápida (Docker)
 
 ### Pré-requisitos
 
@@ -201,19 +201,19 @@ projeto/
 ### Execução em 3 Comandos
 
 ```bash
-# 1️⃣ Clone o repositório
+# 1⃣ Clone o repositório
 git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
-# 2️⃣ Inicie todos os serviços
+# 2⃣ Inicie todos os serviços
 docker compose -f config/docker-compose.yml up -d
 
-# 3️⃣ Acesse os serviços
-echo "✅ Serviços disponíveis:"
-echo "📡 API REST:     http://localhost:8000"
-echo "📊 API Docs:     http://localhost:8000/docs"
-echo "💻 JupyterLab:   http://localhost:8888"
-echo "🌐 Streamlit UI: http://localhost:8501"
+# 3⃣ Acesse os serviços
+echo " Serviços disponíveis:"
+echo " API REST: http://localhost:8000"
+echo " API Docs: http://localhost:8000/docs"
+echo " JupyterLab: http://localhost:8888"
+echo " Streamlit UI: http://localhost:8501"
 ```
 
 ### Verificar Health
@@ -236,7 +236,7 @@ docker compose -f config/docker-compose.yml down
 
 ---
 
-## 🛠️ Instalação Manual (Passo a Passo)
+## Instalação Manual (Passo a Passo)
 
 ### Passo 1: Pré-requisitos do Sistema
 
@@ -287,7 +287,7 @@ pip install --upgrade pip
 pip install -r requirements/requirements.txt
 
 # Verificar instalação
-python -c "import brian2; print('✅ Brian2 instalado:', brian2.__version__)"
+python -c "import brian2; print(' Brian2 instalado:', brian2.__version__)"
 ```
 
 **Troubleshooting:** Se houver erro com Brian2:
@@ -311,13 +311,13 @@ python src/main.py
 
 ---
 
-## 📓 Executando os Notebooks
+## Executando os Notebooks
 
 ### Ordem Recomendada de Execução
 
 Os notebooks foram projetados para serem executados nesta ordem:
 
-#### 1️⃣ **`stdp_example.ipynb`** - Fundamentos (5-10 min)
+#### 1⃣ **`stdp_example.ipynb`** - Fundamentos (5-10 min)
 
 **O que você vai aprender:**
 - Como funciona STDP (aprendizado biológico)
@@ -339,7 +339,7 @@ jupyter notebook notebooks/stdp_example.ipynb
 4. Efeito do timing nos pesos
 5. Aplicação em detecção de padrões
 
-#### 2️⃣ **`demo.ipynb`** - Pipeline Completo (15-20 min)
+#### 2⃣ **`demo.ipynb`** - Pipeline Completo (15-20 min)
 
 **O que você vai explorar:**
 - Geração de dados sintéticos
@@ -354,27 +354,27 @@ jupyter notebook notebooks/demo.ipynb
 
 **Estrutura:**
 ```
-📍 Seção 1: Setup e Dados
-   ├─ Gerar 500 transações (20% fraudes)
-   └─ Exploração visual
+ Seção 1: Setup e Dados
+ Gerar 500 transações (20% fraudes)
+ Exploração visual
 
-📍 Seção 2: Codificação
-   ├─ Rate Encoding (valor → frequência)
-   ├─ Temporal Encoding (timestamp)
-   └─ Population Encoding (localização)
+ Seção 2: Codificação
+ Rate Encoding (valor → frequência)
+ Temporal Encoding (timestamp)
+ Population Encoding (localização)
 
-📍 Seção 3: SNN
-   ├─ Criar rede 256→128→64→2
-   ├─ Treinar com STDP (20 epochs)
-   └─ Visualizar pesos aprendidos
+ Seção 3: SNN
+ Criar rede 256→128→64→2
+ Treinar com STDP (20 epochs)
+ Visualizar pesos aprendidos
 
-📍 Seção 4: Avaliação
-   ├─ Accuracy, Precision, Recall, F1
-   ├─ Matriz de confusão
-   └─ Exemplos de predição
+ Seção 4: Avaliação
+ Accuracy, Precision, Recall, F1
+ Matriz de confusão
+ Exemplos de predição
 ```
 
-#### 3️⃣ **`loihi_benchmark.ipynb`** - Hardware (10-15 min)
+#### 3⃣ **`loihi_benchmark.ipynb`** - Hardware (10-15 min)
 
 **O que você vai analisar:**
 - Benchmark CPU vs Loihi 2
@@ -389,14 +389,14 @@ jupyter notebook notebooks/loihi_benchmark.ipynb
 **Resultados esperados:**
 ```
 CPU (Brian2 Simulator):
-├─ Latência:  ~4829 ms
-├─ Throughput: 0.2 TPS
-└─ Energia:   313 J
+ Latência: ~4829 ms
+ Throughput: 0.2 TPS
+ Energia: 313 J
 
 Intel Loihi 2 (Simulado):
-├─ Latência:  ~101 ms  (47.9x mais rápido)
-├─ Throughput: 9.9 TPS (47.7x maior)
-└─ Energia:   0.19 mJ  (1.6M x mais eficiente)
+ Latência: ~101 ms (47.9x mais rápido)
+ Throughput: 9.9 TPS (47.7x maior)
+ Energia: 0.19 mJ (1.6M x mais eficiente)
 
 ```
 
@@ -406,7 +406,7 @@ Intel Loihi 2 (Simulado):
 - `latency_distribution.png` - Distribuição de latências
 - `scalability_analysis.png` - Análise de escalabilidade
 
-### 💡 Dicas para Notebooks
+### Dicas para Notebooks
 
 ```bash
 # Executar célula por célula (recomendado)
@@ -421,10 +421,9 @@ Kernel → Restart & Clear Output
 
 ---
 
-## 🌐 Usando a API REST
+## Usando a API REST
 
 ### Iniciar Servidor
-
 
 ```bash
 # Opção 1: Usando Docker
@@ -452,9 +451,9 @@ curl http://localhost:8000/health
 **Resposta:**
 ```json
 {
-  "status": "healthy",
-  "version": "1.0.0",
-  "timestamp": "2025-12-06T14:32:15Z"
+ "status": "healthy",
+ "version": "1.0.0",
+ "timestamp": "2025-12-06T14:32:15Z"
 }
 ```
 
@@ -462,30 +461,30 @@ curl http://localhost:8000/health
 
 ```bash
 curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "amount": 5000.00,
-    "timestamp": "2025-12-06T14:32:15Z",
-    "merchant_category": "electronics",
-    "device_id": "abc123",
-    "location": {
-      "lat": -23.5505,
-      "lon": -46.6333
-    },
-    "daily_frequency": 8
-  }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "amount": 5000.00,
+ "timestamp": "2025-12-06T14:32:15Z",
+ "merchant_category": "electronics",
+ "device_id": "abc123",
+ "location": {
+ "lat": -23.5505,
+ "lon": -46.6333
+ },
+ "daily_frequency": 8
+ }'
 ```
 
 **Resposta:**
 ```json
 {
-  "is_fraud": true,
-  "confidence": 0.92,
-  "fraud_probability": 0.85,
-  "latency_ms": 8.3,
-  "spike_rate_output": [0.12, 0.88],
-  "model_version": "fraud_snn_v1",
-  "timestamp": "2025-12-06T14:32:15.234Z"
+ "is_fraud": true,
+ "confidence": 0.92,
+ "fraud_probability": 0.85,
+ "latency_ms": 8.3,
+ "spike_rate_output": [0.12, 0.88],
+ "model_version": "fraud_snn_v1",
+ "timestamp": "2025-12-06T14:32:15.234Z"
 }
 ```
 
@@ -493,13 +492,13 @@ curl -X POST http://localhost:8000/predict \
 
 ```bash
 curl -X POST http://localhost:8000/predict/batch \
-  -H "Content-Type: application/json" \
-  -d '{
-    "transactions": [
-      {"amount": 100, "merchant_category": "groceries", ...},
-      {"amount": 5000, "merchant_category": "electronics", ...}
-    ]
-  }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "transactions": [
+ {"amount": 100, "merchant_category": "groceries", ...},
+ {"amount": 5000, "merchant_category": "electronics", ...}
+ ]
+ }'
 ```
 
 #### 4. Estatísticas do Modelo
@@ -511,11 +510,11 @@ curl http://localhost:8000/stats
 **Resposta:**
 ```json
 {
-  "total_predictions": 15234,
-  "fraud_detected": 756,
-  "avg_latency_ms": 8.7,
-  "avg_confidence": 0.89,
-  "model_accuracy": 0.978
+ "total_predictions": 15234,
+ "fraud_detected": 756,
+ "avg_latency_ms": 8.7,
+ "avg_confidence": 0.89,
+ "model_accuracy": 0.978
 }
 ```
 
@@ -523,12 +522,12 @@ curl http://localhost:8000/stats
 
 ```bash
 curl -X POST http://localhost:8000/train \
-  -H "Content-Type: application/json" \
-  -d '{
-    "dataset_path": "data/transactions.csv",
-    "epochs": 50,
-    "learning_rate": 0.01
-  }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "dataset_path": "data/transactions.csv",
+ "epochs": 50,
+ "learning_rate": 0.01
+ }'
 ```
 
 ### Integração com Python
@@ -541,12 +540,12 @@ API_URL = "http://localhost:8000"
 
 # Criar transação
 transaction = {
-    "amount": 5000.00,
-    "timestamp": "2025-12-06T14:32:15Z",
-    "merchant_category": "electronics",
-    "device_id": "abc123",
-    "location": {"lat": -23.5505, "lon": -46.6333},
-    "daily_frequency": 8
+ "amount": 5000.00,
+ "timestamp": "2025-12-06T14:32:15Z",
+ "merchant_category": "electronics",
+ "device_id": "abc123",
+ "location": {"lat": -23.5505, "lon": -46.6333},
+ "daily_frequency": 8
 }
 
 # Fazer predição
@@ -555,11 +554,11 @@ result = response.json()
 
 # Verificar fraude
 if result['is_fraud']:
-    print(f"⚠️ FRAUDE DETECTADA!")
-    print(f"Confiança: {result['confidence']:.2%}")
-    print(f"Latência: {result['latency_ms']:.2f}ms")
+ print(f" FRAUDE DETECTADA!")
+ print(f"Confiança: {result['confidence']:.2%}")
+ print(f"Latência: {result['latency_ms']:.2f}ms")
 else:
-    print(f"✅ Transação legítima")
+ print(f" Transação legítima")
 ```
 
 ### Integração com cURL (Shell Script)
@@ -573,8 +572,8 @@ TRANSACTION=$(cat transaction.json)
 
 # Fazer predição
 RESULT=$(curl -s -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d "$TRANSACTION")
+ -H "Content-Type: application/json" \
+ -d "$TRANSACTION")
 
 # Extrair resultado
 IS_FRAUD=$(echo $RESULT | jq -r '.is_fraud')
@@ -582,16 +581,16 @@ CONFIDENCE=$(echo $RESULT | jq -r '.confidence')
 
 # Notificar
 if [ "$IS_FRAUD" = "true" ]; then
-    echo "🚨 ALERTA: Fraude detectada (${CONFIDENCE})"
-    # Enviar notificação, bloquear cartão, etc.
+ echo " ALERTA: Fraude detectada (${CONFIDENCE})"
+ # Enviar notificação, bloquear cartão, etc.
 else
-    echo "✅ Transação aprovada"
+ echo " Transação aprovada"
 fi
 ```
 
 ---
 
-## 🧪 Testes e Validação
+## Testes e Validação
 
 ### Executar Todos os Testes
 
@@ -626,11 +625,11 @@ pytest tests/test_api.py -v
 
 ```
 tests/
-├── test_models_snn.py      # Testa SNN, LIF, STDP
-├── test_main.py            # Testa pipeline completo
-├── test_encoders.py        # Testa codificadores
-├── test_api.py             # Testa endpoints REST
-└── conftest.py             # Fixtures compartilhados
+ test_models_snn.py # Testa SNN, LIF, STDP
+ test_main.py # Testa pipeline completo
+ test_encoders.py # Testa codificadores
+ test_api.py # Testa endpoints REST
+ conftest.py # Fixtures compartilhados
 ```
 
 ### Exemplo de Teste Manual
@@ -640,36 +639,36 @@ tests/
 from src.main import FraudDetectionPipeline
 
 def test_pipeline_completo():
-    # Criar pipeline
-    pipeline = FraudDetectionPipeline()
-    
-    # Transação legítima
-    legit = {
-        'amount': 50.00,
-        'merchant_category': 'groceries',
-        'daily_frequency': 3
-    }
-    result1 = pipeline.predict(legit)
-    assert result1['is_fraud'] == False
-    
-    # Transação fraudulenta
-    fraud = {
-        'amount': 10000.00,
-        'merchant_category': 'electronics',
-        'daily_frequency': 15
-    }
-    result2 = pipeline.predict(fraud)
-    assert result2['is_fraud'] == True
-    
-    print("✅ Todos os testes passaram!")
+ # Criar pipeline
+ pipeline = FraudDetectionPipeline()
+ 
+ # Transação legítima
+ legit = {
+ 'amount': 50.00,
+ 'merchant_category': 'groceries',
+ 'daily_frequency': 3
+ }
+ result1 = pipeline.predict(legit)
+ assert result1['is_fraud'] == False
+ 
+ # Transação fraudulenta
+ fraud = {
+ 'amount': 10000.00,
+ 'merchant_category': 'electronics',
+ 'daily_frequency': 15
+ }
+ result2 = pipeline.predict(fraud)
+ assert result2['is_fraud'] == True
+ 
+ print(" Todos os testes passaram!")
 
 if __name__ == '__main__':
-    test_pipeline_completo()
+ test_pipeline_completo()
 ```
 
 ---
 
-## 📊 Resultados e Benchmarks
+## Resultados e Benchmarks
 
 ### Performance do Modelo (Dataset Credit Card Fraud)
 
@@ -677,12 +676,12 @@ if __name__ == '__main__':
 
 | Métrica | Valor |
 |---------|-------|
-| ✅ **Acurácia** | 97.8% |
-| 🎯 **Precisão** | 95.2% |
-| 🔍 **Recall** | 93.7% |
-| ⚖️ **F1-Score** | 94.4% |
-| ⏱️ **Latência Média** | 8.3 ms |
-| 🔋 **Energia/Inferência** | 0.19 mJ |
+| **Acurácia** | 97.8% |
+| **Precisão** | 95.2% |
+| **Recall** | 93.7% |
+| **F1-Score** | 94.4% |
+| [TEMPO] **Latência Média** | 8.3 ms |
+| **Energia/Inferência** | 0.19 mJ |
 
 ### Comparação Hardware (Simulado)
 
@@ -697,9 +696,9 @@ if __name__ == '__main__':
 ```
 Energia por Inferência (escala logarítmica)
 
-CPU:          █████████████████████████████ 313 J
-GPU:          ███ 70 mJ
-Loihi 2:      | 0.19 mJ  ← 1,678,450x mais eficiente!
+CPU: 313 J
+GPU: 70 mJ
+Loihi 2: | 0.19 mJ ← 1,678,450x mais eficiente!
 ```
 
 ### Benchmark de Escalabilidade
@@ -715,7 +714,7 @@ Loihi 2:      | 0.19 mJ  ← 1,678,450x mais eficiente!
 
 ---
 
-## 📚 Documentação Detalhada
+## Documentação Detalhada
 
 Para guias detalhados de instalação, arquitetura e deployment, consulte a pasta `docs/`:
 
@@ -727,92 +726,92 @@ Para guias detalhados de instalação, arquitetura e deployment, consulte a past
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
-> 📝 **Ver estrutura completa**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
+> **Ver estrutura completa**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 
 ```
 fraud-detection-neuromorphic/
-│
-├── 📄 README.md                    # Este arquivo
-├── 📄 LICENSE                      # Licença MIT
-├── 📄 Makefile                     # Comandos úteis
-├── 📄 PROJECT_STRUCTURE.md         # Estrutura detalhada
-│
-├── 📦 requirements/                # Dependências Python
-│   ├── requirements.txt            # Dependências principais
-│   ├── requirements-ci.txt         # CI/CD
-│   ├── requirements-edge.txt       # Edge computing
-│   └── requirements-production.txt # Produção
-│
-├── ⚙️  config/                      # Configurações
-│   ├── docker-compose.yml          # Orquestração Docker
-│   ├── docker-compose.dev.yml      # Dev Containers
-│   ├── docker-compose.remote.yml   # Acesso remoto
-│   ├── docker-compose.production.yml # Produção
-│   └── .devcontainer/              # VS Code Dev Containers
-│
-├── 🚀 deployment/                  # Scripts de deployment
-│   ├── deploy.sh
-│   ├── deploy-production.sh
-│   └── deploy-remote.sh
-│
-├── 📂 docs/                        # Documentação detalhada
-│   ├── DOCS_INDEX.md              # Índice da documentação
-│   ├── QUICKSTART_DOCKER.md       # Quick start Docker
-│   ├── QUICKSTART_VSCODE.md       # Quick start VS Code
-│   └── ...
-│
-├── 🐳 docker/                      # Containers Docker
-│   ├── Dockerfile                  # Dockerfile principal
-│   ├── Dockerfile.api              # Container API
-│   ├── Dockerfile.jupyter          # Container Jupyter
-│   └── Dockerfile.streamlit        # Container UI
-│
-├── 📂 src/                         # Código-fonte principal
-│   ├── main.py                    # Pipeline completo
-│   ├── models_snn.py              # SNN implementation
-│   ├── encoders.py                # Spike encoders
-│   ├── dataset_loader.py          # Data loading
-│   └── __init__.py
-│
-├── 📂 hardware/                    # Hardware neuromórfico
-│   ├── loihi_simulator.py         # Intel Loihi 2
-│   └── __init__.py
-│
-├── 📂 notebooks/                   # Jupyter notebooks
-│   ├── 01_stdp_example.ipynb      # Teoria STDP
-│   ├── 02_demo.ipynb              # Demonstração
-│   └── 03_loihi_benchmark.ipynb   # Benchmarks
-│
-├── 📂 tests/                       # Testes unitários
-│   ├── test_models_snn.py
-│   ├── test_main.py
-│   └── conftest.py
-│
-├── 📂 web/                         # Interface Streamlit
-│   └── app.py
-│
-├── 📂 data/                        # Datasets
-│   └── creditcard.csv.gz
-│
-├── 📂 models/                      # Modelos treinados
-│   └── fraud_snn_v1.pkl
-│
-├── 📂 docs/                        # Documentação
-│   ├── QUICKSTART.md
-│   ├── API_REFERENCE.md
-│   └── ARCHITECTURE.md
-│
-└── 📂 scripts/                     # Scripts utilitários
-    ├── train.py
-    ├── evaluate.py
-    └── deploy.sh
+
+ README.md # Este arquivo
+ LICENSE # Licença MIT
+ Makefile # Comandos úteis
+ PROJECT_STRUCTURE.md # Estrutura detalhada
+
+ requirements/ # Dependências Python
+ requirements.txt # Dependências principais
+ requirements-ci.txt # CI/CD
+ requirements-edge.txt # Edge computing
+ requirements-production.txt # Produção
+
+ config/ # Configurações
+ docker-compose.yml # Orquestração Docker
+ docker-compose.dev.yml # Dev Containers
+ docker-compose.remote.yml # Acesso remoto
+ docker-compose.production.yml # Produção
+ .devcontainer/ # VS Code Dev Containers
+
+ deployment/ # Scripts de deployment
+ deploy.sh
+ deploy-production.sh
+ deploy-remote.sh
+
+ docs/ # Documentação detalhada
+ DOCS_INDEX.md # Índice da documentação
+ QUICKSTART_DOCKER.md # Quick start Docker
+ QUICKSTART_VSCODE.md # Quick start VS Code
+ ...
+
+ docker/ # Containers Docker
+ Dockerfile # Dockerfile principal
+ Dockerfile.api # Container API
+ Dockerfile.jupyter # Container Jupyter
+ Dockerfile.streamlit # Container UI
+
+ src/ # Código-fonte principal
+ main.py # Pipeline completo
+ models_snn.py # SNN implementation
+ encoders.py # Spike encoders
+ dataset_loader.py # Data loading
+ __init__.py
+
+ hardware/ # Hardware neuromórfico
+ loihi_simulator.py # Intel Loihi 2
+ __init__.py
+
+ notebooks/ # Jupyter notebooks
+ 01_stdp_example.ipynb # Teoria STDP
+ 02_demo.ipynb # Demonstração
+ 03_loihi_benchmark.ipynb # Benchmarks
+
+ tests/ # Testes unitários
+ test_models_snn.py
+ test_main.py
+ conftest.py
+
+ web/ # Interface Streamlit
+ app.py
+
+ data/ # Datasets
+ creditcard.csv.gz
+
+ models/ # Modelos treinados
+ fraud_snn_v1.pkl
+
+ docs/ # Documentação
+ QUICKSTART.md
+ API_REFERENCE.md
+ ARCHITECTURE.md
+
+ scripts/ # Scripts utilitários
+ train.py
+ evaluate.py
+ deploy.sh
 ```
 
 ---
 
-## 🔧 Tecnologias
+## Tecnologias
 
 ### Core Stack
 
@@ -851,9 +850,9 @@ fraud-detection-neuromorphic/
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
-### ✅ Fase 1: Proof of Concept (Q4 2025) - **CONCLUÍDA**
+### Fase 1: Proof of Concept (Q4 2025) - **CONCLUÍDA**
 - [x] Implementação SNN com Brian2
 - [x] Encoders (Rate, Temporal, Population)
 - [x] STDP learning rule
@@ -861,7 +860,7 @@ fraud-detection-neuromorphic/
 - [x] Pipeline end-to-end
 - [x] Notebooks demonstrativos
 
-### ✅ Fase 2: Otimização (Q4 2025) - **CONCLUÍDA**
+### Fase 2: Otimização (Q4 2025) - **CONCLUÍDA**
 - [x] Dataset real (Credit Card Fraud)
 - [x] Otimização hiperparâmetros
 - [x] Performance profiling
@@ -869,7 +868,7 @@ fraud-detection-neuromorphic/
 - [x] Comparação com ML tradicional
 - [x] Suite testes (45+ tests)
 
-### ✅ Fase 3: Produção (Q4 2025) - **CONCLUÍDA**
+### Fase 3: Produção (Q4 2025) - **CONCLUÍDA**
 - [x] API REST FastAPI (8 endpoints)
 - [x] Kafka streaming
 - [x] Docker multi-stage
@@ -877,7 +876,7 @@ fraud-detection-neuromorphic/
 - [x] CI/CD (GitHub Actions)
 - [x] Documentação completa
 
-### ✅ Fase 4: Hardware Neuromórfico (Q4 2025) - **CONCLUÍDA**
+### Fase 4: Hardware Neuromórfico (Q4 2025) - **CONCLUÍDA**
 - [x] Loihi 2 simulator
 - [x] TrueNorth benchmark
 - [x] Energy profiling
@@ -885,7 +884,7 @@ fraud-detection-neuromorphic/
 - [x] 1,678,450x energy efficiency
 - [x] Complete documentation
 
-### ✅ Fase 5: Scaling (Q4 2025) - **CONCLUÍDA**
+### Fase 5: Scaling (Q4 2025) - **CONCLUÍDA**
 - [x] Multi-chip distributed cluster
 - [x] BrainScaleS-2 analog emulator
 - [x] Load balancing (4 strategies)
@@ -893,14 +892,14 @@ fraud-detection-neuromorphic/
 - [x] Edge device support (ARM64)
 - [x] 10,000+ TPS cluster performance
 
-### 🔮 Fase 6: Physical Hardware (Q1 2026) - **PLANEJADA**
+### Fase 6: Physical Hardware (Q1 2026) - **PLANEJADA**
 - [ ] Deploy em Loihi 2 físico
 - [ ] Acesso a BrainScaleS-2 wafer
 - [ ] Hybrid clusters (physical/simulated)
 - [ ] Multi-region deployment
 - [ ] Auto-scaling
 
-### 🚀 Fase 7: Produção Enterprise (Q2 2026) - **PLANEJADA**
+### Fase 7: Produção Enterprise (Q2 2026) - **PLANEJADA**
 - [ ] Integração bancária real
 - [ ] PCI-DSS compliance
 - [ ] LGPD/GDPR compliance
@@ -911,45 +910,45 @@ fraud-detection-neuromorphic/
 
 ---
 
-## 🤝 Contribuindo
+## Contribuindo
 
-Contribuições são muito bem-vindas! 🎉
+Contribuições são muito bem-vindas! 
 
 ### Como Contribuir
 
 1. **Fork** o projeto
 2. **Clone** seu fork
-   ```bash
-   git clone https://github.com/seu-usuario/fraud-detection-neuromorphic.git
-   ```
+ ```bash
+ git clone https://github.com/seu-usuario/fraud-detection-neuromorphic.git
+ ```
 3. **Crie uma branch**
-   ```bash
-   git checkout -b feature/minha-feature
-   ```
+ ```bash
+ git checkout -b feature/minha-feature
+ ```
 4. **Faça suas mudanças**
 5. **Teste** suas mudanças
-   ```bash
-   pytest tests/ -v
-   ```
+ ```bash
+ pytest tests/ -v
+ ```
 6. **Commit** suas mudanças
-   ```bash
-   git commit -m "feat: adiciona nova funcionalidade X"
-   ```
+ ```bash
+ git commit -m "feat: adiciona nova funcionalidade X"
+ ```
 7. **Push** para seu fork
-   ```bash
-   git push origin feature/minha-feature
-   ```
+ ```bash
+ git push origin feature/minha-feature
+ ```
 8. **Abra um Pull Request**
 
 ### Áreas para Contribuir
 
-- 🐛 **Bug fixes**
-- ✨ **Novas features**
-- 📝 **Documentação**
-- 🧪 **Testes**
-- 🎨 **UI/UX**
-- ⚡ **Performance**
-- 🌐 **Internacionalização**
+- **Bug fixes**
+- **Novas features**
+- **Documentação**
+- **Testes**
+- **UI/UX**
+- **Performance**
+- **Internacionalização**
 
 ### Diretrizes
 
@@ -960,7 +959,7 @@ Contribuições são muito bem-vindas! 🎉
 
 ---
 
-## 📚 Referências
+## Referências
 
 ### Papers Científicos
 
@@ -988,18 +987,18 @@ Contribuições são muito bem-vindas! 🎉
 
 ---
 
-## 📞 Contato
+## Contato
 
 **Mauro Risonho de Paula Assumpção**
 
-- 📧 **Email:** mauro.risonho@gmail.com
-- 💼 **LinkedIn:** [linkedin.com/in/maurorisonho](https://linkedin.com/in/maurorisonho)
-- 🐙 **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho)
-- 🌐 **Portfolio:** [maurorisonho.github.io](https://maurorisonho.github.io)
+- **Email:** mauro.risonho@gmail.com
+- **LinkedIn:** [linkedin.com/in/maurorisonho](https://linkedin.com/in/maurorisonho)
+- **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho)
+- **Portfolio:** [maurorisonho.github.io](https://maurorisonho.github.io)
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
@@ -1029,17 +1028,17 @@ SOFTWARE.
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 Este é um **projeto de pesquisa e demonstração** para fins educacionais.
 
 **Para uso em produção bancária:**
-- ✅ Validação adicional necessária
-- ✅ Conformidade com PCI-DSS
-- ✅ Compliance LGPD/GDPR
-- ✅ Auditoria de segurança
-- ✅ Testes de stress e penetration
-- ✅ Certificações regulatórias
+- Validação adicional necessária
+- Conformidade com PCI-DSS
+- Compliance LGPD/GDPR
+- Auditoria de segurança
+- Testes de stress e penetration
+- Certificações regulatórias
 
 **Não use em produção sem:**
 1. Revisão de segurança profissional
@@ -1050,7 +1049,7 @@ Este é um **projeto de pesquisa e demonstração** para fins educacionais.
 
 ---
 
-## 🌟 Agradecimentos
+## Agradecimentos
 
 Agradecimentos especiais a:
 
@@ -1061,7 +1060,7 @@ Agradecimentos especiais a:
 
 ---
 
-## 📈 Status do Projeto
+## Status do Projeto
 
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen)
@@ -1069,15 +1068,15 @@ Agradecimentos especiais a:
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
-**Última atualização:** Dezembro 2025  
-**Versão:** 1.0.0  
-**Status:** ✅ Produção (Fase 5 completa)
+**Última atualização:** Dezembro 2025 
+**Versão:** 1.0.0 
+**Status:** Produção (Fase 5 completa)
 
 ---
 
 <div align="center">
 
-### ⭐ Se este projeto foi útil, considere dar uma estrela!
+### Se este projeto foi útil, considere dar uma estrela!
 
 [![GitHub stars](https://img.shields.io/github/stars/maurorisonho/fraud-detection-neuromorphic?style=social)](https://github.com/maurorisonho/fraud-detection-neuromorphic)
 
@@ -1085,4 +1084,4 @@ Agradecimentos especiais a:
 
 ---
 
-**Desenvolvido com 🧠 e ⚡ por [Mauro Risonho](https://github.com/maurorisonho)**
+**Desenvolvido com e por [Mauro Risonho](https://github.com/maurorisonho)**

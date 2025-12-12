@@ -5,7 +5,7 @@
 **Projeto:** Neuromorphic Fraud Detection System
 **Autor:** Mauro Risonho de Paula Assumpção
 **Data de Criação:** 5 de Dezembro de 2025
-**Status:** ✅ Complete
+**Status:** Complete
 
 ---
 
@@ -15,11 +15,11 @@ Phase 4 focuses on deploying the fraud detection system to **physical neuromorph
 
 ### Key Achievements
 
-- ✅ Intel Loihi 2 adapter implementation
-- ✅ Comprehensive energy benchmarking suite
-- ✅ Model deployment automation
-- ✅ Multi-platform comparison (Loihi, TrueNorth, GPU, CPU)
-- ✅ Complete documentation and examples
+- Intel Loihi 2 adapter implementation
+- Comprehensive energy benchmarking suite
+- Model deployment automation
+- Multi-platform comparison (Loihi, TrueNorth, GPU, CPU)
+- Complete documentation and examples
 
 ---
 
@@ -87,7 +87,7 @@ Phase 4 focuses on deploying the fraud detection system to **physical neuromorph
 
 ### 1. Loihi Adapter (`loihi_adapter.py`)
 
-**File Size:** 650+ lines  
+**File Size:** 650+ lines 
 **Purpose:** Convert and deploy SNN models to Loihi hardware
 
 #### Key Components
@@ -96,11 +96,11 @@ Phase 4 focuses on deploying the fraud detection system to **physical neuromorph
 ```python
 @dataclass
 class LoihiNeuronConfig:
-    vth: int = 100                  # Voltage threshold
-    v_decay: int = 128              # Voltage decay
-    c_decay: int = 4096             # Current decay
-    refractory_period: int = 2      # Refractory period
-    bias: int = 0                   # Bias current
+ vth: int = 100 # Voltage threshold
+ v_decay: int = 128 # Voltage decay
+ c_decay: int = 4096 # Current decay
+ refractory_period: int = 2 # Refractory period
+ bias: int = 0 # Bias current
 ```
 
 ##### LoihiAdapter Class
@@ -139,7 +139,7 @@ adapter = LoihiAdapter(n_cores=128, use_hardware=False)
 
 # Convert model
 layer_sizes = [30, 128, 64, 2]
-weights = [...]  # Trained weights
+weights = [...] # Trained weights
 adapter.convert_model(layer_sizes, weights)
 
 # Predict
@@ -148,17 +148,17 @@ result = adapter.predict(features, duration_ms=10)
 
 # Output:
 # {
-#   'prediction': 0,
-#   'confidence': 0.85,
-#   'spike_counts': [245, 123],
-#   'energy_uj': 0.045,
-#   'latency_ms': 10
+# 'prediction': 0,
+# 'confidence': 0.85,
+# 'spike_counts': [245, 123],
+# 'energy_uj': 0.045,
+# 'latency_ms': 10
 # }
 ```
 
 ### 2. Energy Benchmark (`energy_benchmark.py`)
 
-**File Size:** 550+ lines  
+**File Size:** 550+ lines 
 **Purpose:** Comprehensive energy efficiency comparison
 
 #### EnergyMeasurement Class
@@ -214,7 +214,7 @@ benchmark.generate_report()
 
 ### 3. Model Deployment (`deploy_model.py`)
 
-**File Size:** 250+ lines  
+**File Size:** 250+ lines 
 **Purpose:** Automate model deployment to hardware
 
 #### NeuromorphicDeployer Class
@@ -242,8 +242,8 @@ deployer = NeuromorphicDeployer(platform="loihi")
 
 # Deploy
 success = deployer.deploy_to_hardware(
-    model_path='models/fraud_snn.pkl',
-    optimize=True
+ model_path='models/fraud_snn.pkl',
+ optimize=True
 )
 
 # Test
@@ -277,32 +277,32 @@ stats = deployer.benchmark_hardware(test_dataset, labels)
 **Key Findings:**
 
 1. **Neuromorphic Advantage:**
-   - Loihi: 1,400x more energy efficient than GPU
-   - Loihi: 3,000x more energy efficient than CPU
-   - TrueNorth: 875x more efficient than GPU
+ - Loihi: 1,400x more energy efficient than GPU
+ - Loihi: 3,000x more energy efficient than CPU
+ - TrueNorth: 875x more efficient than GPU
 
 2. **Power Consumption:**
-   - Loihi: 50 mW (140,000x less than GPU!)
-   - TrueNorth: 70 mW
-   - GPU: 70 W
-   - CPU: 150 W
+ - Loihi: 50 mW (140,000x less than GPU!)
+ - TrueNorth: 70 mW
+ - GPU: 70 W
+ - CPU: 150 W
 
 3. **Accuracy Maintained:**
-   - All platforms: >95% accuracy
-   - No accuracy loss from quantization
-   - Event-driven processing preserves patterns
+ - All platforms: >95% accuracy
+ - No accuracy loss from quantization
+ - Event-driven processing preserves patterns
 
 4. **Latency:**
-   - Loihi: 10ms (configurable)
-   - TrueNorth: 1ms (inherent)
-   - GPU: 1ms
-   - CPU: 5ms
+ - Loihi: 10ms (configurable)
+ - TrueNorth: 1ms (inherent)
+ - GPU: 1ms
+ - CPU: 5ms
 
 5. **Throughput:**
-   - GPU: Highest (batch processing)
-   - Loihi: Real-time capable
-   - CPU: Lowest
-   - TrueNorth: Event-driven
+ - GPU: Highest (batch processing)
+ - Loihi: Real-time capable
+ - CPU: Lowest
+ - TrueNorth: Event-driven
 
 ### Power Efficiency
 
@@ -386,10 +386,10 @@ Compartment Voltage Update:
 v[t+1] = v[t] * v_decay/4096 + Σ(w_ij * s_j[t])
 
 If v[t] >= vth:
-    spike = 1
-    v[t] = 0  (reset)
+ spike = 1
+ v[t] = 0 (reset)
 else:
-    spike = 0
+ spike = 0
 
 Refractory period: 2 timesteps
 ```
@@ -398,7 +398,7 @@ Refractory period: 2 timesteps
 
 **Rate Coding:**
 ```python
-spike_rate = feature_value  # 0-1 normalized
+spike_rate = feature_value # 0-1 normalized
 n_spikes = int(spike_rate * duration)
 spike_times = random.choice(timesteps, n_spikes)
 ```
@@ -412,8 +412,8 @@ spike_train[spike_time] = 1
 **Population Coding:**
 ```python
 for neuron in population:
-    activation = gaussian(feature_value, neuron.center, sigma)
-    n_spikes = int(activation * duration)
+ activation = gaussian(feature_value, neuron.center, sigma)
+ n_spikes = int(activation * duration)
 ```
 
 ### Weight Quantization
@@ -441,31 +441,31 @@ w_final[abs(w_final) < threshold] = 0
 ### Created Files (4 total)
 
 1. **hardware/loihi_adapter.py** (650 lines)
-   - Intel Loihi 2 adapter
-   - Model conversion
-   - Spike encoding
-   - Energy tracking
-   - Hardware/simulation modes
+ - Intel Loihi 2 adapter
+ - Model conversion
+ - Spike encoding
+ - Energy tracking
+ - Hardware/simulation modes
 
 2. **hardware/energy_benchmark.py** (550 lines)
-   - Comprehensive benchmarking
-   - Multi-platform comparison
-   - Visualization generation
-   - Report generation
-   - JSON export
+ - Comprehensive benchmarking
+ - Multi-platform comparison
+ - Visualization generation
+ - Report generation
+ - JSON export
 
 3. **hardware/deploy_model.py** (250 lines)
-   - Deployment automation
-   - Model optimization
-   - Testing utilities
-   - Benchmark tools
+ - Deployment automation
+ - Model optimization
+ - Testing utilities
+ - Benchmark tools
 
 4. **hardware/README.md** (400 lines)
-   - Complete documentation
-   - Usage examples
-   - Platform specifications
-   - Architecture diagrams
-   - Troubleshooting guide
+ - Complete documentation
+ - Usage examples
+ - Platform specifications
+ - Architecture diagrams
+ - Troubleshooting guide
 
 **Total:** ~1,850 lines of code + documentation
 
@@ -477,28 +477,28 @@ w_final[abs(w_final) < threshold] = 0
 
 **Loihi (10ms inference):**
 ```
-Input spikes:     30 neurons × 5 spikes  = 150 spikes
-Hidden Layer 1:   128 neurons × 10 spikes = 1,280 spikes  
-Hidden Layer 2:   64 neurons × 8 spikes  = 512 spikes
-Output:           2 neurons × 20 spikes   = 40 spikes
+Input spikes: 30 neurons × 5 spikes = 150 spikes
+Hidden Layer 1: 128 neurons × 10 spikes = 1,280 spikes 
+Hidden Layer 2: 64 neurons × 8 spikes = 512 spikes
+Output: 2 neurons × 20 spikes = 40 spikes
 
-Total spikes:     1,982 spikes
-Spike energy:     1,982 × 20 pJ = 39.64 nJ
+Total spikes: 1,982 spikes
+Spike energy: 1,982 × 20 pJ = 39.64 nJ
 
-Synaptic ops:     ~10,000 operations
-Synapse energy:   10,000 × 100 pJ = 1 µJ
+Synaptic ops: ~10,000 operations
+Synapse energy: 10,000 × 100 pJ = 1 µJ
 
-Total:            ~1.04 µJ ≈ 0.050 µJ (optimized)
+Total: ~1.04 µJ ≈ 0.050 µJ (optimized)
 ```
 
 **GPU (1ms inference):**
 ```
-Matrix ops:       30×128 + 128×64 + 64×2 = 12,416 ops
-FP32 energy:      ~5 nJ per operation
-Total ops:        12,416 × 5 nJ = 62 µJ
+Matrix ops: 30×128 + 128×64 + 64×2 = 12,416 ops
+FP32 energy: ~5 nJ per operation
+Total ops: 12,416 × 5 nJ = 62 µJ
 
-Overhead:         Memory access, scheduling
-Total:            ~70 µJ
+Overhead: Memory access, scheduling
+Total: ~70 µJ
 ```
 
 **Ratio: 70 / 0.05 = 1,400x improvement**
@@ -599,17 +599,17 @@ This phase demonstrates the culmination of neuromorphic computing research:
 
 ## Contact & Support
 
-**Author:** Mauro Risonho de Paula Assumpção  
-**Email:** maurorisonho@example.com  
-**Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic  
+**Author:** Mauro Risonho de Paula Assumpção 
+**Email:** maurorisonho@example.com 
+**Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
 **Documentation:** See `hardware/README.md`
 
 ---
 
-**Phase 4 Status:** ✅ **COMPLETE**  
-**Date Completed:** December 5, 2025  
+**Phase 4 Status:** **COMPLETE** 
+**Date Completed:** December 5, 2025 
 **Next:** Production deployment and scaling
 
 ---
 
-**The future of AI is neuromorphic. The future is here.** 🧠⚡
+**The future of AI is neuromorphic. The future is here.** 

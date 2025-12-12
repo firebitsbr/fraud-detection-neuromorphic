@@ -49,8 +49,8 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 
 # Set up repository
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+ $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # Install Docker
 sudo apt-get update
@@ -90,28 +90,27 @@ cd fraud-detection-neuromorphic
 ```
 
 This script will:
-1. ✅ Check system requirements
-2. ✅ Create necessary directories
-3. ✅ Generate `.env` file with default credentials
-4. ✅ Build Docker images (base + API)
-5. ✅ Pull external images (Redis, Prometheus, Grafana)
-6. ✅ Start all services
-7. ✅ Run health checks
-8. ✅ Display service endpoints
+1. Check system requirements
+2. Create necessary directories
+3. Generate `.env` file with default credentials
+4. Build Docker images (base + API)
+5. Pull external images (Redis, Prometheus, Grafana)
+6. Start all services
+7. Run health checks
+8. Display service endpoints
 
 **Expected output:**
 ```
-═══════════════════════════════════════════════════════════
-✅ Deployment Completed Successfully
-═══════════════════════════════════════════════════════════
+
+ Deployment Completed Successfully
 
 Services are available at:
-  • API:        http://localhost:8000
-  • API Docs:   http://localhost:8000/docs
-  • Jupyter:    http://localhost:8888
-  • Streamlit:  http://localhost:8501
-  • Grafana:    http://localhost:3000
-  • Prometheus: http://localhost:9090
+ • API: http://localhost:8000
+ • API Docs: http://localhost:8000/docs
+ • Jupyter: http://localhost:8888
+ • Streamlit: http://localhost:8501
+ • Grafana: http://localhost:3000
+ • Prometheus: http://localhost:9090
 ```
 
 ---
@@ -128,7 +127,7 @@ Services are available at:
 docker build -t fraud-detection-api:ubuntu24.04 -f Dockerfile .
 ```
 
-**Build time:** ~10-15 minutes (first build)  
+**Build time:** ~10-15 minutes (first build) 
 **Image sizes:**
 - Base (builder): ~6GB
 - API (runtime): ~2GB
@@ -185,20 +184,20 @@ curl http://localhost:9090/-/healthy
 ### Microservices Stack
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Docker Network                        │
-│                  (neuromorphic-net)                      │
-│                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │  Fraud API   │  │  Jupyter Lab │  │  Streamlit   │ │
-│  │   (8000)     │  │   (8888)     │  │   (8501)     │ │
-│  └──────┬───────┘  └──────────────┘  └──────────────┘ │
-│         │                                               │
-│  ┌──────▼───────┐  ┌──────────────┐  ┌──────────────┐ │
-│  │   Redis      │  │  Prometheus  │  │   Grafana    │ │
-│  │   (6379)     │  │   (9090)     │  │   (3000)     │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘ │
-└─────────────────────────────────────────────────────────┘
+
+ Docker Network 
+ (neuromorphic-net) 
+ 
+ 
+ Fraud API Jupyter Lab Streamlit 
+ (8000) (8888) (8501) 
+ 
+ 
+ 
+ Redis Prometheus Grafana 
+ (6379) (9090) (3000) 
+ 
+
 ```
 
 ### Services
@@ -251,7 +250,7 @@ curl http://localhost:8000/health
 
 ### Jupyter Lab
 
-**Port:** 8888  
+**Port:** 8888 
 **Token:** Set in `.env` as `JUPYTER_TOKEN`
 
 **Access:**
@@ -292,8 +291,8 @@ backgroundColor = "#FFFFFF"
 
 ### Redis Cache
 
-**Port:** 6379  
-**Max Memory:** 512MB  
+**Port:** 6379 
+**Max Memory:** 512MB 
 **Eviction Policy:** `allkeys-lru`
 
 **Test connection:**
@@ -304,7 +303,7 @@ docker exec -it neuromorphic-fraud-detection-redis-1 redis-cli ping
 
 ### Prometheus Monitoring
 
-**Port:** 9090  
+**Port:** 9090 
 **Scrape Interval:** 15s
 
 **Targets:**
@@ -318,7 +317,7 @@ rate(http_requests_total[5m])
 
 ### Grafana Dashboards
 
-**Port:** 3000  
+**Port:** 3000 
 **Credentials:** `admin / neuromorphic2025` (change in `.env`)
 
 **Pre-configured dashboards:**
@@ -346,19 +345,18 @@ rate(http_requests_total[5m])
 
 **Output:**
 ```
-╔══════════════════════════════════════════════════════════════════╗
-║     Neuromorphic Fraud Detection - Real-time Monitoring         ║
-╚══════════════════════════════════════════════════════════════════╝
 
-════════════════════════ Services Status ════════════════════════
-SERVICE              STATUS          HEALTH          CPU         MEMORY
-────────────────────────────────────────────────────────────────────
-fraud-api            ● Running       ✓ Healthy       15.23%      1.2GiB / 4GiB
-jupyter-lab          ● Running       − No check      8.45%       2.8GiB / 8GiB
-web-interface        ● Running       ✓ Healthy       3.12%       512MiB / 2GiB
-redis                ● Running       ✓ Healthy       0.45%       128MiB / 512MiB
-prometheus           ● Running       ✓ Healthy       1.23%       256MiB / 1GiB
-grafana              ● Running       ✓ Healthy       0.89%       128MiB / 512MiB
+ Neuromorphic Fraud Detection - Real-time Monitoring 
+
+ Services Status 
+SERVICE STATUS HEALTH CPU MEMORY
+
+fraud-api Running Healthy 15.23% 1.2GiB / 4GiB
+jupyter-lab Running − No check 8.45% 2.8GiB / 8GiB
+web-interface Running Healthy 3.12% 512MiB / 2GiB
+redis Running Healthy 0.45% 128MiB / 512MiB
+prometheus Running Healthy 1.23% 256MiB / 1GiB
+grafana Running Healthy 0.89% 128MiB / 512MiB
 ```
 
 ### Health Check Endpoints
@@ -409,7 +407,7 @@ sudo kill -9 <PID>
 
 # Or change port in docker-compose.production.yml
 ports:
-  - "8001:8000"  # External:Internal
+ - "8001:8000" # External:Internal
 ```
 
 #### 2. Out of Memory
@@ -423,9 +421,9 @@ Container killed due to memory limit
 ```yaml
 # Increase memory limit in docker-compose.production.yml
 deploy:
-  resources:
-    limits:
-      memory: 8G  # Increase from 4G
+ resources:
+ limits:
+ memory: 8G # Increase from 4G
 ```
 
 #### 3. Permission Denied
@@ -580,7 +578,7 @@ docker network inspect neuromorphic-fraud-detection_neuromorphic-net
 # Clean specific resources
 ./scripts/docker-cleanup.sh containers
 ./scripts/docker-cleanup.sh images
-./scripts/docker-cleanup.sh volumes  # DANGEROUS
+./scripts/docker-cleanup.sh volumes # DANGEROUS
 ./scripts/docker-cleanup.sh cache
 
 # Full cleanup (DANGEROUS)
@@ -597,19 +595,19 @@ Edit `/etc/docker/daemon.json`:
 
 ```json
 {
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3"
-  },
-  "storage-driver": "overlay2",
-  "default-ulimits": {
-    "nofile": {
-      "Name": "nofile",
-      "Hard": 64000,
-      "Soft": 64000
-    }
-  }
+ "log-driver": "json-file",
+ "log-opts": {
+ "max-size": "10m",
+ "max-file": "3"
+ },
+ "storage-driver": "overlay2",
+ "default-ulimits": {
+ "nofile": {
+ "Name": "nofile",
+ "Hard": 64000,
+ "Soft": 64000
+ }
+ }
 }
 ```
 
@@ -652,5 +650,5 @@ MIT License - See [LICENSE](../LICENSE) file for details.
 
 ---
 
-**Last Updated:** December 2025  
+**Last Updated:** December 2025 
 **Version:** 1.0.0

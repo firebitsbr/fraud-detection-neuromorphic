@@ -1,11 +1,11 @@
-# 🚀 Quick Start - VS Code Remote Development
+# Quick Start - VS Code Remote Development
 
 **Descrição:** Guia rápido para desenvolvimento remoto com VS Code.
 
 **Autor:** Mauro Risonho de Paula Assumpção
 **Data de Criação:** 5 de Dezembro de 2025
 
-## ✅ Status Atual
+## Status Atual
 
 **Container dev já está rodando!**
 
@@ -17,7 +17,7 @@ Ports: 8000, 8888
 
 ---
 
-## 📦 Opção 1: Dev Containers (Recomendado)
+## Opção 1: Dev Containers (Recomendado)
 
 ### Pré-requisitos
 - VS Code instalado
@@ -28,30 +28,30 @@ Ports: 8000, 8888
 1. **Abra VS Code**
 
 2. **Abra Command Palette**
-   - Pressione `Ctrl+Shift+P` (Linux/Windows)
-   - Ou `Cmd+Shift+P` (Mac)
+ - Pressione `Ctrl+Shift+P` (Linux/Windows)
+ - Ou `Cmd+Shift+P` (Mac)
 
 3. **Attach ao Container**
-   - Digite: `Dev Containers: Attach to Running Container`
-   - Selecione: `fraud-detection-dev`
+ - Digite: `Dev Containers: Attach to Running Container`
+ - Selecione: `fraud-detection-dev`
 
 4. **Abra o Workspace**
-   - No VS Code conectado, abra: `/app`
+ - No VS Code conectado, abra: `/app`
 
 5. **Abra um Notebook**
-   - Navegue: `/app/notebooks/01-stdp_example.ipynb`
-   - Clique na célula e execute!
+ - Navegue: `/app/notebooks/01-stdp_example.ipynb`
+ - Clique na célula e execute!
 
 ### Extensões Auto-Instaladas
 
 O container já vem com:
-- ✅ Python (ms-python.python)
-- ✅ Pylance (ms-python.vscode-pylance)
-- ✅ Jupyter (ms-toolsai.jupyter)
+- Python (ms-python.python)
+- Pylance (ms-python.vscode-pylance)
+- Jupyter (ms-toolsai.jupyter)
 
 ---
 
-## 🔐 Opção 2: Remote SSH
+## Opção 2: Remote SSH
 
 ### Deploy do Container SSH
 
@@ -65,10 +65,10 @@ cd /home/test/Downloads/github/portifolio/fraud-detection-neuromorphic
 
 ```
 Host fraud-docker
-    HostName localhost
-    User appuser
-    Port 2222
-    IdentityFile ~/.ssh/id_rsa
+ HostName localhost
+ User appuser
+ Port 2222
+ IdentityFile ~/.ssh/id_rsa
 ```
 
 ### Conectar via VS Code
@@ -80,7 +80,7 @@ Host fraud-docker
 
 ---
 
-## 🧪 Testar Execução de Notebook
+## Testar Execução de Notebook
 
 ### No Terminal do Container
 
@@ -108,20 +108,20 @@ jupyter nbconvert --to notebook --execute notebooks/01-stdp_example.ipynb
 
 ---
 
-## 📊 Monitoramento
+## Monitoramento
 
 ### Ver Logs do Container
 
 ```bash
 sudo docker logs fraud-detection-dev
-sudo docker logs -f fraud-detection-dev  # Follow mode
+sudo docker logs -f fraud-detection-dev # Follow mode
 ```
 
 ### Ver Status
 
 ```bash
 sudo docker ps
-sudo docker stats fraud-detection-dev  # CPU/Memory usage
+sudo docker stats fraud-detection-dev # CPU/Memory usage
 ```
 
 ### Inspecionar Container
@@ -132,7 +132,7 @@ sudo docker exec -it fraud-detection-dev bash
 
 ---
 
-## 🛠️ Comandos Úteis
+## Comandos Úteis
 
 ### Reiniciar Container
 
@@ -154,14 +154,14 @@ sudo docker compose -f docker-compose.dev.yml down
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Container não aparece no VS Code
 
 1. Verifique se o container está rodando:
-   ```bash
-   sudo docker ps | grep fraud-detection-dev
-   ```
+ ```bash
+ sudo docker ps | grep fraud-detection-dev
+ ```
 
 2. Reinstale extensão Remote Containers no VS Code
 
@@ -170,10 +170,10 @@ sudo docker compose -f docker-compose.dev.yml down
 ### Kernel não conecta no Jupyter
 
 1. Dentro do container:
-   ```bash
-   sudo docker exec -it fraud-detection-dev bash
-   python -m ipykernel install --user --name fraud-env
-   ```
+ ```bash
+ sudo docker exec -it fraud-detection-dev bash
+ python -m ipykernel install --user --name fraud-env
+ ```
 
 2. No VS Code, selecione o kernel: `/opt/venv/bin/python`
 
@@ -192,7 +192,7 @@ newgrp docker
 
 ---
 
-## 📚 Documentação Completa
+## Documentação Completa
 
 - **Deployment**: `docs/DOCKER_DEPLOYMENT.md`
 - **Remote Access**: `docs/REMOTE_ACCESS.md`
@@ -201,7 +201,7 @@ newgrp docker
 
 ---
 
-## ✅ Checklist de Verificação
+## Checklist de Verificação
 
 - [ ] Container `fraud-detection-dev` está rodando (healthy)
 - [ ] VS Code consegue ver o container
@@ -213,6 +213,6 @@ newgrp docker
 
 ---
 
-**Status**: ✅ Container pronto para uso!
+**Status**: Container pronto para uso!
 
 **Next Steps**: Abra VS Code e conecte via Dev Containers ou SSH.

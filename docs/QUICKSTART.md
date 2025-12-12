@@ -1,4 +1,4 @@
-# ⚡ Quick Start - Docker Local
+# Quick Start - Docker Local
 
 **Descrição:** Guia rápido de execução local com Docker.
 
@@ -18,11 +18,11 @@ cd fraud-detection-neuromorphic
 make start
 
 # 3. Acesse os serviços
-# API:     http://localhost:8000
+# API: http://localhost:8000
 # Grafana: http://localhost:3000
 ```
 
-## 📦 Requisitos
+## Requisitos
 
 ### Docker Não Instalado?
 
@@ -39,7 +39,7 @@ newgrp docker
 - Docker Compose 2.0+
 - 8GB RAM, 10GB disco
 
-## 🎯 Comandos Principais
+## Comandos Principais
 
 | Comando | Descrição |
 |---------|-----------|
@@ -50,7 +50,7 @@ newgrp docker
 | `make health` | Verifica saúde dos serviços |
 | `make urls` | Lista URLs de acesso |
 
-## 🔧 Comandos Avançados
+## Comandos Avançados
 
 ```bash
 # Reconstruir imagens
@@ -72,7 +72,7 @@ make shell-api
 make monitor
 ```
 
-## 🐛 Troubleshooting Rápido
+## Troubleshooting Rápido
 
 ### Container não inicia
 ```bash
@@ -93,7 +93,7 @@ docker stats
 # Reduza resources em docker-compose.yml
 ```
 
-## 🧪 Testar API
+## Testar API
 
 ```bash
 # Health check
@@ -101,54 +101,54 @@ curl http://localhost:8000/health
 
 # Predição de fraude
 curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "amount": 1500.50,
-    "merchant": "Electronics Store",
-    "location": "New York"
-  }'
+ -H "Content-Type: application/json" \
+ -d '{
+ "amount": 1500.50,
+ "merchant": "Electronics Store",
+ "location": "New York"
+ }'
 ```
 
-## 📊 Monitoramento
+## Monitoramento
 
 - **Grafana:** http://localhost:3000 (admin/admin)
 - **Prometheus:** http://localhost:9090
 - **API Metrics:** http://localhost:8000/metrics
 
-## 🔗 Documentação Completa
+## Documentação Completa
 
-📘 [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia completo
+ [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia completo
 
-## 📝 Arquitetura
+## Arquitetura
 
 ```
-┌─────────────────────────────────────────────┐
-│           fraud_api (8000)                  │
-│         Main REST API                       │
-└──────────────┬──────────────────────────────┘
-               │
-    ┌──────────┴──────────┬──────────────┐
-    │                     │              │
-    ▼                     ▼              ▼
-┌─────────┐        ┌──────────┐   ┌──────────┐
-│ Loihi 2 │        │BrainScale│   │ Cluster  │
-│  (8001) │        │    (8002)│   │  (8003)  │
-└─────────┘        └──────────┘   └──────────┘
-                                         │
-                           ┌─────────────┴──────────┐
-                           ▼                        ▼
-                      ┌─────────┐            ┌──────────┐
-                      │  Redis  │            │Prometheus│
-                      │  (6379) │            │  (9090)  │
-                      └─────────┘            └────┬─────┘
-                                                  │
-                                                  ▼
-                                            ┌──────────┐
-                                            │ Grafana  │
-                                            │  (3000)  │
-                                            └──────────┘
+
+ fraud_api (8000) 
+ Main REST API 
+
+ 
+ 
+ 
+ 
+ 
+ Loihi 2 BrainScale Cluster 
+ (8001) (8002) (8003) 
+ 
+ 
+ 
+ 
+ 
+ Redis Prometheus
+ (6379) (9090) 
+ 
+ 
+ 
+ 
+ Grafana 
+ (3000) 
+ 
 ```
 
-**Autor:** Mauro Risonho de Paula Assumpção  
-**Licença:** MIT  
+**Autor:** Mauro Risonho de Paula Assumpção 
+**Licença:** MIT 
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic

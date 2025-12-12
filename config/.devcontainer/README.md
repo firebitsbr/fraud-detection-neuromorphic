@@ -15,11 +15,11 @@ Ctrl+Shift+P → "Dev Containers: Reopen in Container"
 
 ### 2. O que acontece?
 
-✅ VS Code constrói/inicia container Docker  
-✅ Monta workspace dentro do container  
-✅ Instala extensões Python/Jupyter automaticamente  
-✅ Configura kernel Python do container  
-✅ Sincroniza código (volumes montados)  
+ VS Code constrói/inicia container Docker 
+ Monta workspace dentro do container 
+ Instala extensões Python/Jupyter automaticamente 
+ Configura kernel Python do container 
+ Sincroniza código (volumes montados) 
 
 ### 3. Executar Notebooks
 
@@ -49,17 +49,17 @@ Criar `.vscode/launch.json`:
 
 ```json
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Python: Current File",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${file}",
-      "console": "integratedTerminal",
-      "justMyCode": false
-    }
-  ]
+ "version": "0.2.0",
+ "configurations": [
+ {
+ "name": "Python: Current File",
+ "type": "debugpy",
+ "request": "launch",
+ "program": "${file}",
+ "console": "integratedTerminal",
+ "justMyCode": false
+ }
+ ]
 }
 ```
 
@@ -84,21 +84,21 @@ Ctrl+Shift+P → "Dev Containers: Show Container Log"
 
 ```
 .devcontainer/
-  devcontainer.json    # Configuração do container
+ devcontainer.json # Configuração do container
 docker-compose.dev.yml # Docker Compose para dev
-notebooks/             # Notebooks Jupyter (montado)
-data/                  # Datasets (montado)
-models/                # Modelos treinados (montado)
+notebooks/ # Notebooks Jupyter (montado)
+data/ # Datasets (montado)
+models/ # Modelos treinados (montado)
 ```
 
 ### 8. Vantagens
 
-✅ **Sem Jupyter Web** - Apenas VS Code  
-✅ **IntelliSense completo** - Autocomplete de brian2, torch, etc.  
-✅ **Debug nativo** - Breakpoints em notebooks  
-✅ **Git integrado** - Commits direto do VS Code  
-✅ **Ambiente isolado** - Não afeta sistema local  
-✅ **Reprodutível** - Mesmo ambiente para todos  
+ **Sem Jupyter Web** - Apenas VS Code 
+ **IntelliSense completo** - Autocomplete de brian2, torch, etc. 
+ **Debug nativo** - Breakpoints em notebooks 
+ **Git integrado** - Commits direto do VS Code 
+ **Ambiente isolado** - Não afeta sistema local 
+ **Reprodutível** - Mesmo ambiente para todos 
 
 ### 9. Troubleshooting
 
@@ -125,4 +125,4 @@ Ctrl+Shift+P → "Dev Containers: Rebuild Container"
 
 ---
 
-**Pronto!** Agora você pode desenvolver Python, executar notebooks e debugar tudo diretamente no VS Code usando o ambiente Docker! 🚀
+**Pronto!** Agora você pode desenvolver Python, executar notebooks e debugar tudo diretamente no VS Code usando o ambiente Docker! 
