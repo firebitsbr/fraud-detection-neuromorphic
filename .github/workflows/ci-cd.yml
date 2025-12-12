@@ -6,6 +6,11 @@ name: CI/CD Pipeline
 # **Data de Criação:** 11 de Dezembro de 2025.
 # **Licença:** MIT License.
 # **Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+#
+# **Secrets Necessários (Configure em: Settings → Secrets and variables → Actions):**
+#   - DOCKER_USERNAME: Username do Docker Hub (obrigatório para build/push)
+#   - DOCKER_PASSWORD: Token/Password do Docker Hub (obrigatório para build/push)
+#   - DEPLOY_KEY: Chave de deploy (opcional, usado no job deploy)
 
 on:
   push:
@@ -150,9 +155,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build, security]
     if: github.event_name == 'release'
-    environment:
-      name: production
-      url: https://fraud-detection.example.com
+    # Note: Create 'production' environment in GitHub repo settings if needed
+    # Repository → Settings → Environments → New environment
     
     steps:
       - name: Checkout code
@@ -161,11 +165,12 @@ jobs:
       - name: Deploy to production
         run: |
           echo "Deploying version ${{ github.ref_name }} to production"
+          echo "Docker image: ${{ env.DOCKER_IMAGE }}:${{ github.sha }}"
           # Add your deployment commands here
           # Example: kubectl apply -f k8s/
           # Example: docker-compose -f docker-compose.production.yml up -d
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY || 'not-set' }}
 
   # Job 6: Notification
   notify:
