@@ -26,6 +26,12 @@ env/
 ENV/
 .venv
 
+# Conda Environment
+conda-env/
+.conda/
+*.conda
+envs/
+
 # Jupyter Notebook
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
