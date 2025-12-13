@@ -1,16 +1,12 @@
 """
+Simulador Intel Loihi 2 - Hardware Neuromórfico
+
 **Descrição:** Simula as constraints e métricas de performance do chip neuromórfico Loihi 2 para comparação com implementação em CPU/GPU tradicional. Modela latência, energia, potência e throughput.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
-
-Referências:
-- Intel Loihi 2: https://www.intel.com/content/www/us/en/research/neuromorphic-computing.html
-- Davies et al. (2021): "Advancing Neuromorphic Computing with Loihi"
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import numpy as np

@@ -1,12 +1,12 @@
 """
-**Descrição:** FastAPI REST API for neuromorphic fraud detection.
+API REST para Detecção de Fraude Neuromórfica
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
+**Descrição:** FastAPI REST API para detecção de fraude neuromórfica. Fornece endpoints HTTP para inferência em tempo real, batch processing e monitoramento de modelos SNN.
+
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks, Depends

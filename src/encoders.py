@@ -1,12 +1,12 @@
 """
+Codificadores de Spikes para SNNs
+
 **Descrição:** Este módulo implementa diversas estratégias de codificação de spikes para converter features de transações bancárias em trens de spikes temporais para processamento em Spiking Neural Networks (SNNs).
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import numpy as np

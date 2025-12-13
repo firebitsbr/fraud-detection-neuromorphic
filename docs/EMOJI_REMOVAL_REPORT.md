@@ -44,42 +44,42 @@
 
 | Emoji Original | Substituição Corporativa | Contexto |
 |----------------|-------------------------|----------|
-| ✅ | [OK] | Confirmação/Sucesso |
-| ❌ | [ERRO] | Erro/Falha |
-| ⚠️ | [ATENCAO] | Aviso/Atenção |
-| 📊 | [DADOS] | Dados/Métricas |
-| 📁 | [PASTA] | Diretório/Pasta |
-| 📋 | [LISTA] | Lista/Checklist |
-| 📝 | [NOTA] | Nota/Observação |
-| 💡 | [IDEIA] | Insight/Ideia |
-| 🔍 | [BUSCA] | Pesquisa/Análise |
-| 🧪 | [TESTE] | Teste/Experimento |
-| 🏗️ | [BUILD] | Construção/Build |
-| ⚙️ | [CONFIG] | Configuração |
-| 🎮 | [DEMO] | Demonstração |
-| 💻 | [DEV] | Desenvolvimento |
-| 🔧 | [FERRAMENTA] | Ferramenta/Utilitário |
-| 📦 | [PACOTE] | Pacote/Módulo |
-| 🎉 | [SUCESSO] | Sucesso/Celebração |
-| 🔄 | [SYNC] | Sincronização/Loop |
-| 🚀 | [DEPLOY] | Deploy/Lançamento |
-| 🎯 | [OBJETIVO] | Objetivo/Meta |
-| ⏱️ | [TEMPO] | Tempo/Timing |
-| 🐍 | [PYTHON] | Python |
-| 🐳 | [DOCKER] | Docker |
-| 🔥 | [IMPORTANTE] | Importante/Crítico |
-| 💾 | [STORAGE] | Armazenamento |
-| 📈 | [GRAFICO] | Gráfico/Crescimento |
-| 🌐 | [REDE] | Rede/Internet |
-| 🔐 | [SEGURO] | Segurança |
-| 🎨 | [DESIGN] | Design/Interface |
-| 🚦 | [STATUS] | Status/Estado |
-| 📡 | [COMUNICACAO] | Comunicação |
-| 🔬 | [CIENCIA] | Ciência/Pesquisa |
-| 📚 | [DOCS] | Documentação |
-| 🗂️ | [ARQUIVO] | Arquivo |
-| 🏭 | [PRODUCAO] | Produção |
-| 🛠️ | [FERRAMENTA] | Ferramenta |
+|  | [OK] | Confirmação/Sucesso |
+|  | [ERRO] | Erro/Falha |
+|  | [ATENCAO] | Aviso/Atenção |
+|  | [DADOS] | Dados/Métricas |
+|  | [PASTA] | Diretório/Pasta |
+|  | [LISTA] | Lista/Checklist |
+|  | [NOTA] | Nota/Observação |
+|  | [IDEIA] | Insight/Ideia |
+|  | [BUSCA] | Pesquisa/Análise |
+|  | [TESTE] | Teste/Experimento |
+|  | [BUILD] | Construção/Build |
+|  | [CONFIG] | Configuração |
+|  | [DEMO] | Demonstração |
+|  | [DEV] | Desenvolvimento |
+|  | [FERRAMENTA] | Ferramenta/Utilitário |
+|  | [PACOTE] | Pacote/Módulo |
+|  | [SUCESSO] | Sucesso/Celebração |
+|  | [SYNC] | Sincronização/Loop |
+|  | [DEPLOY] | Deploy/Lançamento |
+|  | [OBJETIVO] | Objetivo/Meta |
+| ⏱ | [TEMPO] | Tempo/Timing |
+|  | [PYTHON] | Python |
+|  | [DOCKER] | Docker |
+|  | [IMPORTANTE] | Importante/Crítico |
+|  | [STORAGE] | Armazenamento |
+|  | [GRAFICO] | Gráfico/Crescimento |
+|  | [REDE] | Rede/Internet |
+|  | [SEGURO] | Segurança |
+|  | [DESIGN] | Design/Interface |
+|  | [STATUS] | Status/Estado |
+|  | [COMUNICACAO] | Comunicação |
+|  | [CIENCIA] | Ciência/Pesquisa |
+|  | [DOCS] | Documentação |
+|  | [ARQUIVO] | Arquivo |
+|  | [PRODUCAO] | Produção |
+|  | [FERRAMENTA] | Ferramenta |
 
 ---
 
@@ -93,12 +93,12 @@
    - Status: [OK] LIMPO
 
 2. **Emojis Técnicos**
-   - Padrão de busca: 🎯🚀✅❌⚠️📊📁📋📝💡🔍🧪🏗️⚙️🎮💻🔧📦🎉🔄
+   - Padrão de busca: 
    - Resultado: 0 ocorrências encontradas
    - Status: [OK] LIMPO
 
 3. **Emojis Adicionais**
-   - Padrão de busca: 🐍🐳🔥💾📈🌐🔐🎨📌🚦📡⏱️🎭🔬📚🗂️🎪🏭🛠️🧰
+   - Padrão de busca: ⏱
    - Resultado inicial: 3 ocorrências (CRITICAL_ANALYSIS.md, manual_kaggle_setup.py, README.md)
    - Resultado final: 0 ocorrências encontradas
    - Status: [OK] LIMPO

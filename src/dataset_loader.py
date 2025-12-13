@@ -1,12 +1,12 @@
 """
-**Descrição:** Utilitários para carregamento e pré-processamento de datasets.
+Carregamento e Pré-processamento de Datasets
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
+**Descrição:** Utilitários para carregamento e pré-processamento de datasets de transações bancárias, incluindo normalização, balanceamento e preparação de dados para treinamento de SNNs.
+
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import os

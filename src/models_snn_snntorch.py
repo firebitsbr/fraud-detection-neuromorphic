@@ -1,19 +1,12 @@
 """
+Implementação SNN com snnTorch para Detecção de Fraude
+
 **Descrição:** Implementação alternativa usando snnTorch (PyTorch-based) para SNNs. Oferece melhor integração com deep learning, treinamento com backprop, e suporte nativo para GPUs.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
-
-Vantagens do snnTorch:
-- Integração com PyTorch (GPU support)
-- Backpropagation through time (BPTT)
-- Gradiente-based learning (mais rápido que STDP)
-- Fácil integração com datasets PyTorch
-- Modelos exportáveis para ONNX/TorchScript
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import torch
@@ -191,9 +184,9 @@ class FraudSNNTorch(nn.Module):
         )
         
         if verbose:
-            print(f"🧠 Training SNN on {device}")
-            print(f"📐 Architecture: {self.input_size} → {self.hidden_sizes} → {self.output_size}")
-            print(f"⚙️ Epochs: {num_epochs}, LR: {lr}, Beta: {self.beta}")
+            print(f"Training SNN on {device}")
+            print(f"Architecture: {self.input_size} → {self.hidden_sizes} → {self.output_size}")
+            print(f"Epochs: {num_epochs}, LR: {lr}, Beta: {self.beta}")
             print("="*60)
         
         # Progress bar for epochs
@@ -256,7 +249,7 @@ class FraudSNNTorch(nn.Module):
         
         if verbose:
             print("="*60)
-            print(f"✅ Training complete! Final test accuracy: {test_acc:.2f}%")
+            print(f"Training complete! Final test accuracy: {test_acc:.2f}%")
     
     def evaluate(
         self, 
@@ -339,7 +332,7 @@ class FraudSNNTorch(nn.Module):
             'train_losses': self.train_losses,
             'train_accuracies': self.train_accuracies
         }, path)
-        print(f"💾 Model saved to {path}")
+        print(f"Model saved to {path}")
     
     def load(self, path: str, device: str = "cpu"):
         """Load model weights."""
@@ -348,7 +341,7 @@ class FraudSNNTorch(nn.Module):
         self.train_losses = checkpoint.get('train_losses', [])
         self.train_accuracies = checkpoint.get('train_accuracies', [])
         self.to(device)
-        print(f"📂 Model loaded from {path}")
+        print(f"Model loaded from {path}")
 
 def create_spike_data(
     features: np.ndarray, 
@@ -377,7 +370,10 @@ def create_spike_data(
                 rate = np.clip(features[i, j], 0, 1)
                 # Generate Poisson spike train
                 spike_times = np.random.rand(num_steps) < rate
-                spike_data[i, spike_times, j] = 1.0
+                # Convert boolean array to indices and then to list
+                spike_indices = np.where(spike_times)[0].tolist()
+                for spike_idx in spike_indices:
+                    spike_data[i, spike_idx, j] = 1.0
     
     elif encoding == "latency":
         # Latency coding: value → spike timing
@@ -393,7 +389,7 @@ def create_spike_data(
 
 # Example usage and demo
 if __name__ == "__main__":
-    print("🧠 snnTorch Fraud Detection Demo")
+    print("snnTorch Fraud Detection Demo")
     print("="*60)
     
     # Create dummy data
@@ -431,8 +427,8 @@ if __name__ == "__main__":
         dropout=0.2
     )
     
-    print(f"\n📊 Model: {sum(p.numel() for p in model.parameters())} parameters")
-    print(f"💻 Device: {'GPU' if torch.cuda.is_available() else 'CPU'}")
+    print(f"\nModel: {sum(p.numel() for p in model.parameters())} parameters")
+    print(f"Device: {'GPU' if torch.cuda.is_available() else 'CPU'}")
     
     # Train
     model.train_model(
@@ -447,7 +443,7 @@ if __name__ == "__main__":
     test_sample = X_spikes[0:1]  # [1, time_steps, features]
     pred_class, confidence, spike_counts = model.predict(test_sample)
     
-    print(f"\n🔍 Test Prediction:")
+    print(f"\nTest Prediction:")
     print(f"  Predicted: {'Fraud' if pred_class == 1 else 'Legitimate'}")
     print(f"  Confidence: {confidence:.2%}")
     print(f"  Spike counts: {spike_counts}")
@@ -455,4 +451,4 @@ if __name__ == "__main__":
     # Save model
     model.save("fraud_snn_snntorch.pth")
     
-    print("\n✅ Demo complete!")
+    print("\nDemo complete!")

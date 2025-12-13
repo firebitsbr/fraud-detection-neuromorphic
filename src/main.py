@@ -1,12 +1,12 @@
 """
+Pipeline de Detecção de Fraude com Redes Neurais Spiking
+
 **Descrição:** Pipeline completo de ponta a ponta para detecção de transações bancárias fraudulentas usando Redes Neurais Spiking (SNNs). Integra extração de features, codificação de spikes, inferência SNN e motor de decisão.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import numpy as np

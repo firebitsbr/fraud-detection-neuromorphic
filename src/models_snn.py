@@ -1,12 +1,14 @@
 """
-**Descrição:** Implementa modelos de Spiking Neural Networks (SNNs) usando neurônios Leaky Integrate-and-Fire (LIF) com aprendizado STDP para detecção de fraude neuromórfica em transações bancárias.
+Modelos SNN com STDP para Detecção de Fraude
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
-- Claude Sonnet 4.5
-- Gemini 3 Pro Preview
+**Descrição:** Tutorial interativo sobre o mecanismo de aprendizado biológico STDP (Spike-Timing-Dependent Plasticity) utilizado em redes neurais neuromórficas. Demonstra como neurônios aprendem correlações temporais automaticamente.
+
+**Autor:** Mauro Risonho de Paula Assumpção.
+**Data de Criação:** 5 de Dezembro de 2025.
+**Licença:** MIT License.
+**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+
+---
 """
 
 from __future__ import annotations
@@ -84,13 +86,22 @@ class FraudSNN:
     def _build_network(self) -> None:
         """Build the SNN architecture using Brian2."""
 
-        defaultclock.dt = 0.1 * ms
+        defaultclock.dt = self.dt
+
+        # Reset collections when rebuilding
+        self.layers = {}
+        self.synapses = {}
+        self.monitors = {}
+
+        self.network = Network()
 
         self.layers["input"] = SpikeGeneratorGroup(
             self.input_size,
             indices=np.array([], dtype=int),
             times=np.array([]) * ms,
         )
+
+        self.network.add(self.layers["input"])
 
         for i, size in enumerate(self.hidden_sizes):
             layer_name = f"hidden_{i}"
@@ -111,6 +122,7 @@ class FraudSNN:
             )
 
             self.layers[layer_name].v = self.neuron_params["v_rest"]
+            self.network.add(self.layers[layer_name])
 
         eqs_output = """
         dv/dt = (v_rest - v + I_syn) / tau_m : volt (unless refractory)
@@ -127,12 +139,14 @@ class FraudSNN:
             namespace=self.neuron_params,
         )
         self.layers["output"].v = self.neuron_params["v_rest"]
+        self.network.add(self.layers["output"])
 
         self.synapses["input_hidden0"] = self._create_synapse_with_stdp(
             self.layers["input"],
             self.layers["hidden_0"],
             connectivity="i != j" if self.input_size == self.hidden_sizes[0] else True,
         )
+        self.network.add(self.synapses["input_hidden0"])
 
         for i in range(len(self.hidden_sizes) - 1):
             syn_name = f"hidden{i}_hidden{i+1}"
@@ -140,24 +154,21 @@ class FraudSNN:
                 self.layers[f"hidden_{i}"],
                 self.layers[f"hidden_{i+1}"],
             )
+            self.network.add(self.synapses[syn_name])
 
         last_hidden_idx = len(self.hidden_sizes) - 1
         self.synapses["hidden_output"] = self._create_synapse_with_stdp(
             self.layers[f"hidden_{last_hidden_idx}"],
             self.layers["output"],
         )
+        self.network.add(self.synapses["hidden_output"])
 
         self.monitors["input_spikes"] = SpikeMonitor(self.layers["input"])
         self.monitors["output_spikes"] = SpikeMonitor(self.layers["output"])
         self.monitors["output_rate"] = PopulationRateMonitor(self.layers["output"])
         self.monitors["hidden0_spikes"] = SpikeMonitor(self.layers["hidden_0"])
 
-        network_objects = (
-            list(self.layers.values())
-            + list(self.synapses.values())
-            + list(self.monitors.values())
-        )
-        self.network = Network(*network_objects)
+        self.network.add(*self.monitors.values())
         self.network.store()
 
     def _create_synapse_with_stdp(
