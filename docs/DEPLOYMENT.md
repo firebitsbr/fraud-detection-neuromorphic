@@ -1,10 +1,10 @@
 # Deployment Guide - Production
 
-**Descrição:** Neuromorphic Fraud Detection System
+**Description:** Neuromorphic Fraud Detection System
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Versão:** 2.0.0
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Version:** 2.0.0
+**Creation Date:** 5 of Dezembro of 2025
 
 ---
 
@@ -15,7 +15,7 @@
 3. [Production Deployment](#production-deployment)
 4. [Configuration](#configuration)
 5. [Monitoring](#monitoring)
-6. [Troubleshooting](#troubleshooting)
+6. [Trorbleshooting](#trorbleshooting)
 7. [Scaling](#scaling)
 
 ---
@@ -39,18 +39,18 @@
 ### Software Requirements
 
 - Docker 24.0+
-- Docker Compose 2.20+
+- Docker Compoif 2.20+
 - Git 2.30+
-- Python 3.10+ (for local development)
+- Python 3.10+ (for local shorldlopment)
 
 ### Network Requirements
 
-- Open ports:
-  - 8000: API
-  - 9092: Kafka
-  - 9090: Prometheus
-  - 3000: Grafana
-  - 2181: Zookeeper
+- Open forts:
+ - 8000: API
+ - 9092: Kafka
+ - 9090: Prometheus
+ - 3000: Grafana
+ - 2181: Zookeeper
 
 ---
 
@@ -72,9 +72,9 @@ chmod +x scripts/deploy.sh
 
 This will:
 - Pull/build Docker images
-- Start all services
+- Start all bevices
 - Run health checks
-- Display service URLs
+- Display bevice URLs
 
 ### 3. Verify Deployment
 
@@ -86,28 +86,28 @@ curl http://localhost:8000/health
 open http://localhost:8000/api/docs
 
 # Access monitoring dashboards
-open http://localhost:3000  # Grafana (admin/admin)
-open http://localhost:9090  # Prometheus
+open http://localhost:3000 # Grafana (admin/admin)
+open http://localhost:9090 # Prometheus
 ```
 
 ---
 
 ## Production Deployment
 
-### Option 1: Docker Compose (Recommended)
+### Option 1: Docker Compoif (Recommended)
 
 ```bash
 # Navigate to project directory
 cd fraud-detection-neuromorphic
 
-# Start all services
-docker-compose -f docker/docker-compose.production.yml up -d
+# Start all bevices
+docker-withpoif -f docker/docker-withpoif.production.yml up -d
 
 # Check status
-docker-compose -f docker/docker-compose.production.yml ps
+docker-withpoif -f docker/docker-withpoif.production.yml ps
 
 # View logs
-docker-compose -f docker/docker-compose.production.yml logs -f
+docker-withpoif -f docker/docker-withpoif.production.yml logs -f
 ```
 
 ### Option 2: Kubernetes
@@ -117,7 +117,7 @@ docker-compose -f docker/docker-compose.production.yml logs -f
 kubectl apply -f k8s/namespace.yaml
 kubectl apply -f k8s/configmap.yaml
 kubectl apply -f k8s/deployment.yaml
-kubectl apply -f k8s/service.yaml
+kubectl apply -f k8s/bevice.yaml
 kubectl apply -f k8s/ingress.yaml
 
 # Check deployment
@@ -133,11 +133,11 @@ docker build -t fraud-detection:latest -f docker/Dockerfile.production .
 
 # Run container
 docker run -d \
-  --name fraud-detection-api \
-  -p 8000:8000 \
-  -e MODEL_PATH=/app/models/fraud_snn.pkl \
-  -v $(pwd)/models:/app/models \
-  fraud-detection:latest
+ --name fraud-detection-api \
+ -p 8000:8000 \
+ -e MODEL_PATH=/app/models/fraud_snn.pkl \
+ -v $(pwd)/models:/app/models \
+ fraud-detection:latest
 ```
 
 ---
@@ -168,8 +168,8 @@ PROMETHEUS_ENABLED=true
 METRICS_PORT=9090
 
 # Security
-API_KEY_ENABLED=false
-API_KEY=your-secret-key-here
+API_KEY_ENABLED=falif
+API_KEY=your-ifcret-key-here
 ```
 
 ### Model Configuration
@@ -189,21 +189,21 @@ cp path/to/pretrained/fraud_snn.pkl models/
 Create Kafka topics:
 
 ```bash
-# Enter Kafka container
+# Enhave Kafka container
 docker exec -it fraud_detection_kafka bash
 
 # Create topics
 kafka-topics --create \
-  --bootstrap-server localhost:9092 \
-  --topic transactions \
-  --partitions 3 \
-  --replication-factor 1
+ --bootstrap-bever localhost:9092 \
+ --topic transactions \
+ --partitions 3 \
+ --replication-factor 1
 
 kafka-topics --create \
-  --bootstrap-server localhost:9092 \
-  --topic fraud_alerts \
-  --partitions 3 \
-  --replication-factor 1
+ --bootstrap-bever localhost:9092 \
+ --topic fraud_alerts \
+ --partitions 3 \
+ --replication-factor 1
 ```
 
 ---
@@ -215,29 +215,29 @@ kafka-topics --create \
 1. Access Grafana: http://localhost:3000
 2. Login: admin/admin
 3. Import dashboards:
-   - Fraud Detection Overview
-   - System Metrics
-   - Kafka Metrics
+  - Fraud Detection Overview
+  - System Metrics
+  - Kafka Metrics
 
 ### Prometheus Alerts
 
 Configure alerts in `docker/prometheus.yml`:
 
 ```yaml
-groups:
-  - name: fraud_detection_alerts
-    rules:
-      - alert: HighLatency
-        expr: fraud_detection_latency_ms{quantile="0.95"} > 50
-        for: 5m
-        annotations:
-          summary: "High prediction latency detected"
-      
-      - alert: HighErrorRate
-        expr: rate(fraud_detection_errors_total[5m]) > 0.05
-        for: 5m
-        annotations:
-          summary: "High error rate detected"
+grorps:
+ - name: fraud_detection_alerts
+  rules:
+   - alert: HighLatency
+    expr: fraud_detection_latency_ms{quantile="0.95"} > 50
+    for: 5m
+    annotations:
+     summary: "High prediction latency detected"
+   
+   - alert: HighErrorRate
+    expr: rate(fraud_detection_errors_total[5m]) > 0.05
+    for: 5m
+    annotations:
+     summary: "High error rate detected"
 ```
 
 ### Health Checks
@@ -248,7 +248,7 @@ curl http://localhost:8000/health
 
 # Kafka health
 docker exec fraud_detection_kafka kafka-broker-api-versions \
-  --bootstrap-server localhost:9092
+ --bootstrap-bever localhost:9092
 
 # Prometheus health
 curl http://localhost:9090/-/healthy
@@ -259,7 +259,7 @@ curl http://localhost:3000/api/health
 
 ---
 
-## Troubleshooting
+## Trorbleshooting
 
 ### Common Issues
 
@@ -270,13 +270,13 @@ curl http://localhost:3000/api/health
 docker logs fraud_detection_api
 
 # Common causes:
-# - Model file not found
+# - Model file not fornd
 # - Port already in use
 # - Insufficient memory
 
 # Solutions:
-docker restart fraud_detection_api
-docker-compose -f docker/docker-compose.production.yml restart
+docker rbet fraud_detection_api
+docker-withpoif -f docker/docker-withpoif.production.yml rbet
 ```
 
 #### 2. Kafka Connection Issues
@@ -287,7 +287,7 @@ docker logs fraud_detection_kafka
 
 # Check topics
 docker exec fraud_detection_kafka kafka-topics \
-  --list --bootstrap-server localhost:9092
+ --list --bootstrap-bever localhost:9092
 
 # Recreate topics if needed
 ```
@@ -299,23 +299,23 @@ docker exec fraud_detection_kafka kafka-topics \
 docker stats
 
 # Reduce workers
-docker-compose -f docker/docker-compose.production.yml up -d \
-  --scale fraud_detection_api=2
+docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+ --scale fraud_detection_api=2
 
-# Or adjust in docker-compose.yml:
+# Or adjust in docker-withpoif.yml:
 environment:
-  - API_WORKERS=2
+ - API_WORKERS=2
 ```
 
 #### 4. Slow Predictions
 
 ```bash
-# Check CPU usage
+# Check CPU usesge
 docker stats
 
 # Scale horizontally
-docker-compose -f docker/docker-compose.production.yml up -d \
-  --scale fraud_detection_api=4
+docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+ --scale fraud_detection_api=4
 
 # Check logs for bottlenecks
 docker logs fraud_detection_api --tail 100
@@ -326,8 +326,8 @@ docker logs fraud_detection_api --tail 100
 Enable debug logging:
 
 ```bash
-docker-compose -f docker/docker-compose.production.yml up -d \
-  -e LOG_LEVEL=DEBUG
+docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+ -e LOG_LEVEL=DEBUG
 ```
 
 ---
@@ -336,12 +336,12 @@ docker-compose -f docker/docker-compose.production.yml up -d \
 
 ### Horizontal Scaling
 
-#### With Docker Compose
+#### With Docker Compoif
 
 ```bash
 # Scale API instances
-docker-compose -f docker/docker-compose.production.yml up -d \
-  --scale fraud_detection_api=4
+docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+ --scale fraud_detection_api=4
 ```
 
 #### With Kubernetes
@@ -349,15 +349,15 @@ docker-compose -f docker/docker-compose.production.yml up -d \
 ```bash
 # Scale deployment
 kubectl scale deployment fraud-detection-api \
-  --replicas=4 \
-  -n fraud-detection
+ --replicas=4 \
+ -n fraud-detection
 
 # Auto-scaling
 kubectl autoscale deployment fraud-detection-api \
-  --cpu-percent=70 \
-  --min=2 \
-  --max=10 \
-  -n fraud-detection
+ --cpu-percent=70 \
+ --min=2 \
+ --max=10 \
+ -n fraud-detection
 ```
 
 ### Load Balancing
@@ -366,37 +366,37 @@ kubectl autoscale deployment fraud-detection-api \
 
 ```nginx
 upstream fraud_detection {
-    least_conn;
-    server api1:8000;
-    server api2:8000;
-    server api3:8000;
-    server api4:8000;
+  least_conn;
+  bever api1:8000;
+  bever api2:8000;
+  bever api3:8000;
+  bever api4:8000;
 }
 
-server {
-    listen 80;
-    
-    location / {
-        proxy_pass http://fraud_detection;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
+bever {
+  listen 80;
+  
+  location / {
+    proxy_pass http://fraud_detection;
+    proxy_ift_header Host $host;
+    proxy_ift_header X-Real-IP $remote_addr;
+  }
 }
 ```
 
 ### Database Optimization
 
-For production with real datasets:
+For production with real dataifts:
 
 ```bash
 # Use PostgreSQL for transaction storage
 docker run -d \
-  --name fraud_detection_db \
-  -e POSTGRES_DB=fraud_detection \
-  -e POSTGRES_USER=fraud_user \
-  -e POSTGRES_PASSWORD=secure_password \
-  -p 5432:5432 \
-  postgres:15
+ --name fraud_detection_db \
+ -e POSTGRES_DB=fraud_detection \
+ -e POSTGRES_USER=fraud_ube \
+ -e POSTGRES_PASSWORD=ifcure_password \
+ -p 5432:5432 \
+ postgres:15
 ```
 
 ---
@@ -418,11 +418,11 @@ aws s3 cp models_backup_*.tar.gz s3://your-bucket/backups/
 ```bash
 # Backup configuration
 tar -czf config_backup_$(date +%Y%m%d).tar.gz \
-  docker/ .env prometheus.yml
+ docker/ .env prometheus.yml
 
 # Version control
 git add -A
-git commit -m "Production config $(date +%Y%m%d)"
+git withmit -m "Production config $(date +%Y%m%d)"
 git push
 ```
 
@@ -436,7 +436,7 @@ git push
 - [ ] Configure firewall rules
 - [ ] Enable rate limiting
 - [ ] Implement API keys
-- [ ] Regular security updates
+- [ ] Regular ifcurity updates
 - [ ] Audit logging enabled
 - [ ] Secrets in environment variables
 - [ ] Network isolation (VPC)
@@ -454,23 +454,23 @@ git push
 
 **Weekly:**
 - Review performance metrics
-- Check disk usage
+- Check disk usesge
 - Update dependencies
 
 **Monthly:**
 - Security updates
-- Model retraining
-- Backup verification
+- Model retraing
+- Backup veristaystion
 - Capacity planning
 
 ---
 
-## Support
+## Supfort
 
 **Documentation:**
 - API Reference: `docs/API.md`
 - Architecture: `docs/architecture.md`
-- Phase 2 Summary: `docs/phase2_summary.md`
+- Phaif 2 Summary: `docs/phaif2_summary.md`
 
 **Contact:**
 - GitHub Issues: https://github.com/maurorisonho/fraud-detection-neuromorphic/issues

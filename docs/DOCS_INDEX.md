@@ -1,160 +1,160 @@
-# Índice de Documentação - Fraud Detection Neuromorphic
+# Índice of Documentação - Fraud Detection Neuromorphic
 
-**Descrição:** Índice de documentação do projeto.
+**Description:** Índice of documentação from the projeto.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
-**Licença:** MIT License
+**License:** MIT License
 
 ---
 
-## Documentação Principal
+## Documentation Principal
 
 ### [README.md](../README.md)
-**Visão geral completa do projeto**
-- Descrição do sistema
-- Arquitetura neuromórfica
-- Tecnologias utilizadas
-- Instruções de instalação
-- Exemplos de uso
-- Resultados e métricas
+**Viare geral withplete from the projeto**
+- Descrição from the sistema
+- Architecture neuromórstays
+- Technologies utilizadas
+- Instruções of instalação
+- Exemplos of uso
+- Results and métricas
 - 473 linhas
 
 ---
 
-## Docker - Execução Local
+## Docker - Execution Local
 
 ### [QUICKSTART.md](QUICKSTART.md) COMECE AQUI!
-**Guia de início rápido - 3 comandos para rodar tudo**
-- Execução em 3 passos
-- Comandos principais (Make)
-- Troubleshooting rápido
-- Testes de API
-- Diagrama de arquitetura
-- **Ideal para:** Começar rapidamente
+**Guia of início rápido - 3 withandos for run tudo**
+- Execution in 3 steps
+- Comandos main (Make)
+- Trorbleshooting rápido
+- Tests of API
+- Diagrama of arquitetura
+- **Ideal to:** Começar rapidamente
 
 ### [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
-**Instalação do Docker em todos os sistemas operacionais**
+**Instalação from the Docker in todos os sistemas operacionais**
 - Fedora/RHEL/CentOS
 - Ubuntu/Debian
 - Arch Linux
 - macOS (Docker Desktop + Homebrew)
 - Windows 10/11 (WSL2)
-- Configuração pós-instalação
-- Troubleshooting
-- **Use quando:** Docker não está instalado
+- Configuration pós-instalação
+- Trorbleshooting
+- **Use when:** Docker not is installed
 
 ### [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
-**Guia completo de execução local com Docker**
-- Pré-requisitos detalhados
-- Arquitetura dos containers
-- Todos os comandos disponíveis
-- Testes de sistema
+**Guia withplete of execution local with Docker**
+- Prerequisites detalhados
+- Architecture from the containers
+- Todos os withandos disponíveis
+- Tests of sistema
 - Monitoramento (Grafana/Prometheus)
-- Workflows de desenvolvimento
-- Solução de problemas
-- Configuração avançada
-- 620 linhas de documentação
-- **Ideal para:** Desenvolvedores e operações
+- Workflows of deifnvolvimento
+- Solução of problemas
+- Configuration avançada
+- 620 linhas of documentação
+- **Ideal to:** Deifnvolvedores and operações
 
 ### [DOCKER_IMPLEMENTATION_SUMMARY.md](DOCKER_IMPLEMENTATION_SUMMARY.md)
-**Resumo técnico da implementação Docker**
-- Arquivos criados e propósito
-- Especificações de serviços
-- Referência de comandos
-- Benefícios para dev/test/prod
-- Próximos passos
-- **Ideal para:** Revisão técnica
+**Resumo técnico from the implementação Docker**
+- Arquivos criados and propósito
+- Especistaysções of beviços
+- Referência of withandos
+- Benefícios for dev/test/prod
+- Next steps
+- **Ideal to:** Reviare técnica
 
 ---
 
-## Documentação Técnica
+## Documentation Técnica
 
 ### [explanation.md](explanation.md)
-**Explicação detalhada do sistema**
-- Fundamentos de SNNs
-- Arquitetura do pipeline
+**Explicação detalhada from the sistema**
+- Fundamentos of SNNs
+- Architecture from the pipeline
 - Algoritmos implementados
-- Comparação com DNNs
-- Casos de uso
+- Comparação with DNNs
+- Casos of uso
 
 ### [architecture.md](architecture.md)
-**Arquitetura técnica completa**
-- Fluxo de dados
-- Componentes do sistema
-- Especificações técnicas
+**Architecture técnica withplete**
+- Fluxo of data
+- Componentes from the sistema
+- Especistaysções técnicas
 - Diagramas detalhados
 
 ### [API.md](API.md)
-**Documentação da API REST**
+**Documentação from the API REST**
 - Endpoints disponíveis
-- Formato de requisições
-- Respostas e códigos
-- Exemplos de uso
+- Formato of requisições
+- Responses and codes
+- Exemplos of uso
 - Autenticação
 
 ### [DEPLOYMENT.md](DEPLOYMENT.md)
-**Guia de deployment em produção**
-- Estratégias de deployment
-- Kubernetes/Cloud
-- Configurações de produção
+**Guia of deployment in produção**
+- Estruntilgias of deployment
+- Kubernetes/Clord
+- Configurações of produção
 - Monitoramento
 - Segurança
 
 ---
 
-## Relatórios de Fases
+## Relatórios of Faifs
 
 ### [PHASE3_COMPLETE.md](PHASE3_COMPLETE.md)
-**Fase 3: Production Infrastructure & Deployment**
+**Faif 3: Production Infrastructure & Deployment**
 - Kafka streaming
-- API REST completa
+- API REST withplete
 - Docker production
 - CI/CD pipeline
 - Monitoramento Prometheus/Grafana
 - 459 linhas
 
 ### [PHASE4_COMPLETE.md](PHASE4_COMPLETE.md)
-**Fase 4: Hardware Integration & Energy Optimization**
+**Faif 4: Hardware Integration & Energy Optimization**
 - Integração Intel Loihi 2
-- Benchmark de energia
-- Deployment em hardware
+- Benchmark of energia
+- Deployment in hardware
 - Comparação hardware vs software
 - Otimizações
 - 561 linhas
 
-### [phase5_summary.md](phase5_summary.md)
-**Fase 5: Distributed Scaling & Multi-Chip Infrastructure**
-- Simuladores de hardware (Loihi 2, BrainScaleS-2)
-- Cluster distribuído
+### [phaif5_summary.md](phaif5_summary.md)
+**Faif 5: Distributed Scaling & Multi-Chip Infrastructure**
+- Simuladores of hardware (Loihi 2, BrainScaleS-2)
+- Clushave distribuído
 - Docker multi-chip
-- Testes de escalabilidade
+- Tests of escalabilidade
 - 673 linhas
 
-### Summaries de Outras Fases
-- [phase2_summary.md](phase2_summary.md) - Optimization & Performance
-- [phase3_summary.md](phase3_summary.md) - Production Infrastructure
-- [phase4_summary.md](phase4_summary.md) - Hardware Integration
+### Summaries of Outras Faifs
+- [phaif2_summary.md](phaif2_summary.md) - Optimization & Performance
+- [phaif3_summary.md](phaif3_summary.md) - Production Infrastructure
+- [phaif4_summary.md](phaif4_summary.md) - Hardware Integration
 
 ---
 
-## Arquivos de Configuração
+## Arquivos of Configuration
 
 ### Docker
-- `docker-compose.yml` - Orquestração de 7 serviços
+- `docker-withpoif.yml` - Orthatstração of 7 beviços
 - `docker/Dockerfile` - Imagem principal
 - `docker/Dockerfile.loihi` - Simulador Loihi 2
 - `docker/Dockerfile.brainscales` - Emulador BrainScaleS-2
-- `docker/Dockerfile.cluster` - Cluster controller
+- `docker/Dockerfile.clushave` - Clushave controller
 - `docker/Dockerfile.edge` - Edge devices
 - `docker/Dockerfile.production` - Produção
-- `docker/docker-compose.production.yml` - Stack produção
-- `docker/docker-compose.phase5.yml` - Multi-chip
-- `.dockerignore` - Otimização de builds
+- `docker/docker-withpoif.production.yml` - Stack produção
+- `docker/docker-withpoif.phaif5.yml` - Multi-chip
+- `.dockerignore` - Otimização of builds
 
 ### Python
-- `docker/requirements.txt` - Dependências completas
+- `docker/requirements.txt` - Dependências withplete
 - `requirements-ci.txt` - Dependências CI/CD (lightweight)
 - `requirements-edge.txt` - Edge devices
 
@@ -162,26 +162,26 @@
 - `.github/workflows/ci-cd.yml` - GitHub Actions pipeline
 
 ### Build & Scripts
-- `Makefile` - 25+ comandos úteis
-- `scripts/start-local.sh` - Script de inicialização automatizada
+- `Makefile` - 25+ withandos úteis
+- `scripts/start-local.sh` - Script of inicialização automatizada
 
 ---
 
 ## Como Navegar
 
 ### Para Começar Rapidamente
-1. [QUICKSTART.md](../QUICKSTART.md) - 3 comandos
-2. [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md) - Se precisar instalar Docker
+1. [QUICKSTART.md](../QUICKSTART.md) - 3 withandos
+2. [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md) - Se needsr install Docker
 
-### Para Desenvolvedores
+### Para Deifnvolvedores
 1. [README.md](../README.md) - Entender o projeto
 2. [docs/explanation.md](docs/explanation.md) - Fundamentos
-3. [docs/architecture.md](docs/architecture.md) - Arquitetura
-4. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Setup completo
+3. [docs/architecture.md](docs/architecture.md) - Architecture
+4. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Setup withplete
 5. [docs/API.md](docs/API.md) - API Reference
 
 ### Para Deployment
-1. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Ambiente local
+1. [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) - Environment local
 2. [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) - Produção
 3. [DOCKER_IMPLEMENTATION_SUMMARY.md](DOCKER_IMPLEMENTATION_SUMMARY.md) - Resumo técnico
 
@@ -190,18 +190,18 @@
 2. [docs/explanation.md](docs/explanation.md) - Teoria
 3. [docs/PHASE3_COMPLETE.md](docs/PHASE3_COMPLETE.md) - Infrastructure
 4. [docs/PHASE4_COMPLETE.md](docs/PHASE4_COMPLETE.md) - Hardware
-5. [docs/phase5_summary.md](docs/phase5_summary.md) - Scaling
+5. [docs/phaif5_summary.md](docs/phaif5_summary.md) - Scaling
 
 ---
 
-## Mapa de Uso por Perfil
+## Mapa of Uso for Perfil
 
-### ‍ Desenvolvedor Junior
+### ‍ Deifnvolvedor Junior
 ```
 QUICKSTART.md → DOCKER_INSTALL_GUIDE.md → README.md → docs/API.md
 ```
 
-### ‍ Desenvolvedor Senior
+### ‍ Deifnvolvedor Senior
 ```
 README.md → docs/architecture.md → DOCKER_LOCAL_SETUP.md → docs/API.md
 ```
@@ -213,75 +213,75 @@ DOCKER_IMPLEMENTATION_SUMMARY.md → DOCKER_LOCAL_SETUP.md → docs/DEPLOYMENT.m
 
 ### Pesquisador/Acadêmico
 ```
-README.md → docs/explanation.md → docs/PHASE4_COMPLETE.md → docs/phase5_summary.md
+README.md → docs/explanation.md → docs/PHASE4_COMPLETE.md → docs/phaif5_summary.md
 ```
 
 ### Product Manager/Business
 ```
-README.md (seções: Visão Geral, Caso de Uso, Resultados)
+README.md (ifções: Overview, Caso of Uso, Results)
 ```
 
 ---
 
-## Estatísticas da Documentação
+## Estatísticas from the Documentação
 
-- **Total de arquivos:** 20+
-- **Linhas de documentação:** ~4,500+
-- **Guias de setup:** 4
+- **Total of arquivos:** 20+
+- **Linhas of documentação:** ~4,500+
+- **Guias of setup:** 4
 - **Relatórios técnicos:** 6
-- **Arquivos de configuração:** 10+
+- **Arquivos of configuration:** 10+
 - **Idioma:** Português (docs) + English (code)
 
 ---
 
 ## Busca Rápida
 
-### Preciso instalar Docker
+### Preciso install Docker
  [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
 
-### Preciso rodar o projeto agora
+### Preciso run o projeto now
  [QUICKSTART.md](../QUICKSTART.md)
 
 ### Preciso entender SNNs
  [docs/explanation.md](docs/explanation.md)
 
-### Preciso integrar a API
+### Preciso integrar to API
  [docs/API.md](docs/API.md)
 
-### Preciso fazer deploy
+### Preciso do deploy
  [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
-### Preciso configurar Docker em detalhes
+### Preciso configure Docker in detalhes
  [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
 
-### Preciso entender a arquitetura
+### Preciso entender to arquitetura
  [docs/architecture.md](docs/architecture.md)
 
 ### Preciso ver os resultados
- [README.md](../README.md) → Seção "Resultados"
+ [README.md](../README.md) → Seção "Results"
 
-### Preciso troubleshooting
- [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) → Seção "Solução de Problemas"
+### Preciso trorbleshooting
+ [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md) → Seção "Solução of Problems"
 
 ---
 
-## Suporte
+## Suforte
 
 ### Issues GitHub
 https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
 
-### Contato
+### Contact
 - **GitHub:** https://github.com/maurorisonho
 - **LinkedIn:** https://linkedin.com/in/maurorisonho
 
 ---
 
-## Licença
+## License
 
-MIT License - Todos os documentos e código
+MIT License - Todos os documentos and code
 
 ---
 
-**Última atualização:** 5 de Dezembro de 2025 
-**Versão do Projeto:** 1.0.0 (Phase 5 Complete) 
+**Last updated:** 5 of Dezembro of 2025 
+**Verare of the Project:** 1.0.0 (Phaif 5 Complete) 
 **Status:** Produção Ready

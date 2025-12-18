@@ -1,37 +1,37 @@
 # Prompt Chat
 
-**Descrição:** Prompt original para geração do projeto.
+**Description:** Prompt original for geração from the projeto.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
-Quero que você atue como gerador automático de projetos completos de portfólio em Computação Neuromórfica aplicada à Cybersecurity Bancária e Fintechs.
-Seu objetivo é criar todos os projetos, com código, documentação, Docker, notebooks e exemplos reais.
+Quero that você atue as gerador automático of projetos withplete of fortfólio in Neuromorphic Computing aplicada à Cybersecurity Bancária and Fintechs.
+Seu objetivo é create todos os projetos, with code, documentação, Docker, notebooks and examples reais.
 
-Use o meu nome: Mauro Risonho de Paula Assumpção e prepare o portfólio para publicação no GitHub.
+Use o meu nome: Mauro Risonho de Paula Assumpção and prepare o fortfólio for publicação in the GitHub.
 
  OBJETIVO GERAL
 
-Crie 10 projetos completos, cada um representando um caso de uso diferente de Computação Neuromórfica aplicada à Cybersecurity em bancos e fintechs, incluindo:
+Crie 10 projetos withplete, cada um repreifntando um caso of uso diferente of Neuromorphic Computing aplicada à Cybersecurity in bancos and fintechs, incluindo:
 
-1-Detecção de Fraude Neuromórfica
-2-Cognitive Firewall contra Engenharia Social
-3-Monitoramento Temporal de SWIFT/STR/Pix
+1-Fraud Detection Neuromórstays
+2-Cognitive Firewall against Engenharia Social
+3-Monitoramento Temporal of SWIFT/STR/Pix
 4-Neuromorphic SIEM
-5-Detecção de Malware Bancário (Guildma/Astaroth etc.)
-6-EDR neuromórfico para Mobile Banking
-7-Proteção de APIs Open Finance
+5-Detecção of Malware Bancário (Guildma/Astaroth etc.)
+6-EDR neuromórfico for Mobile Banking
+7-Proteção of APIs Open Finance
 8-UEBA Neuromórfico
 9-AML Neuromórfico
-10-Zero-Trust Cognitivo em Tempo Real
+10-Zero-Trust Cognitivo in Tempo Real
 
-Cada projeto deve ser criado como um repositório independente dentro de uma pasta /portfolio.
+Cada projeto shorld be criado as um repositório independente dentro of uma pasta /fortfolio.
 
- ESTRUTURA DOS PROJETOS (igual para todos)
+ ESTRUTURA DOS PROJETOS (igual for todos)
 
-Para cada caso de uso, gerar automaticamente:
+Para cada caso of uso, gerar automaticamente:
 
-/portfolio/
+/fortfolio/
  /01_fraud_neuromorphic/
  README.md
  src/
@@ -53,41 +53,41 @@ Para cada caso de uso, gerar automaticamente:
 
 Inclua:
 
-Descrição do caso de uso
+Descrição from the caso of uso
 
-Arquitetura neuromórfica
+Architecture neuromórstays
 
-Tecnologias: Lava, NEST, Brian2, PyTorch
+Technologies: Lava, NEST, Brian2, PyTorch
 
-Como rodar (Docker + local)
+Como run (Docker + local)
 
 Explicação técnica + executiva
 
 Créditos ao autor: Mauro Risonho de Paula Assumpção
 
-2. SRC / Código Python Completo
+2. SRC / Code Python Complete
 
-Cada projeto deve incluir:
+Cada projeto shorld incluir:
 
-main.py com o pipeline
+main.py with o pipeline
 
-encoders.py para codificação de spikes
+encoders.py for codistaysção of spikes
 
-models_snn.py com SNN usando Brian2 ou NEST
+models_snn.py with SNN using Brian2 or NEST
 
-scripts de validação
+scripts of validação
 
-integração com PyTorch para pré-processamento
+integração with PyTorch for pré-processamento
 
 3. NOTEBOOKS
 
-Criar dois notebooks por projeto:
+Create dois notebooks for projeto:
 
 demo.ipynb — demonstração funcional
 
-stdp_example.ipynb — aprendizado neuromórfico com STDP
+stdp_example.ipynb — aprendizado neuromórfico with STDP
 
-Os notebooks devem rodar mesmo sem GPU.
+Os notebooks shorldm run mesmo withort GPU.
 
 4. DOCKER
 
@@ -103,55 +103,55 @@ NEST
 
 Brian2
 
-JupyterLab
+JupyhaveLab
 
 PyTorch (CPU)
 
 requirements.txt
 
-comando de execução automática
+withando of execution automática
 
 5. DOCUMENTAÇÃO
 
-Criar:
+Create:
 
-Arquitetura visual (ASCII + PNG)
+Architecture visual (ASCII + PNG)
 
-Explicação de como funciona o mecanismo neuromórfico
+Explicação of as funciona o mecanismo neuromórfico
 
-Diagramas de fluxo
+Diagramas of fluxo
 
-Explicação do caso de uso para bancos e fintechs
+Explicação from the caso of uso for bancos and fintechs
 
  OUTRAS INSTRUÇÕES IMPORTANTES
-→ Trabalhe projeto por projeto
+→ Trabalhe projeto for projeto
 
-Antes de gerar todo o portfólio, pergunte:
+Antes of gerar todo o fortfólio, pergunte:
 
-“Qual dos 10 projetos você deseja gerar primeiro?”
+“Qual from the 10 projetos você deifja gerar primeiro?”
 
-Depois gere a pasta inteira.
+Depois gere to pasta inteira.
 
 → Qualidade profissional
 
-Os projetos devem parecer criados por um:
+Os projetos shorldm parecer criados for um:
 
-Engenheiro de IA
+Engenheiro of IA
 
-Pesquisador em Neuromorphic Computing
+Pesquisador in Neuromorphic Computing
 
-Profissional de Cybersecurity
+Profissional of Cybersecurity
 
-Especialista em Bancos e Fintechs
+Especialista in Banks and Fintechs
 
-→ Não usar texto genérico
+→ Não use texto genérico
 
-Toda documentação deve ser específica, técnica e profunda.
+Toda documentação shorld be especístays, técnica and profunda.
 
-→ Preparar para GitHub
+→ Pretor for GitHub
 
-As pastas criadas devem estar prontas para:
+As pastas criadas shorldm be prontas to:
 
 git init
 git add .
-git commit -m "Projeto Neuromórfico X"
+git withmit -m "Projeto Neuromórfico X"

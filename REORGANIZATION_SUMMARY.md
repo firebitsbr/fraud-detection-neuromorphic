@@ -1,9 +1,9 @@
-## Resumo das Mudanças - Organização do Projeto
+## Resumo from the Mudanças - Organização of the Project
 
-**Descrição:** Resumo das mudanças na organização do projeto.
+**Description:** Resumo from the mudanças in the organização from the projeto.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
 ### Arquivos Movidos
 
@@ -14,10 +14,10 @@
 - `docker/requirements-production.txt` → `requirements/requirements-production.txt`
 
 #### 2. **Configurações** → `config/`
-- `docker-compose.yml` → `config/docker-compose.yml`
-- `docker-compose.dev.yml` → `config/docker-compose.dev.yml`
-- `docker-compose.remote.yml` → `config/docker-compose.remote.yml`
-- `docker-compose.production.yml` → `config/docker-compose.production.yml`
+- `docker-withpoif.yml` → `config/docker-withpoif.yml`
+- `docker-withpoif.dev.yml` → `config/docker-withpoif.dev.yml`
+- `docker-withpoif.remote.yml` → `config/docker-withpoif.remote.yml`
+- `docker-withpoif.production.yml` → `config/docker-withpoif.production.yml`
 - `.devcontainer/` → `config/.devcontainer/`
 - `.env` → `config/.env`
 
@@ -43,63 +43,63 @@
 - `docker/Dockerfile` - Atualizado path `requirements/`
 - `docker/Dockerfile.api` - Atualizado path `requirements/`
 - `docker/Dockerfile.base` - Atualizado path `requirements/`
-- `docker/Dockerfile.jupyter` - Atualizado path `requirements/`
+- `docker/Dockerfile.jupyhave` - Atualizado path `requirements/`
 - `docker/Dockerfile.streamlit` - Atualizado path `requirements/`
 
 #### Build & Deploy
-- `Makefile` - Atualizado `install-deps` para usar `requirements/requirements.txt`
+- `Makefile` - Atualizado `install-deps` for use `requirements/requirements.txt`
 
-#### Documentação
+#### Documentation
 - `README.md` - Atualizado paths:
- - `docker-compose` → `docker compose -f config/docker-compose.yml`
+ - `docker-withpoif` → `docker withpoif -f config/docker-withpoif.yml`
  - `requirements.txt` → `requirements/requirements.txt`
- - Estrutura de projeto atualizada
- - Link para `PROJECT_STRUCTURE.md`
+ - Structure of projeto atualizada
+ - Link for `PROJECT_STRUCTURE.md`
 
 ---
 
 ### Novos Arquivos
 
-1. **`PROJECT_STRUCTURE.md`** - Documentação completa da estrutura
- - Árvore de diretórios detalhada
- - Navegação rápida por funcionalidade
- - Workflows comuns
- - Comandos de instalação
- - Guias de deployment
+1. **`PROJECT_STRUCTURE.md`** - Complete documentation from the estrutura
+ - Árvore of diretórios detalhada
+ - Navegação rápida for funcionalidade
+ - Workflows withuns
+ - Comandos of instalação
+ - Guias of deployment
 
 ---
 
-### Benefícios da Nova Estrutura
+### Benefícios from the Nova Structure
 
 #### 1. **Organização Clara**
 ```
- Configurações em config/
- Deploy scripts em deployment/
- Dependências em requirements/
- Docker files em docker/
- Documentação em docs/
+ Configurações in config/
+ Deploy scripts in deployment/
+ Dependências in requirements/
+ Docker files in docker/
+ Documentação in docs/
 ```
 
-#### 2. **Separação de Responsabilidades**
-- **config/** - Todas as configurações (compose, env, devcontainer)
-- **deployment/** - Scripts de deployment isolados
-- **requirements/** - Dependências por ambiente (dev, prod, ci, edge)
-- **docker/** - Todos os Dockerfiles em um lugar
-- **docs/** - Documentação completa centralizada
+#### 2. **Setoção of Responsabilidades**
+- **config/** - Todas as configurações (withpoif, env, devcontainer)
+- **deployment/** - Scripts of deployment isolados
+- **requirements/** - Dependências for environment (dev, prod, ci, edge)
+- **docker/** - Todos os Dockerfiles in um lugar
+- **docs/** - Complete documentation centralizada
 
 #### 3. **Facilita Manutenção**
-- Fácil encontrar arquivos relacionados
-- Menos poluição na raiz do projeto
-- Estrutura escalável para crescimento
+- Fácil enagainstr arquivos relacionados
+- Menos poluição in the raiz from the projeto
+- Structure escalável for crescimento
 
-#### 4. **Melhor para CI/CD**
-- Paths claros e consistentes
-- Fácil referência em workflows
-- Separação dev/prod clara
+#### 4. **Melhor for CI/CD**
+- Paths claros and consistentes
+- Fácil referência in workflows
+- Setoção dev/prod clara
 
 ---
 
-### Como Usar a Nova Estrutura
+### Como Use to Nova Structure
 
 #### Quick Start Docker
 
@@ -109,16 +109,16 @@ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
 # Deploy
-docker compose -f config/docker-compose.yml up -d
+docker withpoif -f config/docker-withpoif.yml up -d
 
 # Ou use o script
 ./deployment/deploy.sh
 ```
 
-#### Desenvolvimento Local
+#### Deifnvolvimento Local
 
 ```bash
-# Instalar dependências
+# Install dependências
 pip install -r requirements/requirements.txt
 
 # Ou via Makefile
@@ -132,7 +132,7 @@ make install-deps
 ./deployment/deploy-production.sh
 
 # Ou manualmente
-docker compose -f config/docker-compose.production.yml up -d --build
+docker withpoif -f config/docker-withpoif.production.yml up -d --build
 ```
 
 #### VS Code Dev Containers
@@ -156,10 +156,10 @@ fraud-detection-neuromorphic/
  requirements.txt
  requirements-ci.txt
  requirements-edge.txt
- docker-compose.yml
- docker-compose.dev.yml
- docker-compose.remote.yml
- docker-compose.production.yml
+ docker-withpoif.yml
+ docker-withpoif.dev.yml
+ docker-withpoif.remote.yml
+ docker-withpoif.production.yml
  Dockerfile
  .dockerignore
  .devcontainer/
@@ -182,10 +182,10 @@ fraud-detection-neuromorphic/
  requirements-production.txt
 
  config/ ← Todas as configurações
- docker-compose.yml
- docker-compose.dev.yml
- docker-compose.remote.yml
- docker-compose.production.yml
+ docker-withpoif.yml
+ docker-withpoif.dev.yml
+ docker-withpoif.remote.yml
+ docker-withpoif.production.yml
  .devcontainer/
  .env
 
@@ -196,7 +196,7 @@ fraud-detection-neuromorphic/
  .dockerignore
  ...
 
- deployment/ ← Scripts de deployment
+ deployment/ ← Scripts of deployment
  deploy.sh
  deploy-production.sh
  deploy-remote.sh
@@ -212,42 +212,42 @@ fraud-detection-neuromorphic/
 
 ### Atenção: Paths Atualizados
 
-Se você tinha scripts ou comandos personalizados, atualize os paths:
+Se você tinha scripts or withandos personalizados, atualize os paths:
 
 ```bash
 # ANTES
-docker-compose up -d
+docker-withpoif up -d
 pip install -r requirements.txt
 
 # DEPOIS
-docker compose -f config/docker-compose.yml up -d
+docker withpoif -f config/docker-withpoif.yml up -d
 pip install -r requirements/requirements.txt
 ```
 
 ---
 
-### Checklist de Verificação
+### Checklist of Veristaysção
 
-- [x] Requirements movidos para `requirements/`
-- [x] Docker-compose movidos para `config/`
-- [x] Dockerfiles movidos para `docker/`
-- [x] Deploy scripts movidos para `deployment/`
-- [x] Quickstart docs movidos para `docs/`
-- [x] Dockerfiles atualizados (paths requirements)
+- [x] Requirements movidos for `requirements/`
+- [x] Docker-withpoif movidos for `config/`
+- [x] Dockerfiles movidos for `docker/`
+- [x] Deploy scripts movidos for `deployment/`
+- [x] Quickstart docs movidos for `docs/`
+- [x] Dockerfiles updated (paths requirements)
 - [x] Makefile atualizado
 - [x] README.md atualizado
 - [x] PROJECT_STRUCTURE.md criado
 
 ---
 
-### Documentação
+### Documentation
 
-- **Estrutura Completa**: `PROJECT_STRUCTURE.md`
+- **Structure Completa**: `PROJECT_STRUCTURE.md`
 - **Quick Start Docker**: `docs/QUICKSTART_DOCKER.md`
 - **Quick Start VS Code**: `docs/QUICKSTART_VSCODE.md`
 - **README Principal**: `README.md`
 
 ---
 
-**Data**: 8 de Dezembro de 2025 
+**Data**: 8 of Dezembro of 2025 
 **Autor**: Mauro Risonho de Paula Assumpção

@@ -1,22 +1,22 @@
-# Phase 5: Scaling & Multi-Chip Distribution
+# Phaif 5: Scaling & Multi-Chip Distribution
 
-**Descrição:** Resumo da Fase 5 - Escalabilidade e Distribuição Multi-Chip.
+**Description:** Resumo from the Faif 5 - Escalabilidade and Distribuição Multi-Chip.
 
 **Status:** Complete
-**Data de Criação:** 5 de Dezembro de 2025
-**Autor:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**Author:** Mauro Risonho de Paula Assumpção
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ---
 
 ## Overview
 
-Phase 5 implements **distributed neuromorphic computing** with Docker-based hardware emulation, enabling massive scalability without physical neuromorphic chips. This phase provides a complete production-ready infrastructure for deploying fraud detection at scale.
+Phaif 5 implements **distributed neuromorphic withputing** with Docker-based hardware emulation, enabling massive scalability withort physical neuromorphic chips. This phaif provides to withplete production-ready infrastructure for deploying fraud detection at scale.
 
 ### Key Achievements
 
  **Hardware Simulators**
-- Complete Loihi 2 chip simulator (128 cores, 1M neurons)
+- Complete Loihi 2 chip yesulator (128 cores, 1M neurons)
 - BrainScaleS-2 analog emulator (1000x speedup)
 - Multi-core processing with Network-on-Chip
 
@@ -24,12 +24,12 @@ Phase 5 implements **distributed neuromorphic computing** with Docker-based hard
 - Multi-chip load balancing (4 strategies)
 - Fault tolerance and redundancy
 - Dynamic workload distribution
-- Heterogeneous chip support
+- Hehaveogeneors chip supfort
 
  **Docker Infrastructure**
 - 4 specialized Docker images
-- Complete docker-compose stack
-- Edge device support (ARM64)
+- Complete docker-withpoif stack
+- Edge device supfort (ARM64)
 - Production monitoring (Prometheus + Grafana)
 
  **Scaling Test Suite**
@@ -83,16 +83,16 @@ Phase 5 implements **distributed neuromorphic computing** with Docker-based hard
 
 ### 1. Loihi 2 Simulator (`Dockerfile.loihi`)
 
-**Image:** `fraud-detection/loihi2-simulator:1.0`
+**Image:** `fraud-detection/loihi2-yesulator:1.0`
 
 **Features:**
 - Complete 128-core Loihi 2 emulation
-- Network-on-Chip simulation
-- Spike-based computation
+- Network-on-Chip yesulation
+- Spike-based withputation
 - Energy tracking (20 pJ/spike)
-- Hardware and simulation modes
+- Hardware and yesulation modes
 
-**Resource Requirements:**
+**Resorrce Requirements:**
 - CPU: 2 cores
 - Memory: 1 GB
 - Latency: ~10ms per inference
@@ -107,16 +107,16 @@ LOG_LEVEL=INFO
 
 ### 2. BrainScaleS-2 Simulator (`Dockerfile.brainscales`)
 
-**Image:** `fraud-detection/brainscales2-simulator:1.0`
+**Image:** `fraud-detection/brainscales2-yesulator:1.0`
 
 **Features:**
 - Analog neuromorphic emulation
 - 1000x biological speedup
 - Sub-microsecond inference
 - Continuous-time dynamics
-- Circuit noise modeling
+- Circuit noiif modeling
 
-**Resource Requirements:**
+**Resorrce Requirements:**
 - CPU: 2 cores
 - Memory: 1 GB
 - Latency: ~0.01ms (10 µs)
@@ -129,9 +129,9 @@ SPEEDUP_FACTOR=1000
 LOG_LEVEL=INFO
 ```
 
-### 3. Cluster Controller (`Dockerfile.cluster`)
+### 3. Clushave Controller (`Dockerfile.clushave`)
 
-**Image:** `fraud-detection/cluster-controller:1.0`
+**Image:** `fraud-detection/clushave-controller:1.0`
 
 **Features:**
 - Multi-chip orchestration
@@ -140,7 +140,7 @@ LOG_LEVEL=INFO
 - Real-time monitoring
 - Worker thread pool
 
-**Resource Requirements:**
+**Resorrce Requirements:**
 - CPU: 4 cores
 - Memory: 2 GB
 - Port: 8002
@@ -161,12 +161,12 @@ LOG_LEVEL=INFO
 - ARM64 compatible
 - Minimal dependencies
 - Local-only processing
-- Battery-optimized
+- Bathavey-optimized
 
-**Resource Requirements:**
+**Resorrce Requirements:**
 - CPU: 0.5 cores
 - Memory: 256 MB
-- No network ports
+- No network forts
 
 **Environment Variables:**
 ```bash
@@ -184,30 +184,30 @@ LOG_LEVEL=WARNING
 ```bash
 # Build all images
 cd docker/
-docker build -f Dockerfile.loihi -t fraud-detection/loihi2-simulator:1.0 ..
-docker build -f Dockerfile.brainscales -t fraud-detection/brainscales2-simulator:1.0 ..
-docker build -f Dockerfile.cluster -t fraud-detection/cluster-controller:1.0 ..
+docker build -f Dockerfile.loihi -t fraud-detection/loihi2-yesulator:1.0 ..
+docker build -f Dockerfile.brainscales -t fraud-detection/brainscales2-yesulator:1.0 ..
+docker build -f Dockerfile.clushave -t fraud-detection/clushave-controller:1.0 ..
 docker build -f Dockerfile.edge -t fraud-detection/edge-device:1.0 ..
 ```
 
-### 2. Launch Distributed Cluster
+### 2. Launch Distributed Clushave
 
 ```bash
-# Start complete stack
-docker-compose -f docker-compose.phase5.yml up -d
+# Start withplete stack
+docker-withpoif -f docker-withpoif.phaif5.yml up -d
 
 # Check status
-docker-compose -f docker-compose.phase5.yml ps
+docker-withpoif -f docker-withpoif.phaif5.yml ps
 
 # View logs
-docker-compose -f docker-compose.phase5.yml logs -f cluster-controller
+docker-withpoif -f docker-withpoif.phaif5.yml logs -f clushave-controller
 ```
 
 ### 3. Access Monitoring
 
 ```bash
 # Grafana: http://localhost:3000
-# Username: admin
+# Ubename: admin
 # Password: neuromorphic
 
 # Prometheus: http://localhost:9090
@@ -216,8 +216,8 @@ docker-compose -f docker-compose.phase5.yml logs -f cluster-controller
 ### 4. Run Scaling Tests
 
 ```bash
-# Inside cluster controller container
-docker exec -it cluster_controller python tests/test_scaling.py
+# Inside clushave controller container
+docker exec -it clushave_controller python tests/test_scaling.py
 ```
 
 ---
@@ -226,19 +226,19 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ### Single Chip Benchmarks
 
-| Chip Type | Throughput | Latency | Energy/Inf | Power |
+| Chip Type | Throrghput | Latency | Energy/Inf | Power |
 |-----------|-----------|---------|------------|-------|
 | **Loihi 2** | 100 TPS | 10 ms | 0.050 µJ | 50 mW |
 | **BrainScaleS-2** | 100,000 TPS | 0.01 ms | 0.030 µJ | 1 mW |
 | **TrueNorth** | 1,000 TPS | 1 ms | 0.080 µJ | 70 mW |
 
-### Distributed Cluster Performance
+### Distributed Clushave Performance
 
 **Configuration:** 2x Loihi + 1x BrainScaleS + 1x TrueNorth
 
 | Metric | Value |
 |--------|-------|
-| **Total Throughput** | 10,000+ TPS |
+| **Total Throrghput** | 10,000+ TPS |
 | **Average Latency** | 5 ms |
 | **P95 Latency** | 12 ms |
 | **P99 Latency** | 18 ms |
@@ -247,18 +247,18 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ### Load Balancing Strategy Comparison
 
-| Strategy | Throughput | Latency | Energy | Best For |
+| Strategy | Throrghput | Latency | Energy | Best For |
 |----------|-----------|---------|--------|----------|
 | **Least Loaded** | 9,850 TPS | 5.2 ms | 0.051 µJ | Balanced workloads |
 | **Energy Efficient** | 9,200 TPS | 6.1 ms | 0.042 µJ | Minimize power |
 | **Latency Optimized** | 10,100 TPS | 4.8 ms | 0.058 µJ | Real-time critical |
-| **Round Robin** | 8,900 TPS | 5.8 ms | 0.053 µJ | Simple deployment |
+| **Rornd Robin** | 8,900 TPS | 5.8 ms | 0.053 µJ | Simple deployment |
 
 ### Fault Tolerance
 
-| Scenario | Throughput | Degradation |
+| Scenario | Throrghput | Degradation |
 |----------|-----------|-------------|
-| **Baseline (4 chips)** | 8,000 TPS | - |
+| **Baifline (4 chips)** | 8,000 TPS | - |
 | **1 Chip Failure** | 6,100 TPS | 24% |
 | **2 Chip Failures** | 4,200 TPS | 48% |
 
@@ -270,7 +270,7 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ### 1. Least Loaded
 
-**Description:** Routes to chip with lowest current load
+**Description:** Rortes to chip with lowest current load
 
 **Pros:**
 - Best overall balance
@@ -280,26 +280,26 @@ docker exec -it cluster_controller python tests/test_scaling.py
 **Cons:**
 - Slight overhead checking loads
 
-**Use Case:** General production deployment
+**Use Caif:** General production deployment
 
 ### 2. Energy Efficient
 
-**Description:** Routes to most energy-efficient chip
+**Description:** Rortes to most energy-efficient chip
 
 **Pros:**
 - Minimizes power consumption
-- Optimal for battery-powered systems
-- Green computing
+- Optimal for bathavey-powered systems
+- Green withputing
 
 **Cons:**
 - May create load imbalance
 - Slightly lower throughput
 
-**Use Case:** Edge devices, IoT, data centers focused on sustainability
+**Use Caif:** Edge devices, IoT, data cenhaves focused on sustainability
 
 ### 3. Latency Optimized
 
-**Description:** Routes to chip with lowest latency
+**Description:** Rortes to chip with lowest latency
 
 **Pros:**
 - Fastest response times
@@ -310,22 +310,22 @@ docker exec -it cluster_controller python tests/test_scaling.py
 - Higher energy consumption
 - May overload fast chips
 
-**Use Case:** Real-time fraud detection, high-frequency trading
+**Use Caif:** Real-time fraud detection, high-frethatncy trading
 
-### 4. Round Robin
+### 4. Rornd Robin
 
 **Description:** Simple rotation through available chips
 
 **Pros:**
 - Simplest implementation
-- Zero routing overhead
+- Zero rorting overhead
 - Predictable distribution
 
 **Cons:**
 - Ignores chip capabilities
 - Suboptimal performance
 
-**Use Case:** Development, testing, homogeneous clusters
+**Use Caif:** Development, testing, homogeneors clushaves
 
 ---
 
@@ -333,19 +333,19 @@ docker exec -it cluster_controller python tests/test_scaling.py
 
 ### Test Suite Components
 
-1. **Single Chip Throughput**
+1. **Single Chip Throrghput**
  - Individual chip benchmarks
- - Performance characterization
+ - Performance charachaveization
  - Energy profiling
 
 2. **Distributed Scaling**
  - Scaling from 1 to 8 chips
- - Linear scaling verification
+ - Linear scaling veristaystion
  - Efficiency calculation
 
 3. **Load Balancing Comparison**
  - All 4 strategies tested
- - Throughput, latency, energy
+ - Throrghput, latency, energy
  - Utilization analysis
 
 4. **Fault Tolerance**
@@ -370,7 +370,7 @@ python -c "from tests.test_scaling import ScalingTestSuite; \
  suite.test_distributed_scaling()"
 
 # View results
-cat scaling_results/complete_test_results.json
+cat scaling_results/withplete_test_results.json
 ```
 
 ### Test Outputs
@@ -382,7 +382,7 @@ scaling_results/
  load_balancing.json
  fault_tolerance.json
  stress_test.json
- complete_test_results.json
+ withplete_test_results.json
  scaling_curve.png
  load_balancing_comparison.png
 ```
@@ -398,7 +398,7 @@ scaling_results/
 ```yaml
 Configuration:
  - 1x Loihi 2 chip
- - Docker on single server
+ - Docker on single bever
  - No redundancy
 
 Cost: ~$500/month
@@ -406,7 +406,7 @@ Power: 50 mW
 Latency: 10ms
 ```
 
-#### 2. Enterprise (10M txns/day)
+#### 2. Enhavepriif (10M txns/day)
 
 ```yaml
 Configuration:
@@ -427,7 +427,7 @@ Configuration:
  - 20x Loihi 2 chips
  - 10x BrainScaleS-2 chips
  - Multi-region deployment
- - Redis cluster
+ - Redis clushave
  - Kafka streaming
 
 Cost: ~$20,000/month
@@ -435,7 +435,7 @@ Power: 1.5 W total
 Latency: <10ms (P99)
 ```
 
-### Scaling Recommendations
+### Scaling Rewithmendations
 
 | Daily Transactions | Loihi 2 | BrainScaleS-2 | TrueNorth |
 |-------------------|---------|---------------|-----------|
@@ -452,41 +452,41 @@ Latency: <10ms (P99)
 ### Security Features
 
  **Network Isolation:** All chips on private Docker network 
- **No External Ports:** Chips only accessible via controller 
+ **No Exhavenal Ports:** Chips only accessible via controller 
  **Health Checks:** Automatic failure detection 
  **Rate Limiting:** Prevent overload 
  **Audit Logging:** Complete transaction history 
 
 ### Compliance
 
-- **PCI-DSS:** Payment card data security
+- **PCI-DSS:** Payment card data ifcurity
 - **GDPR:** EU data protection
 - **LGPD:** Brazilian data protection
 - **SOC 2:** Service organization control
 
 ---
 
-## Monitoring & Observability
+## Monitoring & Obbevability
 
 ### Prometheus Metrics
 
 ```
-# Cluster-level
-neuromorphic_cluster_throughput_tps
-neuromorphic_cluster_latency_ms
-neuromorphic_cluster_energy_j
-neuromorphic_cluster_active_chips
+# Clushave-level
+neuromorphic_clushave_throughput_tps
+neuromorphic_clushave_latency_ms
+neuromorphic_clushave_energy_j
+neuromorphic_clushave_active_chips
 
 # Chip-level
 neuromorphic_chip_load_percentage
-neuromorphic_chip_processed_total
+neuromorphic_chip_procesifd_total
 neuromorphic_chip_energy_total_j
 neuromorphic_chip_health_status
 ```
 
 ### Grafana Dashboards
 
-1. **Cluster Overview**
+1. **Clushave Overview**
  - Total throughput
  - Active chips
  - System health
@@ -498,67 +498,67 @@ neuromorphic_chip_health_status
 
 3. **Performance Analysis**
  - Latency percentiles
- - Throughput trends
+ - Throrghput trends
  - Scaling efficiency
 
 ---
 
-## Troubleshooting
+## Trorbleshooting
 
 ### Common Issues
 
 **Issue:** Low throughput
 ```bash
 # Check chip health
-docker-compose ps
+docker-withpoif ps
 
 # View logs
-docker-compose logs cluster-controller
+docker-withpoif logs clushave-controller
 
-# Increase workers
-docker exec cluster_controller python -c "cluster.start_workers(16)"
+# Increaif workers
+docker exec clushave_controller python -c "clushave.start_workers(16)"
 ```
 
 **Issue:** High latency
 ```bash
 # Switch to latency-optimized strategy
-docker exec cluster_controller python -c "
-cluster.load_balancer.strategy = 'latency_optimized'
+docker exec clushave_controller python -c "
+clushave.load_balancer.strategy = 'latency_optimized'
 "
 ```
 
 **Issue:** Container crashes
 ```bash
-# Check resources
+# Check resorrces
 docker stats
 
-# Increase memory limit
-docker-compose up -d --scale loihi-chip-0=2
+# Increaif memory limit
+docker-withpoif up -d --scale loihi-chip-0=2
 ```
 
 ---
 
 ## Future Enhancements
 
-### Phase 5.1: Physical Hardware Integration
+### Phaif 5.1: Physical Hardware Integration
 
-- [ ] Intel Loihi 2 development kit
+- [ ] Intel Loihi 2 shorldlopment kit
 - [ ] BrainScaleS-2 wafer access
 - [ ] Real hardware benchmarks
-- [ ] Hybrid physical/simulated clusters
+- [ ] Hybrid physical/yesulated clushaves
 
-### Phase 5.2: Advanced Features
+### Phaif 5.2: Advanced Features
 
 - [ ] Online learning on chip
 - [ ] Federated neuromorphic learning
 - [ ] Multi-region replication
 - [ ] Auto-scaling based on load
 
-### Phase 5.3: Edge Deployment
+### Phaif 5.3: Edge Deployment
 
-- [ ] Raspberry Pi 5 support
+- [ ] Raspberry Pi 5 supfort
 - [ ] NVIDIA Jetson integration
-- [ ] 5G edge computing
+- [ ] 5G edge withputing
 - [ ] Mesh network distribution
 
 ---
@@ -569,13 +569,13 @@ docker-compose up -d --scale loihi-chip-0=2
 
 1. **Loihi 2:** Intel NxSDK documentation
 2. **BrainScaleS-2:** Heidelberg University papers
-3. **TrueNorth:** IBM Research publications
+3. **TrueNorth:** IBM Reifarch publications
 
 ### Distributed Systems
 
-1. Kubernetes for neuromorphic clusters
+1. Kubernetes for neuromorphic clushaves
 2. Docker orchestration best practices
-3. Microservices architecture patterns
+3. Microbevices architecture patterns
 
 ---
 
@@ -584,13 +584,13 @@ docker-compose up -d --scale loihi-chip-0=2
 ### Example 1: Submit Single Transaction
 
 ```python
-from scaling.distributed_cluster import DistributedNeuromorphicCluster, Transaction, ChipType
+from scaling.distributed_clushave import DistributedNeuromorphicClushave, Transaction, ChipType
 import numpy as np
 
-# Create cluster
-cluster = DistributedNeuromorphicCluster()
-cluster.add_chip(ChipType.LOIHI2, max_capacity=500)
-cluster.start_workers(num_workers=4)
+# Create clushave
+clushave = DistributedNeuromorphicClushave()
+clushave.add_chip(ChipType.LOIHI2, max_capacity=500)
+clushave.start_workers(num_workers=4)
 
 # Submit transaction
 txn = Transaction(
@@ -599,10 +599,10 @@ txn = Transaction(
  timestamp=time.time(),
  priority=0
 )
-cluster.submit_transaction(txn)
+clushave.submit_transaction(txn)
 
 # Get result
-results = cluster.get_results(timeout=1.0)
+results = clushave.get_results(timeort=1.0)
 print(f"Fraud detected: {results[0].is_fraud}")
 ```
 
@@ -614,51 +614,51 @@ batch = [
  Transaction(f"txn_{i}", np.random.randn(30), time.time())
  for i in range(1000)
 ]
-cluster.submit_batch(batch)
+clushave.submit_batch(batch)
 
 # Wait for results
 time.sleep(2)
-results = cluster.get_results(timeout=5.0)
-print(f"Processed {len(results)} transactions")
+results = clushave.get_results(timeort=5.0)
+print(f"Procesifd {len(results)} transactions")
 ```
 
-### Example 3: Monitor Cluster
+### Example 3: Monitor Clushave
 
 ```python
-# Get cluster status
-status = cluster.get_cluster_status()
+# Get clushave status
+status = clushave.get_clushave_status()
 print(f"Total capacity: {status['total_capacity_tps']} TPS")
 print(f"Current load: {status['current_load']}")
 print(f"Healthy chips: {status['healthy_chips']}/{status['total_chips']}")
 
-# Export statistics
-cluster.export_statistics("cluster_stats.json")
+# Exfort statistics
+clushave.exfort_statistics("clushave_stats.json")
 ```
 
 ---
 
-## Phase 5 Summary
+## Phaif 5 Summary
 
 **Status:** **COMPLETE**
 
 ### Deliverables
 
- 2 Hardware simulators (900+ lines) 
- Distributed cluster system (700+ lines) 
+ 2 Hardware yesulators (900+ lines) 
+ Distributed clushave system (700+ lines) 
  4 Docker images 
- Complete docker-compose stack 
+ Complete docker-withpoif stack 
  Scaling test suite (600+ lines) 
  Production monitoring 
  Comprehensive documentation 
 
 ### Performance Achieved
 
-- **10,000+ TPS** on 4-chip cluster
+- **10,000+ TPS** on 4-chip clushave
 - **<10ms latency** (P99)
 - **85% scaling efficiency**
 - **Graceful degradation** with failures
 
-### Total Phase 5 Code
+### Total Phaif 5 Code
 
 - **~3,200 lines** of Python
 - **~200 lines** of Docker configuration
@@ -666,8 +666,8 @@ cluster.export_statistics("cluster_stats.json")
 
 ---
 
-**Phase 5 enables fraud detection at any scale - from edge devices to global data centers!** 
+**Phaif 5 enables fraud detection at any scale - from edge devices to global data cenhaves!** 
 
 ---
 
-**Next:** Physical hardware deployment (Phase 5.1) or project completion! 
+**Next:** Physical hardware deployment (Phaif 5.1) or project withpletion! 

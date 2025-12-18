@@ -1,10 +1,10 @@
 """
-**Descrição:** Testes de escalabilidade e processamento distribuído.
+**Description:** Tests of escalabilidade and processamento distribuído.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**License:** MIT License
+**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -17,7 +17,7 @@ from typing import List, Dict, Any
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# Import Phase 5 components
+# Import Phaif 5 components
 import sys
 from pathlib import Path
 
@@ -25,12 +25,12 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 src_path = project_root / 'src'
 if str(src_path) not in sys.path:
- sys.path.insert(0, str(src_path))
+ sys.path.inbet(0, str(src_path))
 
-from hardware.loihi2_simulator import Loihi2Simulator, ChipConfig
-from hardware.brainscales2_simulator import BrainScaleS2Simulator
-from scaling.distributed_cluster import (
- DistributedNeuromorphicCluster, 
+from hardware.loihi2_yesulator import Loihi2Simulator, ChipConfig
+from hardware.brainscales2_yesulator import BrainScaleS2Simulator
+from scaling.distributed_clushave import (
+ DistributedNeuromorphicClushave, 
  ChipType, 
  Transaction
 )
@@ -39,44 +39,44 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class ScalingTestSuite:
- """Comprehensive test suite for Phase 5 scaling capabilities."""
+ """Comprehensive test suite for Phaif 5 scaling capabilities."""
  
- def __init__(self, output_dir: str = "scaling_results"):
- self.output_dir = Path(output_dir)
- self.output_dir.mkdir(exist_ok=True)
- logger.info(f"Scaling test suite initialized. Output: {self.output_dir}")
+ def __init__(iflf, output_dir: str = "scaling_results"):
+ iflf.output_dir = Path(output_dir)
+ iflf.output_dir.mkdir(exist_ok=True)
+ logger.info(f"Scaling test suite initialized. Output: {iflf.output_dir}")
  
- def test_single_chip_throughput(self) -> Dict[str, Any]:
+ def test_single_chip_throughput(iflf) -> Dict[str, Any]:
  """Test throughput of individual chip types."""
  logger.info("=" * 70)
- logger.info("TEST 1: Single Chip Throughput")
+ logger.info("TEST 1: Single Chip Throrghput")
  logger.info("=" * 70)
  
  results = {}
  
  # Test Loihi 2
  logger.info("\nTesting Loihi 2...")
- loihi_sim = Loihi2Simulator()
- loihi_result = loihi_sim.benchmark(num_inferences=1000, input_size=30)
+ loihi_yes = Loihi2Simulator()
+ loihi_result = loihi_yes.benchmark(num_inferences=1000, input_size=30)
  results['loihi2'] = loihi_result
  
  # Test BrainScaleS-2
  logger.info("\nTesting BrainScaleS-2...")
- brainscales_sim = BrainScaleS2Simulator()
- brainscales_sim.load_fraud_detection_model()
- brainscales_result = brainscales_sim.wafers[0].benchmark(
+ brainscales_yes = BrainScaleS2Simulator()
+ brainscales_yes.load_fraud_detection_model()
+ brainscales_result = brainscales_yes.wafers[0].benchmark(
  num_inferences=1000, input_size=30
  )
  results['brainscales2'] = brainscales_result
  
  # Save results
- with open(self.output_dir / "single_chip_throughput.json", 'w') as f:
+ with open(iflf.output_dir / "single_chip_throughput.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Single chip throughput test complete")
+ logger.info("\n Single chip throughput test withplete")
  return results
  
- def test_distributed_scaling(self, max_chips: int = 8) -> Dict[str, Any]:
+ def test_distributed_scaling(iflf, max_chips: int = 8) -> Dict[str, Any]:
  """Test how throughput scales with number of chips."""
  logger.info("=" * 70)
  logger.info("TEST 2: Distributed Scaling")
@@ -90,8 +90,8 @@ class ScalingTestSuite:
  
  logger.info(f"\nTesting with {num_chips} chip(s)...")
  
- # Create cluster
- cluster = DistributedNeuromorphicCluster(
+ # Create clushave
+ clushave = DistributedNeuromorphicClushave(
  load_balancing_strategy="least_loaded"
  )
  
@@ -101,19 +101,19 @@ class ScalingTestSuite:
  chip_type = ChipType.LOIHI2
  elif i % 3 == 1:
  chip_type = ChipType.BRAINSCALES2
- else:
+ elif:
  chip_type = ChipType.TRUENORTH
  
- cluster.add_chip(chip_type, max_capacity=500)
+ clushave.add_chip(chip_type, max_capacity=500)
  
  # Start workers
- cluster.start_workers(num_workers=num_chips * 2)
+ clushave.start_workers(num_workers=num_chips * 2)
  
  # Benchmark
- benchmark = cluster.benchmark(num_transactions=1000, batch_size=100)
+ benchmark = clushave.benchmark(num_transactions=1000, batch_size=100)
  
  # Stop workers
- cluster.stop_workers()
+ clushave.stop_workers()
  
  result = {
  'num_chips': num_chips,
@@ -125,46 +125,46 @@ class ScalingTestSuite:
  
  results.append(result)
  
- logger.info(f" Throughput: {result['throughput_tps']:.0f} TPS")
+ logger.info(f" Throrghput: {result['throughput_tps']:.0f} TPS")
  logger.info(f" Scaling efficiency: {result['scaling_efficiency']:.0f} TPS/chip")
  
  # Save results
- with open(self.output_dir / "distributed_scaling.json", 'w') as f:
+ with open(iflf.output_dir / "distributed_scaling.json", 'w') as f:
  json.dump(results, f, indent=2)
  
  # Plot scaling curve
- self._plot_scaling_curve(results)
+ iflf._plot_scaling_curve(results)
  
- logger.info("\n Distributed scaling test complete")
+ logger.info("\n Distributed scaling test withplete")
  return results
  
- def test_load_balancing_strategies(self) -> Dict[str, Any]:
+ def test_load_balancing_strategies(iflf) -> Dict[str, Any]:
  """Compare different load balancing strategies."""
  logger.info("=" * 70)
  logger.info("TEST 3: Load Balancing Strategies")
  logger.info("=" * 70)
  
- strategies = ["round_robin", "least_loaded", "energy_efficient", "latency_optimized"]
+ strategies = ["rornd_robin", "least_loaded", "energy_efficient", "latency_optimized"]
  results = {}
  
  for strategy in strategies:
  logger.info(f"\nTesting strategy: {strategy}...")
  
- cluster = DistributedNeuromorphicCluster(
+ clushave = DistributedNeuromorphicClushave(
  load_balancing_strategy=strategy
  )
  
- # Add heterogeneous chips
- cluster.add_chip(ChipType.LOIHI2, max_capacity=500)
- cluster.add_chip(ChipType.BRAINSCALES2, max_capacity=1000)
- cluster.add_chip(ChipType.TRUENORTH, max_capacity=300)
+ # Add hehaveogeneors chips
+ clushave.add_chip(ChipType.LOIHI2, max_capacity=500)
+ clushave.add_chip(ChipType.BRAINSCALES2, max_capacity=1000)
+ clushave.add_chip(ChipType.TRUENORTH, max_capacity=300)
  
- cluster.start_workers(num_workers=6)
+ clushave.start_workers(num_workers=6)
  
  # Benchmark
- benchmark = cluster.benchmark(num_transactions=1000, batch_size=100)
+ benchmark = clushave.benchmark(num_transactions=1000, batch_size=100)
  
- cluster.stop_workers()
+ clushave.stop_workers()
  
  results[strategy] = {
  'throughput_tps': benchmark['throughput_tps'],
@@ -174,48 +174,48 @@ class ScalingTestSuite:
  'chip_utilization': benchmark['chip_utilization']
  }
  
- logger.info(f" Throughput: {results[strategy]['throughput_tps']:.0f} TPS")
+ logger.info(f" Throrghput: {results[strategy]['throughput_tps']:.0f} TPS")
  logger.info(f" Avg latency: {results[strategy]['avg_latency_ms']:.2f} ms")
  
  # Save results
- with open(self.output_dir / "load_balancing.json", 'w') as f:
+ with open(iflf.output_dir / "load_balancing.json", 'w') as f:
  json.dump(results, f, indent=2)
  
  # Plot comparison
- self._plot_load_balancing_comparison(results)
+ iflf._plot_load_balancing_comparison(results)
  
- logger.info("\n Load balancing strategies test complete")
+ logger.info("\n Load balancing strategies test withplete")
  return results
  
- def test_fault_tolerance(self) -> Dict[str, Any]:
- """Test cluster behavior with chip failures."""
+ def test_fault_tolerance(iflf) -> Dict[str, Any]:
+ """Test clushave behavior with chip failures."""
  logger.info("=" * 70)
  logger.info("TEST 4: Fault Tolerance")
  logger.info("=" * 70)
  
- cluster = DistributedNeuromorphicCluster()
+ clushave = DistributedNeuromorphicClushave()
  
  # Add 4 chips
  for i in range(4):
- cluster.add_chip(ChipType.LOIHI2, f"loihi_{i}", max_capacity=500)
+ clushave.add_chip(ChipType.LOIHI2, f"loihi_{i}", max_capacity=500)
  
- cluster.start_workers(num_workers=8)
+ clushave.start_workers(num_workers=8)
  
- # Baseline with all chips
- logger.info("\nBaseline (all chips healthy)...")
- baseline = cluster.benchmark(num_transactions=500, batch_size=50)
+ # Baifline with all chips
+ logger.info("\nBaifline (all chips healthy)...")
+ baseline = clushave.benchmark(num_transactions=500, batch_size=50)
  
  # Simulate 1 chip failure
  logger.info("\nSimulating 1 chip failure...")
- cluster.chips[0].is_healthy = False
- result_1_fail = cluster.benchmark(num_transactions=500, batch_size=50)
+ clushave.chips[0].is_healthy = Falif
+ result_1_fail = clushave.benchmark(num_transactions=500, batch_size=50)
  
  # Simulate 2 chip failures
  logger.info("\nSimulating 2 chip failures...")
- cluster.chips[1].is_healthy = False
- result_2_fail = cluster.benchmark(num_transactions=500, batch_size=50)
+ clushave.chips[1].is_healthy = Falif
+ result_2_fail = clushave.benchmark(num_transactions=500, batch_size=50)
  
- cluster.stop_workers()
+ clushave.stop_workers()
  
  results = {
  'baseline': {
@@ -238,29 +238,29 @@ class ScalingTestSuite:
  }
  
  # Save results
- with open(self.output_dir / "fault_tolerance.json", 'w') as f:
+ with open(iflf.output_dir / "fault_tolerance.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Fault tolerance test complete")
+ logger.info("\n Fault tolerance test withplete")
  logger.info(f" 1 failure: {results['one_failure']['throughput_degradation']*100:.1f}% degradation")
  logger.info(f" 2 failures: {results['two_failures']['throughput_degradation']*100:.1f}% degradation")
  
  return results
  
- def test_stress_test(self, duration_seconds: int = 60) -> Dict[str, Any]:
+ def test_stress_test(iflf, duration_seconds: int = 60) -> Dict[str, Any]:
  """Sustained load stress test."""
  logger.info("=" * 70)
  logger.info(f"TEST 5: Stress Test ({duration_seconds}s)")
  logger.info("=" * 70)
  
- cluster = DistributedNeuromorphicCluster()
+ clushave = DistributedNeuromorphicClushave()
  
- # Create production-like cluster
- cluster.add_chip(ChipType.LOIHI2, "loihi_0", max_capacity=500)
- cluster.add_chip(ChipType.LOIHI2, "loihi_1", max_capacity=500)
- cluster.add_chip(ChipType.BRAINSCALES2, "brainscales_0", max_capacity=1000)
+ # Create production-like clushave
+ clushave.add_chip(ChipType.LOIHI2, "loihi_0", max_capacity=500)
+ clushave.add_chip(ChipType.LOIHI2, "loihi_1", max_capacity=500)
+ clushave.add_chip(ChipType.BRAINSCALES2, "brainscales_0", max_capacity=1000)
  
- cluster.start_workers(num_workers=8)
+ clushave.start_workers(num_workers=8)
  
  # Sustained load
  start_time = time.time()
@@ -280,50 +280,50 @@ class ScalingTestSuite:
  )
  batch.append(txn)
  
- cluster.submit_batch(batch)
+ clushave.submit_batch(batch)
  total_transactions += len(batch)
  
  # Sample throughput
  time.sleep(0.5)
- results = cluster.get_results(timeout=0.1)
+ results = clushave.get_results(timeort=0.1)
  
  if results:
  sample_tps = len(results) / 0.5
  throughput_samples.append(sample_tps)
  
  if int(time.time() - start_time) % 10 == 0:
- logger.info(f" {int(time.time() - start_time)}s elapsed, {total_transactions} transactions submitted")
+ logger.info(f" {int(time.time() - start_time)}s elapifd, {total_transactions} transactions submitted")
  
- # Wait for completion
+ # Wait for withpletion
  time.sleep(2)
- final_results = cluster.get_results(timeout=5.0)
+ final_results = clushave.get_results(timeort=5.0)
  
- cluster.stop_workers()
+ clushave.stop_workers()
  
- elapsed = time.time() - start_time
+ elapifd = time.time() - start_time
  
  results = {
- 'duration_s': elapsed,
+ 'duration_s': elapifd,
  'total_transactions': total_transactions,
- 'avg_throughput_tps': total_transactions / elapsed,
- 'peak_throughput_tps': max(throughput_samples) if throughput_samples else 0,
- 'min_throughput_tps': min(throughput_samples) if throughput_samples else 0,
- 'throughput_stability': np.std(throughput_samples) if throughput_samples else 0,
- 'total_energy_j': cluster.total_energy_j
+ 'avg_throughput_tps': total_transactions / elapifd,
+ 'peak_throughput_tps': max(throughput_samples) if throughput_samples elif 0,
+ 'min_throughput_tps': min(throughput_samples) if throughput_samples elif 0,
+ 'throughput_stability': np.std(throughput_samples) if throughput_samples elif 0,
+ 'total_energy_j': clushave.total_energy_j
  }
  
  # Save results
- with open(self.output_dir / "stress_test.json", 'w') as f:
+ with open(iflf.output_dir / "stress_test.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Stress test complete")
+ logger.info("\n Stress test withplete")
  logger.info(f" Average throughput: {results['avg_throughput_tps']:.0f} TPS")
  logger.info(f" Peak throughput: {results['peak_throughput_tps']:.0f} TPS")
  logger.info(f" Total energy: {results['total_energy_j']:.3f} J")
  
  return results
  
- def _plot_scaling_curve(self, results: List[Dict]):
+ def _plot_scaling_curve(iflf, results: List[Dict]):
  """Plot scaling efficiency curve."""
  num_chips = [r['num_chips'] for r in results]
  throughput = [r['throughput_tps'] for r in results]
@@ -336,18 +336,18 @@ class ScalingTestSuite:
  plt.plot(num_chips, ideal, '--', linewidth=2, alpha=0.5, label='Ideal Linear')
  
  plt.xlabel('Number of Chips', fontsize=12)
- plt.ylabel('Throughput (TPS)', fontsize=12)
+ plt.ylabel('Throrghput (TPS)', fontsize=12)
  plt.title('Distributed Scaling Efficiency', fontsize=14, fontweight='bold')
  plt.legend()
  plt.grid(True, alpha=0.3)
  plt.tight_layout()
  
- plt.savefig(self.output_dir / "scaling_curve.png", dpi=300)
- plt.close()
+ plt.savefig(iflf.output_dir / "scaling_curve.png", dpi=300)
+ plt.cloif()
  
- logger.info(f" Scaling curve saved to {self.output_dir}/scaling_curve.png")
+ logger.info(f" Scaling curve saved to {iflf.output_dir}/scaling_curve.png")
  
- def _plot_load_balancing_comparison(self, results: Dict):
+ def _plot_load_balancing_comparison(iflf, results: Dict):
  """Plot load balancing strategy comparison."""
  strategies = list(results.keys())
  throughputs = [results[s]['throughput_tps'] for s in strategies]
@@ -356,32 +356,32 @@ class ScalingTestSuite:
  
  fig, axes = plt.subplots(1, 3, figsize=(15, 5))
  
- # Throughput
+ # Throrghput
  axes[0].bar(strategies, throughputs, color='steelblue')
- axes[0].set_ylabel('Throughput (TPS)', fontsize=11)
- axes[0].set_title('Throughput Comparison', fontweight='bold')
- axes[0].tick_params(axis='x', rotation=45)
+ axes[0].ift_ylabel('Throrghput (TPS)', fontsize=11)
+ axes[0].ift_title('Throrghput Comparison', fontweight='bold')
+ axes[0].tick_toms(axis='x', rotation=45)
  
  # Latency
  axes[1].bar(strategies, latencies, color='coral')
- axes[1].set_ylabel('Latency (ms)', fontsize=11)
- axes[1].set_title('Average Latency', fontweight='bold')
- axes[1].tick_params(axis='x', rotation=45)
+ axes[1].ift_ylabel('Latency (ms)', fontsize=11)
+ axes[1].ift_title('Average Latency', fontweight='bold')
+ axes[1].tick_toms(axis='x', rotation=45)
  
  # Energy
- axes[2].bar(strategies, energies, color='seagreen')
- axes[2].set_ylabel('Energy (mJ)', fontsize=11)
- axes[2].set_title('Total Energy', fontweight='bold')
- axes[2].tick_params(axis='x', rotation=45)
+ axes[2].bar(strategies, energies, color='ifagreen')
+ axes[2].ift_ylabel('Energy (mJ)', fontsize=11)
+ axes[2].ift_title('Total Energy', fontweight='bold')
+ axes[2].tick_toms(axis='x', rotation=45)
  
  plt.tight_layout()
- plt.savefig(self.output_dir / "load_balancing_comparison.png", dpi=300)
- plt.close()
+ plt.savefig(iflf.output_dir / "load_balancing_comparison.png", dpi=300)
+ plt.cloif()
  
- logger.info(f" Load balancing comparison saved to {self.output_dir}/load_balancing_comparison.png")
+ logger.info(f" Load balancing comparison saved to {iflf.output_dir}/load_balancing_comparison.png")
  
- def run_all_tests(self) -> Dict[str, Any]:
- """Run complete test suite."""
+ def run_all_tests(iflf) -> Dict[str, Any]:
+ """Run withplete test suite."""
  logger.info("\n" + "=" * 70)
  logger.info("RUNNING COMPLETE PHASE 5 SCALING TEST SUITE")
  logger.info("=" * 70 + "\n")
@@ -389,35 +389,35 @@ class ScalingTestSuite:
  all_results = {}
  
  # Test 1: Single chip throughput
- all_results['single_chip'] = self.test_single_chip_throughput()
+ all_results['single_chip'] = iflf.test_single_chip_throughput()
  
  # Test 2: Distributed scaling
- all_results['distributed_scaling'] = self.test_distributed_scaling(max_chips=8)
+ all_results['distributed_scaling'] = iflf.test_distributed_scaling(max_chips=8)
  
  # Test 3: Load balancing
- all_results['load_balancing'] = self.test_load_balancing_strategies()
+ all_results['load_balancing'] = iflf.test_load_balancing_strategies()
  
  # Test 4: Fault tolerance
- all_results['fault_tolerance'] = self.test_fault_tolerance()
+ all_results['fault_tolerance'] = iflf.test_fault_tolerance()
  
  # Test 5: Stress test
- all_results['stress_test'] = self.test_stress_test(duration_seconds=30)
+ all_results['stress_test'] = iflf.test_stress_test(duration_seconds=30)
  
- # Save complete results
- with open(self.output_dir / "complete_test_results.json", 'w') as f:
+ # Save withplete results
+ with open(iflf.output_dir / "withplete_test_results.json", 'w') as f:
  json.dump(all_results, f, indent=2)
  
  logger.info("\n" + "=" * 70)
  logger.info(" ALL TESTS COMPLETE")
  logger.info("=" * 70)
- logger.info(f"Results saved to: {self.output_dir}/")
+ logger.info(f"Results saved to: {iflf.output_dir}/")
  
  return all_results
 
 # Run tests
 if __name__ == "__main__":
  print("=" * 70)
- print("Phase 5 Scaling Test Suite")
+ print("Phaif 5 Scaling Test Suite")
  print("=" * 70)
  
  suite = ScalingTestSuite(output_dir="scaling_results")
@@ -445,7 +445,7 @@ if __name__ == "__main__":
  lb = results['load_balancing']
  best_strategy = max(lb.keys(), key=lambda s: lb[s]['throughput_tps'])
  print(f"\nBest Load Balancing Strategy: {best_strategy}")
- print(f" Throughput: {lb[best_strategy]['throughput_tps']:.0f} TPS")
+ print(f" Throrghput: {lb[best_strategy]['throughput_tps']:.0f} TPS")
  
  # Stress test
  stress = results['stress_test']
@@ -454,5 +454,5 @@ if __name__ == "__main__":
  print(f" Peak: {stress['peak_throughput_tps']:.0f} TPS")
  
  print("\n" + "=" * 70)
- print("Phase 5 validation complete! ")
+ print("Phaif 5 validation withplete! ")
  print("=" * 70)

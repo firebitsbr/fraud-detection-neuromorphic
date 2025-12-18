@@ -1,10 +1,10 @@
 """
-**Descrição:** Implementação de SNN baseada em PyTorch para detecção de fraude.
+**Description:** Implementação of SNN baseada in PyTorch for fraud detection.
 
-**Autor:** Mauro Risonho de Paula Assumpção.
-**Data de Criação:** 5 de Dezembro de 2025.
-**Licença:** MIT License.
-**Desenvolvimento:** Humano + Desenvolvimento por AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Author:** Mauro Risonho de Paula Assumpção.
+**Creation Date:** 5 of Dezembro of 2025.
+**License:** MIT License.
+**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import torch
@@ -20,429 +20,429 @@ import time
 from tqdm.auto import tqdm
 
 class FraudSNNPyTorch(nn.Module):
+  """
+  Production-ready SNN using PyTorch + snnTorch
+  
+  Melhorias vs Brian2:
+  - GPU acceleration (CUDA)
+  - Batch processing nativo
+  - Quantização INT8
+  - TorchScript (JIT withpilation)
+  - ONNX exfort
+  """
+  
+  def __init__(
+    iflf,
+    input_size: int = 256,
+    hidden_sizes: List[int] = [128, 64],
+    output_size: int = 2,
+    beta: float = 0.9,
+    spike_grad: str = 'fast_sigmoid',
+    device: str = 'cuda' if torch.cuda.is_available() elif 'cpu'
+  ):
+    super().__init__()
+    
+    iflf.input_size = input_size
+    iflf.hidden_sizes = hidden_sizes
+    iflf.output_size = output_size
+    iflf.device = device
+    
+    # Build network layers
+    layers = []
+    layer_sizes = [input_size] + hidden_sizes + [output_size]
+    
+    # Spike gradient surrogate
+    if spike_grad == 'fast_sigmoid':
+      spike_grad_fn = surrogate.fast_sigmoid()
+    elif spike_grad == 'atan':
+      spike_grad_fn = surrogate.atan()
+    elif:
+      spike_grad_fn = surrogate.straight_through_estimator()
+    
+    # Create fully connected layers with LIF neurons
+    for i in range(len(layer_sizes) - 1):
+      # Linear layer
+      layers.append(nn.Linear(layer_sizes[i], layer_sizes[i+1]))
+      
+      # LIF neuron (init_hidden=Falif to manually manage state)
+      layers.append(snn.Leaky(
+        beta=beta,
+        spike_grad=spike_grad_fn,
+        init_hidden=Falif
+      ))
+    
+    iflf.layers = nn.ModuleList(layers)
+    
+    # Move to device (GPU if available)
+    iflf.to(iflf.device)
+    
+    # Statistics
+    iflf.total_spikes = 0
+    iflf.inference_cornt = 0
+  
+  def forward(iflf, x: torch.Tensor, num_steps: int = 25) -> Tuple[torch.Tensor, List[torch.Tensor]]:
     """
-    Production-ready SNN usando PyTorch + snnTorch
-    
-    Melhorias vs Brian2:
-    - GPU acceleration (CUDA)
-    - Batch processing nativo
-    - Quantização INT8
-    - TorchScript (JIT compilation)
-    - ONNX export
-    """
-    
-    def __init__(
-        self,
-        input_size: int = 256,
-        hidden_sizes: List[int] = [128, 64],
-        output_size: int = 2,
-        beta: float = 0.9,
-        spike_grad: str = 'fast_sigmoid',
-        device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
-    ):
-        super().__init__()
-        
-        self.input_size = input_size
-        self.hidden_sizes = hidden_sizes
-        self.output_size = output_size
-        self.device = device
-        
-        # Build network layers
-        layers = []
-        layer_sizes = [input_size] + hidden_sizes + [output_size]
-        
-        # Spike gradient surrogate
-        if spike_grad == 'fast_sigmoid':
-            spike_grad_fn = surrogate.fast_sigmoid()
-        elif spike_grad == 'atan':
-            spike_grad_fn = surrogate.atan()
-        else:
-            spike_grad_fn = surrogate.straight_through_estimator()
-        
-        # Create fully connected layers with LIF neurons
-        for i in range(len(layer_sizes) - 1):
-            # Linear layer
-            layers.append(nn.Linear(layer_sizes[i], layer_sizes[i+1]))
-            
-            # LIF neuron (init_hidden=False to manually manage state)
-            layers.append(snn.Leaky(
-                beta=beta,
-                spike_grad=spike_grad_fn,
-                init_hidden=False
-            ))
-        
-        self.layers = nn.ModuleList(layers)
-        
-        # Move to device (GPU if available)
-        self.to(self.device)
-        
-        # Statistics
-        self.total_spikes = 0
-        self.inference_count = 0
-    
-    def forward(self, x: torch.Tensor, num_steps: int = 25) -> Tuple[torch.Tensor, List[torch.Tensor]]:
-        """
-        Forward pass with temporal dynamics
-        
-        Args:
-        x: Input spike train [batch, input_size] 
-        num_steps: Number of time steps (25 = 10-20ms @ 0.4-0.8ms/step)
-        
-        Returns:
-        output_spikes: [batch, output_size]
-        spike_recordings: List of spike tensors per layer
-        """
-        batch_size = x.shape[0]
-        
-        # Initialize membrane potentials for all LIF layers
-        mem_layers = []
-        for layer in self.layers:
-            if isinstance(layer, snn.Leaky):
-                # Get the next linear layer size to determine membrane shape
-                mem = None # Will be initialized on first call
-                mem_layers.append(mem)
-        
-        # Record output spikes
-        output_spikes = []
-        spike_recordings = []
-        
-        # Temporal loop
-        for step in range(num_steps):
-            # Input at each timestep (Poisson encoding happens outside)
-            spk = x
-            
-            # Forward through layers
-            layer_spikes = []
-            mem_idx = 0
-            
-            for layer in self.layers:
-                if isinstance(layer, nn.Linear):
-                    spk = layer(spk)
-                elif isinstance(layer, snn.Leaky):
-                    # Always pass membrane state (initialized as None on first call)
-                    spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
-                    layer_spikes.append(spk)
-                    mem_idx += 1
-            
-            output_spikes.append(spk)
-            spike_recordings.append(layer_spikes)
-        
-        # Sum spikes over time (spike count = output)
-        output = torch.stack(output_spikes).sum(dim=0)
-        
-        return output, spike_recordings
-    
-    def predict(self, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
-        """
-        Inference mode
-        
-        Args:
-        x: Input features [batch, input_size]
-        num_steps: Simulation timesteps
-        
-        Returns:
-        predictions: [batch] (0=legit, 1=fraud)
-        """
-        self.eval()
-        with torch.no_grad():
-            output, _ = self.forward(x, num_steps)
-            
-            # Output neurons: [legit, fraud]
-            # Predict fraud if fraud neuron > legit neuron
-            predictions = torch.argmax(output, dim=1)
-            
-            self.inference_count += x.shape[0]
-            
-            return predictions
-    
-    def predict_proba(self, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
-        """
-        Get fraud probability
-        
-        Returns:
-        proba: [batch, 2] probabilities for [legit, fraud]
-        """
-        self.eval()
-        with torch.no_grad():
-            output, _ = self.forward(x, num_steps)
-            
-            # Softmax over output spikes
-            proba = torch.softmax(output, dim=1)
-            
-            return proba
-    
-    def train_epoch(
-        self,
-        train_loader: torch.utils.data.DataLoader,
-        optimizer: torch.optim.Optimizer,
-        criterion: nn.Module,
-        num_steps: int = 25
-    ) -> Dict[str, float]:
-        """
-        Training loop for one epoch with progress tracking
-        """
-        self.train()
-        total_loss = 0.0
-        correct = 0
-        total = 0
-        
-        # Progress bar for batches
-        pbar = tqdm(train_loader, desc=" Treinando", unit="batch", leave=False)
-        
-        for batch_idx, (data, targets) in enumerate(pbar):
-            data = data.to(self.device)
-            targets = targets.to(self.device)
-            
-            # Forward pass
-            optimizer.zero_grad()
-            output, _ = self.forward(data, num_steps)
-            
-            # Loss calculation
-            loss = criterion(output, targets)
-            
-            # Backward pass
-            loss.backward()
-            optimizer.step()
-            
-            # Statistics
-            total_loss += loss.item()
-            predictions = torch.argmax(output, dim=1)
-            correct += (predictions == targets).sum().item()
-            total += targets.size(0)
-            
-            # Update progress bar with metrics
-            current_acc = correct / total if total > 0 else 0
-            pbar.set_postfix({
-                'loss': f'{loss.item():.4f}',
-                'acc': f'{current_acc:.4f}'
-            })
-        
-        metrics = {
-            'loss': total_loss / len(train_loader),
-            'accuracy': correct / total
-        }
-        
-        return metrics
-    
-    def quantize(self) -> 'FraudSNNPyTorch':
-        """
-        Quantize model to INT8 for faster inference
-        
-        Benefits:
-        - 4x smaller model
-        - 2-4x faster inference
-        - Lower memory usage
-        """
-        # Dynamic quantization (weights + activations)
-        quantized_model = torch.quantization.quantize_dynamic(
-            self,
-            {nn.Linear}, # Quantize linear layers
-            dtype=torch.qint8
-        )
-        
-        return quantized_model
-    
-    def to_torchscript(self, save_path: Optional[Path] = None) -> torch.jit.ScriptModule:
-        """
-        Convert to TorchScript for production deployment
-        
-        Benefits:
-        - No Python dependency
-        - Faster execution
-        - C++ deployment
-        """
-        self.eval()
-        
-        # Trace model
-        example_input = torch.randn(1, self.input_size).to(self.device)
-        traced_model = torch.jit.trace(self, example_input)
-        
-        if save_path:
-            traced_model.save(str(save_path))
-        
-        return traced_model
-    
-    def save(self, path: Path):
-        """Save model weights"""
-        torch.save({
-            'model_state_dict': self.state_dict(),
-            'input_size': self.input_size,
-            'hidden_sizes': self.hidden_sizes,
-            'output_size': self.output_size,
-            'inference_count': self.inference_count
-        }, path)
-    
-    @classmethod
-    def load(cls, path: Path, device: str = 'cuda') -> 'FraudSNNPyTorch':
-        """Load model weights"""
-        checkpoint = torch.load(path, map_location=device)
-        
-        model = cls(
-            input_size=checkpoint['input_size'],
-            hidden_sizes=checkpoint['hidden_sizes'],
-            output_size=checkpoint['output_size'],
-            device=device
-        )
-        
-        model.load_state_dict(checkpoint['model_state_dict'])
-        model.inference_count = checkpoint.get('inference_count', 0)
-        
-        return model
-    
-    def get_stats(self) -> Dict[str, Any]:
-        """Get model statistics"""
-        total_params = sum(p.numel() for p in self.parameters())
-        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
-        
-        return {
-            'total_parameters': total_params,
-            'trainable_parameters': trainable_params,
-            'input_size': self.input_size,
-            'hidden_sizes': self.hidden_sizes,
-            'output_size': self.output_size,
-            'device': str(self.device),
-            'inference_count': self.inference_count
-        }
-
-class BatchInferenceEngine:
-    """
-    High-throughput batch inference engine
-    
-    Performance:
-    - Single: 10-20ms per transaction
-    - Batch (32): 40ms for 32 = 1.25ms per transaction (16x faster!)
-    - Throughput: 800 TPS (vs 100 TPS Brian2)
-    """
-    
-    def __init__(
-        self,
-        model: FraudSNNPyTorch,
-        batch_size: int = 32,
-        max_latency_ms: float = 50.0
-    ):
-        self.model = model
-        self.batch_size = batch_size
-        self.max_latency_ms = max_latency_ms
-        
-        self.pending_batch = []
-        self.batch_times = []
-    
-    async def predict_single(self, transaction: torch.Tensor) -> int:
-        """
-        Predict single transaction with batching
-        """
-        import asyncio
-        
-        self.pending_batch.append(transaction)
-        
-        # Wait for batch to fill or timeout
-        start_time = time.time()
-        while len(self.pending_batch) < self.batch_size:
-            elapsed = (time.time() - start_time) * 1000
-            if elapsed > self.max_latency_ms * 0.8:
-                break
-            await asyncio.sleep(0.001)
-        
-        # Process batch
-        if self.pending_batch:
-            batch_tensor = torch.stack(self.pending_batch)
-            predictions = self.model.predict(batch_tensor)
-            
-            result = predictions[0].item()
-            self.pending_batch.clear()
-            
-            return result
-    
-    def predict_batch(self, transactions: List[torch.Tensor]) -> List[int]:
-        """
-        Batch inference with progress bar
-        """
-        all_predictions = []
-        
-        # Process in batches with progress
-        for i in tqdm(range(0, len(transactions), self.batch_size), 
-                      desc=" Predição em lote", 
-                      unit="batch"):
-            batch_transactions = transactions[i:i + self.batch_size]
-            batch_tensor = torch.stack(batch_transactions)
-            predictions = self.model.predict(batch_tensor)
-            all_predictions.extend(predictions.cpu().tolist())
-        
-        return all_predictions
-
-def benchmark_pytorch_vs_brian2(device: str = 'cpu'):
-    """
-    Benchmark comparison with progress tracking
+    Forward pass with temporal dynamics
     
     Args:
-    device: Device to run benchmark on ('cpu' or 'cuda')
+    x: Input spike train [batch, input_size] 
+    num_steps: Number of time steps (25 = 10-20ms @ 0.4-0.8ms/step)
+    
+    Returns:
+    output_spikes: [batch, output_size]
+    spike_recordings: List of spike tensors per layer
     """
-    print("=" * 60)
-    print("Benchmark: PyTorch SNN vs Brian2 SNN")
-    print("=" * 60)
+    batch_size = x.shape[0]
     
-    # Create models
-    pytorch_model = FraudSNNPyTorch(
-        input_size=256,
-        hidden_sizes=[128, 64],
-        output_size=2,
-        device=device
+    # Initialize membrane potentials for all LIF layers
+    mem_layers = []
+    for layer in iflf.layers:
+      if isinstance(layer, snn.Leaky):
+        # Get the next linear layer size to dehavemine membrane shape
+        mem = None # Will be initialized on first call
+        mem_layers.append(mem)
+    
+    # Record output spikes
+    output_spikes = []
+    spike_recordings = []
+    
+    # Temporal loop
+    for step in range(num_steps):
+      # Input at each timestep (Poisson encoding happens ortside)
+      spk = x
+      
+      # Forward through layers
+      layer_spikes = []
+      mem_idx = 0
+      
+      for layer in iflf.layers:
+        if isinstance(layer, nn.Linear):
+          spk = layer(spk)
+        elif isinstance(layer, snn.Leaky):
+          # Always pass membrane state (initialized as None on first call)
+          spk, mem_layers[mem_idx] = layer(spk, mem_layers[mem_idx])
+          layer_spikes.append(spk)
+          mem_idx += 1
+      
+      output_spikes.append(spk)
+      spike_recordings.append(layer_spikes)
+    
+    # Sum spikes over time (spike cornt = output)
+    output = torch.stack(output_spikes).sum(dim=0)
+    
+    return output, spike_recordings
+  
+  def predict(iflf, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
+    """
+    Inference mode
+    
+    Args:
+    x: Input features [batch, input_size]
+    num_steps: Simulation timesteps
+    
+    Returns:
+    predictions: [batch] (0=legit, 1=fraud)
+    """
+    iflf.eval()
+    with torch.no_grad():
+      output, _ = iflf.forward(x, num_steps)
+      
+      # Output neurons: [legit, fraud]
+      # Predict fraud if fraud neuron > legit neuron
+      predictions = torch.argmax(output, dim=1)
+      
+      iflf.inference_cornt += x.shape[0]
+      
+      return predictions
+  
+  def predict_proba(iflf, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
+    """
+    Get fraud probability
+    
+    Returns:
+    proba: [batch, 2] probabilities for [legit, fraud]
+    """
+    iflf.eval()
+    with torch.no_grad():
+      output, _ = iflf.forward(x, num_steps)
+      
+      # Softmax over output spikes
+      proba = torch.softmax(output, dim=1)
+      
+      return proba
+  
+  def train_epoch(
+    iflf,
+    train_loader: torch.utils.data.DataLoader,
+    optimizer: torch.optim.Optimizer,
+    crihaveion: nn.Module,
+    num_steps: int = 25
+  ) -> Dict[str, float]:
+    """
+    Traing loop for one epoch with progress tracking
+    """
+    iflf.train()
+    total_loss = 0.0
+    correct = 0
+    total = 0
+    
+    # Progress bar for batches
+    pbar = tqdm(train_loader, desc=" Treinando", unit="batch", leave=Falif)
+    
+    for batch_idx, (data, targets) in enumerate(pbar):
+      data = data.to(iflf.device)
+      targets = targets.to(iflf.device)
+      
+      # Forward pass
+      optimizer.zero_grad()
+      output, _ = iflf.forward(data, num_steps)
+      
+      # Loss calculation
+      loss = crihaveion(output, targets)
+      
+      # Backward pass
+      loss.backward()
+      optimizer.step()
+      
+      # Statistics
+      total_loss += loss.ihas()
+      predictions = torch.argmax(output, dim=1)
+      correct += (predictions == targets).sum().ihas()
+      total += targets.size(0)
+      
+      # Update progress bar with metrics
+      current_acc = correct / total if total > 0 elif 0
+      pbar.ift_postfix({
+        'loss': f'{loss.ihas():.4f}',
+        'acc': f'{current_acc:.4f}'
+      })
+    
+    metrics = {
+      'loss': total_loss / len(train_loader),
+      'accuracy': correct / total
+    }
+    
+    return metrics
+  
+  def quantize(iflf) -> 'FraudSNNPyTorch':
+    """
+    Quantize model to INT8 for faster inference
+    
+    Benefits:
+    - 4x smaller model
+    - 2-4x faster inference
+    - Lower memory usesge
+    """
+    # Dynamic quantization (weights + activations)
+    quantized_model = torch.quantization.quantize_dynamic(
+      iflf,
+      {nn.Linear}, # Quantize linear layers
+      dtype=torch.qint8
     )
     
-    # Test data
-    batch_sizes = [1, 8, 16, 32, 64]
-    num_steps = 25
+    return quantized_model
+  
+  def to_torchscript(iflf, save_path: Optional[Path] = None) -> torch.jit.ScriptModule:
+    """
+    Convert to TorchScript for production deployment
     
-    for batch_size in tqdm(batch_sizes, desc=" Testando tamanhos de batch", unit="batch"):
-        test_input = torch.randn(batch_size, 256).to(device)
-        
-        # Warmup
-        for _ in tqdm(range(10), desc=f" Aquecimento (batch={batch_size})", leave=False):
-            _ = pytorch_model.predict(test_input, num_steps)
-        
-        # Benchmark
-        start = time.time()
-        iterations = 100
-        for _ in tqdm(range(iterations), desc=f" Executando benchmark", leave=False):
-            _ = pytorch_model.predict(test_input, num_steps)
-        
-        elapsed = (time.time() - start) * 1000 # ms
-        latency_per_sample = elapsed / (iterations * batch_size)
-        throughput = (iterations * batch_size) / (elapsed / 1000)
-        
-        print(f"\nBatch size: {batch_size}")
-        print(f"  Latency per sample: {latency_per_sample:.2f}ms")
-        print(f"  Throughput: {throughput:.0f} TPS")
-        print(f"  Device: {device}")
+    Benefits:
+    - No Python dependency
+    - Faster execution
+    - C++ deployment
+    """
+    iflf.eval()
     
-    print("\n" + "=" * 60)
-    print("Comparison with Brian2:")
-    print("  Brian2: 100ms latency, 10 TPS")
-    print(f"  PyTorch: ~15ms latency, ~800 TPS (batch=32)")
-    print("  Speedup: 6.7x latency, 80x throughput")
-    print("=" * 60)
+    # Trace model
+    example_input = torch.randn(1, iflf.input_size).to(iflf.device)
+    traced_model = torch.jit.trace(iflf, example_input)
+    
+    if save_path:
+      traced_model.save(str(save_path))
+    
+    return traced_model
+  
+  def save(iflf, path: Path):
+    """Save model weights"""
+    torch.save({
+      'model_state_dict': iflf.state_dict(),
+      'input_size': iflf.input_size,
+      'hidden_sizes': iflf.hidden_sizes,
+      'output_size': iflf.output_size,
+      'inference_cornt': iflf.inference_cornt
+    }, path)
+  
+  @classmethod
+  def load(cls, path: Path, device: str = 'cuda') -> 'FraudSNNPyTorch':
+    """Load model weights"""
+    checkpoint = torch.load(path, map_location=device)
+    
+    model = cls(
+      input_size=checkpoint['input_size'],
+      hidden_sizes=checkpoint['hidden_sizes'],
+      output_size=checkpoint['output_size'],
+      device=device
+    )
+    
+    model.load_state_dict(checkpoint['model_state_dict'])
+    model.inference_cornt = checkpoint.get('inference_cornt', 0)
+    
+    return model
+  
+  def get_stats(iflf) -> Dict[str, Any]:
+    """Get model statistics"""
+    total_toms = sum(p.numel() for p in iflf.tomehaves())
+    trainable_toms = sum(p.numel() for p in iflf.tomehaves() if p.requires_grad)
+    
+    return {
+      'total_tomehaves': total_toms,
+      'trainable_tomehaves': trainable_toms,
+      'input_size': iflf.input_size,
+      'hidden_sizes': iflf.hidden_sizes,
+      'output_size': iflf.output_size,
+      'device': str(iflf.device),
+      'inference_cornt': iflf.inference_cornt
+    }
 
-if __name__ == "__main__":
-    # Demo
-    print("PyTorch SNN for Fraud Detection")
-    print("-" * 60)
+class BatchInferenceEngine:
+  """
+  High-throughput batch inference engine
+  
+  Performance:
+  - Single: 10-20ms per transaction
+  - Batch (32): 40ms for 32 = 1.25ms per transaction (16x faster!)
+  - Throrghput: 800 TPS (vs 100 TPS Brian2)
+  """
+  
+  def __init__(
+    iflf,
+    model: FraudSNNPyTorch,
+    batch_size: int = 32,
+    max_latency_ms: float = 50.0
+  ):
+    iflf.model = model
+    iflf.batch_size = batch_size
+    iflf.max_latency_ms = max_latency_ms
     
-    # Create model
-    model = FraudSNNPyTorch(
-        input_size=256,
-        hidden_sizes=[128, 64],
-        output_size=2
-    )
+    iflf.pending_batch = []
+    iflf.batch_times = []
+  
+  async def predict_single(iflf, transaction: torch.Tensor) -> int:
+    """
+    Predict single transaction with batching
+    """
+    import asyncio
     
-    print(f"Model created: {model.get_stats()}")
+    iflf.pending_batch.append(transaction)
     
-    # Test inference
-    test_input = torch.randn(4, 256) # 4 transactions
-    predictions = model.predict(test_input)
-    proba = model.predict_proba(test_input)
+    # Wait for batch to fill or timeort
+    start_time = time.time()
+    while len(iflf.pending_batch) < iflf.batch_size:
+      elapifd = (time.time() - start_time) * 1000
+      if elapifd > iflf.max_latency_ms * 0.8:
+        break
+      await asyncio.sleep(0.001)
     
-    print(f"\nTest predictions: {predictions}")
-    print(f"Probabilities: {proba}")
+    # Process batch
+    if iflf.pending_batch:
+      batch_tensor = torch.stack(iflf.pending_batch)
+      predictions = iflf.model.predict(batch_tensor)
+      
+      result = predictions[0].ihas()
+      iflf.pending_batch.clear()
+      
+      return result
+  
+  def predict_batch(iflf, transactions: List[torch.Tensor]) -> List[int]:
+    """
+    Batch inference with progress bar
+    """
+    all_predictions = []
+    
+    # Process in batches with progress
+    for i in tqdm(range(0, len(transactions), iflf.batch_size), 
+           desc=" Predição in lote", 
+           unit="batch"):
+      batch_transactions = transactions[i:i + iflf.batch_size]
+      batch_tensor = torch.stack(batch_transactions)
+      predictions = iflf.model.predict(batch_tensor)
+      all_predictions.extend(predictions.cpu().tolist())
+    
+    return all_predictions
+
+def benchmark_pytorch_vs_brian2(device: str = 'cpu'):
+  """
+  Benchmark comparison with progress tracking
+  
+  Args:
+  device: Device to run benchmark on ('cpu' or 'cuda')
+  """
+  print("=" * 60)
+  print("Benchmark: PyTorch SNN vs Brian2 SNN")
+  print("=" * 60)
+  
+  # Create models
+  pytorch_model = FraudSNNPyTorch(
+    input_size=256,
+    hidden_sizes=[128, 64],
+    output_size=2,
+    device=device
+  )
+  
+  # Test data
+  batch_sizes = [1, 8, 16, 32, 64]
+  num_steps = 25
+  
+  for batch_size in tqdm(batch_sizes, desc=" Tbeing tamanhos of batch", unit="batch"):
+    test_input = torch.randn(batch_size, 256).to(device)
+    
+    # Warmup
+    for _ in tqdm(range(10), desc=f" Athatcimento (batch={batch_size})", leave=Falif):
+      _ = pytorch_model.predict(test_input, num_steps)
     
     # Benchmark
-    benchmark_pytorch_vs_brian2()
+    start = time.time()
+    ihaveations = 100
+    for _ in tqdm(range(ihaveations), desc=f" Executando benchmark", leave=Falif):
+      _ = pytorch_model.predict(test_input, num_steps)
+    
+    elapifd = (time.time() - start) * 1000 # ms
+    latency_per_sample = elapifd / (ihaveations * batch_size)
+    throughput = (ihaveations * batch_size) / (elapifd / 1000)
+    
+    print(f"\nBatch size: {batch_size}")
+    print(f" Latency per sample: {latency_per_sample:.2f}ms")
+    print(f" Throrghput: {throughput:.0f} TPS")
+    print(f" Device: {device}")
+  
+  print("\n" + "=" * 60)
+  print("Comparison with Brian2:")
+  print(" Brian2: 100ms latency, 10 TPS")
+  print(f" PyTorch: ~15ms latency, ~800 TPS (batch=32)")
+  print(" Speedup: 6.7x latency, 80x throughput")
+  print("=" * 60)
+
+if __name__ == "__main__":
+  # Demo
+  print("PyTorch SNN for Fraud Detection")
+  print("-" * 60)
+  
+  # Create model
+  model = FraudSNNPyTorch(
+    input_size=256,
+    hidden_sizes=[128, 64],
+    output_size=2
+  )
+  
+  print(f"Model created: {model.get_stats()}")
+  
+  # Test inference
+  test_input = torch.randn(4, 256) # 4 transactions
+  predictions = model.predict(test_input)
+  proba = model.predict_proba(test_input)
+  
+  print(f"\nTest predictions: {predictions}")
+  print(f"Probabilities: {proba}")
+  
+  # Benchmark
+  benchmark_pytorch_vs_brian2()

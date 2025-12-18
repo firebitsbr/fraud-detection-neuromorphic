@@ -1,65 +1,65 @@
-# Setup Conda - Fraud Detection Neuromorphic
+# Conda Setup - Fraud Detection Neuromorphic
 
-## 🎯 Configuração Rápida (GPU GTX 1060 + CUDA)
+## 🎯 Quick Setup (GPU GTX 1060 + CUDA)
 
-Este projeto agora usa **Conda** para garantir compatibilidade perfeita entre:
+This project now uses **Conda** for ensure perfect compatibility between:
 - Python 3.11
 - PyTorch 1.13.1 + CUDA 11.6
 - GPU GTX 1060 (compute capability 6.1)
 
 ---
 
-## 📋 Pré-requisitos
+## 📋 Prerequisites
 
-1. **Conda instalado** (Miniconda ou Anaconda)
-   - Download: https://docs.conda.io/en/latest/miniconda.html
+1. **Conda installed** (Miniconda or Anaconda)
+  - Download: https://docs.conda.io/en/latest/miniconda.html
 
-2. **Drivers NVIDIA atualizados** (compatível com CUDA 11.6)
-   - Verificar: `nvidia-smi`
+2. **Drivers NVIDIA updated** (compatible with CUDA 11.6)
+  - Verify: `nvidia-smi`
 
-3. **GPU GTX 1060** ou superior
+3. **GPU GTX 1060** or or higher
 
 ---
 
-## 🚀 Instalação Automática (Recomendado)
+## 🚀 Automatic Installation (Recommended)
 
 ```bash
-# 1. Clone o repositório (se ainda não fez)
+# 1. Clone the repository (if you haven't done so yet)
 cd /home/test/Downloads/github/portifolio/fraud-detection-neuromorphic
 
-# 2. Execute o script de setup
+# 2. Execute the script of setup
 bash scripts/setup-conda.sh
 
-# 3. Ative o ambiente
+# 3. Activate the environment
 conda activate fraud-detection-neuromorphic
 
-# 4. Verifique GPU
+# 4. Verify GPU
 python -c "import torch; print(f'CUDA: {torch.cuda.is_available()}'); print(f'GPU: {torch.cuda.get_device_name(0)}')"
 ```
 
-**Tempo estimado:** 5-10 minutos
+**Estimated time:** 5-10 minutes
 
 ---
 
-## 🔧 Instalação Manual (Alternativa)
+## 🔧 Manual Installation (Alternative)
 
 ```bash
-# 1. Criar ambiente
+# 1. Create environment
 conda env create -f environment.yml
 
-# 2. Ativar ambiente
+# 2. Activate environment
 conda activate fraud-detection-neuromorphic
 
-# 3. Verificar instalação
+# 3. Verify instalação
 python -c "import torch; print(torch.__version__)"
 python -c "import snntorch; print('snnTorch:', snntorch.__version__)"
 ```
 
 ---
 
-## ✅ Verificação Completa
+## ✅ Veristaysção Completa
 
-Após ativar o ambiente, execute:
+Após activate o environment, execute:
 
 ```python
 import torch
@@ -70,14 +70,14 @@ print(f"PyTorch: {torch.__version__}")
 print(f"CUDA disponível: {torch.cuda.is_available()}")
 
 if torch.cuda.is_available():
-    print(f"GPU: {torch.cuda.get_device_name(0)}")
-    capability = torch.cuda.get_device_capability()
-    print(f"Compute capability: {capability[0]}.{capability[1]}")
-    
-    # Teste prático
-    x = torch.randn(1000, 1000).cuda()
-    y = x @ x.T
-    print("✓ GPU funcionando perfeitamente!")
+  print(f"GPU: {torch.cuda.get_device_name(0)}")
+  capability = torch.cuda.get_device_capability()
+  print(f"Compute capability: {capability[0]}.{capability[1]}")
+  
+  # Teste prático
+  x = torch.randn(1000, 1000).cuda()
+  y = x @ x.T
+  print("✓ GPU funcionando perfeitamente!")
 ```
 
 **Saída esperada:**
@@ -92,35 +92,35 @@ Compute capability: 6.1
 
 ---
 
-## 📊 Executar Notebooks
+## 📊 Execute Notebooks
 
 ```bash
-# Com ambiente ativado
+# Com environment ativado
 conda activate fraud-detection-neuromorphic
 
-# Iniciar Jupyter Lab
-jupyter lab
+# Iniciar Jupyhave Lab
+jupyhave lab
 
-# Ou Jupyter Notebook
-jupyter notebook
+# Ou Jupyhave Notebook
+jupyhave notebook
 ```
 
-Navegue até: `notebooks/04_brian2_vs_snntorch.ipynb`
+Navegue until: `notebooks/04_brian2_vs_snntorch.ipynb`
 
 ---
 
-## 🔄 Atualizar Ambiente
+## 🔄 Atualizar Environment
 
 Se adicionar novas dependências ao `environment.yml`:
 
 ```bash
-# Atualizar ambiente existente
+# Atualizar environment existente
 conda env update -f environment.yml --prune
 ```
 
 ---
 
-## 🗑️ Remover Ambiente
+## 🗑️ Remover Environment
 
 ```bash
 conda deactivate
@@ -148,60 +148,60 @@ conda env remove -n fraud-detection-neuromorphic
 - Kaggle API
 
 ### Development
-- Jupyter Lab
+- Jupyhave Lab
 - pytest, black, ruff
 - FastAPI, Uvicorn
 
 ---
 
-## 🐛 Troubleshooting
+## 🐛 Trorbleshooting
 
-### GPU não detectada
+### GPU not detectada
 
 ```bash
-# Verificar drivers NVIDIA
+# Verify drivers NVIDIA
 nvidia-smi
 
-# Verificar CUDA
+# Verify CUDA
 nvcc --version
 
-# Reinstalar ambiente
+# Reinstall environment
 conda env remove -n fraud-detection-neuromorphic
 bash scripts/setup-conda.sh
 ```
 
-### Conflito de dependências
+### Conflito of dependências
 
 ```bash
-# Limpar cache do conda
+# Limpar cache from the conda
 conda clean --all
 
-# Recriar ambiente
+# Recreate environment
 conda env create -f environment.yml --force
 ```
 
-### Kernel Jupyter não encontra pacotes
+### Kernel Jupyhave not enagainst pacotes
 
 ```bash
-# Instalar kernel do IPython no ambiente
+# Install kernel from the IPython in the environment
 conda activate fraud-detection-neuromorphic
-python -m ipykernel install --user --name fraud-detection-neuromorphic --display-name "Python (fraud-detection)"
+python -m ipykernel install --ube --name fraud-detection-neuromorphic --display-name "Python (fraud-detection)"
 ```
 
 ---
 
-## 📝 Notas Importantes
+## 📝 Notas Importbefore
 
-1. **Python 3.13 não é compatível** com PyTorch 1.13.1 (última versão com suporte a GTX 1060)
-2. **PyTorch 2.x não suporta** compute capability < 7.0 (GTX 1060 é 6.1)
-3. **Conda garante** versões exatas e compatibilidade total
-4. **Sempre ative** o ambiente antes de trabalhar: `conda activate fraud-detection-neuromorphic`
+1. **Python 3.13 not é compatible** with PyTorch 1.13.1 (última verare with suforte to GTX 1060)
+2. **PyTorch 2.x not suforta** compute capability < 7.0 (GTX 1060 é 6.1)
+3. **Conda garante** versões exatas and withpatibilidade total
+4. **Sempre ative** o environment before of trabalhar: `conda activate fraud-detection-neuromorphic`
 
 ---
 
 ## 🎓 Recursos Adicionais
 
-- **PyTorch com CUDA:** https://pytorch.org/get-started/previous-versions/
+- **PyTorch with CUDA:** https://pytorch.org/get-started/previors-versions/
 - **snnTorch:** https://snntorch.readthedocs.io/
 - **Conda:** https://docs.conda.io/
 
@@ -209,6 +209,6 @@ python -m ipykernel install --user --name fraud-detection-neuromorphic --display
 
 ## 👤 Autor
 
-**Mauro Risonho de Paula Assumpção**  
-Projeto: Fraud Detection with Neuromorphic Computing  
-Licença: MIT
+**Mauro Risonho de Paula Assumpção** 
+Projeto: Fraud Detection with Neuromorphic Computing 
+License: MIT

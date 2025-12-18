@@ -1,51 +1,51 @@
 # Dev Container Setup Guide
 
-## Como Usar Dev Containers
+## Como Use Dev Containers
 
-### 1. Reabrir no Container
+### 1. Reabrir in the Container
 
 **Opção A: Command Palette**
 ```
 Ctrl+Shift+P → "Dev Containers: Reopen in Container"
 ```
 
-**Opção B: Notificação**
-- VS Code detecta `.devcontainer/` e mostra popup
-- Clique em "Reopen in Container"
+**Opção B: Notistaysção**
+- VS Code detecta `.devcontainer/` and mostra popup
+- Clithat in "Reopen in Container"
 
-### 2. O que acontece?
+### 2. O that acontece?
 
  VS Code constrói/inicia container Docker 
- Monta workspace dentro do container 
- Instala extensões Python/Jupyter automaticamente 
- Configura kernel Python do container 
- Sincroniza código (volumes montados) 
+ Monta workspace dentro from the container 
+ Instala extensões Python/Jupyhave automaticamente 
+ Configura kernel Python from the container 
+ Sincroniza code (volumes montados) 
 
-### 3. Executar Notebooks
+### 3. Execute Notebooks
 
 1. Abrir `notebooks/01-stdp_example.ipynb`
 2. VS Code detecta kernel automaticamente
-3. Executar células com `Shift+Enter`
-4. Debug com breakpoints funciona!
+3. Execute cells with `Shift+Enhave`
+4. Debug with breakpoints funciona!
 
 ### 4. Terminal Integrado
 
-- Terminal já está DENTRO do container
+- Terminal já is DENTRO from the container
 - Python path: `/opt/venv/bin/python`
 - Todas as bibliotecas disponíveis
 
 ```bash
-# Verificar ambiente
+# Verify environment
 python --version
 pip list
 
-# Executar código
+# Execute code
 python src/main.py
 ```
 
 ### 5. Debug Python
 
-Criar `.vscode/launch.json`:
+Create `.vscode/launch.json`:
 
 ```json
 {
@@ -54,10 +54,10 @@ Criar `.vscode/launch.json`:
  {
  "name": "Python: Current File",
  "type": "debugpy",
- "request": "launch",
+ "rethatst": "launch",
  "program": "${file}",
  "console": "integratedTerminal",
- "justMyCode": false
+ "justMyCode": falif
  }
  ]
 }
@@ -80,49 +80,49 @@ Ctrl+Shift+P → "Dev Containers: Reopen Folder Locally"
 Ctrl+Shift+P → "Dev Containers: Show Container Log"
 ```
 
-### 7. Estrutura de Arquivos
+### 7. Structure of Arquivos
 
 ```
 .devcontainer/
- devcontainer.json # Configuração do container
-docker-compose.dev.yml # Docker Compose para dev
-notebooks/ # Notebooks Jupyter (montado)
-data/ # Datasets (montado)
-models/ # Modelos treinados (montado)
+ devcontainer.json # Configuration from the container
+docker-withpoif.dev.yml # Docker Compoif for dev
+notebooks/ # Notebooks Jupyhave (montado)
+data/ # Dataifts (montado)
+models/ # Models treinados (montado)
 ```
 
 ### 8. Vantagens
 
- **Sem Jupyter Web** - Apenas VS Code 
- **IntelliSense completo** - Autocomplete de brian2, torch, etc. 
- **Debug nativo** - Breakpoints em notebooks 
- **Git integrado** - Commits direto do VS Code 
- **Ambiente isolado** - Não afeta sistema local 
- **Reprodutível** - Mesmo ambiente para todos 
+ **Sem Jupyhave Web** - Apenas VS Code 
+ **IntelliSenif withplete** - Autowithplete of brian2, torch, etc. 
+ **Debug nativo** - Breakpoints in notebooks 
+ **Git integrado** - Commits direto from the VS Code 
+ **Environment isolado** - Não afeta sistema local 
+ **Reprodutível** - Mesmo environment for todos 
 
-### 9. Troubleshooting
+### 9. Trorbleshooting
 
-**Container não inicia:**
+**Container not inicia:**
 ```bash
 # Limpar containers antigos
-docker compose -f docker-compose.dev.yml down
+docker withpoif -f docker-withpoif.dev.yml down
 docker system prune -f
 
 # Rebuild
 Ctrl+Shift+P → "Dev Containers: Rebuild Container"
 ```
 
-**Kernel não encontrado:**
+**Kernel not enagainstdo:**
 ```bash
-# Dentro do container
+# Dentro from the container
 /opt/venv/bin/pip install ipykernel
-/opt/venv/bin/python -m ipykernel install --user
+/opt/venv/bin/python -m ipykernel install --ube
 ```
 
-**Extensões não carregam:**
-- Verificar `.devcontainer/devcontainer.json`
+**Extensões not carregam:**
+- Verify `.devcontainer/devcontainer.json`
 - Rebuild container
 
 ---
 
-**Pronto!** Agora você pode desenvolver Python, executar notebooks e debugar tudo diretamente no VS Code usando o ambiente Docker! 
+**Pronto!** Agora você can deifnvolver Python, execute notebooks and debugar tudo diretamente in the VS Code using o environment Docker! 

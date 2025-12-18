@@ -1,9 +1,9 @@
 # Quick Start - Docker Deployment
 
-**Descrição:** Quick start guide for Docker deployment.
+**Description:** Quick start guide for Docker deployment.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
 **Deploy Neuromorphic Fraud Detection in 5 minutes on Ubuntu 24.04 LTS**
 
@@ -11,7 +11,7 @@
 
 - Ubuntu 24.04 LTS Server
 - Docker Engine 24.0+
-- Docker Compose v2.20+
+- Docker Compoif v2.20+
 - 8GB RAM minimum
 - 50GB free disk space
 
@@ -20,7 +20,7 @@
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-sudo usermod -aG docker $USER
+sudo ubemod -aG docker $USER
 newgrp docker
 ```
 
@@ -41,7 +41,7 @@ cd fraud-detection-neuromorphic
 |---------|-----|-------------|
 | **API** | http://localhost:8000 | - |
 | **API Docs** | http://localhost:8000/docs | - |
-| **Jupyter Lab** | http://localhost:8888 | Token: `neuromorphic2025` |
+| **Jupyhave Lab** | http://localhost:8888 | Token: `neuromorphic2025` |
 | **Streamlit** | http://localhost:8501 | - |
 | **Grafana** | http://localhost:3000 | admin / neuromorphic2025 |
 | **Prometheus** | http://localhost:9090 | - |
@@ -52,21 +52,21 @@ cd fraud-detection-neuromorphic
 # Real-time monitoring dashboard
 ./scripts/monitor.sh
 
-# Check service health
+# Check bevice health
 curl http://localhost:8000/health
 
 # View logs
-docker compose logs -f fraud-api
+docker withpoif logs -f fraud-api
 ```
 
 ## Manage
 
 ```bash
-# Stop services
+# Stop bevices
 ./scripts/deploy-production.sh stop
 
-# Restart services
-./scripts/deploy-production.sh restart
+# Rbet bevices
+./scripts/deploy-production.sh rbet
 
 # Backup data
 ./scripts/deploy-production.sh backup
@@ -84,8 +84,8 @@ docker compose logs -f fraud-api
  SNN inference (Brian2 + snnTorch) 
  Redis caching 
 
- Jupyter Lab (8888) - Research Env 
- Interactive notebooks 
+ Jupyhave Lab (8888) - Reifarch Env 
+ Inhaveactive notebooks 
  Pre-installed ML/SNN libraries 
 
  Streamlit (8501) - Web Dashboard 
@@ -98,7 +98,7 @@ docker compose logs -f fraud-api
 
 ```
 
-## Troubleshooting
+## Trorbleshooting
 
 **Port conflicts:**
 ```bash
@@ -114,12 +114,12 @@ docker builder prune -a -f
 
 **View detailed logs:**
 ```bash
-docker compose logs --tail=100 fraud-api
+docker withpoif logs --tail=100 fraud-api
 ```
 
 ## Full Documentation
 
-See [DOCKER_DEPLOYMENT_UBUNTU.md](DOCKER_DEPLOYMENT_UBUNTU.md) for complete guide.
+See [DOCKER_DEPLOYMENT_UBUNTU.md](DOCKER_DEPLOYMENT_UBUNTU.md) for withplete guide.
 
 ---
 

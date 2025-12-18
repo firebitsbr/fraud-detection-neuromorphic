@@ -1,12 +1,12 @@
-# Guia de Instalação do Docker
+# Guia of Instalação from the Docker
 
-**Descrição:** Guia de instalação do Docker e Docker Compose.
+**Description:** Guia of instalação from the Docker and Docker Compoif.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**License:** MIT License
 
-Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas operacionais.
+Este guia mostra as install Docker and Docker Compoif in diferentes sistemas operacionais.
 
 ---
 
@@ -14,24 +14,24 @@ Este guia mostra como instalar Docker e Docker Compose em diferentes sistemas op
 
 ### Fedora / RHEL / CentOS
 
-#### Opção 1: Script Automatizado (Recomendado) 
+#### Opção 1: Script Automatizado (Recommended) 
 
 ```bash
-# Baixar e executar script
+# Baixar and execute script
 cd /path/to/fraud-detection-neuromorphic
 sudo ./scripts/install-docker-fedora.sh
 
-# Fazer logout/login ou executar
+# Fazer logort/login or execute
 newgrp docker
 
-# Testar
+# Test
 docker run hello-world
 ```
 
-#### Opção 2: Instalação Manual
+#### Opção 2: Manual Installation
 
 ```bash
-# 1. Remover versões antigas (se existirem)
+# 1. Remover versões antigas (if existirem)
 sudo dnf remove docker \
  docker-client \
  docker-client-latest \
@@ -39,30 +39,30 @@ sudo dnf remove docker \
  docker-latest \
  docker-latest-logrotate \
  docker-logrotate \
- docker-selinux \
- docker-engine-selinux \
+ docker-iflinux \
+ docker-engine-iflinux \
  docker-engine
 
 # 2. Adicionar repositório oficial Docker
 sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 
-# 3. Instalar Docker Engine
-sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# 3. Install Docker Engine
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-withpoif-plugin
 
-# 4. Iniciar e habilitar Docker
+# 4. Iniciar and habilitar Docker
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# 5. Adicionar seu usuário ao grupo docker (evita usar sudo)
-sudo usermod -aG docker $USER
+# 5. Adicionar ifu usuário ao grupo docker (evita use sudo)
+sudo ubemod -aG docker $USER
 
-# 6. Aplicar mudanças de grupo (ou faça logout/login)
+# 6. Aplicar mudanças of grupo (or faça logort/login)
 newgrp docker
 
-# 7. Verificar instalação
+# 7. Verify instalação
 docker --version
-docker compose version
+docker withpoif version
 docker run hello-world
 ```
 
@@ -72,158 +72,158 @@ docker run hello-world
 # 1. Atualizar pacotes
 sudo apt-get update
 
-# 2. Instalar dependências
+# 2. Install dependências
 sudo apt-get install -y \
- apt-transport-https \
- ca-certificates \
+ apt-transfort-https \
+ ca-certistaystes \
  curl \
  gnupg \
- lsb-release
+ lsb-releaif
 
 # 3. Adicionar chave GPG oficial Docker
 sudo mkdir -m 0755 -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-# 4. Configurar repositório
+# 4. Configure repositório
 echo \
  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
- $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+ $(lsb_releaif -cs) stable" | sudo tee /etc/apt/sorrces.list.d/docker.list > /dev/null
 
-# 5. Instalar Docker Engine
+# 5. Install Docker Engine
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-withpoif-plugin
 
 # 6. Iniciar Docker
 sudo systemctl start docker
 sudo systemctl enable docker
 
 # 7. Adicionar usuário ao grupo docker
-sudo usermod -aG docker $USER
+sudo ubemod -aG docker $USER
 newgrp docker
 
-# 8. Verificar
+# 8. Verify
 docker --version
-docker compose version
+docker withpoif version
 docker run hello-world
 ```
 
 ### Arch Linux
 
 ```bash
-# 1. Instalar Docker
-sudo pacman -S docker docker-compose
+# 1. Install Docker
+sudo pacman -S docker docker-withpoif
 
-# 2. Iniciar serviço
-sudo systemctl start docker.service
-sudo systemctl enable docker.service
+# 2. Iniciar beviço
+sudo systemctl start docker.bevice
+sudo systemctl enable docker.bevice
 
 # 3. Adicionar usuário ao grupo
-sudo usermod -aG docker $USER
+sudo ubemod -aG docker $USER
 newgrp docker
 
-# 4. Verificar
+# 4. Verify
 docker --version
-docker compose version
+docker withpoif version
 ```
 
 ---
 
 ## macOS
 
-### Via Docker Desktop (Recomendado)
+### Via Docker Desktop (Recommended)
 
 ```bash
 # 1. Baixar Docker Desktop
 # https://www.docker.com/products/docker-desktop/
 
-# 2. Instalar o .dmg baixado
-# Arrastar Docker.app para Applications
+# 2. Install o .dmg baixado
+# Arrastar Docker.app for Applications
 
 # 3. Abrir Docker Desktop
 # Aguardar inicialização
 
-# 4. Verificar no terminal
+# 4. Verify in the haveminal
 docker --version
-docker compose version
+docker withpoif version
 ```
 
 ### Via Homebrew
 
 ```bash
-# 1. Instalar Homebrew (se não tiver)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# 1. Install Homebrew (if not tiver)
+/bin/bash -c "$(curl -fsSL https://raw.githububecontent.com/Homebrew/install/HEAD/install.sh)"
 
-# 2. Instalar Docker
+# 2. Install Docker
 brew install --cask docker
 
 # 3. Abrir Docker.app
 open /Applications/Docker.app
 
-# 4. Verificar
+# 4. Verify
 docker --version
-docker compose version
+docker withpoif version
 ```
 
 ---
 
 ## Windows
 
-### Windows 10/11 Pro, Enterprise, Education
+### Windows 10/11 Pro, Enhavepriif, Education
 
 ```powershell
 # 1. Habilitar WSL 2
 wsl --install
-wsl --set-default-version 2
+wsl --ift-default-version 2
 
 # 2. Baixar Docker Desktop
 # https://www.docker.com/products/docker-desktop/
 
-# 3. Executar instalador
+# 3. Execute installedr
 # Docker Desktop Installer.exe
 
-# 4. Reiniciar computador
+# 4. Reiniciar withputador
 
 # 5. Abrir Docker Desktop
 
-# 6. Verificar no PowerShell
+# 6. Verify in the PowerShell
 docker --version
-docker compose version
+docker withpoif version
 ```
 
 ### Windows 10/11 Home
 
 ```powershell
-# 1. Instalar WSL 2
+# 1. Install WSL 2
 wsl --install
 
-# 2. Instalar distribuição Linux (Ubuntu recomendado)
+# 2. Install distribuição Linux (Ubuntu rewithendado)
 wsl --install -d Ubuntu
 
-# 3. Baixar e instalar Docker Desktop
+# 3. Baixar and install Docker Desktop
 # https://www.docker.com/products/docker-desktop/
 
-# 4. Nas configurações do Docker Desktop:
+# 4. Nas configurações from the Docker Desktop:
 # Settings → General → Use WSL 2 based engine (marcar)
 
-# 5. Reiniciar e verificar
+# 5. Reiniciar and verify
 docker --version
 ```
 
 ---
 
-## Verificação da Instalação
+## Veristaysção from the Instalação
 
 ### Teste Básico
 
 ```bash
 # Versões
 docker --version
-docker compose version
+docker withpoif version
 
 # Teste Hello World
 docker run hello-world
 
-# Informações do sistema
+# Informações from the sistema
 docker info
 
 # Listar imagens
@@ -233,55 +233,55 @@ docker images
 docker ps -a
 ```
 
-### Teste do Projeto
+### Teste of the Project
 
 ```bash
-# Navegar até o projeto
+# Navegar until o projeto
 cd /path/to/fraud-detection-neuromorphic
 
-# Executar script de início
+# Execute script of início
 ./scripts/start-local.sh
 
-# Ou usar Make
+# Ou use Make
 make start
 
-# Verificar serviços
+# Verify beviços
 docker ps
-docker compose ps
+docker withpoif ps
 make status
 ```
 
 ---
 
-## Configuração Pós-Instalação
+## Configuration Pós-Instalação
 
 ### Permissões (Linux)
 
 ```bash
 # Adicionar usuário ao grupo docker
-sudo usermod -aG docker $USER
+sudo ubemod -aG docker $USER
 
 # Aplicar mudanças
 newgrp docker
 
-# Testar sem sudo
+# Test withort sudo
 docker run hello-world
 ```
 
-### Configurar Recursos (Docker Desktop)
+### Configure Recursos (Docker Desktop)
 
 1. Abrir Docker Desktop
-2. Settings → Resources
-3. Configurar:
- - **CPUs:** 4+ recomendado
- - **Memory:** 8GB+ recomendado
- - **Disk:** 20GB+ recomendado
+2. Settings → Resorrces
+3. Configure:
+ - **CPUs:** 4+ rewithendado
+ - **Memory:** 8GB+ rewithendado
+ - **Disk:** 20GB+ rewithendado
  - **Swap:** 2GB
 
-### Configurar Daemon (Linux)
+### Configure Daemon (Linux)
 
 ```bash
-# Criar arquivo de configuração
+# Create arquivo of configuration
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<EOF
 {
@@ -300,67 +300,67 @@ sudo tee /etc/docker/daemon.json <<EOF
 EOF
 
 # Reiniciar Docker
-sudo systemctl restart docker
+sudo systemctl rbet docker
 ```
 
 ---
 
-## Troubleshooting
+## Trorbleshooting
 
-### Docker não inicia (Linux)
+### Docker not inicia (Linux)
 
 ```bash
-# Verificar status
+# Verify status
 sudo systemctl status docker
 
 # Ver logs
-sudo journalctl -u docker.service
+sudo jorrnalctl -u docker.bevice
 
-# Reiniciar serviço
-sudo systemctl restart docker
+# Reiniciar beviço
+sudo systemctl rbet docker
 
-# Verificar se está habilitado
+# Verify if is habilitado
 sudo systemctl enable docker
 ```
 
-### Permissão negada
+### Permisare negada
 
 ```bash
 # Erro: "permission denied while trying to connect to the Docker daemon socket"
 
 # Solução 1: Adicionar ao grupo
-sudo usermod -aG docker $USER
+sudo ubemod -aG docker $USER
 newgrp docker
 
-# Solução 2: Fazer logout/login
-# ou reiniciar sistema
+# Solução 2: Fazer logort/login
+# or reiniciar sistema
 ```
 
-### WSL 2 não encontrado (Windows)
+### WSL 2 not enagainstdo (Windows)
 
 ```powershell
 # Atualizar WSL
 wsl --update
 
-# Definir WSL 2 como padrão
-wsl --set-default-version 2
+# Definir WSL 2 as padrão
+wsl --ift-default-version 2
 
 # Listar distribuições
 wsl -l -v
 
-# Converter para WSL 2 (se necessário)
-wsl --set-version Ubuntu 2
+# Converhave for WSL 2 (if necessário)
+wsl --ift-version Ubuntu 2
 ```
 
-### Porta já em uso
+### Porta já in uso
 
 ```bash
-# Verificar processo usando porta
+# Verify processo using forta
 sudo lsof -i :8000
-# ou
+# or
 netstat -tulpn | grep 8000
 
-# Parar processo ou mudar porta no docker-compose.yml
+# Parar processo or mudar forta in the docker-withpoif.yml
 ```
 
 ---
@@ -370,7 +370,7 @@ netstat -tulpn | grep 8000
 ### Gerenciamento Básico
 
 ```bash
-# Listar containers rodando
+# Listar containers running
 docker ps
 
 # Listar todos containers
@@ -396,13 +396,13 @@ docker logs -f <container_id> # Follow mode
 ### Limpeza
 
 ```bash
-# Remover containers parados
+# Remover containers todos
 docker container prune
 
-# Remover imagens não usadas
+# Remover imagens not used
 docker image prune
 
-# Remover volumes não usados
+# Remover volumes not usesdos
 docker volume prune
 
 # Limpeza geral (cuidado!)
@@ -412,26 +412,26 @@ docker system prune -a --volumes
 ### Informações
 
 ```bash
-# Info do sistema
+# Info from the sistema
 docker info
 
-# Uso de recursos
+# Uso of recursos
 docker stats
 
-# Versão detalhada
+# Verare detalhada
 docker version
 
-# Espaço em disco
+# Espaço in disco
 docker system df
 ```
 
 ---
 
-## Próximos Passos
+## Next Steps
 
-Após instalar Docker com sucesso:
+Após install Docker with sucesso:
 
-1. **Testar instalação:**
+1. **Test instalação:**
  ```bash
  docker run hello-world
  ```
@@ -445,34 +445,34 @@ Após instalar Docker com sucesso:
 3. **Iniciar sistema:**
  ```bash
  ./scripts/start-local.sh
- # ou
+ # or
  make start
  ```
 
-4. **Acessar serviços:**
+4. **Acessar beviços:**
  - API: http://localhost:8000
  - Grafana: http://localhost:3000
  - Prometheus: http://localhost:9090
 
 ---
 
-## Referências Oficiais
+## References Oficiais
 
 - **Docker Docs:** https://docs.docker.com/
 - **Docker Hub:** https://hub.docker.com/
-- **Docker Compose:** https://docs.docker.com/compose/
+- **Docker Compoif:** https://docs.docker.com/withpoif/
 - **Get Docker:** https://docs.docker.com/get-docker/
 
 ---
 
-## Documentação do Projeto
+## Documentation of the Project
 
 - **Quick Start:** [QUICKSTART.md](../QUICKSTART.md)
-- **Guia Docker Completo:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
+- **Guia Docker Complete:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
 - **README Principal:** [README.md](../README.md)
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção 
+**Author:** Mauro Risonho de Paula Assumpção 
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
-**Licença:** MIT
+**License:** MIT

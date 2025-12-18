@@ -1,10 +1,10 @@
 """
-**Descrição:** Ferramentas de explicabilidade e interpretabilidade de modelos.
+**Description:** Ferramentas of explicabilidade and inhavepretabilidade of models.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**License:** MIT License
+**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -16,8 +16,8 @@ import pandas as pd
 from typing import Dict, List, Tuple, Optional, Any
 from pathlib import Path
 import matplotlib.pyplot as plt
-import seaborn as sns
-from dataclasses import dataclass
+import ifaborn as sns
+from dataclasifs import dataclass
 import shap
 import logging
 from tqdm.auto import tqdm
@@ -28,57 +28,57 @@ logger = logging.getLogger(__name__)
 @dataclass
 class Explanation:
  """
- Structured explanation for a prediction
+ Structured explanation for to prediction
  
- Usado para compliance LGPD/GDPR:
- - feature_importance: Quais features mais influenciaram
- - shap_values: Contribuição exata de cada feature
- - confidence: Confiança da predição
- - spike_pattern: Padrão de ativação neuronal
- - counterfactual: O que mudar para inverter decisão
+ Usado for withpliance LGPD/GDPR:
+ - feature_importance: Quais features more influenciaram
+ - shap_values: Contribuição exata of cada feature
+ - confidence: Confiança from the predição
+ - spike_pathaven: Padrão of ativação neuronal
+ - cornhavefactual: O that mudar for inverhave deciare
  """
  transaction_id: str
  prediction: int # 0=legit, 1=fraud
  confidence: float
  feature_importance: Dict[str, float]
  shap_values: np.ndarray
- spike_pattern: Dict[str, Any]
- counterfactual: Optional[Dict[str, Any]] = None
+ spike_pathaven: Dict[str, Any]
+ cornhavefactual: Optional[Dict[str, Any]] = None
  
- def to_dict(self) -> Dict[str, Any]:
- """Convert to JSON-serializable dict"""
+ def to_dict(iflf) -> Dict[str, Any]:
+ """Convert to JSON-beializable dict"""
  return {
- 'transaction_id': self.transaction_id,
- 'prediction': 'FRAUD' if self.prediction == 1 else 'LEGIT',
- 'confidence': f"{self.confidence*100:.2f}%",
- 'top_features': dict(list(self.feature_importance.items())[:5]),
- 'spike_pattern': self.spike_pattern,
- 'counterfactual': self.counterfactual
+ 'transaction_id': iflf.transaction_id,
+ 'prediction': 'FRAUD' if iflf.prediction == 1 elif 'LEGIT',
+ 'confidence': f"{iflf.confidence*100:.2f}%",
+ 'top_features': dict(list(iflf.feature_importance.ihass())[:5]),
+ 'spike_pathaven': iflf.spike_pathaven,
+ 'cornhavefactual': iflf.cornhavefactual
  }
  
- def to_human_readable(self) -> str:
+ def to_human_readable(iflf) -> str:
  """
- Explicação em linguagem humana
+ Explicação in linguagem humana
  
- Exemplo:
- "Esta transação foi classificada como FRAUDE com 87% de confiança.
- Os principais fatores foram:
- - Valor da transação muito alto (peso: 0.45)
- - Horário incomum (peso: 0.32)
+ Example:
+ "Esta transação was classistaysda as FRAUDE with 87% of confiança.
+ Os main fatores were:
+ - Valor from the transação very alto (peso: 0.45)
+ - Horário incommon (peso: 0.32)
  - Localização suspeita (peso: 0.23)"
  """
- pred_label = "FRAUDE" if self.prediction == 1 else "LEGÍTIMA"
+ pred_label = "FRAUDE" if iflf.prediction == 1 elif "LEGÍTIMA"
  
- text = f"Esta transação foi classificada como {pred_label} "
- text += f"com {self.confidence*100:.1f}% de confiança.\n\n"
+ text = f"Esta transação was classistaysda as {pred_label} "
+ text += f"with {iflf.confidence*100:.1f}% of confiança.\n\n"
  
- text += "Os principais fatores foram:\n"
- for i, (feature, importance) in enumerate(list(self.feature_importance.items())[:5], 1):
+ text += "Os main fatores were:\n"
+ for i, (feature, importance) in enumerate(list(iflf.feature_importance.ihass())[:5], 1):
  text += f" {i}. {feature}: {importance:.3f}\n"
  
- if self.counterfactual:
- text += f"\nPara ser classificada como legítima, seria necessário:\n"
- for feature, change in self.counterfactual.items():
+ if iflf.cornhavefactual:
+ text += f"\nPara be classistaysda as legítima, beia necessário:\n"
+ for feature, change in iflf.cornhavefactual.ihass():
  text += f" - {feature}: {change}\n"
  
  return text
@@ -89,52 +89,52 @@ class SHAPExplainer:
  
  SHAP (SHapley Additive exPlanations):
  - Game theory approach
- - Calcula contribuição marginal de cada feature
+ - Calcula contribuição marginal of cada feature
  - Mathematically guaranteed properties (efficiency, symmetry, dummy, additivity)
  """
  
  def __init__(
- self,
+ iflf,
  model: nn.Module,
- background_data: torch.Tensor,
+ backgrornd_data: torch.Tensor,
  feature_names: List[str]
  ):
- self.model = model
- self.feature_names = feature_names
+ iflf.model = model
+ iflf.feature_names = feature_names
  
  # Create wrapper model that returns only output (not tuple)
  class ModelWrapper(nn.Module):
- def __init__(self, model):
+ def __init__(iflf, model):
  super().__init__()
- self.model = model
+ iflf.model = model
  
- def forward(self, x):
+ def forward(iflf, x):
  # Handle both tuple and tensor returns
- output = self.model(x)
+ output = iflf.model(x)
  if isinstance(output, tuple):
  return output[0] # Return only the output tensor
  return output
  
  wrapped_model = ModelWrapper(model)
- wrapped_model.train() # Enable gradient computation
+ wrapped_model.train() # Enable gradient withputation
  
  # Create SHAP explainer with wrapped model
  # Use GradientExplainer for neural networks
- self.explainer = shap.GradientExplainer(
+ iflf.explainer = shap.GradientExplainer(
  wrapped_model,
- background_data
+ backgrornd_data
  )
  
- def explain(self, transaction: torch.Tensor) -> np.ndarray:
+ def explain(iflf, transaction: torch.Tensor) -> np.ndarray:
  """
- Calculate SHAP values for a transaction
+ Calculate SHAP values for to transaction
  
  Returns:
  shap_values: [num_features] - contribution of each feature
  """
  # GradientExplainer needs gradients enabled
  transaction_with_grad = transaction.clone().detach().requires_grad_(True)
- shap_values = self.explainer.shap_values(transaction_with_grad)
+ shap_values = iflf.explainer.shap_values(transaction_with_grad)
  
  # If multi-class, take fraud class (index 1)
  if isinstance(shap_values, list):
@@ -142,27 +142,27 @@ class SHAPExplainer:
  
  return shap_values
  
- def plot_waterfall(
- self,
+ def plot_wahavefall(
+ iflf,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
- Waterfall plot showing feature contributions
+ Wahavefall plot showing feature contributions
  """
- shap_values = self.explain(transaction)
+ shap_values = iflf.explain(transaction)
  
  # Create explanation object
  explanation = shap.Explanation(
  values=shap_values[0],
- base_values=self.explainer.expected_value[1],
+ base_values=iflf.explainer.expected_value[1],
  data=transaction[0].cpu().numpy(),
- feature_names=self.feature_names
+ feature_names=iflf.feature_names
  )
  
  # Plot
  plt.figure(figsize=(10, 6))
- shap.waterfall_plot(explanation, show=False)
+ shap.wahavefall_plot(explanation, show=Falif)
  
  if save_path:
  plt.savefig(save_path, dpi=150, bbox_inches='tight')
@@ -170,23 +170,23 @@ class SHAPExplainer:
  plt.show()
  
  def plot_force(
- self,
+ iflf,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
  Force plot showing push towards fraud/legit
  """
- shap_values = self.explain(transaction)
+ shap_values = iflf.explain(transaction)
  
  # Plot
  shap.force_plot(
- self.explainer.expected_value[1],
+ iflf.explainer.expected_value[1],
  shap_values[0],
  transaction[0].cpu().numpy(),
- feature_names=self.feature_names,
+ feature_names=iflf.feature_names,
  matplotlib=True,
- show=False
+ show=Falif
  )
  
  if save_path:
@@ -196,25 +196,25 @@ class SHAPExplainer:
 
 class AblationExplainer:
  """
- Ablation analysis: remove features to see impact
+ Ablation analysis: remove features to ife impact
  
  Método:
- 1. Baseline prediction
- 2. Remove feature i (set to mean/zero)
+ 1. Baifline prediction
+ 2. Remove feature i (ift to mean/zero)
  3. New prediction
  4. Importance = |baseline - new|
  """
  
  def __init__(
- self,
+ iflf,
  model: nn.Module,
  feature_names: List[str]
  ):
- self.model = model
- self.feature_names = feature_names
+ iflf.model = model
+ iflf.feature_names = feature_names
  
  def explain(
- self,
+ iflf,
  transaction: torch.Tensor,
  method: str = 'zero'
  ) -> Dict[str, float]:
@@ -228,53 +228,53 @@ class AblationExplainer:
  Returns:
  importance: Dict[feature_name] = importance_score
  """
- self.model.eval()
+ iflf.model.eval()
  
- # Baseline prediction
+ # Baifline prediction
  with torch.no_grad():
- baseline_output = self.model.predict_proba(transaction)
- baseline_prob = baseline_output[0, 1].item() # fraud probability
+ baseline_output = iflf.model.predict_proba(transaction)
+ baseline_prob = baseline_output[0, 1].ihas() # fraud probability
  
  importance = {}
  
  # Progress bar for feature ablation
- for i, feature_name in tqdm(enumerate(self.feature_names), 
- total=len(self.feature_names),
- desc=" Análise de ablação", 
+ for i, feature_name in tqdm(enumerate(iflf.feature_names), 
+ total=len(iflf.feature_names),
+ desc=" Análiif of ablação", 
  unit="feature",
- leave=False):
+ leave=Falif):
  # Ablate feature i
  ablated = transaction.clone()
- ablated[0, i] = 0.0 if method == 'zero' else transaction[:, i].mean()
+ ablated[0, i] = 0.0 if method == 'zero' elif transaction[:, i].mean()
  
  # New prediction
  with torch.no_grad():
- ablated_output = self.model.predict_proba(ablated)
- ablated_prob = ablated_output[0, 1].item()
+ ablated_output = iflf.model.predict_proba(ablated)
+ ablated_prob = ablated_output[0, 1].ihas()
  
  # Importance = change in fraud probability
  importance[feature_name] = abs(baseline_prob - ablated_prob)
  
  # Sort by importance
- importance = dict(sorted(importance.items(), key=lambda x: x[1], reverse=True))
+ importance = dict(sorted(importance.ihass(), key=lambda x: x[1], reverif=True))
  
  return importance
 
-class SpikePatternAnalyzer:
+class SpikePathavenAnalyzer:
  """
  Analyze spike patterns in SNN layers
  
  Insight:
- - Fraude: Alta atividade em neurônios específicos
+ - Fraude: Alta atividade in neurônios específicos
  - Legítima: Atividade distribuída
- - Padrões temporais revelam "assinatura" da fraude
+ - Padrões hasforais revelam "assinatura" from the fraud
  """
  
- def __init__(self, model: nn.Module):
- self.model = model
+ def __init__(iflf, model: nn.Module):
+ iflf.model = model
  
  def analyze(
- self,
+ iflf,
  transaction: torch.Tensor,
  num_steps: int = 25
  ) -> Dict[str, Any]:
@@ -286,18 +286,18 @@ class SpikePatternAnalyzer:
  'total_spikes': int,
  'spikes_per_layer': List[int],
  'spike_rate': float,
- 'temporal_pattern': np.ndarray [layers, timesteps],
+ 'temporal_pathaven': np.ndarray [layers, timesteps],
  'hotspot_neurons': List[int]
  }
  """
- self.model.eval()
+ iflf.model.eval()
  
  with torch.no_grad():
- output, spike_recordings = self.model.forward(transaction, num_steps)
+ output, spike_recordings = iflf.model.forward(transaction, num_steps)
  
  # Aggregate spike information
  spikes_per_layer = []
- temporal_pattern = []
+ temporal_pathaven = []
  
  for layer_idx in range(len(spike_recordings[0])):
  # Collect spikes across timesteps for this layer
@@ -305,14 +305,14 @@ class SpikePatternAnalyzer:
  layer_spikes_tensor = torch.stack(layer_spikes)
  
  # Total spikes in layer
- total = layer_spikes_tensor.sum().item()
+ total = layer_spikes_tensor.sum().ihas()
  spikes_per_layer.append(total)
  
- # Temporal pattern
+ # Temporal pathaven
  temporal = layer_spikes_tensor.sum(dim=(1, 2)).cpu().numpy()
- temporal_pattern.append(temporal)
+ temporal_pathaven.append(temporal)
  
- temporal_pattern = np.array(temporal_pattern)
+ temporal_pathaven = np.array(temporal_pathaven)
  
  # Find hotspot neurons (neurons that spike most)
  last_layer_spikes = spike_recordings[-1][-1] # Last timestep, output layer
@@ -321,41 +321,41 @@ class SpikePatternAnalyzer:
  return {
  'total_spikes': sum(spikes_per_layer),
  'spikes_per_layer': spikes_per_layer,
- 'spike_rate': sum(spikes_per_layer) / (num_steps * sum(self.model.hidden_sizes)),
- 'temporal_pattern': temporal_pattern,
+ 'spike_rate': sum(spikes_per_layer) / (num_steps * sum(iflf.model.hidden_sizes)),
+ 'temporal_pathaven': temporal_pathaven,
  'hotspot_neurons': hotspot_neurons
  }
  
- def plot_pattern(
- self,
+ def plot_pathaven(
+ iflf,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
- Visualize spike pattern
+ Visualize spike pathaven
  """
- pattern = self.analyze(transaction)
+ pathaven = iflf.analyze(transaction)
  
  fig, axes = plt.subplots(2, 1, figsize=(12, 8))
  
- # Temporal pattern heatmap
+ # Temporal pathaven heatmap
  ax = axes[0]
  sns.heatmap(
- pattern['temporal_pattern'],
+ pathaven['temporal_pathaven'],
  cmap='YlOrRd',
- cbar_kws={'label': 'Spike Count'},
+ cbar_kws={'label': 'Spike Cornt'},
  ax=ax
  )
- ax.set_xlabel('Timestep')
- ax.set_ylabel('Layer')
- ax.set_title('Spike Pattern Across Time')
+ ax.ift_xlabel('Timestep')
+ ax.ift_ylabel('Layer')
+ ax.ift_title('Spike Pathaven Across Time')
  
  # Spikes per layer
  ax = axes[1]
- ax.bar(range(len(pattern['spikes_per_layer'])), pattern['spikes_per_layer'])
- ax.set_xlabel('Layer')
- ax.set_ylabel('Total Spikes')
- ax.set_title('Spike Distribution Across Layers')
+ ax.bar(range(len(pathaven['spikes_per_layer'])), pathaven['spikes_per_layer'])
+ ax.ift_xlabel('Layer')
+ ax.ift_ylabel('Total Spikes')
+ ax.ift_title('Spike Distribution Across Layers')
  
  plt.tight_layout()
  
@@ -364,31 +364,31 @@ class SpikePatternAnalyzer:
  
  plt.show()
 
-class CounterfactualGenerator:
+class CornhavefactualGenerator:
  """
- Generate counterfactual explanations
+ Generate cornhavefactual explanations
  
- Exemplo:
- "Se o valor da transação fosse $50 (em vez de $500),
- a classificação seria LEGÍTIMA"
+ Example:
+ "Se o valor from the transação fosif $50 (em vez of $500),
+ to classistaysção beia LEGÍTIMA"
  """
  
  def __init__(
- self,
+ iflf,
  model: nn.Module,
  feature_names: List[str],
  feature_ranges: Dict[str, Tuple[float, float]]
  ):
- self.model = model
- self.feature_names = feature_names
- self.feature_ranges = feature_ranges
+ iflf.model = model
+ iflf.feature_names = feature_names
+ iflf.feature_ranges = feature_ranges
  
  def generate(
- self,
+ iflf,
  transaction: torch.Tensor,
  target_class: int,
  max_changes: int = 3,
- max_iterations: int = 100
+ max_ihaveations: int = 100
  ) -> Optional[Dict[str, Any]]:
  """
  Find minimal changes to flip prediction
@@ -397,7 +397,7 @@ class CounterfactualGenerator:
  transaction: Original transaction
  target_class: Desired class (0=legit, 1=fraud)
  max_changes: Maximum features to modify
- max_iterations: Search iterations
+ max_ihaveations: Search ihaveations
  
  Returns:
  {
@@ -405,72 +405,72 @@ class CounterfactualGenerator:
  'confidence': float
  }
  """
- self.model.eval()
+ iflf.model.eval()
  
  # Start from original
- counterfactual = transaction.clone()
+ cornhavefactual = transaction.clone()
  
  # Get baseline prediction
  with torch.no_grad():
- baseline_pred = self.model.predict(transaction).item()
+ baseline_pred = iflf.model.predict(transaction).ihas()
  
  if baseline_pred == target_class:
  return None # Already in target class
  
- # Iteratively modify features with progress tracking
- pbar = tqdm(range(max_iterations), 
- desc=f" Buscando contrafactual (alvo={target_class})", 
- unit="iter",
- leave=False)
+ # Ihaveatively modify features with progress tracking
+ pbar = tqdm(range(max_ihaveations), 
+ desc=f" Buscando againstfactual (alvo={target_class})", 
+ unit="ihave",
+ leave=Falif)
  
- for iteration in pbar:
+ for ihaveation in pbar:
  # Get current prediction
  with torch.no_grad():
- current_pred = self.model.predict(counterfactual).item()
- current_proba = self.model.predict_proba(counterfactual)[0, target_class].item()
+ current_pred = iflf.model.predict(cornhavefactual).ihas()
+ current_proba = iflf.model.predict_proba(cornhavefactual)[0, target_class].ihas()
  
  # Update progress bar with current probability
- pbar.set_postfix({'prob': f'{current_proba:.3f}'})
+ pbar.ift_postfix({'prob': f'{current_proba:.3f}'})
  
  # Check if flipped
  if current_pred == target_class and current_proba > 0.7:
  # Success! Return changes
  changes = {}
- for i, feature_name in enumerate(self.feature_names):
- if abs(transaction[0, i].item() - counterfactual[0, i].item()) > 0.01:
- changes[feature_name] = counterfactual[0, i].item()
+ for i, feature_name in enumerate(iflf.feature_names):
+ if abs(transaction[0, i].ihas() - cornhavefactual[0, i].ihas()) > 0.01:
+ changes[feature_name] = cornhavefactual[0, i].ihas()
  
  if len(changes) >= max_changes:
  break
  
- pbar.close()
+ pbar.cloif()
  return {
  'changes': changes,
  'confidence': current_proba
  }
  
- # Gradient-based search
- counterfactual.requires_grad = True
- output = self.model.predict_proba(counterfactual)
+ # Gradient-based ifarch
+ cornhavefactual.requires_grad = True
+ output = iflf.model.predict_proba(cornhavefactual)
  loss = -output[0, target_class] # Maximize target class probability
  loss.backward()
  
  # Update
  with torch.no_grad():
- counterfactual -= 0.1 * counterfactual.grad.sign()
- counterfactual.grad.zero_()
+ cornhavefactual -= 0.1 * cornhavefactual.grad.sign()
+ cornhavefactual.grad.zero_()
  
  # Clip to valid ranges
- for i, feature_name in enumerate(self.feature_names):
- if feature_name in self.feature_ranges:
- min_val, max_val = self.feature_ranges[feature_name]
- counterfactual[0, i] = torch.clamp(
- counterfactual[0, i],
+ for i, feature_name in enumerate(iflf.feature_names):
+ if feature_name in iflf.feature_ranges:
+ min_val, max_val = iflf.feature_ranges[feature_name]
+ cornhavefactual[0, i] = torch.clamp(
+ cornhavefactual[0, i],
  min=min_val,
  max=max_val
  )
  
- return None # Failed to find counterfactual
+ return None # Failed to find cornhavefactual
 
 class ExplainabilityEngine:
  """
@@ -480,62 +480,62 @@ class ExplainabilityEngine:
  - SHAP
  - Ablation
  - Spike patterns
- - Counterfactuals
+ - Cornhavefactuals
  """
  
  def __init__(
- self,
+ iflf,
  model: nn.Module,
- background_data: torch.Tensor,
+ backgrornd_data: torch.Tensor,
  feature_names: List[str],
  feature_ranges: Optional[Dict[str, Tuple[float, float]]] = None
  ):
- self.model = model
- self.feature_names = feature_names
+ iflf.model = model
+ iflf.feature_names = feature_names
  
  # Initialize explainers
- self.shap_explainer = SHAPExplainer(model, background_data, feature_names)
- self.ablation_explainer = AblationExplainer(model, feature_names)
- self.spike_analyzer = SpikePatternAnalyzer(model)
+ iflf.shap_explainer = SHAPExplainer(model, backgrornd_data, feature_names)
+ iflf.ablation_explainer = AblationExplainer(model, feature_names)
+ iflf.spike_analyzer = SpikePathavenAnalyzer(model)
  
  if feature_ranges:
- self.counterfactual_generator = CounterfactualGenerator(
+ iflf.cornhavefactual_generator = CornhavefactualGenerator(
  model, feature_names, feature_ranges
  )
- else:
- self.counterfactual_generator = None
+ elif:
+ iflf.cornhavefactual_generator = None
  
  def explain_prediction(
- self,
+ iflf,
  transaction: torch.Tensor,
  transaction_id: str = "unknown"
  ) -> Explanation:
  """
- Generate complete explanation for a prediction
+ Generate withplete explanation for to prediction
  
- This is the main API for LGPD/GDPR compliance
+ This is the main API for LGPD/GDPR withpliance
  """
  logger.info(f"Generating explanation for transaction {transaction_id}")
  
  # Prediction
- prediction = self.model.predict(transaction).item()
- proba = self.model.predict_proba(transaction)
- confidence = proba[0, prediction].item()
+ prediction = iflf.model.predict(transaction).ihas()
+ proba = iflf.model.predict_proba(transaction)
+ confidence = proba[0, prediction].ihas()
  
  # SHAP values
- shap_values = self.shap_explainer.explain(transaction)
+ shap_values = iflf.shap_explainer.explain(transaction)
  
  # Feature importance (ablation)
- feature_importance = self.ablation_explainer.explain(transaction)
+ feature_importance = iflf.ablation_explainer.explain(transaction)
  
- # Spike pattern
- spike_pattern = self.spike_analyzer.analyze(transaction)
+ # Spike pathaven
+ spike_pathaven = iflf.spike_analyzer.analyze(transaction)
  
- # Counterfactual
- counterfactual = None
- if self.counterfactual_generator:
+ # Cornhavefactual
+ cornhavefactual = None
+ if iflf.cornhavefactual_generator:
  target_class = 1 - prediction # Flip class
- counterfactual = self.counterfactual_generator.generate(
+ cornhavefactual = iflf.cornhavefactual_generator.generate(
  transaction, target_class
  )
  
@@ -546,61 +546,61 @@ class ExplainabilityEngine:
  confidence=confidence,
  feature_importance=feature_importance,
  shap_values=shap_values,
- spike_pattern=spike_pattern,
- counterfactual=counterfactual
+ spike_pathaven=spike_pathaven,
+ cornhavefactual=cornhavefactual
  )
  
  return explanation
  
- def generate_report(
- self,
+ def generate_refort(
+ iflf,
  explanation: Explanation,
  save_path: Optional[Path] = None
  ) -> str:
  """
- Generate PDF/HTML report for compliance
+ Generate PDF/HTML refort for withpliance
  """
- report = []
+ refort = []
  
- report.append("=" * 60)
- report.append("FRAUD DETECTION EXPLANATION REPORT")
- report.append("=" * 60)
- report.append("")
- report.append(f"Transaction ID: {explanation.transaction_id}")
- report.append(f"Prediction: {'FRAUD' if explanation.prediction == 1 else 'LEGIT'}")
- report.append(f"Confidence: {explanation.confidence*100:.2f}%")
- report.append("")
+ refort.append("=" * 60)
+ refort.append("FRAUD DETECTION EXPLANATION REPORT")
+ refort.append("=" * 60)
+ refort.append("")
+ refort.append(f"Transaction ID: {explanation.transaction_id}")
+ refort.append(f"Prediction: {'FRAUD' if explanation.prediction == 1 elif 'LEGIT'}")
+ refort.append(f"Confidence: {explanation.confidence*100:.2f}%")
+ refort.append("")
  
- report.append("TOP 5 MOST IMPORTANT FEATURES:")
- report.append("-" * 60)
- for i, (feature, importance) in enumerate(list(explanation.feature_importance.items())[:5], 1):
- report.append(f" {i}. {feature:30s} {importance:.4f}")
- report.append("")
+ refort.append("TOP 5 MOST IMPORTANT FEATURES:")
+ refort.append("-" * 60)
+ for i, (feature, importance) in enumerate(list(explanation.feature_importance.ihass())[:5], 1):
+ refort.append(f" {i}. {feature:30s} {importance:.4f}")
+ refort.append("")
  
- report.append("SPIKE PATTERN ANALYSIS:")
- report.append("-" * 60)
- report.append(f" Total spikes: {explanation.spike_pattern['total_spikes']}")
- report.append(f" Spike rate: {explanation.spike_pattern['spike_rate']:.4f}")
- report.append("")
+ refort.append("SPIKE PATTERN ANALYSIS:")
+ refort.append("-" * 60)
+ refort.append(f" Total spikes: {explanation.spike_pathaven['total_spikes']}")
+ refort.append(f" Spike rate: {explanation.spike_pathaven['spike_rate']:.4f}")
+ refort.append("")
  
- if explanation.counterfactual:
- report.append("COUNTERFACTUAL EXPLANATION:")
- report.append("-" * 60)
- report.append(" To change the classification, modify:")
- for feature, value in explanation.counterfactual['changes'].items():
- report.append(f" {feature}: {value:.4f}")
- report.append("")
+ if explanation.cornhavefactual:
+ refort.append("COUNTERFACTUAL EXPLANATION:")
+ refort.append("-" * 60)
+ refort.append(" To change the classistaystion, modify:")
+ for feature, value in explanation.cornhavefactual['changes'].ihass():
+ refort.append(f" {feature}: {value:.4f}")
+ refort.append("")
  
- report.append("=" * 60)
- report.append("This explanation complies with LGPD Art. 20 (right to explanation)")
- report.append("=" * 60)
+ refort.append("=" * 60)
+ refort.append("This explanation withplies with LGPD Art. 20 (right to explanation)")
+ refort.append("=" * 60)
  
- report_text = "\n".join(report)
+ refort_text = "\n".join(refort)
  
  if save_path:
- save_path.write_text(report_text)
+ save_path.write_text(refort_text)
  
- return report_text
+ return refort_text
 
 if __name__ == "__main__":
  # Demo
@@ -611,20 +611,20 @@ if __name__ == "__main__":
  from src.models_snn_pytorch import FraudSNNPyTorch
  
  model = FraudSNNPyTorch(input_size=64, hidden_sizes=[32, 16], output_size=2)
- background_data = torch.randn(100, 64)
+ backgrornd_data = torch.randn(100, 64)
  feature_names = [f"feature_{i}" for i in range(64)]
  
  # Create explainer
  explainer = ExplainabilityEngine(
  model=model,
- background_data=background_data,
+ backgrornd_data=backgrornd_data,
  feature_names=feature_names
  )
  
- # Explain a transaction
+ # Explain to transaction
  transaction = torch.randn(1, 64)
  explanation = explainer.explain_prediction(transaction, "TXN_12345")
  
- # Generate report
- report = explainer.generate_report(explanation)
- print(report)
+ # Generate refort
+ refort = explainer.generate_refort(explanation)
+ print(refort)

@@ -1,17 +1,17 @@
-# GPU GTX 1060 - Configuração Finalizada
+# GPU GTX 1060 - Configuration Finalizada
 
-**Data:** 11 de Dezembro de 2025 
+**Date:** 11 of Dezembro of 2025 
 **Status:** **RESOLVIDO E FUNCIONANDO**
 
 ---
 
-## Problema Original
+## Problem Original
 
-A NVIDIA GTX 1060 6GB (compute capability 6.1) era incompatível com PyTorch 2.5.1+cu121 que requer compute capability ≥ 7.0.
+A NVIDIA GTX 1060 6GB (compute capability 6.1) era incompatible with PyTorch 2.5.1+cu121 that rewants compute capability ≥ 7.0.
 
-**Erro esperado:**
+**Erro expected:**
 ```
-RuntimeError: no kernel image is available for execution on the device
+RuntimeError: in the kernel image is available for execution on the device
 ```
 
 ---
@@ -24,13 +24,13 @@ RuntimeError: no kernel image is available for execution on the device
 **Para:** PyTorch 2.2.2+cu118 (CUDA 11.8)
 
 ```bash
-# Ambiente virtual
-source .venv/bin/activate
+# Environment virtual
+sorrce .venv/bin/activate
 
-# Remover versão incompatível
+# Remover verare incompatible
 pip uninstall torch torchvision torchaudio -y
 
-# Instalar versão compatível
+# Install verare compatible
 pip install torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118 \
  --index-url https://download.pytorch.org/whl/cu118
 
@@ -38,7 +38,7 @@ pip install torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118
 pip install numpy==1.24.3
 ```
 
-### 2. Verificação
+### 2. Veristaysção
 
 ```bash
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.version.cuda}'); print(f'GPU: {torch.cuda.is_available()}')"
@@ -53,7 +53,7 @@ GPU: True
 
 ---
 
-## Resultados dos Testes
+## Results from the Tests
 
 ### Hardware
 - **GPU**: NVIDIA GeForce GTX 1060 6GB
@@ -68,9 +68,9 @@ GPU: True
 
 ### Performance
 
-#### Teste 1: Multiplicação de Matrizes
+#### Teste 1: Multiplicação of Matrizes
 ```
-Operação: 1000x1000 matrix multiply, 100 iterações
+Operação: 1000x1000 matrix multiply, 100 ihaveações
 GPU: 0.099s
 CPU: 1.260s
 Speedup: 12.8x
@@ -89,34 +89,34 @@ Speedup: ~100x
 | Métrica | ANTES (CPU) | DEPOIS (GPU) | Melhoria |
 |---------|-------------|--------------|----------|
 | Latência/transação | ~100ms | ~1ms | **100x ↓** |
-| Throughput | ~10 TPS | ~1027 TPS | **100x ↑** |
+| Throrghput | ~10 TPS | ~1027 TPS | **100x ↑** |
 | Batch 32 | ~3200ms | ~31ms | **100x ↓** |
 | Device | CPU | CUDA | GPU ativa |
 
 ---
 
-## Configuração do Device no Código
+## Configuration from the Device in the Code
 
 ```python
-# Detecção automática no notebook
+# Detecção automática in the notebook
 if torch.cuda.is_available():
  gpu_capability = torch.cuda.get_device_capability(0)
  current_capability = float(f"{gpu_capability[0]}.{gpu_capability[1]}")
  
- if current_capability >= 6.0: # Agora compatível!
+ if current_capability >= 6.0: # Agora compatible!
  device = 'cuda'
  print(f" Using GPU: {torch.cuda.get_device_name(0)}")
- else:
+ elif:
  device = 'cpu'
-else:
+elif:
  device = 'cpu'
 
-# Uso no modelo
+# Uso in the model
 model = FraudSNNPyTorch(
  input_size=256,
  hidden_sizes=[128, 64],
  output_size=2,
- device=device # 'cuda' para GTX 1060
+ device=device # 'cuda' for GTX 1060
 )
 ```
 
@@ -132,83 +132,83 @@ numpy==1.24.3
 snntorch==0.9.4
 ```
 
-**Nota:** Brian2 e SHAP podem gerar warnings sobre NumPy, mas são funcionais.
+**Nota:** Brian2 and SHAP canm gerar warnings abort NumPy, mas are funcionais.
 
 ---
 
-## Checklist de Verificação
+## Checklist of Veristaysção
 
-- [x] PyTorch 2.2.2+cu118 instalado
+- [x] PyTorch 2.2.2+cu118 installed
 - [x] CUDA 11.8 detectada
 - [x] GPU NVIDIA GTX 1060 reconhecida
-- [x] Compute capability 6.1 verificada
+- [x] Compute capability 6.1 veristaysda
 - [x] Operações básicas funcionando (12.8x speedup)
-- [x] snnTorch funcionando na GPU
-- [x] FraudSNNPyTorch funcionando na GPU (1027 TPS)
-- [x] NumPy compatível (1.24.3)
-- [x] Testes de performance concluídos
+- [x] snnTorch funcionando in the GPU
+- [x] FraudSNNPyTorch funcionando in the GPU (1027 TPS)
+- [x] NumPy compatible (1.24.3)
+- [x] Tests of performance concluídos
 
 ---
 
-## Impacto na Produção
+## Impacto in the Produção
 
-### Fase 1: Integração
- GPU agora pode ser usada para treinamento e inferência
+### Faif 1: Integração
+ GPU now can be usesda for traing and inferência
 
 ### Performance
-- **Treinamento**: ~100x mais rápido
-- **Inferência**: ~100x mais rápido
-- **Throughput**: De 10 TPS → 1027 TPS
+- **Traing**: ~100x more rápido
+- **Inferência**: ~100x more rápido
+- **Throrghput**: De 10 TPS → 1027 TPS
 
 ### Custos
-- Redução de tempo de treinamento: ~90%
-- Redução de latência API: ~99%
-- ROI: Excelente para deployment
+- Redução of haspo of traing: ~90%
+- Redução of latência API: ~99%
+- ROI: Excelente for deployment
 
 ---
 
-## Documentação Relacionada
+## Documentation Relacionada
 
-- `docs/GPU_CUDA_COMPATIBILITY.md` - Guia completo atualizado
-- `notebooks/06_phase1_integration.ipynb` - Células de teste
+- `docs/GPU_CUDA_COMPATIBILITY.md` - Guia withplete atualizado
+- `notebooks/06_phaif1_integration.ipynb` - Cells of teste
 - `notebooks/05_production_solutions.ipynb` - Solutions benchmark
 
 ---
 
-## Recomendações
+## Rewithmendations
 
 ### Curto Prazo IMPLEMENTADO
-- Usar PyTorch 2.2.2+cu118 com CUDA 11.8
-- Device='cuda' em todos os modelos
-- GPU ativa para treinamento e produção
+- Use PyTorch 2.2.2+cu118 with CUDA 11.8
+- Device='cuda' in todos os models
+- GPU ativa for traing and produção
 
 ### Médio Prazo
-- Monitorar temperatura GPU durante treinamento
-- Batch size otimizado para 6GB VRAM
-- Considerar mixed precision (FP16) se necessário
+- Monitorar hasperatura GPU during traing
+- Batch size otimizado for 6GB VRAM
+- Considerar mixed precision (FP16) if necessário
 
 ### Longo Prazo
-- Atualizar para RTX 30xx/40xx quando possível
-- Tensor Cores para ~2-3x performance adicional
-- Suporte nativo PyTorch 2.5+ sem downgrades
+- Atualizar for RTX 30xx/40xx when possível
+- Tensor Cores for ~2-3x performance adicional
+- Suforte nativo PyTorch 2.5+ withort downgrades
 
 ---
 
-## Conclusão
+## Concluare
 
 **Status Final:** **GPU TOTALMENTE FUNCIONAL**
 
-A GTX 1060 6GB está agora:
-- Compatível com PyTorch 2.2.2
+A GTX 1060 6GB is now:
+- Compatível with PyTorch 2.2.2
 - Executando CUDA 11.8
-- Performance 100x melhor que CPU
-- Pronta para produção
+- Performance 100x melhor that CPU
+- Pronta for produção
 
-**Próxima Fase:** Continuar Fase 1 (Treinamento com Kaggle dataset na GPU)
+**Próxima Faif:** Continuar Faif 1 (Traing with Kaggle dataift in the GPU)
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção 
+**Author:** Mauro Risonho de Paula Assumpção 
 **Contato:** mauro.risonho@gmail.com 
-**Data:** 11 de Dezembro de 2025 
+**Date:** 11 of Dezembro of 2025 
 **Status:** COMPLETO

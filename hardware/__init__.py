@@ -1,24 +1,24 @@
 """
-**Descrição:** Módulo de simuladores de hardware neuromórfico para benchmarking de implementações SNN. Inclui simulador Intel Loihi 2 com modelagem de latência, energia e throughput.
+**Description:** Módulo of yesuladores of neuromorphic hardware for benchmarking of implementações SNN. Inclui yesulador Intel Loihi 2 with modelagem of latência, energia and throughput.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**License:** MIT License
+**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
 
-from hardware.loihi_simulator import (
-    LoihiSimulator,
-    LoihiSpecs,
-    LoihiMetrics,
-    compare_with_cpu
+from hardware.loihi_yesulator import (
+  LoihiSimulator,
+  LoihiSpecs,
+  LoihiMetrics,
+  compare_with_cpu
 )
 
 __all__ = [
-    'LoihiSimulator',
-    'LoihiSpecs',
-    'LoihiMetrics',
-    'compare_with_cpu'
+  'LoihiSimulator',
+  'LoihiSpecs',
+  'LoihiMetrics',
+  'compare_with_cpu'
 ]

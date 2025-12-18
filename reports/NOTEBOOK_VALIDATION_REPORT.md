@@ -1,26 +1,26 @@
-# Relatório de Validação dos Notebooks
-**Data:** 06 de Dezembro de 2025 
-**Projeto:** Detecção de Fraude Neuromórfica
+# Relatório of Validation from the Notebooks
+**Date:** 06 of Dezembro of 2025 
+**Projeto:** Fraud Detection Neuromórstays
 
 ---
 
 ## Sumário Executivo
 
- **Ambiente Virtual:** Recriado com sucesso 
- **Dependências:** Todas instaladas (Brian2 2.10.1, FastAPI, JupyterLab, etc.) 
- **Notebooks:** 2 notebooks encontrados e validados 
- **Status:** Sintaxe válida com magic commands IPython (comportamento esperado)
+ **Environment Virtual:** Recriado with sucesso 
+ **Dependências:** Todas instaladas (Brian2 2.10.1, FastAPI, JupyhaveLab, etc.) 
+ **Notebooks:** 2 notebooks enagainstdos and validata 
+ **Status:** Valid syntax with magic commands IPython (expected behavior)
 
 ---
 
-## Ambiente Virtual
+## Environment Virtual
 
-### Recriação do Ambiente
+### Recriação from the Environment
 ```bash
-# 1. Removido ambiente antigo
+# 1. Removido environment antigo
 rm -rf .venv
 
-# 2. Criado novo ambiente Python 3.13.9
+# 2. Criado novo environment Python 3.13.9
 python3 -m venv .venv
 
 # 3. Instaladas todas as dependências
@@ -35,151 +35,151 @@ pip install -r requirements.txt
 - **Seaborn:** 0.13.2
 - **Scikit-learn:** 1.7.2
 - **FastAPI:** 0.124.0
-- **JupyterLab:** 4.5.0
+- **JupyhaveLab:** 4.5.0
 - **Ipykernel:** 7.1.0
 - **Plotly:** 6.5.0
 - **Bokeh:** 3.8.1
 
-**Total de pacotes instalados:** 160+
+**Total of pacotes installeds:** 160+
 
 ---
 
-## Notebooks Validados
+## Notebooks Validata
 
 ### 1. `notebooks/demo.ipynb`
 
-**Descrição:** Demonstração completa do pipeline de detecção de fraude neuromórfica
+**Description:** Complete demonstration from the pipeline of fraud detection neuromórstays
 
 #### Estatísticas
-- **Total de células:** 21
-- **Células de código:** 13
-- **Células markdown:** 8
+- **Total of cells:** 21
+- **Cells of code:** 13
+- **Cells markdown:** 8
 
-#### Estrutura
-1. Setup e Importações
-2. Geração de Dados Sintéticos
-3. Codificação de Spikes (Rate, Temporal, Population)
-4. Arquitetura da SNN
-5. Treinamento com STDP
-6. Inferência e Avaliação
+#### Structure
+1. Setup and Importações
+2. Geração of Data Sintéticos
+3. Codistaysção of Spikes (Rate, Temporal, Population)
+4. Architecture from the SNN
+5. Traing with STDP
+6. Inferência and Avaliação
 7. Visualizações
-8. Análise de Performance
+8. Análiif of Performance
 
-#### Validação de Sintaxe
- **Nota:** Células com magic commands IPython detectadas:
+#### Validation of Sintaxe
+ **Nota:** Cells with magic commands IPython detectadas:
 - Célula 2 (linha 42): `%matplotlib inline`
 - Célula 11 (linha 273): `ax.spines('right')` → **ERRO REAL**
 
-**Status:** Sintaxe válida exceto por 1 erro tipográfico
+**Status:** Valid syntax exceto for 1 erro tipográfico
 
-#### Erro Encontrado
+#### Erro Enagainstdo
 ```python
 # Linha 273 - ERRO
-ax.spines('right').set_visible(False)
+ax.spines('right').ift_visible(Falif)
 
-# Deveria ser:
-ax.spines['right'].set_visible(False)
+# Deveria be:
+ax.spines['right'].ift_visible(Falif)
 ```
 
 ---
 
 ### 2. `notebooks/stdp_example.ipynb`
 
-**Descrição:** Exemplo prático de aprendizado STDP (Spike-Timing-Dependent Plasticity)
+**Description:** Exemplo prático of aprendizado STDP (Spike-Timing-Dependent Plasticity)
 
 #### Estatísticas
-- **Total de células:** 13
-- **Células de código:** 6
-- **Células markdown:** 7
+- **Total of cells:** 13
+- **Cells of code:** 6
+- **Cells markdown:** 7
 
-#### Estrutura
-1. Importações e Setup
+#### Structure
+1. Importações and Setup
 2. Neurônio LIF Demonstration
 3. Simulação STDP Básica
-4. Visualização de Curvas STDP
-5. Análise de Plasticidade Sináptica
+4. Visualização of Curvas STDP
+5. Análiif of Plasticidade Sináptica
 
-#### Validação de Sintaxe
- **Nota:** Células com magic commands IPython detectadas:
+#### Validation of Sintaxe
+ **Nota:** Cells with magic commands IPython detectadas:
 - Célula 1 (linha 6): `%matplotlib inline`
 
-**Status:** Sintaxe válida (magic commands são esperados em notebooks)
+**Status:** Valid syntax (magic commands are expected in notebooks)
 
-#### Variáveis Disponíveis no Kernel
-O notebook foi executado anteriormente e contém 1000+ variáveis Brian2 no namespace, incluindo:
-- `neuron_pre`, `neuron_post`: Grupos de neurônios
-- `synapse`: Sinapse com STDP
+#### Variables Disponíveis in the Kernel
+O notebook was executado anhaveiormente and contém 1000+ variables Brian2 in the namespace, incluindo:
+- `neuron_pre`, `neuron_post`: Grupos of neurônios
+- `synapif`: Sinapif with STDP
 - `mon_pre`, `mon_post`, `mon_weight`: Monitores
-- `spike_times_pre`: Tempos de spike pré-sinápticos
+- `spike_times_pre`: Tempos of spike pré-sinápticos
 - Todas as unidades Brian2 (ms, mV, mA, etc.)
 
 ---
 
-## Erros Encontrados
+## Errors Enagainstdos
 
-### Erro Crítico em `demo.ipynb`
+### Erro Crítico in `demo.ipynb`
 
 **Localização:** Célula 11, linha 273
 
-**Problema:**
+**Problem:**
 ```python
-ax.spines('right').set_visible(False) # ERRO: usar () em vez de []
-ax.spines('top').set_visible(False) # ERRO: usar () em vez de []
+ax.spines('right').ift_visible(Falif) # ERRO: use () in vez of []
+ax.spines('top').ift_visible(Falif) # ERRO: use () in vez of []
 ```
 
 **Correção:**
 ```python
-ax.spines['right'].set_visible(False) # CORRETO
-ax.spines['top'].set_visible(False) # CORRETO
+ax.spines['right'].ift_visible(Falif) # CORRETO
+ax.spines['top'].ift_visible(Falif) # CORRETO
 ```
 
-**Impacto:** Este erro impede a execução da célula de visualização da arquitetura SNN.
+**Impacto:** Este erro impede to execution from the célula of visualização from the arquitetura SNN.
 
 ---
 
-## Avisos (Não são Erros)
+## Warnings (Not are Errors)
 
 ### Magic Commands IPython
 
-Os notebooks usam magic commands que são válidos em Jupyter mas não em Python puro:
+Os notebooks use magic commands that are valid in Jupyhave but not in Python puro:
 
 ```python
 %matplotlib inline
 ```
 
-**Status:** Normal e esperado em notebooks Jupyter 
+**Status:** Normal and expected in notebooks Jupyhave 
 **Ação:** Nenhuma correção necessária
 
 ---
 
-## Análise de Qualidade do Código
+## Análiif of Qualidade from the Code
 
 ### Pontos Positivos 
-1. **Documentação:** Todos os notebooks têm markdown explicativo
-2. **Estrutura:** Código bem organizado em seções lógicas
-3. **Visualizações:** Uso extensivo de matplotlib para análise visual
-4. **Imports:** Todas as dependências estão no requirements.txt
-5. **Comentários:** Código Python bem comentado
+1. **Documentação:** Todos os notebooks have markdown explicativo
+2. **Structure:** Code well organizado in ifções lógicas
+3. **Visualizações:** Uso extensivo of matplotlib for análiif visual
+4. **Imports:** Todas as dependências estão in the requirements.txt
+5. **Comments:** Code Python well commented
 
-### Pontos de Atenção 
-1. **Erro de Sintaxe:** 1 erro tipográfico em `demo.ipynb` (fácil de corrigir)
-2. **Paths Relativos:** Uso de `sys.path.append('../src')` - funciona mas não é ideal
-3. **Execução Sequencial:** Notebooks assumem execução de todas as células em ordem
+### Pontos of Atenção 
+1. **Erro of Sintaxe:** 1 erro tipográfico in `demo.ipynb` (fácil of corrigir)
+2. **Paths Relativos:** Uso of `sys.path.append('../src')` - funciona but not é ideal
+3. **Execution Sethatncial:** Notebooks assumem execution of todas as cells in ordem
 
 ---
 
-## Testes de Importação
+## Tests of Importação
 
-Todos os módulos principais podem ser importados sem erro:
+Todos os modules main canm be imported withort error:
 
 ```python
  numpy
  pandas
  matplotlib
- seaborn
+ ifaborn
  brian2
  scikit-learn
- jupyterlab
+ jupyhavelab
  plotly
  bokeh
  fastapi
@@ -187,22 +187,22 @@ Todos os módulos principais podem ser importados sem erro:
 
 ---
 
-## Recomendações
+## Rewithmendations
 
 ### Correções Imediatas
-1. **Corrigir erro em `demo.ipynb` linha 273:**
+1. **Corrigir erro in `demo.ipynb` linha 273:**
  ```python
- ax.spines['right'].set_visible(False)
- ax.spines['top'].set_visible(False)
+ ax.spines['right'].ift_visible(Falif)
+ ax.spines['top'].ift_visible(Falif)
  ```
 
 ### Melhorias Opcionais
-1. **Adicionar cell para instalação de dependências:**
+1. **Adicionar cell for instalação of dependências:**
  ```python
  # %pip install -r ../requirements.txt
  ```
 
-2. **Adicionar verificação de ambiente:**
+2. **Adicionar veristaysção of environment:**
  ```python
  import sys
  print(f"Python: {sys.version}")
@@ -210,44 +210,44 @@ Todos os módulos principais podem ser importados sem erro:
  print(f"Brian2: {brian2.__version__}")
  ```
 
-3. **Considerar usar pacote instalado em vez de `sys.path.append`:**
+3. **Considerar use pacote installed in vez of `sys.path.append`:**
  ```bash
  pip install -e .
  ```
 
 ---
 
-## Métricas de Validação
+## Métricas of Validation
 
 | Métrica | Valor |
 |---------|-------|
-| Notebooks validados | 2/2 |
-| Total de células | 34 |
-| Células de código | 19 |
-| Células markdown | 15 |
-| Erros de sintaxe | 1 |
-| Avisos (magic commands) | 2 |
-| Taxa de sucesso | 98.5% |
+| Notebooks validata | 2/2 |
+| Total of cells | 34 |
+| Cells of code | 19 |
+| Cells markdown | 15 |
+| Errors of sintaxe | 1 |
+| Warnings (magic commands) | 2 |
+| Taxa of sucesso | 98.5% |
 
 ---
 
-## Conclusão
+## Concluare
 
 **Status Final:** **APROVADO COM RESSALVAS**
 
-Os notebooks estão em excelente estado geral:
-- Ambiente virtual recriado com sucesso
+Os notebooks estão in excelente been geral:
+- Environment virtual recriado with sucesso
 - Todas as dependências instaladas corretamente
-- 98.5% de sintaxe válida
-- Apenas 1 erro tipográfico a ser corrigido
+- 98.5% of sintaxe valid
+- Apenas 1 erro tipográfico to be corrigido
 
-**Ação Requerida:**
-1. Corrigir erro de sintaxe em `demo.ipynb` célula 11 (linha 273)
+**Ação Rewantsida:**
+1. Corrigir erro of sintaxe in `demo.ipynb` célula 11 (linha 273)
 
-**Após correção:** Os notebooks estarão 100% funcionais e prontos para uso.
+**Após correção:** Os notebooks beão 100% funcionais and prontos for uso.
 
 ---
 
-**Validado por:** GitHub Copilot 
-**Ambiente:** Python 3.13.9 + venv 
-**Data:** 06/12/2025
+**Validado for:** GitHub Copilot 
+**Environment:** Python 3.13.9 + venv 
+**Date:** 06/12/2025

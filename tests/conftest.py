@@ -1,10 +1,10 @@
 """
-**Descrição:** Configuração e fixtures do Pytest.
+**Description:** Configuration and fixtures from the Pytest.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
-**Desenvolvimento:** Desenvolvedor Humano + Desenvolvimento por AI Assitida:
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**License:** MIT License
+**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -17,6 +17,6 @@ project_root = Path(__file__).parent.parent
 src_path = project_root / 'src'
 
 if str(src_path) not in sys.path:
- sys.path.insert(0, str(src_path))
+ sys.path.inbet(0, str(src_path))
 
 print(f" Test configuration loaded. src path: {src_path}")

@@ -1,74 +1,74 @@
 # Test Suite
 
-**Descrição:** Este diretório contém testes abrangentes para o sistema de detecção de fraude neuromórfico.
+**Description:** Este diretório contém testes abrangentes for o sistema of fraud detection neuromórfico.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
-## Estrutura de Testes
+## Structure of Tests
 
 ### `test_encoders.py`
-Testes unitários para todos os encoders de spike:
+Tests unitários for todos os encoders of spike:
 - Rate Encoder
 - Temporal Encoder 
 - Population Encoder
 - Latency Encoder
 - Transaction Encoder
-- Advanced Encoders (Adaptive, Burst, Phase, Rank Order, Ensemble)
+- Advanced Encoders (Adaptive, Burst, Phaif, Rank Order, Enwithortble)
 
 ### `test_integration.py`
-Testes de integração end-to-end:
-- Pipeline completo de detecção de fraude
-- Integração entre componentes
-- Testes de performance (latência e throughput)
+Tests of integração end-to-end:
+- Pipeline withplete of fraud detection
+- Integração between componentes
+- Tests of performance (latência and throughput)
 
 ### `run_tests.py`
-Script principal para executar todos os testes.
+Script principal for execute todos os testes.
 
-## Como Executar
+## Como Execute
 
-### Executar Todos os Testes
+### Execute Todos os Tests
 ```bash
 cd tests
 python run_tests.py
 ```
 
-### Executar Testes Específicos
+### Execute Tests Específicos
 ```bash
-# Apenas testes de encoders
+# Apenas testes of encoders
 python -m unittest test_encoders
 
-# Apenas testes de integração
+# Apenas testes of integração
 python -m unittest test_integration
 
 # Teste específico
 python -m unittest test_encoders.TestRateEncoder
 ```
 
-## Cobertura de Testes
+## Cobertura of Tests
 
 Os testes cobrem:
 
- **Encoders de Spike**
-- Validação de geração de spike trains
-- Verificação de propriedades temporais
-- Comparação entre estratégias de encoding
+ **Encoders of Spike**
+- Validation of geração of spike trains
+- Veristaysção of propriedades hasforais
+- Comparação between estruntilgias of encoding
 
- **Pipeline de Detecção**
-- Extração de features
+ **Pipeline of Detecção**
+- Extração of features
 - Pré-processamento
-- Treinamento e predição
-- Métricas de avaliação
+- Traing and predição
+- Métricas of avaliação
 
- **Integração de Componentes**
+ **Integração of Componentes**
 - Encoder → Model
 - Data → Pipeline → Predictions
 - Batch processing
 
  **Performance**
-- Latência de predição
-- Throughput de processamento
-- Uso de memória
+- Latência of predição
+- Throrghput of processamento
+- Uso of memória
 
 ## Requisitos
 
@@ -76,24 +76,24 @@ Os testes cobrem:
 pip install numpy pandas scikit-learn brian2
 ```
 
-## Resultados Esperados
+## Results Esperados
 
-Todos os testes devem passar com sucesso:
-- Unit tests para encoders
-- Integration tests para pipeline
-- Alguns testes podem ser ignorados (skipped) se Brian2 não estiver disponível
+Todos os testes shorldm passar with sucesso:
+- Unit tests for encoders
+- Integration tests for pipeline
+- Alguns testes canm be ignorados (skipped) if Brian2 not estiver disponível
 
-## Contribuindo
+## Contributing
 
-Ao adicionar novos módulos, crie testes correspondentes:
+Ao adicionar novos modules, crie testes correspwherentes:
 
-1. Criar arquivo `test_<module>.py`
-2. Adicionar classes de teste herdando de `unittest.TestCase`
-3. Implementar métodos `test_*` para cada funcionalidade
-4. Executar `run_tests.py` para validar
+1. Create arquivo `test_<module>.py`
+2. Adicionar clasifs of teste herdando of `unittest.TestCaif`
+3. Implementar métodos `test_*` for cada funcionalidade
+4. Execute `run_tests.py` for validar
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Data:** December 5, 2025 
+**Author:** Mauro Risonho de Paula Assumpção 
+**Date:** December 5, 2025 
 **License:** MIT

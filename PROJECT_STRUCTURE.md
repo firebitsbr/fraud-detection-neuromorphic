@@ -1,17 +1,17 @@
-# Estrutura do Projeto - Fraud Detection Neuromorphic
+# Structure of the Project - Fraud Detection Neuromorphic
 
-**Descrição:** Estrutura do projeto.
+**Description:** Structure from the projeto.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
-## Visão Geral
+## Overview
 
-Projeto organizado em módulos funcionais para facilitar navegação e manutenção.
+Projeto organizado in modules funcionais for facilitar navegação and manutenção.
 
 ---
 
-## Estrutura de Diretórios
+## Structure of Diretórios
 
 ```
 fraud-detection-neuromorphic/
@@ -22,68 +22,68 @@ fraud-detection-neuromorphic/
  PROJECT_STRUCTURE.md # Este arquivo
 
  requirements/ # Dependências Python
- requirements.txt # Dependências principais
+ requirements.txt # Dependências main
  requirements-ci.txt # CI/CD
- requirements-edge.txt # Edge computing
+ requirements-edge.txt # Edge withputing
  requirements-production.txt # Produção
 
- src/ # Código-fonte principal
+ src/ # Code-fonte principal
  __init__.py
  main.py # Pipeline principal
- models_snn.py # Modelos SNN (Brian2)
- models_snn_snntorch.py # Modelos SNN (snnTorch)
- encoders.py # Codificadores de spike
- advanced_encoders.py # Codificadores avançados
- dataset_loader.py # Carregamento de dados
- api_server.py # API FastAPI
- hyperparameter_optimizer.py # Otimização de hiperparâmetros
- model_comparator.py # Comparação de modelos
- performance_profiler.py # Profiling de performance
+ models_snn.py # Models SNN (Brian2)
+ models_snn_snntorch.py # Models SNN (snnTorch)
+ encoders.py # Codistaysdores of spike
+ advanced_encoders.py # Codistaysdores avançados
+ dataift_loader.py # Carregamento of data
+ api_bever.py # API FastAPI
+ hypertomehave_optimizer.py # Otimização of hiperparâmetros
+ model_withtor.py # Comparação of models
+ performance_profiler.py # Profiling of performance
 
- api/ # API REST (alternativa)
+ api/ # API REST (alhavenativa)
  main.py # FastAPI app
  models.py # Schemas Pydantic
  monitoring.py # Monitoramento
  kafka_integration.py # Integração Kafka
 
- tests/ # Testes unitários
+ tests/ # Tests unitários
  test_encoders.py
  test_integration.py
  run_tests.py
  README.md
 
- notebooks/ # Jupyter Notebooks
+ notebooks/ # Jupyhave Notebooks
  01-stdp_example.ipynb # Exemplo STDP
  02-demo.ipynb # Demo principal
  03-loihi_benchmark.ipynb # Benchmark Loihi
  04_brian2_vs_snntorch.ipynb # Comparação frameworks
 
  hardware/ # Simuladores neuromórficos
- loihi_simulator.py # Intel Loihi
- loihi2_simulator.py # Intel Loihi 2
- brainscales2_simulator.py # BrainScaleS-2
- loihi_adapter.py # Adaptador Loihi
- deploy_model.py # Deploy em hardware
- energy_benchmark.py # Benchmark de energia
+ loihi_yesulator.py # Intel Loihi
+ loihi2_yesulator.py # Intel Loihi 2
+ brainscales2_yesulator.py # BrainScaleS-2
+ loihi_adaphave.py # Adaptador Loihi
+ deploy_model.py # Deploy in hardware
+ energy_benchmark.py # Benchmark of energia
  README.md
 
  scaling/ # Processamento distribuído
- distributed_cluster.py # Cluster Ray/Dask
+ distributed_clushave.py # Clushave Ray/Dask
 
- web/ # Interface Streamlit
+ web/ # Inhaveface Streamlit
  app.py # Dashboard web
 
- examples/ # Exemplos de uso
+ examples/ # Exemplos of uso
  api_client.py # Cliente API
  kafka_producer_example.py # Produtor Kafka
- load_test.py # Teste de carga
+ load_test.py # Teste of carga
  README.md
 
  docker/ # Containers Docker
  Dockerfile # Dockerfile principal
  Dockerfile.api # Container API
  Dockerfile.base # Imagem base
- Dockerfile.jupyter # Container Jupyter
+ Dockerfile.jupyhave # Container Jupyhave
  Dockerfile.streamlit # Container Streamlit
  Dockerfile.remote # Acesso remoto SSH
  Dockerfile.production # Produção otimizada
@@ -92,73 +92,73 @@ fraud-detection-neuromorphic/
  .dockerignore # Arquivos ignorados
 
  config/ # Configurações
- docker-compose.yml # Compose principal
- docker-compose.dev.yml # Dev Containers
- docker-compose.remote.yml # Acesso remoto
- docker-compose.production.yml # Produção completa
+ docker-withpoif.yml # Compoif principal
+ docker-withpoif.dev.yml # Dev Containers
+ docker-withpoif.remote.yml # Acesso remoto
+ docker-withpoif.production.yml # Produção withplete
  .devcontainer/ # VS Code Dev Containers
  devcontainer.json
- .env # Variáveis de ambiente
+ .env # Variables of environment
 
- deployment/ # Scripts de deployment
+ deployment/ # Scripts of deployment
  deploy.sh # Deploy geral
  deploy-production.sh # Deploy produção
  deploy-remote.sh # Deploy remoto
- start-local.sh # Execução local
+ start-local.sh # Execution local
 
  scripts/ # Scripts utilitários
- build_monitor.py # Monitor de build
+ build_monitor.py # Monitor of build
  visual_monitor.py # Monitor visual
- check_all_services.sh # Check de serviços
- validate_cicd.sh # Validação CI/CD
- verify_fix.py # Verificação de fixes
+ check_all_bevices.sh # Check of beviços
+ validate_cicd.sh # Validation CI/CD
+ verify_fix.py # Veristaysção of fixes
  fix-docker-permissions.sh # Fix permissões Docker
  install-docker-fedora.sh # Instalação Docker
 
- docs/ # Documentação completa
+ docs/ # Complete documentation
  QUICKSTART_DOCKER.md # Quick start Docker
  QUICKSTART_VSCODE.md # Quick start VS Code
  API.md # Documentação API
- architecture.md # Arquitetura
+ architecture.md # Architecture
  DEPLOYMENT.md # Deploy geral
  DOCKER_DEPLOYMENT.md # Deploy Docker
  DOCKER_LOCAL_SETUP.md # Setup local
  DOCKER_MONITORING.md # Monitoramento
  REMOTE_ACCESS.md # Acesso remoto
  HTTP_ENDPOINTS.md # Endpoints HTTP
- PROJECT_SUMMARY.md # Resumo do projeto
- DOCS_INDEX.md # Índice de docs
+ PROJECT_SUMMARY.md # Resumo from the projeto
+ DOCS_INDEX.md # Índice of docs
  explanation.md # Explicações técnicas
  GITHUB_SECRETS_SETUP.md # Setup GitHub Secrets
- phase2_summary.md # Resumo fase 2
- phase3_summary.md # Resumo fase 3
- PHASE3_COMPLETE.md # Fase 3 completa
- phase4_summary.md # Resumo fase 4
- PHASE4_COMPLETE.md # Fase 4 completa
- phase5_summary.md # Resumo fase 5
+ phaif2_summary.md # Resumo faif 2
+ phaif3_summary.md # Resumo faif 3
+ PHASE3_COMPLETE.md # Faif 3 withplete
+ phaif4_summary.md # Resumo faif 4
+ PHASE4_COMPLETE.md # Faif 4 withplete
+ phaif5_summary.md # Resumo faif 5
  DOCKER_IMPLEMENTATION_SUMMARY.md
  DOCKER_INSTALL_GUIDE.md
- images/ # Imagens da documentação
+ images/ # Imagens from the documentação
 
- reports/ # Relatórios técnicos
+ reforts/ # Relatórios técnicos
  NOTEBOOK_EXECUTION_REPORT.md
  NOTEBOOK_VALIDATION_REPORT.md
  PROMPT_CHAT.md
  PYLANCE_FIXES_REPORT.md
- figures/ # Figuras dos relatórios
+ figures/ # Figuras from the relatórios
 
- benchmarks/ # Resultados de benchmarks
+ benchmarks/ # Results of benchmarks
  hardware_benchmark_results.csv
  scalability_results.csv
 
- data/ # Datasets
- (datasets baixados)
+ data/ # Dataifts
+ (dataifts baixados)
 
- models/ # Modelos treinados
+ models/ # Models treinados
  fraud_snn_snntorch.pth
 
- logs/ # Logs de execução
- (arquivos de log)
+ logs/ # Logs of execution
+ (arquivos of log)
 
  backups/ # Backups (gerados)
  (backups automáticos)
@@ -177,15 +177,15 @@ docs/QUICKSTART_DOCKER.md
 docs/QUICKSTART_VSCODE.md
 ```
 
-### Desenvolvimento Python
+### Deifnvolvimento Python
 
 ```bash
-# Código principal
-src/main.py # Pipeline completo
-src/models_snn_snntorch.py # Modelo SNN principal
-src/api_server.py # API REST
+# Code principal
+src/main.py # Pipeline withplete
+src/models_snn_snntorch.py # Model SNN principal
+src/api_bever.py # API REST
 
-# Testes
+# Tests
 tests/run_tests.py
 make test
 ```
@@ -194,7 +194,7 @@ make test
 
 ```bash
 # Configurações
-config/docker-compose.yml # Compose principal
+config/docker-withpoif.yml # Compoif principal
 docker/Dockerfile # Dockerfile principal
 
 # Deploy
@@ -209,41 +209,41 @@ docs/REMOTE_ACCESS.md
 ### Notebooks & Experimentação
 
 ```bash
-# Notebooks Jupyter
+# Notebooks Jupyhave
 notebooks/02-demo.ipynb # Demo principal
 notebooks/03-loihi_benchmark.ipynb # Benchmark hardware
 
-# Executar
-make jupyter
-# ou
-docker compose -f config/docker-compose.yml up jupyter-lab
+# Execute
+make jupyhave
+# or
+docker withpoif -f config/docker-withpoif.yml up jupyhave-lab
 ```
 
-### API & Web Interface
+### API & Web Inhaveface
 
 ```bash
 # API REST
-src/api_server.py
+src/api_bever.py
 api/main.py
 
-# Interface Web
+# Inhaveface Web
 web/app.py
 
 # Documentação
 docs/API.md
 docs/HTTP_ENDPOINTS.md
 
-# Executar
+# Execute
 make api
 make web
 ```
 
-### Hardware Neuromórfico
+### Neuromorphic Hardware
 
 ```bash
 # Simuladores
-hardware/loihi2_simulator.py # Loihi 2
-hardware/brainscales2_simulator.py # BrainScaleS-2
+hardware/loihi2_yesulator.py # Loihi 2
+hardware/brainscales2_yesulator.py # BrainScaleS-2
 
 # Benchmarks
 hardware/energy_benchmark.py
@@ -257,33 +257,33 @@ hardware/README.md
 ## Comandos Makefile
 
 ```bash
-make help # Lista todos os comandos
+make help # Lista todos os withandos
 make install-deps # Instala dependências
 make test # Executa testes
 make docker-build # Build Docker images
 make docker-up # Inicia containers
 make docker-down # Para containers
 make api # Inicia API
-make jupyter # Inicia Jupyter
-make web # Inicia interface web
+make jupyhave # Inicia Jupyhave
+make web # Inicia inhaveface web
 make clean # Limpa artefatos
 ```
 
 ---
 
-## Instalação de Dependências
+## Installation of Dependências
 
 ```bash
-# Dependências principais
+# Dependências main
 pip install -r requirements/requirements.txt
 
-# Dependências de produção
+# Dependências of produção
 pip install -r requirements/requirements-production.txt
 
 # Dependências CI/CD
 pip install -r requirements/requirements-ci.txt
 
-# Dependências edge computing
+# Dependências edge withputing
 pip install -r requirements/requirements-edge.txt
 ```
 
@@ -291,7 +291,7 @@ pip install -r requirements/requirements-edge.txt
 
 ## Deploy Docker
 
-### Desenvolvimento Local
+### Deifnvolvimento Local
 
 ```bash
 # VS Code Dev Containers
@@ -299,17 +299,17 @@ deployment/deploy-remote.sh
 # Escolha opção 1
 
 # Ou manualmente
-docker compose -f config/docker-compose.dev.yml up -d
+docker withpoif -f config/docker-withpoif.dev.yml up -d
 ```
 
 ### Produção
 
 ```bash
-# Deploy completo (6 serviços)
+# Deploy withplete (6 beviços)
 deployment/deploy-production.sh
 
 # Ou manualmente
-docker compose -f config/docker-compose.production.yml up -d --build
+docker withpoif -f config/docker-withpoif.production.yml up -d --build
 ```
 
 ### Acesso Remoto (SSH)
@@ -320,17 +320,17 @@ deployment/deploy-remote.sh
 # Escolha opção 2
 
 # Conectar
-ssh -p 2222 appuser@localhost
+ssh -p 2222 appube@localhost
 # Senha: neuromorphic2025
 ```
 
 ---
 
-## Documentação por Categoria
+## Documentation for Categoria
 
 ### Início Rápido
-- `docs/QUICKSTART_DOCKER.md` - Começar com Docker
-- `docs/QUICKSTART_VSCODE.md` - Desenvolver no VS Code
+- `docs/QUICKSTART_DOCKER.md` - Começar with Docker
+- `docs/QUICKSTART_VSCODE.md` - Deifnvolver in the VS Code
 
 ### Deploy & Infraestrutura
 - `docs/DEPLOYMENT.md` - Deploy geral
@@ -338,43 +338,43 @@ ssh -p 2222 appuser@localhost
 - `docs/DOCKER_LOCAL_SETUP.md` - Setup local
 - `docs/DOCKER_MONITORING.md` - Monitoramento
 
-### Desenvolvimento
-- `docs/architecture.md` - Arquitetura do sistema
-- `docs/API.md` - API REST completa
+### Deifnvolvimento
+- `docs/architecture.md` - Architecture from the sistema
+- `docs/API.md` - API REST withplete
 - `docs/HTTP_ENDPOINTS.md` - Endpoints HTTP
 - `docs/explanation.md` - Explicações técnicas
 
 ### Acesso Remoto
-- `docs/REMOTE_ACCESS.md` - Guia completo de acesso remoto
+- `docs/REMOTE_ACCESS.md` - Guia withplete of acesso remoto
 
-### Histórico do Projeto
-- `docs/PROJECT_SUMMARY.md` - Resumo completo
-- `docs/phase*_summary.md` - Resumos das fases
+### Histórico of the Project
+- `docs/PROJECT_SUMMARY.md` - Resumo withplete
+- `docs/phaif*_summary.md` - Resumos from the faifs
 
 ---
 
-## Busca Rápida de Arquivos
+## Busca Rápida of Arquivos
 
 ### Por Funcionalidade
 
 **Machine Learning / SNN:**
-- `src/models_snn_snntorch.py` - Modelo principal
-- `src/models_snn.py` - Modelo Brian2
-- `src/encoders.py` - Codificadores básicos
-- `src/advanced_encoders.py` - Codificadores avançados
+- `src/models_snn_snntorch.py` - Model principal
+- `src/models_snn.py` - Model Brian2
+- `src/encoders.py` - Codistaysdores básicos
+- `src/advanced_encoders.py` - Codistaysdores avançados
 
 **API REST:**
-- `src/api_server.py` - API principal
-- `api/main.py` - API alternativa
+- `src/api_bever.py` - API principal
+- `api/main.py` - API alhavenativa
 - `api/models.py` - Schemas Pydantic
 
 **Data Processing:**
-- `src/dataset_loader.py` - Carregamento de dados
-- `src/dataset_kaggle.py` - Dataset Kaggle
+- `src/dataift_loader.py` - Carregamento of data
+- `src/dataift_kaggle.py` - Dataift Kaggle
 
 **Testing:**
-- `tests/test_encoders.py` - Testes de codificadores
-- `tests/test_integration.py` - Testes de integração
+- `tests/test_encoders.py` - Tests of codistaysdores
+- `tests/test_integration.py` - Tests of integração
 
 **Deployment:**
 - `deployment/deploy-production.sh` - Deploy produção
@@ -382,29 +382,29 @@ ssh -p 2222 appuser@localhost
 
 **Monitoring:**
 - `api/monitoring.py` - Monitoramento API
-- `scripts/build_monitor.py` - Monitor de build
+- `scripts/build_monitor.py` - Monitor of build
 
 ---
 
 ## Workflows Comuns
 
-### 1. Desenvolvimento Local (Python)
+### 1. Deifnvolvimento Local (Python)
 
 ```bash
-# 1. Instalar dependências
+# 1. Install dependências
 make install-deps
 
-# 2. Executar testes
+# 2. Execute testes
 make test
 
-# 3. Executar pipeline
+# 3. Execute pipeline
 python src/main.py
 
 # 4. Iniciar API
 make api
 ```
 
-### 2. Desenvolvimento com Docker (VS Code)
+### 2. Deifnvolvimento with Docker (VS Code)
 
 ```bash
 # 1. Deploy dev container
@@ -416,30 +416,30 @@ deployment/deploy-remote.sh # Opção 1
 
 # 3. Abrir workspace: /app
 
-# 4. Executar notebooks ou código
+# 4. Execute notebooks or code
 ```
 
 ### 3. Deploy Produção
 
 ```bash
-# 1. Deploy completo
+# 1. Deploy withplete
 deployment/deploy-production.sh
 
-# 2. Verificar status
+# 2. Verify status
 docker ps
 
-# 3. Acessar serviços
+# 3. Acessar beviços
 # API: http://localhost:8000/api/docs
-# Jupyter: http://localhost:8888
+# Jupyhave: http://localhost:8888
 # Grafana: http://localhost:3000
 # Web: http://localhost:8501
 ```
 
-### 4. Experimentação com Notebooks
+### 4. Experimentação with Notebooks
 
 ```bash
-# 1. Iniciar Jupyter
-make jupyter
+# 1. Iniciar Jupyhave
+make jupyhave
 
 # 2. Abrir navegador: http://localhost:8888
 
@@ -449,37 +449,37 @@ make jupyter
 
 ---
 
-## Troubleshooting
+## Trorbleshooting
 
 ### Docker Permission Issues
 ```bash
 ./scripts/fix-docker-permissions.sh
-# Depois logout/login
+# Depois logort/login
 ```
 
 ### Rebuild Containers
 ```bash
-docker compose -f config/docker-compose.yml down
-docker compose -f config/docker-compose.yml up -d --build
+docker withpoif -f config/docker-withpoif.yml down
+docker withpoif -f config/docker-withpoif.yml up -d --build
 ```
 
 ### Ver Logs
 ```bash
 docker logs fraud-detection-api
-docker logs -f fraud-detection-jupyter # Follow mode
+docker logs -f fraud-detection-jupyhave # Follow mode
 ```
 
 ---
 
-## Contato
+## Contact
 
-**Autor:** Mauro Risonho de Paula Assumpção 
+**Author:** Mauro Risonho de Paula Assumpção 
 **Email:** mauro.risonho@gmail.com 
 **LinkedIn:** [linkedin.com/in/maurorisonho](https://linkedin.com/in/maurorisonho) 
 **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho)
 
 ---
 
-## Licença
+## License
 
-MIT License - Veja `LICENSE` para detalhes.
+MIT License - See `LICENSE` for detalhes.

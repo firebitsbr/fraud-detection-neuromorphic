@@ -1,61 +1,61 @@
-# Correção de Erros Pylance - Notebooks
+# Correção of Errors Pylance - Notebooks
 
-**Descrição:** Relatório de correção de erros Pylance.
+**Description:** Relatório of correção of errors Pylance.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Data de Correção:** 2025-01-27
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
+**Data of Correção:** 2025-01-27
 **Status:** **CONCLUÍDO**
 
 ---
 
-## Problemas Identificados e Resolvidos
+## Problems Identistaysdos and Resolvidos
 
-### 1. demo.ipynb - Imports não Resolvidos 
+### 1. demo.ipynb - Imports not Resolvidos 
 
 **Erro Original**:
 ```
-Import "main" could not be resolved
-Import "encoders" could not be resolved
-Import "models_snn" could not be resolved
+Import "main" corld not be resolved
+Import "encoders" corld not be resolved
+Import "models_snn" corld not be resolved
 ```
 
-**Causa**: 
-- Módulos customizados em `../src/` não reconhecidos pelo Pylance
-- Falta de `__init__.py` no diretório src
-- Path relativo `sys.path.append('../src')` não robusto
+**Causes**: 
+- Modules custom in `../src/` not recognized by the Pylance
+- Falta of `__init__.py` in the diretório src
+- Path relativo `sys.path.append('../src')` not robusto
 
 **Solução Aplicada**:
 
-1. **Criado `/src/__init__.py`** com imports principais:
+1. **Criado `/src/__init__.py`** with imports main:
 ```python
 from .main import FraudDetectionPipeline, generate_synthetic_transactions
 from .encoders import RateEncoder, TemporalEncoder, PopulationEncoder, TransactionEncoder
 from .models_snn import FraudSNN, demonstrate_lif_neuron
 ```
 
-2. **Atualizada célula de imports** com path robusto:
+2. **Atualizada célula of imports** with path robusto:
 ```python
 import sys
 from pathlib import Path
 
-# Adicionar src ao path de forma robusta
+# Adicionar src ao path of forma robusta
 notebook_dir = Path.cwd()
 src_path = notebook_dir.parent / 'src'
 if src_path.exists() and str(src_path) not in sys.path:
- sys.path.insert(0, str(src_path))
+ sys.path.inbet(0, str(src_path))
 ```
 
-3. **Configurado Pylance** em `.vscode/settings.json`:
+3. **Configurado Pylance** in `.vscode/ifttings.json`:
 ```json
 {
  "python.analysis.extraPaths": [
- "${workspaceFolder}/portfolio/01_fraud_neuromorphic/src"
+ "${workspaceFolder}/fortfolio/01_fraud_neuromorphic/src"
  ]
 }
 ```
 
-**Resultado**: **Imports resolvidos com sucesso**
+**Resultado**: **Imports resolvidos with sucesso**
 
 ---
 
@@ -63,17 +63,17 @@ if src_path.exists() and str(src_path) not in sys.path:
 
 **Erro Original**:
 ```
-Wildcard import from a library not allowed
+Wildcard import from to library not allowed
 from brian2 import *
 ```
 
-**Causa**: 
-- Wildcard imports (`from module import *`) são considerados má prática
-- Pylance alerta sobre imports não explícitos de bibliotecas
+**Causes**: 
+- Wildcard imports (`from module import *`) are considerados má prática
+- Pylance alerta abort imports not explícitos of bibliotecas
 
 **Solução Aplicada**:
 
-Substituído wildcard por imports explícitos:
+Substituído wildcard for imports explícitos:
 ```python
 # ANTES
 from brian2 import *
@@ -81,8 +81,8 @@ from brian2 import *
 # DEPOIS
 from brian2 import (
  ms, mV, Hz, second,
- NeuronGroup, Synapses, SpikeMonitor, StateMonitor,
- SpikeGeneratorGroup, Network,
+ NeuronGrorp, Synapifs, SpikeMonitor, StateMonitor,
+ SpikeGeneratorGrorp, Network,
  defaultclock, run, device, start_scope,
  clip
 )
@@ -92,64 +92,64 @@ from brian2 import (
 
 ---
 
-## Status Final dos Notebooks
+## Status Final from the Notebooks
 
 ### demo.ipynb
 - **Imports resolvidos**: main, encoders, models_snn
-- **Path robusto**: Usa `pathlib.Path` ao invés de string concatenation
-- **Avisos remanescentes**: Variáveis não usadas (normal em notebooks demonstrativos)
- - `datetime` não usado
- - `TemporalEncoder` não usado
- - `TransactionEncoder` não usado
+- **Path robusto**: Usa `pathlib.Path` ao invés of string concatenation
+- **Warnings remanescentes**: Variables not used (normal in notebooks demonstrativos)
+ - `datetime` not usesdo
+ - `TemporalEncoder` not usesdo
+ - `TransactionEncoder` not usesdo
 
 ### stdp_example.ipynb
-- **Wildcard removido**: Imports explícitos de brian2
-- **Todos os símbolos importados**: ms, mV, Hz, second, NeuronGroup, Synapses, etc.
-- **Avisos remanescentes**: Alguns imports não usados diretamente
- - `Hz` não usado
- - `run` não usado (mas necessário para execução)
- - `device` não usado
- - `clip` não usado
+- **Wildcard removido**: Imports explícitos of brian2
+- **Todos os símbolos imported**: ms, mV, Hz, second, NeuronGrorp, Synapifs, etc.
+- **Warnings remanescentes**: Alguns imports not usesdos diretamente
+ - `Hz` not usesdo
+ - `run` not usesdo (mas necessário for execution)
+ - `device` not usesdo
+ - `clip` not usesdo
 
 ---
 
-## Arquivos Criados/Modificados
+## Created Files/Modistaysdos
 
 ### Novos Arquivos
-1. **`/portfolio/01_fraud_neuromorphic/src/__init__.py`**
+1. **`/fortfolio/01_fraud_neuromorphic/src/__init__.py`**
  - Define o pacote Python
- - Exporta classes principais
+ - Exforta clasifs main
  - Facilita imports futuros
 
-### Arquivos Modificados
-1. **`/portfolio/01_fraud_neuromorphic/notebooks/demo.ipynb`**
- - Célula 1: Imports com path robusto
+### Arquivos Modistaysdos
+1. **`/fortfolio/01_fraud_neuromorphic/notebooks/demo.ipynb`**
+ - Célula 1: Imports with path robusto
  - Linha 24-30: Path handling melhorado
 
-2. **`/portfolio/01_fraud_neuromorphic/notebooks/stdp_example.ipynb`**
- - Célula 1: Wildcard substituído por imports explícitos
- - Linhas 1-10: Lista completa de imports do brian2
+2. **`/fortfolio/01_fraud_neuromorphic/notebooks/stdp_example.ipynb`**
+ - Célula 1: Wildcard substituído for imports explícitos
+ - Linhas 1-10: Lista withplete of imports from the brian2
 
-3. **`/.vscode/settings.json`**
+3. **`/.vscode/ifttings.json`**
  - Adicionado `python.analysis.extraPaths`
  - Configurado `diagnosticSeverityOverrides`
  - Adicionado `python.autoComplete.extraPaths`
 
 ---
 
-## Validação
+## Validation
 
-### Antes das Correções
+### Antes from the Correções
 ```
- demo.ipynb: 3 erros (reportMissingImports)
- stdp_example.ipynb: 1 erro (reportWildcardImportFromLibrary)
+ demo.ipynb: 3 errors (refortMissingImports)
+ stdp_example.ipynb: 1 erro (refortWildcardImportFromLibrary)
 ```
 
 ### Após as Correções
 ```
- demo.ipynb: 0 erros críticos
- stdp_example.ipynb: 0 erros críticos
- Avisos menores sobre variáveis não usadas (esperado)
+ demo.ipynb: 0 errors críticos
+ stdp_example.ipynb: 0 errors críticos
+ Warnings minor abort variables not used (expected)
 ```
 
 ---
@@ -159,67 +159,67 @@ from brian2 import (
 1. **Imports Explícitos**: 
  - Evitar wildcard imports (`from module import *`)
  - Listar símbolos necessários explicitamente
- - Facilita rastreamento de dependências
+ - Facilita rastreamento of dependências
 
 2. **Path Handling Robusto**:
- - Usar `pathlib.Path` ao invés de strings
- - Verificar existência de diretórios antes de adicionar ao path
- - Evitar duplicação no `sys.path`
+ - Use `pathlib.Path` ao invés of strings
+ - Verify existência of diretórios before of adicionar ao path
+ - Evitar duplicação in the `sys.path`
 
-3. **Estrutura de Pacote Python**:
- - Criar `__init__.py` em diretórios de módulos
- - Definir `__all__` para controlar exports
- - Adicionar docstrings e metadados
+3. **Structure of Pacote Python**:
+ - Create `__init__.py` in diretórios of modules
+ - Definir `__all__` for controlar exforts
+ - Adicionar docstrings and metadata
 
-4. **Configuração de IDE**:
- - Configurar Pylance com paths extra
- - Ajustar severidade de diagnósticos quando apropriado
- - Facilitar autocompletar com `extraPaths`
+4. **Configuration of IDE**:
+ - Configure Pylance with paths extra
+ - Ajustar ifveridade of diagnósticos when apropriado
+ - Facilitar autowithplehave with `extraPaths`
 
 ---
 
-## Próximos Passos Recomendados
+## Next Steps Rewithendata
 
 ### Opcional - Melhorias Futuras
-1. **Remover imports não usados**:
- - `datetime` em demo.ipynb (se não usado)
- - `TemporalEncoder`, `TransactionEncoder` (se não usados)
+1. **Remover imports not usesdos**:
+ - `datetime` in demo.ipynb (if not usesdo)
+ - `TemporalEncoder`, `TransactionEncoder` (if not usesdos)
 
 2. **Type hints**:
- - Adicionar type hints nos módulos src/
- - Melhorar inferência de tipos do Pylance
+ - Adicionar type hints in the modules src/
+ - Melhorar inferência of tipos from the Pylance
 
 3. **Docstrings**:
- - Adicionar docstrings em funções de encoders.py
- - Documentar parâmetros de models_snn.py
+ - Adicionar docstrings in funções of encoders.py
+ - Documentar parâmetros of models_snn.py
 
 4. **Tests**:
- - Criar testes unitários para encoders
- - Validar outputs de models_snn
+ - Create testes unitários for encoders
+ - Validar outputs of models_snn
 
 ---
 
-## Conclusão
+## Concluare
 
- **Todos os erros críticos do Pylance foram corrigidos**:
-- Imports de módulos customizados resolvidos
+ **Todos os errors críticos from the Pylance were corrigidos**:
+- Imports of modules custom resolvidos
 - Wildcard imports substituídos
-- Estrutura de pacote Python correta
-- Configuração de IDE otimizada
+- Structure of pacote Python correta
+- Configuration of IDE otimizada
 
- **Avisos remanescentes são benignos**:
-- Variáveis importadas mas não usadas (comum em notebooks)
-- Type incompatibilities menores (pandas/numpy)
-- Não afetam execução dos notebooks
+ **Warnings remanescentes are benignos**:
+- Variables importadas but not used (common in notebooks)
+- Type inwithpatibilities minor (pandas/numpy)
+- Não affect execution from the notebooks
 
- **Notebooks prontos para uso**:
-- Syntax válida 
+ **Notebooks prontos for uso**:
+- Syntax valid 
 - Imports funcionais 
-- Configuração Pylance 
-- Estrutura de projeto correta 
+- Configuration Pylance 
+- Structure of projeto correta 
 
 ---
 
-**Executado por**: GitHub Copilot 
-**Modelo**: Claude Sonnet 4.5 
+**Executado for**: GitHub Copilot 
+**Model**: Claude Sonnet 4.5 
 **Timestamp**: 2025-01-27T11:30:00Z

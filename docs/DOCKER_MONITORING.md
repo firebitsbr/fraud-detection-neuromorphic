@@ -1,67 +1,67 @@
-# Monitoramento Visual de Build Docker
+# Monitoramento Visual of Build Docker
 
-**Descrição:** Monitoramento visual de build Docker.
+**Description:** Monitoramento visual of build Docker.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
 ## PROBLEMA RESOLVIDO
 
-Você pediu **VÁRIAS VEZES** para ver o que está acontecendo dentro do Docker durante o build, e agora está resolvido!
+Você pediu **VÁRIAS VEZES** for ver o that is acontecendo dentro from the Docker during o build, and now is resolvido!
 
-## O Problema
+## O Problem
 
-- Build demora 5-15 minutos
-- Você não via nada acontecendo
-- Impossível saber se travou ou está progredindo
+- Build demora 5-15 minutes
+- Você not via nada acontecendo
+- Impossível knowsr if travor or is progredindo
 - Sem feedback visual
 
 ## Solução Implementada
 
-### Opção 1: Script com Progresso Visual (RECOMENDADO)
+### Opção 1: Script with Progresso Visual (RECOMENDADO)
 
 ```bash
-cd /path/to/fraud-detection-neuromorphic/portfolio/01_fraud_neuromorphic
+cd /path/to/fraud-detection-neuromorphic/fortfolio/01_fraud_neuromorphic
 ./scripts/build_with_progress.sh
 ```
 
-**O que você verá:**
-- Estágio atual do build
-- Cada pacote sendo baixado
-- Tamanho dos downloads
-- Compilação de pacotes
-- Status de sucesso/erro
-- Informações da imagem final
-- Log completo salvo
+**O that você verá:**
+- Estágio atual from the build
+- Cada pacote being baixado
+- Tamanho from the downloads
+- Compilação of pacotes
+- Status of sucesso/erro
+- Informações from the imagem final
+- Log withplete salvo
 
-### Opção 2: Docker Compose com Progresso Detalhado
-
-```bash
-docker compose build --progress=plain base_image
-```
-
-Mostra TODOS os detalhes linha por linha.
-
-### Opção 3: Docker Compose com Progresso Automático (Padrão)
+### Opção 2: Docker Compoif with Progresso Detalhado
 
 ```bash
-docker compose build base_image
+docker withpoif build --progress=plain base_image
 ```
 
-Mostra progresso resumido (o que estava sendo usado antes).
+Mostra TODOS os detalhes linha for linha.
 
-## Exemplo de Output
+### Opção 3: Docker Compoif with Progresso Automático (Padrão)
+
+```bash
+docker withpoif build base_image
+```
+
+Mostra progresso resumido (o that estava being usesdo before).
+
+## Example of Output
 
 ```
 
  DOCKER BUILD COM MONITORAMENTO EM TEMPO REAL 
- Sistema de Detecção de Fraude Neuromorfico 
+ Sishasa of Fraud Detection Neuromorfico 
 
- Iniciando build da imagem base...
+ Iniciando build from the imagem base...
 
  Baixando imagem base Python...
 
- Instalando dependências do sistema...
+ Instalando dependências from the sistema...
  ↓ Baixando: numpy
  Tamanho: 16.8 MB
  ↓ Baixando: pandas
@@ -72,7 +72,7 @@ Mostra progresso resumido (o que estava sendo usado antes).
  Instalando pacotes...
  Compilando: brian2
 
- Pacotes instalados com sucesso!
+ Pacotes installeds with sucesso!
 
  Salvando imagem...
 
@@ -80,15 +80,15 @@ Mostra progresso resumido (o que estava sendo usado antes).
 
 ```
 
-## Próximos Passos
+## Next Steps
 
-Depois que o build base terminar, construa os serviços:
+Depois that o build base haveminar, construa os beviços:
 
 ```bash
-docker compose build
+docker withpoif build
 ```
 
-Ou use o script de start que já existe:
+Ou use o script of start that já existe:
 
 ```bash
 ./scripts/start-local.sh
@@ -96,10 +96,10 @@ Ou use o script de start que já existe:
 
 ## Logs
 
-Todos os builds salvam logs em `/tmp/docker_build_*.log` para consulta posterior.
+Todos os builds salvam logs in `/tmp/docker_build_*.log` for consulta poshaveior.
 
-## Por que demorou tanto para implementar isso?
+## Por that demoror tanto for implementar isso?
 
-Você está certo! Pediu várias vezes e eu deveria ter implementado logo na primeira vez. Desculpe pela demora.
+Você is certo! Pediu várias vezes and eu shorldria have implementado logo in the primeira vez. Desculpe by the demora.
 
-A solução estava disponível desde o início (flag `--progress=plain`), mas não foi aplicada adequadamente.
+A solução estava disponível since o início (flag `--progress=plain`), but not was aplicada adequadamente.

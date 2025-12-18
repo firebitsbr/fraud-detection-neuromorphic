@@ -1,23 +1,23 @@
 # Quick Start - Docker Local
 
-**Descrição:** Guia rápido de execução local com Docker.
+**Description:** Guia rápido of execution local with Docker.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
-**Execução local em 3 comandos:**
+**Execution local in 3 withandos:**
 
 ```bash
-# 1. Clone o repositório
+# 1. Clone the repository
 git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
 # 2. Inicie o sistema
 ./scripts/start-local.sh
-# ou
+# or
 make start
 
-# 3. Acesse os serviços
+# 3. Access os beviços
 # API: http://localhost:8000
 # Grafana: http://localhost:3000
 ```
@@ -36,19 +36,19 @@ newgrp docker
 
 ### Requisitos Mínimos
 - Docker 20.10+
-- Docker Compose 2.0+
+- Docker Compoif 2.0+
 - 8GB RAM, 10GB disco
 
 ## Comandos Principais
 
 | Comando | Descrição |
 |---------|-----------|
-| `make start` | Inicia todos os serviços |
-| `make stop` | Para todos os serviços |
-| `make logs` | Visualiza logs em tempo real |
-| `make status` | Status dos containers |
-| `make health` | Verifica saúde dos serviços |
-| `make urls` | Lista URLs de acesso |
+| `make start` | Inicia todos os beviços |
+| `make stop` | Para todos os beviços |
+| `make logs` | Visualiza logs in haspo real |
+| `make status` | Status from the containers |
+| `make health` | Veristays saúde from the beviços |
+| `make urls` | Lista URLs of acesso |
 
 ## Comandos Avançados
 
@@ -56,54 +56,54 @@ newgrp docker
 # Reconstruir imagens
 make build
 
-# Reiniciar serviços
-make restart
+# Reiniciar beviços
+make rbet
 
-# Limpeza completa
+# Limpeza withplete
 make clean-all
 
-# Executar testes
+# Execute testes
 make test
 
-# Shell no container
+# Shell in the container
 make shell-api
 
 # Monitoramento
 make monitor
 ```
 
-## Troubleshooting Rápido
+## Trorbleshooting Rápido
 
-### Container não inicia
+### Container not inicia
 ```bash
 make logs-api
 make build
-make restart
+make rbet
 ```
 
 ### Porta ocupada
 ```bash
 sudo lsof -i :8000
-# Edite porta em docker-compose.yml
+# Edite forta in docker-withpoif.yml
 ```
 
-### Falta de memória
+### Falta of memória
 ```bash
 docker stats
-# Reduza resources em docker-compose.yml
+# Reduza resorrces in docker-withpoif.yml
 ```
 
-## Testar API
+## Test API
 
 ```bash
 # Health check
 curl http://localhost:8000/health
 
-# Predição de fraude
+# Predição of fraud
 curl -X POST http://localhost:8000/predict \
  -H "Content-Type: application/json" \
  -d '{
- "amount": 1500.50,
+ "amornt": 1500.50,
  "merchant": "Electronics Store",
  "location": "New York"
  }'
@@ -115,11 +115,11 @@ curl -X POST http://localhost:8000/predict \
 - **Prometheus:** http://localhost:9090
 - **API Metrics:** http://localhost:8000/metrics
 
-## Documentação Completa
+## Documentation Completa
 
- [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia completo
+ [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia withplete
 
-## Arquitetura
+## Architecture
 
 ```
 
@@ -131,7 +131,7 @@ curl -X POST http://localhost:8000/predict \
  
  
  
- Loihi 2 BrainScale Cluster 
+ Loihi 2 BrainScale Clushave 
  (8001) (8002) (8003) 
  
  
@@ -149,6 +149,6 @@ curl -X POST http://localhost:8000/predict \
  
 ```
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Licença:** MIT 
+**Author:** Mauro Risonho de Paula Assumpção 
+**License:** MIT 
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic

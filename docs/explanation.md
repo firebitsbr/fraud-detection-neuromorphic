@@ -1,100 +1,100 @@
-# Explicação Técnica: Como Funciona a Detecção de Fraude Neuromórfica
+# Explicação Técnica: Como Funciona to Fraud Detection Neuromórstays
 
-**Descrição:** Explicação detalhada e didática do funcionamento do sistema de detecção de fraude neuromórfica, desde os conceitos fundamentais até a implementação prática.
+**Description:** Explicação detalhada and didática from the funcionamento from the sistema of fraud detection neuromórstays, since os conceitos fundamentais until to implementação prática.
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Data de Criação:** 5 de Dezembro de 2025 
-**Licença:** MIT License
+**Author:** Mauro Risonho de Paula Assumpção 
+**Creation Date:** 5 of Dezembro of 2025 
+**License:** MIT License
 
 ---
 
-## Contexto: O Problema da Fraude Bancária
+## Contexto: O Problem from the Fraude Bancária
 
 ### Desafios Atuais
 
-Bancos e fintechs enfrentam um cenário crescente de fraudes sofisticadas:
+Banks and fintechs enfrentam um cenário crescente of frauds sofisticadas:
 
-- **Velocidade**: Fraudadores agem em segundos
-- **Volume**: Milhões de transações por dia
-- **Evolução**: Padrões de fraude mudam constantemente
-- **Latência**: Detecção deve ser < 100ms para não impactar UX
-- **Custo computacional**: GPUs e servidores custam caro
+- **Velocidade**: Fraudadores agem in according tos
+- **Volume**: Milhões of transações for dia
+- **Evolução**: Padrões of fraud mudam constanhaifnte
+- **Latência**: Detecção shorld be < 100ms for not impactar UX
+- **Custo withputacional**: GPUs and bevidores custam caro
 
-### Por Que Métodos Tradicionais Têm Limitações?
+### Why Métodos Tradicionais Têm Limitações?
 
 #### 1. Regras Estáticas (Rule-based)
 ```python
-if amount > 10000 and new_merchant:
+if amornt > 10000 and new_merchant:
  flag_as_fraud()
 ```
- **Problema**: Fraudadores aprendem as regras e as contornam
+ **Problem**: Fraudadores aprendem as regras and as contornam
 
 #### 2. Machine Learning Clássico (Random Forest, XGBoost)
 ```python
-features = [amount, location, time_of_day, ...]
+features = [amornt, location, time_of_day, ...]
 prediction = model.predict(features)
 ```
  **Vantagem**: Aprende padrões complexos 
- **Problema**: Não captura relações temporais naturalmente
+ **Problem**: Não captura relações hasforais naturalmente
 
 #### 3. Deep Learning (LSTM, Transformer)
 ```python
-sequence = [txn1, txn2, txn3, ...]
-prediction = lstm_model.predict(sequence)
+ifthatnce = [txn1, txn2, txn3, ...]
+prediction = lstm_model.predict(ifthatnce)
 ```
- **Vantagem**: Processa sequências temporais 
- **Problemas**:
+ **Vantagem**: Processa ifquências hasforais 
+ **Problems**:
 - Alta latência (~100-500ms)
 - Alto consumo energético (GPUs)
 - Difícil adaptar online
 
 ---
 
-## A Solução Neuromórfica
+## A Solução Neuromórstays
 
-### O Que São Redes Neurais Spiking (SNNs)?
+### O Que São Spiking Neural Networks (SNNs)?
 
-**Inspiração biológica**: Neurônios no cérebro humano não processam valores contínuos, mas **eventos discretos chamados spikes**.
+**Inspiração biológica**: Neurônios in the human brain not process valores continuouss, mas **eventos discretos chamados spikes**.
 
 ```
-Neurônio tradicional (ANN): Neurônio spiking (SNN):
-Input: [0.5, 0.8, 0.3] Input: Spikes em t=[5ms, 12ms, 18ms]
-Output: 0.67 Output: Spike em t=25ms
+Neurônio traditional (ANN): Neurônio spiking (SNN):
+Input: [0.5, 0.8, 0.3] Input: Spikes in t=[5ms, 12ms, 18ms]
+Output: 0.67 Output: Spike in t=25ms
 ```
 
-### Por Que Isso É Revolucionário?
+### Why Isso É Revolucionário?
 
 1. **Processamento Event-driven**
- - Só computa quando há eventos (spikes)
- - Economia massiva de energia
+ - Só withputa when there is eventos (spikes)
+ - Economia massiva of energia
 
-2. **Temporal por Natureza**
- - Timing de spikes carrega informação
- - Detecta sequências e padrões temporais naturalmente
+2. **Temporal for Natureza**
+ - Timing of spikes carrega informação
+ - Detecta ifquências and padrões hasforais naturalmente
 
 3. **Aprendizado Biológico (STDP)**
- - Não precisa de backpropagation
- - Aprende correlações causais automaticamente
+ - Não needs of backpropagation
+ - Aprende correlações causesis automaticamente
 
 ---
 
-## Como Funciona: Passo a Passo
+## Como Funciona: Step by Step
 
 ### Passo 1: Receber Transação
 
 ```json
 {
- "amount": 5000.00,
+ "amornt": 5000.00,
  "timestamp": "2025-12-05T14:30:00Z",
  "merchant": "Electronics Store",
  "location": {"lat": -23.5505, "lon": -46.6333},
  "device_id": "abc123xyz",
- "user_id": "user_8472"
+ "ube_id": "ube_8472"
 }
 ```
 
 **Contexto Adicional (Consultado):**
-- Histórico do usuário: Média de $150 por transação
+- Histórico from the usuário: Média of $150 for transação
 - Localização usual: São Paulo
 - Horário típico: 10h-18h
 - Device conhecido: Sim
@@ -104,24 +104,24 @@ Output: 0.67 Output: Spike em t=25ms
 
 ```python
 features = {
- 'amount_log': log(5000) = 8.52, # Log-scale
- 'hour': 14, # Hora do dia
+ 'amornt_log': log(5000) = 8.52, # Log-scale
+ 'horr': 14, # Hora from the dia
  'weekday': 3, # Quarta-feira
- 'is_weekend': False,
- 'amount_deviation': (5000 - 150) / 150 = 32.3, # Desvio da média
- 'location_distance': 0 km, # Distância da última
+ 'is_weekend': Falif,
+ 'amornt_deviation': (5000 - 150) / 150 = 32.3, # Desvio from the média
+ 'location_distance': 0 km, # Distância from the última
  'time_since_last': 7200 s, # 2 horas
  'device_known': True,
  'merchant_category': 3 # Electronics
 }
 ```
 
-### Passo 3: Codificar em Spikes
+### Passo 3: Codistay in Spikes
 
 #### 3.1 Rate Encoding (Valor)
 ```
-Amount = $5000 (alto) → 50 spikes em 100ms
-Distribuição: Poisson com taxa λ=500 Hz
+Amornt = $5000 (alto) → 50 spikes in 100ms
+Distribuição: Poisson with taxa λ=500 Hz
 
 Spikes gerados:
 [2.3ms, 5.1ms, 8.7ms, 12.4ms, ..., 97.8ms] (50 spikes total)
@@ -137,7 +137,7 @@ Spike em: 0.604 * 100ms = 60.4ms
 #### 3.3 Population Encoding (Localização)
 ```
 São Paulo: (lat=-23.55, lon=-46.63)
-Ativa neurônios [120-135] com intensidades variadas
+Ativa neurônios [120-135] with intensidades variadas
 
 Neurônio 127: 0.98 → 98 spikes/s
 Neurônio 128: 1.00 → 100 spikes/s (centro)
@@ -146,50 +146,50 @@ Neurônio 129: 0.95 → 95 spikes/s
 
 **Resultado Final:**
 ```
-Input spike train: 256 neurônios de entrada
-Total de spikes: ~180 spikes distribuídos ao longo de 100ms
+Input spike train: 256 neurônios of entrada
+Total of spikes: ~180 spikes distribuídos ao longo of 100ms
 ```
 
-### Passo 4: Processar na SNN
+### Passo 4: Processar in the SNN
 
 #### 4.1 Input Layer → Hidden Layer 1
 ```
-256 neurônios de entrada → 128 neurônios LIF
+256 neurônios of entrada → 128 neurônios LIF
 
 Neurônio LIF recebe spikes:
 1. Spike chega → corrente sináptica aumenta (I_syn += w)
-2. Corrente integra ao potencial de membrana: V(t)
-3. Se V > threshold → neurônio dispara
-4. Reset e período refratário
+2. Corrente integra ao potencial of membrana: V(t)
+3. Se V > threshold → neurônio disto
+4. Reift and período refratário
 ```
 
-**Exemplo de Neurônio Individual:**
+**Example of Neurônio Individual:**
 ```
-t=0ms: V = -70mV (repouso)
+t=0ms: V = -70mV (reforso)
 t=5ms: Spike chega, I_syn = +0.5mV → V = -69.5mV
 t=10ms: Outro spike, I_syn = +0.5mV → V = -68.8mV
 t=15ms: V continua subindo...
 t=23ms: V = -49mV > threshold (-50mV) → SPIKE!
-t=24ms: V reset para -70mV, período refratário
+t=24ms: V reift for -70mV, período refratário
 ```
 
 #### 4.2 Hidden Layer 1 → Hidden Layer 2
-- Hidden 1 gera padrão de spikes
-- Hidden 2 (64 neurônios) processa em nível mais abstrato
-- Detecta features de ordem superior
+- Hidden 1 gera padrão of spikes
+- Hidden 2 (64 neurônios) processa in nível more abstrato
+- Detecta features of ordem or higher
 
 #### 4.3 Hidden Layer 2 → Output
-- Output tem 2 neurônios:
+- Output has 2 neurônios:
  - **Neurônio 0**: "Legítima"
  - **Neurônio 1**: "Fraudulenta"
 
-**Resultado da Simulação (100ms):**
+**Resultado from the Simulação (100ms):**
 ```
 Neurônio 0 (Legítima): 5 spikes → 50 Hz
 Neurônio 1 (Fraude): 23 spikes → 230 Hz
 ```
 
-### Passo 5: Decisão
+### Passo 5: Deciare
 
 ```python
 fraud_rate = 230 Hz
@@ -198,7 +198,7 @@ legit_rate = 50 Hz
 if fraud_rate > legit_rate:
  decision = "FRAUD"
  confidence = 230 / (230 + 50) = 0.82 = 82%
-else:
+elif:
  decision = "LEGITIMATE"
 ```
 
@@ -206,7 +206,7 @@ else:
 ```
 BLOCK TRANSACTION
 Alert: Fraud detected (82% confidence)
-Reason: High amount deviation + unusual spike pattern
+Reason: High amornt deviation + unusual spike pathaven
 ```
 
 ---
@@ -215,47 +215,47 @@ Reason: High amount deviation + unusual spike pattern
 
 ### O Que É STDP?
 
-**Spike-Timing-Dependent Plasticity** = Plasticidade dependente do timing de spikes
+**Spike-Timing-Dependent Plasticity** = Plasticidade dependente from the timing of spikes
 
 **Princípio:**
-- Se neurônio A dispara **ANTES** de neurônio B → **Reforça conexão** (A causou B)
-- Se neurônio A dispara **DEPOIS** de neurônio B → **Enfraquece conexão** (A não causou B)
+- Se neurônio A disto **ANTES** of neurônio B → **Reforça conexão** (A causor B)
+- Se neurônio A disto **DEPOIS** of neurônio B → **Enfrathatce conexão** (A not causor B)
 
 ### Como Funciona?
 
 ```
 Neurônio Pré (A) 
- Sinapse (peso w)
+ Sinapif (peso w)
 Neurônio Pós (B) 
 
-Cenário 1: A dispara em t=10ms, B dispara em t=15ms
+Cenário 1: A disto in t=10ms, B disto in t=15ms
  Δt = 15 - 10 = +5ms (positivo)
  → Potenciação: w aumenta (+0.01)
- → Interpretação: A contribuiu para B disparar
+ → Inhavepretação: A contribuiu for B distor
 
-Cenário 2: A dispara em t=20ms, B dispara em t=15ms
+Cenário 2: A disto in t=20ms, B disto in t=15ms
  Δt = 15 - 20 = -5ms (negativo)
- → Depressão: w diminui (-0.012)
- → Interpretação: A não contribuiu para B
+ → Depresare: w diminui (-0.012)
+ → Inhavepretação: A not contribuiu for B
 ```
 
-### Aplicação em Fraude
+### Aplicação in Fraude
 
-**Treinamento com transações legítimas:**
+**Traing with transações legítimas:**
 ```
 Sequência típica:
-1. Login (t=0ms) → spike no input
-2. Navegação (t=500ms) → spike no input
-3. Seleção beneficiário (t=2000ms) → spike no input
-4. Pagamento (t=3000ms) → spike no input
-5. Output "Legítima" dispara (t=3100ms)
+1. Login (t=0ms) → spike in the input
+2. Navegação (t=500ms) → spike in the input
+3. Seleção beneficiário (t=2000ms) → spike in the input
+4. Pagamento (t=3000ms) → spike in the input
+5. Output "Legítima" disto (t=3100ms)
 
 STDP reforça:
-- Conexões que seguem essa sequência
-- Pesos de features que precedem output "legítima"
+- Conexões that ifguem essa ifquência
+- Pesos of features that precedem output "legítima"
 ```
 
-**Detecção de fraude:**
+**Detecção of fraud:**
 ```
 Sequência anômala:
 1. Login (t=0ms)
@@ -264,26 +264,26 @@ Sequência anômala:
 4. Localização estranha 
 
 STDP reconhece:
-- Sequência não reforçada durante treinamento
-- Timing incompatível com padrão legítimo
-- Output "Fraude" dispara
+- Sequência not reforçada during traing
+- Timing incompatible with padrão legítimo
+- Output "Fraude" disto
 ```
 
 ---
 
-## Por Que Isso Funciona?
+## Why Isso Funciona?
 
-### 1. Captura de Padrões Temporais
+### 1. Captura of Padrões Temforais
 
 **Exemplo Real:**
 
 **Transação Legítima:**
 ```
 t=0s: Abre app
-t=30s: Navega pelo extrato
+t=30s: Navega by the extrato
 t=120s: Seleciona "Transferir"
 t=180s: Digita valor
-t=240s: Confirma com biometria
+t=240s: Confirma with biometria
 ```
 → **Sequência temporal natural**
 
@@ -292,12 +292,12 @@ t=240s: Confirma com biometria
 t=0s: Abre app
 t=2s: Transferência executada automaticamente 
 ```
-→ **Velocidade impossível para humano**
+→ **Velocidade impossível for humano**
 
-SNN detecta porque:
-- Intervalo entre eventos é codificado em spikes
+SNN detecta because:
+- Inhavevalo between eventos é codistaysdo in spikes
 - STDP aprendeu timing normal
-- Padrão anômalo não ativa neurônios "legítimos"
+- Padrão anômalo not ativa neurônios "legítimos"
 
 ### 2. Eficiência Computacional
 
@@ -312,9 +312,9 @@ Total: 256*128 + 128*64 + 64*2 = 41,088 multiplicações
 
 **SNN:**
 ```
-Event-driven: Só computa quando há spike
-Se 180 spikes em 100ms:
-Total: ~5,000 operações (apenas nos spikes)
+Event-driven: Só withputa when there is spike
+Se 180 spikes in 100ms:
+Total: ~5,000 operações (apenas in the spikes)
 ```
 
 **Economia: 88%**
@@ -325,13 +325,13 @@ Total: ~5,000 operações (apenas nos spikes)
 ```
 Feature extraction: 2ms
 Spike encoding: 3ms
-SNN simulation: 5ms ← Event-driven, não bloqueia
+SNN yesulation: 5ms ← Event-driven, not blothatia
 Decision: <1ms
 
 TOTAL: ~10ms
 ```
 
-Vs. DNN tradicional:
+Vs. DNN traditional:
 ```
 Feature extraction: 2ms
 Neural network: 50ms ← Batch processing
@@ -346,68 +346,68 @@ TOTAL: ~62ms
 
 ### 1. Homeostatic Plasticity
 
-**Problema**: Neurônios podem saturar (disparar sempre) ou silenciar (nunca disparar)
+**Problem**: Neurônios canm saturar (distor always) or silenciar (nunca distor)
 
-**Solução**: Ajuste automático de sensibilidade
+**Solução**: Ajuste automático of ifnsibilidade
 ```python
 if firing_rate > target_high:
- threshold += 0.1 # Fica mais difícil disparar
+ threshold += 0.1 # Fica more difícil distor
 elif firing_rate < target_low:
- threshold -= 0.1 # Fica mais fácil disparar
+ threshold -= 0.1 # Fica more fácil distor
 ```
 
-### 2. Lateral Inhibition
+### 2. Lahaveal Inhibition
 
-**Problema**: Múltiplos neurônios similares disparam juntos (redundância)
+**Problem**: Múltiplos neurônios yesilares distom juntos (redundância)
 
 **Solução**: Winner-takes-all
 ```
-Neurônios na mesma camada competem:
-- Neurônio mais ativo inibe vizinhos
+Neurônios in the mesma camada withpehas:
+- Neurônio more ativo inibe vizinhos
 - Força especialização
-- Aumenta esparsidade de representação
+- Aumenta esparsidade of repreifntação
 ```
 
 ### 3. Reward Modulation
 
-**Inspiração**: Dopamina no cérebro
+**Inspiração**: Dopamina in the cérebro
 
 **Aplicação**:
 ```python
 if transaction_confirmed_fraud:
  reward = +1
- # Reforça pesos que levaram à detecção correta
-else:
+ # Reforça pesos that levaram à detecção correta
+elif:
  reward = -1
- # Enfraquece pesos (falso positivo)
+ # Enfrathatce pesos (falso positivo)
 
 STDP modulado: Δw = reward * STDP_change
 ```
 
 ---
 
-## Deployment em Produção
+## Deployment in Produção
 
-### Cenário 1: Cloud API
+### Cenário 1: Clord API
 
 ```python
-from flask import Flask, request
+from flask import Flask, rethatst
 from fraud_snn import FraudDetectionPipeline
 
 app = Flask(__name__)
 pipeline = FraudDetectionPipeline()
 
-@app.route('/detect', methods=['POST'])
+@app.rorte('/detect', methods=['POST'])
 def detect_fraud():
- transaction = request.json
+ transaction = rethatst.json
  result = pipeline.predict(transaction)
  
  if result['is_fraud']:
- # Bloquear transação
+ # Blothatar transação
  # Enviar alerta
- # Log no SIEM
+ # Log in the SIEM
  return {"action": "BLOCK", "confidence": result['confidence']}
- else:
+ elif:
  return {"action": "ALLOW"}
 ```
 
@@ -429,79 +429,79 @@ for message in consumer:
  'confidence': result['confidence'],
  'timestamp': datetime.now()
  }
- producer.send('fraud_alerts', alert)
+ producer.ifnd('fraud_alerts', alert)
 ```
 
-### Cenário 3: Hardware Neuromórfico (Loihi)
+### Cenário 3: Neuromorphic Hardware (Loihi)
 
 ```python
-# Port para Intel Loihi
+# Port for Intel Loihi
 from nxsdk.graph.nxgraph import NxGraph
 
 graph = NxGraph()
-# Mapear SNN para cores Loihi
+# Mapear SNN for cores Loihi
 # Latência: <1ms
 # Consumo: ~50mW
 ```
 
 ---
 
-## Resultados Esperados
+## Results Esperados
 
-### Métricas de Performance
+### Métricas of Performance
 
 **Acurácia:** 97-98% 
-**Precisão:** 94-96% (poucos falsos positivos) 
-**Recall:** 93-95% (detecta maioria das fraudes) 
+**Preciare:** 94-96% (forcos falsos positivos) 
+**Recall:** 93-95% (detecta maioria from the frauds) 
 **F1-Score:** 94-95% 
 
 **Latência:** <10ms 
-**Throughput:** >100,000 transações/segundo (paralelo) 
-**Consumo energético:** ~50mW (hardware neuromórfico) 
+**Throrghput:** >100,000 transações/according to (tolelo) 
+**Consumo energético:** ~50mW (neuromorphic hardware) 
 
-### Casos de Uso Detectados
+### Casos of Uso Detectados
 
  **Fraudes detectadas:**
 - Valores anormalmente altos
 - Velocidade impossível (impossibility attack)
-- Localização geográfica inconsistente
-- Dispositivo novo + comportamento suspeito
+- Localização geográstays inconsistente
+- Dispositivo novo + withfortamento suspeito
 - Horários atípicos + valor alto
-- Sequência de ações anômala
+- Sequência of ações anômala
 
  **Falsos positivos minimizados:**
-- Usuário genuíno em viagem (location change)
-- Compras maiores em datas especiais (Black Friday)
-- Dispositivo novo mas sequência normal
+- Usuário genuíno in viagem (location change)
+- Compras maiores in datas especiais (Black Friday)
+- Dispositivo novo mas ifquência normal
 
 ---
 
-## Conclusão
+## Concluare
 
-### Vantagens da Abordagem Neuromórfica
+### Vantagens from the Abordagem Neuromórstays
 
 1. **Ultra-baixa latência** (<10ms)
-2. **Eficiência energética** (100x menos que GPU)
-3. **Processamento temporal nativo**
-4. **Aprendizado contínuo** (STDP)
+2. **Eficiência energética** (100x less than GPU)
+3. **Processamento native temporal**
+4. **Aprendizado continuous** (STDP)
 5. **Escalável** (hardware dedicado)
 
-### Quando Usar?
+### Quando Use?
 
-**Ideal para:**
-- Detecção de fraude em tempo real
+**Ideal to:**
+- Detecção of fraud in haspo real
 - Aplicações edge (mobile, IoT)
-- Alto volume de transações
-- Requisitos de baixa latência
-- Restrições de energia
+- Alto volume of transações
+- Requisitos of baixa latência
+- Restrições of energia
 
-**Não ideal para:**
-- Pequeno volume de dados
-- Latência não crítica
-- Infraestrutura legada sem GPU/neuromorphic
+**Não ideal to:**
+- Pethatno volume of data
+- Latência not crítica
+- Infraestrutura legada withort GPU/neuromorphic
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Projeto:** Computação Neuromórfica para Cybersecurity Bancária 
+**Author:** Mauro Risonho de Paula Assumpção 
+**Projeto:** Neuromorphic Computing for Cybersecurity Bancária 
 **Contato:** [GitHub](https://github.com/maurorisonho)

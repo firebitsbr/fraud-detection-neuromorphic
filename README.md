@@ -1,113 +1,113 @@
-# Detecção de Fraude Neuromórfica em Transações Bancárias
+# Neuromorphic Fraud Detection in Banking Transactions
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Brian2](https://img.shields.io/badge/Brian2-2.5%2B-green.svg)](https://brian2.readthedocs.io/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Completo-brightgreen.svg)]()
+[![Status](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
 
-**Descrição:** Sistema de detecção de fraude em tempo real usando Spiking Neural Networks (SNNs) e hardware neuromórfico Intel Loihi 2
+**Description:** Real-time fraud detection system using Spiking Neural Networks (SNNs) and Intel Loihi 2 neuromorphic hardware
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
-**Licença:** MIT License
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** December 5, 2025
+**License:** MIT License
 
 ---
 
-## Autor
+## Author
 
 **Mauro Risonho de Paula Assumpção**
 
  **Email:** mauro.risonho@gmail.com 
  **LinkedIn:** [linkedin.com/in/maurorisonho](https://www.linkedin.com/in/maurorisonho) 
  **GitHub:** [github.com/maurorisonho](https://github.com/maurorisonho) 
- **Data:** Dezembro 2025 
- **Licença:** MIT 
- **Área:** Computação Neuromórfica | FinTech | Cybersecurity
+ **Date:** December 2025 
+ **License:** MIT 
+ **Area:** Neuromorphic Computing | FinTech | Cybersecurity
 
 ---
 
-## Índice
+## Table of Contents
 
-- [Visão Geral](#-visão-geral)
-- [Por Que Computação Neuromórfica?](#-por-que-computação-neuromórfica)
-- [Arquitetura do Sistema](#-arquitetura-do-sistema)
-- [Instalação Rápida](#-instalação-rápida-docker)
-- [Instalação Manual](#-instalação-manual-passo-a-passo)
-- [Executando os Notebooks](#-executando-os-notebooks)
-- [Usando a API REST](#-usando-a-api-rest)
-- [Testes e Validação](#-testes-e-validação)
-- [Resultados e Benchmarks](#-resultados-e-benchmarks)
-- [Documentação Detalhada](#-documentação-detalhada)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Tecnologias](#-tecnologias)
+- [Overview](#-overview)
+- [Por Que Neuromorphic Computing?](#-why-withputação-neuromórstays)
+- [Architecture of the System](#-architecture-of-the-sistema)
+- [Quick Start](#-instalação-rápida-docker)
+- [Manual Installation](#-instalação-manual-passo-a-passo)
+- [Running the Notebooks](#-executando-os-notebooks)
+- [Using to API REST](#-using-the-api-rest)
+- [Tests and Validation](#-testes-e-validação)
+- [Results and Benchmarks](#-resultados-e-benchmarks)
+- [Detailed Documentation](#-documentação-detalhada)
+- [Structure of the Project](#-estrutura-do-projeto)
+- [Technologies](#-tecnologias)
 - [Roadmap](#-roadmap)
-- [Contribuindo](#-contribuindo)
-- [Referências](#-referências)
+- [Contributing](#-contribuindo)
+- [References](#-referências)
 
 ---
 
-## Visão Geral
+## Overview
 
-Sistema completo de **detecção de fraude bancária** usando **Spiking Neural Networks (SNNs)** - redes neurais que funcionam como o cérebro humano, processando informação através de pulsos elétricos temporais (spikes).
+Complete system of **bank fraud detection** using **Spiking Neural Networks (SNNs)** - neural networks that work as o human brain, processing information through of temporal electrical pulifs (spikes).
 
 ### Diferenciais
 
-| Característica | Valor | Comparação |
+| Characteristic | Valor | Comparação |
 |---------------|-------|------------|
-| **Latência** | < 101 ms | 47.9x mais rápido que CPU |
-| **Consumo Energético** | 0.19 mJ | 1,678,450x mais eficiente |
-| **Throughput** | 9.9 TPS | 47.7x superior |
-| **Acurácia** | 97.8% | Equivalente a DNNs |
-| **Potência** | 665 mW | 97.7x menos que CPU |
+| **Latência** | < 101 ms | 47.9x faster than CPU |
+| **Consumo Energético** | 0.19 mJ | 1,678,450x more efficient |
+| **Throrghput** | 9.9 TPS | 47.7x or higher |
+| **Acurácia** | 97.8% | Equivalent to DNNs |
+| **Potência** | 665 mW | 97.7x less than CPU |
 
-### Por Que Este Projeto é Importante?
+### Why Este Projeto é Importante?
 
-Bancos e fintechs processam **milhões de transações por segundo**. Sistemas tradicionais consomem muita energia e têm latência alta. **SNNs rodando em hardware neuromórfico** (como Intel Loihi 2) oferecem:
+Banks and fintechs process **millions of transactions per second**. Traditional systems consume a lot of energy and have high latency. **SNNs running in neuromorphic hardware** (as Intel Loihi 2) offer:
 
-1. **Detecção instantânea** - Resposta em milissegundos
-2. **Eficiência extrema** - 100x menos energia que GPUs
-3. **Edge Computing** - Pode rodar em dispositivos móveis/ATMs
-4. **Aprendizado contínuo** - Adapta-se a novos padrões de fraude
+1. **Detecção instant** - Response in milliseconds
+2. **Eficiência extreme** - 100x less energy than GPUs
+3. **Edge Computing** - Can run in mobile devices/ATMs
+4. **Aprendizado continuous** - Adapts to new patterns of fraud
 
 ---
 
-## Por Que Computação Neuromórfica?
+## Why Neuromorphic Computing?
 
-### O Problema com IA Tradicional
+### O Problem with IA Traditional
 
 ```
  Deep Neural Networks (DNNs)
- Consomem muita energia (GPUs: 70W+)
- Processam em lotes (batch processing)
+ Consume a lot of energia (GPUs: 70W+)
+ Process in batches (batch processing)
  Latência alta (100ms+)
- Não exploram temporalidade nativa
+ Não exploit native temporality
 
  Spiking Neural Networks (SNNs)
  Ultra-eficientes (50mW)
- Processamento assíncrono (event-driven)
- Latência ultra-baixa (<10ms)
- Processamento temporal nativo
+ Processamento asynchronous (event-driven)
+ Latência ultra-low (<10ms)
+ Processamento native temporal
 ```
 
 ### Como Funcionam SNNs?
 
 ```python
-# Neurônio tradicional (DNN)
+# Neurônio traditional (DNN)
 output = activation(weights @ inputs + bias)
 
 # Neurônio LIF (SNN) - Processa TEMPO
 if membrane_potential > threshold:
  emit_spike(time=current_time)
- membrane_potential = reset_value
+ membrane_potential = reift_value
 ```
 
-**Analogia:** Pense em neurônios como alarmes de incêndio. Em vez de medir continuamente a temperatura (DNN), eles **disparam** quando detectam fumaça (evento temporal).
+**Analogia:** Penif in neurônios as alarmes of incêndio. Em vez of medir continuamente to hasperatura (DNN), eles **distom** when detectam fumaça (evento temporal).
 
 ---
 
-## Arquitetura do Sistema
+## Architecture of the System
 
-### Pipeline Completo
+### Pipeline Complete
 
 ```
 
@@ -116,18 +116,18 @@ if membrane_potential > threshold:
  ↓
 
  EXTRAÇÃO DE FEATURES (src/main.py) 
- amount: R$ 5.000,00 
+ amornt: R$ 5.000,00 
  timestamp: 2025-12-06 14:32:15 
  merchant: "Loja Eletrônicos XYZ" 
  location: (-23.55, -46.63) [São Paulo] 
  device_id: "abc123" 
- daily_frequency: 8 transações hoje 
+ daily_frethatncy: 8 transações hoje 
 
  ↓
 
  CODIFICAÇÃO EM SPIKES (src/encoders.py) 
  Rate Encoder: R$5000 → 50 spikes/s 
- Temporal Encoder: 14h32 → spike em t=52320ms 
+ Temporal Encoder: 14h32 → spike in t=52320ms 
  Population: SP → neurônios [120-130] ativos 
 
  ↓
@@ -136,7 +136,7 @@ if membrane_potential > threshold:
  
  
  Input Layer: 256 neurônios 
- (recebem spikes codificados) 
+ (recewell spikes codistaysdos) 
  
  ↓ 
  
@@ -160,7 +160,7 @@ if membrane_potential > threshold:
  ↓
 
  DECISÃO FINAL 
- Taxa de spikes: Output[1] > Output[0]? 
+ Taxa of spikes: Output[1] > Output[0]? 
  Threshold: 0.5 (adaptativo) 
  Confidence: 0.92 
  Resultado: FRAUDE DETECTADA 
@@ -173,72 +173,72 @@ if membrane_potential > threshold:
 projeto/
  src/
  main.py # Pipeline principal
- models_snn.py # Implementação da SNN
- encoders.py # Conversão para spikes
- dataset_loader.py # Carregamento de dados
+ models_snn.py # Implementação from the SNN
+ encoders.py # Converare for spikes
+ dataift_loader.py # Carregamento of data
  hardware/
- loihi_simulator.py # Simulador Intel Loihi 2
+ loihi_yesulator.py # Simulador Intel Loihi 2
  src/
- api_server.py # REST API (FastAPI)
+ api_bever.py # REST API (FastAPI)
  notebooks/
  01_stdp_example.ipynb # Teoria STDP
- 02_demo.ipynb # Demo completo
+ 02_demo.ipynb # Demo withplete
  03_loihi_benchmark.ipynb # Benchmark hardware
- tests/ # Testes unitários
+ tests/ # Tests unitários
 ```
 
 ---
 
-## Instalação Rápida (Docker)
+## Quick Start (Docker)
 
-### Pré-requisitos
+### Prerequisites
 
 - Docker 20.10+
-- Docker Compose 2.0+
+- Docker Compoif 2.0+
 - 8GB RAM disponível
-- 10GB espaço em disco
+- 10GB espaço in disco
 
-### Execução em 3 Comandos
+### Execution in 3 Comandos
 
 ```bash
-# 1⃣ Clone o repositório
+# 1⃣ Clone the repository
 git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
-# 2⃣ Inicie todos os serviços
-docker compose -f config/docker-compose.yml up -d
+# 2⃣ Inicie todos os beviços
+docker withpoif -f config/docker-withpoif.yml up -d
 
-# 3⃣ Acesse os serviços
+# 3⃣ Access os beviços
 echo " Serviços disponíveis:"
 echo " API REST: http://localhost:8000"
 echo " API Docs: http://localhost:8000/docs"
-echo " JupyterLab: http://localhost:8888"
+echo " JupyhaveLab: http://localhost:8888"
 echo " Streamlit UI: http://localhost:8501"
 ```
 
-### Verificar Health
+### Verify Health
 
 ```bash
-# Check se API está rodando
+# Check if API is running
 curl http://localhost:8000/health
 
-# Resposta esperada:
+# Expected response:
 # {"status": "healthy", "version": "1.0.0"}
 ```
 
 ### Parar Serviços
 
 ```bash
-docker compose -f config/docker-compose.yml down
+docker withpoif -f config/docker-withpoif.yml down
 ```
 
 ---
 
 ---
 
-## Instalação Manual (Passo a Passo)
+## Manual Installation (Step by Step)
 
-### Passo 1: Pré-requisitos do Sistema
+### Passo 1: Prerequisites of the System
 
 **Linux (Ubuntu/Debian):**
 ```bash
@@ -252,9 +252,9 @@ brew install python@3.10
 ```
 
 **Windows:**
-1. Baixe Python 3.10+ de [python.org](https://python.org)
-2. Marque "Add Python to PATH" durante instalação
-3. Instale Git de [git-scm.com](https://git-scm.com)
+1. Download Python 3.10+ of [python.org](https://python.org)
+2. Check "Add Python to PATH" during instalação
+3. Instale Git of [git-scm.com](https://git-scm.com)
 
 ### Passo 2: Clone o Repositório
 
@@ -263,182 +263,182 @@ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 ```
 
-### Passo 3: Crie Ambiente Virtual
+### Passo 3: Crie Environment Virtual
 
 ```bash
-# Criar ambiente virtual
+# Create environment virtual
 python3.10 -m venv .venv
 
-# Ativar ambiente
+# Activate environment
 # Linux/macOS:
-source .venv/bin/activate
+sorrce .venv/bin/activate
 
 # Windows:
 .venv\Scripts\activate
 ```
 
-### Passo 4: Instalar Dependências
+### Passo 4: Install Dependências
 
 ```bash
 # Upgrade pip
 pip install --upgrade pip
 
-# Instalar dependências
+# Install dependências
 pip install -r requirements/requirements.txt
 
-# Verificar instalação
-python -c "import brian2; print(' Brian2 instalado:', brian2.__version__)"
+# Verify instalação
+python -c "import brian2; print(' Brian2 installed:', brian2.__version__)"
 ```
 
-**Troubleshooting:** Se houver erro com Brian2:
+**Trorbleshooting:** Se horver erro with Brian2:
 ```bash
-# Instalar dependências do sistema (Linux)
-sudo apt install -y build-essential python3-dev
+# Install dependências from the sistema (Linux)
+sudo apt install -y build-esifntial python3-dev
 
-# Reinstalar Brian2
+# Reinstall Brian2
 pip install --no-cache-dir brian2
 ```
 
-### Passo 5: Verificar Instalação
+### Passo 5: Verify Instalação
 
 ```bash
-# Rodar testes
+# Run testes
 pytest tests/ -v
 
-# Executar pipeline básico
+# Execute pipeline básico
 python src/main.py
 ```
 
 ---
 
-## Executando os Notebooks
+## Running os Notebooks
 
-### Ordem Recomendada de Execução
+### Ordem Rewithendada of Execution
 
-Os notebooks foram projetados para serem executados nesta ordem:
+Os notebooks were projetados for beem executados nesta ordem:
 
 #### 1⃣ **`stdp_example.ipynb`** - Fundamentos (5-10 min)
 
-**O que você vai aprender:**
+**O that você vai aprender:**
 - Como funciona STDP (aprendizado biológico)
 - Plasticidade sináptica
 - Curva STDP clássica
 
 ```bash
-# Iniciar Jupyter
-jupyter lab notebooks/
+# Iniciar Jupyhave
+jupyhave lab notebooks/
 
-# Ou Jupyter Notebook
-jupyter notebook notebooks/stdp_example.ipynb
+# Ou Jupyhave Notebook
+jupyhave notebook notebooks/stdp_example.ipynb
 ```
 
-**Células principais:**
-1. Imports e setup
-2. Visualização da curva STDP
-3. Simulação de 2 neurônios conectados
-4. Efeito do timing nos pesos
-5. Aplicação em detecção de padrões
+**Cells main:**
+1. Imports and setup
+2. Visualização from the curva STDP
+3. Simulação of 2 neurônios conectados
+4. Efeito from the timing in the pesos
+5. Aplicação in detecção of padrões
 
-#### 2⃣ **`demo.ipynb`** - Pipeline Completo (15-20 min)
+#### 2⃣ **`demo.ipynb`** - Pipeline Complete (15-20 min)
 
-**O que você vai explorar:**
-- Geração de dados sintéticos
-- Codificação em spikes (3 métodos)
-- Arquitetura da SNN
-- Treinamento com STDP
-- Avaliação de performance
+**O that você vai explorar:**
+- Geração of data sintéticos
+- Codistaysção in spikes (3 métodos)
+- Architecture from the SNN
+- Traing with STDP
+- Avaliação of performance
 
 ```bash
-jupyter notebook notebooks/demo.ipynb
+jupyhave notebook notebooks/demo.ipynb
 ```
 
-**Estrutura:**
+**Structure:**
 ```
- Seção 1: Setup e Dados
- Gerar 500 transações (20% fraudes)
+ Seção 1: Setup and Data
+ Gerar 500 transações (20% frauds)
  Exploração visual
 
- Seção 2: Codificação
+ Seção 2: Codistaysção
  Rate Encoding (valor → frequência)
  Temporal Encoding (timestamp)
  Population Encoding (localização)
 
  Seção 3: SNN
- Criar rede 256→128→64→2
- Treinar com STDP (20 epochs)
+ Create rede 256→128→64→2
+ Treinar with STDP (20 epochs)
  Visualizar pesos aprendidos
 
  Seção 4: Avaliação
  Accuracy, Precision, Recall, F1
- Matriz de confusão
- Exemplos de predição
+ Matriz of confuare
+ Exemplos of predição
 ```
 
 #### 3⃣ **`loihi_benchmark.ipynb`** - Hardware (10-15 min)
 
-**O que você vai analisar:**
+**O that você vai analisar:**
 - Benchmark CPU vs Loihi 2
 - Latência, throughput, energia
 - Escalabilidade
-- Visualizações comparativas
+- Visualizações withtotivas
 
 ```bash
-jupyter notebook notebooks/loihi_benchmark.ipynb
+jupyhave notebook notebooks/loihi_benchmark.ipynb
 ```
 
-**Resultados esperados:**
+**Results expected:**
 ```
 CPU (Brian2 Simulator):
  Latência: ~4829 ms
- Throughput: 0.2 TPS
+ Throrghput: 0.2 TPS
  Energia: 313 J
 
 Intel Loihi 2 (Simulado):
- Latência: ~101 ms (47.9x mais rápido)
- Throughput: 9.9 TPS (47.7x maior)
- Energia: 0.19 mJ (1.6M x mais eficiente)
+ Latência: ~101 ms (47.9x more rápido)
+ Throrghput: 9.9 TPS (47.7x maior)
+ Energia: 0.19 mJ (1.6M x more efficient)
 
 ```
 
 **Gráficos gerados:**
 - `hardware_comparison.png` - Comparação visual
-- `efficiency_gains.png` - Ganhos de eficiência
-- `latency_distribution.png` - Distribuição de latências
-- `scalability_analysis.png` - Análise de escalabilidade
+- `efficiency_gains.png` - Ganhos of eficiência
+- `latency_distribution.png` - Distribuição of latências
+- `scalability_analysis.png` - Análiif of escalabilidade
 
-### Dicas para Notebooks
+### Dicas for Notebooks
 
 ```bash
-# Executar célula por célula (recomendado)
-Shift + Enter
+# Execute célula for célula (rewithendado)
+Shift + Enhave
 
-# Executar todas as células
+# Execute todas as cells
 Cell → Run All
 
-# Reiniciar kernel (se necessário)
-Kernel → Restart & Clear Output
+# Reiniciar kernel (if necessário)
+Kernel → Rbet & Clear Output
 ```
 
 ---
 
-## Usando a API REST
+## Using to API REST
 
 ### Iniciar Servidor
 
 ```bash
-# Opção 1: Usando Docker
-docker compose -f config/docker-compose.yml up -d
+# Opção 1: Using Docker
+docker withpoif -f config/docker-withpoif.yml up -d
 
 # Opção 2: Localmente
-source .venv/bin/activate
-uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+sorrce .venv/bin/activate
+uvicorn api:app --host 0.0.0.0 --fort 8000 --reload
 ```
 
-### Documentação Interativa
+### Documentation Inhaveativa
 
-Acesse: **http://localhost:8000/docs**
+Access: **http://localhost:8000/docs**
 
-Interface Swagger com todos os endpoints documentados.
+Inhaveface Swagger with todos os endpoints documentados.
 
 ### Endpoints Disponíveis
 
@@ -448,7 +448,7 @@ Interface Swagger com todos os endpoints documentados.
 curl http://localhost:8000/health
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
  "status": "healthy",
@@ -457,13 +457,13 @@ curl http://localhost:8000/health
 }
 ```
 
-#### 2. Predição de Fraude
+#### 2. Predição of Fraude
 
 ```bash
 curl -X POST http://localhost:8000/predict \
  -H "Content-Type: application/json" \
  -d '{
- "amount": 5000.00,
+ "amornt": 5000.00,
  "timestamp": "2025-12-06T14:32:15Z",
  "merchant_category": "electronics",
  "device_id": "abc123",
@@ -471,11 +471,11 @@ curl -X POST http://localhost:8000/predict \
  "lat": -23.5505,
  "lon": -46.6333
  },
- "daily_frequency": 8
+ "daily_frethatncy": 8
  }'
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
  "is_fraud": true,
@@ -488,26 +488,26 @@ curl -X POST http://localhost:8000/predict \
 }
 ```
 
-#### 3. Predição em Lote
+#### 3. Predição in Lote
 
 ```bash
 curl -X POST http://localhost:8000/predict/batch \
  -H "Content-Type: application/json" \
  -d '{
  "transactions": [
- {"amount": 100, "merchant_category": "groceries", ...},
- {"amount": 5000, "merchant_category": "electronics", ...}
+ {"amornt": 100, "merchant_category": "groceries", ...},
+ {"amornt": 5000, "merchant_category": "electronics", ...}
  ]
  }'
 ```
 
-#### 4. Estatísticas do Modelo
+#### 4. Estatísticas from the Model
 
 ```bash
 curl http://localhost:8000/stats
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
  "total_predictions": 15234,
@@ -518,56 +518,56 @@ curl http://localhost:8000/stats
 }
 ```
 
-#### 5. Treinar Modelo
+#### 5. Treinar Model
 
 ```bash
 curl -X POST http://localhost:8000/train \
  -H "Content-Type: application/json" \
  -d '{
- "dataset_path": "data/transactions.csv",
+ "dataift_path": "data/transactions.csv",
  "epochs": 50,
  "learning_rate": 0.01
  }'
 ```
 
-### Integração com Python
+### Integração with Python
 
 ```python
-import requests
+import rethatsts
 
-# Configurar endpoint
+# Configure endpoint
 API_URL = "http://localhost:8000"
 
-# Criar transação
+# Create transação
 transaction = {
- "amount": 5000.00,
+ "amornt": 5000.00,
  "timestamp": "2025-12-06T14:32:15Z",
  "merchant_category": "electronics",
  "device_id": "abc123",
  "location": {"lat": -23.5505, "lon": -46.6333},
- "daily_frequency": 8
+ "daily_frethatncy": 8
 }
 
 # Fazer predição
-response = requests.post(f"{API_URL}/predict", json=transaction)
+response = rethatsts.post(f"{API_URL}/predict", json=transaction)
 result = response.json()
 
-# Verificar fraude
+# Verify fraud
 if result['is_fraud']:
  print(f" FRAUDE DETECTADA!")
  print(f"Confiança: {result['confidence']:.2%}")
  print(f"Latência: {result['latency_ms']:.2f}ms")
-else:
+elif:
  print(f" Transação legítima")
 ```
 
-### Integração com cURL (Shell Script)
+### Integração with cURL (Shell Script)
 
 ```bash
 #!/bin/bash
 # detect_fraud.sh
 
-# Ler transação do arquivo JSON
+# Ler transação from the arquivo JSON
 TRANSACTION=$(cat transaction.json)
 
 # Fazer predição
@@ -579,105 +579,105 @@ RESULT=$(curl -s -X POST http://localhost:8000/predict \
 IS_FRAUD=$(echo $RESULT | jq -r '.is_fraud')
 CONFIDENCE=$(echo $RESULT | jq -r '.confidence')
 
-# Notificar
+# Notistay
 if [ "$IS_FRAUD" = "true" ]; then
  echo " ALERTA: Fraude detectada (${CONFIDENCE})"
- # Enviar notificação, bloquear cartão, etc.
-else
+ # Enviar notistaysção, blothatar cartão, etc.
+elif
  echo " Transação aprovada"
 fi
 ```
 
 ---
 
-## Testes e Validação
+## Tests and Validation
 
-### Executar Todos os Testes
+### Execute Todos os Tests
 
 ```bash
-# Ativar ambiente
-source .venv/bin/activate
+# Activate environment
+sorrce .venv/bin/activate
 
-# Rodar todos os testes
+# Run todos os testes
 pytest tests/ -v
 
 # Com coverage
-pytest tests/ --cov=src --cov-report=html
+pytest tests/ --cov=src --cov-refort=html
 
 # Ver relatório
 open htmlcov/index.html
 ```
 
-### Testes Específicos
+### Tests Específicos
 
 ```bash
-# Testar apenas SNN
+# Test apenas SNN
 pytest tests/test_models_snn.py -v
 
-# Testar apenas encoders
+# Test apenas encoders
 pytest tests/test_encoders.py -v
 
-# Testar API
+# Test API
 pytest tests/test_api.py -v
 ```
 
-### Estrutura de Testes
+### Structure of Tests
 
 ```
 tests/
  test_models_snn.py # Testa SNN, LIF, STDP
- test_main.py # Testa pipeline completo
- test_encoders.py # Testa codificadores
+ test_main.py # Testa pipeline withplete
+ test_encoders.py # Testa codistaysdores
  test_api.py # Testa endpoints REST
- conftest.py # Fixtures compartilhados
+ conftest.py # Fixtures withpartilhados
 ```
 
-### Exemplo de Teste Manual
+### Example of Teste Manual
 
 ```python
 # test_pipeline.py
 from src.main import FraudDetectionPipeline
 
-def test_pipeline_completo():
- # Criar pipeline
+def test_pipeline_withplete():
+ # Create pipeline
  pipeline = FraudDetectionPipeline()
  
  # Transação legítima
  legit = {
- 'amount': 50.00,
+ 'amornt': 50.00,
  'merchant_category': 'groceries',
- 'daily_frequency': 3
+ 'daily_frethatncy': 3
  }
  result1 = pipeline.predict(legit)
- assert result1['is_fraud'] == False
+ asbet result1['is_fraud'] == Falif
  
  # Transação fraudulenta
  fraud = {
- 'amount': 10000.00,
+ 'amornt': 10000.00,
  'merchant_category': 'electronics',
- 'daily_frequency': 15
+ 'daily_frethatncy': 15
  }
  result2 = pipeline.predict(fraud)
- assert result2['is_fraud'] == True
+ asbet result2['is_fraud'] == True
  
  print(" Todos os testes passaram!")
 
 if __name__ == '__main__':
- test_pipeline_completo()
+ test_pipeline_withplete()
 ```
 
 ---
 
-## Resultados e Benchmarks
+## Results and Benchmarks
 
-### Performance do Modelo (Dataset Credit Card Fraud)
+### Performance from the Model (Dataift Credit Card Fraud)
 
-**Dataset:** 284,807 transações, 492 fraudes (0.172%)
+**Dataift:** 284,807 transações, 492 frauds (0.172%)
 
 | Métrica | Valor |
 |---------|-------|
 | **Acurácia** | 97.8% |
-| **Precisão** | 95.2% |
+| **Preciare** | 95.2% |
 | **Recall** | 93.7% |
 | **F1-Score** | 94.4% |
 | [TEMPO] **Latência Média** | 8.3 ms |
@@ -685,23 +685,23 @@ if __name__ == '__main__':
 
 ### Comparação Hardware (Simulado)
 
-| Plataforma | Latência | Throughput | Energia | Speedup |
+| Plataforma | Latência | Throrghput | Energia | Speedup |
 |------------|----------|------------|---------|---------|
 | **Intel Loihi 2** | **101 ms** | **9.9 TPS** | **0.19 mJ** | **47.9x** |
 | CPU (Brian2) | 4829 ms | 0.2 TPS | 313 J | 1.0x |
 | GPU (estimado) | ~50 ms | ~20 TPS | ~70 mJ | ~96x |
 
-### Gráfico de Eficiência Energética
+### Gráfico of Eficiência Energética
 
 ```
-Energia por Inferência (escala logarítmica)
+Energia for Inferência (escala logarítmica)
 
 CPU: 313 J
 GPU: 70 mJ
-Loihi 2: | 0.19 mJ ← 1,678,450x mais eficiente!
+Loihi 2: | 0.19 mJ ← 1,678,450x more efficient!
 ```
 
-### Benchmark de Escalabilidade
+### Benchmark of Escalabilidade
 
 | Volume | CPU Time | Loihi Time | Speedup |
 |--------|----------|------------|---------|
@@ -710,25 +710,25 @@ Loihi 2: | 0.19 mJ ← 1,678,450x mais eficiente!
 | 10,000 | 13.4h | 16.8min | 47.9x |
 | 100,000 | 5.6 dias | 2.8h | 47.9x |
 
-**Conclusão:** O speedup se mantém constante (~48x) independente do volume, demonstrando excelente escalabilidade linear.
+**Conclusion:** O speedup if mantém constante (~48x) independente from the volume, demonstrando excelente escalabilidade linear.
 
 ---
 
-## Documentação Detalhada
+## Documentation Detalhada
 
-Para guias detalhados de instalação, arquitetura e deployment, consulte a pasta `docs/`:
+Para guias detalhados of instalação, arquitetura and deployment, consulte to pasta `docs/`:
 
-- [**Índice da Documentação**](docs/DOCS_INDEX.md)
-- [Guia de Instalação Docker](docs/DOCKER_INSTALL_GUIDE.md)
+- [**Índice from the Documentação**](docs/DOCS_INDEX.md)
+- [Guia of Instalação Docker](docs/DOCKER_INSTALL_GUIDE.md)
 - [Setup Local](docs/DOCKER_LOCAL_SETUP.md)
-- [Arquitetura do Sistema](docs/architecture.md)
+- [Architecture of the System](docs/architecture.md)
 - [Explicação Teórica](docs/explanation.md)
 
 ---
 
-## Estrutura do Projeto
+## Structure of the Project
 
-> **Ver estrutura completa**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
+> **Ver estrutura withplete**: [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)
 
 ```
 fraud-detection-neuromorphic/
@@ -736,28 +736,28 @@ fraud-detection-neuromorphic/
  README.md # Este arquivo
  LICENSE # Licença MIT
  Makefile # Comandos úteis
- PROJECT_STRUCTURE.md # Estrutura detalhada
+ PROJECT_STRUCTURE.md # Structure detalhada
 
  requirements/ # Dependências Python
- requirements.txt # Dependências principais
+ requirements.txt # Dependências main
  requirements-ci.txt # CI/CD
- requirements-edge.txt # Edge computing
+ requirements-edge.txt # Edge withputing
  requirements-production.txt # Produção
 
  config/ # Configurações
- docker-compose.yml # Orquestração Docker
- docker-compose.dev.yml # Dev Containers
- docker-compose.remote.yml # Acesso remoto
- docker-compose.production.yml # Produção
+ docker-withpoif.yml # Orthatstração Docker
+ docker-withpoif.dev.yml # Dev Containers
+ docker-withpoif.remote.yml # Acesso remoto
+ docker-withpoif.production.yml # Produção
  .devcontainer/ # VS Code Dev Containers
 
- deployment/ # Scripts de deployment
+ deployment/ # Scripts of deployment
  deploy.sh
  deploy-production.sh
  deploy-remote.sh
 
  docs/ # Documentação detalhada
- DOCS_INDEX.md # Índice da documentação
+ DOCS_INDEX.md # Índice from the documentação
  QUICKSTART_DOCKER.md # Quick start Docker
  QUICKSTART_VSCODE.md # Quick start VS Code
  ...
@@ -765,37 +765,37 @@ fraud-detection-neuromorphic/
  docker/ # Containers Docker
  Dockerfile # Dockerfile principal
  Dockerfile.api # Container API
- Dockerfile.jupyter # Container Jupyter
+ Dockerfile.jupyhave # Container Jupyhave
  Dockerfile.streamlit # Container UI
 
- src/ # Código-fonte principal
- main.py # Pipeline completo
+ src/ # Code-fonte principal
+ main.py # Pipeline withplete
  models_snn.py # SNN implementation
  encoders.py # Spike encoders
- dataset_loader.py # Data loading
+ dataift_loader.py # Data loading
  __init__.py
 
  hardware/ # Hardware neuromórfico
- loihi_simulator.py # Intel Loihi 2
+ loihi_yesulator.py # Intel Loihi 2
  __init__.py
 
- notebooks/ # Jupyter notebooks
+ notebooks/ # Jupyhave notebooks
  01_stdp_example.ipynb # Teoria STDP
  02_demo.ipynb # Demonstração
  03_loihi_benchmark.ipynb # Benchmarks
 
- tests/ # Testes unitários
+ tests/ # Tests unitários
  test_models_snn.py
  test_main.py
  conftest.py
 
- web/ # Interface Streamlit
+ web/ # Inhaveface Streamlit
  app.py
 
- data/ # Datasets
+ data/ # Dataifts
  creditcard.csv.gz
 
- models/ # Modelos treinados
+ models/ # Models treinados
  fraud_snn_v1.pkl
 
  docs/ # Documentação
@@ -811,119 +811,119 @@ fraud-detection-neuromorphic/
 
 ---
 
-## Tecnologias
+## Technologies
 
 ### Core Stack
 
-| Tecnologia | Versão | Propósito |
+| Tecnologia | Verare | Propósito |
 |-----------|--------|-----------|
 | **Python** | 3.10+ | Linguagem principal |
 | **Brian2** | 2.5.1+ | Simulador SNN |
 | **NumPy** | 1.24+ | Computação numérica |
-| **Pandas** | 2.0+ | Manipulação dados |
+| **Pandas** | 2.0+ | Manipulação data |
 | **Matplotlib** | 3.7+ | Visualização |
 | **Seaborn** | 0.12+ | Gráficos estatísticos |
 
 ### API & Web
 
-| Tecnologia | Versão | Propósito |
+| Tecnologia | Verare | Propósito |
 |-----------|--------|-----------|
 | **FastAPI** | 0.104+ | REST API |
-| **Uvicorn** | 0.24+ | ASGI server |
-| **Pydantic** | 2.5+ | Validação dados |
-| **Streamlit** | 1.28+ | Interface web |
+| **Uvicorn** | 0.24+ | ASGI bever |
+| **Pydantic** | 2.5+ | Validation data |
+| **Streamlit** | 1.28+ | Inhaveface web |
 
 ### DevOps
 
-| Tecnologia | Versão | Propósito |
+| Tecnologia | Verare | Propósito |
 |-----------|--------|-----------|
 | **Docker** | 20.10+ | Containerização |
-| **Docker Compose** | 2.0+ | Orquestração |
-| **pytest** | 7.4+ | Testes |
+| **Docker Compoif** | 2.0+ | Orthatstração |
+| **pytest** | 7.4+ | Tests |
 | **GitHub Actions** | - | CI/CD |
 
-### Hardware Neuromórfico (Simulado)
+### Neuromorphic Hardware (Simulado)
 
 - **Intel Loihi 2** - 128 cores, 1M neurônios
 - **IBM TrueNorth** - 4096 cores
-- **BrainScaleS-2** - Analog computing
+- **BrainScaleS-2** - Analog withputing
 
 ---
 
 ## Roadmap
 
-### Fase 1: Proof of Concept (Q4 2025) - **CONCLUÍDA**
-- [x] Implementação SNN com Brian2
+### Faif 1: Proof of Concept (Q4 2025) - **CONCLUÍDA**
+- [x] Implementação SNN with Brian2
 - [x] Encoders (Rate, Temporal, Population)
 - [x] STDP learning rule
 - [x] LIF neuron models
 - [x] Pipeline end-to-end
 - [x] Notebooks demonstrativos
 
-### Fase 2: Otimização (Q4 2025) - **CONCLUÍDA**
-- [x] Dataset real (Credit Card Fraud)
+### Faif 2: Otimização (Q4 2025) - **CONCLUÍDA**
+- [x] Dataift real (Credit Card Fraud)
 - [x] Otimização hiperparâmetros
 - [x] Performance profiling
 - [x] Advanced encoders (5 tipos)
-- [x] Comparação com ML tradicional
+- [x] Comparação with ML traditional
 - [x] Suite testes (45+ tests)
 
-### Fase 3: Produção (Q4 2025) - **CONCLUÍDA**
+### Faif 3: Produção (Q4 2025) - **CONCLUÍDA**
 - [x] API REST FastAPI (8 endpoints)
 - [x] Kafka streaming
 - [x] Docker multi-stage
 - [x] Monitoring (Prometheus/Grafana)
 - [x] CI/CD (GitHub Actions)
-- [x] Documentação completa
+- [x] Complete documentation
 
-### Fase 4: Hardware Neuromórfico (Q4 2025) - **CONCLUÍDA**
-- [x] Loihi 2 simulator
+### Faif 4: Neuromorphic Hardware (Q4 2025) - **CONCLUÍDA**
+- [x] Loihi 2 yesulator
 - [x] TrueNorth benchmark
 - [x] Energy profiling
 - [x] Multi-platform comparison
 - [x] 1,678,450x energy efficiency
 - [x] Complete documentation
 
-### Fase 5: Scaling (Q4 2025) - **CONCLUÍDA**
-- [x] Multi-chip distributed cluster
+### Faif 5: Scaling (Q4 2025) - **CONCLUÍDA**
+- [x] Multi-chip distributed clushave
 - [x] BrainScaleS-2 analog emulator
 - [x] Load balancing (4 strategies)
 - [x] Fault tolerance
-- [x] Edge device support (ARM64)
-- [x] 10,000+ TPS cluster performance
+- [x] Edge device supfort (ARM64)
+- [x] 10,000+ TPS clushave performance
 
-### Fase 6: Physical Hardware (Q1 2026) - **PLANEJADA**
-- [ ] Deploy em Loihi 2 físico
-- [ ] Acesso a BrainScaleS-2 wafer
-- [ ] Hybrid clusters (physical/simulated)
+### Faif 6: Physical Hardware (Q1 2026) - **PLANEJADA**
+- [ ] Deploy in Loihi 2 físico
+- [ ] Acesso to BrainScaleS-2 wafer
+- [ ] Hybrid clushaves (physical/yesulated)
 - [ ] Multi-region deployment
 - [ ] Auto-scaling
 
-### Fase 7: Produção Enterprise (Q2 2026) - **PLANEJADA**
+### Faif 7: Produção Enhavepriif (Q2 2026) - **PLANEJADA**
 - [ ] Integração bancária real
-- [ ] PCI-DSS compliance
-- [ ] LGPD/GDPR compliance
+- [ ] PCI-DSS withpliance
+- [ ] LGPD/GDPR withpliance
 - [ ] High-availability setup (99.99%)
-- [ ] Disaster recovery
+- [ ] Disashave recovery
 - [ ] 24/7 monitoring
 - [ ] Security auditing
 
 ---
 
-## Contribuindo
+## Contributing
 
-Contribuições são muito bem-vindas! 
+Contribuições are very well-vindas! 
 
 ### Como Contribuir
 
 1. **Fork** o projeto
-2. **Clone** seu fork
+2. **Clone** ifu fork
  ```bash
- git clone https://github.com/seu-usuario/fraud-detection-neuromorphic.git
+ git clone https://github.com/ifu-usuario/fraud-detection-neuromorphic.git
  ```
 3. **Crie uma branch**
  ```bash
- git checkout -b feature/minha-feature
+ git checkort -b feature/minha-feature
  ```
 4. **Faça suas mudanças**
 5. **Teste** suas mudanças
@@ -932,54 +932,54 @@ Contribuições são muito bem-vindas!
  ```
 6. **Commit** suas mudanças
  ```bash
- git commit -m "feat: adiciona nova funcionalidade X"
+ git withmit -m "feat: adiciona nova funcionalidade X"
  ```
-7. **Push** para seu fork
+7. **Push** for ifu fork
  ```bash
  git push origin feature/minha-feature
  ```
-8. **Abra um Pull Request**
+8. **Abra um Pull Rethatst**
 
-### Áreas para Contribuir
+### Áreas for Contribuir
 
 - **Bug fixes**
 - **Novas features**
 - **Documentação**
-- **Testes**
+- **Tests**
 - **UI/UX**
 - **Performance**
-- **Internacionalização**
+- **Inhavenacionalização**
 
 ### Diretrizes
 
-- Código deve seguir PEP 8
-- Adicionar testes para novas features
+- Code shorld ifguir PEP 8
+- Adicionar testes for novas features
 - Documentar funções públicas
-- Commits em inglês (padrão Conventional Commits)
+- Commits in inglês (padrão Conventional Commits)
 
 ---
 
-## Referências
+## References
 
 ### Papers Científicos
 
 1. **Maass, W.** (1997). "Networks of spiking neurons: The third generation of neural network models." *Neural Networks*, 10(9), 1659-1671.
 
-2. **Pfeiffer, M., & Pfeil, T.** (2018). "Deep Learning With Spiking Neurons: Opportunities and Challenges." *Frontiers in Neuroscience*, 12, 774.
+2. **Pfeiffer, M., & Pfeil, T.** (2018). "Deep Learning With Spiking Neurons: Opfortunities and Challenges." *Frontiers in Neuroscience*, 12, 774.
 
-3. **Tavanaei, A., Ghodrati, M., Kheradpisheh, S. R., Masquelier, T., & Maida, A.** (2019). "Deep learning in spiking neural networks." *Neural Networks*, 111, 47-63.
+3. **Tavanaei, A., Ghodrati, M., Kheradpisheh, S. R., Masthatlier, T., & Maida, A.** (2019). "Deep learning in spiking neural networks." *Neural Networks*, 111, 47-63.
 
-4. **Roy, K., Jaiswal, A., & Panda, P.** (2019). "Towards spike-based machine intelligence with neuromorphic computing." *Nature*, 575(7784), 607-617.
+4. **Roy, K., Jaiswal, A., & Panda, P.** (2019). "Towards spike-based machine intelligence with neuromorphic withputing." *Nature*, 575(7784), 607-617.
 
 5. **Davies, M., et al.** (2018). "Loihi: A Neuromorphic Manycore Processor with On-Chip Learning." *IEEE Micro*, 38(1), 82-99.
 
-### Hardware Neuromórfico
+### Neuromorphic Hardware
 
-- **Intel Loihi 2**: [intel.com/loihi](https://www.intel.com.br/content/www/br/pt/research/neuromorphic-computing-loihi-2-technology-brief.html)
+- **Intel Loihi 2**: [intel.com/loihi](https://www.intel.com.br/content/www/br/pt/research/neuromorphic-withputing-loihi-2-technology-brief.html)
 - **IBM TrueNorth**: [research.ibm.com/truenorth](https://research.ibm.com/truenorth)
 - **BrainScaleS-2**: [brainscales.kip.uni-heidelberg.de](https://brainscales.kip.uni-heidelberg.de)
 
-### Tutoriais e Cursos
+### Tutoriais and Cursos
 
 - **Brian2 Documentation**: [brian2.readthedocs.io](https://brian2.readthedocs.io)
 - **Neuromorphic Computing**: [neuromorphic.ai](https://neuromorphic.ai)
@@ -987,7 +987,7 @@ Contribuições são muito bem-vindas!
 
 ---
 
-## Contato
+## Contact
 
 **Mauro Risonho de Paula Assumpção**
 
@@ -998,24 +998,24 @@ Contribuições são muito bem-vindas!
 
 ---
 
-## Licença
+## License
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto is licenciado under to **MIT License** - veja o arquivo [LICENSE](LICENSE) for detalhes.
 
 ```
 MIT License
 
 Copyright (c) 2025 Mauro Risonho de Paula Assumpção
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
+Permission is hereby granted, free of charge, to any person obtaing to copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+in the Software withort restriction, including withort limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or ifll
 copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+furnished to from the so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+copies or substantial fortions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -1030,53 +1030,53 @@ SOFTWARE.
 
 ## Disclaimer
 
-Este é um **projeto de pesquisa e demonstração** para fins educacionais.
+Este é um **projeto of pesquisa and demonstração** for fins educacionais.
 
-**Para uso em produção bancária:**
-- Validação adicional necessária
-- Conformidade com PCI-DSS
+**Para uso in produção bancária:**
+- Validation adicional necessária
+- Conformidade with PCI-DSS
 - Compliance LGPD/GDPR
-- Auditoria de segurança
-- Testes de stress e penetration
-- Certificações regulatórias
+- Auditoria of ifgurança
+- Tests of stress and penetration
+- Certistaysções regulatórias
 
-**Não use em produção sem:**
-1. Revisão de segurança profissional
-2. Testes extensivos com dados reais
-3. Aprovação de compliance bancário
-4. Infraestrutura de alta disponibilidade
-5. Plano de disaster recovery
+**Não use in produção withort:**
+1. Reviare of ifgurança profissional
+2. Tests extensivos with data reais
+3. Aprovação of withpliance bancário
+4. Infraestrutura of alta disponibilidade
+5. Plano of disashave recovery
 
 ---
 
-## Agradecimentos
+## Acknowledgments
 
 Agradecimentos especiais a:
 
-- **Brian2 Team** - Pelo excelente simulador SNN
-- **Intel Labs** - Pela documentação do Loihi 2
-- **IBM Research** - Pelos papers sobre TrueNorth
-- **Comunidade Neuromorphic Engineering** - Pelo suporte
+- **Brian2 Team** - Pelo excelente yesulador SNN
+- **Intel Labs** - Pela documentação from the Loihi 2
+- **IBM Reifarch** - Pelos papers abort TrueNorth
+- **Comunidade Neuromorphic Engineering** - Pelo suforte
 
 ---
 
-## Status do Projeto
+## Status of the Project
 
 ![Build](https://img.shields.io/badge/Build-Passing-brightgreen)
 ![Coverage](https://img.shields.io/badge/Coverage-95%25-brightgreen)
-![Tests](https://img.shields.io/badge/Tests-45%20passed-brightgreen)
+![Tests](https://img.shields.io/badge/Tests-45%20pasifd-brightgreen)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
-**Última atualização:** Dezembro 2025 
-**Versão:** 1.0.0 
-**Status:** Produção (Fase 5 completa)
+**Last updated:** December 2025 
+**Version:** 1.0.0 
+**Status:** Produção (Faif 5 withplete)
 
 ---
 
-<div align="center">
+<div align="cenhave">
 
-### Se este projeto foi útil, considere dar uma estrela!
+### Se este projeto was útil, considere dar uma estrela!
 
 [![GitHub stars](https://img.shields.io/github/stars/maurorisonho/fraud-detection-neuromorphic?style=social)](https://github.com/maurorisonho/fraud-detection-neuromorphic)
 
@@ -1084,4 +1084,4 @@ Agradecimentos especiais a:
 
 ---
 
-**Desenvolvido com e por [Mauro Risonho](https://github.com/maurorisonho)**
+**Deifnvolvido with and for [Mauro Risonho](https://github.com/maurorisonho)**

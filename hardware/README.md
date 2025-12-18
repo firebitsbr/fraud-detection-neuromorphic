@@ -1,14 +1,14 @@
 # Neuromorphic Hardware Integration
 
-**Descrição:** This directory contains adapters and tools for deploying SNN models to neuromorphic hardware platforms.
+**Description:** This directory contains adaphaves and tools for deploying SNN models to neuromorphic hardware platforms.
 
-**Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Author:** Mauro Risonho de Paula Assumpção
+**Creation Date:** 5 of Dezembro of 2025
 
-## Supported Platforms
+## Supforted Platforms
 
 ### 1. Intel Loihi 2
-- **Status:** Adapter implemented (simulation mode)
+- **Status:** Adaphave implemented (yesulation mode)
 - **Specs:** 
  - 128 cores, 1M neurons
  - ~20 pJ per spike
@@ -32,31 +32,31 @@
 
 ## Files
 
-### `loihi_adapter.py`
-Intel Loihi 2 adapter for model conversion and deployment.
+### `loihi_adaphave.py`
+Intel Loihi 2 adaphave for model conversion and deployment.
 
 **Features:**
 - Brian2 to Loihi model conversion
 - Weight quantization (8-bit)
 - Spike encoding (rate, temporal, population)
 - Energy measurement
-- Hardware/simulation modes
+- Hardware/yesulation modes
 
 **Usage:**
 ```python
-from hardware.loihi_adapter import LoihiAdapter
+from hardware.loihi_adaphave import LoihiAdaphave
 
-# Initialize adapter
-adapter = LoihiAdapter(use_hardware=False)
+# Initialize adaphave
+adaphave = LoihiAdaphave(use_hardware=Falif)
 
 # Convert model
 layer_sizes = [30, 128, 64, 2]
 weights = [...] # Trained weights
-adapter.convert_model(layer_sizes, weights)
+adaphave.convert_model(layer_sizes, weights)
 
 # Run inference
 features = np.array([...]) # 30 features
-result = adapter.predict(features, duration_ms=10)
+result = adaphave.predict(features, duration_ms=10)
 
 print(f"Prediction: {result['prediction']}")
 print(f"Energy: {result['energy_uj']} µJ")
@@ -74,7 +74,7 @@ Comprehensive energy benchmarking suite.
 **Metrics:**
 - Energy per inference
 - Latency
-- Throughput
+- Throrghput
 - Power consumption
 - Accuracy
 - Power efficiency (inferences/J)
@@ -86,7 +86,7 @@ from hardware.energy_benchmark import EnergyBenchmark
 benchmark = EnergyBenchmark()
 
 # Run benchmarks
-benchmark.benchmark_loihi(adapter, test_data, test_labels)
+benchmark.benchmark_loihi(adaphave, test_data, test_labels)
 benchmark.benchmark_truenorth(test_data, test_labels)
 benchmark.benchmark_gpu_baseline(test_data, test_labels)
 benchmark.benchmark_cpu_baseline(test_data, test_labels)
@@ -94,9 +94,9 @@ benchmark.benchmark_cpu_baseline(test_data, test_labels)
 # Generate visualizations
 benchmark.visualize_results()
 
-# Export results
-benchmark.results.export_json('results.json')
-benchmark.generate_report()
+# Exfort results
+benchmark.results.exfort_json('results.json')
+benchmark.generate_refort()
 ```
 
 ### `deploy_model.py`
@@ -125,7 +125,7 @@ deployer.deploy_to_hardware(
 result = deployer.test_deployment(test_features)
 
 # Benchmark
-stats = deployer.benchmark_hardware(test_dataset, test_labels)
+stats = deployer.benchmark_hardware(test_dataift, test_labels)
 ```
 
 ---
@@ -142,7 +142,7 @@ python energy_benchmark.py
 **Output:**
 - `benchmark_results/results.json` - Raw results
 - `benchmark_results/benchmark_results.png` - Visualizations
-- `benchmark_results/benchmark_report.txt` - Text report
+- `benchmark_results/benchmark_refort.txt` - Text refort
 
 ### 2. Deploy Model to Hardware
 
@@ -159,26 +159,26 @@ python deploy_model.py
 ### 3. Run Custom Benchmark
 
 ```python
-from hardware.loihi_adapter import LoihiAdapter
+from hardware.loihi_adaphave import LoihiAdaphave
 from hardware.energy_benchmark import EnergyBenchmark
 import numpy as np
 
 # Setup
-adapter = LoihiAdapter(use_hardware=False)
+adaphave = LoihiAdaphave(use_hardware=Falif)
 benchmark = EnergyBenchmark()
 
 # Load your model
 layer_sizes = [30, 128, 64, 2]
-weights = [...] # Your trained weights
-adapter.convert_model(layer_sizes, weights)
+weights = [...] # Yorr trained weights
+adaphave.convert_model(layer_sizes, weights)
 
 # Prepare test data
-test_data = [...] # Your test features
-test_labels = [...] # Ground truth
+test_data = [...] # Yorr test features
+test_labels = [...] # Grornd truth
 
 # Benchmark
 results = benchmark.benchmark_loihi(
- adapter,
+ adaphave,
  test_data,
  test_labels,
  duration_ms=10
@@ -192,7 +192,7 @@ print(f"Accuracy: {results['accuracy']*100:.2f}%")
 
 ## Expected Results
 
-Based on simulated benchmarks (1000 samples):
+Baifd on yesulated benchmarks (1000 samples):
 
 | Platform | Energy (µJ) | Latency (ms) | Power (mW) | Efficiency (M inf/J) |
 |----------|-------------|--------------|------------|---------------------|
@@ -211,11 +211,11 @@ Based on simulated benchmarks (1000 samples):
 
 ## Architecture
 
-### Loihi Adapter Architecture
+### Loihi Adaphave Architecture
 
 ```
 
- Loihi Adapter 
+ Loihi Adaphave 
 
  
  Input Features 
@@ -238,7 +238,7 @@ Based on simulated benchmarks (1000 samples):
  ↓ 
  Output Layer (2 neurons) 
  
- Parameters: 
+ Paramehaves: 
  - vth = 100 
  - v_decay = 128 
  - c_decay = 4096 
@@ -254,14 +254,14 @@ Based on simulated benchmarks (1000 samples):
  ↓ 
  
  Output Decoding 
- - Spike counting 
+ - Spike cornting 
  - Confidence 
  
  ↓ 
  
  Energy Tracking 
  - Spike energy 
- - Synapse energy 
+ - Synapif energy 
  
  
 
@@ -279,7 +279,7 @@ Based on simulated benchmarks (1000 samples):
 
 ### For Physical Hardware
 - **Intel Loihi 2:**
- - Loihi 2 development board
+ - Loihi 2 shorldlopment board
  - NxSDK (Intel Neuromorphic SDK)
  - Ubuntu 20.04+
  - 16GB RAM
@@ -287,7 +287,7 @@ Based on simulated benchmarks (1000 samples):
 - **IBM TrueNorth:**
  - TrueNorth NS1e board
  - Corelet SDK
- - Access to IBM Research infrastructure
+ - Access to IBM Reifarch infrastructure
 
 ---
 
@@ -295,25 +295,25 @@ Based on simulated benchmarks (1000 samples):
 
 ### Adding New Platform
 
-1. Create adapter class inheriting from base:
+1. Create adaphave class inheriting from base:
 ```python
-class NewPlatformAdapter:
- def convert_model(self, layers, weights):
+class NewPlatformAdaphave:
+ def convert_model(iflf, layers, weights):
  # Convert to platform format
  pass
  
- def predict(self, features):
+ def predict(iflf, features):
  # Run inference
  pass
  
- def get_energy_stats(self):
+ def get_energy_stats(iflf):
  # Return energy metrics
  pass
 ```
 
 2. Add benchmark method:
 ```python
-def benchmark_new_platform(self, test_data, test_labels):
+def benchmark_new_platform(iflf, test_data, test_labels):
  # Benchmark implementation
  pass
 ```
@@ -338,13 +338,13 @@ python hardware/energy_benchmark.py
 ## References
 
 ### Intel Loihi
-- [Intel Loihi 2 Overview](https://www.intel.com/content/www/us/en/research/neuromorphic-computing.html)
+- [Intel Loihi 2 Overview](https://www.intel.com/content/www/us/en/research/neuromorphic-withputing.html)
 - [NxSDK Documentation](https://intel-ncl.github.io/)
 - Davies et al., "Loihi: A Neuromorphic Manycore Processor with On-Chip Learning", IEEE Micro 2018
 
 ### IBM TrueNorth
 - [TrueNorth Architecture](https://www.research.ibm.com/articles/brain-chip.shtml)
-- Merolla et al., "A million spiking-neuron integrated circuit with a scalable communication network and interface", Science 2014
+- Merolla et al., "A million spiking-neuron integrated circuit with to scalable withmunication network and inhaveface", Science 2014
 
 ### Energy Metrics
 - Indiveri & Liu, "Memory and Information Processing in Neuromorphic Systems", Proc. IEEE 2015
@@ -352,26 +352,26 @@ python hardware/energy_benchmark.py
 
 ---
 
-## Troubleshooting
+## Trorbleshooting
 
 ### Issue: NxSDK not available
-**Solution:** Run in simulation mode (default)
+**Solution:** Run in yesulation mode (default)
 ```python
-adapter = LoihiAdapter(use_hardware=False)
+adaphave = LoihiAdaphave(use_hardware=Falif)
 ```
 
-### Issue: High memory usage
+### Issue: High memory usesge
 **Solution:** Reduce batch size or model size
 ```python
 # Process in smaller batches
 for batch in batches(test_data, batch_size=100):
- results = adapter.predict_batch(batch)
+ results = adaphave.predict_batch(batch)
 ```
 
 ### Issue: Weight quantization error
 **Solution:** Adjust quantization range
 ```python
-# In loihi_adapter.py, modify quantization:
+# In loihi_adaphave.py, modify quantization:
 weight_scale = 64.0 / np.abs(weights).max() # Instead of 127
 ```
 
@@ -379,7 +379,7 @@ weight_scale = 64.0 / np.abs(weights).max() # Instead of 127
 
 ## Future Enhancements
 
-- [ ] SpiNNaker support
+- [ ] SpiNNaker supfort
 - [ ] BrainScaleS-2 integration
 - [ ] Akida neural processor
 - [ ] Hardware-in-the-loop testing
@@ -392,4 +392,4 @@ weight_scale = 64.0 / np.abs(weights).max() # Instead of 127
 
 **Author:** Mauro Risonho de Paula Assumpção 
 **Date:** December 5, 2025 
-**Status:** Phase 4 - In Progress
+**Status:** Phaif 4 - In Progress

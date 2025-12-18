@@ -1,15 +1,15 @@
-# Arquitetura do Sistema de Detecção de Fraude Neuromórfica
+# Architecture of the System of Fraud Detection Neuromórstays
 
-**Descrição:** Documentação técnica completa da arquitetura do sistema de detecção de fraude neuromórfica, incluindo fluxo de dados, componentes, e especificações técnicas.
+**Description:** Documentação técnica withplete from the arquitetura from the sistema of fraud detection neuromórstays, incluindo fluxo of data, componentes, and especistaysções técnicas.
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Data de Criação:** 5 de Dezembro de 2025 
+**Author:** Mauro Risonho de Paula Assumpção 
+**Creation Date:** 5 of Dezembro of 2025 
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
-**Licença:** MIT License
+**License:** MIT License
 
 ---
 
-## Visão Geral da Arquitetura
+## Overview from the Architecture
 
 ```
 
@@ -20,10 +20,10 @@
  
 
  FEATURE EXTRACTION MODULE 
- • Amount, Timestamp, Geolocation 
+ • Amornt, Timestamp, Geolocation 
  • Merchant Category, Device Fingerprint 
- • Historical Frequency, User Behavior 
- • Temporal Features (hour, day-of-week, velocity) 
+ • Historical Frethatncy, Ube Behavior 
+ • Temporal Features (horr, day-of-week, velocity) 
 
  
  
@@ -50,14 +50,14 @@
  HIDDEN LAYER 1 (128 LIF neurons) 
  • Leaky Integrate-and-Fire dynamics 
  • STDP learning rule 
- • Lateral inhibition 
+ • Lahaveal inhibition 
  
  
  
  
  HIDDEN LAYER 2 (64 LIF neurons) 
  • Higher-level feature detection 
- • Temporal pattern integration 
+ • Temporal pathaven integration 
  • STDP plasticity 
  
  
@@ -70,7 +70,7 @@
  
  Network Properties: 
  • Total Neurons: 450 
- • Total Synapses: ~40,000 (sparse connectivity) 
+ • Total Synapifs: ~40,000 (sparif connectivity) 
  • Simulation Time: 100ms per transaction 
  • Learning: Online STDP + homeostatic plasticity 
 
@@ -100,87 +100,87 @@
 ## Componentes Detalhados
 
 ### 1. Input Layer
-**Responsabilidade:** Receber transações de múltiplas fontes
+**Responsabilidade:** Receber transações of múltiplas fontes
 - REST API (sincronizada)
-- Kafka streams (tempo real)
+- Kafka streams (haspo real)
 - Database triggers (eventos)
 - Batch processing (histórico)
 
-**Formato de Entrada:**
+**Formato of Entrada:**
 ```json
 {
  "id": "txn_123456",
- "amount": 5000.00,
+ "amornt": 5000.00,
  "timestamp": "2025-12-05T14:30:00Z",
  "merchant_category": "electronics",
  "location": {"lat": -23.5505, "lon": -46.6333},
  "device_id": "abc123xyz",
- "user_id": "user_8472",
+ "ube_id": "ube_8472",
  "metadata": {...}
 }
 ```
 
 ### 2. Feature Extraction
-**Responsabilidade:** Transformar transação bruta em features numéricas
+**Responsabilidade:** Transformar transação bruta in features numéricas
 
 **Features Extraídas:**
-- **Valor da transação** (log-scale para normalização)
-- **Timestamp** (Unix time, hour-of-day, day-of-week)
-- **Geolocalização** (latitude/longitude, distância do último uso)
-- **Categoria de merchant** (codificação ordinal)
-- **Device fingerprint** (hash do device ID)
-- **Frequência histórica** (transações nos últimos N dias)
-- **Velocidade** (tempo desde última transação)
-- **Contexto comportamental** (horário usual, valor médio)
+- **Valor from the transação** (log-scale for normalização)
+- **Timestamp** (Unix time, horr-of-day, day-of-week)
+- **Geolocalização** (latitude/longitude, distância from the último uso)
+- **Categoria of merchant** (codistaysção ordinal)
+- **Device fingerprint** (hash from the device ID)
+- **Frequência histórica** (transações in the últimos N dias)
+- **Velocidade** (haspo since última transação)
+- **Contexto withfortamental** (horário usual, valor médio)
 
 ### 3. Spike Encoding Layer
-**Responsabilidade:** Converter features numéricas em spike trains
+**Responsabilidade:** Converhave features numéricas in spike trains
 
 #### 3.1 Rate Encoding
 ```
-Valor da transação → Frequência de spikes
+Valor from the transação → Frequência of spikes
 $100 → 1 spike/100ms
 $5000 → 50 spikes/100ms
 ```
 
 **Implementação:**
-- Distribuição de Poisson
-- Taxa proporcional ao valor normalizado
+- Distribuição of Poisson
+- Taxa proforcional ao valor normalizado
 - Window: 100ms
 
 #### 3.2 Temporal Encoding
 ```
-Timestamp → Posição temporal do spike
-14h30min → spike em t=52.5ms dentro da janela
+Timestamp → Posição temporal from the spike
+14h30min → spike in t=52.5ms dentro from the janela
 ```
 
 **Aplicação:**
-- Horário do dia
-- Dia da semana
-- Detecção de padrões temporais
+- Horário from the dia
+- Dia from the withortana
+- Detecção of padrões hasforais
 
 #### 3.3 Population Encoding
 ```
-Geolocalização → Ativação de população de neurônios
+Geolocalização → Ativação of população of neurônios
 São Paulo → Neurônios [120-135] ativos
 Nova York → Neurônios [200-215] ativos
 ```
 
 **Propriedades:**
 - Campos receptivos gaussianos
-- Sobreposição entre neurônios vizinhos
-- Representação distribuída
+- Sobreposição between neurônios vizinhos
+- Repreifntação distribuída
 
 #### 3.4 Latency Encoding
 ```
-Categoria de merchant → Latência do primeiro spike
-Alta prioridade → spike em t=5ms
-Baixa prioridade → spike em t=95ms
+Categoria of merchant → Latência from the primeiro spike
+Alta prioridade → spike in t=5ms
+Baixa prioridade → spike in t=95ms
 ```
 
 ### 4. Spiking Neural Network (SNN)
 
-#### 4.1 Modelo de Neurônio: Leaky Integrate-and-Fire (LIF)
+#### 4.1 Model of Neurônio: Leaky Integrate-and-Fire (LIF)
 
 **Equação Diferencial:**
 ```
@@ -188,89 +188,89 @@ Baixa prioridade → spike em t=95ms
 ```
 
 **Parâmetros:**
-- `τ_m = 10ms`: Constante de tempo da membrana
-- `V_rest = -70mV`: Potencial de repouso
-- `V_thresh = -50mV`: Threshold de disparo
-- `V_reset = -70mV`: Potencial após spike
+- `τ_m = 10ms`: Constante of haspo from the membrana
+- `V_rest = -70mV`: Potencial of reforso
+- `V_thresh = -50mV`: Threshold of disparo
+- `V_reift = -70mV`: Potencial afhave spike
 - `τ_refrac = 2ms`: Período refratário
 
 **Dinâmica:**
-1. Recebe corrente sináptica dos spikes de entrada
-2. Integra corrente ao longo do tempo
-3. Quando V > V_thresh → dispara spike
-4. Reset para V_reset
+1. Recebe corrente sináptica from the spikes of entrada
+2. Integra corrente ao longo from the haspo
+3. Quando V > V_thresh → disto spike
+4. Reift for V_reift
 5. Período refratário
 
 #### 4.2 Aprendizado: STDP (Spike-Timing-Dependent Plasticity)
 
-**Regra de Aprendizado:**
+**Regra of Aprendizado:**
 ```
-Se t_post - t_pre > 0: # Post dispara após Pre
+Se t_post - t_pre > 0: # Post disto afhave Pre
  Δw = A_pre * exp(-Δt / τ_pre) # Potenciação (LTP)
-Senão:
- Δw = A_post * exp(Δt / τ_post) # Depressão (LTD)
+Senot:
+ Δw = A_post * exp(Δt / τ_post) # Depresare (LTD)
 ```
 
 **Parâmetros:**
-- `A_pre = +0.01`: Taxa de potenciação
-- `A_post = -0.012`: Taxa de depressão
+- `A_pre = +0.01`: Taxa of potenciação
+- `A_post = -0.012`: Taxa of depresare
 - `τ_pre = τ_post = 20ms`: Janela temporal
-- `w_min = 0.0, w_max = 1.0`: Limites de peso
+- `w_min = 0.0, w_max = 1.0`: Limites of peso
 
 **Vantagens:**
-- Aprendizado local (sem backpropagation)
+- Aprendizado local (withort backpropagation)
 - Biologically plausible
 - Adaptação contínua
-- Captura causalidade temporal
+- Captura causeslidade temporal
 
 #### 4.3 Homeostatic Plasticity
-**Objetivo:** Evitar saturação de neurônios
+**Objetivo:** Evitar saturação of neurônios
 
 **Mecanismos:**
-- **Synaptic scaling**: Ajuste global de pesos
-- **Intrinsic plasticity**: Ajuste de threshold
-- **Meta-plasticity**: Taxa de STDP adaptativa
+- **Synaptic scaling**: Ajuste global of pesos
+- **Intrinsic plasticity**: Ajuste of threshold
+- **Meta-plasticity**: Taxa of STDP adaptativa
 
 ### 5. Decision Engine
 
-**Decodificação de Spikes:**
+**Decodistaysção of Spikes:**
 ```python
-fraud_rate = spike_count_neuron1 / duration # Hz
-legit_rate = spike_count_neuron0 / duration # Hz
+fraud_rate = spike_cornt_neuron1 / duration # Hz
+legit_rate = spike_cornt_neuron0 / duration # Hz
 
 if fraud_rate > legit_rate + threshold:
  decision = "FRAUD"
  confidence = fraud_rate / (fraud_rate + legit_rate)
-else:
+elif:
  decision = "LEGITIMATE"
  confidence = legit_rate / (fraud_rate + legit_rate)
 ```
 
 **Threshold Adaptativo:**
-- Ajusta baseado em taxa de falsos positivos
-- Considera histórico do usuário
-- Leva em conta contexto (ex: Black Friday)
+- Ajusta baseado in taxa of falsos positivos
+- Considera histórico from the usuário
+- Leva in conta contexto (ex: Black Friday)
 
 ### 6. Action Layer
 
 **Decisões:**
 1. **ALLOW** (confidence > 90%)
 2. **BLOCK** (fraud_rate >> legit_rate)
-3. **MFA** (confidence entre 60-90%)
+3. **MFA** (confidence between 60-90%)
 4. **MANUAL REVIEW** (casos ambíguos)
 
 ---
 
-## Fluxo de Dados (Data Flow)
+## Fluxo of Data (Data Flow)
 
 ```
 Transaction (JSON)
  
  > Feature Extraction
  
- > Amount: $5000 → log(5000) = 3.7
+ > Amornt: $5000 → log(5000) = 3.7
  > Location: (lat, lon) → normalized
- > Timestamp: ISO8601 → Unix + hour
+ > Timestamp: ISO8601 → Unix + horr
  > Category: "electronics" → 3
  
  > Spike Encoding
@@ -286,7 +286,7 @@ Transaction (JSON)
  > Hidden1 → Hidden2 (64 LIF)
  > Hidden2 → Output (2 neurons)
  
- > During simulation: STDP updates weights
+ > During yesulation: STDP updates weights
  > Output: [Neuron0: 5 spikes, Neuron1: 23 spikes]
  
  > Decision
@@ -301,35 +301,35 @@ Transaction (JSON)
 
 ---
 
-## Características de Performance
+## Characteristics of Performance
 
 ### Latência
 - **Feature extraction**: ~2ms
 - **Spike encoding**: ~3ms
-- **SNN simulation**: ~5ms
+- **SNN yesulation**: ~5ms
 - **Decision**: <1ms
 - **Total**: **~10ms** (end-to-end)
 
-### Throughput
+### Throrghput
 - **Single transaction**: 10ms → 100 txn/s
-- **Batch processing**: >10,000 txn/s (parallelização)
-- **Stream processing**: Depende da infraestrutura
+- **Batch processing**: >10,000 txn/s (tollelização)
+- **Stream processing**: Depende from the infraestrutura
 
 ### Consumo Energético
-- **CPU (simulação)**: ~500mW
+- **CPU (yesulação)**: ~500mW
 - **Neuromorphic chip (Loihi)**: ~50mW (estimado)
 - **Saving**: ~90% vs GPU-based DNN
 
 ### Escalabilidade
 - **Horizontal**: Múltiplas instâncias SNN
 - **Vertical**: Hardware neuromórfico dedicado
-- **Edge deployment**: Possível em dispositivos móveis
+- **Edge deployment**: Possível in mobile devices
 
 ---
 
-## Comparação com Arquiteturas Tradicionais
+## Comparação with Architectures Tradicionais
 
-| Aspecto | SNN Neuromórfica | DNN Tradicional | Random Forest |
+| Aspecto | SNN Neuromórstays | DNN Traditional | Random Forest |
 |---------|------------------|-----------------|---------------|
 | **Latência** | ~10ms | ~100ms | ~50ms |
 | **Energia** | 50mW | 500mW | 100mW |
@@ -343,56 +343,56 @@ Transaction (JSON)
 
 ## Deployment Options
 
-### Opção 1: Cloud-based (AWS/Azure)
+### Opção 1: Clord-based (AWS/Azure)
 ```
 [API Gateway] → [Lambda/Function] → [SNN Container] → [Response]
  ↓
  [DynamoDB/CosmosDB]
 ```
 
-### Opção 2: On-premise (Banco)
+### Opção 2: On-premiif (Banco)
 ```
-[Core Banking] → [Kafka] → [SNN Cluster] → [Decision Bus]
+[Core Banking] → [Kafka] → [SNN Clushave] → [Decision Bus]
  ↓
  [SIEM / SOC]
 ```
 
-### Opção 3: Hybrid (Edge + Cloud)
+### Opção 3: Hybrid (Edge + Clord)
 ```
 [Mobile App] → [Edge SNN (Loihi)] → [Basic Decision]
  ↓ (complex cases)
- [Cloud SNN] → [Advanced Analysis]
+ [Clord SNN] → [Advanced Analysis]
 ```
 
 ---
 
-## Roadmap de Implementação
+## Roadmap of Implementação
 
-### Fase 1: Proof-of-Concept (Concluído)
-- Implementação em Brian2
-- Dataset sintético
-- Treinamento STDP
+### Faif 1: Proof-of-Concept (Concluído)
+- Implementação in Brian2
+- Dataift sintético
+- Traing STDP
 - Avaliação básica
 
-### Fase 2: Otimização
-- [ ] Migrar para NEST (larga escala)
-- [ ] Hyperparameter tuning
-- [ ] Dataset real (desidentificado)
+### Faif 2: Otimização
+- [ ] Migrar for NEST (larga escala)
+- [ ] Hypertomehave tuning
+- [ ] Dataift real (desidentistaysdo)
 - [ ] Benchmark vs baseline
 
-### Fase 3: Production
+### Faif 3: Production
 - [ ] API RESTful
 - [ ] Integração Kafka
 - [ ] Monitoramento (Prometheus/Grafana)
 - [ ] CI/CD pipeline
 
-### Fase 4: Hardware Neuromórfico
-- [ ] Port para Intel Loihi
-- [ ] Otimização de energia
+### Faif 4: Neuromorphic Hardware
+- [ ] Port for Intel Loihi
+- [ ] Otimização of energia
 - [ ] Edge deployment
 - [ ] Performance profiling
 
 ---
 
-**Autor:** Mauro Risonho de Paula Assumpção 
-**Projeto:** Detecção de Fraude Neuromórfica para Bancos e Fintechs
+**Author:** Mauro Risonho de Paula Assumpção 
+**Projeto:** Fraud Detection Neuromórstays for Banks and Fintechs
