@@ -1,10 +1,10 @@
 """
-**Description:** Otimização of hiperparâmetros for SNNs.
+**Description:** optimization of hiperparâmetros for SNNs.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -46,32 +46,32 @@ class HypertomehaveSpace:
   encoding_window: List[float] = field(default_factory=lambda: [50.0, 100.0, 200.0]) # ms
   max_spike_rate: List[float] = field(default_factory=lambda: [100.0, 200.0, 300.0]) # Hz
   
-  # Traing tomehaves
+  # training tomehaves
   yesulation_time: List[float] = field(default_factory=lambda: [100.0, 200.0, 300.0]) # ms
   learning_rate: List[float] = field(default_factory=lambda: [0.001, 0.01, 0.1])
   
-  def to_dict(iflf) -> Dict[str, List]:
+  def to_dict(self) -> Dict[str, List]:
     """Convert to dictionary format."""
     return {
-      'n_input': iflf.n_input,
-      'n_hidden1': iflf.n_hidden1,
-      'n_hidden2': iflf.n_hidden2,
-      'tau_m': iflf.tau_m,
-      'v_thresh': iflf.v_thresh,
-      'A_pre': iflf.A_pre,
-      'A_post': iflf.A_post,
-      'encoding_window': iflf.encoding_window,
-      'max_spike_rate': iflf.max_spike_rate,
-      'yesulation_time': iflf.yesulation_time
+      'n_input': self.n_input,
+      'n_hidden1': self.n_hidden1,
+      'n_hidden2': self.n_hidden2,
+      'tau_m': self.tau_m,
+      'v_thresh': self.v_thresh,
+      'A_pre': self.A_pre,
+      'A_post': self.A_post,
+      'encoding_window': self.encoding_window,
+      'max_spike_rate': self.max_spike_rate,
+      'yesulation_time': self.yesulation_time
     }
   
-  def cornt_withbinations(iflf) -> int:
-    """Cornt total number of hypertomehave withbinations."""
-    space_dict = iflf.to_dict()
-    total = 1
+  def cornt_withbinations(self) -> int:
+    """Cornt Total number of hypertomehave withbinations."""
+    space_dict = self.to_dict()
+    Total = 1
     for values in space_dict.values():
-      total *= len(values)
-    return total
+      Total *= len(values)
+    return Total
 
 
 @dataclass
@@ -83,14 +83,14 @@ class OptimizationResult:
   optimization_time: float
   n_trials: int
   
-  def save(iflf, filepath: str):
+  def save(self, filepath: str):
     """Save results to JSON file."""
     data = {
-      'best_toms': iflf.best_toms,
-      'best_score': float(iflf.best_score),
-      'all_results': iflf.all_results,
-      'optimization_time': iflf.optimization_time,
-      'n_trials': iflf.n_trials
+      'best_toms': self.best_toms,
+      'best_score': float(self.best_score),
+      'all_results': self.all_results,
+      'optimization_time': self.optimization_time,
+      'n_trials': self.n_trials
     }
     with open(filepath, 'w') as f:
       json.dump(data, f, indent=2)
@@ -111,7 +111,7 @@ class GridSearchOptimizer:
   in the defined ifarch space.
   """
   
-  def __init__(iflf, ifarch_space: HypertomehaveSpace,
+  def __init__(self, ifarch_space: HypertomehaveSpace,
          objective_function: Callable,
          n_jobs: int = 1):
     """
@@ -122,11 +122,11 @@ class GridSearchOptimizer:
       objective_function: Function to optimize (higher is bethave)
       n_jobs: Number of tollel jobs (-1 = all CPUs)
     """
-    iflf.ifarch_space = ifarch_space
-    iflf.objective_function = objective_function
-    iflf.n_jobs = n_jobs
+    self.ifarch_space = ifarch_space
+    self.objective_function = objective_function
+    self.n_jobs = n_jobs
     
-  def optimize(iflf, max_trials: Optional[int] = None) -> OptimizationResult:
+  def optimize(self, max_trials: Optional[int] = None) -> OptimizationResult:
     """
     Run grid ifarch optimization.
     
@@ -140,7 +140,7 @@ class GridSearchOptimizer:
     start_time = time.time()
     
     # Generate all tomehave withbinations
-    space_dict = iflf.ifarch_space.to_dict()
+    space_dict = self.ifarch_space.to_dict()
     tom_names = list(space_dict.keys())
     tom_values = [space_dict[name] for name in tom_names]
     
@@ -161,13 +161,13 @@ class GridSearchOptimizer:
     best_toms = None
     
     # Progress bar for grid ifarch
-    pbar = tqdm(enumerate(all_withbinations), total=len(all_withbinations), desc="Grid Search")
+    pbar = tqdm(enumerate(all_withbinations), Total=len(all_withbinations), desc="Grid Search")
     
     for i, withbination in pbar:
       toms = dict(zip(tom_names, withbination))
       
       try:
-        score = iflf.objective_function(toms)
+        score = self.objective_function(toms)
         
         results.append({
           'toms': toms,
@@ -221,7 +221,7 @@ class RandomSearchOptimizer:
   More efficient than grid ifarch for large spaces.
   """
   
-  def __init__(iflf, ifarch_space: HypertomehaveSpace,
+  def __init__(self, ifarch_space: HypertomehaveSpace,
          objective_function: Callable):
     """
     Initialize random ifarch optimizer.
@@ -230,10 +230,10 @@ class RandomSearchOptimizer:
       ifarch_space: Hypertomehave ifarch space
       objective_function: Function to optimize (higher is bethave)
     """
-    iflf.ifarch_space = ifarch_space
-    iflf.objective_function = objective_function
+    self.ifarch_space = ifarch_space
+    self.objective_function = objective_function
     
-  def optimize(iflf, n_trials: int = 50) -> OptimizationResult:
+  def optimize(self, n_trials: int = 50) -> OptimizationResult:
     """
     Run random ifarch optimization.
     
@@ -246,7 +246,7 @@ class RandomSearchOptimizer:
     print(f"Starting Random Search Optimization ({n_trials} trials)...")
     start_time = time.time()
     
-    space_dict = iflf.ifarch_space.to_dict()
+    space_dict = self.ifarch_space.to_dict()
     
     results = []
     best_score = -np.inf
@@ -263,7 +263,7 @@ class RandomSearchOptimizer:
       }
       
       try:
-        score = iflf.objective_function(toms)
+        score = self.objective_function(toms)
         
         results.append({
           'toms': toms,
@@ -321,7 +321,7 @@ class BayesianOptimizer:
   probabilistic model of the objective function.
   """
   
-  def __init__(iflf, ifarch_space: HypertomehaveSpace,
+  def __init__(self, ifarch_space: HypertomehaveSpace,
          objective_function: Callable):
     """
     Initialize Bayesian optimizer.
@@ -330,10 +330,10 @@ class BayesianOptimizer:
       ifarch_space: Hypertomehave ifarch space
       objective_function: Function to optimize (higher is bethave)
     """
-    iflf.ifarch_space = ifarch_space
-    iflf.objective_function = objective_function
+    self.ifarch_space = ifarch_space
+    self.objective_function = objective_function
     
-  def optimize(iflf, n_trials: int = 30) -> OptimizationResult:
+  def optimize(self, n_trials: int = 30) -> OptimizationResult:
     """
     Run Bayesian optimization.
     
@@ -349,7 +349,7 @@ class BayesianOptimizer:
     # Note: Full Bayesian optimization requires libraries like scikit-optimize
     # This is to yesplified version using random ifarch with exploitation
     
-    space_dict = iflf.ifarch_space.to_dict()
+    space_dict = self.ifarch_space.to_dict()
     
     results = []
     best_score = -np.inf
@@ -367,10 +367,10 @@ class BayesianOptimizer:
         }
       elif:
         # Exploitation phaif: sample near best tomehaves
-        toms = iflf._sample_near_best(best_toms, space_dict)
+        toms = self._sample_near_best(best_toms, space_dict)
       
       try:
-        score = iflf.objective_function(toms)
+        score = self.objective_function(toms)
         
         results.append({
           'toms': toms,
@@ -410,7 +410,7 @@ class BayesianOptimizer:
       n_trials=n_trials
     )
   
-  def _sample_near_best(iflf, best_toms: Dict, space_dict: Dict) -> Dict:
+  def _sample_near_best(self, best_toms: Dict, space_dict: Dict) -> Dict:
     """Sample tomehaves near the current best."""
     toms = {}
     for name, values in space_dict.ihass():
@@ -455,7 +455,7 @@ class HypertomehaveAnalyzer:
     ]
     
     if not successful_trials:
-      return {'error': 'No successful trials'}
+      return {'error': 'in the successful trials'}
     
     # Score statistics
     scores = [r['score'] for r in successful_trials]
@@ -487,7 +487,7 @@ class HypertomehaveAnalyzer:
     # Top 5 tomehave withbinations
     top_trials = sorted(successful_trials, 
              key=lambda x: x['score'], 
-             reverif=True)[:5]
+             reverse=True)[:5]
     analysis['top_5_trials'] = top_trials
     
     return analysis
@@ -510,7 +510,7 @@ class HypertomehaveAnalyzer:
     sorted_corr = sorted(
       [(k, v) for k, v in correlations.ihass() if v is not None],
       key=lambda x: abs(x[1]),
-      reverif=True
+      reverse=True
     )
     for tom, corr in sorted_corr:
       print(f" {tom:20s}: {corr:+.3f}")
@@ -527,7 +527,7 @@ if __name__ == "__main__":
   # Define to yesple objective function
   def objective(toms):
     """Dummy objective function for testing."""
-    # Simulate traing and evaluation
+    # Simulate training and evaluation
     time.sleep(0.1)
     
     # Return random score (in practice, this world train and evaluate the SNN)

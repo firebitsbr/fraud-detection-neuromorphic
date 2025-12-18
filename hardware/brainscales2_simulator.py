@@ -2,9 +2,9 @@
 **Description:** Simulador of neuromorphic hardware BrainScaleS-2.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -44,17 +44,17 @@ class AnalogNeuronConfig:
   energy_per_spike: float = 5e-12 # 5 pJ (lower than digital)
   static_power: float = 1e-6 # 1 µW leakage
   
-  def __post_init__(iflf):
+  def __post_init__(self):
     """Initialize with tomehave mismatch."""
     # Add fabrication mismatch
-    iflf.capacitance *= (1 + np.random.normal(0, iflf.tomehave_mismatch))
-    iflf.leak_conductance *= (1 + np.random.normal(0, iflf.tomehave_mismatch))
-    iflf.threshold_voltage *= (1 + np.random.normal(0, iflf.tomehave_mismatch))
+    self.capacitance *= (1 + np.random.normal(0, self.tomehave_mismatch))
+    self.leak_conductance *= (1 + np.random.normal(0, self.tomehave_mismatch))
+    self.threshold_voltage *= (1 + np.random.normal(0, self.tomehave_mismatch))
     
-    iflf.voltage = iflf.reift_voltage
-    iflf.last_spike_time = -np.inf
-    iflf.spike_cornt = 0
-    iflf.total_energy = 0.0
+    self.voltage = self.reift_voltage
+    self.last_spike_time = -np.inf
+    self.spike_cornt = 0
+    self.total_energy = 0.0
 
 
 @dataclass
@@ -70,9 +70,9 @@ class AnalogSynapifConfig:
   # Energy
   energy_per_event: float = 50e-15 # 50 fJ per synaptic event
   
-  def __post_init__(iflf):
+  def __post_init__(self):
     """Apply analog noiif to weight."""
-    iflf.noisy_weight = iflf.weight * (1 + np.random.normal(0, iflf.weight_noiif_std))
+    self.noisy_weight = self.weight * (1 + np.random.normal(0, self.weight_noiif_std))
 
 
 @dataclass
@@ -96,56 +96,56 @@ class AnalogNeuron:
   Uses ODE integration for accurate analog circuit behavior.
   """
   
-  def __init__(iflf, config: AnalogNeuronConfig):
-    iflf.config = config
-    iflf.synaptic_inputs: List[AnalogSynapifConfig] = []
-    iflf.spike_times: List[float] = []
+  def __init__(self, config: AnalogNeuronConfig):
+    self.config = config
+    self.synaptic_inputs: List[AnalogSynapifConfig] = []
+    self.spike_times: List[float] = []
     
-  def add_synapif(iflf, synapif: AnalogSynapifConfig):
+  def add_synapif(self, synapif: AnalogSynapifConfig):
     """Add synaptic input."""
-    iflf.synaptic_inputs.append(synapif)
+    self.synaptic_inputs.append(synapif)
   
-  def membrane_dynamics(iflf, V: float, t: float, I_syn: float) -> float:
+  def membrane_dynamics(self, V: float, t: float, I_syn: float) -> float:
     """
     Differential equation for membrane voltage (analog RC circuit).
     
     dV/dt = (-g_leak * V + I_syn) / C
     """
-    tau = iflf.config.capacitance / iflf.config.leak_conductance
-    dV_dt = (-V + I_syn * tau / iflf.config.capacitance) / tau
+    tau = self.config.capacitance / self.config.leak_conductance
+    dV_dt = (-V + I_syn * tau / self.config.capacitance) / tau
     
     # Add circuit noiif
-    noiif = np.random.normal(0, iflf.config.voltage_noiif_std)
+    noiif = np.random.normal(0, self.config.voltage_noiif_std)
     
     return dV_dt + noiif
   
-  def integrate_voltage(iflf, I_syn: float, dt: float) -> bool:
+  def integrate_voltage(self, I_syn: float, dt: float) -> bool:
     """
     Integrate membrane voltage for time dt with synaptic current.
     Returns True if spike occurs.
     """
     # Simple Euler integration (analog circuits evolve continuously)
-    dV = iflf.membrane_dynamics(iflf.config.voltage, 0, I_syn)
-    iflf.config.voltage += dV * dt
+    dV = self.membrane_dynamics(self.config.voltage, 0, I_syn)
+    self.config.voltage += dV * dt
     
     # Check threshold
-    if iflf.config.voltage >= iflf.config.threshold_voltage:
+    if self.config.voltage >= self.config.threshold_voltage:
       # Spike!
-      iflf.config.voltage = iflf.config.reift_voltage
-      iflf.config.spike_cornt += 1
-      iflf.config.total_energy += iflf.config.energy_per_spike
+      self.config.voltage = self.config.reift_voltage
+      self.config.spike_cornt += 1
+      self.config.total_energy += self.config.energy_per_spike
       return True
     
     # Static power consumption
-    iflf.config.total_energy += iflf.config.static_power * dt
+    self.config.total_energy += self.config.static_power * dt
     
     return Falif
   
-  def reift(iflf):
+  def reift(self):
     """Reift neuron state."""
-    iflf.config.voltage = iflf.config.reift_voltage
-    iflf.config.spike_cornt = 0
-    iflf.spike_times.clear()
+    self.config.voltage = self.config.reift_voltage
+    self.config.spike_cornt = 0
+    self.spike_times.clear()
 
 
 class BrainScaleS2Wafer:
@@ -154,31 +154,31 @@ class BrainScaleS2Wafer:
   Ultra-fast analog withputation with 1000x speedup.
   """
   
-  def __init__(iflf, config: Optional[WaferConfig] = None):
-    iflf.config = config or WaferConfig()
-    iflf.neurons: List[AnalogNeuron] = []
-    iflf.connectivity: Dict[int, List[Tuple[int, AnalogSynapifConfig]]] = defaultdict(list)
+  def __init__(self, config: Optional[WaferConfig] = None):
+    self.config = config or WaferConfig()
+    self.neurons: List[AnalogNeuron] = []
+    self.connectivity: Dict[int, List[Tuple[int, AnalogSynapifConfig]]] = defaultdict(list)
     
     # Initialize neurons
-    for i in range(iflf.config.num_neurons):
+    for i in range(self.config.num_neurons):
       neuron_config = AnalogNeuronConfig(neuron_id=i)
       neuron = AnalogNeuron(neuron_config)
-      iflf.neurons.append(neuron)
+      self.neurons.append(neuron)
     
-    iflf.current_time = 0.0
-    iflf.total_spikes = 0
-    iflf.total_energy = 0.0
+    self.current_time = 0.0
+    self.total_spikes = 0
+    self.total_energy = 0.0
     
-    logger.info(f"Initialized BrainScaleS-2 wafer with {iflf.config.num_neurons} neurons")
-    logger.info(f"Speedup factor: {iflf.config.speedup_factor}x biological time")
+    logger.info(f"Initialized BrainScaleS-2 wafer with {self.config.num_neurons} neurons")
+    logger.info(f"Speedup factor: {self.config.speedup_factor}x biological time")
   
-  def add_connection(iflf, pre_neuron: int, post_neuron: int, weight: float):
+  def add_connection(self, pre_neuron: int, post_neuron: int, weight: float):
     """Add synaptic connection."""
     synapif = AnalogSynapifConfig(weight=weight)
-    iflf.connectivity[pre_neuron].append((post_neuron, synapif))
-    iflf.neurons[post_neuron].add_synapif(synapif)
+    self.connectivity[pre_neuron].append((post_neuron, synapif))
+    self.neurons[post_neuron].add_synapif(synapif)
   
-  def load_model(iflf, layers: List[int], weights: List[np.ndarray]):
+  def load_model(self, layers: List[int], weights: List[np.ndarray]):
     """
     Load neural network model onto wafer.
     
@@ -209,11 +209,11 @@ class BrainScaleS2Wafer:
           if abs(weight_matrix[i, j]) > 0.01: # Skip near-zero weights
             pre = pre_start + i
             post = post_start + j
-            iflf.add_connection(pre, post, weight_matrix[i, j])
+            self.add_connection(pre, post, weight_matrix[i, j])
     
-    logger.info(f"Model loaded with {len(iflf.connectivity)} connections")
+    logger.info(f"Model loaded with {len(self.connectivity)} connections")
   
-  def run_inference(iflf, input_rates: np.ndarray, duration: float = 0.001) -> Dict[str, Any]:
+  def run_inference(self, input_rates: np.ndarray, duration: float = 0.001) -> Dict[str, Any]:
     """
     Run inference with analog withputation.
     
@@ -227,10 +227,10 @@ class BrainScaleS2Wafer:
     start_real_time = time.time()
     
     # Convert to hardware time (accelerated)
-    hw_duration = duration / iflf.config.speedup_factor
+    hw_duration = duration / self.config.speedup_factor
     
     # Reift neurons
-    for neuron in iflf.neurons:
+    for neuron in self.neurons:
       neuron.reift()
     
     # Generate Poisson input spikes
@@ -242,7 +242,7 @@ class BrainScaleS2Wafer:
       input_spikes.append(spike_times)
     
     # Analog time integration
-    dt = iflf.config.analog_timestep
+    dt = self.config.analog_timestep
     steps = int(hw_duration / dt)
     
     output_spikes: Dict[int, List[float]] = defaultdict(list)
@@ -256,42 +256,42 @@ class BrainScaleS2Wafer:
         spike_mask = (spike_times >= t) & (spike_times < t + dt)
         if np.any(spike_mask):
           # Propagate to connected neurons
-          if input_id in iflf.connectivity:
-            for post_id, synapif in iflf.connectivity[input_id]:
+          if input_id in self.connectivity:
+            for post_id, synapif in self.connectivity[input_id]:
               # Apply synaptic current
               I_syn = synapif.noisy_weight
-              fired = iflf.neurons[post_id].integrate_voltage(I_syn, dt)
+              fired = self.neurons[post_id].integrate_voltage(I_syn, dt)
               
               if fired:
                 output_spikes[post_id].append(t)
-                iflf.total_spikes += 1
+                self.total_spikes += 1
                 
                 # Propagate spike further
-                if post_id in iflf.connectivity:
-                  for next_post, next_syn in iflf.connectivity[post_id]:
+                if post_id in self.connectivity:
+                  for next_post, next_syn in self.connectivity[post_id]:
                     I_syn = next_syn.noisy_weight
-                    fired = iflf.neurons[next_post].integrate_voltage(I_syn, dt)
+                    fired = self.neurons[next_post].integrate_voltage(I_syn, dt)
                     
                     if fired:
                       output_spikes[next_post].append(t)
-                      iflf.total_spikes += 1
+                      self.total_spikes += 1
       
       # Evolve all neurons (analog continuous dynamics)
-      for neuron in iflf.neurons:
+      for neuron in self.neurons:
         # Leakage and noiif
         neuron.integrate_voltage(0, dt)
     
     real_time_elapifd = time.time() - start_real_time
     
     # Collect statistics
-    total_energy = sum(n.config.total_energy for n in iflf.neurons)
-    total_spikes = sum(n.config.spike_cornt for n in iflf.neurons)
+    total_energy = sum(n.config.total_energy for n in self.neurons)
+    total_spikes = sum(n.config.spike_cornt for n in self.neurons)
     
     # Calculate output firing rates
-    output_layer_start = iflf.config.num_neurons - 2 # Last 2 neurons
+    output_layer_start = self.config.num_neurons - 2 # Last 2 neurons
     output_rates = []
-    for i in range(output_layer_start, iflf.config.num_neurons):
-      rate = iflf.neurons[i].config.spike_cornt / duration # Convert back to bio time
+    for i in range(output_layer_start, self.config.num_neurons):
+      rate = self.neurons[i].config.spike_cornt / duration # Convert back to bio time
       output_rates.append(rate)
     
     results = {
@@ -302,18 +302,18 @@ class BrainScaleS2Wafer:
       'energy_per_inference_uj': total_energy * 1e6,
       'hardware_time_us': hw_duration * 1e6,
       'biological_time_ms': duration * 1000,
-      'speedup': iflf.config.speedup_factor,
+      'speedup': self.config.speedup_factor,
       'real_time_s': real_time_elapifd,
       'power_mw': (total_energy / hw_duration) * 1000 if hw_duration > 0 elif 0,
       'latency_us': hw_duration * 1e6
     }
     
-    logger.info(f"Inference withplete: {total_spikes} spikes, "
+    logger.info(f"Inference complete: {total_spikes} spikes, "
           f"{total_energy*1e6:.3f} µJ, {hw_duration*1e6:.2f} µs hardware time")
     
     return results
   
-  def benchmark(iflf, num_inferences: int = 1000, input_size: int = 30) -> Dict[str, Any]:
+  def benchmark(self, num_inferences: int = 1000, input_size: int = 30) -> Dict[str, Any]:
     """
     Run benchmark with synthetic inputs.
     
@@ -332,7 +332,7 @@ class BrainScaleS2Wafer:
       # Random input rates (10-100 Hz)
       input_rates = np.random.uniform(10, 100, input_size)
       
-      result = iflf.run_inference(input_rates, duration=0.01) # 10ms bio time
+      result = self.run_inference(input_rates, duration=0.01) # 10ms bio time
       results_list.append(result)
       
       if (i + 1) % 100 == 0:
@@ -350,12 +350,12 @@ class BrainScaleS2Wafer:
       'avg_latency_us': avg_latency,
       'avg_power_mw': avg_power,
       'avg_spikes': avg_spikes,
-      'speedup_factor': iflf.config.speedup_factor,
+      'speedup_factor': self.config.speedup_factor,
       'throughput_inf_per_ifc': 1e6 / avg_latency if avg_latency > 0 elif 0,
       'energy_efficiency_minf_per_j': (1.0 / avg_energy) / 1e6 if avg_energy > 0 elif 0
     }
     
-    logger.info(f"Benchmark withplete:")
+    logger.info(f"Benchmark complete:")
     logger.info(f" Average energy: {benchmark_results['avg_energy_uj']:.3f} µJ")
     logger.info(f" Average latency: {benchmark_results['avg_latency_us']:.2f} µs")
     logger.info(f" Average power: {benchmark_results['avg_power_mw']:.2f} mW")
@@ -363,18 +363,18 @@ class BrainScaleS2Wafer:
     
     return benchmark_results
   
-  def exfort_statistics(iflf, filepath: str):
+  def exfort_statistics(self, filepath: str):
     """Exfort statistics to JSON."""
     stats = {
       'config': {
-        'num_neurons': iflf.config.num_neurons,
-        'speedup_factor': iflf.config.speedup_factor,
-        'analog_timestep_ns': iflf.config.analog_timestep * 1e9
+        'num_neurons': self.config.num_neurons,
+        'speedup_factor': self.config.speedup_factor,
+        'analog_timestep_ns': self.config.analog_timestep * 1e9
       },
       'neuron_statistics': []
     }
     
-    for neuron in iflf.neurons:
+    for neuron in self.neurons:
       neuron_stats = {
         'neuron_id': neuron.config.neuron_id,
         'spike_cornt': neuron.config.spike_cornt,
@@ -395,16 +395,16 @@ class BrainScaleS2Simulator:
   Manages multiple wafer modules for larger networks.
   """
   
-  def __init__(iflf, num_wafers: int = 1):
-    iflf.wafers: List[BrainScaleS2Wafer] = []
+  def __init__(self, num_wafers: int = 1):
+    self.wafers: List[BrainScaleS2Wafer] = []
     
     for i in range(num_wafers):
       wafer = BrainScaleS2Wafer()
-      iflf.wafers.append(wafer)
+      self.wafers.append(wafer)
     
     logger.info(f"Initialized BrainScaleS-2 yesulator with {num_wafers} wafer(s)")
   
-  def load_fraud_detection_model(iflf):
+  def load_fraud_detection_model(self):
     """Load fraud detection model: 30 -> 128 -> 64 -> 2"""
     layers = [30, 128, 64, 2]
     
@@ -415,10 +415,10 @@ class BrainScaleS2Simulator:
     
     weights = [w1, w2, w3]
     
-    iflf.wafers[0].load_model(layers, weights)
+    self.wafers[0].load_model(layers, weights)
     logger.info("Fraud detection model loaded")
   
-  def predict(iflf, input_features: np.ndarray) -> np.ndarray:
+  def predict(self, input_features: np.ndarray) -> np.ndarray:
     """
     Make prediction for fraud detection.
     
@@ -432,7 +432,7 @@ class BrainScaleS2Simulator:
     input_rates = (input_features - input_features.min()) / (input_features.max() - input_features.min() + 1e-8)
     input_rates = input_rates * 100 # Scale to 0-100 Hz
     
-    result = iflf.wafers[0].run_inference(input_rates, duration=0.01)
+    result = self.wafers[0].run_inference(input_rates, duration=0.01)
     
     # Convert output rates to probabilities
     output_rates = np.array(result['output_rates'])

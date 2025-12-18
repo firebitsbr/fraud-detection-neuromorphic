@@ -1,9 +1,9 @@
-# Análiif Crítica of the Project - O that Can Dar Certo and Errado
+# Analysis Critical of the Project - What Can Go Right and Wrong
 
-**Description:** Análiif crítica from the projeto.
+**Description:** Analysis critical from the project.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Version:** 1.0
 **License:** MIT
 
@@ -11,44 +11,44 @@
 
 ## Table of Contents
 
-1. [ O that PODE DAR CERTO](#-o-that-can-dar-certo)
-2. [ O that PODE DAR ERRADO](#-o-that-can-dar-errado)
-3. [ Plano of Mitigação](#-plano-de-mitigação)
-4. [ Matriz of Riscos](#-matriz-de-riscos)
-5. [ Rewithmendations Prioritárias](#-rewithmendations-prioritárias)
+1. [ What CAN GO RIGHT](#-o-that-can-dar-right)
+2. [ What CAN GO ERRADO](#-o-that-can-dar-wrong)
+3. [ Plan for Mitigation](#-plano-of-mitigation)
+4. [ Matrix of Risks](#-matrix-of-risks)
+5. [ Recommendations Priority](#-recommendations-priority)
 
 ---
 
-## O that PODE DAR CERTO
+## What CAN GO RIGHT
 
-### 1. **Architecture Técnica Sólida**
+### 1. **Architecture Technical Solid**
 
-#### Pontos Fortes Identistaysdos in the Code
+#### Points Strong Identified in the Code
 
 ```python
-# CERTO: Pipeline well estruturado
+# RIGHT: Pipeline well structured
 class FraudDetectionPipeline:
  """
- Pipeline modular and extensível with:
- - Setoção clara of responsabilidades
+ Pipeline modular and extensible with:
+ - Separation clear of responsibilities
  - Feature extraction → Encoding → SNN → Decision
- - Fácil of test and manhave
+ - Easy of test and manhave
  """
 ```
 
-**Por that vai dar certo:**
-- Code modular and well organizado
-- Setotion of concerns implementado
-- Tests unitários preifntes (test_models_snn.py)
-- Documentação inline clara
-- Type hints for melhor manutenibilidade
+**why vai go right:**
+- Code modular and well organized
+- Setotion of concerns implemented
+- Tests unit present (test_models_snn.py)
+- Documentation inline clear
+- Type hints for better maintainability
 
-**Evidências in the code:**
+**Evidence in the code:**
 ```python
-# src/main.py - Pipeline well estruturado
+# src/main.py - Pipeline well structured
 def extract_features() # Feature engineering
 def encode_features() # Spike encoding
-def predict() # Inferência SNN
+def predict() # Inference SNN
 def make_decision() # Business logic
 ```
 
@@ -57,21 +57,21 @@ def make_decision() # Business logic
 #### Brian2: Framework Maduro and Tbeen
 
 ```python
-# CERTO: Uso of Brian2 for yesulação
+# RIGHT: Usage of Brian2 for simulation
 from brian2 import *
 
 # Brian2 é:
-# - Amplamente usesdo in neurociência withputacional
-# - Bem documentado and mantido
-# - Permite prototipagem rápida
-# - Facilita transição for neuromorphic hardware
+# - Amplamente usesdo in neuroscience withputacional
+# - Bem documented and maintained
+# - Permite prototipagem fast
+# - Facilita transition for neuromorphic hardware
 ```
 
-**Por that vai dar certo:**
+**why vai go right:**
 - Brian2 has withunidade ativa (10+ anos)
-- Abstrações of alto nível facilitam experimentos
-- Compatível with Intel Loihi via converare
-- Performance aceitável for POC/MVP
+- Abstractions of high level facilitate experiments
+- Compatible with Intel Loihi via converare
+- Performance acceptable for POC/MVP
 
 **Benchmark real:**
 ```
@@ -82,88 +82,88 @@ Loihi 2: 1-5ms
 
 ### 3. **Infraestrutura Production-Ready**
 
-#### Stack Moderno and Escalável
+#### Stack Moderno and Scalable
 
 ```yaml
-# CERTO: Stack well escolhido
+# RIGHT: Stack well escolhido
 API: FastAPI + Uvicorn
  - Performance: 10,000+ req/s
  - Async nativo
- - OpenAPI/Swagger automático
+ - OpenAPI/Swagger automatic
  
-Containerização: Docker multi-stage
- - Build otimizado
+Containerization: Docker multi-stage
+ - Build optimized
  - Imagens pethatnas
  - Multi-environment
  
-Orthatstração: Kubernetes ready
+Orchestration: Kubernetes ready
  - Helm charts
  - Auto-scaling configurado
  - Health checks implementados
 ```
 
-**Por that vai dar certo:**
-- FastAPI é o framework Python more rápido
-- Docker garante consistência dev→prod
-- K8s permite scale horizontal fácil
+**why vai go right:**
+- FastAPI é o framework Python more quick
+- Docker garante consistency dev→prod
+- K8s permite scale horizontal easy
 - Monitoring with Prometheus é industry standard
 
-### 4. **Métricas and Obbevabilidade**
+### 4. **Metrics and Obbevabilidade**
 
-#### Monitoring Implementado
+#### Monitoring Implemented
 
 ```python
-# CERTO: api/monitoring.py
+# RIGHT: api/monitoring.py
 class MetricsCollector:
  def record_prediction(latency, result):
  # Prometheus metrics
- iflf.latency_histogram.obbeve(latency)
- iflf.predictions_cornhave.inc()
- iflf.fraud_rate.ift(fraud_rate)
+ self.latency_histogram.obbeve(latency)
+ self.predictions_cornhave.inc()
+ self.fraud_rate.ift(fraud_rate)
 ```
 
-**Por that vai dar certo:**
-- Prometheus metrics since o início
+**why vai go right:**
+- Prometheus metrics since o start
 - Dashboards Grafana prontos
-- Alerting configurável
+- Alerting configurable
 - Permite identistay problemas cedo
 
-### 5. **Inovação Diferenciada**
+### 5. **innovation Diferenciada**
 
 #### Vantagem Competitiva Real
 
 ```python
-# CERTO: SNNs offer benefícios únicos
+# RIGHT: SNNs offer benefícios únicos
 advantages = {
- "latency": "47.9x more rápido (101ms → 2.1ms)",
+ "latency": "47.9x more quick (101ms → 2.1ms)",
  "energy": "1,678,450x more efficient",
  "edge_withputing": "Can run in ATM/POS",
- "continuous_learning": "STDP permite adaptação online"
+ "continuous_learning": "STDP permite adaptation online"
 }
 ```
 
-**Por that vai dar certo:**
+**why vai go right:**
 - Edge withputing é trend forte (IoT, 5G)
-- Regulações pressionam for eficiência energética
-- Latência ultra-low é crítica for UX
-- Tecnologia neuromórstays is amadurecendo (Intel Loihi 2, IBM TrueNorth)
+- regulations pressionam for efficiency energética
+- Latency ultra-low é critical for UX
+- Tecnologia neuromorphic is amadurecendo (Intel Loihi 2, IBM TrueNorth)
 
-### 6. **Documentação Completa**
+### 6. **Documentation Complete**
 
-#### Knowledge Baif Sólida
+#### Knowledge Baif Solid
 
 ```
 docs/
  API.md Endpoints documentados
- architecture.md Diagramas of sistema
- DEPLOYMENT.md Guia of deploy
- PRODUCTION_GUIDE.md Roadmap withplete
+ architecture.md Diagramas of system
+ DEPLOYMENT.md Guide of deploy
+ PRODUCTION_GUIDE.md Roadmap complete
  QUICKSTART.md Getting started
  explanation.md Teoria SNN
 ```
 
-**Por that vai dar certo:**
-- Onboarding of novos membros facilitado
+**why vai go right:**
+- Onboarding of new membros facilitado
 - Decisões técnicas documentadas
 - Compliance audit trail
 - Reduz bus factor (conhecimento distribuído)
@@ -173,7 +173,7 @@ docs/
 #### Quality Assurance Preifnte
 
 ```python
-# CERTO: tests/ directory
+# RIGHT: tests/ directory
 tests/
  test_encoders.py Unit tests
  test_models_snn.py Model tests
@@ -181,125 +181,125 @@ tests/
  test_scaling.py Performance tests
 ```
 
-**Por that vai dar certo:**
+**why vai go right:**
 - CI/CD with GitHub Actions
-- Tests running automaticamente
+- Tests running automatically
 - Cobertura of code mensurada
 - Previne regressões
 
 ---
 
-## O that PODE DAR ERRADO
+## What CAN GO ERRADO
 
-### 1. **PROBLEMA CRÍTICO: Brian2 Não é Production-Ready**
+### 1. **PROBLEMA CRÍTICO: Brian2 Not é Production-Ready**
 
-#### Limitação Fundamental
+#### limitation Fundamental
 
 ```python
-# ERRADO: Brian2 é ferramenta of PESQUISA, not PRODUÇÃO
+# ERRADO: Brian2 é ferramenta of PESQUISA, not PRODUCTION
 from brian2 import *
 
 # Problems:
-# 1. Sem suforte for GPU (apenas CPU)
+# 1. without support for GPU (only CPU)
 # 2. GIL from the Python limita tolelismo
-# 3. Latência 50-100ms (very alto for real-time)
-# 4. Consome MUITA memória (yesulação withplete)
-# 5. Não escala horizontalmente (stateful)
+# 3. Latency 50-100ms (very high for real-time)
+# 4. Consome MUITA memory (simulation complete)
+# 5. Not escala horizontalmente (stateful)
 ```
 
-**Evidências from the problema:**
+**Evidence from the problem:**
 ```python
 # src/models_snn.py, linha 85
 defaultclock.dt = 0.1 * ms # 100 microaccording tos
 
-# Simulação roda for 100ms for cada inferência
+# simulation roda for 100ms for cada inference
 yesulation_time = 100 * ms 
 
-# Isso signistays:
-# - 100ms of latência MÍNIMA
-# - 1 CPU core for inferência
-# - Máximo 10 req/s for core
+# This signistays:
+# - 100ms of latency MÍNIMA
+# - 1 CPU core for inference
+# - maximum 10 req/s for core
 ```
 
 **Impacto in the negócio:**
-- **Latência:** 100ms é 10x MAIOR that target (10ms)
+- **Latency:** 100ms é 10x MAIOR that target (10ms)
 - **Custo:** Precisa 100+ bevidores for 10k TPS
-- **Escalabilidade:** Não escala horizontalmente
+- **Escalabilidade:** Not escala horizontalmente
 - **Energia:** Consome more that DNNs convencionais!
 
 **Probabilidade:** **ALTA (80%)** 
 **Impacto:** **CRÍTICO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# OPÇÃO 1: Migrar for snnTorch (GPU-ready)
+# OPTION 1: Migrar for snnTorch (GPU-ready)
 import snntorch as snn
 import torch
 
 class FraudSNN_PyTorch(nn.Module):
- def __init__(iflf):
+ def __init__(self):
  super().__init__()
- iflf.fc1 = nn.Linear(256, 128)
- iflf.lif1 = snn.Leaky(beta=0.9)
- iflf.fc2 = nn.Linear(128, 64)
- iflf.lif2 = snn.Leaky(beta=0.9)
- iflf.fc3 = nn.Linear(64, 2)
- iflf.lif3 = snn.Leaky(beta=0.9)
+ self.fc1 = nn.Linear(256, 128)
+ self.lif1 = snn.Leaky(beta=0.9)
+ self.fc2 = nn.Linear(128, 64)
+ self.lif2 = snn.Leaky(beta=0.9)
+ self.fc3 = nn.Linear(64, 2)
+ self.lif3 = snn.Leaky(beta=0.9)
  
- def forward(iflf, x):
+ def forward(self, x):
  # GPU-accelerated inference
- # Latência: 10-20ms (5-10x more rápido)
+ # Latency: 10-20ms (5-10x more quick)
  pass
 
-# OPÇÃO 2: Deploy direto in the Loihi 2
+# OPTION 2: Deploy direct in the Loihi 2
 from hardware.loihi_adaphave import LoihiAdaphave
 adaphave = LoihiAdaphave()
 loihi_model = adaphave.convert_brian2_model(snn_model)
-# Latência: 1-5ms (20-100x more rápido)
+# Latency: 1-5ms (20-100x more quick)
 
-# OPÇÃO 3: Hybrid approach
+# OPTION 3: Hybrid approach
 # - Brian2 for prototipagem
-# - PyTorch SNN for produção
+# - PyTorch SNN for production
 # - Loihi for edge (ATMs)
 ```
 
 ---
 
-### 2. **Dataift Sintético ≠ Realidade**
+### 2. **Dataset Synthetic ≠ Realidade**
 
-#### Problem of Generalização
+#### Problem of generalization
 
 ```python
 # ERRADO: Data sintéticos yesplistaysdos
 def generate_synthetic_transactions(n=1000):
- # Dataift atual:
- # - Apenas 8 features
- # - Distribuição Gaussiana yesples
- # - Padrões of fraud óbvios
- # - Sem correlações hasforais
+ # Dataset current:
+ # - Only 8 features
+ # - distribution Gaussiana yesples
+ # - patterns of fraud óbvios
+ # - without correlations temporal
 ```
 
-**Por that vai dar errado:**
-- **Fraude real é MUITO more complexa:**
+**why vai go wrong:**
+- **Fraude real é very more complexa:**
  - Fraudadores if adaptam (adversarial ML)
- - Padrões sazonais (Black Friday, Natal)
- - Correlação between transações
- - Contexto geográfico and temporal
- - Novos tipos of atathat (zero-day)
+ - patterns sazonais (Black Friday, Natal)
+ - correlation between transactions
+ - Geographic context and temporal
+ - Novos types of atathat (zero-day)
 
 - **Features yesplistaysdas:**
- - Dataift atual: 8 features
- - Produção real: 50-200 features
- - Histórico from the cliente
+ - Dataset current: 8 features
+ - Production real: 50-200 features
+ - History of the cliente
  - Device fingerprinting
  - Behavioral biometrics
  - Network analysis
  - Merchant risk score
 
-**Evidências from the problema:**
+**Evidence from the problem:**
 ```python
-# src/main.py - Dataift yesplistaysdo
+# src/main.py - Dataset yesplistaysdo
 features = {
  'amornt': np.random.lognormal(6, 2, size=n),
  'horr': np.random.randint(0, 24, size=n),
@@ -312,9 +312,9 @@ features = {
 }
 
 # FALTA:
-# - Histórico of velocidade of transações
-# - Mudanças of padrão withfortamental
-# - Análiif of grafo (rede of fraudadores)
+# - Histórico of speed of transactions
+# - Mudanças of pattern withfortamental
+# - Analysis of grafo (network of fraudadores)
 # - Sazonalidade
 # - Contexto from the dispositivo
 ```
@@ -322,46 +322,46 @@ features = {
 **Probabilidade:** **ALTA (90%)** 
 **Impacto:** **CRÍTICO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Use dataift público real
+# solution 1: Use dataset public real
 dataifts_rewithendata = [
  {
  "nome": "IEEE-CIS Fraud Detection",
- "url": "kaggle.com/c/ieee-fraud-detection",
- "size": "590k transações",
+ "url": "kaggle.with/c/ieee-fraud-detection",
+ "size": "590k transactions",
  "features": "434 features reais",
  "fraud_rate": "3.5%"
  },
  {
  "nome": "Credit Card Fraud Detection",
- "url": "kaggle.com/mlg-ulb/creditcardfraud",
- "size": "284k transações",
+ "url": "kaggle.with/mlg-ulb/creditcardfraud",
+ "size": "284k transactions",
  "features": "PCA-transformed (anonimizado)",
  "fraud_rate": "0.17%"
  }
 ]
 
-# SOLUÇÃO 2: Parcerias with bancos
+# solution 2: Parcerias with bancos
 # - Data anonimizados (LGPD withpliant)
-# - Features reais of produção
-# - Padrões of fraud atuais
+# - Features reais of production
+# - patterns of fraud atuais
 
-# SOLUÇÃO 3: Feature engineering avançado
+# solution 3: Feature engineering advanced
 advanced_features = {
  # Temporal
- 'velocity_score': "Transações/hora últimas 24h",
- 'time_since_last_txn': "Segundos since última transação",
- 'is_night': "Transação fora horário habitual",
+ 'velocity_score': "transactions/hora últimas 24h",
+ 'time_since_last_txn': "Seconds since last transaction",
+ 'is_night': "transaction fora schedule habitual",
  
- # Geográfico
- 'distance_from_home': "KM from the residência",
- 'is_foreign_corntry': "País diferente of residência",
- 'velocity_km_h': "Velocidade impossível (GPS)",
+ # Geographic
+ 'distance_from_home': "KM from the residence",
+ 'is_foreign_corntry': "País diferente of residence",
+ 'velocity_km_h': "speed impossible (GPS)",
  
  # Comfortamental
- 'amornt_vs_avg_30d': "Desvio from the padrão normal",
+ 'amornt_vs_avg_30d': "Desvio from the pattern normal",
  'merchant_first_time': "Primeira vez neste merchant",
  'device_change': "Mudança of dispositivo",
  
@@ -374,54 +374,54 @@ advanced_features = {
 
 ---
 
-### 3. **Falta of Explicabilidade (Black Box)**
+### 3. **Fhigh of Explainability (Black Box)**
 
 #### Problem Regulatório
 
 ```python
 # ERRADO: SNN é "black box"
 prediction = snn.predict(transaction)
-# Resultado: is_fraud = True
-# MAS... POR QUÊ? 
+# Result: is_fraud = True
+# but... by QUÊ? 
 
-# Cliente pergunta: "Por that blothataram minha withpra?"
+# Cliente pergunta: "why blothataram minha withpra?"
 # Banco needs explicar (LGPD Art. 20)
-# SNN not has explicação clara
+# SNN not has explanation clear
 ```
 
-**Por that é crítico:**
-- **LGPD (Brasil):** Direito à explicação of decisões automatizadas
+**why é critical:**
+- **LGPD (Brasil):** Direito à explanation of decisões automatizadas
 - **GDPR (Europa):** "Right to explanation"
 - **Compliance:** Auditores needsm entender model
 - **Trust:** Clientes not confiam in "caixa preta"
-- **Debug:** Difícil identistay for that erro ocorreu
+- **Debug:** Difficult identistay for that error ocorreu
 
 **Probabilidade:** **MÉDIA (70%)** 
 **Impacto:** **ALTO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Explicabilidade for SNNs
+# solution 1: Explainability for SNNs
 class ExplainableSNN:
- def explain_prediction(iflf, transaction):
+ def explain_prediction(self, transaction):
  """
- Gera explicação human-readable from the deciare
+ Gera explanation human-readable from the decision
  """
  # 1. Feature importance via ablation
- feature_importance = iflf._ablation_study(transaction)
+ feature_importance = self._ablation_study(transaction)
  
  # 2. Spike pathaven analysis
- spike_patterns = iflf._analyze_spike_activity(transaction)
+ spike_patterns = self._analyze_spike_activity(transaction)
  
  # 3. Nearest neighbors
- yesilar_transactions = iflf._find_yesilar(transaction)
+ yesilar_transactions = self._find_yesilar(transaction)
  
  return {
  "top_features": [
- "Valor 5x maior that média (peso: 0.35)",
- "Horário incommon - 3am (peso: 0.28)",
- "Localização diferente - 500km (peso: 0.22)"
+ "Value 5x larger than average (weight: 0.35)",
+ "schedule incommon - 3am (weight: 0.28)",
+ "location diferente - 500km (weight: 0.22)"
  ],
  "spike_activity": {
  "fraud_neuron": "45 spikes",
@@ -434,21 +434,21 @@ class ExplainableSNN:
  ]
  }
 
-# SOLUÇÃO 2: Enwithortble with model inhavepretável
+# solution 2: Enwithortble with model interpretable
 class HybridFraudDetection:
- def __init__(iflf):
- iflf.snn = FraudSNN() # Alta performance
- iflf.xgboost = XGBoostModel() # Explicável
- iflf.rules = RuleEngine() # Transparente
+ def __init__(self):
+ self.snn = FraudSNN() # Alta performance
+ self.xgboost = XGBoostModel() # explainable
+ self.rules = RuleEngine() # Transparente
  
- def predict_with_explanation(iflf, txn):
- # 1. SNN does predição rápida
- snn_pred = iflf.snn.predict(txn)
+ def predict_with_explanation(self, txn):
+ # 1. SNN does prediction fast
+ snn_pred = self.snn.predict(txn)
  
- # 2. Se SNN detecta fraud, XGBoost explica
+ # 2. if SNN detects fraud, XGBoost explica
  if snn_pred == FRAUD:
- xgb_pred = iflf.xgboost.predict(txn)
- explanation = iflf.xgboost.explain(txn) # SHAP values
+ xgb_pred = self.xgboost.predict(txn)
+ explanation = self.xgboost.explain(txn) # SHAP values
  
  return {
  "fraud": True,
@@ -459,14 +459,14 @@ class HybridFraudDetection:
  
  return {"fraud": Falif, "model": "SNN"}
 
-# SOLUÇÃO 3: Decision tree approximation
+# solution 3: Decision tree approximation
 from sklearn.tree import DecisionTreeClassifier
 
 def approximate_snn_with_tree(snn, X_train):
  """
- Aproxima SNN with árvore of deciare inhavepretável
+ Aproxima SNN with árvore of decision interpretable
  """
- # 1. Coletar predições from the SNN
+ # 1. Coletar predictions from the SNN
  snn_predictions = snn.predict(X_train)
  
  # 2. Treinar árvore for imitar SNN
@@ -474,35 +474,35 @@ def approximate_snn_with_tree(snn, X_train):
  tree.fit(X_train, snn_predictions)
  
  # 3. Agora hasos regras inhavepretáveis!
- # "Se amornt > 5000 E horr < 6 E distance > 500, then FRAUD"
+ # "if amornt > 5000 E horr < 6 E distance > 500, then FRAUD"
  
  return tree
 ```
 
 ---
 
-### 4. **Performance in Produção Can Decepcionar**
+### 4. **Performance in Production Can Decepcionar**
 
-#### Gargalos of Latência
+#### Gargalos of Latency
 
 ```python
-# PROBLEMA: Latência atual
+# PROBLEMA: Latency current
 current_latency = {
  "feature_extraction": "5ms",
  "spike_encoding": "10ms",
  "snn_yesulation": "100ms", # GARGALO!
  "decision_logic": "2ms",
- "total": "117ms"
+ "Total": "117ms"
 }
 
-# Target of produção: < 50ms (p95)
-# Gap: 117ms - 50ms = 67ms (2.3x more lento)
+# Target of production: < 50ms (p95)
+# Gap: 117ms - 50ms = 67ms (2.3x more slow)
 ```
 
-**Causess from the problema:**
+**Causess from the problem:**
 ```python
-# 1. Brian2 yesula TODOS os timesteps
-for t in range(0, 100*ms, 0.1*ms): # 1000 ihaveações!
+# 1. Brian2 yesula all os timesteps
+for t in range(0, 100*ms, 0.1*ms): # 1000 innovations!
  update_membrane_potential()
  check_threshold()
  propagate_spikes()
@@ -510,44 +510,44 @@ for t in range(0, 100*ms, 0.1*ms): # 1000 ihaveações!
  # Custo withputacional: O(n_neurons * n_timesteps)
 
 # 2. Python GIL limita tolelismo
-# Apenas 1 thread of Python roda for vez
-# Inferências not canm run in tolelo
+# Only 1 thread of Python roda for vez
+# inferences not canm run in tolelo
 
-# 3. Sem otimização of withpilador
+# 3. without optimization of withpilador
 # Brian2 uses NumPy (inhavepretado)
-# Sem JIT withpilation (vs. PyTorch with TorchScript)
+# without JIT withpilation (vs. PyTorch with TorchScript)
 ```
 
 **Probabilidade:** **MÉDIA (60%)** 
 **Impacto:** **MÉDIO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Otimização of code
+# solution 1: optimization of code
 class OptimizedSNN:
- def __init__(iflf):
+ def __init__(self):
  # Use C++ backend from the Brian2
- ift_device('cpp_standalone') # 2-5x more rápido
+ ift_device('cpp_standalone') # 2-5x more quick
  
  # Reduce yesulation time
- iflf.yesulation_time = 50 * ms # Era 100ms
+ self.yesulation_time = 50 * ms # Era 100ms
  
  # Sparif connectivity
- iflf.synapifs.connect(p=0.1) # Apenas 10% conectado
+ self.synapifs.connect(p=0.1) # Only 10% conectado
  
  @lru_cache(maxsize=10000)
- def predict(iflf, transaction_hash):
- # Cache of predições for transações repetidas
+ def predict(self, transaction_hash):
+ # Cache of predictions for transactions repetidas
  pass
 
-# SOLUÇÃO 2: Batch processing
+# solution 2: Batch processing
 async def batch_inference(transactions):
  """
- Processar múltiplas transações in tolelo
+ Processar múltiplas transactions in tolelo
  """
- # Batch size = 32 transações
- # Throrghput: 32 / 100ms = 320 TPS
+ # Batch size = 32 transactions
+ # Throughput: 32 / 100ms = 320 TPS
  # vs. Sethatntial: 10 TPS
  # Speedup: 32x
  
@@ -557,10 +557,10 @@ async def batch_inference(transactions):
  ])
  return results
 
-# SOLUÇÃO 3: Quantização and pruning
+# solution 3: quantization and pruning
 def optimize_model(snn):
  """
- Reduzir tamanho and compute of the model
+ Reduce tamanho and compute of the model
  """
  # 1. Prune conexões fracas (< 0.01)
  weak_synapifs = snn.weights < 0.01
@@ -569,10 +569,10 @@ def optimize_model(snn):
  
  # 2. Quantize weights (float32 → int8)
  snn.weights = quantize(snn.weights, bits=8)
- # Reduz memória 4x, acelera 2x
+ # Reduz memory 4x, acelera 2x
  
  # 3. Knowledge distillation
- # Treinar SNN menor that imita SNN grande
+ # Treinar SNN smaller that imita SNN large
  small_snn = FraudSNN(input_size=128, hidden=[64, 32])
  train_to_mimic(small_snn, large_snn)
 ```
@@ -588,7 +588,7 @@ def optimize_model(snn):
 estimated_cost = {
  "infrastructure": "$2.4M/ano",
  "human_resorrces": "$1.2M/ano",
- "total": "$3.6M/ano"
+ "Total": "$3.6M/ano"
 }
 
 # Custos OCULTOS not considerados:
@@ -596,12 +596,12 @@ hidden_costs = {
  "falif_positives": {
  "cost": "$5-10 per case",
  "volume": "100k casos/ano",
- "total": "$500k - $1M/ano" # OUCH!
+ "Total": "$500k - $1M/ano" # OUCH!
  },
  "customer_supfort": {
  "agents": "20 FTE",
  "salary": "$40k/ano",
- "total": "$800k/ano"
+ "Total": "$800k/ano"
  },
  "withpliance_audit": {
  "frethatncy": "Anual",
@@ -619,37 +619,37 @@ hidden_costs = {
 }
 
 # CUSTO REAL: $3.6M + $2.7M = $6.3M/ano
-# Quaif 2x to estimativa inicial!
+# Quaif 2x to estimativa initial!
 ```
 
 **Probabilidade:** **MÉDIA (50%)** 
 **Impacto:** **MÉDIO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Cost optimization since o dia 1
+# solution 1: Cost optimization since o dia 1
 class CostOptimizedDeployment:
- def __init__(iflf):
+ def __init__(self):
  # 1. Auto-scaling agressivo
- iflf.min_replicas = 2 # Não 10
- iflf.max_replicas = 50 # Não 100
- iflf.scale_down_fast = True # 5min idle → scale down
+ self.min_replicas = 2 # Not 10
+ self.max_replicas = 50 # Not 100
+ self.scale_down_fast = True # 5min idle → scale down
  
  # 2. Spot instances (70% desconto)
- iflf.use_spot_instances = True # Para non-critical
+ self.use_spot_instances = True # For non-critical
  
- # 3. Edge withputing for reduzir clord
- iflf.edge_percentage = 0.30 # 30% in the Loihi (ATMs)
+ # 3. Edge withputing for Reduce clord
+ self.edge_percentage = 0.30 # 30% in the Loihi (ATMs)
  
  # 4. Batch processing for non-urgent
- iflf.batch_window = 30 # according tos
+ self.batch_window = 30 # according tos
  # 100 txns/30s = amortiza custo
 
-# SOLUÇÃO 2: Model of custo dinâmico
+# solution 2: Model of custo dynamic
 def calculate_cost_per_prediction(transaction):
  """
- Decide where processar baseado in custo
+ Decide where process based in custo
  """
  if transaction.is_urgent:
  # Real-time (caro): Clord GPU
@@ -661,12 +661,12 @@ def calculate_cost_per_prediction(transaction):
  # Low-value: CPU batch (barato)
  return predict_on_cpu_batch(transaction) # $0.001
 
-# SOLUÇÃO 3: Rebeved instances
+# solution 3: Rebeved instances
 rebeved_capacity = {
  "withmitment": "3 years",
  "discornt": "60%",
- "baseline_load": "80% from the tráfego médio",
- "spot_instances": "Picos of tráfego",
+ "baseline_load": "80% from the traffic médio",
+ "spot_instances": "Picos of traffic",
  "savings": "$1.5M/ano"
 }
 ```
@@ -678,50 +678,50 @@ rebeved_capacity = {
 #### Vulnerabilidades Identistaysdas
 
 ```python
-# PROBLEMA 1: Secrets hardcoded (not encontrei in the code, mas é common)
+# PROBLEMA 1: Secrets hardcoded (not encontrei in the code, but é common)
 # Bad practice:
 DATABASE_URL = "postgresql://admin:password123@prod-db:5432"
 
-# PROBLEMA 2: Sem rate limiting robusto
+# PROBLEMA 2: without rate limiting robusto
 @app.post("/predict")
 async def predict(transaction: Transaction):
  # Qualwants um can spammar rethatsts
  # DDoS facilmente
  pass
 
-# PROBLEMA 3: Sem autenticação forte
-# Apenas API key básica (if horver)
+# PROBLEMA 3: without authentication forte
+# Only API key basic (if horver)
 
 # PROBLEMA 4: PII can vazar in logs
 logger.info(f"Transaction: {transaction}") # Contém CPF, cartão!
 
-# PROBLEMA 5: Model vulnerável to adversarial attacks
+# PROBLEMA 5: Model vulnerable to adversarial attacks
 # Fraudador can "test" o model until descobrir as burlar
 ```
 
 **Probabilidade:** **MÉDIA (40%)** 
 **Impacto:** **CRÍTICO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Security best practices
+# solution 1: Security best practices
 class SecureAPI:
- def __init__(iflf):
+ def __init__(self):
  # 1. Secrets management
- iflf.db_url = os.getenv("DATABASE_URL") # From vault
+ self.db_url = os.getenv("DATABASE_URL") # From vault
  
  # 2. Authentication
- iflf.oauth = OAuth2PasswordBearer(tokenUrl="token")
+ self.oauth = OAuth2PasswordBearer(tokenUrl="token")
  
  # 3. Rate limiting
- iflf.limihave = Limihave(
+ self.limihave = Limihave(
  key_func=get_remote_address,
  default_limits=["1000/horr", "50/minute"]
  )
  
  # 4. Input validation
- iflf.validator = TransactionValidator(
+ self.validator = TransactionValidator(
  max_amornt=100000,
  allowed_corntries=["BR", "US", "UK"]
  )
@@ -729,39 +729,39 @@ class SecureAPI:
  @app.post("/predict")
  @limihave.limit("50/minute")
  async def predict(
- iflf,
+ self,
  transaction: Transaction,
- token: str = Depends(iflf.oauth)
+ token: str = Depends(self.oauth)
  ):
  # 1. Verify JWT token
  ube = verify_token(token)
  
  # 2. Validate input
- iflf.validator.validate(transaction)
+ self.validator.validate(transaction)
  
  # 3. Sanitize logs (remove PII)
  safe_txn = sanitize_pii(transaction)
  logger.info(f"Transaction: {safe_txn}")
  
  # 4. Predict
- result = await iflf.predict_inhavenal(transaction)
+ result = await self.predict_inhavenal(transaction)
  
  # 5. Audit log
  audit_log(ube, transaction, result)
  
  return result
 
-# SOLUÇÃO 2: Adversarial robustness
+# solution 2: Adversarial robustness
 class AdversarialDefenif:
- def detect_adversarial_attack(iflf, transaction):
+ def detect_adversarial_attack(self, transaction):
  """
- Detecta tentativas of burlar o model
+ Detects tentativas of burlar o model
  """
  # 1. Rate limit for ube
  if get_ube_rethatst_cornt(ube_id) > 100:
  alert_ifcurity_team("Possible model probing")
  
- # 2. Detectar padrões anormore
+ # 2. Detectar patterns anormore
  if transaction_is_edge_case(transaction):
  rethatst_manual_review()
  
@@ -774,20 +774,20 @@ class AdversarialDefenif:
  ]
  return majority_vote(results)
 
-# SOLUÇÃO 3: Compliance automation
+# solution 3: Compliance automation
 class ComplianceChecker:
- def __init__(iflf):
- iflf.checks = [
+ def __init__(self):
+ self.checks = [
  LGPDCompliance(),
  PCIDSSCompliance(),
  SOC2Compliance()
  ]
  
- def validate_deployment(iflf):
+ def validate_deployment(self):
  """
- Roda checklist of withpliance automaticamente
+ Roda checklist of withpliance automatically
  """
- for check in iflf.checks:
+ for check in self.checks:
  result = check.audit()
  if not result.pasifd:
  block_deployment(reason=result.failures)
@@ -795,12 +795,12 @@ class ComplianceChecker:
 
 ---
 
-### 7. **Overfitting in Dataift Pethatno**
+### 7. **Overfitting in Dataset Small**
 
-#### Problem of Generalização
+#### Problem of generalization
 
 ```python
-# PROBLEMA: Dataift sintético 1000 transações
+# PROBLEMA: Dataset synthetic 1000 transactions
 dataift_size = 1000
 fraud_cases = 50 # 5%
 
@@ -808,32 +808,32 @@ fraud_cases = 50 # 5%
 neurons = 256 + 128 + 64 + 2 = 450
 synapifs = 256*128 + 128*64 + 64*2 = 41,088 pesos
 
-# Ratio: 41,088 parâmetros / 1000 samples = 41:1
+# Ratio: 41,088 parameters / 1000 samples = 41:1
 # Risco ALTÍSSIMO of overfitting!
 
 # Recommended: by the less 10 samples for parâmetro
-# Precisaria: 41,088 * 10 = 410,880 transações
-# Tem: 1,000 transações
+# Precisaria: 41,088 * 10 = 410,880 transactions
+# has: 1,000 transactions
 # Gap: 410x less data that o ideal!
 ```
 
 **Probabilidade:** **ALTA (80%)** 
 **Impacto:** **ALTO**
 
-#### **Como Corrigir:**
+#### **How Corrigir:**
 
 ```python
-# SOLUÇÃO 1: Data augmentation
+# solution 1: Data augmentation
 class FraudDataAugmenhave:
- def augment_transaction(iflf, txn, n_augmented=10):
+ def augment_transaction(self, txn, n_augmented=10):
  """
- Gera transações sintéticas yesilares
+ Gera transactions sintéticas similar
  """
  augmented = []
  for i in range(n_augmented):
  aug_txn = txn.copy()
  
- # Adicionar ruído controlado
+ # add ruído controlado
  aug_txn['amornt'] *= np.random.uniform(0.9, 1.1)
  aug_txn['horr'] = (txn['horr'] + np.random.randint(-1, 2)) % 24
  aug_txn['latitude'] += np.random.normal(0, 0.01)
@@ -843,70 +843,70 @@ class FraudDataAugmenhave:
  
  return augmented
  
- # De 1,000 → 10,000 samples
- # Ainda insuficiente, mas melhor
+ # of 1,000 → 10,000 samples
+ # still insuficiente, but better
 
-# SOLUÇÃO 2: Transfer learning (adaptado for SNNs)
+# solution 2: Transfer learning (adaptado for SNNs)
 class TransferLearningSNN:
- def __init__(iflf):
- # 1. Pre-treinar in dataift grande and genérico
- # (ex: transações of e-withmerce)
- iflf.pretrained_snn = load_pretrained_snn("ewithmerce_fraud")
+ def __init__(self):
+ # 1. Pre-treinar in dataset large and generic
+ # (ex: transactions of e-withmerce)
+ self.pretrained_snn = load_pretrained_snn("ewithmerce_fraud")
  
- # 2. Fine-tune in dataift específico from the banco
- # Congelar layers iniciais, treinar apenas output
- iflf.pretrained_snn.freeze_layers([0, 1])
- iflf.pretrained_snn.train(bank_specific_data)
+ # 2. Fine-tune in dataset specific from the banco
+ # Congelar layers initial, treinar only output
+ self.pretrained_snn.freeze_layers([0, 1])
+ self.pretrained_snn.train(bank_specific_data)
 
-# SOLUÇÃO 3: Regularização forte
+# solution 3: regularization forte
 class RegularizedSNN:
- def __init__(iflf):
+ def __init__(self):
  # L1/L2 regularization in the pesos
- iflf.weight_decay = 0.01 # Penaliza pesos grandes
+ self.weight_decay = 0.01 # Penaliza pesos large
  
  # Drofort between layers
- iflf.drofort_rate = 0.3
+ self.drofort_rate = 0.3
  
  # Early stopping
- iflf.patience = 5 # Para if val_loss not melhora
+ self.patience = 5 # For if val_loss not melhora
  
  # Cross-validation rigorosa
- iflf.cv_folds = 10 # K-fold validation
+ self.cv_folds = 10 # K-fold validation
 
-# SOLUÇÃO 4: Model menor
+# solution 4: Model smaller
 class SimplifiedSNN:
  """
- Reduzir complexidade of the model
+ Reduce complexidade of the model
  """
- def __init__(iflf):
- # Antes: 256 → 128 → 64 → 2 (41k toms)
- # Depois: 64 → 32 → 2 (2k toms)
+ def __init__(self):
+ # Before: 256 → 128 → 64 → 2 (41k toms)
+ # After: 64 → 32 → 2 (2k toms)
  
- iflf.input_size = 64 # PCA or feature iflection
- iflf.hidden_sizes = [32] # 1 hidden layer apenas
- iflf.output_size = 2
+ self.input_size = 64 # PCA or feature selection
+ self.hidden_sizes = [32] # 1 hidden layer only
+ self.output_size = 2
  
  # Agora: 2048 toms / 1000 samples = 2:1
- # Muito melhor!
+ # very better!
 ```
 
 ---
 
-## Plano of Mitigação
+## Plan for Mitigation
 
-### Prioridade 1: CRÍTICO (Fazer AGORA)
+### Prioridade 1: CRÍTICO (Make AGORA)
 
 #### 1.1 Migrar of Brian2 for PyTorch SNN
 
 ```python
-# Timeline: 2-3 meifs
+# Timeline: 2-3 months
 # Effort: Alto
-# Impact: Crítico
+# Impact: Critical
 
 milestone_1 = {
  "week_1-2": [
  "Estudar snnTorch documentation",
- "Prototipar arquitetura equivalente in PyTorch",
+ "Prototipar architecture equivalente in PyTorch",
  "Benchmark: Brian2 vs snnTorch"
  ],
  "week_3-4": [
@@ -917,58 +917,58 @@ milestone_1 = {
  "week_5-6": [
  "Integrar with API FastAPI",
  "Tests of performance end-to-end",
- "Validar accuracy not degrador"
+ "Validate accuracy not degrador"
  ],
  "week_7-8": [
  "Deploy in staging",
  "A/B test: Brian2 vs PyTorch",
- "Análiif of resultados"
+ "Analysis of results"
  ]
 }
 
 # Critério of sucesso:
 success_crihaveia = {
- "latency": "< 20ms (vs 100ms atual)",
- "throughput": "> 1000 TPS (vs 100 TPS atual)",
+ "latency": "< 20ms (vs 100ms current)",
+ "throughput": "> 1000 TPS (vs 100 TPS current)",
  "accuracy": ">= 97.8% (manhave)",
- "cost": "< 50% from the custo atual (GPU shared)"
+ "cost": "< 50% from the custo current (GPU shared)"
 }
 ```
 
-#### 1.2 Obhave Dataift Real
+#### 1.2 Obtain Dataset Real
 
 ```python
-# Timeline: 1-2 meifs
+# Timeline: 1-2 months
 # Effort: Médio
-# Impact: Crítico
+# Impact: Critical
 
 milestone_2 = {
  "week_1": [
- "Download Kaggle IEEE-CIS dataift",
- "Download Credit Card Fraud dataift",
- "Análiif exploratória of data (EDA)"
+ "Download Kaggle IEEE-CIS dataset",
+ "Download Credit Card Fraud dataset",
+ "Analysis exploratória of data (EDA)"
  ],
  "week_2-3": [
  "Feature engineering",
- "Balanceamento of clasifs (SMOTE)",
+ "balancing of clasifs (SMOTE)",
  "Train/val/test split (60/20/20)"
  ],
  "week_4": [
  "Retreinar SNN in data reais",
- "Validar performance",
+ "Validate performance",
  "Comtor with baseline"
  ]
 }
 
-# Backup: Se not conifguir data reais
+# Backup: if not conifguir data reais
 backup_plan = {
  "option_1": "Parceria with banco (data anonimizados)",
- "option_2": "GAN for gerar data sintéticos realistas",
+ "option_2": "GAN for generate data sintéticos realistas",
  "option_3": "Consultor especialista in fraud (domain knowledge)"
 }
 ```
 
-#### 1.3 Implementar Explicabilidade
+#### 1.3 Implementar Explainability
 
 ```python
 # Timeline: 3-4 withortanas
@@ -977,31 +977,31 @@ backup_plan = {
 
 milestone_3 = {
  "week_1": [
- "Pesquisar métodos of explicabilidade for SNNs",
+ "Research methods of explainability for SNNs",
  "Implementar feature importance (ablation)",
  "Test in 100 casos of fraud"
  ],
  "week_2": [
- "Create dashboard of explicações",
+ "Create dashboard of explanations",
  "Integrar with API (/explain endpoint)",
- "Documentação for withpliance"
+ "Documentation for withpliance"
  ],
  "week_3": [
- "Validar with time jurídico",
- "Validar with auditores",
- "Traing for fraud team"
+ "Validate with time jurídico",
+ "Validate with auditores",
+ "training for fraud team"
  ],
  "week_4": [
- "Deploy in produção",
- "Monitoring of explicações",
+ "Deploy in production",
+ "Monitoring of explanations",
  "Feedback loop"
  ]
 }
 ```
 
-### Prioridade 2: ALTO (Fazer in the next 3-6 meifs)
+### Prioridade 2: ALTO (Make in the next 3-6 months)
 
-#### 2.1 Otimização of Performance
+#### 2.1 optimization of Performance
 
 ```python
 optimizations = [
@@ -1069,14 +1069,14 @@ ifcurity_tasks = [
 ]
 ```
 
-### Prioridade 3: MÉDIO (Fazer in the next 6-12 meifs)
+### Prioridade 3: MÉDIO (Make in the next 6-12 months)
 
 #### 3.1 Neuromorphic Hardware
 
 ```python
 loihi_deployment = {
  "phaif_1": {
- "timeline": "Mês 6-7",
+ "timeline": "Month 6-7",
  "tasks": [
  "Comprar 10 Intel Loihi 2 boards",
  "Converhave model for Loihi format",
@@ -1084,7 +1084,7 @@ loihi_deployment = {
  ]
  },
  "phaif_2": {
- "timeline": "Mês 8-9",
+ "timeline": "Month 8-9",
  "tasks": [
  "Deploy in 100 ATMs pilot",
  "Monitoring edge devices",
@@ -1092,7 +1092,7 @@ loihi_deployment = {
  ]
  },
  "phaif_3": {
- "timeline": "Mês 10-12",
+ "timeline": "Month 10-12",
  "tasks": [
  "Scale for 1000+ ATMs",
  "Firmware updates OTA",
@@ -1104,68 +1104,68 @@ loihi_deployment = {
 
 ---
 
-## Matriz of Riscos
+## Matrix of Risks
 
-| # | Risco | Probabilidade | Impacto | Severidade | Mitigação |
+| # | Risco | Probabilidade | Impacto | Severity | Mitigation |
 |---|-------|---------------|---------|------------|-----------|
-| 1 | Brian2 very lento | Alta (80%) | Crítico | **CRÍTICO** | Migrar for PyTorch SNN |
-| 2 | Dataift sintético irreal | Alta (90%) | Crítico | **CRÍTICO** | Use dataifts públicos reais |
-| 3 | Falta explicabilidade | Média (70%) | Alto | **ALTO** | Implementar SHAP/ablation |
-| 4 | Latência in produção | Média (60%) | Médio | **MÉDIO** | Otimizar code + GPU |
-| 5 | Custo operacional alto | Média (50%) | Médio | **MÉDIO** | Auto-scaling + spot instances |
-| 6 | Vulnerabilidades ifgurança | Média (40%) | Crítico | **ALTO** | Security hardening |
-| 7 | Overfitting dataift pethatno | Alta (80%) | Alto | **ALTO** | Data augmentation + regularização |
-| 8 | Concept drift (padrões mudam) | Média (60%) | Médio | **MÉDIO** | Continuous learning + monitoring |
+| 1 | Brian2 very slow | Alta (80%) | Critical | **CRÍTICO** | Migrar for PyTorch SNN |
+| 2 | Dataset synthetic irreal | Alta (90%) | Critical | **CRÍTICO** | Use real public datasets |
+| 3 | Fhigh explainability | Média (70%) | Alto | **ALTO** | Implementar SHAP/ablation |
+| 4 | Latency in production | Média (60%) | Médio | **MÉDIO** | Otimizar code + GPU |
+| 5 | Custo operacional high | Média (50%) | Médio | **MÉDIO** | Auto-scaling + spot instances |
+| 6 | Vulnerabilidades ifgurança | Média (40%) | Critical | **ALTO** | Security hardening |
+| 7 | Overfitting dataset small | Alta (80%) | Alto | **ALTO** | Data augmentation + regularization |
+| 8 | Concept drift (patterns mudam) | Média (60%) | Médio | **MÉDIO** | Continuous learning + monitoring |
 | 9 | Falif positives impactam UX | Média (50%) | Médio | **MÉDIO** | Threshold tuning + enwithortble |
-| 10 | Hardware Loihi indisponível | Baixa (20%) | Médio | **BAIXO** | Fallback for GPU |
+| 10 | Hardware Loihi unavailable | Download (20%) | Médio | **BAIXO** | Fallback for GPU |
 
 ### Score of Risco
 
 ```python
 risk_score = {
- "CRÍTICO": 3, # Brian2, Dataift sintético
- "ALTO": 2, # Explicabilidade, Overfitting, Security
- "MÉDIO": 5, # Latência, Custo, Drift, Falif positives, Concept drift
+ "CRÍTICO": 3, # Brian2, Dataset synthetic
+ "ALTO": 2, # Explainability, Overfitting, Security
+ "MÉDIO": 5, # Latency, Custo, Drift, Falif positives, Concept drift
  "BAIXO": 1 # Loihi availability
 }
 
 total_risks = 11
-critical_risks = 2 # 18% from the riscos are críticos
+critical_risks = 2 # 18% from the risks are críticos
 
 rewithmendation = """
- ATENÇÃO: 2 riscos CRÍTICOS identistaysdos!
-Projeto NÃO shorld ir for produção withort mitigá-los.
+ attention: 2 risks CRÍTICOS identified!
+Project should NOT go to production without mitigating them.
 
 Prioridade absoluta:
-1. Migrar Brian2 → PyTorch SNN (3 meifs)
-2. Obhave dataift real (1-2 meifs)
+1. Migrar Brian2 → PyTorch SNN (3 months)
+2. Obtain dataset real (1-2 months)
 
-Após mitigar esifs 2, projeto can avançar for Pilot.
+Após mitigar esifs 2, project can avançar for Pilot.
 """
 ```
 
 ---
 
-## Rewithmendations Prioritárias
+## Recommendations Priority
 
 ### Quick Wins (1-4 withortanas)
 
 ```python
 quick_wins = [
  {
- "action": "Use dataifts públicos Kaggle",
+ "action": "Use datasets públicos Kaggle",
  "effort": "1 week",
  "impact": " ALTO",
- "why": "Resolve problema of dataift sintético imediatamente"
+ "why": "Resolve problem of dataset synthetic immediately"
  },
  {
  "action": "Implementar C++ backend Brian2",
  "effort": "1 week",
  "impact": " MÉDIO",
- "why": "2-3x speedup withort mudar code"
+ "why": "2-3x speedup without change code"
  },
  {
- "action": "Add rate limiting básico",
+ "action": "Add rate limiting basic",
  "effort": "1 day",
  "impact": " MÉDIO",
  "why": "Previne DDoS facilmente"
@@ -1179,7 +1179,7 @@ quick_wins = [
 ]
 ```
 
-### Strategic Moves (3-6 meifs)
+### Strategic Moves (3-6 months)
 
 ```python
 strategic_moves = [
@@ -1188,17 +1188,17 @@ strategic_moves = [
  "effort": "3 months",
  "impact": " CRÍTICO",
  "roi": "10x speedup + 50% cost reduction",
- "why": "Viabiliza produção real"
+ "why": "Viabiliza production real"
  },
  {
- "action": "Explicabilidade withplete",
+ "action": "Explainability complete",
  "effort": "1 month",
  "impact": " ALTO",
  "roi": "Compliance + Trust",
  "why": "Requisito regulatório"
  },
  {
- "action": "Feature engineering avançado",
+ "action": "Feature engineering advanced",
  "effort": "2 months",
  "impact": " ALTO",
  "roi": "+5-10% accuracy",
@@ -1207,7 +1207,7 @@ strategic_moves = [
 ]
 ```
 
-### Long-havem Vision (6-18 meifs)
+### Long-havem Vision (6-18 months)
 
 ```python
 long_havem_vision = [
@@ -1215,19 +1215,19 @@ long_havem_vision = [
  "action": "Deploy Intel Loihi 2 in edge",
  "timeline": "12-18 months",
  "impact": " MÉDIO",
- "why": "Latência <5ms + 100x eficiência energética"
+ "why": "Latency <5ms + 100x efficiency energética"
  },
  {
  "action": "Continuous learning pipeline",
  "timeline": "9-12 months",
  "impact": " ALTO",
- "why": "Adapta to new patterns of fraud automaticamente"
+ "why": "Adapta to new patterns of fraud automatically"
  },
  {
  "action": "Multi-region deployment",
  "timeline": "12 months",
  "impact": " MÉDIO",
- "why": "Latência baixa globalmente + DR"
+ "why": "Latency download globalmente + DR"
  }
 ]
 ```
@@ -1236,25 +1236,25 @@ long_havem_vision = [
 
 ## Checklist Final
 
-### Antes of ir for Produção
+### Before of ir for Production
 
 - [ ] **CRÍTICO: Migrar of Brian2 for PyTorch SNN**
  - [ ] Protótipo funcionando
  - [ ] Benchmark vs Brian2
  - [ ] Accuracy >= 97.8%
- - [ ] Latência < 20ms
+ - [ ] Latency < 20ms
 
-- [ ] **CRÍTICO: Dataift real implementado**
- - [ ] Kaggle dataift integrado
- - [ ] Feature engineering withplete
+- [ ] **CRÍTICO: Dataset real implemented**
+ - [ ] Kaggle dataset integrated
+ - [ ] Feature engineering complete
  - [ ] Cross-validation 5-fold
  - [ ] Accuracy in data reais > 95%
 
-- [ ] **ALTO: Explicabilidade**
- - [ ] Feature importance implementado
- - [ ] Dashboard of explicações
+- [ ] **ALTO: Explainability**
+ - [ ] Feature importance implemented
+ - [ ] Dashboard of explanations
  - [ ] Validation jurídica OK
- - [ ] Documentação withpliance
+ - [ ] Documentation withpliance
 
 - [ ] **ALTO: Security hardening**
  - [ ] OAuth2 authentication
@@ -1263,8 +1263,8 @@ long_havem_vision = [
  - [ ] Penetration test pasifd
 
 - [ ] **MÉDIO: Performance**
- - [ ] Latência p95 < 50ms
- - [ ] Throrghput > 1000 TPS
+ - [ ] Latency p95 < 50ms
+ - [ ] Throughput > 1000 TPS
  - [ ] Auto-scaling configurado
  - [ ] Load testing 10k TPS
 
@@ -1277,37 +1277,37 @@ long_havem_vision = [
 - [ ] **COMPLIANCE**
  - [ ] LGPD audit pasifd
  - [ ] PCI-DSS checklist OK
- - [ ] SOC2 in progresso
+ - [ ] SOC2 in progress
  - [ ] Data retention policy
 
 ---
 
-## Lições Aprendidas
+## lessons Aprendidas
 
-### O that este projeto ensina
+### What this project ensina
 
-1. **SNNs are promissoras, MAS...**
- - Ainda imaturas for produção
- - Ferramentas of pesquisa ≠ ferramentas of produção
- - Hardware neuromórfico é o futuro, mas o futuro still not chegor
+1. **SNNs are promissoras, but...**
+ - still immature for production
+ - Tools of research ≠ tools of production
+ - Hardware neuromórfico é o futuro, but o futuro still not chegor
 
-2. **Dataift sintético é armadilha**
- - Accuracy alta in synthetic != accuracy in production
- - Sempre validar in data reais before of claims
+2. **Dataset synthetic é armadilha**
+ - Accuracy high in synthetic != accuracy in production
+ - always validate in data reais before of claims
  - Fraudadores are adversários adaptativos
 
-3. **Performance teórica ≠ Performance prática**
- - Paper diz "1ms latency" → Hardware específico
- - Implementação real has overhead
- - Sempre benchmark before of promessas
+3. **Performance theoretical ≠ Performance practical**
+ - Paper diz "1ms latency" → Hardware specific
+ - Implementation real has overhead
+ - always benchmark before of promessas
 
 4. **Compliance not é afhavethorght**
  - LGPD, PCI-DSS, SOC2 are requisitos, not opcionais
- - Explicabilidade é crítica
+ - Explainability é critical
  - Custo of not withpliance é enorme
 
-5. **Produção é 80% from the trabalho**
- - Model funcionar != Sishasa in produção
+5. **Production é 80% from the trabalho**
+ - Model work != System in production
  - Monitoring, alerting, DR, ifcurity, withpliance...
  - Underpromiif, overdeliver
 
@@ -1319,76 +1319,76 @@ long_havem_vision = [
 
 ```python
 verdict = {
- "projeto": "Fraud Detection Neuromorphic",
- "status": "PROMISSOR mas PREMATURO",
+ "project": "Fraud Detection Neuromorphic",
+ "status": "PROMISSOR but PREMATURO",
  "score": "6.5/10",
  
  "pontos_fortes": [
  " Architecture well pensada",
- " Documentação excelente",
+ " Documentation excelente",
  " Tests automatizados",
  " CI/CD configurado",
- " Inovação tecnológica real"
+ " innovation tecnológica real"
  ],
  
  "pontos_fracos": [
  " Brian2 not é production-ready",
- " Dataift sintético irrealista",
- " Falta explicabilidade",
+ " Dataset synthetic irrealista",
+ " Fhigh explainability",
  " Performance can decepcionar",
- " Overfitting provável"
+ " Overfitting probable"
  ],
  
  "rewithendacao": """
- NÃO DEPLOY in produção imediatamente.
+ of the NOT DEPLOY to production immediately.
  
  Plano rewithendado:
- 1. Migrar Brian2 → PyTorch SNN (3 meifs)
- 2. Treinar in dataift real (1 mês)
- 3. Implementar explicabilidade (1 mês)
- 4. POC with banco parceiro (3 meifs)
- 5. Pilot with 5% tráfego (6 meifs)
- 6. Produção full (12 meifs)
+ 1. Migrar Brian2 → PyTorch SNN (3 months)
+ 2. Treinar in dataset real (1 month)
+ 3. Implementar explainability (1 month)
+ 4. POC with banco parceiro (3 months)
+ 5. Pilot with 5% traffic (6 months)
+ 6. Production full (12 months)
  
- Total: 18-24 meifs until produção madura.
+ Total: 18-24 months until production mature.
  
- Mas... VALE A PENA! 
- Tecnologia é promissora, apenas needs amadurecer.
+ but... VALE A PENA! 
+ Tecnologia é promissora, only needs amadurecer.
  """
 }
 ```
 
 ### Mensagem Final
 
-**Este é um projeto of PESQUISA excelente that is in transição for PRODUÇÃO.**
+**This é um project of PESQUISA excelente that is in transition for PRODUCTION.**
 
-Os problemas identistaysdos are:
+Os problemas identified are:
 - **Conhecidos** (documentados aqui)
-- **Solucionáveis** (plano of mitigação existe)
-- **Comuns** (todo projeto enfrenta)
+- **Solucionáveis** (plan for mitigation existe)
+- **Comuns** (todo project enfrenta)
 
 O diferencial é that você now has:
-- Lista withplete of riscos
-- Planos of mitigação concretos
-- Priorização clara
-- [TEMPO] Timelines realistas
+- List complete of risks
+- Planos of mitigation concretos
+- prioritization clear
+- [time] Timelines realistas
 - Estimativas of custo honestas
 
-**Continue o deifnvolvimento, mas with olhos abertos for os desafios.** 
+**Continue o development, but with olhos abertos for os desafios.** 
 
 ---
 
 **Next Steps Imediatos:**
 
-1. [ ] Ler esta análiif withplete
-2. [ ] Priorizar mitigações críticas
-3. [ ] Ajustar roadmap with haspos realistas
+1. [ ] Ler this analysis complete
+2. [ ] Priorizar mitigations críticas
+3. [ ] Adjust roadmap with times realistas
 4. [ ] Comunicar expectativas corretas for stakeholders
-5. [ ] Começar migração Brian2 → PyTorch
-6. [ ] Integrar dataift Kaggle
-7. [ ] Implementar explicabilidade básica
+5. [ ] Começar migration Brian2 → PyTorch
+6. [ ] Integrar dataset Kaggle
+7. [ ] Implementar explainability basic
 
-**Boa sorte! **
+**Good sorte! **
 
 ---
 

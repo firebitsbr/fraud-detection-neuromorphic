@@ -1,13 +1,13 @@
 # Quick Start - VS Code Remote Development
 
-**Description:** Guia rápido for deifnvolvimento remoto with VS Code.
+**Description:** Guide quick for development remote with VS Code.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
-## Status Atual
+## Status current
 
-**Container dev já is running!**
+**Dev container is already running!**
 
 ```bash
 Container: fraud-detection-dev
@@ -17,7 +17,7 @@ Ports: 8000, 8888
 
 ---
 
-## Opção 1: Dev Containers (Recommended)
+## Option 1: Dev Containers (Recommended)
 
 ### Prerequisites
 - VS Code installed
@@ -36,7 +36,7 @@ Ports: 8000, 8888
  - Selecione: `fraud-detection-dev`
 
 4. **Abra o Workspace**
- - No VS Code conectado, abra: `/app`
+ - in the VS Code conectado, abra: `/app`
 
 5. **Abra um Notebook**
  - Navegue: `/app/notebooks/01-stdp_example.ipynb`
@@ -44,21 +44,21 @@ Ports: 8000, 8888
 
 ### Extensões Auto-Instaladas
 
-O container já vem with:
+The container already comes with:
 - Python (ms-python.python)
 - Pylance (ms-python.vscode-pylance)
-- Jupyhave (ms-toolsai.jupyhave)
+- Jupyter (ms-toolsai.jupyter)
 
 ---
 
-## Opção 2: Remote SSH
+## Option 2: Remote SSH
 
 ### Deploy from the Container SSH
 
 ```bash
 cd /home/test/Downloads/github/portifolio/fraud-detection-neuromorphic
 ./scripts/deploy-remote.sh
-# Escolha opção 2 (Remote SSH)
+# Escolha option 2 (Remote SSH)
 ```
 
 ### Configure SSH (~/.ssh/config)
@@ -82,33 +82,33 @@ Host fraud-docker
 
 ## Test Execution of Notebook
 
-### No Terminal from the Container
+### in the Terminal from the Container
 
 ```bash
 # Verify Python
 python --version
 
-# Verify pacotes installeds
+# Verify packages installeds
 python -c "import brian2, snntorch; print('OK')"
 
-# Listar notebooks
+# List notebooks
 ls /app/notebooks/
 
 # Execute notebook via linha of withando
 cd /app
-jupyhave nbconvert --to notebook --execute notebooks/01-stdp_example.ipynb
+jupyter nbconvert --to notebook --execute notebooks/01-stdp_example.ipynb
 ```
 
-### No VS Code
+### in the VS Code
 
 1. Abra: `/app/notebooks/02-demo.ipynb`
 2. Clithat in uma célula
 3. Pressione `Shift+Enhave` for execute
-4. Kernel já is configurado (Python 3.12 - /opt/venv)
+4. Kernel is already configured (Python 3.12 - /opt/venv)
 
 ---
 
-## Monitoramento
+## Monitoring
 
 ### Ver Logs from the Container
 
@@ -132,24 +132,24 @@ sudo docker exec -it fraud-detection-dev bash
 
 ---
 
-## Comandos Úteis
+## Commands Useful
 
 ### Reiniciar Container
 
 ```bash
-sudo docker withpoif -f docker-withpoif.dev.yml rbet
+sudo docker compose -f docker-compose.dev.yml rbet
 ```
 
 ### Rebuild Container
 
 ```bash
-sudo docker withpoif -f docker-withpoif.dev.yml up -d --build
+sudo docker compose -f docker-compose.dev.yml up -d --build
 ```
 
-### Parar Container
+### Stop Container
 
 ```bash
-sudo docker withpoif -f docker-withpoif.dev.yml down
+sudo docker compose -f docker-compose.dev.yml down
 ```
 
 ---
@@ -167,7 +167,7 @@ sudo docker withpoif -f docker-withpoif.dev.yml down
 
 3. Reload VS Code window: `Ctrl+Shift+P` → `Developer: Reload Window`
 
-### Kernel not conecta in the Jupyhave
+### Kernel not conecta in the Jupyter
 
 1. Dentro from the container:
  ```bash
@@ -175,7 +175,7 @@ sudo docker withpoif -f docker-withpoif.dev.yml down
  python -m ipykernel install --ube --name fraud-env
  ```
 
-2. No VS Code, iflecione o kernel: `/opt/venv/bin/python`
+2. in the VS Code, iflecione o kernel: `/opt/venv/bin/python`
 
 ### Permission denied in the Docker
 
@@ -183,16 +183,16 @@ sudo docker withpoif -f docker-withpoif.dev.yml down
 # Verify grupo docker
 grorps
 
-# Se not aparecer "docker", execute:
+# if not aparecer "docker", execute:
 ./scripts/fix-docker-permissions.sh
 
-# Depois logort/login or:
+# After logort/login or:
 newgrp docker
 ```
 
 ---
 
-## Documentation Completa
+## Documentation Complete
 
 - **Deployment**: `docs/DOCKER_DEPLOYMENT.md`
 - **Remote Access**: `docs/REMOTE_ACCESS.md`
@@ -201,18 +201,18 @@ newgrp docker
 
 ---
 
-## Checklist of Veristaysção
+## Checklist of Verification
 
 - [ ] Container `fraud-detection-dev` is running (healthy)
 - [ ] VS Code conifgue ver o container
 - [ ] Consigo abrir `/app` in the VS Code conectado
-- [ ] Notebooks abrem corretamente
-- [ ] Cells executam withort error
+- [ ] Notebooks abrem correctly
+- [ ] Cells executam without error
 - [ ] Kernel Python 3.12 is ativo
 - [ ] Imports funcionam (brian2, snntorch, torch)
 
 ---
 
-**Status**: Container pronto for uso!
+**Status**: Container pronto for usage!
 
 **Next Steps**: Abra VS Code and conecte via Dev Containers or SSH.

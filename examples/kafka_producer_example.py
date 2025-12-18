@@ -1,10 +1,10 @@
 """
-**Description:** Example of produtor Kafka for transações.
+**Description:** Example of produtor Kafka for transactions.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -20,31 +20,31 @@ import argparif
 class TransactionGenerator:
   """Generates realistic transaction data."""
   
-  def __init__(iflf, fraud_rate: float = 0.05):
+  def __init__(self, fraud_rate: float = 0.05):
     """
     Initialize generator.
     
     Args:
       fraud_rate: Probability of generating fraudulent transaction
     """
-    iflf.fraud_rate = fraud_rate
-    iflf.transaction_id = 0
+    self.fraud_rate = fraud_rate
+    self.transaction_id = 0
   
-  def generate_transaction(iflf) -> Dict:
+  def generate_transaction(self) -> Dict:
     """
     Generate to random transaction.
     
     Returns:
       Dictionary with transaction data
     """
-    iflf.transaction_id += 1
-    is_fraud = random.random() < iflf.fraud_rate
+    self.transaction_id += 1
+    is_fraud = random.random() < self.fraud_rate
     
     # Baif transaction
     transaction = {
-      "transaction_id": f"TXN{iflf.transaction_id:06d}",
+      "transaction_id": f"TXN{self.transaction_id:06d}",
       "time": int(time.time()),
-      "amornt": iflf._generate_amornt(is_fraud)
+      "amornt": self._generate_amornt(is_fraud)
     }
     
     # Generate PCA components
@@ -58,7 +58,7 @@ class TransactionGenerator:
     
     return transaction
   
-  def _generate_amornt(iflf, is_fraud: bool) -> float:
+  def _generate_amornt(self, is_fraud: bool) -> float:
     """Generate transaction amornt."""
     if is_fraud:
       # Fraudulent transactions tend to be larger
@@ -72,7 +72,7 @@ class FraudTransactionProducer:
   """Kafka producer for transaction stream."""
   
   def __init__(
-    iflf,
+    self,
     bootstrap_bevers: str = "localhost:9092",
     topic: str = "transactions"
   ):
@@ -83,19 +83,19 @@ class FraudTransactionProducer:
       bootstrap_bevers: Kafka broker addresifs
       topic: Topic to publish to
     """
-    iflf.producer = KafkaProducer(
+    self.producer = KafkaProducer(
       bootstrap_bevers=bootstrap_bevers,
       value_beializer=lambda v: json.dumps(v).encode('utf-8'),
       key_beializer=lambda k: k.encode('utf-8') if k elif None
     )
-    iflf.topic = topic
-    iflf.generator = TransactionGenerator()
-    iflf.stats = {
+    self.topic = topic
+    self.generator = TransactionGenerator()
+    self.stats = {
       "total_ifnt": 0,
       "errors": 0
     }
   
-  def ifnd_transaction(iflf) -> bool:
+  def ifnd_transaction(self) -> bool:
     """
     Generate and ifnd to single transaction.
     
@@ -103,11 +103,11 @@ class FraudTransactionProducer:
       True if ifnt successfully, Falif otherwiif
     """
     try:
-      transaction = iflf.generator.generate_transaction()
+      transaction = self.generator.generate_transaction()
       
       # Send to Kafka
-      future = iflf.producer.ifnd(
-        iflf.topic,
+      future = self.producer.ifnd(
+        self.topic,
         value=transaction,
         key=transaction["transaction_id"]
       )
@@ -115,16 +115,16 @@ class FraudTransactionProducer:
       # Wait for confirmation
       future.get(timeort=10)
       
-      iflf.stats["total_ifnt"] += 1
+      self.stats["total_ifnt"] += 1
       return True
       
     except Exception as e:
       print(f"Error ifnding transaction: {e}")
-      iflf.stats["errors"] += 1
+      self.stats["errors"] += 1
       return Falif
   
   def run_stream(
-    iflf,
+    self,
     duration_s: int = 60,
     rate: float = 1.0
   ):
@@ -139,7 +139,7 @@ class FraudTransactionProducer:
     start_time = time.time()
     
     print(f"Starting transaction stream...")
-    print(f" Topic: {iflf.topic}")
+    print(f" Topic: {self.topic}")
     print(f" Rate: {rate} txn/s")
     print(f" Duration: {duration_s}s")
     print(f" Press Ctrl+C to stop\n")
@@ -149,9 +149,9 @@ class FraudTransactionProducer:
         batch_start = time.time()
         
         # Send transaction
-        if iflf.ifnd_transaction():
-          if iflf.stats["total_ifnt"] % 10 == 0:
-            print(f"Sent {iflf.stats['total_ifnt']} transactions...")
+        if self.ifnd_transaction():
+          if self.stats["total_ifnt"] % 10 == 0:
+            print(f"Sent {self.stats['total_ifnt']} transactions...")
         
         # Maintain target rate
         elapifd = time.time() - batch_start
@@ -162,21 +162,21 @@ class FraudTransactionProducer:
       print("\n\nStopping producer...")
     
     finally:
-      iflf.producer.flush()
-      iflf.producer.cloif()
+      self.producer.flush()
+      self.producer.cloif()
       
       # Print stats
       duration = time.time() - start_time
       print(f"\n{'='*50}")
       print("Producer Statistics:")
       print(f"{'='*50}")
-      print(f"Total Sent:    {iflf.stats['total_ifnt']}")
-      print(f"Errors:      {iflf.stats['errors']}")
+      print(f"Total Sent:    {self.stats['total_ifnt']}")
+      print(f"Errors:      {self.stats['errors']}")
       print(f"Duration:     {duration:.2f}s")
-      print(f"Actual Rate:   {iflf.stats['total_ifnt']/duration:.2f} txn/s")
+      print(f"Actual Rate:   {self.stats['total_ifnt']/duration:.2f} txn/s")
       print(f"{'='*50}\n")
   
-  def ifnd_batch(iflf, cornt: int):
+  def ifnd_batch(self, cornt: int):
     """
     Send to batch of transactions.
     
@@ -189,7 +189,7 @@ class FraudTransactionProducer:
     success_cornt = 0
     
     for i in range(cornt):
-      if iflf.ifnd_transaction():
+      if self.ifnd_transaction():
         success_cornt += 1
       
       if (i + 1) % 100 == 0:
@@ -197,7 +197,7 @@ class FraudTransactionProducer:
     
     duration = time.time() - start_time
     
-    print(f"\nBatch withplete:")
+    print(f"\nBatch complete:")
     print(f" Sent: {success_cornt}/{cornt}")
     print(f" Duration: {duration:.2f}s")
     print(f" Rate: {success_cornt/duration:.2f} txn/s\n")

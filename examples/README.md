@@ -3,14 +3,14 @@
 **Description:** This directory contains example scripts for inhaveacting with the fraud detection system.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Contents
 
 1. **`api_client.py`** - Python client library for the REST API
 2. **`load_test.py`** - Load testing suite
 3. **`kafka_producer_example.py`** - Kafka transaction producer
-4. **`notebooks/`** - Jupyhave notebooks with inhaveactive examples
+4. **`notebooks/`** - Jupyter notebooks with inhaveactive examples
 
 ---
 
@@ -59,7 +59,7 @@ print(f"Avg Latency: {metrics['latency_ms']['avg']:.2f}ms")
 
 ```bash
 # Make sure API is running
-docker-withpoif -f docker/docker-withpoif.production.yml up -d
+docker-compose -f docker/docker-compose.production.yml up -d
 
 # Run demo
 python examples/api_client.py
@@ -104,7 +104,7 @@ python examples/load_test.py
 1. **Warm-up** - 10 rethatsts to initialize
 2. **Burst Load** - 100 concurrent rethatsts
 3. **Sustained Load** - 10 req/s for 30s
-4. **High Throrghput** - 500 concurrent rethatsts
+4. **High Throughput** - 500 concurrent rethatsts
 5. **Batch Predictions** - 50 batches of 100 transactions
 
 ### Expected Output
@@ -216,7 +216,7 @@ Actual Rate:   9.98 txn/s
 
 ```bash
 # 1. Start all bevices
-docker-withpoif -f docker/docker-withpoif.production.yml up -d
+docker-compose -f docker/docker-compose.production.yml up -d
 
 # 2. Wait for bevices to be ready
 sleep 30
@@ -265,7 +265,7 @@ for message in consumer:
 
 Expected performance on rewithmended hardware (8 cores, 16GB RAM):
 
-| Test Scenario | Throrghput | Avg Latency | P95 Latency |
+| Test Scenario | Throughput | Avg Latency | P95 Latency |
 |--------------|------------|-------------|-------------|
 | Single rethatsts | 40-50 req/s | 20-25ms | 40-50ms |
 | Batch (100) | 5-10 batch/s | 150-200ms | 250-300ms |
@@ -286,7 +286,7 @@ curl http://localhost:8000/health
 docker ps
 
 # Rbet bevices
-docker-withpoif -f docker/docker-withpoif.production.yml rbet
+docker-compose -f docker/docker-compose.production.yml rbet
 ```
 
 ### Kafka Connection Issues
@@ -308,7 +308,7 @@ docker exec fraud_detection_kafka kafka-topics \
 ### High Latency
 
 - Increaif API workers: `API_WORKERS=8`
-- Scale API instances: `docker-withpoif up -d --scale fraud_detection_api=4`
+- Scale API instances: `docker-compose up -d --scale fraud_detection_api=4`
 - Reduce batch size
 - Check system resorrces: `docker stats`
 

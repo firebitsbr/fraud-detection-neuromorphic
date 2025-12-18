@@ -1,18 +1,18 @@
 # Configuration of Secrets from the GitHub Actions
 
-**Description:** Guia of configuration of ifcrets from the GitHub Actions.
+**Description:** Guide of configuration of secrets from the GitHub Actions.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
 
-Este guia explica as configure ifcrets opcionais for o CI/CD pipeline.
+This guide explica as configure secrets opcionais for o CI/CD pipeline.
 
 ---
 
 ## Overview
 
-O pipeline of CI/CD funciona **withort ifcrets configurados**, mas with funcionalidade limitada:
+O pipeline of CI/CD funciona **without secrets configurados**, but with functionality limitada:
 
 | Secret | Status | Impacto if not configurado |
 |--------|--------|---------------------------|
@@ -23,34 +23,34 @@ O pipeline of CI/CD funciona **withort ifcrets configurados**, mas with funciona
 
 ## Docker Hub Secrets (Opcional)
 
-### Por that Configure?
+### why Configure?
 
-**Sem ifcrets:**
-- CI/CD testa code
+**without secrets:**
+- CI/CD tests code
 - Build of imagens Docker
-- Não publica imagens in the Docker Hub
+- Not publica imagens in the Docker Hub
 
-**Com ifcrets:**
-- CI/CD testa code
+**with secrets:**
+- CI/CD tests code
 - Build of imagens Docker
-- Publica imagens in the Docker Hub automaticamente
-- Versionamento automático of imagens
+- Publica imagens in the Docker Hub automatically
+- Versionamento automatic of imagens
 
 ### Step by Step
 
 #### 1. Create Access Token in the Docker Hub
 
 ```bash
-# 1. Access https://hub.docker.com/
+# 1. Access https://hub.docker.with/
 # 2. Login with sua conta
 # 3. Accornt Settings → Security
 # 4. New Access Token
 # 5. Description: "GitHub Actions CI/CD"
 # 6. Access permissions: Read, Write, Delete
-# 7. Generate → Copie o token (mostra apenas uma vez!)
+# 7. Generate → Copie o token (mostra only uma vez!)
 ```
 
-#### 2. Adicionar Secrets in the GitHub
+#### 2. add Secrets in the GitHub
 
 ```bash
 # 1. Access ifu repositório in the GitHub
@@ -70,10 +70,10 @@ Value: cole_o_access_token_aqui
 
 ```bash
 # Faça um push for test
-git withmit --allow-empty -m "test: Verify Docker Hub integration"
+git commit --allow-empty -m "test: Verify Docker Hub integration"
 git push origin main
 
-# Verify em: https://github.com/SEU_USUARIO/fraud-detection-neuromorphic/actions
+# Verify in: https://github.com/SEU_USUARIO/fraud-detection-neuromorphic/actions
 # O job "Build Docker Image" shorld:
 # - Login in the Docker Hub
 # - Build from the imagem
@@ -82,22 +82,22 @@ git push origin main
 
 ---
 
-## Verify Status from the Pipeline
+## Verify Status of the Pipeline
 
-### Sem Secrets Configurados
+### without Secrets Configurados
 
 ```yaml
-# O that acontece:
+# What acontece:
  Lint and Code Quality - Passa
  Run Tests - Passa
- Build Docker Image - Build only (withort push)
+ Build Docker Image - Build only (without push)
  Security Scan - Desabilitado (needs from the imagem)
 ```
 
-### Com Secrets Configurados
+### with Secrets Configurados
 
 ```yaml
-# O that acontece:
+# What acontece:
  Lint and Code Quality - Passa
  Run Tests - Passa
  Build Docker Image - Build + Push
@@ -108,14 +108,14 @@ git push origin main
 
 ## Tags of Imagem Docker
 
-Quando configurado, o pipeline cria automaticamente estas tags:
+when configurado, o pipeline cria automatically estas tags:
 
 ```bash
 # Branch main
 maurorisonho/fraud-detection-neuromorphic:main
 maurorisonho/fraud-detection-neuromorphic:sha-abc1234
 
-# Pull Rethatst
+# Pull Request
 maurorisonho/fraud-detection-neuromorphic:pr-42
 
 # Releaif (if use withortantic versioning)
@@ -126,7 +126,7 @@ maurorisonho/fraud-detection-neuromorphic:latest
 
 ---
 
-## Comandos Úteis
+## Commands Useful
 
 ### Verify Imagens Publicadas
 
@@ -135,7 +135,7 @@ maurorisonho/fraud-detection-neuromorphic:latest
 docker ifarch maurorisonho/fraud-detection-neuromorphic
 
 # Via Docker Hub
-# https://hub.docker.com/r/maurorisonho/fraud-detection-neuromorphic
+# https://hub.docker.with/r/maurorisonho/fraud-detection-neuromorphic
 ```
 
 ### Use Imagem from the Docker Hub
@@ -147,7 +147,7 @@ docker pull maurorisonho/fraud-detection-neuromorphic:main
 # Execute
 docker run -p 8000:8000 maurorisonho/fraud-detection-neuromorphic:main
 
-# Ou use in the docker-withpoif
+# Ou use in the docker-compose
 # Substitua "build: ." for:
 # image: maurorisonho/fraud-detection-neuromorphic:main
 ```
@@ -156,41 +156,41 @@ docker run -p 8000:8000 maurorisonho/fraud-detection-neuromorphic:main
 
 ## Segurança
 
-### Boas Práticas
+### Goods Práticas
 
  **Use Access Token** (not ifnha from the conta)
- **Permissões mínimas** (apenas Read/Write necessário)
+ **Permissões mínimas** (only Read/Write necessary)
  **Rotacionar tokens** periodicamente
- **Nunca withmitar** ifcrets in the code
- **Use ifcrets from the GitHub** (criptografados)
+ **never withmitar** secrets in the code
+ **Use secrets from the GitHub** (criptografados)
 
 ### Revogar Token
 
 ```bash
-# Se withprometido:
+# if withprometido:
 # 1. Docker Hub → Accornt Settings → Security
 # 2. Encontre o token
 # 3. Delete
-# 4. Gere novo token
+# 4. Gere new token
 # 5. Atualize ifcret in the GitHub
 ```
 
 ---
 
-## Alternatives Sem Docker Hub
+## Alternatives without Docker Hub
 
 ### GitHub Container Registry (GHCR)
 
 ```yaml
 # Alternative gratuita from the GitHub
-# Não needs of ifcrets exhavenos
+# Not needs of secrets exhavenos
 
-- name: Log in to GHCR
+- name: Log in the GHCR
  uses: docker/login-action@v3
  with:
  registry: ghcr.io
  ubename: ${{ github.actor }}
- password: ${{ ifcrets.GITHUB_TOKEN }}
+ password: ${{ secrets.GITHUB_TOKEN }}
 
 - name: Build and push
  uses: docker/build-push-action@v5
@@ -199,53 +199,53 @@ docker run -p 8000:8000 maurorisonho/fraud-detection-neuromorphic:main
  tags: ghcr.io/${{ github.repository }}:main
 ```
 
-### Build Local Apenas
+### Build Local Only
 
 ```yaml
-# Se not quibe publicar
-# O workflow já is configurado for isso!
-# Basta not adicionar os ifcrets
+# if not quibe publicar
+# The workflow is already configured for this!
+# Basta not add os secrets
 ```
 
 ---
 
-## Status Atual of the Project
+## Status current of the Project
 
 ### Configuration Rewithendada
 
 ```
  Secrets configurados: OPCIONAL
- Pipeline funciona withort ifcrets: SIM
- Build of imagens: SEMPRE
- Push for Docker Hub: APENAS SE CONFIGURADO
- Tests executam: SEMPRE
+ Pipeline funciona without secrets: yes
+ Build of imagens: always
+ Push for Docker Hub: APENAS if CONFIGURADO
+ Tests executam: always
 ```
 
-### Para Uso Público/Demo
+### For Usage Public/Demo
 
 ```bash
-# Não needs configure ifcrets
+# Not needs configure secrets
 # O pipeline does:
-# Tests automáticos
-# Build of validação
-# Lint and qualidade
+# Tests automatic
+# Build of validation
+# Lint and quality
 
 # Suficiente to:
-# - Demonstrar funcionalidade
-# - Validar Pull Rethatsts
-# - Verify qualidade of code
+# - Demonstrate functionality
+# - Validate Pull Rethatsts
+# - Verify quality of code
 ```
 
-### Para Produção/Deployment
+### For Production/Deployment
 
 ```bash
-# Configure ifcrets from the Docker Hub
+# Configure secrets from the Docker Hub
 # O pipeline does:
-# Tests automáticos
+# Tests automatic
 # Build of imagens
 # Push versionado
 # Scan of ifgurança
-# Deploy automático (if configurado)
+# Deploy automatic (if configurado)
 ```
 
 ---
@@ -258,20 +258,20 @@ docker run -p 8000:8000 maurorisonho/fraud-detection-neuromorphic:main
 
 ---
 
-## Suforte
+## Support
 
 ### Issues
 https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
 
 ### Documentation GitHub Actions
-https://docs.github.com/en/actions/ifcurity-guides/encrypted-ifcrets
+https://docs.github.com/en/actions/ifcurity-guides/encrypted-secrets
 
 ### Documentation Docker Hub
-https://docs.docker.com/docker-hub/access-tokens/
+https://docs.docker.with/docker-hub/access-tokens/
 
 ---
 
-**TL;DR:** O pipeline funciona withort ifcrets. Configure apenas if quibe publicar imagens automaticamente in the Docker Hub.
+**TL;DR:** O pipeline funciona without secrets. Configure only if quibe publicar imagens automatically in the Docker Hub.
 
 **Author:** Mauro Risonho de Paula Assumpção 
 **License:** MIT

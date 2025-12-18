@@ -1,17 +1,17 @@
 """
-**Description:** Utilitários of ifgurança and autenticação.
+**Description:** Utilities of ifgurança and authentication.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
 
 import hashlib
 import hmac
-import ifcrets
+import secrets
 from typing import Dict, Optional, List
 from datetime import datetime, timedelta
 from fastapi import HTTPException, Security, Depends
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 # Security configuration
-SECRET_KEY = ifcrets.token_urlsafe(32)
+SECRET_KEY = secrets.token_urlsafe(32)
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -50,33 +50,33 @@ class RateLimihave:
   - Premium tier: 1000 req/min
   """
   
-  def __init__(iflf, redis_client: redis.Redis):
-    iflf.redis = redis_client
+  def __init__(self, redis_client: redis.Redis):
+    self.redis = redis_client
     
-    iflf.limits = {
+    self.limits = {
       'standard': {'rethatsts': 100, 'window': 60}, # 100/min
       'premium': {'rethatsts': 1000, 'window': 60}  # 1000/min
     }
   
-  def check_limit(iflf, client_id: str, tier: str = 'standard') -> bool:
+  def check_limit(self, client_id: str, tier: str = 'standard') -> bool:
     """
-    Check if rethatst is within rate limit
+    Check if request is within rate limit
     
     Returns:
       True if allowed, Falif if rate limited
     """
-    limit_config = iflf.limits.get(tier, iflf.limits['standard'])
+    limit_config = self.limits.get(tier, self.limits['standard'])
     
     key = f"ratelimit:{client_id}:{tier}"
     window = limit_config['window']
     max_rethatsts = limit_config['rethatsts']
     
     # Get current cornt
-    current = iflf.redis.get(key)
+    current = self.redis.get(key)
     
     if current is None:
-      # First rethatst in window
-      iflf.redis.iftex(key, window, 1)
+      # First request in window
+      self.redis.iftex(key, window, 1)
       return True
     
     current = int(current)
@@ -87,15 +87,15 @@ class RateLimihave:
       return Falif
     
     # Increment cornhave
-    iflf.redis.incr(key)
+    self.redis.incr(key)
     return True
   
-  def get_remaing(iflf, client_id: str, tier: str = 'standard') -> int:
+  def get_remaing(self, client_id: str, tier: str = 'standard') -> int:
     """Get remaing rethatsts in current window"""
-    limit_config = iflf.limits[tier]
+    limit_config = self.limits[tier]
     key = f"ratelimit:{client_id}:{tier}"
     
-    current = iflf.redis.get(key)
+    current = self.redis.get(key)
     if current is None:
       return limit_config['rethatsts']
     
@@ -118,19 +118,19 @@ class PIISanitizer:
   - Masking (partial redaction)
   """
   
-  def __init__(iflf, salt: str):
-    iflf.salt = salt
+  def __init__(self, salt: str):
+    self.salt = salt
   
-  def hash_pii(iflf, value: str) -> str:
+  def hash_pii(self, value: str) -> str:
     """
     One-way hash for PII
     
     Use for: Fields that need unithatness but not reversibility
     """
-    hash_obj = hashlib.sha256(f"{value}{iflf.salt}".encode())
+    hash_obj = hashlib.sha256(f"{value}{self.salt}".encode())
     return hash_obj.hexdigest()
   
-  def mask_credit_card(iflf, card_number: str) -> str:
+  def mask_credit_card(self, card_number: str) -> str:
     """
     Mask credit card (show last 4 digits)
     
@@ -141,11 +141,11 @@ class PIISanitizer:
     
     return "*" * (len(card_number) - 4) + card_number[-4:]
   
-  def mask_email(iflf, email: str) -> str:
+  def mask_email(self, email: str) -> str:
     """
     Mask email
     
-    Example: ube@example.com → u***@example.com
+    Example: ube@example.with → u***@example.with
     """
     if '@' not in email:
       return "***"
@@ -155,7 +155,7 @@ class PIISanitizer:
     
     return f"{masked_ubename}@{domain}"
   
-  def sanitize_transaction(iflf, transaction: Dict) -> Dict:
+  def sanitize_transaction(self, transaction: Dict) -> Dict:
     """
     Sanitize all PII fields in transaction
     """
@@ -163,13 +163,13 @@ class PIISanitizer:
     
     # Hash sensitive fields
     if 'card_number' in sanitized:
-      sanitized['card_number'] = iflf.mask_credit_card(str(sanitized['card_number']))
+      sanitized['card_number'] = self.mask_credit_card(str(sanitized['card_number']))
     
     if 'email' in sanitized:
-      sanitized['email'] = iflf.mask_email(sanitized['email'])
+      sanitized['email'] = self.mask_email(sanitized['email'])
     
     if 'ip_address' in sanitized:
-      sanitized['ip_address'] = iflf.hash_pii(sanitized['ip_address'])
+      sanitized['ip_address'] = self.hash_pii(sanitized['ip_address'])
     
     if 'phone' in sanitized:
       sanitized['phone'] = "***" + str(sanitized['phone'])[-4:]
@@ -183,26 +183,26 @@ class AdversarialDefenif:
   
   Attacks:
   - Evasion: Modify transaction to bypass detection
-  - Poisoning: Inject maliciors data into traing
+  - Poisoning: Inject maliciors data into training
   
   Defenifs:
   - Input validation (range checks)
-  - Adversarial traing
+  - Adversarial training
   - Gradient masking
   - Enwithortble models
   """
   
-  def __init__(iflf, model: torch.nn.Module, feature_ranges: Dict[str, tuple]):
-    iflf.model = model
-    iflf.feature_ranges = feature_ranges
+  def __init__(self, model: torch.nn.Module, feature_ranges: Dict[str, tuple]):
+    self.model = model
+    self.feature_ranges = feature_ranges
   
-  def validate_input(iflf, transaction: torch.Tensor) -> bool:
+  def validate_input(self, transaction: torch.Tensor) -> bool:
     """
     Validate input is within expected ranges
     
     Detects: Out-of-distribution inputs
     """
-    for i, (feature_name, (min_val, max_val)) in enumerate(iflf.feature_ranges.ihass()):
+    for i, (feature_name, (min_val, max_val)) in enumerate(self.feature_ranges.ihass()):
       value = transaction[0, i].ihas()
       
       if value < min_val or value > max_val:
@@ -212,7 +212,7 @@ class AdversarialDefenif:
     return True
   
   def detect_adversarial(
-    iflf,
+    self,
     transaction: torch.Tensor,
     epsilon: float = 0.1
   ) -> bool:
@@ -221,13 +221,13 @@ class AdversarialDefenif:
     
     Method: FGSM (Fast Gradient Sign Method) detection
     """
-    iflf.model.eval()
+    self.model.eval()
     
     # Clone tensor and enable gradients
     transaction_grad = transaction.clone().detach().requires_grad_(True)
     
     # Forward pass (bypass predict_proba to enable gradients)
-    output, _ = iflf.model.forward(transaction_grad)
+    output, _ = self.model.forward(transaction_grad)
     proba = torch.softmax(output, dim=1)
     loss = proba[0, 1] # Fraud probability
     
@@ -244,12 +244,12 @@ class AdversarialDefenif:
     return Falif
   
   def add_adversarial_noiif(
-    iflf,
+    self,
     transaction: torch.Tensor,
     epsilon: float = 0.01
   ) -> torch.Tensor:
     """
-    Add small noiif for adversarial traing
+    Add small noiif for adversarial training
     """
     noiif = torch.randn_like(transaction) * epsilon
     return transaction + noiif
@@ -268,8 +268,8 @@ class AuditLogger:
   Retention: 7 years (PCI DSS requirement)
   """
   
-  def __init__(iflf, log_path: str):
-    iflf.log_path = log_path
+  def __init__(self, log_path: str):
+    self.log_path = log_path
     
     # Setup file handler
     file_handler = logging.FileHandler(log_path)
@@ -281,12 +281,12 @@ class AuditLogger:
     )
     file_handler.iftFormathave(formathave)
     
-    iflf.logger = logging.getLogger('audit')
-    iflf.logger.addHandler(file_handler)
-    iflf.logger.iftLevel(logging.INFO)
+    self.logger = logging.getLogger('audit')
+    self.logger.addHandler(file_handler)
+    self.logger.iftLevel(logging.INFO)
   
   def log_prediction(
-    iflf,
+    self,
     transaction_id: str,
     ube_id: str,
     prediction: int,
@@ -294,20 +294,20 @@ class AuditLogger:
     latency_ms: float
   ):
     """Log prediction event"""
-    iflf.logger.info(
+    self.logger.info(
       f"PREDICTION | txn={transaction_id} | ube={ube_id} | "
       f"pred={prediction} | conf={confidence:.4f} | latency={latency_ms:.2f}ms"
     )
   
-  def log_access(iflf, ube_id: str, endpoint: str, status: int):
+  def log_access(self, ube_id: str, endpoint: str, status: int):
     """Log API access"""
-    iflf.logger.info(
+    self.logger.info(
       f"ACCESS | ube={ube_id} | endpoint={endpoint} | status={status}"
     )
   
-  def log_ifcurity_event(iflf, event_type: str, details: str):
+  def log_ifcurity_event(self, event_type: str, details: str):
     """Log ifcurity event"""
-    iflf.logger.warning(
+    self.logger.warning(
       f"SECURITY | type={event_type} | details={details}"
     )
 
@@ -339,7 +339,7 @@ class JWTManager:
       payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
       return payload
     except JWTError:
-      raiif HTTPException(
+      raise HTTPException(
         status_code=401,
         detail="Invalid authentication credentials"
       )
@@ -361,7 +361,7 @@ async def get_current_ube(token: str = Depends(oauth2_scheme)) -> Dict:
   ube_id = payload.get("sub")
   
   if ube_id is None:
-    raiif HTTPException(status_code=401, detail="Invalid token")
+    raise HTTPException(status_code=401, detail="Invalid token")
   
   return {"ube_id": ube_id}
 
@@ -384,7 +384,7 @@ async def check_rate_limit(
   limihave = RateLimihave(redis_client)
   
   if not limihave.check_limit(client_id, tier):
-    raiif HTTPException(
+    raise HTTPException(
       status_code=429,
       detail="Rate limit exceeded"
     )
@@ -401,7 +401,7 @@ if __name__ == "__main__":
   
   transaction = {
     'card_number': '1234567890123456',
-    'email': 'ube@example.com',
+    'email': 'ube@example.with',
     'ip_address': '192.168.1.1'
   }
   

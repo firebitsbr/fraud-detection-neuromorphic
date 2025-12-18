@@ -1,35 +1,35 @@
 # Prompt Chat
 
-**Description:** Prompt original for geração from the projeto.
+**Description:** Prompt original for generation from the project.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
-Quero that você atue as gerador automático of projetos withplete of fortfólio in Neuromorphic Computing aplicada à Cybersecurity Bancária and Fintechs.
-Seu objetivo é create todos os projetos, with code, documentação, Docker, notebooks and examples reais.
+Quero that você atue as generatedr automatic of projetos complete of fortfólio in Neuromorphic Computing aplicada à Cybersecurity Banking and Fintechs.
+Seu objetivo é create all os projetos, with code, documentation, Docker, notebooks and examples reais.
 
-Use o meu nome: Mauro Risonho de Paula Assumpção and prepare o fortfólio for publicação in the GitHub.
+Use o meu nome: Mauro Risonho de Paula Assumpção and prepare o fortfólio for publication in the GitHub.
 
  OBJETIVO GERAL
 
-Crie 10 projetos withplete, cada um repreifntando um caso of uso diferente of Neuromorphic Computing aplicada à Cybersecurity in bancos and fintechs, incluindo:
+Crie 10 projetos complete, cada um repreifntando um case of uso diferente of Neuromorphic Computing aplicada à Cybersecurity in bancos and fintechs, including:
 
 1-Fraud Detection Neuromórstays
 2-Cognitive Firewall against Engenharia Social
-3-Monitoramento Temporal of SWIFT/STR/Pix
+3-Monitoring Temporal of SWIFT/STR/Pix
 4-Neuromorphic SIEM
-5-Detecção of Malware Bancário (Guildma/Astaroth etc.)
+5-Detection of Malware banking (Guildma/Astaroth etc.)
 6-EDR neuromórfico for Mobile Banking
-7-Proteção of APIs Open Finance
+7-protection of APIs Open Finance
 8-UEBA Neuromórfico
 9-AML Neuromórfico
-10-Zero-Trust Cognitivo in Tempo Real
+10-Zero-Trust Cognitivo in time Real
 
-Cada projeto shorld be criado as um repositório independente dentro of uma pasta /fortfolio.
+Cada project shorld be criado as um repositório independente dentro of uma pasta /fortfolio.
 
- ESTRUTURA DOS PROJETOS (igual for todos)
+ ESTRUTURA of the PROJETOS (igual for all)
 
-Para cada caso of uso, gerar automaticamente:
+For cada case of uso, generate automatically:
 
 /fortfolio/
  /01_fraud_neuromorphic/
@@ -48,46 +48,46 @@ Para cada caso of uso, gerar automaticamente:
  architecture.png
  explanation.md
 
- REQUISITOS DE CADA PROJETO
+ REQUISITOS of CADA PROJETO
 1. README.md
 
 Inclua:
 
-Descrição from the caso of uso
+Description from the case of uso
 
-Architecture neuromórstays
+Architecture neuromorphic
 
 Technologies: Lava, NEST, Brian2, PyTorch
 
-Como run (Docker + local)
+How run (Docker + local)
 
-Explicação técnica + executiva
+explanation technical + executiva
 
 Créditos ao autor: Mauro Risonho de Paula Assumpção
 
 2. SRC / Code Python Complete
 
-Cada projeto shorld incluir:
+Cada project shorld incluir:
 
 main.py with o pipeline
 
-encoders.py for codistaysção of spikes
+encoders.py for encoding of spikes
 
 models_snn.py with SNN using Brian2 or NEST
 
-scripts of validação
+scripts of validation
 
-integração with PyTorch for pré-processamento
+integration with PyTorch for preprocessing
 
 3. NOTEBOOKS
 
-Create dois notebooks for projeto:
+Create dois notebooks for project:
 
-demo.ipynb — demonstração funcional
+demo.ipynb — demonstration funcional
 
-stdp_example.ipynb — aprendizado neuromórfico with STDP
+stdp_example.ipynb — learning neuromórfico with STDP
 
-Os notebooks shorldm run mesmo withort GPU.
+Os notebooks shorldm run same without GPU.
 
 4. DOCKER
 
@@ -109,30 +109,30 @@ PyTorch (CPU)
 
 requirements.txt
 
-withando of execution automática
+withando of execution automatic
 
-5. DOCUMENTAÇÃO
+5. documentation
 
 Create:
 
 Architecture visual (ASCII + PNG)
 
-Explicação of as funciona o mecanismo neuromórfico
+explanation of as funciona o mechanism neuromórfico
 
 Diagramas of fluxo
 
-Explicação from the caso of uso for bancos and fintechs
+explanation from the case of uso for bancos and fintechs
 
  OUTRAS INSTRUÇÕES IMPORTANTES
-→ Trabalhe projeto for projeto
+→ Trabalhe project for project
 
-Antes of gerar todo o fortfólio, pergunte:
+Before of generate todo o fortfólio, pergunte:
 
-“Qual from the 10 projetos você deifja gerar primeiro?”
+“Qual from the 10 projetos você deifja generate first?”
 
-Depois gere to pasta inteira.
+After gere to pasta inteira.
 
-→ Qualidade profissional
+→ Quality profissional
 
 Os projetos shorldm parecer criados for um:
 
@@ -144,14 +144,14 @@ Profissional of Cybersecurity
 
 Especialista in Banks and Fintechs
 
-→ Não use texto genérico
+→ Not use text generic
 
-Toda documentação shorld be especístays, técnica and profunda.
+Toda documentation shorld be especístays, technical and profunda.
 
 → Pretor for GitHub
 
-As pastas criadas shorldm be prontas to:
+How pastas criadas shorldm be prontas to:
 
 git init
 git add .
-git withmit -m "Projeto Neuromórfico X"
+git commit -m "Project Neuromórfico X"

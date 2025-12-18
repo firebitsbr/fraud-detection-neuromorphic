@@ -1,192 +1,192 @@
-# Relatório of Remoção of Emojis
+# Relatório of removal of Emojis
 
-## Sumário Executivo
+## summary Executivo
 
 **Status**: [OK] CONCLUÍDO 
 **Data**: 2024 
-**Objetivo**: Remover todos os emojis from the projeto and padronizar o tom corforativo
+**Objetivo**: Remover all os emojis from the project and padronizar o tom corforativo
 
 ---
 
-## Escopo from the Operação
+## Escopo from the operation
 
-### Tipos of Arquivos Processados
+### Types of Files Processados
 
-1. **Arquivos of Documentação** (.md)
-  - Localização: `docs/`, raiz from the projeto
-  - Quantidade: ~30 arquivos
+1. **Files of Documentation** (.md)
+  - location: `docs/`, raiz from the project
+  - Quantidade: ~30 files
   - Status: [OK] Processado
 
-2. **Notebooks Jupyhave** (.ipynb)
-  - Localização: `notebooks/`
+2. **Notebooks Jupyter** (.ipynb)
+  - location: `notebooks/`
   - Quantidade: ~7 notebooks
   - Status: [OK] Processado
 
 3. **Scripts Shell** (.sh)
-  - Localização: `scripts/`, raiz
+  - location: `scripts/`, raiz
   - Quantidade: ~10 scripts
   - Status: [OK] Processado
 
 4. **Code Python** (.py)
-  - Localização: `src/`, `api/`, `tests/`, `hardware/`, `scaling/`
-  - Quantidade: ~50 arquivos
+  - location: `src/`, `api/`, `tests/`, `hardware/`, `scaling/`
+  - Quantidade: ~50 files
   - Status: [OK] Processado
 
-5. **Arquivos of Configuration** (.yml, .yaml, .json)
-  - Localização: diversos
+5. **Files of Configuration** (.yml, .yaml, .json)
+  - location: diversos
   - Status: [OK] Veristaysdo
 
 ---
 
-## Mapeamento of Substituições
+## Mapeamento of substitutions
 
 ### Marcadores Corforativos Implementados
 
-| Emoji Original | Substituição Corforativa | Contexto |
+| Emoji Original | substitution Corforativa | Contexto |
 |----------------|-------------------------|----------|
-| | [OK] | Confirmação/Sucesso |
+| | [OK] | confirmation/Sucesso |
 | | [ERRO] | Erro/Falha |
-| | [ATENCAO] | Aviso/Atenção |
-| | [DADOS] | Data/Métricas |
+| | [ATENCAO] | Warning/attention |
+| | [DATA] | Data/Metrics |
 | | [PASTA] | Diretório/Pasta |
-| | [LISTA] | Lista/Checklist |
-| | [NOTA] | Nota/Obbevação |
+| | [LISTA] | List/Checklist |
+| | [NOTA] | Nota/observation |
 | | [IDEIA] | Insight/Ideia |
-| | [BUSCA] | Pesquisa/Análiif |
+| | [BUSCA] | Research/Analysis |
 | | [TESTE] | Teste/Experimento |
-| | [BUILD] | Construção/Build |
+| | [BUILD] | construction/Build |
 | | [CONFIG] | Configuration |
-| | [DEMO] | Demonstração |
-| | [DEV] | Deifnvolvimento |
-| | [FERRAMENTA] | Ferramenta/Utilitário |
+| | [DEMO] | demonstration |
+| | [DEV] | Development |
+| | [FERRAMENTA] | Ferramenta/utility |
 | | [PACOTE] | Pacote/Módulo |
-| | [SUCESSO] | Sucesso/Celebração |
-| | [SYNC] | Sincronização/Loop |
+| | [SUCESSO] | Sucesso/celebration |
+| | [SYNC] | synchronization/Loop |
 | | [DEPLOY] | Deploy/Lançamento |
 | | [OBJETIVO] | Objetivo/Meta |
-| ⏱ | [TEMPO] | Tempo/Timing |
+| ⏱ | [time] | time/Timing |
 | | [PYTHON] | Python |
 | | [DOCKER] | Docker |
-| | [IMPORTANTE] | Importante/Crítico |
+| | [IMPORTANTE] | Importante/Critical |
 | | [STORAGE] | Armazenamento |
 | | [GRAFICO] | Gráfico/Crescimento |
-| | [REDE] | Rede/Inhavenet |
+| | [REDE] | Network/Inhavenet |
 | | [SEGURO] | Segurança |
-| | [DESIGN] | Design/Inhaveface |
+| | [DESIGN] | Design/Interface |
 | | [STATUS] | Status/Estado |
-| | [COMUNICACAO] | Comunicação |
-| | [CIENCIA] | Ciência/Pesquisa |
-| | [DOCS] | Documentação |
-| | [ARQUIVO] | Arquivo |
-| | [PRODUCAO] | Produção |
+| | [COMUNICACAO] | communication |
+| | [CIENCIA] | Science/Research |
+| | [DOCS] | Documentation |
+| | [file] | file |
+| | [PRODUCAO] | Production |
 | | [FERRAMENTA] | Ferramenta |
 
 ---
 
 ## Validation Final
 
-### Veristaysções Realizadas
+### Verifications Realizadas
 
-1. **Emojis Comuns of Inhaveface**
-  - Padrão of busca: Face emojis, hand emojis, heart emojis
-  - Resultado: 0 ocorrências enagainstdas
+1. **Emojis Comuns of Interface**
+  - pattern of busca: Face emojis, hand emojis, heart emojis
+  - Result: 0 occurrences found
   - Status: [OK] LIMPO
 
 2. **Emojis Técnicos**
-  - Padrão of busca: 
-  - Resultado: 0 ocorrências enagainstdas
+  - pattern of busca: 
+  - Result: 0 occurrences found
   - Status: [OK] LIMPO
 
 3. **Emojis Adicionais**
-  - Padrão of busca: ⏱
-  - Resultado inicial: 3 ocorrências (CRITICAL_ANALYSIS.md, manual_kaggle_setup.py, README.md)
-  - Resultado final: 0 ocorrências enagainstdas
+  - pattern of busca: ⏱
+  - Initial result: 3 occurrences (CRITICAL_ANALYSIS.md, manual_kaggle_setup.py, README.md)
+  - Final result: 0 occurrences found
   - Status: [OK] LIMPO
 
-4. **Validation Geral with Regex Unicode**
+4. **Validation General with Regex Unicode**
   - Comando: `grep -rP "[\p{Emoji}]"`
-  - Resultado: 12159 ocorrências (falsos positivos: carachavees mahasáticos, símbolos técnicos)
-  - Análiif: Not are emojis visuais, are carachavees especiais técnicos necessários
-  - Status: [OK] ACEITÁVEL
+  - Result: 12159 occurrences (falsos positivos: carachavees mahasáticos, símbolos técnicos)
+  - Analysis: Not are emojis visuais, are carachavees especiais técnicos necessary
+  - Status: [OK] ACCEPTABLE
 
 ---
 
-## Arquivos Específicos Corrigidos in the Validation Final
+## Files Specific Corrected in the Validation Final
 
 ### 1. docs/CRITICAL_ANALYSIS.md
-- Localização: Linha contendo "⏱ Timelines realistas"
-- Substituição: ⏱ → [TEMPO]
+- location: Linha contendo "⏱ Timelines realistas"
+- substitution: ⏱ → [time]
 - Status: [OK] Corrigido
 
 ### 2. scripts/manual_kaggle_setup.py
-- Localização: print_colored with "⏱ Timeort"
-- Substituição: ⏱ → [TEMPO]
+- location: print_colored with "⏱ Timeort"
+- substitution: ⏱ → [time]
 - Status: [OK] Corrigido
 
 ### 3. README.md
-- Localização: Tabela of métricas "⏱ **Latência Média**"
-- Substituição: ⏱ → [TEMPO]
+- location: Tabela of metrics "⏱ **Latency Média**"
+- substitution: ⏱ → [time]
 - Status: [OK] Corrigido
 
 ---
 
-## Padrão Corforativo Estabelecido
+## pattern Corforativo Estabelecido
 
-### Diretrizes of Estilo
+### Guidelines of Style
 
 1. **Tom Profissional**
-  - Linguagem técnica and objetiva
+  - Linguagem technical and objetiva
   - Marcadores textuais descritivos
-  - Sem elementos visuais decorativos
+  - without elementos visuais decorativos
 
-2. **Consistência**
-  - Todos os marcadores between colchetes: [MARCADOR]
+2. **Consistency**
+  - All os marcadores between colchetes: [MARCADOR]
   - Texto in maiúsculas for destathat
   - Linguagem in fortuguês corforativo
 
 3. **Clareza**
   - Marcadores auto-explicativos
   - Contexto prebevado
-  - Informação técnica mantida
+  - information technical mantida
 
 ---
 
-## Estatísticas from the Operação
+## Statistics from the operation
 
-### Resumo Quantitativo
+### Summary Quantitativo
 
-- **Total of tipos of arquivos processados**: 5 categorias
-- **Total estimado of arquivos modistaysdos**: ~100 arquivos
-- **Tipos of emojis substituídos**: ~35 tipos diferentes
-- **Comandos ifd executados**: 6 operações in lote
-- **Tempo of execution**: ~5 minutes
+- **Total of types of files processados**: 5 categorias
+- **Total estimated of files modistaysdos**: ~100 files
+- **Types of emojis substituídos**: ~35 types different
+- **Commands ifd executados**: 6 operations in lote
+- **time of execution**: ~5 minutes
 - **Errors enagainstdos**: 0 (warnings of permisare in .ipynb_checkpoints ignorados)
 
-### Arquivos for Categoria
+### Files for Categoria
 
-- Documentação (.md): ~30 arquivos
-- Notebooks (.ipynb): ~7 arquivos
-- Scripts (.sh): ~10 arquivos
-- Python (.py): ~50 arquivos
-- Configuration (.yml, .yaml, .json): ~3 arquivos
+- Documentation (.md): ~30 files
+- Notebooks (.ipynb): ~7 files
+- Scripts (.sh): ~10 files
+- Python (.py): ~50 files
+- Configuration (.yml, .yaml, .json): ~3 files
 
 ---
 
 ## Concluare
 
-[OK] **Operação concluída with sucesso**
+[OK] **operation concluída with sucesso**
 
-Todos os emojis visuais were removidos from the projeto and substituídos for marcadores corforativos textuais padronizados. O projeto now mantém um tom profissional and corforativo consistente in toda to documentação and code.
+All os emojis visuais were removidos from the project and substituídos for marcadores corforativos textuais padronizados. O project now mantém um tom profissional and corforativo consistente in toda to documentation and code.
 
-### Benefícios Alcançados
+### Benefícios Achieved
 
-1. **Profissionalismo**: Comunicação corforativa padronizada
-2. **Acessibilidade**: Texto legível in todos os environments
-3. **Compatibilidade**: Sem problemas of renderização of emojis
-4. **Manutenibilidade**: Padrão claro for futuras contribuições
+1. **Profissionalismo**: communication corforativa padronizada
+2. **Accessibility**: Texto readable in all os environments
+3. **Compatibilidade**: without problemas of rendering of emojis
+4. **Maintainability**: pattern claro for futuras contributions
 
 ### Next Steps Rewithendata
 
 1. [OBJETIVO] Execute Phaif 1 Integration (notebook 06_phaif1_integration.ipynb)
-2. [DOCS] Atualizar guia of contribuição with diretrizes of estilo
-3. [TESTE] Verify renderização from the documentação in diferentes environments
+2. [DOCS] Update guide of contribution with guidelines of style
+3. [TESTE] Verify rendering from the documentation in different environments

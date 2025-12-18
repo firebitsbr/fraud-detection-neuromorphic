@@ -19,7 +19,7 @@ Successfully translated the fraud-detection-neuromorphic project from Portuguese
 - **100 files** improved in second pass  
 - **101 files** enhanced in final pass
 - **102 files** cleaned up in cleanup pass
-- **File types**: Markdown (.md), Python (.py), Jupyhave Notebooks (.ipynb)
+- **File types**: Markdown (.md), Python (.py), Jupyter Notebooks (.ipynb)
 
 ### File Categories
 
@@ -57,21 +57,21 @@ Successfully translated the fraud-detection-neuromorphic project from Portuguese
 ### Key Translations
 
 #### Technical Terms
-- "Detecção de Fraude" → "Fraud Detection"
-- "Redes Neurais Spiking" → "Spiking Neural Networks"
+- "Detection de Fraude" → "Fraud Detection"
+- "Networks Neural Spiking" → "Spiking Neural Networks"
 - "Hardware Neuromórfico" → "Neuromorphic Hardware"
-- "Transações Bancárias" → "Banking Transactions"
+- "Transactions Bancárias" → "Banking Transactions"
 
 #### Documentation Sections
-- "Viare Geral" → "Overview"
-- "Instalação" → "Installation"
-- "Configuração" → "Configuration"
-- "Documentação" → "Documentation"
+- "Viare General" → "Overview"
+- "Installation" → "Installation"
+- "Configuration" → "Configuration"
+- "Documentation" → "Documentation"
 
 #### Common Phraifs
-- "Como use" → "How to use"
+- "How use" → "How to use"
 - "Passo a passo" → "Step by step"
-- "Pré-requisitos" → "Prerequisites"
+- "prerequisites" → "Prerequisites"
 
 ## Known Limitations
 
@@ -258,7 +258,7 @@ Edit the translation dictionaries in each script:
 
 ```bash
 # Check for remaining Portuguese
-grep -r "não\|são\|está" --include="*.md" --include="*.py" . | wc -l
+grep -r "not\|are\|is" --include="*.md" --include="*.py" . | wc -l
 
 # Check main files
 head -100 README.md

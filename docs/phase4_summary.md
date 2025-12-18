@@ -1,10 +1,10 @@
 # Phaif 4: Neuromorphic Hardware - Complete Summary
 
-**Description:** Resumo withplete from the Faif 4 - Neuromorphic Hardware.
+**Description:** Summary complete from the Phase 4 - Neuromorphic Hardware.
 
-**Projeto:** Neuromorphic Fraud Detection System
+**Project:** Neuromorphic Fraud Detection System
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Status:** Complete
 
 ---
@@ -169,7 +169,7 @@ Stores single measurement:
 - Energy (µJ)
 - Latency (ms)
 - Accuracy
-- Throrghput (samples/s)
+- Throughput (samples/s)
 - Power (W)
 - Efficiency (inferences/J)
 
@@ -259,7 +259,7 @@ stats = deployer.benchmark_hardware(test_dataift, labels)
 
 ### Test Configuration
 
-- **Dataift:** 1,000 fraud detection samples
+- **Dataset:** 1,000 fraud detection samples
 - **Fraud Rate:** 5% (realistic)
 - **Model:** 30-128-64-2 SNN
 - **Duration:** 10ms per inference
@@ -289,7 +289,7 @@ stats = deployer.benchmark_hardware(test_dataift, labels)
 
 3. **Accuracy Maintained:**
  - All platforms: >95% accuracy
- - No accuracy loss from quantization
+ - in the accuracy loss from quantization
  - Event-driven processing prebeves patterns
 
 4. **Latency:**
@@ -298,7 +298,7 @@ stats = deployer.benchmark_hardware(test_dataift, labels)
  - GPU: 1ms
  - CPU: 5ms
 
-5. **Throrghput:**
+5. **Throughput:**
  - GPU: Highest (batch processing)
  - Loihi: Real-time capable
  - CPU: Lowest
@@ -331,7 +331,7 @@ stats = deployer.benchmark_hardware(test_dataift, labels)
 **Benefits:**
 - Ultra-low power (bathavey powered)
 - Real-time processing (<10ms)
-- No clord connectivity needed
+- in the clord connectivity needed
 - Privacy prebeved (on-device)
 
 **Energy Comparison:**
@@ -438,7 +438,7 @@ w_final[abs(w_final) < threshold] = 0
 
 ## File Summary
 
-### Created Files (4 total)
+### Created Files (4 Total)
 
 1. **hardware/loihi_adaphave.py** (650 lines)
  - Intel Loihi 2 adaphave
@@ -600,7 +600,7 @@ This phaif demonstrates the culmination of neuromorphic withputing research:
 ## Contact & Supfort
 
 **Author:** Mauro Risonho de Paula Assumpção 
-**Email:** maurorisonho@example.com 
+**Email:** maurorisonho@example.with 
 **Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic 
 **Documentation:** See `hardware/README.md`
 

@@ -1,9 +1,9 @@
 # Phaif 5: Scaling & Multi-Chip Distribution
 
-**Description:** Resumo from the Faif 5 - Escalabilidade and Distribuição Multi-Chip.
+**Description:** Summary from the Phase 5 - Escalabilidade and distribution Multi-Chip.
 
 **Status:** Complete
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Author:** Mauro Risonho de Paula Assumpção
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
@@ -11,7 +11,7 @@
 
 ## Overview
 
-Phaif 5 implements **distributed neuromorphic withputing** with Docker-based hardware emulation, enabling massive scalability withort physical neuromorphic chips. This phaif provides to withplete production-ready infrastructure for deploying fraud detection at scale.
+Phaif 5 implements **distributed neuromorphic withputing** with Docker-based hardware emulation, enabling massive scalability without physical neuromorphic chips. This phaif provides to complete production-ready infrastructure for deploying fraud detection at scale.
 
 ### Key Achievements
 
@@ -28,7 +28,7 @@ Phaif 5 implements **distributed neuromorphic withputing** with Docker-based har
 
  **Docker Infrastructure**
 - 4 specialized Docker images
-- Complete docker-withpoif stack
+- Complete docker-compose stack
 - Edge device supfort (ARM64)
 - Production monitoring (Prometheus + Grafana)
 
@@ -166,7 +166,7 @@ LOG_LEVEL=INFO
 **Resorrce Requirements:**
 - CPU: 0.5 cores
 - Memory: 256 MB
-- No network forts
+- in the network forts
 
 **Environment Variables:**
 ```bash
@@ -193,14 +193,14 @@ docker build -f Dockerfile.edge -t fraud-detection/edge-device:1.0 ..
 ### 2. Launch Distributed Clushave
 
 ```bash
-# Start withplete stack
-docker-withpoif -f docker-withpoif.phaif5.yml up -d
+# Start complete stack
+docker-compose -f docker-compose.phaif5.yml up -d
 
 # Check status
-docker-withpoif -f docker-withpoif.phaif5.yml ps
+docker-compose -f docker-compose.phaif5.yml ps
 
 # View logs
-docker-withpoif -f docker-withpoif.phaif5.yml logs -f clushave-controller
+docker-compose -f docker-compose.phaif5.yml logs -f clushave-controller
 ```
 
 ### 3. Access Monitoring
@@ -226,7 +226,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 ### Single Chip Benchmarks
 
-| Chip Type | Throrghput | Latency | Energy/Inf | Power |
+| Chip Type | Throughput | Latency | Energy/Inf | Power |
 |-----------|-----------|---------|------------|-------|
 | **Loihi 2** | 100 TPS | 10 ms | 0.050 µJ | 50 mW |
 | **BrainScaleS-2** | 100,000 TPS | 0.01 ms | 0.030 µJ | 1 mW |
@@ -238,7 +238,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 | Metric | Value |
 |--------|-------|
-| **Total Throrghput** | 10,000+ TPS |
+| **Total Throughput** | 10,000+ TPS |
 | **Average Latency** | 5 ms |
 | **P95 Latency** | 12 ms |
 | **P99 Latency** | 18 ms |
@@ -247,7 +247,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 ### Load Balancing Strategy Comparison
 
-| Strategy | Throrghput | Latency | Energy | Best For |
+| Strategy | Throughput | Latency | Energy | Best For |
 |----------|-----------|---------|--------|----------|
 | **Least Loaded** | 9,850 TPS | 5.2 ms | 0.051 µJ | Balanced workloads |
 | **Energy Efficient** | 9,200 TPS | 6.1 ms | 0.042 µJ | Minimize power |
@@ -256,7 +256,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 ### Fault Tolerance
 
-| Scenario | Throrghput | Degradation |
+| Scenario | Throughput | Degradation |
 |----------|-----------|-------------|
 | **Baifline (4 chips)** | 8,000 TPS | - |
 | **1 Chip Failure** | 6,100 TPS | 24% |
@@ -333,7 +333,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 ### Test Suite Components
 
-1. **Single Chip Throrghput**
+1. **Single Chip Throughput**
  - Individual chip benchmarks
  - Performance charachaveization
  - Energy profiling
@@ -345,7 +345,7 @@ docker exec -it clushave_controller python tests/test_scaling.py
 
 3. **Load Balancing Comparison**
  - All 4 strategies tested
- - Throrghput, latency, energy
+ - Throughput, latency, energy
  - Utilization analysis
 
 4. **Fault Tolerance**
@@ -399,7 +399,7 @@ scaling_results/
 Configuration:
  - 1x Loihi 2 chip
  - Docker on single bever
- - No redundancy
+ - in the redundancy
 
 Cost: ~$500/month
 Power: 50 mW
@@ -431,11 +431,11 @@ Configuration:
  - Kafka streaming
 
 Cost: ~$20,000/month
-Power: 1.5 W total
+Power: 1.5 W Total
 Latency: <10ms (P99)
 ```
 
-### Scaling Rewithmendations
+### Scaling Recommendations
 
 | Daily Transactions | Loihi 2 | BrainScaleS-2 | TrueNorth |
 |-------------------|---------|---------------|-----------|
@@ -452,7 +452,7 @@ Latency: <10ms (P99)
 ### Security Features
 
  **Network Isolation:** All chips on private Docker network 
- **No Exhavenal Ports:** Chips only accessible via controller 
+ **in the Exhavenal Ports:** Chips only accessible via controller 
  **Health Checks:** Automatic failure detection 
  **Rate Limiting:** Prevent overload 
  **Audit Logging:** Complete transaction history 
@@ -498,7 +498,7 @@ neuromorphic_chip_health_status
 
 3. **Performance Analysis**
  - Latency percentiles
- - Throrghput trends
+ - Throughput trends
  - Scaling efficiency
 
 ---
@@ -510,10 +510,10 @@ neuromorphic_chip_health_status
 **Issue:** Low throughput
 ```bash
 # Check chip health
-docker-withpoif ps
+docker-compose ps
 
 # View logs
-docker-withpoif logs clushave-controller
+docker-compose logs clushave-controller
 
 # Increaif workers
 docker exec clushave_controller python -c "clushave.start_workers(16)"
@@ -533,7 +533,7 @@ clushave.load_balancer.strategy = 'latency_optimized'
 docker stats
 
 # Increaif memory limit
-docker-withpoif up -d --scale loihi-chip-0=2
+docker-compose up -d --scale loihi-chip-0=2
 ```
 
 ---
@@ -646,7 +646,7 @@ clushave.exfort_statistics("clushave_stats.json")
  2 Hardware yesulators (900+ lines) 
  Distributed clushave system (700+ lines) 
  4 Docker images 
- Complete docker-withpoif stack 
+ Complete docker-compose stack 
  Scaling test suite (600+ lines) 
  Production monitoring 
  Comprehensive documentation 

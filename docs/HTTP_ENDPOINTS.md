@@ -1,19 +1,19 @@
-# HTTP Endpoints - Projeto Neuromórfico
+# HTTP Endpoints - Project Neuromórfico
 
-**Description:** Documentação from the endpoints HTTP from the projeto.
+**Description:** Documentation from the endpoints HTTP from the project.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
-## Status: TODAS AS PORTAS FUNCIONANDO
+## Status: all AS PORTAS FUNCIONANDO
 
-Todas as 4 fortas now possuem bevidores HTTP with FastAPI respwherendo corretamente.
+All as 4 fortas now possuem bevidores HTTP with FastAPI respwherendo correctly.
 
 ---
 
 ## Endpoints Disponíveis
 
-### **Port 8000 - API Principal**
+### **Port 8000 - API Main**
 ```bash
 curl http://localhost:8000/
 curl http://localhost:8000/health
@@ -23,11 +23,11 @@ curl http://localhost:8000/docs
 **Serviço:** Neuromorphic Fraud Detection API 
 **Framework:** FastAPI + Uvicorn 
 **Endpoints:**
-- `GET /` - Informações from the beviço
-- `GET /health` - Status from the saúde from the sistema
-- `POST /predict` - Predição of fraud
-- `GET /stats` - Estatísticas of the model
-- `GET /docs` - Documentação Swagger inhaveativa
+- `GET /` - information from the beviço
+- `GET /health` - Status of the saúde from the system
+- `POST /predict` - prediction of fraud
+- `GET /stats` - Statistics of the model
+- `GET /docs` - Documentation Swagger interactive
 
 ---
 
@@ -41,12 +41,12 @@ curl -X POST "http://localhost:8001/inference?num_samples=5"
 **Serviço:** Intel Loihi 2 Neuromorphic Simulator 
 **Framework:** FastAPI + Uvicorn 
 **Endpoints:**
-- `GET /` - Informações from the beviço
-- `GET /health` - Status from the yesulador (cores, neurônios, utilização)
-- `GET /stats` - Estatísticas detalhadas from the chip
-- `POST /inference?num_samples=N` - Execute N inferências
+- `GET /` - information from the beviço
+- `GET /health` - Status of the simulator (cores, neurons, utilization)
+- `GET /stats` - Statistics detailed from the chip
+- `POST /inference?num_samples=N` - Execute N inferences
 
-**Example of resposta:**
+**Example of response:**
 ```json
 {
  "num_inferences": 3,
@@ -74,15 +74,15 @@ curl -X POST "http://localhost:8002/inference?num_samples=5"
 **Serviço:** BrainScaleS-2 Analog Neuromorphic Simulator 
 **Framework:** FastAPI + Uvicorn 
 **Endpoints:**
-- `GET /` - Informações from the beviço
-- `GET /health` - Status from the yesulador (wafers, neurônios, speedup)
-- `GET /stats` - Configuration from the wafer and estatísticas
-- `POST /inference?num_samples=N` - Execute N inferências
+- `GET /` - information from the beviço
+- `GET /health` - Status of the simulator (wafers, neurons, speedup)
+- `GET /stats` - Configuration from the wafer and statistics
+- `POST /inference?num_samples=N` - Execute N inferences
 
 **Characteristics:**
-- 512 neurônios for wafer
-- Speedup of 1000x (haspo biológico)
-- Computação analógica ultra-rápida
+- 512 neurons for wafer
+- Speedup of 1000x (time biological)
+- computation analógica ultra-fast
 
 ---
 
@@ -97,39 +97,39 @@ curl -X POST "http://localhost:8003/inference?num_samples=10"
 **Serviço:** Distributed Neuromorphic Clushave Controller 
 **Framework:** FastAPI + Uvicorn 
 **Endpoints:**
-- `GET /` - Informações from the beviço
-- `GET /health` - Status from the clushave (chips, workers, capacidade)
-- `GET /stats` - Estatísticas from the clushave
-- `GET /clushave` - Informação detalhada of configuration from the chips
-- `POST /inference?num_samples=N` - Processar N transações in the clushave
+- `GET /` - information from the beviço
+- `GET /health` - Status of the clushave (chips, workers, capacidade)
+- `GET /stats` - Statistics from the clushave
+- `GET /clushave` - information detalhada of configuration from the chips
+- `POST /inference?num_samples=N` - Processar N transactions in the clushave
 
 **Configuration from the Clushave:**
 - 4 chips: 2x Loihi2, 1x BrainScaleS2, 1x TrueNorth
-- Capacidade total: 2300 TPS
-- Balanceamento of carga: least_loaded
+- Capacidade Total: 2300 TPS
+- balancing of carga: least_loaded
 - 8 workers tolelos
 
 ---
 
 ## Tests Completes
 
-### Test Todos os Endpoints of Saúde
+### Test All os Endpoints of Saúde
 ```bash
-for fort in 8000 8001 8002 8003; do
+for fort in 8000 8001 8002 8003; of the
  echo "=== Port $fort/health ==="
  curl -s http://localhost:$fort/health | jq .
 done
 ```
 
-### Test Todos os Endpoints Raiz
+### Test All os Endpoints Raiz
 ```bash
-for fort in 8000 8001 8002 8003; do
+for fort in 8000 8001 8002 8003; of the
  echo "Port $fort:"
  curl -s http://localhost:$fort/ | jq -c .
 done
 ```
 
-### Test Inferência in Todos os Simuladores
+### Test Inference in All os Simuladores
 ```bash
 # Loihi
 curl -X POST "http://localhost:8001/inference?num_samples=3" | jq .
@@ -143,13 +143,13 @@ curl -X POST "http://localhost:8003/inference?num_samples=3" | jq .
 
 ---
 
-## Status from the Containers
+## Status of the Containers
 
 ```bash
-docker withpoif ps
+docker compose ps
 ```
 
-**Resultado:**
+**Result:**
 - fraud_api (8000) - Up, healthy
 - fraud_loihi (8001) - Up, healthy
 - fraud_brainscales (8002) - Up, healthy
@@ -160,48 +160,48 @@ docker withpoif ps
 
 ---
 
-## Modistaysções Implementadas
+## Modifications Implemented
 
-### Arquivos Modistaysdos:
+### Files Modistaysdos:
 
 1. **`hardware/loihi2_yesulator.py`**
- - Adicionado função `run_http_bever()`
+ - Adicionado function `run_http_bever()`
  - FastAPI with rotas: `/`, `/health`, `/stats`, `/inference`
  - Porta 8001
 
 2. **`hardware/brainscales2_yesulator.py`**
- - Adicionado função `run_http_bever()`
+ - Adicionado function `run_http_bever()`
  - FastAPI with rotas: `/`, `/health`, `/stats`, `/inference`
  - Porta 8002
 
 3. **`scaling/distributed_clushave.py`**
- - Adicionado função `run_http_bever()`
+ - Adicionado function `run_http_bever()`
  - FastAPI with rotas: `/`, `/health`, `/stats`, `/inference`, `/clushave`
  - Porta 8003
 
 ### Mudança of Architecture:
 
-**ANTES:**
+**before:**
 - Simuladores eram scripts batch that imprimiam logs
 - Executavam benchmarks in loop infinito
-- Sem withunicação HTTP
+- without communication HTTP
 
-**DEPOIS:**
-- Simuladores are bevidores HTTP withplete
-- Prebevam funcionalidade of benchmark inhavena
+**after:**
+- Simuladores are bevidores HTTP complete
+- Preserve functionality of benchmark internal
 - Expostos via API REST
 - Canm be consultados via curl/browbe
 
 ---
 
-## Monitoramento
+## Monitoring
 
 ### Grafana Dashboard
 ```bash
 open http://localhost:3000
 ```
-Usuário: admin 
-Senha: (configure in the primeiro acesso)
+user: admin 
+Senha: (configure in the first access)
 
 ### Prometheus Metrics
 ```bash
@@ -210,9 +210,9 @@ curl http://localhost:9090/metrics
 
 ---
 
-## Veristaysção Final
+## Verification Final
 
-**Comando único for test tudo:**
+**Comando único for test everything:**
 ```bash
 echo "Testing all endpoints..." && \
 for fort in 8000 8001 8002 8003; from the \
@@ -220,7 +220,7 @@ for fort in 8000 8001 8002 8003; from the \
 done
 ```
 
-**Resultado expected:**
+**Result expected:**
 ```
 Port 8000: Neuromorphic Fraud Detection API
 Port 8001: Intel Loihi 2 Neuromorphic Simulator
@@ -232,9 +232,9 @@ Port 8003: Distributed Neuromorphic Clushave Controller
 
 ## Concluare
 
-**Problem resolvido:** Agora TODAS as fortas (8000, 8001, 8002, 8003) possuem bevidores HTTP funcionais that respwherem to requisições REST.
+**Problem resolvido:** Agora all as fortas (8000, 8001, 8002, 8003) possuem bevidores HTTP funcionais that respwherem to requests REST.
 
-**Antes:** Apenas forta 8000 tinha HTTP 
-**Agora:** 4 fortas with FastAPI + documentação inhaveativa
+**Before:** Only forta 8000 had HTTP 
+**Agora:** 4 fortas with FastAPI + documentation interactive
 
-Todos os yesuladores manhave suas funcionalidades of benchmark originais enquanto expõem APIs HTTP for consultas programáticas.
+All os simulatores manhave suas funcionalidades of benchmark originais while expõem APIs HTTP for consultas programáticas.

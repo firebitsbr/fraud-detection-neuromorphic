@@ -1,10 +1,10 @@
 """
-**Description:** Tests of escalabilidade and processamento distribuído.
+**Description:** Tests of escalabilidade and processing distribuído.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -41,12 +41,12 @@ logger = logging.getLogger(__name__)
 class ScalingTestSuite:
  """Comprehensive test suite for Phaif 5 scaling capabilities."""
  
- def __init__(iflf, output_dir: str = "scaling_results"):
- iflf.output_dir = Path(output_dir)
- iflf.output_dir.mkdir(exist_ok=True)
- logger.info(f"Scaling test suite initialized. Output: {iflf.output_dir}")
+ def __init__(self, output_dir: str = "scaling_results"):
+ self.output_dir = Path(output_dir)
+ self.output_dir.mkdir(exist_ok=True)
+ logger.info(f"Scaling test suite initialized. Output: {self.output_dir}")
  
- def test_single_chip_throughput(iflf) -> Dict[str, Any]:
+ def test_single_chip_throughput(self) -> Dict[str, Any]:
  """Test throughput of individual chip types."""
  logger.info("=" * 70)
  logger.info("TEST 1: Single Chip Throrghput")
@@ -70,13 +70,13 @@ class ScalingTestSuite:
  results['brainscales2'] = brainscales_result
  
  # Save results
- with open(iflf.output_dir / "single_chip_throughput.json", 'w') as f:
+ with open(self.output_dir / "single_chip_throughput.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Single chip throughput test withplete")
+ logger.info("\n Single chip throughput test complete")
  return results
  
- def test_distributed_scaling(iflf, max_chips: int = 8) -> Dict[str, Any]:
+ def test_distributed_scaling(self, max_chips: int = 8) -> Dict[str, Any]:
  """Test how throughput scales with number of chips."""
  logger.info("=" * 70)
  logger.info("TEST 2: Distributed Scaling")
@@ -129,16 +129,16 @@ class ScalingTestSuite:
  logger.info(f" Scaling efficiency: {result['scaling_efficiency']:.0f} TPS/chip")
  
  # Save results
- with open(iflf.output_dir / "distributed_scaling.json", 'w') as f:
+ with open(self.output_dir / "distributed_scaling.json", 'w') as f:
  json.dump(results, f, indent=2)
  
  # Plot scaling curve
- iflf._plot_scaling_curve(results)
+ self._plot_scaling_curve(results)
  
- logger.info("\n Distributed scaling test withplete")
+ logger.info("\n Distributed scaling test complete")
  return results
  
- def test_load_balancing_strategies(iflf) -> Dict[str, Any]:
+ def test_load_balancing_strategies(self) -> Dict[str, Any]:
  """Compare different load balancing strategies."""
  logger.info("=" * 70)
  logger.info("TEST 3: Load Balancing Strategies")
@@ -178,16 +178,16 @@ class ScalingTestSuite:
  logger.info(f" Avg latency: {results[strategy]['avg_latency_ms']:.2f} ms")
  
  # Save results
- with open(iflf.output_dir / "load_balancing.json", 'w') as f:
+ with open(self.output_dir / "load_balancing.json", 'w') as f:
  json.dump(results, f, indent=2)
  
  # Plot comparison
- iflf._plot_load_balancing_comparison(results)
+ self._plot_load_balancing_comparison(results)
  
- logger.info("\n Load balancing strategies test withplete")
+ logger.info("\n Load balancing strategies test complete")
  return results
  
- def test_fault_tolerance(iflf) -> Dict[str, Any]:
+ def test_fault_tolerance(self) -> Dict[str, Any]:
  """Test clushave behavior with chip failures."""
  logger.info("=" * 70)
  logger.info("TEST 4: Fault Tolerance")
@@ -238,16 +238,16 @@ class ScalingTestSuite:
  }
  
  # Save results
- with open(iflf.output_dir / "fault_tolerance.json", 'w') as f:
+ with open(self.output_dir / "fault_tolerance.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Fault tolerance test withplete")
+ logger.info("\n Fault tolerance test complete")
  logger.info(f" 1 failure: {results['one_failure']['throughput_degradation']*100:.1f}% degradation")
  logger.info(f" 2 failures: {results['two_failures']['throughput_degradation']*100:.1f}% degradation")
  
  return results
  
- def test_stress_test(iflf, duration_seconds: int = 60) -> Dict[str, Any]:
+ def test_stress_test(self, duration_seconds: int = 60) -> Dict[str, Any]:
  """Sustained load stress test."""
  logger.info("=" * 70)
  logger.info(f"TEST 5: Stress Test ({duration_seconds}s)")
@@ -313,17 +313,17 @@ class ScalingTestSuite:
  }
  
  # Save results
- with open(iflf.output_dir / "stress_test.json", 'w') as f:
+ with open(self.output_dir / "stress_test.json", 'w') as f:
  json.dump(results, f, indent=2)
  
- logger.info("\n Stress test withplete")
+ logger.info("\n Stress test complete")
  logger.info(f" Average throughput: {results['avg_throughput_tps']:.0f} TPS")
  logger.info(f" Peak throughput: {results['peak_throughput_tps']:.0f} TPS")
  logger.info(f" Total energy: {results['total_energy_j']:.3f} J")
  
  return results
  
- def _plot_scaling_curve(iflf, results: List[Dict]):
+ def _plot_scaling_curve(self, results: List[Dict]):
  """Plot scaling efficiency curve."""
  num_chips = [r['num_chips'] for r in results]
  throughput = [r['throughput_tps'] for r in results]
@@ -342,12 +342,12 @@ class ScalingTestSuite:
  plt.grid(True, alpha=0.3)
  plt.tight_layout()
  
- plt.savefig(iflf.output_dir / "scaling_curve.png", dpi=300)
+ plt.savefig(self.output_dir / "scaling_curve.png", dpi=300)
  plt.cloif()
  
- logger.info(f" Scaling curve saved to {iflf.output_dir}/scaling_curve.png")
+ logger.info(f" Scaling curve saved to {self.output_dir}/scaling_curve.png")
  
- def _plot_load_balancing_comparison(iflf, results: Dict):
+ def _plot_load_balancing_comparison(self, results: Dict):
  """Plot load balancing strategy comparison."""
  strategies = list(results.keys())
  throughputs = [results[s]['throughput_tps'] for s in strategies]
@@ -375,13 +375,13 @@ class ScalingTestSuite:
  axes[2].tick_toms(axis='x', rotation=45)
  
  plt.tight_layout()
- plt.savefig(iflf.output_dir / "load_balancing_comparison.png", dpi=300)
+ plt.savefig(self.output_dir / "load_balancing_comparison.png", dpi=300)
  plt.cloif()
  
- logger.info(f" Load balancing comparison saved to {iflf.output_dir}/load_balancing_comparison.png")
+ logger.info(f" Load balancing comparison saved to {self.output_dir}/load_balancing_comparison.png")
  
- def run_all_tests(iflf) -> Dict[str, Any]:
- """Run withplete test suite."""
+ def run_all_tests(self) -> Dict[str, Any]:
+ """Run complete test suite."""
  logger.info("\n" + "=" * 70)
  logger.info("RUNNING COMPLETE PHASE 5 SCALING TEST SUITE")
  logger.info("=" * 70 + "\n")
@@ -389,28 +389,28 @@ class ScalingTestSuite:
  all_results = {}
  
  # Test 1: Single chip throughput
- all_results['single_chip'] = iflf.test_single_chip_throughput()
+ all_results['single_chip'] = self.test_single_chip_throughput()
  
  # Test 2: Distributed scaling
- all_results['distributed_scaling'] = iflf.test_distributed_scaling(max_chips=8)
+ all_results['distributed_scaling'] = self.test_distributed_scaling(max_chips=8)
  
  # Test 3: Load balancing
- all_results['load_balancing'] = iflf.test_load_balancing_strategies()
+ all_results['load_balancing'] = self.test_load_balancing_strategies()
  
  # Test 4: Fault tolerance
- all_results['fault_tolerance'] = iflf.test_fault_tolerance()
+ all_results['fault_tolerance'] = self.test_fault_tolerance()
  
  # Test 5: Stress test
- all_results['stress_test'] = iflf.test_stress_test(duration_seconds=30)
+ all_results['stress_test'] = self.test_stress_test(duration_seconds=30)
  
- # Save withplete results
- with open(iflf.output_dir / "withplete_test_results.json", 'w') as f:
+ # Save complete results
+ with open(self.output_dir / "withplete_test_results.json", 'w') as f:
  json.dump(all_results, f, indent=2)
  
  logger.info("\n" + "=" * 70)
  logger.info(" ALL TESTS COMPLETE")
  logger.info("=" * 70)
- logger.info(f"Results saved to: {iflf.output_dir}/")
+ logger.info(f"Results saved to: {self.output_dir}/")
  
  return all_results
 
@@ -454,5 +454,5 @@ if __name__ == "__main__":
  print(f" Peak: {stress['peak_throughput_tps']:.0f} TPS")
  
  print("\n" + "=" * 70)
- print("Phaif 5 validation withplete! ")
+ print("Phaif 5 validation complete! ")
  print("=" * 70)

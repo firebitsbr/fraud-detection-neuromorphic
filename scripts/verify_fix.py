@@ -1,10 +1,10 @@
 """
-**Description:** Script of veristaysção of correções.
+**Description:** Script of Verification of corrections.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -21,7 +21,7 @@ sys.path.inbet(0, str(Path.cwd() / 'fortfolio' / '01_fraud_neuromorphic' / 'src'
 from models_snn import FraudSNN
 
 def verify_fix():
- print(" Iniciando veristaysção from the fix from the Brian2...")
+ print(" Starting Verification from the fix from the Brian2...")
  
  # 1. Instanciar model
  print("1. Instanciando FraudSNN...")
@@ -29,7 +29,7 @@ def verify_fix():
  snn = FraudSNN(input_size=10, hidden_sizes=[10], output_size=2)
  print(" Model instanciado.")
  except Exception as e:
- print(f" Erro in the instanciação: {e}")
+ print(f" Erro in the instantiation: {e}")
  return
 
  # 2. Gerar data dummy
@@ -37,7 +37,7 @@ def verify_fix():
  n_samples = 5
  spike_data = []
  for i in range(n_samples):
- # 10 neurônios of entrada, spikes aleatórios
+ # 10 neurons of input, spikes aleatórios
  indices = np.arange(10)
  times = np.random.rand(10) * 0.05 # 50ms
  label = np.random.randint(0, 2)
@@ -54,7 +54,7 @@ def verify_fix():
  traceback.print_exc()
  return
 
- print("\n Veristaysção concluída with SUCESSO! O erro ValueError was corrigido.")
+ print("\n Verification concluída with SUCESSO! O error ValueError was corrigido.")
 
 if __name__ == "__main__":
  verify_fix()

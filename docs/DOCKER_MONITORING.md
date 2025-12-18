@@ -1,67 +1,67 @@
-# Monitoramento Visual of Build Docker
+# Monitoring Visual of Build Docker
 
-**Description:** Monitoramento visual of build Docker.
+**Description:** Monitoring visual of build Docker.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## PROBLEMA RESOLVIDO
 
-Você pediu **VÁRIAS VEZES** for ver o that is acontecendo dentro from the Docker during o build, and now is resolvido!
+Você pediu **VÁRIAS VEZES** for ver what is acontecendo dentro from the Docker during o build, and now is resolvido!
 
-## O Problem
+## The Problem
 
 - Build demora 5-15 minutes
 - Você not via nada acontecendo
-- Impossível knowsr if travor or is progredindo
-- Sem feedback visual
+- Impossible knowsr if travor or is progredindo
+- without feedback visual
 
-## Solução Implementada
+## Solution Implementada
 
-### Opção 1: Script with Progresso Visual (RECOMENDADO)
+### Option 1: Script with progress Visual (RECOMENDADO)
 
 ```bash
 cd /path/to/fraud-detection-neuromorphic/fortfolio/01_fraud_neuromorphic
 ./scripts/build_with_progress.sh
 ```
 
-**O that você verá:**
-- Estágio atual from the build
-- Cada pacote being baixado
+**What você verá:**
+- Current build stage
+- Cada package being baixado
 - Tamanho from the downloads
-- Compilação of pacotes
-- Status of sucesso/erro
-- Informações from the imagem final
-- Log withplete salvo
+- compilation of packages
+- Status of sucesso/error
+- information from the imagem final
+- Log complete except
 
-### Opção 2: Docker Compoif with Progresso Detalhado
-
-```bash
-docker withpoif build --progress=plain base_image
-```
-
-Mostra TODOS os detalhes linha for linha.
-
-### Opção 3: Docker Compoif with Progresso Automático (Padrão)
+### Option 2: Docker Compose with progress Detalhado
 
 ```bash
-docker withpoif build base_image
+docker compose build --progress=plain base_image
 ```
 
-Mostra progresso resumido (o that estava being usesdo before).
+Mostra all os detalhes linha for linha.
+
+### Option 3: Docker Compose with progress Automático (pattern)
+
+```bash
+docker compose build base_image
+```
+
+Mostra progress resumido (what estava being usesdo before).
 
 ## Example of Output
 
 ```
 
- DOCKER BUILD COM MONITORAMENTO EM TEMPO REAL 
- Sishasa of Fraud Detection Neuromorfico 
+ DOCKER BUILD with MONITORAMENTO in time REAL 
+ System of Fraud Detection Neuromorfico 
 
- Iniciando build from the imagem base...
+ Starting build from the imagem base...
 
  Baixando imagem base Python...
 
- Instalando dependências from the sistema...
+ Instalando dependencies from the system...
  ↓ Baixando: numpy
  Tamanho: 16.8 MB
  ↓ Baixando: pandas
@@ -69,26 +69,26 @@ Mostra progresso resumido (o that estava being usesdo before).
  ↓ Baixando: scipy
  Tamanho: 37.7 MB
 
- Instalando pacotes...
+ Instalando packages...
  Compilando: brian2
 
  Pacotes installeds with sucesso!
 
  Salvando imagem...
 
- BUILD CONCLUÍDO COM SUCESSO! 
+ BUILD CONCLUÍDO with SUCESSO! 
 
 ```
 
 ## Next Steps
 
-Depois that o build base haveminar, construa os beviços:
+After that o build base haveminar, construa os services:
 
 ```bash
-docker withpoif build
+docker compose build
 ```
 
-Ou use o script of start that já existe:
+Ou use o script of start that already exists:
 
 ```bash
 ./scripts/start-local.sh
@@ -96,10 +96,10 @@ Ou use o script of start that já existe:
 
 ## Logs
 
-Todos os builds salvam logs in `/tmp/docker_build_*.log` for consulta poshaveior.
+All os builds salvam logs in `/tmp/docker_build_*.log` for query poshaveior.
 
-## Por that demoror tanto for implementar isso?
+## why demoror tanto for implementar this?
 
-Você is certo! Pediu várias vezes and eu shorldria have implementado logo in the primeira vez. Desculpe by the demora.
+Você is right! Pediu várias vezes and eu shorldria have implemented logo in the first vez. Desculpe by the demora.
 
-A solução estava disponível since o início (flag `--progress=plain`), but not was aplicada adequadamente.
+A solution estava available since o start (flag `--progress=plain`), but not was aplicada adequadamente.

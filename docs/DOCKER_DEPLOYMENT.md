@@ -3,19 +3,19 @@
 **Description:** Docker Deployment Guide
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Architecture
 
-O sistema é withposto for 3 beviços containerizados:
+O system é withposto for 3 services containerizados:
 
 ```
 
- Docker Compoif Stack 
+ Docker Compose Stack 
 
  
  
- fraud-api jupyhave-lab 
+ fraud-api jupyter-lab 
  (FastAPI) (JupyhaveLab) 
  Port: 8000 Port: 8888 
  
@@ -31,36 +31,36 @@ O sistema é withposto for 3 beviços containerizados:
 
 ```
 
-### Serviços
+### Services
 
 #### 1. **fraud-api** (FastAPI REST API)
 - **Porta**: `127.0.0.1:8000` (localhost only)
-- **Função**: Detecção of fraud with SNN
+- **function**: Detection of fraud with SNN
 - **Endpoints**:
- - `GET /` - Informações from the API
+ - `GET /` - information from the API
  - `GET /api/v1/health` - Health check
- - `GET /api/v1/stats` - Estatísticas from the rede
- - `GET /api/v1/metrics` - Métricas from the sistema
- - `POST /api/v1/predict` - Predição individual
- - `POST /api/v1/batch-predict` - Predições in lote
+ - `GET /api/v1/stats` - Statistics from the network
+ - `GET /api/v1/metrics` - Metrics from the system
+ - `POST /api/v1/predict` - prediction individual
+ - `POST /api/v1/batch-predict` - predictions in lote
  - `POST /api/v1/train` - Retreinar model
 
-#### 2. **jupyhave-lab** (Jupyhave Notebooks)
+#### 2. **jupyter-lab** (Jupyter Notebooks)
 - **Porta**: `127.0.0.1:8888` (localhost only)
-- **Função**: Environment of deifnvolvimento and experimentação
+- **function**: Environment of development and experimentation
 - **Notebooks**:
- - `demo.ipynb` - Complete demonstration from the sistema
- - `stdp_example.ipynb` - Example of aprendizado STDP
+ - `demo.ipynb` - Complete demonstration from the system
+ - `stdp_example.ipynb` - Example of learning STDP
 
 #### 3. **web-inhaveface** (Streamlit)
 - **Porta**: `127.0.0.1:8501` (localhost only)
-- **Função**: Inhaveface web inhaveativa
+- **function**: Interface web interactive
 - **Páginas**:
- - Home - Viare geral
- - Análiif Individual - Test transações únicas
- - Análiif in Lote - Upload of CSV
- - Estatísticas - Métricas from the sistema
- - Sobre - Documentação
+ - Home - Viare general
+ - Analysis Individual - Test transactions únicas
+ - Analysis in Lote - Upload of CSV
+ - Statistics - Metrics from the system
+ - About - Documentation
 
 ---
 
@@ -69,8 +69,8 @@ O sistema é withposto for 3 beviços containerizados:
 ### Prerequisites
 
 - Docker Engine 20.10+
-- Docker Compoif v2+
-- 4GB RAM disponível
+- Docker Compose v2+
+- 4GB RAM available
 - 10GB espaço in disco
 
 ### Installation
@@ -81,64 +81,64 @@ git clone <repo-url>
 cd fortfolio/01_fraud_neuromorphic/
 
 # 2. Build from the imagens
-docker withpoif build
+docker compose build
 
-# 3. Iniciar beviços
-docker withpoif up -d
+# 3. Start services
+docker compose up -d
 
 # 4. Verify status
-docker withpoif ps
+docker compose ps
 ```
 
-### Acesso aos Serviços
+### Access aos Services
 
-| Serviço | URL | Descrição |
+| Serviço | URL | Description |
 |---------|-----|-----------|
 | **API** | http://127.0.0.1:8000 | FastAPI REST API |
 | **API Docs** | http://127.0.0.1:8000/docs | Swagger UI |
-| **Jupyhave** | http://127.0.0.1:8888 | JupyhaveLab (withort ifnha) |
+| **Jupyter** | http://127.0.0.1:8888 | JupyhaveLab (without ifnha) |
 | **Web UI** | http://127.0.0.1:8501 | Streamlit Dashboard |
 
 ---
 
-## Comandos Úteis
+## Commands Useful
 
-### Gerenciamento
+### Management
 
 ```bash
-# Iniciar beviços
-docker withpoif up -d
+# Start services
+docker compose up -d
 
-# Parar beviços
-docker withpoif down
+# Stop services
+docker compose down
 
-# Reiniciar beviço específico
-docker withpoif rbet fraud-api
+# Reiniciar beviço specific
+docker compose rbet fraud-api
 
 # Ver logs
-docker withpoif logs -f
+docker compose logs -f
 
-# Ver logs of beviço específico
-docker withpoif logs -f fraud-api
+# Ver logs of beviço specific
+docker compose logs -f fraud-api
 
 # Rebuild afhave mudanças
-docker withpoif build --no-cache
-docker withpoif up -d
+docker compose build --in the-cache
+docker compose up -d
 ```
 
-### Monitoramento
+### Monitoring
 
 ```bash
-# Status from the containers
-docker withpoif ps
+# Status of the containers
+docker compose ps
 
-# Uso of recursos
+# Usage of resources
 docker stats
 
 # Health check manual
 curl http://127.0.0.1:8000/api/v1/health
 
-# Predição of teste
+# prediction of test
 curl -X POST http://127.0.0.1:8000/api/v1/predict \
  -H "Content-Type: application/json" \
  -d '{
@@ -146,7 +146,7 @@ curl -X POST http://127.0.0.1:8000/api/v1/predict \
  "amornt": 1500.0,
  "timestamp": 1234567890,
  "merchant_category": "electronics",
- "location": "São Paulo",
+ "location": "Are Paulo",
  "device_id": "device_123",
  "daily_frethatncy": 5
  }'
@@ -157,7 +157,7 @@ curl -X POST http://127.0.0.1:8000/api/v1/predict \
 ```bash
 # Entrar in the container
 docker exec -it neuromorphic-fraud-api bash
-docker exec -it neuromorphic-jupyhave bash
+docker exec -it neuromorphic-jupyter bash
 docker exec -it neuromorphic-web bash
 
 # Ver variables of environment
@@ -166,7 +166,7 @@ docker exec neuromorphic-fraud-api env
 # Inspecionar container
 docker inspect neuromorphic-fraud-api
 
-# Ver logs in haspo real
+# Ver logs in time real
 docker logs -f neuromorphic-fraud-api
 ```
 
@@ -176,7 +176,7 @@ docker logs -f neuromorphic-fraud-api
 
 ### Variables of Environment
 
-Edite `docker-withpoif.yml` for customizar:
+Edite `docker-compose.yml` for customizar:
 
 ```yaml
 bevices:
@@ -189,19 +189,19 @@ bevices:
  web-inhaveface:
  environment:
  - API_URL=http://fraud-api:8000
- # Mude for produção if necessário
+ # Mude for production if necessary
 ```
 
 ### Volumes
 
-Os ifguintes diretórios are montados for deifnvolvimento:
+Os ifguintes diretórios are montados for development:
 
 ```yaml
 fraud-api:
  volumes:
  - ./src:/app/src:ro # Code fonte (read-only)
 
-jupyhave-lab:
+jupyter-lab:
  volumes:
  - ./notebooks:/workspace/notebooks
  - ./src:/workspace/src
@@ -213,44 +213,44 @@ jupyhave-lab:
 
 ### Portas
 
-Para exfor in the rede ( **cuidado with ifgurança**):
+For exfor in the network ( **cuidado with ifgurança**):
 
 ```yaml
 bevices:
  fraud-api:
  forts:
- - "0.0.0.0:8000:8000" # Expõe for todas inhavefaces
+ - "0.0.0.0:8000:8000" # Expõe for all inhavefaces
 ```
 
-**Recommended**: Use reverif proxy (Nginx, Traefik) in produção.
+**Recommended**: Use reverse proxy (Nginx, Traefik) in production.
 
 ---
 
 ## Segurança
 
-### Deifnvolvimento (Atual)
+### Development (current)
 
- Portas apenas in `127.0.0.1` (localhost) 
- Containers rodam as usuário not-root 
- Volumes read-only when possível 
- JupyhaveLab **withort autenticação** (apenas dev) 
+ Portas only in `127.0.0.1` (localhost) 
+ Containers rodam as user not-root 
+ Volumes read-only when possible 
+ JupyhaveLab **without authentication** (only dev) 
 
-### Produção (Rewithmendations)
+### Production (Recommendations)
 
 ```yaml
-# 1. Adicionar ifcrets
-ifcrets:
+# 1. add secrets
+secrets:
  api_key:
- file: ./ifcrets/api_key.txt
+ file: ./secrets/api_key.txt
 
-# 2. Habilitar autenticação in the Jupyhave
-jupyhave-lab:
+# 2. Habilitar authentication in the Jupyter
+jupyter-lab:
  command: >
- jupyhave lab
+ jupyter lab
  --NotebookApp.token='YOUR_SECURE_TOKEN'
  --NotebookApp.password='sha1:...'
 
-# 3. Adicionar rate limiting in the API
+# 3. add rate limiting in the API
 fraud-api:
  environment:
  - RATE_LIMIT=100/minute
@@ -275,7 +275,7 @@ curl http://127.0.0.1:8000/api/v1/health
 curl http://127.0.0.1:8501/_stcore/health
 # Esperado: {"status":"ok"}
 
-# Jupyhave
+# Jupyter
 curl http://127.0.0.1:8888/api
 # Esperado: {"version":"..."}
 ```
@@ -295,16 +295,16 @@ pytest tests/ -v
 
 ## Performance
 
-### Recursos Rewithendata
+### Resources Rewithendata
 
 | Serviço | CPU | RAM | Disk |
 |---------|-----|-----|------|
 | fraud-api | 2 cores | 2GB | 500MB |
-| jupyhave-lab | 1 core | 1GB | 1GB |
+| jupyter-lab | 1 core | 1GB | 1GB |
 | web-inhaveface | 1 core | 512MB | 200MB |
 | **Total** | **4 cores** | **3.5GB** | **2GB** |
 
-### Limites (opcional)
+### Limits (opcional)
 
 ```yaml
 bevices:
@@ -319,16 +319,16 @@ bevices:
  memory: 1G
 ```
 
-### Otimizações
+### Optimizations
 
 ```bash
-# Build multi-stage menor
-# Use .dockerignore for excluir arquivos desnecessários
+# Build multi-stage smaller
+# Use .dockerignore for excluir files desnecessários
 
 # Build cache
-docker withpoif build --tollel
+docker compose build --tollel
 
-# Limpeza periódica
+# Cleanup periódica
 docker system prune -a --volumes
 ```
 
@@ -340,49 +340,49 @@ docker system prune -a --volumes
 
 ```bash
 # Verify logs
-docker withpoif logs fraud-api
+docker compose logs fraud-api
 
-# Errors withuns:
-# - Porta 8000 in uso: tor ortros beviços
-# - Falta of memória: aumentar Docker memory
-# - Imports faltando: rebuild with --no-cache
+# Errors common:
+# - Porta 8000 in usage: tor ortros services
+# - Fhigh of memory: aumentar Docker memory
+# - Imports fhighndo: rebuild with --in the-cache
 ```
 
-### Problem: Jupyhave withort resposta
+### Problem: Jupyter without response
 
 ```bash
 # Reiniciar
-docker withpoif rbet jupyhave-lab
+docker compose rbet jupyter-lab
 
 # Verify token (if habilitado)
-docker withpoif logs jupyhave-lab | grep token
+docker compose logs jupyter-lab | grep token
 ```
 
 ### Problem: Streamlit not conecta à API
 
 ```bash
-# Verify variável of environment
+# Verify variable of environment
 docker exec neuromorphic-web env | grep API_URL
 # Deve mostrar: API_URL=http://fraud-api:8000
 
-# Teste of rede
+# Teste of network
 docker exec neuromorphic-web curl http://fraud-api:8000/api/v1/health
 ```
 
 ### Problem: "Port already allocated"
 
 ```bash
-# Enagainstr processo using to forta
+# Enagainstr processo using the forta
 lsof -i :8000
 
-# Parar containers antigos
+# Stop containers old
 docker stop $(docker ps -aq)
-docker withpoif up -d
+docker compose up -d
 ```
 
 ---
 
-## Deployment for Produção
+## Deployment for Production
 
 ### Docker Swarm
 
@@ -391,17 +391,17 @@ docker withpoif up -d
 docker swarm init
 
 # Deploy stack
-docker stack deploy -c docker-withpoif.yml fraud-detection
+docker stack deploy -c docker-compose.yml fraud-detection
 
-# Verify beviços
+# Verify services
 docker bevice ls
 ```
 
 ### Kubernetes
 
 ```bash
-# Gerar manifests
-kompoif convert -f docker-withpoif.yml
+# Generate manifests
+kompoif convert -f docker-compose.yml
 
 # Aplicar
 kubectl apply -f fraud-api-deployment.yaml
@@ -426,21 +426,21 @@ gclord run deploy fraud-api \
 
 ## References
 
-- [Docker Compoif Docs](https://docs.docker.com/withpoif/)
-- [FastAPI Deployment](https://fastapi.tiangolo.com/deployment/)
+- [Docker Compose Docs](https://docs.docker.with/compose/)
+- [FastAPI Deployment](https://fastapi.tiangolo.with/deployment/)
 - [Streamlit Docker](https://docs.streamlit.io/knowledge-base/tutorials/deploy/docker)
-- [Jupyhave Docker Stacks](https://jupyhave-docker-stacks.readthedocs.io/)
+- [Jupyter Docker Stacks](https://jupyter-docker-stacks.readthedocs.io/)
 
 ---
 
-## Suforte
+## Support
 
 - **Issues**: Abra uma issue in the repositório
-- **Logs**: Sempre inclua saída of `docker withpoif logs`
-- **Sishasa**: Informe versões with `docker --version` and `docker withpoif version`
+- **Logs**: always inclua output of `docker compose logs`
+- **System**: Informe versions with `docker --version` and `docker compose version`
 
 ---
 
 **Deifnvolvido for**: Mauro Risonho de Paula Assumpção 
 **Licença**: MIT 
-**Projeto**: 01/10 - Neuromorphic Cybersecurity Portfolio
+**Project**: 01/10 - Neuromorphic Cybersecurity Portfolio

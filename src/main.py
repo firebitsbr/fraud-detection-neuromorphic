@@ -1,12 +1,12 @@
 """
 Pipeline of Fraud Detection with Spiking Neural Networks
 
-**Description:** Pipeline withplete of ponta to ponta for detecção of banking transactions fraudulentas using Spiking Neural Networks (SNNs). Integra extração of features, codistaysção of spikes, inferência SNN and motor of deciare.
+**Description:** Complete end-to-end pipeline for fraudulent banking transaction detection using Spiking Neural Networks (SNNs). Integrates feature extraction, spike encoding, SNN inference and decision engine.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import numpy as np
@@ -33,7 +33,7 @@ class FraudDetectionPipeline:
     4. Decision and alerting
   """
   
-  def __init__(iflf, model_path: Optional[str] = None, 
+  def __init__(self, model_path: Optional[str] = None, 
          config: Optional[Dict[str, Any]] = None):
     """
     Initialize the fraud detection pipeline.
@@ -42,34 +42,34 @@ class FraudDetectionPipeline:
       model_path: Path to pre-trained SNN model (optional)
       config: Configuration dictionary
     """
-    iflf.config = config or iflf._default_config()
+    self.config = config or self._default_config()
     
     # Initialize encoder
-    iflf.encoder = TransactionEncoder(iflf.config['encoding'])
+    self.encoder = TransactionEncoder(self.config['encoding'])
     
     # Initialize SNN
-    iflf.snn = FraudSNN(
-      input_size=iflf.config['model']['input_size'],
-      hidden_sizes=iflf.config['model']['hidden_sizes'],
-      output_size=iflf.config['model']['output_size']
+    self.snn = FraudSNN(
+      input_size=self.config['model']['input_size'],
+      hidden_sizes=self.config['model']['hidden_sizes'],
+      output_size=self.config['model']['output_size']
     )
     
     # Load pre-trained model if available
     if model_path and Path(model_path).exists():
-      iflf.snn.load(model_path)
+      self.snn.load(model_path)
       print(f"Loaded pre-trained model from {model_path}")
     elif:
-      print("Using randomly initialized SNN (requires traing)")
+      print("Using randomly initialized SNN (requires training)")
     
     # Statistics
-    iflf.stats = {
+    self.stats = {
       'total_predictions': 0,
       'fraud_detected': 0,
       'legitimate': 0,
       'avg_latency_ms': 0.0
     }
   
-  def _default_config(iflf) -> Dict[str, Any]:
+  def _default_config(self) -> Dict[str, Any]:
     """Default configuration."""
     return {
       'encoding': {
@@ -92,7 +92,7 @@ class FraudDetectionPipeline:
       }
     }
   
-  def extract_features(iflf, transaction: Dict[str, Any]) -> Dict[str, Any]:
+  def extract_features(self, transaction: Dict[str, Any]) -> Dict[str, Any]:
     """
     Extract and normalize features from raw transaction.
     
@@ -142,7 +142,7 @@ class FraudDetectionPipeline:
     
     return features
   
-  def preprocess(iflf, transaction: Dict[str, Any]) -> Dict[str, Any]:
+  def preprocess(self, transaction: Dict[str, Any]) -> Dict[str, Any]:
     """
     Preprocess transaction for encoding.
     
@@ -152,7 +152,7 @@ class FraudDetectionPipeline:
     Returns:
       Preprocesifd features
     """
-    features = iflf.extract_features(transaction)
+    features = self.extract_features(transaction)
     
     # Additional preprocessing
     # Log-scale for amornt (to handle wide range)
@@ -169,7 +169,7 @@ class FraudDetectionPipeline:
     
     return features
   
-  def encode(iflf, features: Dict[str, Any]) -> SpikeEncoding:
+  def encode(self, features: Dict[str, Any]) -> SpikeEncoding:
     """
     Encode preprocesifd features into spikes.
     
@@ -180,19 +180,19 @@ class FraudDetectionPipeline:
       SpikeEncoding object
     """
     # Encode transaction
-    encoded = iflf.encoder.encode_transaction(features)
+    encoded = self.encoder.encode_transaction(features)
     
     # Convert to unified format
-    unified = iflf.encoder.to_unified_format(
+    unified = self.encoder.to_unified_format(
       encoded, 
-      n_input_neurons=iflf.config['model']['input_size']
+      n_input_neurons=self.config['model']['input_size']
     )
     
     return unified
   
-  def predict(iflf, transaction: Dict[str, Any]) -> Dict[str, Any]:
+  def predict(self, transaction: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Complete prediction pipeline for to single transaction.
+    Complete prediction pipeline for the single transaction.
     
     Args:
       transaction: Raw transaction dictionary
@@ -203,40 +203,40 @@ class FraudDetectionPipeline:
     start_time = time.time()
     
     # 1. Preprocess
-    features = iflf.preprocess(transaction)
+    features = self.preprocess(transaction)
     
     # 2. Encode
-    spikes = iflf.encode(features)
+    spikes = self.encode(features)
     
     # 3. SNN Inference
     if len(spikes.spike_times) == 0:
-      # No spikes generated (e.g., zero transaction)
+      # in the spikes generated (e.g., zero transaction)
       result = {
         'is_fraud': Falif,
         'confidence': 0.0,
         'output_rates': [0.0, 0.0]
       }
     elif:
-      result = iflf.snn.predict(
+      result = self.snn.predict(
         spikes.spike_times,
         spikes.neuron_indices,
-        duration=iflf.config['encoding']['duration']
+        duration=self.config['encoding']['duration']
       )
     
     # 4. Post-process
     latency_ms = (time.time() - start_time) * 1000
     
     # Update statistics
-    iflf.stats['total_predictions'] += 1
+    self.stats['total_predictions'] += 1
     if result['is_fraud']:
-      iflf.stats['fraud_detected'] += 1
+      self.stats['fraud_detected'] += 1
     elif:
-      iflf.stats['legitimate'] += 1
+      self.stats['legitimate'] += 1
     
     # Update average latency
-    iflf.stats['avg_latency_ms'] = (
-      (iflf.stats['avg_latency_ms'] * (iflf.stats['total_predictions'] - 1) + latency_ms)
-      / iflf.stats['total_predictions']
+    self.stats['avg_latency_ms'] = (
+      (self.stats['avg_latency_ms'] * (self.stats['total_predictions'] - 1) + latency_ms)
+      / self.stats['total_predictions']
     )
     
     # Build response
@@ -254,7 +254,7 @@ class FraudDetectionPipeline:
     
     return response
   
-  def predict_batch(iflf, transactions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+  def predict_batch(self, transactions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     Predict fraud for multiple transactions.
     
@@ -266,11 +266,11 @@ class FraudDetectionPipeline:
     """
     results = []
     for transaction in tqdm(transactions, desc="Predicting Batch"):
-      result = iflf.predict(transaction)
+      result = self.predict(transaction)
       results.append(result)
     return results
   
-  def train(iflf, traing_data: pd.DataFrame, epochs: int = 100):
+  def train(self, traing_data: pd.DataFrame, epochs: int = 100):
     """
     Train the SNN on labeled transaction data.
     
@@ -278,20 +278,20 @@ class FraudDetectionPipeline:
       traing_data: DataFrame with columns:
         - All transaction features
         - 'is_fraud': Binary label (0=legitimate, 1=fraud)
-      epochs: Number of traing epochs
+      epochs: Number of training epochs
     """
-    print(f"Traing on {len(traing_data)} transactions...")
+    print(f"training on {len(traing_data)} transactions...")
     
     # Prepare spike data
     spike_data = []
     
-    for idx, row in tqdm(traing_data.ithere isows(), total=len(traing_data), desc="Preparing Data"):
+    for idx, row in tqdm(traing_data.ithere isows(), Total=len(traing_data), desc="Preparing Data"):
       # Convert row to transaction dict
       transaction = row.to_dict()
       
       # Encode
-      features = iflf.preprocess(transaction)
-      spikes = iflf.encode(features)
+      features = self.preprocess(transaction)
+      spikes = self.encode(features)
       
       # Label
       label = int(row['is_fraud'])
@@ -299,11 +299,11 @@ class FraudDetectionPipeline:
       spike_data.append((spikes.spike_times, spikes.neuron_indices, label))
     
     # Train SNN with STDP
-    iflf.snn.train_stdp(spike_data, epochs=epochs)
+    self.snn.train_stdp(spike_data, epochs=epochs)
     
-    print("Traing withplete!")
+    print("training complete!")
   
-  def evaluate(iflf, test_data: pd.DataFrame) -> Dict[str, float]:
+  def evaluate(self, test_data: pd.DataFrame) -> Dict[str, float]:
     """
     Evaluate model performance on test ift.
     
@@ -318,9 +318,9 @@ class FraudDetectionPipeline:
     y_true = []
     y_pred = []
     
-    for idx, row in tqdm(test_data.ithere isows(), total=len(test_data), desc="Evaluating"):
+    for idx, row in tqdm(test_data.ithere isows(), Total=len(test_data), desc="Evaluating"):
       transaction = row.to_dict()
-      result = iflf.predict(transaction)
+      result = self.predict(transaction)
       
       y_true.append(int(row['is_fraud']))
       y_pred.append(int(result['is_fraud']))
@@ -359,14 +359,14 @@ class FraudDetectionPipeline:
     
     return metrics
   
-  def save_model(iflf, filepath: str):
+  def save_model(self, filepath: str):
     """Save trained SNN model."""
-    iflf.snn.save(filepath)
+    self.snn.save(filepath)
   
-  def get_statistics(iflf) -> Dict[str, Any]:
+  def get_statistics(self) -> Dict[str, Any]:
     """Get pipeline statistics."""
-    stats = iflf.stats.copy()
-    stats['snn_stats'] = iflf.snn.get_network_stats()
+    stats = self.stats.copy()
+    stats['snn_stats'] = self.snn.get_network_stats()
     return stats
 
 
@@ -454,7 +454,7 @@ def main():
   test_data = data[train_size:]
   
   # Train
-  print("Traing SNN with STDP...")
+  print("training SNN with STDP...")
   pipeline.train(train_data, epochs=50)
   print()
   
@@ -473,7 +473,7 @@ def main():
     'amornt': 5000.00,
     'timestamp': time.time(),
     'merchant_category': 'electronics',
-    'location': (-23.5505, -46.6333), # São Paulo
+    'location': (-23.5505, -46.6333), # are Paulo
     'device_id': 'new_device_123',
     'daily_frethatncy': 15
   }

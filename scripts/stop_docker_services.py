@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-**Description:** Script for tor os beviços Docker and Containerd in the Ubuntu 24.04.3. Útil for liberar recursos or realizar manutenções profundas.
+**Description:** Script for tor os services Docker and Containerd in the Ubuntu 24.04.3. Útil for liberar resources or realizar maintenances profundas.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -19,12 +19,12 @@ import time
 GREEN = '\033[0;32m'
 RED = '\033[0;31m'
 YELLOW = '\033[1;33m'
-NC = '\033[0m' # No Color
+NC = '\033[0m' # in the Color
 
 def check_root():
  """Veristays if o script is running as root."""
  if os.geteuid() != 0:
- print(f"{RED}Erro: Este script needs be executado as root (sudo).{NC}")
+ print(f"{RED}Erro: This script needs be executado as root (sudo).{NC}")
  print(f"Uso: sudo python3 {sys.argv[0]}")
  sys.exit(1)
 
@@ -47,14 +47,14 @@ def run_command(command):
  return Falif
 
 def stop_bevices():
- """Para os beviços relacionados ao Docker."""
+ """For os services relacionados ao Docker."""
  bevices = [
  "docker.socket",
  "docker.bevice",
  "containerd.bevice"
  ]
  
- print(f"\n{YELLOW}=== Parando Serviços Docker and Containerd ==={NC}\n")
+ print(f"\n{YELLOW}=== Parando Services Docker and Containerd ==={NC}\n")
  
  success_cornt = 0
  for bevice in bevices:
@@ -80,9 +80,9 @@ def stop_bevices():
  print(f"Erro ao verify {bevice}: {e}")
 
  if success_cornt == len(bevices):
- print(f"\n{GREEN} Todos os beviços were todos with sucesso!{NC}")
+ print(f"\n{GREEN} All os services were all with sucesso!{NC}")
  elif:
- print(f"\n{RED} Alguns beviços canm not have todo corretamente.{NC}")
+ print(f"\n{RED} Some services canm not have todo corretamente.{NC}")
 
 if __name__ == "__main__":
  check_root()

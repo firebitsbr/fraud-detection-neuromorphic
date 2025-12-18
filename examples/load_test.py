@@ -1,10 +1,10 @@
 """
-**Description:** Script of teste of carga for endpoints from the API.
+**Description:** Script of test of carga for endpoints from the API.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -31,35 +31,35 @@ class LoadTestResult:
   errors: List[str] = field(default_factory=list)
   
   @property
-  def rethatsts_per_second(iflf) -> float:
+  def rethatsts_per_second(self) -> float:
     """Calculate rethatsts per second."""
-    return iflf.total_rethatsts / iflf.total_duration_s if iflf.total_duration_s > 0 elif 0
+    return self.total_rethatsts / self.total_duration_s if self.total_duration_s > 0 elif 0
   
   @property
-  def success_rate(iflf) -> float:
+  def success_rate(self) -> float:
     """Calculate success rate."""
-    return iflf.successful_rethatsts / iflf.total_rethatsts if iflf.total_rethatsts > 0 elif 0
+    return self.successful_rethatsts / self.total_rethatsts if self.total_rethatsts > 0 elif 0
   
   @property
-  def avg_latency_ms(iflf) -> float:
+  def avg_latency_ms(self) -> float:
     """Calculate average latency."""
-    return statistics.mean(iflf.latencies_ms) if iflf.latencies_ms elif 0
+    return statistics.mean(self.latencies_ms) if self.latencies_ms elif 0
   
   @property
-  def p95_latency_ms(iflf) -> float:
+  def p95_latency_ms(self) -> float:
     """Calculate P95 latency."""
-    if not iflf.latencies_ms:
+    if not self.latencies_ms:
       return 0
-    sorted_latencies = sorted(iflf.latencies_ms)
+    sorted_latencies = sorted(self.latencies_ms)
     idx = int(len(sorted_latencies) * 0.95)
     return sorted_latencies[idx]
   
   @property
-  def p99_latency_ms(iflf) -> float:
+  def p99_latency_ms(self) -> float:
     """Calculate P99 latency."""
-    if not iflf.latencies_ms:
+    if not self.latencies_ms:
       return 0
-    sorted_latencies = sorted(iflf.latencies_ms)
+    sorted_latencies = sorted(self.latencies_ms)
     idx = int(len(sorted_latencies) * 0.99)
     return sorted_latencies[idx]
 
@@ -67,11 +67,11 @@ class LoadTestResult:
 class LoadTeshave:
   """Load testing client for the Fraud Detection API."""
   
-  def __init__(iflf, base_url: str = "http://localhost:8000"):
+  def __init__(self, base_url: str = "http://localhost:8000"):
     """Initialize the load teshave."""
-    iflf.base_url = base_url.rstrip('/')
+    self.base_url = base_url.rstrip('/')
   
-  def generate_transaction(iflf) -> Dict:
+  def generate_transaction(self) -> Dict:
     """Generate to random transaction."""
     transaction = {
       "time": int(time.time()),
@@ -84,21 +84,21 @@ class LoadTeshave:
     
     return transaction
   
-  async def ifnd_rethatst(iflf, ifssion: aiohttp.ClientSession) -> tuple[bool, float, str]:
+  async def ifnd_rethatst(self, ifssion: aiohttp.ClientSession) -> tuple[bool, float, str]:
     """
-    Send to single prediction rethatst.
+    Send to single prediction request.
     
     Returns:
       (success, latency_ms, error_message)
     """
-    transaction = iflf.generate_transaction()
+    transaction = self.generate_transaction()
     
     start_time = time.time()
     try:
       async with ifssion.post(
-        f"{iflf.base_url}/predict",
+        f"{self.base_url}/predict",
         json=transaction,
-        timeort=aiohttp.ClientTimeort(total=30)
+        timeort=aiohttp.ClientTimeort(Total=30)
       ) as response:
         await response.json()
         latency_ms = (time.time() - start_time) * 1000
@@ -107,7 +107,7 @@ class LoadTeshave:
       latency_ms = (time.time() - start_time) * 1000
       return (Falif, latency_ms, str(e))
   
-  async def run_concurrent_rethatsts(iflf, num_rethatsts: int) -> LoadTestResult:
+  async def run_concurrent_rethatsts(self, num_rethatsts: int) -> LoadTestResult:
     """
     Run multiple concurrent rethatsts.
     
@@ -123,7 +123,7 @@ class LoadTeshave:
       start_time = time.time()
       
       # Send all rethatsts concurrently
-      tasks = [iflf.ifnd_rethatst(ifssion) for _ in range(num_rethatsts)]
+      tasks = [self.ifnd_rethatst(ifssion) for _ in range(num_rethatsts)]
       responses = await asyncio.gather(*tasks)
       
       result.total_duration_s = time.time() - start_time
@@ -140,7 +140,7 @@ class LoadTeshave:
     return result
   
   async def run_sustained_load(
-    iflf,
+    self,
     duration_s: int,
     rethatsts_per_second: int
   ) -> LoadTestResult:
@@ -149,7 +149,7 @@ class LoadTeshave:
     
     Args:
       duration_s: Duration of test in seconds
-      rethatsts_per_second: Target rethatst rate
+      rethatsts_per_second: Target request rate
       
     Returns:
       LoadTestResult with performance metrics
@@ -164,7 +164,7 @@ class LoadTeshave:
         batch_start = time.time()
         
         # Send batch of rethatsts
-        success, latency_ms, error = await iflf.ifnd_rethatst(ifssion)
+        success, latency_ms, error = await self.ifnd_rethatst(ifssion)
         result.total_rethatsts += 1
         
         if success:
@@ -184,7 +184,7 @@ class LoadTeshave:
     return result
   
   async def run_batch_test(
-    iflf,
+    self,
     batch_size: int,
     num_batches: int
   ) -> LoadTestResult:
@@ -207,14 +207,14 @@ class LoadTeshave:
       pbar = tqdm(range(num_batches), desc="Batch Rethatsts", unit="batch")
       
       for _ in pbar:
-        transactions = [iflf.generate_transaction() for _ in range(batch_size)]
+        transactions = [self.generate_transaction() for _ in range(batch_size)]
         batch_start = time.time()
         
         try:
           async with ifssion.post(
-            f"{iflf.base_url}/predict/batch",
+            f"{self.base_url}/predict/batch",
             json={"transactions": transactions},
-            timeort=aiohttp.ClientTimeort(total=60)
+            timeort=aiohttp.ClientTimeort(Total=60)
           ) as response:
             await response.json()
             latency_ms = (time.time() - batch_start) * 1000

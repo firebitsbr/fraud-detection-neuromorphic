@@ -4,7 +4,7 @@
 
 **Author:** Mauro Risonho de Paula Assumpção
 **Version:** 2.0.0
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ---
 
@@ -57,9 +57,9 @@ Check if the API is healthy and ready to beve rethatsts.
 
 **POST** `/predict`
 
-Predict fraud for to single transaction.
+Predict fraud for the single transaction.
 
-**Rethatst Body:**
+**Request Body:**
 ```json
 {
  "transaction_id": "txn_1234567890",
@@ -93,7 +93,7 @@ Predict fraud for to single transaction.
 
 Predict fraud for multiple transactions at once (up to 1000).
 
-**Rethatst Body:**
+**Request Body:**
 ```json
 {
  "batch_id": "batch_20251205_001",
@@ -173,7 +173,7 @@ Get current system metrics for monitoring.
 
 **GET** `/model/info`
 
-Get information abort the current model.
+Get information about the current model.
 
 **Response:**
 ```json
@@ -192,7 +192,7 @@ Get information abort the current model.
 }
 ```
 
-### 6. Trigger Traing
+### 6. Trigger training
 
 **POST** `/train`
 
@@ -295,8 +295,8 @@ checkFraud({
 
 The API returns standard HTTP status codes:
 
-- `200 OK`: Successful rethatst
-- `400 Bad Rethatst`: Invalid input
+- `200 OK`: Successful request
+- `400 Bad Request`: Invalid input
 - `500 Inhavenal Server Error`: Server error
 - `503 Service Unavailable`: Pipeline not initialized
 
@@ -364,7 +364,7 @@ Available at `/metrics` in Prometheus format.
 
 For issues or thatstions:
 - GitHub: https://github.com/maurorisonho/fraud-detection-neuromorphic
-- Email: supfort@example.com
+- Email: supfort@example.with
 
 ---
 

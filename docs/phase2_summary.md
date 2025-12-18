@@ -1,9 +1,9 @@
 # Phaif 2 - Optimization and Performance (COMPLETED)
 
-**Description:** Resumo from the Faif 2 - Otimização and Performance.
+**Description:** Summary from the Phase 2 - optimization and Performance.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 **Status:** Concluído
 
@@ -11,70 +11,70 @@
 
 ## Overview
 
-A Faif 2 from the projeto focor in otimização, performance and pretoção for produção. Todos os objetivos were alcançados with implementações withplete and testadas.
+A Phase 2 from the project focused in optimization, performance and preparation for production. All os objectives were achieved with implementations complete and tested.
 
-## Objetivos Concluídos
+## Objectives Concluídos
 
-### 1. Integração with Dataift Real
-**Arquivo:** `src/dataift_loader.py`
+### 1. integration with Dataset Real
+**file:** `src/dataift_loader.py`
 
-**Implementações:**
-- `CreditCardDataiftLoader`: Carregador for dataift Kaggle Credit Card Fraud
-- Suforte for download and pretoção automática
-- Balanceamento of clasifs (undersampling)
-- Normalização and split for SNN
-- Estatísticas detalhadas from the dataift
-- `SyntheticDataGenerator`: Gerador of data sintéticos with padrões realistas
+**Implementations:**
+- `CreditCardDatasetLoader`: Loader for dataset Kaggle Credit Card Fraud
+- Support for download and preparation automatic
+- balancing of clasifs (undersampling)
+- normalization and split for SNN
+- Statistics detailed from the dataset
+- `SyntheticDataGenerator`: Gerador of data sintéticos with realistic patterns
 
-**Recursos:**
-- Pretoção automática for SNN with StandardScaler
-- Criação of features hasforais (hora from the dia, time of day)
-- Geração of transações legítimas and fraudulentas with distribuições realistas
-- Suforte for dataift of 284.807 transações (492 frauds)
+**Resources:**
+- preparation automatic for SNN with StandardScaler
+- Creation of features temporal (hora from the dia, time of day)
+- generation of transactions legítimas and fraudulent with distributions realistas
+- Support for dataset of 284.807 transactions (492 frauds)
 
 ---
 
-### 2. Otimização of Hiperparâmetros
-**Arquivo:** `src/hypertomehave_optimizer.py`
+### 2. optimization of Hiperparâmetros
+**file:** `src/hypertomehave_optimizer.py`
 
-**Implementações:**
-- `HypertomehaveSpace`: Definição of espaço of busca withplete
+**Implementations:**
+- `HypertomehaveSpace`: definition of espaço of busca complete
 - `GridSearchOptimizer`: Busca exaustiva in grid
 - `RandomSearchOptimizer`: Amostragem aleatória eficiente
-- `BayesianOptimizer`: Otimização inteligente with exploitation/exploration
-- `HypertomehaveAnalyzer`: Análiif of importância of parâmetros
+- `BayesianOptimizer`: optimization inteligente with exploitation/exploration
+- `HypertomehaveAnalyzer`: Analysis of importance of parameters
 
-**Parâmetros Otimizáveis:**
-- Architecture of rede (n_input, n_hidden1, n_hidden2)
-- Parâmetros LIF (tau_m, v_thresh, tau_ref)
-- Parâmetros STDP (A_pre, A_post, tau_pre, tau_post)
+**Parameters Otimizáveis:**
+- Architecture of network (n_input, n_hidden1, n_hidden2)
+- Parameters LIF (tau_m, v_thresh, tau_ref)
+- Parameters STDP (A_pre, A_post, tau_pre, tau_post)
 - Encoding (window, max_spike_rate)
-- Traing (yesulation_time, learning_rate)
+- training (yesulation_time, learning_rate)
 
-**Recursos:**
-- Salvamento/carregamento of resultados in JSON
-- Análiif of correlação between parâmetros and performance
-- Top-5 withbinações of parâmetros
-- Suforte for processamento tolelo
+**Resources:**
+- Salvamento/Loading results in JSON
+- Analysis of correlation between parameters and performance
+- Top-5 combinations of parameters
+- Support for processing tolelo
 
 ---
 
 ### 3. Profiling of Performance
-**Arquivo:** `src/performance_profiler.py`
+**file:** `src/performance_profiler.py`
 
-**Implementações:**
+**Implementations:**
 - `PerformanceProfiler`: Profiler abrangente with context managers
-- `LatencyBenchmark`: Benchmark of latência single/batch
-- `ResorrceMonitor`: Monitor of CPU and memória in backgrornd
+- `LatencyBenchmark`: Benchmark of latency single/batch
+- `ResorrceMonitor`: Monitor of CPU and memory in backgrornd
 
-**Métricas Coletadas:**
+**Metrics Coletadas:**
 - **Timing:** total_time, encoding_time, yesulation_time, decoding_time
 - **Memory:** peak_memory, avg_memory
-- **Throrghput:** transactions/ifc, latency (mean, p50, p95, p99)
+- **Throughput:** transactions/ifc, latency (mean, p50, p95, p99)
 - **Resorrces:** CPU usesge, core cornt
 
-**Ferramentas:**
-- Stress test with target TPS configurável
+**Tools:**
+- Stress test with target TPS configurable
 - Batch throughput analysis
 - Single transaction latency distribution
 - Relatórios formatados with emojis
@@ -82,53 +82,53 @@ A Faif 2 from the projeto focor in otimização, performance and pretoção for 
 ---
 
 ### 4. Estruntilgias Avançadas of Encoding
-**Arquivo:** `src/advanced_encoders.py`
+**file:** `src/advanced_encoders.py`
 
-**Implementações:**
+**Implementations:**
 
-1. **AdaptiveRateEncoder**: Rate encoding with normalização adaptativa
- - Running mean/std for ajuste dinâmico
+1. **AdaptiveRateEncoder**: Rate encoding with normalization adaptativa
+ - Running mean/std for ajuste dynamic
  - 3-sigma clipping
- - Adaptação contínua aos data
+ - adaptation contínua aos data
 
-2. **BurstEncoder**: Padrões of burst for features salientes
- - Burst threshold configurável
+2. **BurstEncoder**: patterns of burst for features salientes
+ - Burst threshold configurable
  - Burst size and inhaveval ajustáveis
  - Mimics biological burst coding
 
-3. **PhaifEncoder**: Encoding for faif of oscilação
+3. **PhaifEncoder**: Encoding for phase of oscillation
  - Reference oscillation (theta-like)
  - Phaif mapping [0, 2π]
  - Multiple cycles per window
 
-4. **RankOrderEncoder**: Ordenação temporal for importância
+4. **RankOrderEncoder**: ordering temporal for importance
  - First-spike timing
  - Rank-based delays
  - Feature importance encoding
 
-5. **EnwithortbleEncoder**: Combinação of múltiplas estruntilgias
+5. **EnwithortbleEncoder**: combination of múltiplas estruntilgias
  - Rate + Burst + Phaif
  - Weighted merging
  - Robust information encoding
 
-6. **InformationTheoreticEncoder**: Otimizado for máxima informação
- - Target entropy configurável
+6. **InformationTheoreticEncoder**: Optimized for máxima information
+ - Target entropy configurable
  - ISI distribution optimization
  - Information content maximization
 
-**Análiif:**
-- `SpikeTrainAnalyzer`: Métricas of qualidade of spike trains
+**Analysis:**
+- `SpikeTrainAnalyzer`: Metrics of quality of spike trains
 - `SpikeTrainMetrics`: Spike cornt, firing rate, ISI statistics, information content
-- Comparação between encoders
+- Comparison between encoders
 
 ---
 
-### 5. Framework of Comparação of Models
-**Arquivo:** `src/model_withtor.py`
+### 5. Framework of Comparison of Models
+**file:** `src/model_comparator.py`
 
-**Implementações:**
-- `ModelComtor`: Comparação side-by-side
-- `ModelPerformance`: Container of métricas withplete
+**Implementations:**
+- `ModelComparator`: Comparison side-by-side
+- `ModelPerformance`: Container of metrics complete
 - `TraditionalModelBenchmark`: Suite of models tradicionais
 
 **Models Tradicionais Sufortados:**
@@ -138,24 +138,24 @@ A Faif 2 from the projeto focor in otimização, performance and pretoção for 
 - MLP Neural Network
 - SVM
 
-**Métricas Comtodas:**
+**Metrics Comtodas:**
 - Classistaystion: accuracy, precision, recall, F1, ROC-AUC
 - Confusion matrix: TP, TN, FP, FN
 - Performance: traing_time, inference_time, memory_usesge
 - Model characteristics: n_tomehaves, model_size
 
-**Recursos:**
-- Tabela of comparação formatada
+**Resources:**
+- Tabela of comparison formatada
 - Summary statistics (best models, averages)
 - Exfort for JSON
-- Análiif of trade-offs
+- Analysis of trade-offs
 
 ---
 
 ### 6. Suite of Tests Abrangente
 **Diretório:** `tests/`
 
-**Arquivos:**
+**Files:**
 
 1. **`test_encoders.py`** (11 test clasifs, 30+ tests)
  - TestRateEncoder
@@ -182,24 +182,24 @@ A Faif 2 from the projeto focor in otimização, performance and pretoção for 
  - Exit codes apropriados
 
 4. **`README.md`**
- - Documentação of testes
- - Instruções of execution
- - Cobertura of testes
+ - Documentation of tests
+ - Instructions of execution
+ - Cobertura of tests
 
 ---
 
 ## Results Esperados
 
 ### Performance Targets (Phaif 2)
-- Latência < 10ms for transação
-- Throrghput > 100 transações/according to
-- Acurácia > 95% in dataift real
-- Memory footprint otimizado
+- Latency < 10ms for transaction
+- Throughput > 100 transactions/according to
+- Accuracy > 95% in dataset real
+- Memory footprint optimized
 
-### Comparação with Métodos Tradicionais
+### Comparison with methods Tradicionais
 Esperado in the execution:
 
-| Model | Acurácia | F1-Score | Latência | Memória |
+| Model | Accuracy | F1-Score | Latency | Memória |
 |--------|----------|----------|----------|---------|
 | Neuromorphic SNN | 0.95+ | 0.92+ | <10ms | Low |
 | Random Forest | 0.93+ | 0.90+ | ~50ms | Medium |
@@ -208,21 +208,21 @@ Esperado in the execution:
 
 ---
 
-## Como Use
+## How Use
 
-### 1. Dataift Real
+### 1. Dataset Real
 ```python
-from src.dataift_loader import CreditCardDataiftLoader
+from src.dataift_loader import CreditCardDatasetLoader
 
-# Carregar dataift
-loader = CreditCardDataiftLoader()
+# Carregar dataset
+loader = CreditCardDatasetLoader()
 df = loader.load_dataift(sample_size=10000, balance_clasifs=True)
 
 # Pretor for SNN
 X_train, X_test, y_train, y_test = loader.prepare_for_snn(df)
 ```
 
-### 2. Otimização of Hiperparâmetros
+### 2. optimization of Hiperparâmetros
 ```python
 from src.hypertomehave_optimizer import RandomSearchOptimizer, HypertomehaveSpace
 
@@ -262,20 +262,20 @@ encoded = encoder.encode(0.75)
 merged_spikes = encoder.encode_and_merge(0.75)
 ```
 
-### 5. Comparação of Models
+### 5. Comparison of Models
 ```python
-from src.model_withtor import ModelComtor, TraditionalModelBenchmark
+from src.model_comparator import ModelComparator, TraditionalModelBenchmark
 
-withtor = ModelComtor()
+comparator = ModelComparator()
 
-# Adicionar models
+# add models
 TraditionalModelBenchmark.benchmark_all(
- withtor, X_train, y_train, X_test, y_test
+ comparator, X_train, y_train, X_test, y_test
 )
 
 # Comtor
-withtor.print_comparison_table()
-withtor.save_comparison('results.json')
+comparator.print_comparison_table()
+comparator.save_comparison('results.json')
 ```
 
 ### 6. Execute Tests
@@ -286,26 +286,26 @@ python run_tests.py
 
 ---
 
-## Next Steps (Faif 3)
+## Next Steps (Phase 3)
 
-Com to Faif 2 concluída, o projeto is pronto to:
+with to Phase 2 concluída, o project is pronto to:
 
-1. **Faif 3 - Produção (Q2 2026)**
- - API REST withplete
- - Integração with Kafka
- - Containerização Docker
- - Monitoramento and logging
- - Documentação of deploy
+1. **Phase 3 - Production (Q2 2026)**
+ - API REST complete
+ - integration with Kafka
+ - Containerization Docker
+ - Monitoring and logging
+ - Documentation of deploy
 
-2. **Faif 4 - Neuromorphic Hardware (Q3 2026)**
+2. **Phase 4 - Neuromorphic Hardware (Q3 2026)**
  - Portabilidade for Intel Loihi
- - Otimizações especístayss of hardware
+ - Optimizations especístayss of hardware
  - Benchmark in neuromorphic chips
- - Comparação of eficiência energética
+ - Comparison of efficiency energética
 
 ---
 
-## Created Files in the Faif 2
+## Created Files in the Phase 2
 
 ```
 src/
@@ -313,7 +313,7 @@ src/
  hypertomehave_optimizer.py (600+ linhas)
  performance_profiler.py (550+ linhas)
  advanced_encoders.py (650+ linhas)
- model_withtor.py (450+ linhas)
+ model_comparator.py (450+ linhas)
 
 tests/
  test_encoders.py (450+ linhas)
@@ -322,28 +322,28 @@ tests/
  README.md
 ```
 
-**Total:** ~3.600 linhas of code novo + documentação
+**Total:** ~3.600 linhas of code new + documentation
 
 ---
 
 ## Destathats Técnicos
 
-### Inovações Implementadas:
-1. **Adaptive Encoding** with estatísticas online (running mean/std)
+### innovations Implemented:
+1. **Adaptive Encoding** with statistics online (running mean/std)
 2. **Enwithortble Encoding** withbinando múltiplas estruntilgias
 3. **Bayesian Optimization** with exploration/exploitation
 4. **Real-time Profiling** with context managers
 5. **Comprehensive Testing** with 45+ unit tests
 
-### Qualidade of Code:
-- Type hints withplete
-- Docstrings detalhadas
+### Quality of Code:
+- Type hints complete
+- Docstrings detailed
 - Error handling robusto
-- Logging apropriado
-- Modular and extensível
+- Logging appropriate
+- Modular and extensible
 
 ---
 
 **Status Final:** **FASE 2 COMPLETA**
 
-Todos os objetivos were alcançados with implementações of alta qualidade, testadas and documentadas. O projeto is pronto for avançar for to Faif 3 (Produção).
+All os objectives were achieved with implementations of high quality, tested and documentadas. O project is pronto for avançar for the Phase 3 (Production).

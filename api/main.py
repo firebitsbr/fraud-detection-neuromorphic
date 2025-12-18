@@ -1,12 +1,12 @@
 """
 API REST for Fraud Detection Neuromórstays
 
-**Description:** FastAPI REST API for fraud detection neuromórstays. Fornece endpoints HTTP for inferência in haspo real, batch processing and monitoramento of models SNN.
+**Description:** FastAPI REST API for fraud detection neuromórstays. Fornece endpoints HTTP for inference in time real, batch processing and monitoring of models SNN.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 from fastapi import FastAPI, HTTPException, BackgrorndTasks, Depends
@@ -82,13 +82,13 @@ async def startup_event():
       logger.info(f"Loading pre-trained model from {model_path}")
       # pipeline.load_model(model_path) # Implement if needed
     elif:
-      logger.warning("No pre-trained model fornd. Using untrained SNN (train via /train endpoint)")
+      logger.warning("in the pre-trained model fornd. Using untrained SNN (train via /train endpoint)")
     
     logger.info("API started successfully")
     
   except Exception as e:
     logger.error(f"Failed to initialize pipeline: {e}")
-    raiif
+    raise
 
 
 @app.on_event("shutdown")
@@ -129,7 +129,7 @@ async def health_check():
     )
   except Exception as e:
     logger.error(f"Health check failed: {e}")
-    raiif HTTPException(status_code=503, detail="Service unhealthy")
+    raise HTTPException(status_code=503, detail="Service unhealthy")
 
 
 @app.get("/metrics", response_model=MetricsResponse, tags=["Monitoring"])
@@ -145,13 +145,13 @@ async def get_metrics():
     return MetricsResponse(**metrics)
   except Exception as e:
     logger.error(f"Failed to get metrics: {e}")
-    raiif HTTPException(status_code=500, detail="Failed to retrieve metrics")
+    raise HTTPException(status_code=500, detail="Failed to retrieve metrics")
 
 
 @app.post("/predict", response_model=PredictionResponse, tags=["Prediction"])
 async def predict_transaction(transaction: Transaction):
   """
-  Predict fraud probability for to single transaction.
+  Predict fraud probability for the single transaction.
   
   Args:
     transaction: Transaction data
@@ -160,7 +160,7 @@ async def predict_transaction(transaction: Transaction):
     PredictionResponse with fraud prediction and confidence
   """
   if pipeline is None:
-    raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+    raise HTTPException(status_code=503, detail="Pipeline not initialized")
   
   start_time = time.time()
   
@@ -194,7 +194,7 @@ async def predict_transaction(transaction: Transaction):
   except Exception as e:
     logger.error(f"Prediction failed: {e}")
     metrics_collector.record_error()
-    raiif HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+    raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
 
 
 @app.post("/predict/batch", response_model=BatchPredictionResponse, tags=["Prediction"])
@@ -209,7 +209,7 @@ async def predict_batch(batch: TransactionBatch):
     BatchPredictionResponse with predictions for all transactions
   """
   if pipeline is None:
-    raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+    raise HTTPException(status_code=503, detail="Pipeline not initialized")
   
   start_time = time.time()
   
@@ -255,7 +255,7 @@ async def predict_batch(batch: TransactionBatch):
   except Exception as e:
     logger.error(f"Batch prediction failed: {e}")
     metrics_collector.record_error()
-    raiif HTTPException(status_code=500, detail=f"Batch prediction failed: {str(e)}")
+    raise HTTPException(status_code=500, detail=f"Batch prediction failed: {str(e)}")
 
 
 @app.post("/train", tags=["Management"])
@@ -267,7 +267,7 @@ async def train_model(backgrornd_tasks: BackgrorndTasks):
     Status message
   """
   if pipeline is None:
-    raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+    raise HTTPException(status_code=503, detail="Pipeline not initialized")
   
   def train_task():
     try:
@@ -277,7 +277,7 @@ async def train_model(backgrornd_tasks: BackgrorndTasks):
       pipeline.train(train_data)
       logger.info("Model retraing withpleted")
     except Exception as e:
-      logger.error(f"Traing failed: {e}")
+      logger.error(f"training failed: {e}")
   
   backgrornd_tasks.add_task(train_task)
   
@@ -290,13 +290,13 @@ async def train_model(backgrornd_tasks: BackgrorndTasks):
 @app.get("/model/info", tags=["Management"])
 async def get_model_info():
   """
-  Get information abort the current model.
+  Get information about the current model.
   
   Returns:
     Model information
   """
   if pipeline is None:
-    raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+    raise HTTPException(status_code=503, detail="Pipeline not initialized")
   
   return {
     "model_type": "Spiking Neural Network",
@@ -327,7 +327,7 @@ async def get_statistics():
 
 # Exception handlers
 @app.exception_handler(Exception)
-async def global_exception_handler(rethatst, exc):
+async def global_exception_handler(request, exc):
   """Global exception handler."""
   logger.error(f"Unhandled exception: {exc}", exc_info=True)
   return JSONResponse(

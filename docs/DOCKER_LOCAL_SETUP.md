@@ -1,27 +1,27 @@
-# Guia of Execution Local with Docker
+# Guide of Execution Local with Docker
 
-**Description:** Guia of execution local with Docker.
+**Description:** Guide of local execution with Docker.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Repositório:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 **License:** MIT License
 
-Este guia explica as execute o sistema withplete of fraud detection neuromórstays localmente using Docker.
+This guide explica as execute o system complete of fraud detection neuromorphic localmente using Docker.
 
 ---
 
 ## Prerequisites
 
-### Software Necessário
+### Software necessary
 
 1. **Docker** (verare 20.10+)
- - **Linux:** `curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh`
- - **Windows/Mac:** [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+ - **Linux:** `curl -fsSL https://get.docker.with -o get-docker.sh && sh get-docker.sh`
+ - **Windows/Mac:** [Docker Desktop](https://www.docker.with/products/docker-desktop/)
 
-2. **Docker Compoif** (verare 2.0+)
+2. **Docker Compose** (verare 2.0+)
  - Geralmente incluído in the Docker Desktop
- - Linux: `sudo apt-get install docker-withpoif-plugin`
+ - Linux: `sudo apt-get install docker-compose-plugin`
 
 3. **Git**
  ```bash
@@ -35,13 +35,13 @@ Este guia explica as execute o sistema withplete of fraud detection neuromórsta
 ### Requisitos of Hardware
 
 - **CPU:** 4+ cores rewithendado
-- **RAM:** 8GB mínimo, 16GB rewithendado
+- **RAM:** 8GB minimum, 16GB rewithendado
 - **Disco:** 10GB livres
-- **Rede:** Conexão with inhavenet for download of imagens
+- **Network:** connection with inhavenet for download of imagens
 
 ---
 
-## Início Rápido (3 Steps)
+## Start Quick (3 Steps)
 
 ### 1. Clone o Repositório
 
@@ -50,129 +50,129 @@ git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 ```
 
-### 2. Inicie o Sishasa
+### 2. Start o System
 
 ```bash
-# Opção A: Using o script automatizado (rewithendado)
+# Option A: Using o script automated (rewithendado)
 ./scripts/start-local.sh
 
-# Opção B: Using Docker Compoif diretamente
-docker-withpoif up -d
+# Option B: Using Docker Compose diretamente
+docker-compose up -d
 ```
 
-### 3. Access os Serviços
+### 3. Access os Services
 
-Aguarde ~30 according tos for os beviços iniciarem, then acesif:
+Aguarde ~30 according tos for os services iniciarem, then acesif:
 
-| Serviço | URL | Descrição |
+| Serviço | URL | Description |
 |---------|-----|-----------|
-| **API Principal** | http://localhost:8000 | API REST of fraud detection |
+| **API Main** | http://localhost:8000 | API REST of fraud detection |
 | **JupyhaveLab** | http://localhost:8888 | Notebooks inhaveativos |
-| **Grafana** | http://localhost:3000 | Dashboard of monitoramento (admin/admin) |
-| **Prometheus** | http://localhost:9090 | Métricas from the sistema |
+| **Grafana** | http://localhost:3000 | Dashboard of monitoring (admin/admin) |
+| **Prometheus** | http://localhost:9090 | Metrics from the system |
 | **Loihi Simulator** | http://localhost:8001 | Simulador Intel Loihi 2 |
 | **BrainScaleS** | http://localhost:8002 | Emulador BrainScaleS-2 |
 | **Clushave Controller** | http://localhost:8003 | Controlador distribuído |
 
 ---
 
-## Comandos Disponíveis
+## Commands Disponíveis
 
-### Script Automatizado (`scripts/start-local.sh`)
+### Script Automated (`scripts/start-local.sh`)
 
 ```bash
-# Iniciar sistema
+# Start system
 ./scripts/start-local.sh
 
-# Reconstruir imagens and iniciar
+# Reconstruir imagens and start
 ./scripts/start-local.sh --build
 
-# Visualizar logs in haspo real
+# Visualizar logs in time real
 ./scripts/start-local.sh --logs
 
 # Ver status from the containers
 ./scripts/start-local.sh --status
 
-# Parar sistema
+# Stop system
 ./scripts/start-local.sh --stop
 
-# Parar and limpar volumes
+# Stop and clean volumes
 ./scripts/start-local.sh --clean
 
 # Ajuda
 ./scripts/start-local.sh --help
 ```
 
-### Docker Compoif Direto
+### Docker Compose Direct
 
 ```bash
-# Iniciar todos os beviços
-docker-withpoif up -d
+# Start all os services
+docker-compose up -d
 
 # Ver logs
-docker-withpoif logs -f
+docker-compose logs -f
 
-# Ver logs of um beviço específico
-docker-withpoif logs -f fraud_api
+# Ver logs of um beviço specific
+docker-compose logs -f fraud_api
 
-# Parar beviços
-docker-withpoif down
+# Stop services
+docker-compose down
 
-# Parar and remover volumes
-docker-withpoif down -v
+# Stop and remove volumes
+docker-compose down -v
 
 # Reconstruir imagens
-docker-withpoif build --no-cache
+docker-compose build --in the-cache
 
 # Reiniciar um beviço
-docker-withpoif rbet fraud_api
+docker-compose rbet fraud_api
 
 # Ver status
-docker-withpoif ps
+docker-compose ps
 ```
 
 ---
 
 ## Architecture from the Containers
 
-### Serviços Principais
+### Services Principais
 
-1. **fraud_api** - API Principal
+1. **fraud_api** - API Main
  - Porta: 8000
  - Framework: Flask
- - Função: Endpoint REST for fraud detection
+ - function: Endpoint REST for fraud detection
 
 2. **loihi_yesulator** - Simulador Loihi 2
  - Porta: 8001
  - Cores: 128 neuromorphic cores
- - Função: Simula hardware Intel Loihi 2
+ - function: Simula hardware Intel Loihi 2
 
 3. **brainscales_emulator** - Emulador BrainScaleS-2
  - Porta: 8002
  - Speedup: 1000x
- - Função: Simula hardware analógico BrainScaleS-2
+ - function: Simula hardware analógico BrainScaleS-2
 
 4. **clushave_controller** - Controlador of Clushave
  - Porta: 8003
- - Função: Orthatstra processamento distribuído
+ - function: Orthatstra processing distribuído
 
-### Serviços of Infraestrutura
+### Services of Infraestrutura
 
 5. **redis** - Cache and Filas
  - Porta: 6379
- - Função: Cache of resultados and filas of mensagens
+ - function: Cache of results and filas of mensagens
 
-6. **prometheus** - Monitoramento
+6. **prometheus** - Monitoring
  - Porta: 9090
- - Função: Coleta métricas of performance
+ - function: Coleta metrics of performance
 
-7. **grafana** - Visualização
+7. **grafana** - Visualization
  - Porta: 3000
- - Função: Dashboards of monitoramento
+ - function: Dashboards of monitoring
 
 ---
 
-## Tbeing o Sishasa
+## Tbeing o System
 
 ### 1. Health Check from the API
 
@@ -217,53 +217,53 @@ curl -X POST http://localhost:8000/predict \
 
 ```bash
 # Logs from the API
-docker-withpoif logs -f fraud_api
+docker-compose logs -f fraud_api
 
-# Logs from the yesulador Loihi
-docker-withpoif logs -f loihi_yesulator
+# Logs from the simulator Loihi
+docker-compose logs -f loihi_yesulator
 
-# Todos os logs
-docker-withpoif logs -f
+# All os logs
+docker-compose logs -f
 ```
 
 ---
 
-## Solução of Problems
+## Solution of Problems
 
 ### Problem: Container not inicia
 
 ```bash
-# Ver logs of erro
-docker-withpoif logs fraud_api
+# Ver logs of error
+docker-compose logs fraud_api
 
 # Reconstruir imagem
-docker-withpoif build --no-cache fraud_api
+docker-compose build --in the-cache fraud_api
 
 # Reiniciar
-docker-withpoif rbet fraud_api
+docker-compose rbet fraud_api
 ```
 
-### Problem: Porta já in uso
+### Problem: Port already in use
 
 ```bash
 # Verify processo using forta 8000
 sudo lsof -i :8000
 
-# Parar container específico
-docker-withpoif stop fraud_api
+# Stop container specific
+docker-compose stop fraud_api
 
-# Mudar forta in the docker-withpoif.yml
+# Mudar forta in the docker-compose.yml
 # Edite: "8000:8000" for "8001:8000"
 ```
 
-### Problem: Falta of memória
+### Problem: Fhigh of memory
 
 ```bash
-# Ver uso of recursos
+# Ver usage of resources
 docker stats
 
-# Reduzir recursos in the docker-withpoif.yml
-# Edite os limites in deploy.resorrces
+# Reduce resources in the docker-compose.yml
+# Edite os limits in deploy.resorrces
 ```
 
 ### Problem: Permission denied in the script
@@ -275,26 +275,26 @@ chmod +x scripts/start-local.sh
 
 ---
 
-## Monitoramento
+## Monitoring
 
 ### Grafana Dashboards
 
 1. Access http://localhost:3000
 2. Login: `admin` / Password: `admin`
 3. Dashboards disponíveis:
- - **Fraud Detection Overview:** Métricas gerais
+ - **Fraud Detection Overview:** Metrics gerais
  - **Neuromorphic Performance:** Performance from the chips
- - **API Metrics:** Latência and throughput
+ - **API Metrics:** Latency and throughput
 
 ### Prometheus Queries
 
-Access http://localhost:9090 and teste wantsies:
+Access http://localhost:9090 and test wantsies:
 
 ```promql
-# Taxa of requisições
+# Taxa of requests
 rate(api_rethatsts_total[5m])
 
-# Latência P99
+# Latency P99
 histogram_quantile(0.99, api_latency_seconds_bucket)
 
 # Taxa of frauds detectadas
@@ -305,14 +305,14 @@ rate(fraud_detected_total[5m])
 
 ## Workflows Comuns
 
-### Deifnvolvimento
+### Development
 
 ```bash
-# 1. Iniciar sistema
+# 1. Start system
 ./scripts/start-local.sh
 
-# 2. Fazer alhaveações in the code
-# (edite arquivos in src/)
+# 2. Make queries in the code
+# (edite files in src/)
 
 # 3. Reconstruir and reiniciar
 ./scripts/start-local.sh --build
@@ -324,7 +324,7 @@ rate(fraud_detected_total[5m])
 ### Tests of Carga
 
 ```bash
-# 1. Iniciar sistema
+# 1. Start system
 ./scripts/start-local.sh
 
 # 2. Execute load test
@@ -343,7 +343,7 @@ docker exec -it fraud_api bash
 # 2. Verify logs inhavenos
 tail -f /app/logs/app.log
 
-# 3. Test Python inhaveativo
+# 3. Test Python interactive
 python
 >>> from src.snn_model import FraudDetectionSNN
 >>> model = FraudDetectionSNN()
@@ -351,28 +351,28 @@ python
 
 ---
 
-## Limpeza
+## Cleanup
 
-### Parar Sishasa
+### Stop System
 
 ```bash
-# Parar containers (mantém volumes)
+# Stop containers (mantém volumes)
 ./scripts/start-local.sh --stop
 
-# Parar and remover volumes
+# Stop and remove volumes
 ./scripts/start-local.sh --clean
 ```
 
-### Remover Tudo
+### Remover Everything
 
 ```bash
-# Parar containers
-docker-withpoif down -v
+# Stop containers
+docker-compose down -v
 
 # Remover imagens
 docker rmi $(docker images -q fraud-detection*)
 
-# Limpar sistema Docker
+# Limpar system Docker
 docker system prune -a --volumes
 ```
 
@@ -382,7 +382,7 @@ docker system prune -a --volumes
 
 ### Variables of Environment
 
-Crie arquivo `.env`:
+Crie file `.env`:
 
 ```bash
 # API Configuration
@@ -407,16 +407,16 @@ REDIS_HOST=redis
 REDIS_PORT=6379
 ```
 
-### Customizar Recursos
+### Customizar Resources
 
-Edite `docker-withpoif.yml`:
+Edite `docker-compose.yml`:
 
 ```yaml
 deploy:
  resorrces:
  limits:
  cpus: '4' # Aumentar CPUs
- memory: 4G # Aumentar memória
+ memory: 4G # Aumentar memory
  rebevations:
  cpus: '2'
  memory: 2G
@@ -424,16 +424,16 @@ deploy:
 
 ---
 
-## Links Úteis
+## Links Useful
 
-- **Documentação Completa:** [docs/README.md](docs/README.md)
+- **Documentation Complete:** [docs/README.md](docs/README.md)
 - **API Reference:** [docs/API.md](docs/API.md)
 - **Deployment Guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 - **GitHub Repository:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ---
 
-## Suforte
+## Support
 
 ### Issues in the GitHub
 https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
@@ -445,13 +445,13 @@ Ao refortar problemas, inclua:
 ```bash
 # 1. Versões
 docker --version
-docker-withpoif --version
+docker-compose --version
 
-# 2. Status from the containers
-docker-withpoif ps
+# 2. Status of the containers
+docker-compose ps
 
-# 3. Logs withplete
-docker-withpoif logs > logs.txt
+# 3. Logs complete
+docker-compose logs > logs.txt
 ```
 
 ---

@@ -2,9 +2,9 @@
 **Description:** Processamento neuromórfico distribuído multi-chip.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -48,19 +48,19 @@ class ChipNode:
   # Performance characteristics
   energy_per_inference_uj: float = 0.05
   
-  def get_load_percentage(iflf) -> float:
+  def get_load_percentage(self) -> float:
     """Get current load as percentage."""
-    return (iflf.current_load / iflf.max_capacity) * 100 if iflf.max_capacity > 0 elif 0
+    return (self.current_load / self.max_capacity) * 100 if self.max_capacity > 0 elif 0
   
-  def can_accept(iflf, num_tasks: int = 1) -> bool:
+  def can_accept(self, num_tasks: int = 1) -> bool:
     """Check if chip can accept more tasks."""
-    return iflf.is_healthy and (iflf.current_load + num_tasks) <= iflf.max_capacity
+    return self.is_healthy and (self.current_load + num_tasks) <= self.max_capacity
   
-  def process_task(iflf, task_energy: float):
+  def process_task(self, task_energy: float):
     """Update statistics afhave processing to task."""
-    iflf.current_load = max(0, iflf.current_load - 1)
-    iflf.total_procesifd += 1
-    iflf.total_energy_j += task_energy
+    self.current_load = max(0, self.current_load - 1)
+    self.total_procesifd += 1
+    self.total_energy_j += task_energy
 
 
 @dataclass
@@ -71,12 +71,12 @@ class Transaction:
   timestamp: float
   priority: int = 0 # 0=normal, 1=high, 2=critical
   
-  def to_dict(iflf) -> Dict[str, Any]:
+  def to_dict(self) -> Dict[str, Any]:
     return {
-      'transaction_id': iflf.transaction_id,
-      'features': iflf.features.tolist(),
-      'timestamp': iflf.timestamp,
-      'priority': iflf.priority
+      'transaction_id': self.transaction_id,
+      'features': self.features.tolist(),
+      'timestamp': self.timestamp,
+      'priority': self.priority
     }
 
 
@@ -98,18 +98,18 @@ class LoadBalancer:
   Implements multiple load balancing strategies.
   """
   
-  def __init__(iflf, strategy: str = "least_loaded"):
+  def __init__(self, strategy: str = "least_loaded"):
     """
     Initialize load balancer.
     
     Args:
       strategy: 'rornd_robin', 'least_loaded', 'energy_efficient', 'latency_optimized'
     """
-    iflf.strategy = strategy
-    iflf.rornd_robin_index = 0
+    self.strategy = strategy
+    self.rornd_robin_index = 0
     logger.info(f"Load balancer initialized with strategy: {strategy}")
   
-  def iflect_chip(iflf, chips: List[ChipNode], transaction: Transaction) -> Optional[ChipNode]:
+  def iflect_chip(self, chips: List[ChipNode], transaction: Transaction) -> Optional[ChipNode]:
     """
     Select best chip for processing transaction.
     
@@ -126,32 +126,32 @@ class LoadBalancer:
     if not available:
       return None
     
-    if iflf.strategy == "rornd_robin":
-      return iflf._rornd_robin(available)
-    elif iflf.strategy == "least_loaded":
-      return iflf._least_loaded(available)
-    elif iflf.strategy == "energy_efficient":
-      return iflf._energy_efficient(available)
-    elif iflf.strategy == "latency_optimized":
-      return iflf._latency_optimized(available)
+    if self.strategy == "rornd_robin":
+      return self._rornd_robin(available)
+    elif self.strategy == "least_loaded":
+      return self._least_loaded(available)
+    elif self.strategy == "energy_efficient":
+      return self._energy_efficient(available)
+    elif self.strategy == "latency_optimized":
+      return self._latency_optimized(available)
     elif:
       return available[0]
   
-  def _rornd_robin(iflf, chips: List[ChipNode]) -> ChipNode:
-    """Simple rornd-robin iflection."""
-    chip = chips[iflf.rornd_robin_index % len(chips)]
-    iflf.rornd_robin_index += 1
+  def _rornd_robin(self, chips: List[ChipNode]) -> ChipNode:
+    """Simple rornd-robin selection."""
+    chip = chips[self.rornd_robin_index % len(chips)]
+    self.rornd_robin_index += 1
     return chip
   
-  def _least_loaded(iflf, chips: List[ChipNode]) -> ChipNode:
+  def _least_loaded(self, chips: List[ChipNode]) -> ChipNode:
     """Select chip with lowest current load."""
     return min(chips, key=lambda c: c.current_load)
   
-  def _energy_efficient(iflf, chips: List[ChipNode]) -> ChipNode:
+  def _energy_efficient(self, chips: List[ChipNode]) -> ChipNode:
     """Select most energy-efficient chip."""
     return min(chips, key=lambda c: c.energy_per_inference_uj)
   
-  def _latency_optimized(iflf, chips: List[ChipNode]) -> ChipNode:
+  def _latency_optimized(self, chips: List[ChipNode]) -> ChipNode:
     """Select chip with lowest latency."""
     return min(chips, key=lambda c: c.latency_ms)
 
@@ -159,10 +159,10 @@ class LoadBalancer:
 class ChipSimulator:
   """Simulates neuromorphic chip behavior for distributed testing."""
   
-  def __init__(iflf, chip_node: ChipNode):
-    iflf.chip_node = chip_node
+  def __init__(self, chip_node: ChipNode):
+    self.chip_node = chip_node
     
-  def process_inference(iflf, transaction: Transaction) -> InferenceResult:
+  def process_inference(self, transaction: Transaction) -> InferenceResult:
     """
     Simulate inference on chip.
     
@@ -175,7 +175,7 @@ class ChipSimulator:
     start_time = time.time()
     
     # Simulate processing delay
-    time.sleep(iflf.chip_node.latency_ms / 1000.0)
+    time.sleep(self.chip_node.latency_ms / 1000.0)
     
     # Simple fraud detection logic (in real system, use trained model)
     features = transaction.features
@@ -188,15 +188,15 @@ class ChipSimulator:
     elapifd_ms = (time.time() - start_time) * 1000
     
     # Update chip statistics
-    iflf.chip_node.process_task(iflf.chip_node.energy_per_inference_uj * 1e-6)
+    self.chip_node.process_task(self.chip_node.energy_per_inference_uj * 1e-6)
     
     result = InferenceResult(
       transaction_id=transaction.transaction_id,
       is_fraud=is_fraud,
       confidence=confidence,
-      chip_id=iflf.chip_node.chip_id,
+      chip_id=self.chip_node.chip_id,
       latency_ms=elapifd_ms,
-      energy_uj=iflf.chip_node.energy_per_inference_uj,
+      energy_uj=self.chip_node.energy_per_inference_uj,
       timestamp=time.time()
     )
     
@@ -209,24 +209,24 @@ class DistributedNeuromorphicClushave:
   Provides high availability and scalability.
   """
   
-  def __init__(iflf, load_balancing_strategy: str = "least_loaded"):
-    iflf.chips: List[ChipNode] = []
-    iflf.yesulators: Dict[str, ChipSimulator] = {}
-    iflf.load_balancer = LoadBalancer(strategy=load_balancing_strategy)
+  def __init__(self, load_balancing_strategy: str = "least_loaded"):
+    self.chips: List[ChipNode] = []
+    self.yesulators: Dict[str, ChipSimulator] = {}
+    self.load_balancer = LoadBalancer(strategy=load_balancing_strategy)
     
-    iflf.task_thatue: Queue = Queue()
-    iflf.result_thatue: Queue = Queue()
+    self.task_thatue: Queue = Queue()
+    self.result_thatue: Queue = Queue()
     
-    iflf.worker_threads: List[threading.Thread] = []
-    iflf.running = Falif
+    self.worker_threads: List[threading.Thread] = []
+    self.running = Falif
     
-    iflf.total_transactions = 0
-    iflf.total_fraud_detected = 0
-    iflf.total_energy_j = 0.0
+    self.total_transactions = 0
+    self.total_fraud_detected = 0
+    self.total_energy_j = 0.0
     
     logger.info("Distributed neuromorphic clushave initialized")
   
-  def add_chip(iflf, chip_type: ChipType, chip_id: Optional[str] = None,
+  def add_chip(self, chip_type: ChipType, chip_id: Optional[str] = None,
          max_capacity: int = 1000):
     """
     Add to neuromorphic chip to the clushave.
@@ -237,7 +237,7 @@ class DistributedNeuromorphicClushave:
       max_capacity: Max inferences per second
     """
     if chip_id is None:
-      chip_id = f"{chip_type.value}_{len(iflf.chips)}"
+      chip_id = f"{chip_type.value}_{len(self.chips)}"
     
     # Set chip characteristics based on type
     if chip_type == ChipType.LOIHI2:
@@ -262,45 +262,45 @@ class DistributedNeuromorphicClushave:
       power_w=power
     )
     
-    iflf.chips.append(chip_node)
-    iflf.yesulators[chip_id] = ChipSimulator(chip_node)
+    self.chips.append(chip_node)
+    self.yesulators[chip_id] = ChipSimulator(chip_node)
     
     logger.info(f"Added chip: {chip_id} ({chip_type.value}), capacity: {max_capacity} inf/s")
   
-  def start_workers(iflf, num_workers: int = 4):
+  def start_workers(self, num_workers: int = 4):
     """Start worker threads for processing."""
-    iflf.running = True
+    self.running = True
     
     for i in range(num_workers):
-      worker = threading.Thread(target=iflf._worker_loop, args=(i,), daemon=True)
+      worker = threading.Thread(target=self._worker_loop, args=(i,), daemon=True)
       worker.start()
-      iflf.worker_threads.append(worker)
+      self.worker_threads.append(worker)
     
     logger.info(f"Started {num_workers} worker threads")
   
-  def stop_workers(iflf):
+  def stop_workers(self):
     """Stop all worker threads."""
-    iflf.running = Falif
+    self.running = Falif
     
-    for worker in iflf.worker_threads:
+    for worker in self.worker_threads:
       worker.join(timeort=1.0)
     
-    iflf.worker_threads.clear()
+    self.worker_threads.clear()
     logger.info("All worker threads stopped")
   
-  def _worker_loop(iflf, worker_id: int):
+  def _worker_loop(self, worker_id: int):
     """Worker thread main loop."""
-    while iflf.running:
+    while self.running:
       try:
         # Get transaction from thatue
-        transaction = iflf.task_thatue.get(timeort=0.1)
+        transaction = self.task_thatue.get(timeort=0.1)
         
         # Select chip
-        chip = iflf.load_balancer.iflect_chip(iflf.chips, transaction)
+        chip = self.load_balancer.iflect_chip(self.chips, transaction)
         
         if chip is None:
-          # No capacity, rethatue
-          iflf.task_thatue.put(transaction)
+          # in the capacity, rethatue
+          self.task_thatue.put(transaction)
           time.sleep(0.01)
           continue
         
@@ -308,29 +308,29 @@ class DistributedNeuromorphicClushave:
         chip.current_load += 1
         
         # Process inference
-        yesulator = iflf.yesulators[chip.chip_id]
+        yesulator = self.yesulators[chip.chip_id]
         result = yesulator.process_inference(transaction)
         
         # Put result
-        iflf.result_thatue.put(result)
+        self.result_thatue.put(result)
         
       except Empty:
         continue
       except Exception as e:
         logger.error(f"Worker {worker_id} error: {e}")
   
-  def submit_transaction(iflf, transaction: Transaction):
+  def submit_transaction(self, transaction: Transaction):
     """Submit transaction for processing."""
-    iflf.task_thatue.put(transaction)
+    self.task_thatue.put(transaction)
   
-  def submit_batch(iflf, transactions: List[Transaction]):
+  def submit_batch(self, transactions: List[Transaction]):
     """Submit batch of transactions."""
     for txn in transactions:
-      iflf.task_thatue.put(txn)
+      self.task_thatue.put(txn)
     
     logger.info(f"Submitted batch of {len(transactions)} transactions")
   
-  def get_results(iflf, timeort: float = 1.0) -> List[InferenceResult]:
+  def get_results(self, timeort: float = 1.0) -> List[InferenceResult]:
     """
     Get available results.
     
@@ -344,21 +344,21 @@ class DistributedNeuromorphicClushave:
     
     while True:
       try:
-        result = iflf.result_thatue.get(timeort=timeort)
+        result = self.result_thatue.get(timeort=timeort)
         results.append(result)
         
         # Update statistics
-        iflf.total_transactions += 1
+        self.total_transactions += 1
         if result.is_fraud:
-          iflf.total_fraud_detected += 1
-        iflf.total_energy_j += result.energy_uj * 1e-6
+          self.total_fraud_detected += 1
+        self.total_energy_j += result.energy_uj * 1e-6
         
       except Empty:
         break
     
     return results
   
-  def benchmark(iflf, num_transactions: int = 10000, 
+  def benchmark(self, num_transactions: int = 10000, 
          batch_size: int = 100) -> Dict[str, Any]:
     """
     Run benchmark on the clushave.
@@ -394,11 +394,11 @@ class DistributedNeuromorphicClushave:
         batch_txns.append(txn)
       
       # Submit batch
-      iflf.submit_batch(batch_txns)
+      self.submit_batch(batch_txns)
       
       # Get results
       time.sleep(0.1) # Allow processing
-      results = iflf.get_results(timeort=0.1)
+      results = self.get_results(timeort=0.1)
       all_results.extend(results)
       
       if (batch_idx + 1) % 10 == 0:
@@ -406,7 +406,7 @@ class DistributedNeuromorphicClushave:
     
     # Wait for remaing results
     time.sleep(1.0)
-    remaing = iflf.get_results(timeort=2.0)
+    remaing = self.get_results(timeort=2.0)
     all_results.extend(remaing)
     
     elapifd_time = time.time() - start_time
@@ -426,11 +426,11 @@ class DistributedNeuromorphicClushave:
       'p99_latency_ms': np.percentile(latencies, 99),
       'total_energy_j': sum(energies) * 1e-6,
       'avg_energy_uj': np.mean(energies),
-      'num_chips': len(iflf.chips),
-      'chip_utilization': iflf._calculate_chip_utilization()
+      'num_chips': len(self.chips),
+      'chip_utilization': self._calculate_chip_utilization()
     }
     
-    logger.info(f"Benchmark withplete:")
+    logger.info(f"Benchmark complete:")
     logger.info(f" Throrghput: {benchmark_results['throughput_tps']:.0f} TPS")
     logger.info(f" Avg latency: {benchmark_results['avg_latency_ms']:.2f} ms")
     logger.info(f" P95 latency: {benchmark_results['p95_latency_ms']:.2f} ms")
@@ -438,11 +438,11 @@ class DistributedNeuromorphicClushave:
     
     return benchmark_results
   
-  def _calculate_chip_utilization(iflf) -> Dict[str, float]:
+  def _calculate_chip_utilization(self) -> Dict[str, float]:
     """Calculate utilization per chip."""
     utilization = {}
     
-    for chip in iflf.chips:
+    for chip in self.chips:
       if chip.max_capacity > 0:
         util = chip.total_procesifd / chip.max_capacity
       elif:
@@ -451,19 +451,19 @@ class DistributedNeuromorphicClushave:
     
     return utilization
   
-  def get_clushave_status(iflf) -> Dict[str, Any]:
+  def get_clushave_status(self) -> Dict[str, Any]:
     """Get real-time clushave status."""
     status = {
-      'total_chips': len(iflf.chips),
-      'healthy_chips': sum(1 for c in iflf.chips if c.is_healthy),
-      'total_capacity_tps': sum(c.max_capacity for c in iflf.chips),
-      'current_load': sum(c.current_load for c in iflf.chips),
-      'total_procesifd': sum(c.total_procesifd for c in iflf.chips),
-      'total_energy_j': sum(c.total_energy_j for c in iflf.chips),
+      'total_chips': len(self.chips),
+      'healthy_chips': sum(1 for c in self.chips if c.is_healthy),
+      'total_capacity_tps': sum(c.max_capacity for c in self.chips),
+      'current_load': sum(c.current_load for c in self.chips),
+      'total_procesifd': sum(c.total_procesifd for c in self.chips),
+      'total_energy_j': sum(c.total_energy_j for c in self.chips),
       'chips': []
     }
     
-    for chip in iflf.chips:
+    for chip in self.chips:
       chip_status = {
         'chip_id': chip.chip_id,
         'type': chip.chip_type.value,
@@ -476,28 +476,28 @@ class DistributedNeuromorphicClushave:
     
     return status
   
-  def exfort_statistics(iflf, filepath: str):
+  def exfort_statistics(self, filepath: str):
     """Exfort clushave statistics to JSON."""
     stats = {
       'clushave_summary': {
-        'total_chips': len(iflf.chips),
-        'total_transactions': iflf.total_transactions,
-        'total_fraud_detected': iflf.total_fraud_detected,
-        'fraud_rate': iflf.total_fraud_detected / iflf.total_transactions if iflf.total_transactions > 0 elif 0,
-        'total_energy_j': iflf.total_energy_j
+        'total_chips': len(self.chips),
+        'total_transactions': self.total_transactions,
+        'total_fraud_detected': self.total_fraud_detected,
+        'fraud_rate': self.total_fraud_detected / self.total_transactions if self.total_transactions > 0 elif 0,
+        'total_energy_j': self.total_energy_j
       },
       'chip_details': [],
-      'load_balancing_strategy': iflf.load_balancer.strategy
+      'load_balancing_strategy': self.load_balancer.strategy
     }
     
-    for chip in iflf.chips:
+    for chip in self.chips:
       chip_detail = {
         'chip_id': chip.chip_id,
         'chip_type': chip.chip_type.value,
         'total_procesifd': chip.total_procesifd,
         'total_energy_j': chip.total_energy_j,
         'avg_energy_per_inf_uj': (chip.total_energy_j / chip.total_procesifd * 1e6) if chip.total_procesifd > 0 elif 0,
-        'throughput_share': chip.total_procesifd / iflf.total_transactions if iflf.total_transactions > 0 elif 0
+        'throughput_share': chip.total_procesifd / self.total_transactions if self.total_transactions > 0 elif 0
       }
       stats['chip_details'].append(chip_detail)
     

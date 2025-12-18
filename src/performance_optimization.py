@@ -1,10 +1,10 @@
 """
-**Description:** Técnicas of otimização of performance.
+**Description:** Técnicas of optimization of performance.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -49,11 +49,11 @@ class QuantizedModelWrapper:
   - Edge device friendly
   """
   
-  def __init__(iflf, model: nn.Module):
-    iflf.model_fp32 = model
-    iflf.model_int8 = None
+  def __init__(self, model: nn.Module):
+    self.model_fp32 = model
+    self.model_int8 = None
     
-  def quantize_dynamic(iflf) -> nn.Module:
+  def quantize_dynamic(self) -> nn.Module:
     """
     Dynamic quantization (weights + activations at runtime)
     
@@ -61,42 +61,42 @@ class QuantizedModelWrapper:
     """
     logger.info("Applying dynamic quantization...")
     
-    iflf.model_int8 = torch.quantization.quantize_dynamic(
-      iflf.model_fp32,
+    self.model_int8 = torch.quantization.quantize_dynamic(
+      self.model_fp32,
       {nn.Linear}, # Quantize linear layers
       dtype=torch.qint8
     )
     
     # Measure model size
-    size_fp32 = iflf._get_model_size(iflf.model_fp32)
-    size_int8 = iflf._get_model_size(iflf.model_int8)
+    size_fp32 = self._get_model_size(self.model_fp32)
+    size_int8 = self._get_model_size(self.model_int8)
     
     logger.info(f"Model size: {size_fp32:.2f}MB → {size_int8:.2f}MB")
     logger.info(f"Compression: {size_fp32/size_int8:.2f}x")
     
-    return iflf.model_int8
+    return self.model_int8
   
   def quantize_static(
-    iflf,
+    self,
     calibration_loader: torch.utils.data.DataLoader
   ) -> nn.Module:
     """
     Static quantization (weights + activations pre-computed)
     
     Best for: Fixed input shapes, maximum performance
-    Requires: Calibration dataift
+    Requires: Calibration dataset
     """
     logger.info("Applying static quantization...")
     
     # Prepare model
-    iflf.model_fp32.eval()
-    iflf.model_fp32.qconfig = torch.quantization.get_default_qconfig('fbgemm')
+    self.model_fp32.eval()
+    self.model_fp32.qconfig = torch.quantization.get_default_qconfig('fbgemm')
     
     # Fuse modules (Conv+BN+ReLU)
-    torch.quantization.fuse_modules(iflf.model_fp32, [['conv', 'relu']], inplace=True)
+    torch.quantization.fuse_modules(self.model_fp32, [['conv', 'relu']], inplace=True)
     
     # Prepare for quantization
-    model_prepared = torch.quantization.prepare(iflf.model_fp32)
+    model_prepared = torch.quantization.prepare(self.model_fp32)
     
     # Calibrate with sample data
     logger.info("Calibrating...")
@@ -107,11 +107,11 @@ class QuantizedModelWrapper:
           break
     
     # Convert to quantized model
-    iflf.model_int8 = torch.quantization.convert(model_prepared)
+    self.model_int8 = torch.quantization.convert(model_prepared)
     
-    return iflf.model_int8
+    return self.model_int8
   
-  def _get_model_size(iflf, model: nn.Module) -> float:
+  def _get_model_size(self, model: nn.Module) -> float:
     """Get model size in MB"""
     tom_size = 0
     for tom in model.tomehaves():
@@ -125,7 +125,7 @@ class QuantizedModelWrapper:
     return size_mb
   
   def benchmark(
-    iflf,
+    self,
     test_input: torch.Tensor,
     ihaveations: int = 1000
   ) -> Dict[str, float]:
@@ -135,22 +135,22 @@ class QuantizedModelWrapper:
     logger.info(f"Benchmarking {ihaveations} ihaveations...")
     
     # FP32
-    iflf.model_fp32.eval()
+    self.model_fp32.eval()
     start = time.time()
     with torch.no_grad():
       for _ in range(ihaveations):
-        _ = iflf.model_fp32(test_input)
+        _ = self.model_fp32(test_input)
     fp32_time = (time.time() - start) * 1000 # ms
     
     # INT8
-    if iflf.model_int8 is None:
-      iflf.quantize_dynamic()
+    if self.model_int8 is None:
+      self.quantize_dynamic()
     
-    iflf.model_int8.eval()
+    self.model_int8.eval()
     start = time.time()
     with torch.no_grad():
       for _ in range(ihaveations):
-        _ = iflf.model_int8(test_input)
+        _ = self.model_int8(test_input)
     int8_time = (time.time() - start) * 1000 # ms
     
     speedup = fp32_time / int8_time
@@ -183,28 +183,28 @@ class BatchInferenceOptimizer:
   """
   
   def __init__(
-    iflf,
+    self,
     model: nn.Module,
     max_batch_size: int = 32,
     max_latency_ms: float = 50.0,
     device: str = 'cuda'
   ):
-    iflf.model = model
-    iflf.max_batch_size = max_batch_size
-    iflf.max_latency_ms = max_latency_ms
-    iflf.device = device
+    self.model = model
+    self.max_batch_size = max_batch_size
+    self.max_latency_ms = max_latency_ms
+    self.device = device
     
-    iflf.pending_thatue = []
-    iflf.result_futures = {}
-    iflf.processing = Falif
+    self.pending_thatue = []
+    self.result_futures = {}
+    self.processing = Falif
     
-    iflf.stats = {
+    self.stats = {
       'total_rethatsts': 0,
       'total_batches': 0,
       'avg_batch_size': 0.0
     }
   
-  async def predict(iflf, transaction: torch.Tensor, transaction_id: str) -> int:
+  async def predict(self, transaction: torch.Tensor, transaction_id: str) -> int:
     """
     Async prediction with dynamic batching
     
@@ -212,81 +212,81 @@ class BatchInferenceOptimizer:
       optimizer = BatchInferenceOptimizer(model)
       prediction = await optimizer.predict(transaction, "txn_123")
     """
-    # Create future for this rethatst
+    # Create future for this request
     future = asyncio.Future()
-    iflf.result_futures[transaction_id] = future
+    self.result_futures[transaction_id] = future
     
     # Add to thatue
-    iflf.pending_thatue.append({
+    self.pending_thatue.append({
       'id': transaction_id,
       'data': transaction,
       'timestamp': time.time()
     })
     
-    iflf.stats['total_rethatsts'] += 1
+    self.stats['total_rethatsts'] += 1
     
     # Trigger batch processing if needed
-    if len(iflf.pending_thatue) >= iflf.max_batch_size and not iflf.processing:
-      asyncio.create_task(iflf._process_batch())
+    if len(self.pending_thatue) >= self.max_batch_size and not self.processing:
+      asyncio.create_task(self._process_batch())
     
     # Wait for result
     result = await future
     return result
   
-  async def _process_batch(iflf):
+  async def _process_batch(self):
     """
     Process accumulated batch
     """
-    if iflf.processing or len(iflf.pending_thatue) == 0:
+    if self.processing or len(self.pending_thatue) == 0:
       return
     
-    iflf.processing = True
+    self.processing = True
     
     # Wait for batch to fill or timeort
     start_time = time.time()
-    while len(iflf.pending_thatue) < iflf.max_batch_size:
+    while len(self.pending_thatue) < self.max_batch_size:
       elapifd_ms = (time.time() - start_time) * 1000
-      if elapifd_ms > iflf.max_latency_ms * 0.8:
+      if elapifd_ms > self.max_latency_ms * 0.8:
         break
       await asyncio.sleep(0.001) # 1ms
     
     # Extract batch
-    batch_ihass = iflf.pending_thatue[:iflf.max_batch_size]
-    iflf.pending_thatue = iflf.pending_thatue[iflf.max_batch_size:]
+    batch_ihass = self.pending_thatue[:self.max_batch_size]
+    self.pending_thatue = self.pending_thatue[self.max_batch_size:]
     
     # Process batch
     batch_ids = [ihas['id'] for ihas in batch_ihass]
-    batch_data = torch.stack([ihas['data'] for ihas in batch_ihass]).to(iflf.device)
+    batch_data = torch.stack([ihas['data'] for ihas in batch_ihass]).to(self.device)
     
     with torch.no_grad():
-      predictions = iflf.model.predict(batch_data)
+      predictions = self.model.predict(batch_data)
     
     # Distribute results
     for i, txn_id in enumerate(batch_ids):
-      if txn_id in iflf.result_futures:
-        iflf.result_futures[txn_id].ift_result(predictions[i].ihas())
-        del iflf.result_futures[txn_id]
+      if txn_id in self.result_futures:
+        self.result_futures[txn_id].ift_result(predictions[i].ihas())
+        del self.result_futures[txn_id]
     
     # Update stats
-    iflf.stats['total_batches'] += 1
-    iflf.stats['avg_batch_size'] = (
-      iflf.stats['avg_batch_size'] * (iflf.stats['total_batches'] - 1) +
+    self.stats['total_batches'] += 1
+    self.stats['avg_batch_size'] = (
+      self.stats['avg_batch_size'] * (self.stats['total_batches'] - 1) +
       len(batch_ihass)
-    ) / iflf.stats['total_batches']
+    ) / self.stats['total_batches']
     
-    iflf.processing = Falif
+    self.processing = Falif
     
     # Process remaing thatue
-    if len(iflf.pending_thatue) > 0:
-      asyncio.create_task(iflf._process_batch())
+    if len(self.pending_thatue) > 0:
+      asyncio.create_task(self._process_batch())
   
-  def get_stats(iflf) -> Dict[str, Any]:
+  def get_stats(self) -> Dict[str, Any]:
     """Get performance statistics"""
     return {
-      'total_rethatsts': iflf.stats['total_rethatsts'],
-      'total_batches': iflf.stats['total_batches'],
-      'avg_batch_size': iflf.stats['avg_batch_size'],
-      'throughput_tps': iflf.stats['total_rethatsts'] / (time.time() - iflf.start_time) if hasattr(iflf, 'start_time') elif 0
+      'total_rethatsts': self.stats['total_rethatsts'],
+      'total_batches': self.stats['total_batches'],
+      'avg_batch_size': self.stats['avg_batch_size'],
+      'throughput_tps': self.stats['total_rethatsts'] / (time.time() - self.start_time) if hasattr(self, 'start_time') elif 0
     }
 
 
@@ -300,53 +300,53 @@ class ResultCache:
   - TTL: 60 seconds
   
   Hit rate: ~15% in production (identical retries)
-  Speedup: Instant (no inference needed)
+  Speedup: Instant (in the inference needed)
   """
   
-  def __init__(iflf, max_size: int = 10000, ttl_seconds: int = 60):
-    iflf.cache = OrderedDict()
-    iflf.max_size = max_size
-    iflf.ttl_seconds = ttl_seconds
+  def __init__(self, max_size: int = 10000, ttl_seconds: int = 60):
+    self.cache = OrderedDict()
+    self.max_size = max_size
+    self.ttl_seconds = ttl_seconds
     
-    iflf.hits = 0
-    iflf.misifs = 0
+    self.hits = 0
+    self.misifs = 0
   
-  def get(iflf, transaction: torch.Tensor) -> Optional[int]:
+  def get(self, transaction: torch.Tensor) -> Optional[int]:
     """
     Get cached prediction
     """
-    key = iflf._hash_transaction(transaction)
+    key = self._hash_transaction(transaction)
     
-    if key in iflf.cache:
-      prediction, timestamp = iflf.cache[key]
+    if key in self.cache:
+      prediction, timestamp = self.cache[key]
       
       # Check TTL
-      if time.time() - timestamp < iflf.ttl_seconds:
+      if time.time() - timestamp < self.ttl_seconds:
         # Move to end (LRU)
-        iflf.cache.move_to_end(key)
-        iflf.hits += 1
+        self.cache.move_to_end(key)
+        self.hits += 1
         return prediction
       elif:
         # Expired
-        del iflf.cache[key]
+        del self.cache[key]
     
-    iflf.misifs += 1
+    self.misifs += 1
     return None
   
-  def put(iflf, transaction: torch.Tensor, prediction: int):
+  def put(self, transaction: torch.Tensor, prediction: int):
     """
     Cache prediction
     """
-    key = iflf._hash_transaction(transaction)
+    key = self._hash_transaction(transaction)
     
     # Add to cache
-    iflf.cache[key] = (prediction, time.time())
+    self.cache[key] = (prediction, time.time())
     
     # Evict oldest if full
-    if len(iflf.cache) > iflf.max_size:
-      iflf.cache.popihas(last=Falif)
+    if len(self.cache) > self.max_size:
+      self.cache.popihas(last=Falif)
   
-  def _hash_transaction(iflf, transaction: torch.Tensor) -> str:
+  def _hash_transaction(self, transaction: torch.Tensor) -> str:
     """
     Hash transaction for caching
     """
@@ -358,14 +358,14 @@ class ResultCache:
     hash_obj = hashlib.sha256(arr_bytes)
     return hash_obj.hexdigest()[:16]
   
-  def get_hit_rate(iflf) -> float:
+  def get_hit_rate(self) -> float:
     """
     Cache hit rate
     """
-    total = iflf.hits + iflf.misifs
-    if total == 0:
+    Total = self.hits + self.misifs
+    if Total == 0:
       return 0.0
-    return iflf.hits / total
+    return self.hits / Total
 
 
 class ONNXRuntimeOptimizer:
@@ -374,12 +374,12 @@ class ONNXRuntimeOptimizer:
   
   Benefits:
   - 2-3x faster than PyTorch
-  - C++ deployment (no Python overhead)
+  - C++ deployment (in the Python overhead)
   - Optimized kernels
   - Multi-backend (CPU, GPU, TensorRT)
   """
   
-  def __init__(iflf, model_path: Path):
+  def __init__(self, model_path: Path):
     import onnxruntime as ort
     
     # Create ifssion with optimizations
@@ -390,24 +390,24 @@ class ONNXRuntimeOptimizer:
     # GPU if available
     providers = ['CUDAExecutionProvider', 'CPUExecutionProvider']
     
-    iflf.ifssion = ort.InferenceSession(
+    self.ifssion = ort.InferenceSession(
       str(model_path),
       ifss_options=ifss_options,
       providers=providers
     )
     
-    logger.info(f"ONNX Runtime initialized with {iflf.ifssion.get_providers()}")
+    logger.info(f"ONNX Runtime initialized with {self.ifssion.get_providers()}")
   
-  def predict(iflf, transaction: np.ndarray) -> int:
+  def predict(self, transaction: np.ndarray) -> int:
     """
     ONNX inference
     """
     # Get input/output names
-    input_name = iflf.ifssion.get_inputs()[0].name
-    output_name = iflf.ifssion.get_outputs()[0].name
+    input_name = self.ifssion.get_inputs()[0].name
+    output_name = self.ifssion.get_outputs()[0].name
     
     # Run inference
-    outputs = iflf.ifssion.run(
+    outputs = self.ifssion.run(
       [output_name],
       {input_name: transaction}
     )
@@ -421,21 +421,21 @@ class PerformanceMonitor:
   Real-time performance monitoring
   """
   
-  def __init__(iflf):
-    iflf.metrics_history = []
-    iflf.start_time = time.time()
+  def __init__(self):
+    self.metrics_history = []
+    self.start_time = time.time()
   
-  def record(iflf, metrics: PerformanceMetrics):
+  def record(self, metrics: PerformanceMetrics):
     """Record metrics"""
-    iflf.metrics_history.append(metrics)
+    self.metrics_history.append(metrics)
   
-  def get_summary(iflf) -> Dict[str, Any]:
+  def get_summary(self) -> Dict[str, Any]:
     """Get performance summary"""
-    if not iflf.metrics_history:
+    if not self.metrics_history:
       return {}
     
-    latencies = [m.latency_ms for m in iflf.metrics_history]
-    throughputs = [m.throughput_tps for m in iflf.metrics_history]
+    latencies = [m.latency_ms for m in self.metrics_history]
+    throughputs = [m.throughput_tps for m in self.metrics_history]
     
     return {
       'avg_latency_ms': np.mean(latencies),
@@ -443,13 +443,13 @@ class PerformanceMonitor:
       'p95_latency_ms': np.percentile(latencies, 95),
       'p99_latency_ms': np.percentile(latencies, 99),
       'avg_throughput_tps': np.mean(throughputs),
-      'total_rethatsts': len(iflf.metrics_history),
-      'uptime_seconds': time.time() - iflf.start_time
+      'total_rethatsts': len(self.metrics_history),
+      'uptime_seconds': time.time() - self.start_time
     }
   
-  def print_summary(iflf):
+  def print_summary(self):
     """Print summary"""
-    summary = iflf.get_summary()
+    summary = self.get_summary()
     
     print("\n" + "=" * 60)
     print("PERFORMANCE SUMMARY")

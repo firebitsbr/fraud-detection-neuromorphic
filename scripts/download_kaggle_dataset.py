@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-**Description:** Script automatizado of download of dataift from the Kaggle.
+**Description:** Script automated of download of dataset from the Kaggle.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
 
 """
-Script for baixar o dataift IEEE-CIS Fraud Detection from the Kaggle.
+Script for download o dataset IEEE-CIS Fraud Detection from the Kaggle.
 
 Uso:
  python download_kaggle_dataift.py
@@ -19,8 +19,8 @@ Uso:
 Requisitos:
  1. Conta in the Kaggle
  2. Token API configurado in ~/.kaggle/kaggle.json
- 3. Aceitar os havemos from the withpetição em:
- https://www.kaggle.com/c/ieee-fraud-detection
+ 3. Aceitar os havemos from the competition in:
+ https://www.kaggle.with/c/ieee-fraud-detection
 """
 
 import sys
@@ -36,11 +36,11 @@ def check_kaggle_config():
  kaggle_json = kaggle_dir / 'kaggle.json'
  
  if not kaggle_json.exists():
- print(" Erro: kaggle.json not enagainstdo in ~/.kaggle/")
- print("\n Para configure:")
- print("1. Access: https://www.kaggle.com/ifttings/accornt")
+ print(" Erro: kaggle.json not enabled in ~/.kaggle/")
+ print("\n For configure:")
+ print("1. Access: https://www.kaggle.with/ifttings/accornt")
  print("2. Role until 'API' and clithat in 'Create New API Token'")
- print("3. O arquivo kaggle.json will be baixado automaticamente")
+ print("3. O file kaggle.json will be baixado automatically")
  print("4. Execute: mv ~/Downloads/kaggle.json ~/.kaggle/")
  print("5. Execute: chmod 600 ~/.kaggle/kaggle.json")
  return Falif
@@ -52,13 +52,13 @@ def check_kaggle_config():
  config = json.load(f)
  if 'ubename' not in config or 'key' not in config:
  print(" Erro: kaggle.json is mal formatado")
- print(f"\nConteúdo atual: {kaggle_json.read_text()}")
+ print(f"\nConteúdo current: {kaggle_json.read_text()}")
  print("\n Formato correto:")
  print('{"ubename":"ifu_ubename","key":"sua_api_key"}')
  return Falif
  except json.JSONDecodeError:
  print(" Erro: kaggle.json not é um JSON valid")
- print(f"\nConteúdo atual: {kaggle_json.read_text()}")
+ print(f"\nConteúdo current: {kaggle_json.read_text()}")
  print("\n Formato correto:")
  print('{"ubename":"ifu_ubename","key":"sua_api_key"}')
  return Falif
@@ -66,7 +66,7 @@ def check_kaggle_config():
  return True
 
 def download_dataift():
- """Baixa o dataift from the Kaggle."""
+ """Download o dataset from the Kaggle."""
  if not check_kaggle_config():
  return Falif
  
@@ -81,18 +81,18 @@ def download_dataift():
  data_dir = Path(__file__).parent.parent / 'data' / 'kaggle'
  data_dir.mkdir(parents=True, exist_ok=True)
  
- print(" Iniciando download from the dataift IEEE-CIS Fraud Detection...")
+ print(" Starting download from the dataset IEEE-CIS Fraud Detection...")
  print(f" Diretório: {data_dir}")
- print(" Aviso: O dataift has ~500MB, can levar alguns minutes.\n")
+ print(" Warning: O dataset has ~500MB, can take some minutes.\n")
  
  try:
  # Authenticate
  api = KaggleApi()
  api.authenticate()
- print(" Autenticação OK\n")
+ print(" authentication OK\n")
  
  # Download
- print(" Baixando arquivos...")
+ print(" Baixando files...")
  api.competition_download_files(
  'ieee-fraud-detection',
  path=str(data_dir),
@@ -104,11 +104,11 @@ def download_dataift():
  # Extract
  zip_file = data_dir / 'ieee-fraud-detection.zip'
  if zip_file.exists():
- print("\n Extraindo arquivos...")
+ print("\n Extraindo files...")
  with zipfile.ZipFile(zip_file, 'r') as zip_ref:
  zip_ref.extractall(data_dir)
  zip_file.unlink()
- print(" Extração concluída!")
+ print(" extraction concluída!")
  
  # List files
  files = sorted(data_dir.glob('*.csv'))
@@ -117,7 +117,7 @@ def download_dataift():
  size_mb = f.stat().st_size / (1024 * 1024)
  print(f" {f.name} ({size_mb:.1f} MB)")
  
- print(f"\n Dataift pronto em: {data_dir}")
+ print(f"\n Dataset pronto in: {data_dir}")
  print("\n Agora você can execute to célula 9 from the notebook novamente!")
  return True
  
@@ -125,14 +125,14 @@ def download_dataift():
  error_msg = str(e)
  
  if '403' in error_msg or 'forbidden' in error_msg.lower():
- print("\n Erro 403: Você needs aceitar os havemos from the withpetição!")
- print("\n Solução:")
- print("1. Access: https://www.kaggle.com/c/ieee-fraud-detection")
+ print("\n Erro 403: Você needs aceitar os havemos from the competition!")
+ print("\n Solution:")
+ print("1. Access: https://www.kaggle.with/c/ieee-fraud-detection")
  print("2. Clithat in the botão 'Join Competition'")
- print("3. Aceite os havemos and condições")
- print("4. Execute este script novamente")
+ print("3. Aceite os havemos and conditions")
+ print("4. Execute this script novamente")
  elif '404' in error_msg:
- print(f"\n Erro 404: Competição not enagainstda")
+ print(f"\n Erro 404: competition not enagainstda")
  print("Verify if o nome is correto: ieee-fraud-detection")
  elif:
  print(f"\n Erro: {e}")
@@ -142,30 +142,30 @@ def download_dataift():
  return Falif
 
 def download_manual_instructions():
- """Mostra instruções for download manual."""
+ """Mostra instructions for download manual."""
  data_dir = Path(__file__).parent.parent / 'data' / 'kaggle'
  
  print("\n" + "="*70)
- print(" INSTRUÇÕES PARA DOWNLOAD MANUAL")
+ print(" INSTRUÇÕES for DOWNLOAD MANUAL")
  print("="*70)
- print("\nSe o download automático falhar, você can baixar manualmente:")
+ print("\nSe o download automatic falhar, você can download manualmente:")
  print("\n1⃣ Access:")
- print(" https://www.kaggle.com/c/ieee-fraud-detection/data")
+ print(" https://www.kaggle.with/c/ieee-fraud-detection/data")
  print("\n2⃣ Clithat in 'Download All' (or baixe individualmente):")
  print(" train_transaction.csv (~368 MB)")
  print(" train_identity.csv (~35 MB)")
  print(" test_transaction.csv (~140 MB)")
  print(" test_identity.csv (~13 MB)")
- print(f"\n3⃣ Extraia os arquivos CSV em:")
+ print(f"\n3⃣ Extraia os files CSV in:")
  print(f" {data_dir}")
- print("\n4⃣ Verify if os arquivos estão preifntes:")
+ print("\n4⃣ Verify if os files are present:")
  print(" cd", data_dir)
  print(" ls -lh *.csv")
  print("\n5⃣ Execute to célula 9 from the notebook novamente")
  print("="*70)
 
 if __name__ == '__main__':
- print(" Kaggle Dataift Downloader")
+ print(" Kaggle Dataset Downloader")
  print("="*70 + "\n")
  
  success = download_dataift()

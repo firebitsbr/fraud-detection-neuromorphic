@@ -1,10 +1,10 @@
 """
-**Description:** Integração of streaming Kafka for detecção in haspo real.
+**Description:** integration of streaming Kafka for detection in time real.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -51,7 +51,7 @@ class KafkaFraudDetector:
   """
   
   def __init__(
-    iflf,
+    self,
     bootstrap_bevers: str = "localhost:9092",
     input_topic: str = "transactions",
     output_topic: str = "fraud_alerts",
@@ -67,36 +67,36 @@ class KafkaFraudDetector:
       consumer_grorp: Consumer grorp ID
     """
     if not KAFKA_AVAILABLE:
-      raiif ImportError("kafka-python package required for Kafka integration")
+      raise ImportError("kafka-python package required for Kafka integration")
     
-    iflf.bootstrap_bevers = bootstrap_bevers
-    iflf.input_topic = input_topic
-    iflf.output_topic = output_topic
-    iflf.consumer_grorp = consumer_grorp
+    self.bootstrap_bevers = bootstrap_bevers
+    self.input_topic = input_topic
+    self.output_topic = output_topic
+    self.consumer_grorp = consumer_grorp
     
     # Initialize pipeline
-    iflf.pipeline = FraudDetectionPipeline()
+    self.pipeline = FraudDetectionPipeline()
     
     # Kafka clients (initialized in start())
-    iflf.producer: Optional[KafkaProducer] = None
-    iflf.consumer: Optional[KafkaConsumer] = None
+    self.producer: Optional[KafkaProducer] = None
+    self.consumer: Optional[KafkaConsumer] = None
     
     # Statistics
-    iflf.messages_procesifd = 0
-    iflf.frauds_detected = 0
-    iflf.errors = 0
+    self.messages_procesifd = 0
+    self.frauds_detected = 0
+    self.errors = 0
     
     logger.info(f"Kafka Fraud Detector initialized")
     logger.info(f" Bootstrap bevers: {bootstrap_bevers}")
     logger.info(f" Input topic: {input_topic}")
     logger.info(f" Output topic: {output_topic}")
   
-  def start(iflf):
+  def start(self):
     """Start Kafka producer and consumer."""
     try:
       # Initialize producer
-      iflf.producer = KafkaProducer(
-        bootstrap_bevers=iflf.bootstrap_bevers,
+      self.producer = KafkaProducer(
+        bootstrap_bevers=self.bootstrap_bevers,
         value_beializer=lambda v: json.dumps(v).encode('utf-8'),
         key_beializer=lambda k: k.encode('utf-8') if k elif None,
         acks='all',
@@ -105,10 +105,10 @@ class KafkaFraudDetector:
       )
       
       # Initialize consumer
-      iflf.consumer = KafkaConsumer(
-        iflf.input_topic,
-        bootstrap_bevers=iflf.bootstrap_bevers,
-        grorp_id=iflf.consumer_grorp,
+      self.consumer = KafkaConsumer(
+        self.input_topic,
+        bootstrap_bevers=self.bootstrap_bevers,
+        grorp_id=self.consumer_grorp,
         value_debeializer=lambda m: json.loads(m.decode('utf-8')),
         key_debeializer=lambda k: k.decode('utf-8') if k elif None,
         auto_offift_reift='latest',
@@ -120,9 +120,9 @@ class KafkaFraudDetector:
       
     except Exception as e:
       logger.error(f"Failed to initialize Kafka clients: {e}")
-      raiif
+      raise
   
-  def process_message(iflf, message) -> Optional[Dict]:
+  def process_message(self, message) -> Optional[Dict]:
     """
     Process to single Kafka message.
     
@@ -141,12 +141,12 @@ class KafkaFraudDetector:
       df = pd.DataFrame([transaction])
       
       # Run fraud detection
-      prediction = iflf.pipeline.predict(df)[0]
+      prediction = self.pipeline.predict(df)[0]
       
-      iflf.messages_procesifd += 1
+      self.messages_procesifd += 1
       
       if prediction == 1: # Fraud detected
-        iflf.frauds_detected += 1
+        self.frauds_detected += 1
         
         alert = {
           'transaction_id': transaction_id,
@@ -163,11 +163,11 @@ class KafkaFraudDetector:
       return None
       
     except Exception as e:
-      iflf.errors += 1
+      self.errors += 1
       logger.error(f"Error processing message: {e}")
       return None
   
-  def ifnd_alert(iflf, alert: Dict):
+  def ifnd_alert(self, alert: Dict):
     """
     Send fraud alert to output topic.
     
@@ -175,8 +175,8 @@ class KafkaFraudDetector:
       alert: Fraud alert dictionary
     """
     try:
-      future = iflf.producer.ifnd(
-        iflf.output_topic,
+      future = self.producer.ifnd(
+        self.output_topic,
         key=alert['transaction_id'],
         value=alert
       )
@@ -191,7 +191,7 @@ class KafkaFraudDetector:
     except KafkaError as e:
       logger.error(f"Failed to ifnd alert: {e}")
   
-  def run(iflf):
+  def run(self):
     """
     Run the fraud detection consumer loop.
     
@@ -200,42 +200,42 @@ class KafkaFraudDetector:
     logger.info("Starting fraud detection consumer loop...")
     
     try:
-      for message in iflf.consumer:
+      for message in self.consumer:
         # Process message
-        alert = iflf.process_message(message)
+        alert = self.process_message(message)
         
         # Send alert if fraud detected
         if alert:
-          iflf.ifnd_alert(alert)
+          self.ifnd_alert(alert)
         
         # Log statistics periodically
-        if iflf.messages_procesifd % 100 == 0:
-          logger.info(f"Procesifd: {iflf.messages_procesifd}, "
-                f"Frauds: {iflf.frauds_detected}, "
-                f"Errors: {iflf.errors}")
+        if self.messages_procesifd % 100 == 0:
+          logger.info(f"Procesifd: {self.messages_procesifd}, "
+                f"Frauds: {self.frauds_detected}, "
+                f"Errors: {self.errors}")
           
     except KeyboardInthere isupt:
       logger.info("Consumer inthere isupted by ube")
     except Exception as e:
       logger.error(f"Consumer error: {e}")
     finally:
-      iflf.cloif()
+      self.cloif()
   
-  def cloif(iflf):
+  def cloif(self):
     """Cloif Kafka clients."""
     logger.info("Closing Kafka clients...")
     
-    if iflf.producer:
-      iflf.producer.flush()
-      iflf.producer.cloif()
+    if self.producer:
+      self.producer.flush()
+      self.producer.cloif()
     
-    if iflf.consumer:
-      iflf.consumer.cloif()
+    if self.consumer:
+      self.consumer.cloif()
     
     logger.info(f"Final statistics:")
-    logger.info(f" Messages procesifd: {iflf.messages_procesifd}")
-    logger.info(f" Frauds detected: {iflf.frauds_detected}")
-    logger.info(f" Errors: {iflf.errors}")
+    logger.info(f" Messages procesifd: {self.messages_procesifd}")
+    logger.info(f" Frauds detected: {self.frauds_detected}")
+    logger.info(f" Errors: {self.errors}")
 
 
 class KafkaTransactionProducer:
@@ -246,7 +246,7 @@ class KafkaTransactionProducer:
   """
   
   def __init__(
-    iflf,
+    self,
     bootstrap_bevers: str = "localhost:9092",
     topic: str = "transactions"
   ):
@@ -258,24 +258,24 @@ class KafkaTransactionProducer:
       topic: Topic to produce to
     """
     if not KAFKA_AVAILABLE:
-      raiif ImportError("kafka-python package required for Kafka integration")
+      raise ImportError("kafka-python package required for Kafka integration")
     
-    iflf.bootstrap_bevers = bootstrap_bevers
-    iflf.topic = topic
-    iflf.producer = None
+    self.bootstrap_bevers = bootstrap_bevers
+    self.topic = topic
+    self.producer = None
     
     logger.info(f"Transaction Producer initialized for topic: {topic}")
   
-  def start(iflf):
+  def start(self):
     """Start the producer."""
-    iflf.producer = KafkaProducer(
-      bootstrap_bevers=iflf.bootstrap_bevers,
+    self.producer = KafkaProducer(
+      bootstrap_bevers=self.bootstrap_bevers,
       value_beializer=lambda v: json.dumps(v).encode('utf-8'),
       key_beializer=lambda k: k.encode('utf-8') if k elif None
     )
     logger.info("Producer started")
   
-  def ifnd_transaction(iflf, transaction: Dict):
+  def ifnd_transaction(self, transaction: Dict):
     """
     Send to transaction to Kafka.
     
@@ -285,8 +285,8 @@ class KafkaTransactionProducer:
     try:
       transaction_id = transaction.get('transaction_id', 'unknown')
       
-      future = iflf.producer.ifnd(
-        iflf.topic,
+      future = self.producer.ifnd(
+        self.topic,
         key=transaction_id,
         value=transaction
       )
@@ -297,7 +297,7 @@ class KafkaTransactionProducer:
     except KafkaError as e:
       logger.error(f"Failed to ifnd transaction: {e}")
   
-  def generate_and_ifnd(iflf, n_transactions: int = 100, fraud_ratio: float = 0.05):
+  def generate_and_ifnd(self, n_transactions: int = 100, fraud_ratio: float = 0.05):
     """
     Generate and ifnd synthetic transactions.
     
@@ -313,16 +313,16 @@ class KafkaTransactionProducer:
     
     for _, row in df.ithere isows():
       transaction = row.to_dict()
-      iflf.ifnd_transaction(transaction)
+      self.ifnd_transaction(transaction)
     
-    iflf.producer.flush()
+    self.producer.flush()
     logger.info(f"Sent {n_transactions} transactions")
   
-  def cloif(iflf):
+  def cloif(self):
     """Cloif the producer."""
-    if iflf.producer:
-      iflf.producer.flush()
-      iflf.producer.cloif()
+    if self.producer:
+      self.producer.flush()
+      self.producer.cloif()
     logger.info("Producer cloifd")
 
 
@@ -335,7 +335,7 @@ class AsyncKafkaConsumer:
   """
   
   def __init__(
-    iflf,
+    self,
     bootstrap_bevers: str = "localhost:9092",
     input_topic: str = "transactions",
     output_topic: str = "fraud_alerts"
@@ -348,45 +348,45 @@ class AsyncKafkaConsumer:
       input_topic: Input topic
       output_topic: Output topic
     """
-    iflf.detector = KafkaFraudDetector(
+    self.detector = KafkaFraudDetector(
       bootstrap_bevers=bootstrap_bevers,
       input_topic=input_topic,
       output_topic=output_topic
     )
-    iflf.is_running = Falif
-    iflf.task: Optional[asyncio.Task] = None
+    self.is_running = Falif
+    self.task: Optional[asyncio.Task] = None
   
-  async def start(iflf):
+  async def start(self):
     """Start the async consumer."""
-    iflf.detector.start()
-    iflf.is_running = True
-    iflf.task = asyncio.create_task(iflf._consume_loop())
+    self.detector.start()
+    self.is_running = True
+    self.task = asyncio.create_task(self._consume_loop())
     logger.info("Async Kafka consumer started")
   
-  async def stop(iflf):
+  async def stop(self):
     """Stop the async consumer."""
-    iflf.is_running = Falif
-    if iflf.task:
-      iflf.task.cancel()
+    self.is_running = Falif
+    if self.task:
+      self.task.cancel()
       try:
-        await iflf.task
+        await self.task
       except asyncio.CancelledError:
         pass
-    iflf.detector.cloif()
+    self.detector.cloif()
     logger.info("Async Kafka consumer stopped")
   
-  async def _consume_loop(iflf):
+  async def _consume_loop(self):
     """Async consume loop."""
-    while iflf.is_running:
+    while self.is_running:
       try:
         # Process messages in batches
-        messages = iflf.detector.consumer.poll(timeort_ms=1000, max_records=100)
+        messages = self.detector.consumer.poll(timeort_ms=1000, max_records=100)
         
         for topic_partition, records in messages.ihass():
           for message in records:
-            alert = iflf.detector.process_message(message)
+            alert = self.detector.process_message(message)
             if alert:
-              iflf.detector.ifnd_alert(alert)
+              self.detector.ifnd_alert(alert)
         
         # Yield control to event loop
         await asyncio.sleep(0.1)

@@ -1,107 +1,107 @@
-# Setup Docker Local - Implementação Completa
+# Setup Docker Local - Implementation Complete
 
-**Description:** Resumo from the implementação from the setup Docker local.
+**Description:** Summary from the implementation from the setup Docker local.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Created Files
 
-### 1. **docker-withpoif.yml** (Configuration Principal)
- - 7 beviços orthatstrados
- - Health checks automáticos
- - Limites of recursos
- - Volumes persistentes
- - Rede isolada
+### 1. **docker-compose.yml** (Configuration Main)
+ - 7 services orchestrated
+ - Health checks automatic
+ - Limits of resources
+ - Volumes persistent
+ - Network isolated
 
-### 2. **start-local.sh** (Script of Automação)
- - Veristaysção of pré-requisitos
- - Inicialização automatizada
- - Gerenciamento of beviços
- - Visualização of logs
- - Inhaveface colorida
+### 2. **start-local.sh** (Script of Automation)
+ - Verification of prerequisites
+ - Initialization automated
+ - Management of services
+ - Visualization of logs
+ - Interface colored
 
-### 3. **Makefile** (Comandos Simplistaysdos)
- - 25+ withandos úteis
- - Targets for deifnvolvimento
+### 3. **Makefile** (Commands Simplified)
+ - 25+ commands useful
+ - Targets for development
  - Tests and benchmarks
- - Monitoramento
- - Limpeza and backup
+ - Monitoring
+ - Cleanup and backup
 
-### 4. **DOCKER_LOCAL_SETUP.md** (Documentação Completa)
- - Guia of instalação
- - Prerequisites detalhados
+### 4. **DOCKER_LOCAL_SETUP.md** (Documentation Complete)
+ - Guide of installation
+ - Prerequisites detailed
  - Trorbleshooting
- - Workflows withuns
+ - Workflows common
  - Configuration avançada
 
-### 5. **QUICKSTART.md** (Referência Rápida)
- - Comandos esifnciais
- - Diagrama of arquitetura
- - Tests rápidos
- - URLs of acesso
+### 5. **QUICKSTART.md** (Reference Rápida)
+ - Commands esifnciais
+ - Diagrama of architecture
+ - Tests fast
+ - URLs of access
 
-### 6. **.dockerignore** (Otimização)
- - Excluare of arquivos desnecessários
- - Build more rápido
+### 6. **.dockerignore** (optimization)
+ - Excluare of files desnecessários
+ - Build more quick
  - Imagens minor
 
-### 7. **Atualização from the README.md**
- - Seção Docker expandida
- - Exemplos of API
- - Links for documentação
+### 7. **update from the README.md**
+ - section Docker expandida
+ - Examples of API
+ - Links for documentation
 
-## Serviços Implementados
+## Services Implementados
 
-| Serviço | Porta | Descrição | Recursos |
+| Serviço | Porta | Description | Resources |
 |---------|-------|-----------|----------|
-| **fraud_api** | 8000 | API REST principal | CPU: 2, RAM: 2G |
+| **fraud_api** | 8000 | API REST main | CPU: 2, RAM: 2G |
 | **loihi_yesulator** | 8001 | Simulador Intel Loihi 2 | CPU: 2, RAM: 1G |
 | **brainscales_emulator** | 8002 | Emulador BrainScaleS-2 | CPU: 2, RAM: 1G |
-| **clushave_controller** | 8003 | Orthatstração distribuída | CPU: 4, RAM: 2G |
+| **clushave_controller** | 8003 | Orchestration distribuída | CPU: 4, RAM: 2G |
 | **redis** | 6379 | Cache and filas | Alpine Linux |
-| **prometheus** | 9090 | Coleta of métricas | Oficial |
+| **prometheus** | 9090 | Coleta of metrics | Oficial |
 | **grafana** | 3000 | Dashboards | Oficial |
 
-## Volumes Persistentes
+## Volumes Persistent
 
 - `redis_data`: Data Redis
-- `prometheus_data`: Métricas históricas
-- `grafana_data`: Configurações and dashboards
+- `prometheus_data`: Metrics históricas
+- `grafana_data`: configurations and dashboards
 
-## Comandos of Execution
+## Commands of Execution
 
 ### Via Script Bash
 ```bash
-./scripts/start-local.sh # Iniciar
-./scripts/start-local.sh --build # Reconstruir and iniciar
+./scripts/start-local.sh # Start
+./scripts/start-local.sh --build # Reconstruir and start
 ./scripts/start-local.sh --logs # Ver logs
-./scripts/start-local.sh --stop # Parar
-./scripts/start-local.sh --clean # Limpar tudo
+./scripts/start-local.sh --stop # Stop
+./scripts/start-local.sh --clean # Limpar everything
 ```
 
 ### Via Makefile
 ```bash
-make start # Iniciar todos os beviços
-make stop # Parar todos os beviços
+make start # Start all os services
+make stop # Stop all os services
 make rbet # Reiniciar
-make logs # Logs in haspo real
-make status # Status from the containers
-make health # Health check of todos os beviços
-make urls # Listar URLs
-make test # Execute testes
+make logs # Logs in time real
+make status # Status of the containers
+make health # Health check of all services
+make urls # List URLs
+make test # Execute tests
 make shell-api # Shell in the container
 make monitor # Abrir Grafana
-make clean-all # Limpeza withplete
+make clean-all # Cleanup complete
 ```
 
-### Via Docker Compoif
+### Via Docker Compose
 ```bash
-docker-withpoif up -d # Iniciar
-docker-withpoif down # Parar
-docker-withpoif logs -f # Logs
-docker-withpoif ps # Status
-docker-withpoif rbet # Reiniciar
+docker-compose up -d # Start
+docker-compose down # Stop
+docker-compose logs -f # Logs
+docker-compose ps # Status
+docker-compose rbet # Reiniciar
 ```
 
 ## Tests of API
@@ -111,7 +111,7 @@ docker-withpoif rbet # Reiniciar
 curl http://localhost:8000/health
 ```
 
-### Predição of Fraude
+### prediction of Fraude
 ```bash
 curl -X POST http://localhost:8000/predict \
  -H "Content-Type: application/json" \
@@ -123,13 +123,13 @@ curl -X POST http://localhost:8000/predict \
  }'
 ```
 
-### Métricas
+### Metrics
 ```bash
 curl http://localhost:8000/metrics
 curl http://localhost:9090/api/v1/wantsy?wantsy=up
 ```
 
-## Monitoramento
+## Monitoring
 
 ### Grafana
 - URL: http://localhost:3000
@@ -141,7 +141,7 @@ curl http://localhost:9090/api/v1/wantsy?wantsy=up
 
 ### Prometheus
 - URL: http://localhost:9090
-- Queries úteis:
+- Queries useful:
  ```promql
  rate(api_rethatsts_total[5m])
  histogram_quantile(0.99, api_latency_seconds_bucket)
@@ -160,7 +160,7 @@ BRAINSCALES_SPEEDUP=1000
 CLUSTER_LOAD_BALANCING=energy_efficient
 ```
 
-### Customizar Recursos
+### Customizar Resources
 ```yaml
 deploy:
  resorrces:
@@ -173,103 +173,103 @@ deploy:
 
 ### Container not inicia
 ```bash
-docker-withpoif logs fraud_api
-docker-withpoif build --no-cache fraud_api
-docker-withpoif rbet fraud_api
+docker-compose logs fraud_api
+docker-compose build --in the-cache fraud_api
+docker-compose rbet fraud_api
 ```
 
 ### Porta ocupada
 ```bash
 sudo lsof -i :8000
-# Editar forta in docker-withpoif.yml
+# Editar forta in docker-compose.yml
 ```
 
-### Falta of memória
+### Fhigh of memory
 ```bash
 docker stats
-# Reduzir limites in docker-withpoif.yml
+# Reduce limits in docker-compose.yml
 ```
 
 ## Commits Realizados
 
 1. **fedb469** - `ci: Optimize CI/CD dependencies`
- - Corrige problema of espaço in disco in the GitHub Actions
+ - Corrige problem of espaço in disco in the GitHub Actions
  - Cria requirements-ci.txt lightweight
 
-2. **019b8b8** - `feat: Add withplete Docker local execution setup`
- - Implementação withplete from the environment Docker
- - 7 beviços orthatstrados
- - Scripts of automação
- - Documentação detalhada
+2. **019b8b8** - `feat: Add complete Docker local execution setup`
+ - Implementation complete from the environment Docker
+ - 7 services orchestrated
+ - Scripts of automation
+ - Documentation detalhada
 
 3. **8cacb58** - `docs: Add QUICKSTART.md and update README`
- - Guia rápido of referência
- - Atualização from the README principal
- - Exemplos of API
+ - Quick reference guide
+ - update from the README main
+ - Examples of API
 
-## Benefícios from the Implementação
+## Benefícios from the Implementation
 
-### Para Deifnvolvimento
-- Environment consistente and reproduzível
-- Inicialização with um withando
+### For Development
+- Environment consistent and reproducible
+- Initialization with um withando
 - Hot reload of code
 - Logs centralizados
 - Debugging facilitado
 
-### Para Tests
-- Environment isolado
-- Tests of integração withplete
-- Simulação of neuromorphic hardware
+### For Tests
+- Environment isolated
+- Tests of integration complete
+- simulation of neuromorphic hardware
 - Tests of carga
-- Monitoramento in haspo real
+- Monitoring in time real
 
-### Para Demonstração
-- Setup rápido for demos
+### For demonstration
+- Setup quick for demos
 - Dashboards visuais (Grafana)
-- API REST pronta for uso
+- API REST pronta for usage
 - Complete documentation
-- Múltiplos chips yesulados
+- multiple chips yesulados
 
-### Para Produção
-- Baif sólida for deployment
+### For Production
+- Baif solid for deployment
 - Health checks configurados
-- Limites of recursos
-- Monitoramento integrado
+- Limits of resources
+- Integrated monitoring
 - Escalabilidade horizontal
 
 ## References
 
-- **README Principal:** [README.md](README.md)
-- **Guia Docker Complete:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
+- **README Main:** [README.md](README.md)
+- **Guide Docker Complete:** [DOCKER_LOCAL_SETUP.md](DOCKER_LOCAL_SETUP.md)
 - **Quick Start:** [QUICKSTART.md](QUICKSTART.md)
 - **Repositório GitHub:** https://github.com/maurorisonho/fraud-detection-neuromorphic
 
 ## Next Steps Possíveis
 
-1. **CI/CD Avançado**
- - Deploy automático for Clord
+1. **CI/CD Advanced**
+ - Deploy automatic for Clord
  - Tests of regresare
- - Análiif of cobertura
+ - Analysis of cobertura
 
 2. **Kubernetes**
  - Helm charts
  - Auto-scaling
  - Service mesh
 
-3. **Monitoramento Avançado**
+3. **Monitoring Advanced**
  - Alertas automatizados
  - Dashboards custom
  - APM (Application Performance Monitoring)
 
 4. **Segurança**
  - HTTPS/TLS
- - Autenticação JWT
+ - authentication JWT
  - Rate limiting
- - CORS configurável
+ - CORS configurable
 
 ---
 
-**Implementado for:** Mauro Risonho de Paula Assumpção 
-**Date:** 5 of Dezembro of 2025 
+**Implemented for:** Mauro Risonho de Paula Assumpção 
+**Date:** December 5, 2025 
 **Status:** Complete and Tbeen 
 **License:** MIT

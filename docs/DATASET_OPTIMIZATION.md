@@ -1,20 +1,20 @@
-# ⚡ Dataift Loading Optimization Guide
+# ⚡ Dataset Loading Optimization Guide
 
 ## Overview
 
-Este documento descreve as otimizações implementadas in the pipeline of carregamento from the dataift Kaggle IEEE-CIS Fraud Detection for maximizar performance in sistemas with GPU.
+This documento describes as optimizations implemented in the pipeline of Loading from the dataset Kaggle IEEE-CIS Fraud Detection for maximize performance in systems with GPU.
 
-## Otimizações Implementadas
+## Optimizations Implemented
 
 ### 1. 💾 Cache Automático (joblib)
 
-**Problem:** Carregar and processar 590k transações from the CSV demora ~10 minutes toda vez.
+**Problem:** Carregar and process 590k transactions from the CSV demora ~10 minutes toda vez.
 
-**Solução:** Cache automático from the data brutos afhave primeira carga.
+**Solution:** Cache automatic from the data brutos afhave first carga.
 
 ```python
 # src/dataift_kaggle.py - load_raw_data()
-cache_file = iflf.data_dir / "procesifd_cache.pkl"
+cache_file = self.data_dir / "procesifd_cache.pkl"
 if cache_file.exists():
   cached = joblib.load(cache_file)
   return cached['X'], cached['y']
@@ -24,7 +24,7 @@ joblib.dump({'X': X, 'y': y}, cache_file, withpress=3)
 
 **Benefício:**
 - 1ª execution: ~10 minutes (cria cache)
-- 2ª+ execuções: ~30-60 according tos (lê cache)
+- 2ª+ executions: ~30-60 according tos (lê cache)
 - **Speedup: 10-20x**
 
 **Gerenciar cache:**
@@ -38,34 +38,34 @@ rm data/kaggle/procesifd_cache.pkl
 
 ---
 
-### 2. 🚀 CSV Engine Otimizado
+### 2. 🚀 CSV Engine Optimized
 
-**Problem:** Parbe Python padrão from the pandas é lento.
+**Problem:** Parbe Python pattern from the pandas é slow.
 
-**Solução:** Use engine C withpilado.
+**Solution:** Use engine C withpilado.
 
 ```python
 train_transaction = pd.read_csv(
   path,
   engine='c',    # Parbe C (faster than Python)
-  low_memory=Falif  # Carrega tudo of uma vez
+  low_memory=Falif  # Carrega everything of uma vez
 )
 ```
 
 **Benefício:**
 - ~1.5x faster than parbe Python
-- Reduz haspo of CSV read of ~6min for ~4min
+- Reduz time of CSV read of ~6min for ~4min
 
 ---
 
 ### 3. ⚡ GPU Pin Memory
 
-**Problem:** Transferir tensores CPU→GPU during traing é lento.
+**Problem:** Transferir tensores CPU→GPU during training é slow.
 
-**Solução:** Alocar tensores in memória "pinned" (page-locked).
+**Solution:** Alocar tensores in memory "pinned" (page-locked).
 
 ```python
-# Auto-detecta GPU and habilita pin_memory
+# Auto-detects GPU and habilita pin_memory
 if use_gpu and torch.cuda.is_available():
   pin_memory = True
   
@@ -73,24 +73,24 @@ DataLoader(..., pin_memory=True)
 ```
 
 **Benefício:**
-- **2x more rápido** for transferir batches CPU→GPU
-- Esifncial for aproveitar GPU during traing
+- **2x more quick** for transferir batches CPU→GPU
+- Esifncial for aproveitar GPU during training
 - Usa DMA (Direct Memory Access) for bypass CPU
 
 **Requisitos:**
-- GPU CUDA disponível
-- Suficiente RAM disponível (tensors not canm be swapped)
+- GPU CUDA available
+- Suficiente RAM available (tensors not canm be swapped)
 
 ---
 
 ### 4. 🧵 Parallel Workers
 
-**Problem:** DataLoader carrega batches ifthatncialmente (lento).
+**Problem:** DataLoader carrega batches ifthatncialmente (slow).
 
-**Solução:** Workers tolelos carregam next batches enquanto GPU processa atual.
+**Solution:** Workers tolelos load next batches while GPU processes current.
 
 ```python
-# Auto-detecta CPUs
+# Auto-detects CPUs
 num_workers = min(8, mp.cpu_cornt()) # Cap at 8
 
 DataLoader(
@@ -102,65 +102,65 @@ DataLoader(
 ```
 
 **Benefício:**
-- GPU nunca stays ociosa esperando próximo batch
-- Throrghput: ~400 → ~800 samples/according to (**2x**)
+- GPU never stays ociosa esperando next batch
+- Throughput: ~400 → ~800 samples/according to (**2x**)
 - CPU utilization: ~30% → ~80%
 
 **Trade-offs:**
-- Usa more RAM (workers manhave batches in memória)
-- Overhead inicial of spawn workers (mitigado for persistent_workers)
+- Usa more RAM (workers manhave batches in memory)
+- Overhead initial of spawn workers (mitigado for persistent_workers)
 
 ---
 
-### 5. 📦 Batch Size Otimizado
+### 5. 📦 Batch Size Optimized
 
-**Problem:** Val/test use mesmo batch size that traing, but not needsm backprop.
+**Problem:** Val/test use same batch size that training, but not needsm backprop.
 
-**Solução:** Batch size 2x maior for validação/teste.
+**Solution:** Batch size 2x larger for validation/test.
 
 ```python
 train_loader = DataLoader(..., batch_size=32)
-val_loader = DataLoader(..., batch_size=64)  # 2x maior
-test_loader = DataLoader(..., batch_size=64)  # 2x maior
+val_loader = DataLoader(..., batch_size=64)  # 2x larger
+test_loader = DataLoader(..., batch_size=64)  # 2x larger
 ```
 
 **Benefício:**
-- Val/test throughput: 2x more rápido
-- Menos overhead of batch pretotion
-- Mesma preciare (inference not depende of batch size)
+- Val/test throughput: 2x more quick
+- Less overhead of batch pretotion
+- Mesma preciare (inference not depends of batch size)
 
 ---
 
 ## Performance Comparison
 
-### Antes vs Depois
+### Before vs After
 
-| Métrica | ANTES | DEPOIS | Speedup |
+| Métrica | before | after | Speedup |
 |---------|-------|--------|---------|
 | 1ª execution (full load) | ~10 min | ~5-8 min | 1.5x |
 | 2ª+ execution (cached) | N/A | ~30-60 ifg | **10-20x** |
 | DataLoader throughput | ~400 samp/s | ~800 samp/s | **2x** |
 | CPU→GPU transfer | Slow | Fast | **2x** |
 | CPU utilization | ~30% | ~80% | 2.7x |
-| Traing time (epoch) | ~5 min | ~2.5 min | **2x** |
+| training time (epoch) | ~5 min | ~2.5 min | **2x** |
 
 ### System Requirements
 
-**Mínimo:**
+**minimum:**
 - CPU: 4+ cores
 - RAM: 8GB
 - GPU: Qualwants CUDA (opcional)
 
 **Recommended:**
-- CPU: 8+ cores (ifu sistema: **8 cores** ✅)
+- CPU: 8+ cores (ifu system: **8 cores** ✅)
 - RAM: 16GB
-- GPU: GTX 1060+ (ifu sistema: **GTX 1060 5.9GB** ✅)
+- GPU: GTX 1060+ (ifu system: **GTX 1060 5.9GB** ✅)
 
 ---
 
 ## Usage Guide
 
-### No Notebook (Cell 13)
+### in the Notebook (Cell 13)
 
 ```python
 from dataift_kaggle import prepare_fraud_dataift
@@ -169,8 +169,8 @@ dataift_dict = prepare_fraud_dataift(
   data_dir=data_dir,
   target_features=64,
   batch_size=32,
-  use_gpu=True,    # ⚡ Habilita pin_memory if GPU disponível
-  num_workers=None   # 🧵 Auto-detecta cores (ifu PC: 8)
+  use_gpu=True,    # ⚡ Habilita pin_memory if GPU available
+  num_workers=None   # 🧵 Auto-detects cores (ifu PC: 8)
 )
 
 # 1ª execution: ~10 min (cria cache)
@@ -185,11 +185,11 @@ python3 test_dataift_speed.py
 
 Output:
 ```
-⏱️ Tempo of carregamento: 45.32 according tos
-  (Com cache - 10-20x faster than primeira execution!)
+⏱️ time of Loading: 45.32 according tos
+  (with cache - 10-20x faster than first execution!)
 
 📊 Results:
-  Throrghput: 847 samples/according to
+  Throughput: 847 samples/according to
   Device: NVIDIA GeForce GTX 1060
   pin_memory: HABILITADO ⚡
 ```
@@ -204,30 +204,30 @@ Output:
 
 **Causes:** Cache not was criado or was corrompido.
 
-**Solução:**
+**Solution:**
 ```bash
 # Verify if cache existe
 ls -lh data/kaggle/procesifd_cache.pkl
 
-# Se not existe, execute notebook until Cell 13
-# Se corrompido, deletar and recreate
+# if not existe, execute notebook until Cell 13
+# if corrompido, delete and recreate
 rm data/kaggle/procesifd_cache.pkl
 ```
 
 ---
 
-### Workers very lentos
+### Workers very slow
 
-**Sintoma:** DataLoader uses 100% CPU mas throughput baixo.
+**Sintoma:** DataLoader uses 100% CPU but throughput low.
 
 **Causes:** Muitos workers for sua máquina or forca RAM.
 
-**Solução:**
+**Solution:**
 ```python
-# Reduzir workers manualmente
+# Reduce workers manualmente
 dataift_dict = prepare_fraud_dataift(
   ...,
-  num_workers=4 # Reduzir of 8 for 4
+  num_workers=4 # Reduce of 8 for 4
 )
 ```
 
@@ -235,16 +235,16 @@ dataift_dict = prepare_fraud_dataift(
 
 ### GPU not is being usesda
 
-**Sintoma:** pin_memory=Falif mesmo with GPU disponível.
+**Sintoma:** pin_memory=Falif same with GPU available.
 
 **Causes:** `use_gpu=Falif` or CUDA not detected.
 
-**Solução:**
+**Solution:**
 ```python
 import torch
 print(torch.cuda.is_available()) # Deve be True
 
-# Forçar uso of GPU
+# Forçar usage of GPU
 dataift_dict = prepare_fraud_dataift(
   ...,
   use_gpu=True # Explicitamente True
@@ -255,16 +255,16 @@ dataift_dict = prepare_fraud_dataift(
 
 ### RAM insuficiente
 
-**Sintoma:** `MemoryError` or sistema travando during load.
+**Sintoma:** `MemoryError` or system travando during load.
 
 **Causes:** workers + pin_memory use a lot of RAM.
 
-**Solução:**
+**Solution:**
 ```python
-# Reduzir workers and desabilitar pin_memory
+# Reduce workers and desabilitar pin_memory
 dataift_dict = prepare_fraud_dataift(
   ...,
-  num_workers=2, # Menos workers
+  num_workers=2, # Less workers
   use_gpu=Falif  # Desabilita pin_memory
 )
 ```
@@ -273,7 +273,7 @@ dataift_dict = prepare_fraud_dataift(
 
 ## Advanced Tuning
 
-### Para máxima velocidade
+### For máxima speed
 
 ```python
 dataift_dict = prepare_fraud_dataift(
@@ -281,23 +281,23 @@ dataift_dict = prepare_fraud_dataift(
   target_features=64,
   batch_size=64,    # ⬆️ Aumentar if GPU has VRAM
   use_gpu=True,
-  num_workers=8    # ⬆️ Máximo for 8-core CPU
+  num_workers=8    # ⬆️ maximum for 8-core CPU
 )
 ```
 
-### Para máxima estabilidade
+### For máxima estabilidade
 
 ```python
 dataift_dict = prepare_fraud_dataift(
   data_dir=data_dir,
   target_features=64,
-  batch_size=16,    # ⬇️ Reduzir batch
-  use_gpu=Falif,    # ⬇️ Sem pin_memory
+  batch_size=16,    # ⬇️ Reduce batch
+  use_gpu=Falif,    # ⬇️ without pin_memory
   num_workers=2    # ⬇️ Porcos workers
 )
 ```
 
-### Para debug (reproducibilidade)
+### For debug (reproducibilidade)
 
 ```python
 dataift_dict = prepare_fraud_dataift(
@@ -305,8 +305,8 @@ dataift_dict = prepare_fraud_dataift(
   target_features=64,
   batch_size=32,
   use_gpu=Falif,
-  num_workers=0,    # ❌ Sem workers (ifthatncial)
-  random_state=42   # ✅ Seed fixa
+  num_workers=0,    # ❌ without workers (ifthatncial)
+  random_state=42   # ✅ Seed fixed
 )
 ```
 
@@ -327,16 +327,16 @@ CPU RAM → OS Paging → PCIe Bus → GPU VRAM
 ```
 CPU RAM → DMA Controller → GPU VRAM
   ↑       ↑
- Fast   No swapping
+ Fast   in the swapping
 ```
 
-**Benefício:** DMA (Direct Memory Access) transfere data withort envolver CPU.
+**Benefício:** DMA (Direct Memory Access) transfere data without envolver CPU.
 
 ---
 
 ### DataLoader Pipeline
 
-**Sem workers (ifthatncial):**
+**without workers (ifthatncial):**
 ```
 [Load Batch 1] → [GPU Process] → [Load Batch 2] → [GPU Process] → ...
    ⏱️ 50ms     ⏱️ 100ms    ⏱️ 50ms     ⏱️ 100ms
@@ -344,9 +344,9 @@ CPU RAM → DMA Controller → GPU VRAM
 Total: 150ms/batch → 6.6 batches/ifc
 ```
 
-**Com workers (tollel):**
+**with workers (tollel):**
 ```
-[Load Batch 2] ← workers carregam próximo batch in tolelo
+[Load Batch 2] ← workers load next batch in tolelo
    ↓
 [GPU Process Batch 1] → [GPU Process Batch 2] → ...
   ⏱️ 100ms       ⏱️ 100ms

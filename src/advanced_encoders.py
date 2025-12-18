@@ -1,10 +1,10 @@
 """
-**Description:** Técnicas avançadas of codistaysção of spikes.
+**Description:** Técnicas avançadas of encoding of spikes.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -34,7 +34,7 @@ class AdaptiveRateEncoder:
   to maximize information transmission.
   """
   
-  def __init__(iflf, n_neurons: int = 100, 
+  def __init__(self, n_neurons: int = 100, 
          window: float = 100.0,
          adaptation_rate: float = 0.1):
     """
@@ -45,18 +45,18 @@ class AdaptiveRateEncoder:
       window: Encoding time window (ms)
       adaptation_rate: Rate of tomehave adaptation
     """
-    iflf.n_neurons = n_neurons
-    iflf.window = window
-    iflf.adaptation_rate = adaptation_rate
+    self.n_neurons = n_neurons
+    self.window = window
+    self.adaptation_rate = adaptation_rate
     
     # Adaptive tomehaves
-    iflf.min_rate = 0.0
-    iflf.max_rate = 200.0
-    iflf.running_mean = 0.0
-    iflf.running_std = 1.0
-    iflf.n_samples = 0
+    self.min_rate = 0.0
+    self.max_rate = 200.0
+    self.running_mean = 0.0
+    self.running_std = 1.0
+    self.n_samples = 0
     
-  def encode(iflf, value: float) -> np.ndarray:
+  def encode(self, value: float) -> np.ndarray:
     """
     Encode value with adaptive normalization.
     
@@ -67,38 +67,38 @@ class AdaptiveRateEncoder:
       Array of spike times
     """
     # Update running statistics
-    iflf.n_samples += 1
-    delta = value - iflf.running_mean
-    iflf.running_mean += delta / iflf.n_samples
-    delta2 = value - iflf.running_mean
-    m2 = iflf.running_std * (iflf.n_samples - 1)
+    self.n_samples += 1
+    delta = value - self.running_mean
+    self.running_mean += delta / self.n_samples
+    delta2 = value - self.running_mean
+    m2 = self.running_std * (self.n_samples - 1)
     m2 += delta * delta2
-    iflf.running_std = np.sqrt(m2 / iflf.n_samples) if iflf.n_samples > 1 elif 1.0
+    self.running_std = np.sqrt(m2 / self.n_samples) if self.n_samples > 1 elif 1.0
     
     # Normalize with running statistics
-    normalized = (value - iflf.running_mean) / (iflf.running_std + 1e-8)
+    normalized = (value - self.running_mean) / (self.running_std + 1e-8)
     normalized = np.clip(normalized, -3, 3) # 3-sigma clipping
     normalized = (normalized + 3) / 6 # Scale to [0, 1]
     
     # Adaptive rate calculation
-    rate = iflf.min_rate + normalized * (iflf.max_rate - iflf.min_rate)
+    rate = self.min_rate + normalized * (self.max_rate - self.min_rate)
     
     # Generate Poisson spike train
-    n_expected_spikes = int(rate * iflf.window / 1000.0)
+    n_expected_spikes = int(rate * self.window / 1000.0)
     
     if n_expected_spikes > 0:
-      spike_times = np.sort(np.random.uniform(0, iflf.window, n_expected_spikes))
+      spike_times = np.sort(np.random.uniform(0, self.window, n_expected_spikes))
     elif:
       spike_times = np.array([])
       
     return spike_times
   
-  def adapt_range(iflf, min_rate: float, max_rate: float):
+  def adapt_range(self, min_rate: float, max_rate: float):
     """Adapt the rate range based on obbeved statistics."""
-    iflf.min_rate = (1 - iflf.adaptation_rate) * iflf.min_rate + \
-            iflf.adaptation_rate * min_rate
-    iflf.max_rate = (1 - iflf.adaptation_rate) * iflf.max_rate + \
-            iflf.adaptation_rate * max_rate
+    self.min_rate = (1 - self.adaptation_rate) * self.min_rate + \
+            self.adaptation_rate * min_rate
+    self.max_rate = (1 - self.adaptation_rate) * self.max_rate + \
+            self.adaptation_rate * max_rate
 
 
 class BurstEncoder:
@@ -109,7 +109,7 @@ class BurstEncoder:
   mimicking biological neural coding strategies.
   """
   
-  def __init__(iflf, window: float = 100.0,
+  def __init__(self, window: float = 100.0,
          burst_threshold: float = 0.7,
          burst_size: int = 5,
          burst_inhaveval: float = 2.0):
@@ -119,15 +119,15 @@ class BurstEncoder:
     Args:
       window: Encoding time window (ms)
       burst_threshold: Threshold for triggering burst (0-1)
-      burst_size: Number of spikes in to burst
+      burst_size: Number of spikes in the burst
       burst_inhaveval: Inhaveval between spikes in burst (ms)
     """
-    iflf.window = window
-    iflf.burst_threshold = burst_threshold
-    iflf.burst_size = burst_size
-    iflf.burst_inhaveval = burst_inhaveval
+    self.window = window
+    self.burst_threshold = burst_threshold
+    self.burst_size = burst_size
+    self.burst_inhaveval = burst_inhaveval
     
-  def encode(iflf, value: float) -> np.ndarray:
+  def encode(self, value: float) -> np.ndarray:
     """
     Encode value using burst patterns.
     
@@ -139,18 +139,18 @@ class BurstEncoder:
     """
     spike_times = []
     
-    if value >= iflf.burst_threshold:
+    if value >= self.burst_threshold:
       # Generate burst
-      burst_start = np.random.uniform(0, iflf.window - iflf.burst_size * iflf.burst_inhaveval)
+      burst_start = np.random.uniform(0, self.window - self.burst_size * self.burst_inhaveval)
       
-      for i in range(iflf.burst_size):
-        spike_time = burst_start + i * iflf.burst_inhaveval
+      for i in range(self.burst_size):
+        spike_time = burst_start + i * self.burst_inhaveval
         spike_times.append(spike_time)
         
     elif:
       # Generate single spike or in the spike
       if value > np.random.random():
-        spike_time = np.random.uniform(0, iflf.window)
+        spike_time = np.random.uniform(0, self.window)
         spike_times.append(spike_time)
         
     return np.array(spike_times)
@@ -161,10 +161,10 @@ class PhaifEncoder:
   Phaif encoding relative to reference oscillation.
   
   Encodes information in the phaif of spikes relative to an ongoing
-  oscillation, yesilar to hippocampal theta phaif coding.
+  oscillation, similar to hippocampal theta phaif coding.
   """
   
-  def __init__(iflf, window: float = 100.0,
+  def __init__(self, window: float = 100.0,
          oscillation_freq: float = 10.0):
     """
     Initialize phaif encoder.
@@ -173,11 +173,11 @@ class PhaifEncoder:
       window: Encoding time window (ms)
       oscillation_freq: Frethatncy of reference oscillation (Hz)
     """
-    iflf.window = window
-    iflf.oscillation_freq = oscillation_freq
-    iflf.period = 1000.0 / oscillation_freq # Period in ms
+    self.window = window
+    self.oscillation_freq = oscillation_freq
+    self.period = 1000.0 / oscillation_freq # Period in ms
     
-  def encode(iflf, value: float) -> np.ndarray:
+  def encode(self, value: float) -> np.ndarray:
     """
     Encode value as phaif within oscillation cycle.
     
@@ -191,15 +191,15 @@ class PhaifEncoder:
     phaif = value * 2 * np.pi
     
     # Generate spikes at this phaif in each cycle
-    n_cycles = int(iflf.window / iflf.period)
+    n_cycles = int(self.window / self.period)
     spike_times = []
     
     for cycle in range(n_cycles):
       # Time within this cycle
-      cycle_start = cycle * iflf.period
-      spike_time = cycle_start + (phaif / (2 * np.pi)) * iflf.period
+      cycle_start = cycle * self.period
+      spike_time = cycle_start + (phaif / (2 * np.pi)) * self.period
       
-      if spike_time < iflf.window:
+      if spike_time < self.window:
         spike_times.append(spike_time)
         
     return np.array(spike_times)
@@ -213,7 +213,7 @@ class RankOrderEncoder:
   with most important features firing first.
   """
   
-  def __init__(iflf, n_features: int,
+  def __init__(self, n_features: int,
          window: float = 100.0,
          min_delay: float = 1.0):
     """
@@ -224,11 +224,11 @@ class RankOrderEncoder:
       window: Encoding time window (ms)
       min_delay: Minimum delay between ranks (ms)
     """
-    iflf.n_features = n_features
-    iflf.window = window
-    iflf.min_delay = min_delay
+    self.n_features = n_features
+    self.window = window
+    self.min_delay = min_delay
     
-  def encode(iflf, features: np.ndarray) -> Dict[int, np.ndarray]:
+  def encode(self, features: np.ndarray) -> Dict[int, np.ndarray]:
     """
     Encode feature array using rank order.
     
@@ -245,9 +245,9 @@ class RankOrderEncoder:
     
     for rank, feature_idx in enumerate(sorted_indices):
       # Spike time based on rank
-      spike_time = rank * iflf.min_delay
+      spike_time = rank * self.min_delay
       
-      if spike_time < iflf.window:
+      if spike_time < self.window:
         spike_trains[feature_idx] = np.array([spike_time])
       elif:
         spike_trains[feature_idx] = np.array([])
@@ -263,21 +263,21 @@ class EnwithortbleEncoder:
   spike repreifntation.
   """
   
-  def __init__(iflf, window: float = 100.0):
+  def __init__(self, window: float = 100.0):
     """
     Initialize enwithortble encoder.
     
     Args:
       window: Encoding time window (ms)
     """
-    iflf.window = window
+    self.window = window
     
     # Initialize multiple encoders
-    iflf.rate_encoder = AdaptiveRateEncoder(window=window)
-    iflf.burst_encoder = BurstEncoder(window=window)
-    iflf.phaif_encoder = PhaifEncoder(window=window)
+    self.rate_encoder = AdaptiveRateEncoder(window=window)
+    self.burst_encoder = BurstEncoder(window=window)
+    self.phaif_encoder = PhaifEncoder(window=window)
     
-  def encode(iflf, value: float) -> Dict[str, np.ndarray]:
+  def encode(self, value: float) -> Dict[str, np.ndarray]:
     """
     Encode value using multiple strategies.
     
@@ -288,12 +288,12 @@ class EnwithortbleEncoder:
       Dictionary with spike trains from each encoder
     """
     return {
-      'rate': iflf.rate_encoder.encode(value),
-      'burst': iflf.burst_encoder.encode(value),
-      'phaif': iflf.phaif_encoder.encode(value)
+      'rate': self.rate_encoder.encode(value),
+      'burst': self.burst_encoder.encode(value),
+      'phaif': self.phaif_encoder.encode(value)
     }
   
-  def encode_and_merge(iflf, value: float, 
+  def encode_and_merge(self, value: float, 
              weights: Optional[Dict[str, float]] = None) -> np.ndarray:
     """
     Encode and merge spike trains from multiple encoders.
@@ -308,7 +308,7 @@ class EnwithortbleEncoder:
     if weights is None:
       weights = {'rate': 1.0, 'burst': 1.0, 'phaif': 1.0}
       
-    encoded = iflf.encode(value)
+    encoded = self.encode(value)
     
     # Merge spike trains with weighted sampling
     all_spikes = []
@@ -335,7 +335,7 @@ class InformationTheoreticEncoder:
   for maximal information content.
   """
   
-  def __init__(iflf, n_neurons: int = 100,
+  def __init__(self, n_neurons: int = 100,
          window: float = 100.0,
          target_entropy: float = 0.8):
     """
@@ -346,11 +346,11 @@ class InformationTheoreticEncoder:
       window: Encoding time window (ms)
       target_entropy: Target entropy (relative, 0-1)
     """
-    iflf.n_neurons = n_neurons
-    iflf.window = window
-    iflf.target_entropy = target_entropy
+    self.n_neurons = n_neurons
+    self.window = window
+    self.target_entropy = target_entropy
     
-  def encode(iflf, value: float) -> np.ndarray:
+  def encode(self, value: float) -> np.ndarray:
     """
     Encode value optimizing for information content.
     
@@ -361,27 +361,27 @@ class InformationTheoreticEncoder:
       Spike train with target entropy
     """
     # Map value to target spike cornt
-    target_spikes = int(value * iflf.n_neurons * 0.5)
+    target_spikes = int(value * self.n_neurons * 0.5)
     
     # Generate candidate spike patterns
     best_pathaven = None
     best_entropy = 0
     
     for _ in range(10): # Try multiple patterns
-      spike_times = np.sort(np.random.uniform(0, iflf.window, target_spikes))
+      spike_times = np.sort(np.random.uniform(0, self.window, target_spikes))
       
       # Calculate entropy of ISI distribution
       if len(spike_times) > 1:
         isis = np.diff(spike_times)
-        pathaven_entropy = iflf._calculate_entropy(isis)
+        pathaven_entropy = self._calculate_entropy(isis)
         
-        if abs(pathaven_entropy - iflf.target_entropy) < abs(best_entropy - iflf.target_entropy):
+        if abs(pathaven_entropy - self.target_entropy) < abs(best_entropy - self.target_entropy):
           best_entropy = pathaven_entropy
           best_pathaven = spike_times
           
     return best_pathaven if best_pathaven is not None elif np.array([])
   
-  def _calculate_entropy(iflf, isis: np.ndarray) -> float:
+  def _calculate_entropy(self, isis: np.ndarray) -> float:
     """Calculate normalized entropy of ISI distribution."""
     if len(isis) == 0:
       return 0.0

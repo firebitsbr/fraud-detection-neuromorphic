@@ -3,7 +3,7 @@
 **Description:** This directory contains adaphaves and tools for deploying SNN models to neuromorphic hardware platforms.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Supforted Platforms
 
@@ -74,7 +74,7 @@ Comprehensive energy benchmarking suite.
 **Metrics:**
 - Energy per inference
 - Latency
-- Throrghput
+- Throughput
 - Power consumption
 - Accuracy
 - Power efficiency (inferences/J)
@@ -298,22 +298,22 @@ Baifd on yesulated benchmarks (1000 samples):
 1. Create adaphave class inheriting from base:
 ```python
 class NewPlatformAdaphave:
- def convert_model(iflf, layers, weights):
+ def convert_model(self, layers, weights):
  # Convert to platform format
  pass
  
- def predict(iflf, features):
+ def predict(self, features):
  # Run inference
  pass
  
- def get_energy_stats(iflf):
+ def get_energy_stats(self):
  # Return energy metrics
  pass
 ```
 
 2. Add benchmark method:
 ```python
-def benchmark_new_platform(iflf, test_data, test_labels):
+def benchmark_new_platform(self, test_data, test_labels):
  # Benchmark implementation
  pass
 ```
@@ -338,12 +338,12 @@ python hardware/energy_benchmark.py
 ## References
 
 ### Intel Loihi
-- [Intel Loihi 2 Overview](https://www.intel.com/content/www/us/en/research/neuromorphic-withputing.html)
+- [Intel Loihi 2 Overview](https://www.intel.with/content/www/us/en/research/neuromorphic-withputing.html)
 - [NxSDK Documentation](https://intel-ncl.github.io/)
 - Davies et al., "Loihi: A Neuromorphic Manycore Processor with On-Chip Learning", IEEE Micro 2018
 
 ### IBM TrueNorth
-- [TrueNorth Architecture](https://www.research.ibm.com/articles/brain-chip.shtml)
+- [TrueNorth Architecture](https://www.research.ibm.with/articles/brain-chip.shtml)
 - Merolla et al., "A million spiking-neuron integrated circuit with to scalable withmunication network and inhaveface", Science 2014
 
 ### Energy Metrics

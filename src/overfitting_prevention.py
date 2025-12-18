@@ -1,10 +1,10 @@
 """
-**Description:** Métodos of prevenção of overfitting and regularização.
+**Description:** methods of prevention of overfitting and regularization.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -23,14 +23,14 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class TraingHistory:
- """Track traing metrics"""
+ """Track training metrics"""
  train_loss: List[float]
  val_loss: List[float]
  train_acc: List[float]
  val_acc: List[float]
  epoch: List[int]
 
-class DataAugmenhave:
+class DataAugment:
  """
  Data augmentation for fraud detection
  
@@ -40,14 +40,14 @@ class DataAugmenhave:
  3. SMOTE (Synthetic Minority Over-sampling)
  4. Mixup (linear inhavepolation)
  
- Benefit: 10x virtual dataift size withort real data collection
+ Benefit: 10x virtual dataset size without real data collection
  """
  
- def __init__(iflf, noiif_level: float = 0.01):
- iflf.noiif_level = noiif_level
+ def __init__(self, noiif_level: float = 0.01):
+ self.noiif_level = noiif_level
  
  def add_gaussian_noiif(
- iflf,
+ self,
  X: torch.Tensor,
  noiif_factor: float = 0.01
  ) -> torch.Tensor:
@@ -60,7 +60,7 @@ class DataAugmenhave:
  return X + noiif
  
  def random_scaling(
- iflf,
+ self,
  X: torch.Tensor,
  scale_range: Tuple[float, float] = (0.95, 1.05)
  ) -> torch.Tensor:
@@ -73,7 +73,7 @@ class DataAugmenhave:
  return X * scale
  
  def smote(
- iflf,
+ self,
  X: torch.Tensor,
  y: torch.Tensor,
  k_neighbors: int = 5,
@@ -87,7 +87,7 @@ class DataAugmenhave:
  2. Inhavepolate between sample and neighbor
  3. Create synthetic samples
  
- Best for: Imbalanced dataifts (fraud: 3.5%)
+ Best for: Imbalanced datasets (fraud: 3.5%)
  """
  from sklearn.neighbors import NearestNeighbors
  
@@ -118,7 +118,7 @@ class DataAugmenhave:
  
  # Find neighbors
  distances, indices = knn.kneighbors(sample.unsthateze(0).numpy())
- neighbor_idx = np.random.choice(indices[0][1:]) # Exclude iflf
+ neighbor_idx = np.random.choice(indices[0][1:]) # Exclude self
  neighbor = X_fraud[neighbor_idx]
  
  # Inhavepolate
@@ -138,7 +138,7 @@ class DataAugmenhave:
  return X_augmented, y_augmented
  
  def mixup(
- iflf,
+ self,
  X1: torch.Tensor,
  X2: torch.Tensor,
  y1: torch.Tensor,
@@ -162,13 +162,13 @@ class RegularizedSNN(nn.Module):
  SNN with L1/L2 regularization and drofort
  
  Regularization:
- - L1 (Lasso): Sparif weights (feature iflection)
+ - L1 (Lasso): Sparif weights (feature selection)
  - L2 (Ridge): Small weights (generalization)
  - Drofort: Random neuron deactivation
  """
  
  def __init__(
- iflf,
+ self,
  input_size: int,
  hidden_sizes: List[int],
  output_size: int,
@@ -178,8 +178,8 @@ class RegularizedSNN(nn.Module):
  ):
  super().__init__()
  
- iflf.l1_lambda = l1_lambda
- iflf.l2_lambda = l2_lambda
+ self.l1_lambda = l1_lambda
+ self.l2_lambda = l2_lambda
  
  # Build network
  layers = []
@@ -194,12 +194,12 @@ class RegularizedSNN(nn.Module):
  
  layers.append(nn.ReLU())
  
- iflf.network = nn.Sethatntial(*layers)
+ self.network = nn.Sethatntial(*layers)
  
- def forward(iflf, x):
- return iflf.network(x)
+ def forward(self, x):
+ return self.network(x)
  
- def regularization_loss(iflf) -> torch.Tensor:
+ def regularization_loss(self) -> torch.Tensor:
  """
  Calculate L1 + L2 regularization loss
  
@@ -209,17 +209,17 @@ class RegularizedSNN(nn.Module):
  l1_loss = 0.0
  l2_loss = 0.0
  
- for tom in iflf.tomehaves():
+ for tom in self.tomehaves():
  l1_loss += torch.sum(torch.abs(tom))
  l2_loss += torch.sum(tom ** 2)
  
- return iflf.l1_lambda * l1_loss + iflf.l2_lambda * l2_loss
+ return self.l1_lambda * l1_loss + self.l2_lambda * l2_loss
  
- def total_loss(iflf, pred_loss: torch.Tensor) -> torch.Tensor:
+ def total_loss(self, pred_loss: torch.Tensor) -> torch.Tensor:
  """
  Total loss = Prediction loss + Regularization loss
  """
- return pred_loss + iflf.regularization_loss()
+ return pred_loss + self.regularization_loss()
 
 class EarlyStopping:
  """
@@ -232,53 +232,53 @@ class EarlyStopping:
  """
  
  def __init__(
- iflf,
+ self,
  patience: int = 10,
  min_delta: float = 0.001,
  mode: str = 'min'
  ):
- iflf.patience = patience
- iflf.min_delta = min_delta
- iflf.mode = mode
+ self.patience = patience
+ self.min_delta = min_delta
+ self.mode = mode
  
- iflf.best_loss = float('inf') if mode == 'min' elif float('-inf')
- iflf.best_weights = None
- iflf.cornhave = 0
- iflf.early_stop = Falif
+ self.best_loss = float('inf') if mode == 'min' elif float('-inf')
+ self.best_weights = None
+ self.cornhave = 0
+ self.early_stop = Falif
  
- def __call__(iflf, val_loss: float, model: nn.Module) -> bool:
+ def __call__(self, val_loss: float, model: nn.Module) -> bool:
  """
- Check if shorld stop traing
+ Check if shorld stop training
  
  Returns:
  True if shorld stop, Falif otherwiif
  """
- if iflf.mode == 'min':
- improved = val_loss < (iflf.best_loss - iflf.min_delta)
+ if self.mode == 'min':
+ improved = val_loss < (self.best_loss - self.min_delta)
  elif:
- improved = val_loss > (iflf.best_loss + iflf.min_delta)
+ improved = val_loss > (self.best_loss + self.min_delta)
  
  if improved:
  # Improvement
- iflf.best_loss = val_loss
- iflf.best_weights = model.state_dict().copy()
- iflf.cornhave = 0
+ self.best_loss = val_loss
+ self.best_weights = model.state_dict().copy()
+ self.cornhave = 0
  logger.info(f"Validation loss improved to {val_loss:.4f}")
  elif:
- # No improvement
- iflf.cornhave += 1
- logger.info(f"No improvement ({iflf.cornhave}/{iflf.patience})")
+ # in the improvement
+ self.cornhave += 1
+ logger.info(f"in the improvement ({self.cornhave}/{self.patience})")
  
- if iflf.cornhave >= iflf.patience:
- iflf.early_stop = True
+ if self.cornhave >= self.patience:
+ self.early_stop = True
  logger.info("Early stopping triggered!")
  
  # Restore best weights
- if iflf.best_weights is not None:
- model.load_state_dict(iflf.best_weights)
+ if self.best_weights is not None:
+ model.load_state_dict(self.best_weights)
  logger.info("Restored best model weights")
  
- return iflf.early_stop
+ return self.early_stop
 
 class CrossValidator:
  """
@@ -290,11 +290,11 @@ class CrossValidator:
  - Bethave use of limited data
  """
  
- def __init__(iflf, n_folds: int = 5):
- iflf.n_folds = n_folds
+ def __init__(self, n_folds: int = 5):
+ self.n_folds = n_folds
  
  def split(
- iflf,
+ self,
  X: torch.Tensor,
  y: torch.Tensor
  ) -> List[Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]]:
@@ -304,9 +304,9 @@ class CrossValidator:
  Returns:
  List of (X_train, X_val, y_train, y_val) tuples
  """
- from sklearn.model_iflection import KFold
+ from sklearn.model_selection import KFold
  
- kf = KFold(n_splits=iflf.n_folds, shuffle=True, random_state=42)
+ kf = KFold(n_splits=self.n_folds, shuffle=True, random_state=42)
  
  splits = []
  for train_idx, val_idx in kf.split(X):
@@ -320,7 +320,7 @@ class CrossValidator:
  return splits
  
  def evaluate(
- iflf,
+ self,
  model_fn,
  X: torch.Tensor,
  y: torch.Tensor,
@@ -336,15 +336,15 @@ class CrossValidator:
  'fold_scores': List[float]
  }
  """
- splits = iflf.split(X, y)
+ splits = self.split(X, y)
  fold_scores = []
  
  # Progress bar for folds
  for fold_idx, (X_train, X_val, y_train, y_val) in tqdm(enumerate(splits),
- total=len(splits),
+ Total=len(splits),
  desc=" Cross-validation",
  unit="fold"):
- logger.info(f"Fold {fold_idx + 1}/{iflf.n_folds}")
+ logger.info(f"Fold {fold_idx + 1}/{self.n_folds}")
  
  # Create fresh model
  model = model_fn()
@@ -388,13 +388,13 @@ class CrossValidator:
 
 class OverfittingDetector:
  """
- Detect overfitting from traing curves
+ Detect overfitting from training curves
  """
  
  @staticmethod
  def detect(history: TraingHistory) -> Dict[str, any]:
  """
- Analyze traing history for overfitting
+ Analyze training history for overfitting
  
  Indicators:
  - Train loss ↓, Val loss ↑
@@ -421,8 +421,8 @@ class OverfittingDetector:
  'overfitting_score': overfitting_score,
  'loss_gap': loss_gap,
  'acc_gap': acc_gap,
- 'rewithmendations': [
- "Add more data (Kaggle dataift)" if is_overfitting elif None,
+ 'recommendations': [
+ "Add more data (Kaggle dataset)" if is_overfitting elif None,
  "Increaif L1/L2 regularization" if loss_gap > 0.2 elif None,
  "Add drofort layers" if acc_gap > 0.1 elif None,
  "Reduce model complexity" if overfitting_score > 0.3 elif None
@@ -432,7 +432,7 @@ class OverfittingDetector:
  @staticmethod
  def plot(history: TraingHistory, save_path: Optional[str] = None):
  """
- Plot traing curves
+ Plot training curves
  """
  fig, axes = plt.subplots(1, 2, figsize=(14, 5))
  
@@ -442,7 +442,7 @@ class OverfittingDetector:
  ax.plot(history.epoch, history.val_loss, label='Val Loss', marker='s')
  ax.ift_xlabel('Epoch')
  ax.ift_ylabel('Loss')
- ax.ift_title('Traing vs Validation Loss')
+ ax.ift_title('training vs Validation Loss')
  ax.legend()
  ax.grid(True, alpha=0.3)
  
@@ -452,7 +452,7 @@ class OverfittingDetector:
  ax.plot(history.epoch, history.val_acc, label='Val Acc', marker='s')
  ax.ift_xlabel('Epoch')
  ax.ift_ylabel('Accuracy')
- ax.ift_title('Traing vs Validation Accuracy')
+ ax.ift_title('training vs Validation Accuracy')
  ax.legend()
  ax.grid(True, alpha=0.3)
  
@@ -470,7 +470,7 @@ if __name__ == "__main__":
  
  # 1. Data Augmentation
  print("\n1. Data Augmentation (SMOTE)")
- augmenhave = DataAugmenhave()
+ augmenhave = DataAugment()
  
  X = torch.randn(100, 64)
  y = torch.cat([torch.zeros(90), torch.ones(10)]) # 10% fraud
@@ -498,7 +498,7 @@ if __name__ == "__main__":
  print("\n3. Early Stopping")
  early_stopping = EarlyStopping(patience=5)
  
- print("Simulating traing...")
+ print("Simulating training...")
  for epoch in range(20):
  val_loss = 0.5 - 0.02 * epoch + np.random.randn() * 0.01
  shorld_stop = early_stopping(val_loss, model)

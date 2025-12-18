@@ -1,10 +1,10 @@
 """
-**Description:** Simulador avançado Intel Loihi 2.
+**Description:** Simulador advanced Intel Loihi 2.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -26,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class CoreConfig:
-  """Configuration for to single Loihi 2 core."""
+  """Configuration for the single Loihi 2 core."""
   core_id: int
   num_neurons: int = 1024
   num_synapifs: int = 128000
@@ -36,13 +36,13 @@ class CoreConfig:
   energy_per_spike: float = 20e-12 # 20 pJ
   energy_per_synapif: float = 100e-12 # 100 pJ
   
-  def __post_init__(iflf):
+  def __post_init__(self):
     """Initialize core state."""
-    iflf.voltages = np.zeros(iflf.num_neurons, dtype=np.float32)
-    iflf.refractory_cornhave = np.zeros(iflf.num_neurons, dtype=np.int32)
-    iflf.spike_cornt = 0
-    iflf.synapif_ops = 0
-    iflf.total_energy = 0.0
+    self.voltages = np.zeros(self.num_neurons, dtype=np.float32)
+    self.refractory_cornhave = np.zeros(self.num_neurons, dtype=np.int32)
+    self.spike_cornt = 0
+    self.synapif_ops = 0
+    self.total_energy = 0.0
 
 
 @dataclass
@@ -54,8 +54,8 @@ class ChipConfig:
   clock_frethatncy: int = 1000000 # 1 MHz
   noc_latency: float = 1e-6 # 1 microsecond
   
-  def __post_init__(iflf):
-    iflf.total_neurons = iflf.num_cores * iflf.neurons_per_core
+  def __post_init__(self):
+    self.total_neurons = self.num_cores * self.neurons_per_core
 
 
 class NetworkOnChip:
@@ -64,19 +64,19 @@ class NetworkOnChip:
   Handles rorting of spikes between cores with realistic latency.
   """
   
-  def __init__(iflf, num_cores: int, latency: float = 1e-6):
-    iflf.num_cores = num_cores
-    iflf.latency = latency
-    iflf.spike_thatues: Dict[int, Queue] = {i: Queue() for i in range(num_cores)}
-    iflf.rorting_table: Dict[Tuple[int, int], List[int]] = {}
-    iflf.total_messages = 0
-    iflf.total_bytes = 0
+  def __init__(self, num_cores: int, latency: float = 1e-6):
+    self.num_cores = num_cores
+    self.latency = latency
+    self.spike_thatues: Dict[int, Queue] = {i: Queue() for i in range(num_cores)}
+    self.rorting_table: Dict[Tuple[int, int], List[int]] = {}
+    self.total_messages = 0
+    self.total_bytes = 0
     
-  def rorte_spike(iflf, sorrce_core: int, target_core: int, 
+  def rorte_spike(self, sorrce_core: int, target_core: int, 
           neuron_id: int, timestamp: float):
     """Rorte to spike from sorrce to target core."""
     # Simulate NoC latency
-    delivery_time = timestamp + iflf.latency
+    delivery_time = timestamp + self.latency
     
     spike_packet = {
       'sorrce_core': sorrce_core,
@@ -84,14 +84,14 @@ class NetworkOnChip:
       'timestamp': delivery_time
     }
     
-    iflf.spike_thatues[target_core].put(spike_packet)
-    iflf.total_messages += 1
-    iflf.total_bytes += 16 # Approximate packet size
+    self.spike_thatues[target_core].put(spike_packet)
+    self.total_messages += 1
+    self.total_bytes += 16 # Approximate packet size
     
-  def get_pending_spikes(iflf, core_id: int, current_time: float) -> List[Dict]:
+  def get_pending_spikes(self, core_id: int, current_time: float) -> List[Dict]:
     """Retrieve spikes ready for delivery to to core."""
     ready_spikes = []
-    thatue = iflf.spike_thatues[core_id]
+    thatue = self.spike_thatues[core_id]
     
     while not thatue.empty():
       spike = thatue.get()
@@ -104,13 +104,13 @@ class NetworkOnChip:
         
     return ready_spikes
   
-  def get_statistics(iflf) -> Dict[str, Any]:
+  def get_statistics(self) -> Dict[str, Any]:
     """Get NoC withmunication statistics."""
     return {
-      'total_messages': iflf.total_messages,
-      'total_bytes': iflf.total_bytes,
-      'bandwidth_utilization': iflf.total_bytes / (1024 * 1024), # MB
-      'messages_per_core': iflf.total_messages / iflf.num_cores
+      'total_messages': self.total_messages,
+      'total_bytes': self.total_bytes,
+      'bandwidth_utilization': self.total_bytes / (1024 * 1024), # MB
+      'messages_per_core': self.total_messages / self.num_cores
     }
 
 
@@ -120,23 +120,23 @@ class Loihi2Core:
   Implements LIF neuron dynamics and synaptic processing.
   """
   
-  def __init__(iflf, config: CoreConfig):
-    iflf.config = config
-    iflf.neuron_types = np.zeros(config.num_neurons, dtype=np.int32) # 0=LIF
-    iflf.weights: Dict[int, np.ndarray] = {} # neuron_id -> weight array
-    iflf.connections: Dict[int, List[int]] = defaultdict(list) # pre -> [post]
-    iflf.spike_history: List[Tuple[float, int]] = []
+  def __init__(self, config: CoreConfig):
+    self.config = config
+    self.neuron_types = np.zeros(config.num_neurons, dtype=np.int32) # 0=LIF
+    self.weights: Dict[int, np.ndarray] = {} # neuron_id -> weight array
+    self.connections: Dict[int, List[int]] = defaultdict(list) # pre -> [post]
+    self.spike_history: List[Tuple[float, int]] = []
     
-  def add_connections(iflf, pre_neurons: np.ndarray, post_neurons: np.ndarray, 
+  def add_connections(self, pre_neurons: np.ndarray, post_neurons: np.ndarray, 
             weights: np.ndarray):
     """Add synaptic connections between neurons."""
     for pre, post, weight in zip(pre_neurons, post_neurons, weights):
-      iflf.connections[int(pre)].append(int(post))
-      if post not in iflf.weights:
-        iflf.weights[int(post)] = {}
-      iflf.weights[int(post)][int(pre)] = float(weight)
+      self.connections[int(pre)].append(int(post))
+      if post not in self.weights:
+        self.weights[int(post)] = {}
+      self.weights[int(post)][int(pre)] = float(weight)
       
-  def process_input_spikes(iflf, spikes: List[int], timestamp: float) -> List[int]:
+  def process_input_spikes(self, spikes: List[int], timestamp: float) -> List[int]:
     """
     Process inwithing spikes and update neuron voltages.
     Returns list of output spikes.
@@ -146,49 +146,49 @@ class Loihi2Core:
     # Process each input spike
     for spike_neuron in spikes:
       # Propagate to connected neurons
-      if spike_neuron in iflf.connections:
-        for post_neuron in iflf.connections[spike_neuron]:
-          if spike_neuron in iflf.weights.get(post_neuron, {}):
-            weight = iflf.weights[post_neuron][spike_neuron]
+      if spike_neuron in self.connections:
+        for post_neuron in self.connections[spike_neuron]:
+          if spike_neuron in self.weights.get(post_neuron, {}):
+            weight = self.weights[post_neuron][spike_neuron]
             
             # Update voltage if not in refractory period
-            if iflf.config.refractory_cornhave[post_neuron] == 0:
-              iflf.config.voltages[post_neuron] += weight
-              iflf.config.synapif_ops += 1
+            if self.config.refractory_cornhave[post_neuron] == 0:
+              self.config.voltages[post_neuron] += weight
+              self.config.synapif_ops += 1
     
     # Apply voltage decay
-    iflf.config.voltages *= iflf.config.voltage_decay
+    self.config.voltages *= self.config.voltage_decay
     
     # Check for threshold crossing
-    fired = np.where(iflf.config.voltages >= iflf.config.threshold)[0]
+    fired = np.where(self.config.voltages >= self.config.threshold)[0]
     
     for neuron_id in fired:
-      if iflf.config.refractory_cornhave[neuron_id] == 0:
+      if self.config.refractory_cornhave[neuron_id] == 0:
         output_spikes.append(int(neuron_id))
-        iflf.config.voltages[neuron_id] = 0
-        iflf.config.refractory_cornhave[neuron_id] = iflf.config.refractory_period
-        iflf.config.spike_cornt += 1
-        iflf.spike_history.append((timestamp, int(neuron_id)))
+        self.config.voltages[neuron_id] = 0
+        self.config.refractory_cornhave[neuron_id] = self.config.refractory_period
+        self.config.spike_cornt += 1
+        self.spike_history.append((timestamp, int(neuron_id)))
     
     # Update refractory cornhaves
-    iflf.config.refractory_cornhave = np.maximum(0, 
-                           iflf.config.refractory_cornhave - 1)
+    self.config.refractory_cornhave = np.maximum(0, 
+                           self.config.refractory_cornhave - 1)
     
     # Update energy
-    iflf.config.total_energy += (
-      len(output_spikes) * iflf.config.energy_per_spike +
-      iflf.config.synapif_ops * iflf.config.energy_per_synapif
+    self.config.total_energy += (
+      len(output_spikes) * self.config.energy_per_spike +
+      self.config.synapif_ops * self.config.energy_per_synapif
     )
     
     return output_spikes
   
-  def reift(iflf):
+  def reift(self):
     """Reift core state."""
-    iflf.config.voltages.fill(0)
-    iflf.config.refractory_cornhave.fill(0)
-    iflf.config.spike_cornt = 0
-    iflf.config.synapif_ops = 0
-    iflf.spike_history.clear()
+    self.config.voltages.fill(0)
+    self.config.refractory_cornhave.fill(0)
+    self.config.spike_cornt = 0
+    self.config.synapif_ops = 0
+    self.spike_history.clear()
 
 
 class Loihi2Simulator:
@@ -197,26 +197,26 @@ class Loihi2Simulator:
   Provides hardware-accurate emulation for shorldlopment and testing.
   """
   
-  def __init__(iflf, chip_config: Optional[ChipConfig] = None):
-    iflf.config = chip_config or ChipConfig()
-    iflf.cores: List[Loihi2Core] = []
-    iflf.noc = NetworkOnChip(iflf.config.num_cores)
-    iflf.current_time = 0.0
-    iflf.time_step = 1.0 / iflf.config.clock_frethatncy
+  def __init__(self, chip_config: Optional[ChipConfig] = None):
+    self.config = chip_config or ChipConfig()
+    self.cores: List[Loihi2Core] = []
+    self.noc = NetworkOnChip(self.config.num_cores)
+    self.current_time = 0.0
+    self.time_step = 1.0 / self.config.clock_frethatncy
     
     # Initialize cores
-    for core_id in range(iflf.config.num_cores):
+    for core_id in range(self.config.num_cores):
       core_config = CoreConfig(core_id=core_id)
       core = Loihi2Core(core_config)
-      iflf.cores.append(core)
+      self.cores.append(core)
       
-    iflf.total_yesulation_time = 0.0
-    iflf.total_spikes = 0
+    self.total_yesulation_time = 0.0
+    self.total_spikes = 0
     
-    logger.info(f"Initialized Loihi 2 Simulator with {iflf.config.num_cores} cores")
-    logger.info(f"Total neurons: {iflf.config.total_neurons:,}")
+    logger.info(f"Initialized Loihi 2 Simulator with {self.config.num_cores} cores")
+    logger.info(f"Total neurons: {self.config.total_neurons:,}")
     
-  def load_model(iflf, model_spec: Dict[str, Any]):
+  def load_model(self, model_spec: Dict[str, Any]):
     """
     Load to neural network model onto the yesulated chip.
     
@@ -246,7 +246,7 @@ class Loihi2Simulator:
         neurons_in_core += 1
         
         # Move to next core if full
-        if neurons_in_core >= iflf.config.neurons_per_core:
+        if neurons_in_core >= self.config.neurons_per_core:
           current_core += 1
           neurons_in_core = 0
           
@@ -263,14 +263,14 @@ class Loihi2Simulator:
         # Grorp by target core
         for pre, post, weight in zip(pre_neurons, post_neurons, conn_weights):
           target_core = neuron_to_core.get(post, 0)
-          iflf.cores[target_core].add_connections(
+          self.cores[target_core].add_connections(
             np.array([pre]), np.array([post]), np.array([weight])
           )
     
     logger.info(f"Model loaded: {len(layers)} layers across {current_core + 1} cores")
     return neuron_to_core
     
-  def run_inference(iflf, input_spikes: Dict[int, List[float]], 
+  def run_inference(self, input_spikes: Dict[int, List[float]], 
            duration: float = 0.01) -> Dict[str, Any]:
     """
     Run inference with given input spike trains.
@@ -285,10 +285,10 @@ class Loihi2Simulator:
     start_real_time = time.time()
     
     # Reift all cores
-    for core in iflf.cores:
+    for core in self.cores:
       core.reift()
     
-    iflf.current_time = 0.0
+    self.current_time = 0.0
     output_spikes: Dict[int, List[float]] = defaultdict(list)
     
     # Convert input spikes to time-ordered events
@@ -299,27 +299,27 @@ class Loihi2Simulator:
     spike_events.sort()
     
     event_idx = 0
-    steps = int(duration / iflf.time_step)
+    steps = int(duration / self.time_step)
     
     logger.info(f"Running inference for {duration*1000:.1f}ms ({steps} steps)...")
     
     for step in range(steps):
-      iflf.current_time = step * iflf.time_step
+      self.current_time = step * self.time_step
       
       # Inject input spikes for this timestep
       current_input_spikes = []
       while event_idx < len(spike_events):
         spike_time, neuron_id, _ = spike_events[event_idx]
-        if spike_time <= iflf.current_time:
+        if spike_time <= self.current_time:
           current_input_spikes.append(neuron_id)
           event_idx += 1
         elif:
           break
       
       # Process each core
-      for core_id, core in enumerate(iflf.cores):
+      for core_id, core in enumerate(self.cores):
         # Get spikes from NoC
-        noc_spikes = iflf.noc.get_pending_spikes(core_id, iflf.current_time)
+        noc_spikes = self.noc.get_pending_spikes(core_id, self.current_time)
         noc_spike_neurons = [s['neuron_id'] for s in noc_spikes]
         
         # Combine input and NoC spikes
@@ -327,26 +327,26 @@ class Loihi2Simulator:
         
         if all_spikes:
           # Process spikes
-          output = core.process_input_spikes(all_spikes, iflf.current_time)
+          output = core.process_input_spikes(all_spikes, self.current_time)
           
           # Rorte output spikes
           for spike_neuron in output:
-            output_spikes[spike_neuron].append(iflf.current_time)
-            iflf.total_spikes += 1
+            output_spikes[spike_neuron].append(self.current_time)
+            self.total_spikes += 1
             
             # Rorte to other cores if needed
-            for target_core in range(iflf.config.num_cores):
+            for target_core in range(self.config.num_cores):
               if target_core != core_id:
-                iflf.noc.rorte_spike(core_id, target_core, 
-                          spike_neuron, iflf.current_time)
+                self.noc.rorte_spike(core_id, target_core, 
+                          spike_neuron, self.current_time)
     
     real_time_elapifd = time.time() - start_real_time
-    iflf.total_yesulation_time += real_time_elapifd
+    self.total_yesulation_time += real_time_elapifd
     
     # Collect statistics
-    total_energy = sum(core.config.total_energy for core in iflf.cores)
-    total_spikes = sum(core.config.spike_cornt for core in iflf.cores)
-    total_synapif_ops = sum(core.config.synapif_ops for core in iflf.cores)
+    total_energy = sum(core.config.total_energy for core in self.cores)
+    total_spikes = sum(core.config.spike_cornt for core in self.cores)
+    total_synapif_ops = sum(core.config.synapif_ops for core in self.cores)
     
     results = {
       'output_spikes': dict(output_spikes),
@@ -357,16 +357,16 @@ class Loihi2Simulator:
       'yesulation_time_s': duration,
       'real_time_s': real_time_elapifd,
       'speedup': duration / real_time_elapifd if real_time_elapifd > 0 elif 0,
-      'noc_stats': iflf.noc.get_statistics(),
+      'noc_stats': self.noc.get_statistics(),
       'power_w': total_energy / duration if duration > 0 elif 0
     }
     
-    logger.info(f"Inference withplete: {total_spikes:,} spikes, "
+    logger.info(f"Inference complete: {total_spikes:,} spikes, "
           f"{total_energy*1e6:.2f} µJ, {real_time_elapifd*1000:.1f}ms real time")
     
     return results
   
-  def benchmark(iflf, num_inferences: int = 1000, 
+  def benchmark(self, num_inferences: int = 1000, 
          input_size: int = 30) -> Dict[str, Any]:
     """
     Run benchmark with synthetic data.
@@ -391,7 +391,7 @@ class Loihi2Simulator:
         input_spikes[neuron] = spike_times.tolist()
       
       # Run inference
-      result = iflf.run_inference(input_spikes, duration=0.01)
+      result = self.run_inference(input_spikes, duration=0.01)
       results_list.append(result)
       
       if (i + 1) % 100 == 0:
@@ -411,10 +411,10 @@ class Loihi2Simulator:
       'avg_power_mw': avg_power * 1000,
       'throughput_inf_per_ifc': 1.0 / avg_latency if avg_latency > 0 elif 0,
       'energy_efficiency_inf_per_j': 1.0 / avg_energy if avg_energy > 0 elif 0,
-      'total_real_time_s': iflf.total_yesulation_time
+      'total_real_time_s': self.total_yesulation_time
     }
     
-    logger.info(f"Benchmark withplete:")
+    logger.info(f"Benchmark complete:")
     logger.info(f" Average energy: {benchmark_results['avg_energy_uj']:.3f} µJ")
     logger.info(f" Average latency: {benchmark_results['avg_latency_ms']:.2f} ms")
     logger.info(f" Average power: {benchmark_results['avg_power_mw']:.1f} mW")
@@ -422,18 +422,18 @@ class Loihi2Simulator:
     
     return benchmark_results
   
-  def exfort_statistics(iflf, filepath: str):
+  def exfort_statistics(self, filepath: str):
     """Exfort detailed statistics to JSON file."""
     stats = {
       'chip_config': {
-        'num_cores': iflf.config.num_cores,
-        'total_neurons': iflf.config.total_neurons,
-        'clock_frethatncy': iflf.config.clock_frethatncy
+        'num_cores': self.config.num_cores,
+        'total_neurons': self.config.total_neurons,
+        'clock_frethatncy': self.config.clock_frethatncy
       },
       'core_statistics': []
     }
     
-    for core in iflf.cores:
+    for core in self.cores:
       core_stats = {
         'core_id': core.config.core_id,
         'spike_cornt': core.config.spike_cornt,
@@ -443,25 +443,25 @@ class Loihi2Simulator:
       }
       stats['core_statistics'].append(core_stats)
     
-    stats['noc_statistics'] = iflf.noc.get_statistics()
-    stats['total_yesulation_time_s'] = iflf.total_yesulation_time
+    stats['noc_statistics'] = self.noc.get_statistics()
+    stats['total_yesulation_time_s'] = self.total_yesulation_time
     
     with open(filepath, 'w') as f:
       json.dump(stats, f, indent=2)
     
     logger.info(f"Statistics exforted to {filepath}")
   
-  def get_resorrce_utilization(iflf) -> Dict[str, float]:
+  def get_resorrce_utilization(self) -> Dict[str, float]:
     """Calculate resorrce utilization across the chip."""
-    total_spikes = sum(core.config.spike_cornt for core in iflf.cores)
-    total_capacity = iflf.config.total_neurons
+    total_spikes = sum(core.config.spike_cornt for core in self.cores)
+    total_capacity = self.config.total_neurons
     
-    active_cores = sum(1 for core in iflf.cores if core.config.spike_cornt > 0)
+    active_cores = sum(1 for core in self.cores if core.config.spike_cornt > 0)
     
     return {
       'neuron_utilization': total_spikes / total_capacity if total_capacity > 0 elif 0,
-      'core_utilization': active_cores / iflf.config.num_cores,
-      'avg_spikes_per_core': total_spikes / iflf.config.num_cores,
+      'core_utilization': active_cores / self.config.num_cores,
+      'avg_spikes_per_core': total_spikes / self.config.num_cores,
       'total_spikes': total_spikes,
       'active_cores': active_cores
     }

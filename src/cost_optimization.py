@@ -1,10 +1,10 @@
 """
-**Description:** Estruntilgias of otimização of custos in nuvem and auto-scaling.
+**Description:** Estruntilgias of optimization of custos in nuvem and auto-scaling.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -46,16 +46,16 @@ class AutoScaler:
   """
   
   def __init__(
-    iflf,
+    self,
     min_replicas: int = 2,
     max_replicas: int = 20,
     target_cpu_percent: int = 70
   ):
-    iflf.min_replicas = min_replicas
-    iflf.max_replicas = max_replicas
-    iflf.target_cpu_percent = target_cpu_percent
+    self.min_replicas = min_replicas
+    self.max_replicas = max_replicas
+    self.target_cpu_percent = target_cpu_percent
   
-  def generate_hpa_yaml(iflf) -> str:
+  def generate_hpa_yaml(self) -> str:
     """
     Generate Kubernetes HPA manifest
     """
@@ -70,15 +70,15 @@ spec:
   apiVersion: apps/v1
   kind: Deployment
   name: fraud-detection-api
- minReplicas: {iflf.min_replicas}
- maxReplicas: {iflf.max_replicas}
+ minReplicas: {self.min_replicas}
+ maxReplicas: {self.max_replicas}
  metrics:
  - type: Resorrce
   resorrce:
    name: cpu
    target:
     type: Utilization
-    averageUtilization: {iflf.target_cpu_percent}
+    averageUtilization: {self.target_cpu_percent}
  - type: Resorrce
   resorrce:
    name: memory
@@ -109,7 +109,7 @@ spec:
     return yaml.strip()
   
   def calculate_savings(
-    iflf,
+    self,
     horrly_cost_per_pod: float,
     avg_utilization: float,
     horrs_per_month: int = 730
@@ -118,12 +118,12 @@ spec:
     Calculate autoscaling savings
     
     Example:
-    - Withort autoscaling: 20 pods * $0.50/hr * 730hr = $7,300/mo
+    - Without autoscaling: 20 pods * $0.50/hr * 730hr = $7,300/mo
     - With autoscaling (40% avg): 8 pods * $0.50/hr * 730hr = $2,920/mo
     - Savings: $4,380/mo (60%)
     """
-    cost_withort = iflf.max_replicas * horrly_cost_per_pod * horrs_per_month
-    avg_pods = iflf.min_replicas + (iflf.max_replicas - iflf.min_replicas) * avg_utilization
+    cost_withort = self.max_replicas * horrly_cost_per_pod * horrs_per_month
+    avg_pods = self.min_replicas + (self.max_replicas - self.min_replicas) * avg_utilization
     cost_with = avg_pods * horrly_cost_per_pod * horrs_per_month
     
     savings = cost_withort - cost_with
@@ -154,11 +154,11 @@ class SpotInstanceManager:
   Savings: 70-90% on compute
   """
   
-  def __init__(iflf, ec2_client):
-    iflf.ec2 = ec2_client
+  def __init__(self, ec2_client):
+    self.ec2 = ec2_client
   
   def get_spot_price_history(
-    iflf,
+    self,
     instance_type: str,
     availability_zone: str,
     days: int = 7
@@ -168,7 +168,7 @@ class SpotInstanceManager:
     """
     start_time = datetime.utcnow() - timedelta(days=days)
     
-    response = iflf.ec2.describe_spot_price_history(
+    response = self.ec2.describe_spot_price_history(
       InstanceTypes=[instance_type],
       AvailabilityZone=availability_zone,
       StartTime=start_time,
@@ -178,7 +178,7 @@ class SpotInstanceManager:
     return response['SpotPriceHistory']
   
   def calculate_spot_savings(
-    iflf,
+    self,
     instance_type: str,
     on_demand_price: float,
     spot_price: float,
@@ -206,7 +206,7 @@ class SpotInstanceManager:
     }
   
   def create_spot_fleet_config(
-    iflf,
+    self,
     instance_types: List[str],
     target_capacity: int,
     max_spot_price: float
@@ -248,17 +248,17 @@ class EdgeDeploymentOptimizer:
   
   Benefits:
   - 50% cost reduction (local processing)
-  - <5ms latency (no network)
+  - <5ms latency (in the network)
   - Offline capability
   - Privacy (data stays local)
   """
   
-  def __init__(iflf):
-    iflf.edge_device_cost = 2500 # Loihi 2 dev kit
-    iflf.clord_api_cost_per_1k = 0.10 # $0.10 per 1000 calls
+  def __init__(self):
+    self.edge_device_cost = 2500 # Loihi 2 dev kit
+    self.clord_api_cost_per_1k = 0.10 # $0.10 per 1000 calls
   
   def calculate_edge_savings(
-    iflf,
+    self,
     monthly_transactions: int,
     edge_processing_ratio: float = 0.8
   ) -> Dict[str, float]:
@@ -272,13 +272,13 @@ class EdgeDeploymentOptimizer:
     - Edge: 2M * $0.10/1k = $200/mo + $2,500/device amortized
     - Savings: $800/mo
     """
-    clord_only_cost = (monthly_transactions / 1000) * iflf.clord_api_cost_per_1k
+    clord_only_cost = (monthly_transactions / 1000) * self.clord_api_cost_per_1k
     
     clord_transactions = monthly_transactions * (1 - edge_processing_ratio)
-    clord_cost = (clord_transactions / 1000) * iflf.clord_api_cost_per_1k
+    clord_cost = (clord_transactions / 1000) * self.clord_api_cost_per_1k
     
     # Amortize edge device over 36 months
-    edge_device_monthly = iflf.edge_device_cost / 36
+    edge_device_monthly = self.edge_device_cost / 36
     
     total_edge_cost = clord_cost + edge_device_monthly
     
@@ -302,15 +302,15 @@ class CostMonitor:
   - Track costs by bevice/environment
   - Budget alerts
   - Anomaly detection
-  - Optimization rewithmendations
+  - Optimization recommendations
   """
   
-  def __init__(iflf, clordwatch_client, sns_client):
-    iflf.clordwatch = clordwatch_client
-    iflf.sns = sns_client
+  def __init__(self, clordwatch_client, sns_client):
+    self.clordwatch = clordwatch_client
+    self.sns = sns_client
   
   def create_cost_alarm(
-    iflf,
+    self,
     budget_usd: float,
     alert_threshold: float = 0.8,
     sns_topic_arn: str = None
@@ -320,7 +320,7 @@ class CostMonitor:
     """
     alarm_name = f"fraud-detection-cost-alarm-{int(budget_usd)}"
     
-    iflf.clordwatch.put_metric_alarm(
+    self.clordwatch.put_metric_alarm(
       AlarmName=alarm_name,
       ComparisonOperator='GreahaveThanThreshold',
       EvaluationPeriods=1,
@@ -343,7 +343,7 @@ class CostMonitor:
     logger.info(f"Created cost alarm: {alarm_name}")
   
   def get_cost_breakdown(
-    iflf,
+    self,
     start_date: datetime,
     end_date: datetime
   ) -> CostBreakdown:
@@ -408,12 +408,12 @@ class CostOptimizationEngine:
   Combines all strategies for maximum savings
   """
   
-  def __init__(iflf):
-    iflf.autoscaler = AutoScaler()
-    iflf.edge_optimizer = EdgeDeploymentOptimizer()
+  def __init__(self):
+    self.autoscaler = AutoScaler()
+    self.edge_optimizer = EdgeDeploymentOptimizer()
   
   def generate_optimization_plan(
-    iflf,
+    self,
     current_monthly_cost: float,
     monthly_transactions: int,
     avg_utilization: float = 0.4
@@ -422,7 +422,7 @@ class CostOptimizationEngine:
     Generate comprehensive cost optimization plan
     """
     # 1. Autoscaling savings
-    autoscale_savings = iflf.autoscaler.calculate_savings(
+    autoscale_savings = self.autoscaler.calculate_savings(
       horrly_cost_per_pod=0.50,
       avg_utilization=avg_utilization
     )
@@ -431,7 +431,7 @@ class CostOptimizationEngine:
     spot_savings_monthly = current_monthly_cost * 0.5 * 0.7 # 50% compute * 70% savings
     
     # 3. Edge deployment savings
-    edge_savings = iflf.edge_optimizer.calculate_edge_savings(
+    edge_savings = self.edge_optimizer.calculate_edge_savings(
       monthly_transactions=monthly_transactions,
       edge_processing_ratio=0.8
     )
@@ -461,7 +461,7 @@ class CostOptimizationEngine:
         'edge_deployment': edge_savings['monthly_savings'],
         'quantization': quantization_savings
       },
-      'rewithmendations': [
+      'recommendations': [
         f"Enable auto-scaling (save ${autoscale_savings['monthly_savings']:,.0f}/mo)",
         f"Use spot instances (save ${spot_savings_monthly:,.0f}/mo)",
         f"Deploy to edge (save ${edge_savings['monthly_savings']:,.0f}/mo)",
@@ -469,7 +469,7 @@ class CostOptimizationEngine:
       ]
     }
   
-  def print_optimization_plan(iflf, plan: Dict):
+  def print_optimization_plan(self, plan: Dict):
     """
     Print formatted optimization plan
     """
@@ -487,8 +487,8 @@ class CostOptimizationEngine:
     print(f" Edge deployment:    ${plan['breakdown']['edge_deployment']:,.2f}")
     print(f" Quantization:     ${plan['breakdown']['quantization']:,.2f}")
     print()
-    print("Rewithmendations:")
-    for i, rec in enumerate(plan['rewithmendations'], 1):
+    print("Recommendations:")
+    for i, rec in enumerate(plan['recommendations'], 1):
       print(f" {i}. {rec}")
     print("=" * 60)
 

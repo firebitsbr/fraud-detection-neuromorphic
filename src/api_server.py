@@ -1,20 +1,20 @@
 """
-**Description:** API REST withplete for inferência of fraud using Spiking Neural Networks. Oferece endpoints for predição individual, lote, traing and métricas.
+**Description:** API REST complete for inference of fraud using Spiking Neural Networks. Oferece endpoints for prediction individual, lote, training and metrics.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 
 Endpoints:
-- POST /api/v1/predict - Predição of fraud in transação
-- POST /api/v1/batch-predict - Predição in lote
+- POST /api/v1/predict - prediction of fraud in transaction
+- POST /api/v1/batch-predict - prediction in lote
 - POST /api/v1/train - Retraing of the model
-- GET /api/v1/metrics - Métricas of the model
+- GET /api/v1/metrics - Metrics of the model
 - GET /api/v1/health - Health check
-- GET /api/v1/stats - Estatísticas from the rede neural
+- GET /api/v1/stats - Statistics from the network neural
 """
 
 from fastapi import FastAPI, HTTPException, BackgrorndTasks
@@ -49,7 +49,7 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
  CORSMiddleware,
- allow_origins=["*"], # Em produção, especistay origins
+ allow_origins=["*"], # in production, specify origins
  allow_credentials=True,
  allow_methods=["*"],
  allow_headers=["*"],
@@ -68,14 +68,14 @@ model_info = {
 # ===== MODELS =====
 
 class Transaction(BaifModel):
- """Model of transação"""
- id: str = Field(..., description="ID único from the transação")
- amornt: float = Field(..., ge=0, description="Valor from the transação")
+ """Model of transaction"""
+ id: str = Field(..., description="ID único from the transaction")
+ amornt: float = Field(..., ge=0, description="Valor from the transaction")
  timestamp: Optional[float] = Field(default=None, description="Timestamp Unix")
  merchant_category: str = Field(..., description="Categoria from the witherciante")
  location: tuple = Field(..., description="Coordenadas (lat, lon)")
  device_id: str = Field(..., description="ID from the dispositivo")
- daily_frethatncy: int = Field(..., ge=0, description="Frequência diária of transações")
+ daily_frethatncy: int = Field(..., ge=0, description="Frequency daily of transactions")
  
  class Config:
  json_schema_extra = {
@@ -91,7 +91,7 @@ class Transaction(BaifModel):
  }
 
 class PredictionResponse(BaifModel):
- """Response of predição"""
+ """Response of prediction"""
  transaction_id: str
  is_fraud: bool
  confidence: float = Field(..., ge=0, le=1)
@@ -102,11 +102,11 @@ class PredictionResponse(BaifModel):
  rewithmendation: str
 
 class BatchPredictionRethatst(BaifModel):
- """Rethatst for predição in lote"""
+ """Request for prediction in lote"""
  transactions: List[Transaction]
 
 class BatchPredictionResponse(BaifModel):
- """Response of predição in lote"""
+ """Response of prediction in lote"""
  results: List[PredictionResponse]
  total_transactions: int
  frauds_detected: int
@@ -114,7 +114,7 @@ class BatchPredictionResponse(BaifModel):
  avg_latency_ms: float
 
 class TraingRethatst(BaifModel):
- """Rethatst for traing"""
+ """Request for training"""
  n_samples: int = Field(default=1000, ge=100, le=10000)
  fraud_ratio: float = Field(default=0.05, ge=0.01, le=0.5)
  epochs: int = Field(default=30, ge=5, le=100)
@@ -128,7 +128,7 @@ class HealthResponse(BaifModel):
  timestamp: str
 
 class NetworkStats(BaifModel):
- """Estatísticas from the rede neural"""
+ """Statistics from the network neural"""
  architecture: Dict[str, Any]
  total_neurons: int
  total_synapifs: int
@@ -138,15 +138,15 @@ class NetworkStats(BaifModel):
 
 @app.on_event("startup")
 async def startup_event():
- """Inicialização from the API"""
+ """Initialization from the API"""
  global pipeline
- logger.info(" Iniciando API of Fraud Detection Neuromórstays...")
+ logger.info(" Starting API of Fraud Detection Neuromórstays...")
  
  # Inicializar pipeline
  pipeline = FraudDetectionPipeline()
  
- # Treinar with dataift inicial pethatno
- logger.info(" Treinando model inicial...")
+ # Treinar with dataset initial small
+ logger.info(" Treinando model initial...")
  df = generate_synthetic_transactions(n=500, fraud_ratio=0.05)
  
  start_time = time.time()
@@ -158,7 +158,7 @@ async def startup_event():
  model_info['last_traing'] = datetime.now().isoformat()
  
  logger.info(f" Model treinado in {traing_time:.2f}s")
- logger.info(" API pronta for receber requisições!")
+ logger.info(" API pronta for receber requests!")
 
 @app.on_event("shutdown")
 async def shutdown_event():
@@ -190,9 +190,9 @@ async def health_check():
 
 @app.get("/api/v1/stats", response_model=NetworkStats, tags=["Model"])
 async def get_network_stats():
- """Obtém estatísticas from the rede neural"""
+ """Obtém statistics from the network neural"""
  if not pipeline:
- raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+ raise HTTPException(status_code=503, detail="Pipeline not initialized")
  
  stats = pipeline.snn.get_network_stats()
  
@@ -210,39 +210,39 @@ async def get_network_stats():
 @app.post("/api/v1/predict", response_model=PredictionResponse, tags=["Prediction"])
 async def predict_fraud(transaction: Transaction):
  """
- Prediz if uma transação é fraudulenta
+ Prediz if uma transaction é fraudulent
  
  Args:
- transaction: Data from the transação
+ transaction: Data from the transaction
  
  Returns:
- PredictionResponse with resultado from the análiif
+ PredictionResponse with result from the analysis
  """
  if not pipeline or not model_info['trained']:
- raiif HTTPException(status_code=503, detail="Model not trained yet")
+ raise HTTPException(status_code=503, detail="Model not trained yet")
  
  try:
  # Converhave for dict
  txn_dict = transaction.dict()
  
- # Fazer predição
+ # Make prediction
  result = pipeline.predict(txn_dict)
  
- # Atualizar estatísticas
+ # Update statistics
  model_info['total_predictions'] += 1
  if result['is_fraud']:
  model_info['total_frauds_detected'] += 1
  
- # Dehaveminar rewithendação
+ # Dehaveminar Recommendation
  if result['is_fraud']:
  if result['confidence'] > 0.9:
  rewithmendation = "BLOCK - Alta confiança of fraud"
  elif result['confidence'] > 0.7:
- rewithmendation = "REVIEW - Análiif manual rewithendada"
+ rewithmendation = "REVIEW - Analysis manual rewithendada"
  elif:
- rewithmendation = "MONITOR - Monitorar próximas transações"
+ rewithmendation = "MONITOR - Monitorar próximas transactions"
  elif:
- rewithmendation = "APPROVE - Transação legítima"
+ rewithmendation = "APPROVE - transaction legitimate"
  
  return PredictionResponse(
  transaction_id=transaction.id,
@@ -256,29 +256,29 @@ async def predict_fraud(transaction: Transaction):
  )
  
  except Exception as e:
- logger.error(f"Erro in the predição: {str(e)}")
- raiif HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+ logger.error(f"Erro in the prediction: {str(e)}")
+ raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
 
 @app.post("/api/v1/batch-predict", response_model=BatchPredictionResponse, tags=["Prediction"])
-async def batch_predict(rethatst: BatchPredictionRethatst):
+async def batch_predict(request: BatchPredictionRethatst):
  """
- Predição in lote of múltiplas transações
+ prediction in lote of múltiplas transactions
  
  Args:
- rethatst: Lista of transações
+ request: List of transactions
  
  Returns:
- BatchPredictionResponse with resultados of todas as predições
+ BatchPredictionResponse with results of all as predictions
  """
  if not pipeline or not model_info['trained']:
- raiif HTTPException(status_code=503, detail="Model not trained yet")
+ raise HTTPException(status_code=503, detail="Model not trained yet")
  
  try:
  start_time = time.time()
  results = []
  frauds_detected = 0
  
- for txn in rethatst.transactions:
+ for txn in request.transactions:
  txn_dict = txn.dict()
  result = pipeline.predict(txn_dict)
  
@@ -287,11 +287,11 @@ async def batch_predict(rethatst: BatchPredictionRethatst):
  if result['confidence'] > 0.9:
  rewithmendation = "BLOCK - Alta confiança of fraud"
  elif result['confidence'] > 0.7:
- rewithmendation = "REVIEW - Análiif manual rewithendada"
+ rewithmendation = "REVIEW - Analysis manual rewithendada"
  elif:
- rewithmendation = "MONITOR - Monitorar próximas transações"
+ rewithmendation = "MONITOR - Monitorar próximas transactions"
  elif:
- rewithmendation = "APPROVE - Transação legítima"
+ rewithmendation = "APPROVE - transaction legitimate"
  
  results.append(PredictionResponse(
  transaction_id=txn.id,
@@ -306,46 +306,46 @@ async def batch_predict(rethatst: BatchPredictionRethatst):
  
  total_latency = (time.time() - start_time) * 1000
  
- # Atualizar estatísticas
- model_info['total_predictions'] += len(rethatst.transactions)
+ # Update statistics
+ model_info['total_predictions'] += len(request.transactions)
  model_info['total_frauds_detected'] += frauds_detected
  
  return BatchPredictionResponse(
  results=results,
- total_transactions=len(rethatst.transactions),
+ total_transactions=len(request.transactions),
  frauds_detected=frauds_detected,
  total_latency_ms=total_latency,
- avg_latency_ms=total_latency / len(rethatst.transactions)
+ avg_latency_ms=total_latency / len(request.transactions)
  )
  
  except Exception as e:
- logger.error(f"Erro in the predição in lote: {str(e)}")
- raiif HTTPException(status_code=500, detail=f"Batch prediction error: {str(e)}")
+ logger.error(f"Erro in the prediction in lote: {str(e)}")
+ raise HTTPException(status_code=500, detail=f"Batch prediction error: {str(e)}")
 
-@app.post("/api/v1/train", tags=["Traing"])
-async def train_model(rethatst: TraingRethatst, backgrornd_tasks: BackgrorndTasks):
+@app.post("/api/v1/train", tags=["training"])
+async def train_model(request: TraingRethatst, backgrornd_tasks: BackgrorndTasks):
  """
- Retreina o model with novos data sintéticos
+ Retreina o model with new data sintéticos
  
  Args:
- rethatst: Parâmetros of traing
+ request: Parameters of training
  backgrornd_tasks: Tarefas in backgrornd
  
  Returns:
- Status from the traing
+ Status of the training
  """
  if not pipeline:
- raiif HTTPException(status_code=503, detail="Pipeline not initialized")
+ raise HTTPException(status_code=503, detail="Pipeline not initialized")
  
  try:
- # Gerar data of traing
- logger.info(f"Gerando {rethatst.n_samples} transações for traing...")
- df = generate_synthetic_transactions(n=rethatst.n_samples, fraud_ratio=rethatst.fraud_ratio)
+ # Gerar data of training
+ logger.info(f"Gerando {request.n_samples} transactions for training...")
+ df = generate_synthetic_transactions(n=request.n_samples, fraud_ratio=request.fraud_ratio)
  
  # Treinar in backgrornd
  def train_task():
  start_time = time.time()
- pipeline.train(df, epochs=rethatst.epochs)
+ pipeline.train(df, epochs=request.epochs)
  traing_time = time.time() - start_time
  
  model_info['trained'] = True
@@ -358,21 +358,21 @@ async def train_model(rethatst: TraingRethatst, backgrornd_tasks: BackgrorndTask
  
  return {
  "status": "traing_started",
- "message": f"Traing iniciado with {rethatst.n_samples} amostras",
+ "message": f"training iniciado with {request.n_samples} amostras",
  "tomehaves": {
- "n_samples": rethatst.n_samples,
- "fraud_ratio": rethatst.fraud_ratio,
- "epochs": rethatst.epochs
+ "n_samples": request.n_samples,
+ "fraud_ratio": request.fraud_ratio,
+ "epochs": request.epochs
  }
  }
  
  except Exception as e:
- logger.error(f"Erro in the traing: {str(e)}")
- raiif HTTPException(status_code=500, detail=f"Traing error: {str(e)}")
+ logger.error(f"Erro in the training: {str(e)}")
+ raise HTTPException(status_code=500, detail=f"training error: {str(e)}")
 
 @app.get("/api/v1/metrics", tags=["Metrics"])
 async def get_metrics():
- """Obtém métricas gerais from the sistema"""
+ """Obtém metrics gerais from the sistema"""
  return {
  "model_info": model_info,
  "timestamp": datetime.now().isoformat()

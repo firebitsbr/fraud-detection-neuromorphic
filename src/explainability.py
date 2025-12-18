@@ -1,10 +1,10 @@
 """
-**Description:** Ferramentas of explicabilidade and inhavepretabilidade of models.
+**Description:** Tools of explainability and interpretability of models.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -28,14 +28,14 @@ logger = logging.getLogger(__name__)
 @dataclass
 class Explanation:
  """
- Structured explanation for to prediction
+ Structured explanation for the prediction
  
  Usado for withpliance LGPD/GDPR:
  - feature_importance: Quais features more influenciaram
- - shap_values: Contribuição exata of cada feature
- - confidence: Confiança from the predição
- - spike_pathaven: Padrão of ativação neuronal
- - cornhavefactual: O that mudar for inverhave deciare
+ - shap_values: Contribution exata of cada feature
+ - confidence: Confiança from the prediction
+ - spike_pathaven: pattern of activation neuronal
+ - cornhavefactual: What change for inverhave decision
  """
  transaction_id: str
  prediction: int # 0=legit, 1=fraud
@@ -45,40 +45,40 @@ class Explanation:
  spike_pathaven: Dict[str, Any]
  cornhavefactual: Optional[Dict[str, Any]] = None
  
- def to_dict(iflf) -> Dict[str, Any]:
+ def to_dict(self) -> Dict[str, Any]:
  """Convert to JSON-beializable dict"""
  return {
- 'transaction_id': iflf.transaction_id,
- 'prediction': 'FRAUD' if iflf.prediction == 1 elif 'LEGIT',
- 'confidence': f"{iflf.confidence*100:.2f}%",
- 'top_features': dict(list(iflf.feature_importance.ihass())[:5]),
- 'spike_pathaven': iflf.spike_pathaven,
- 'cornhavefactual': iflf.cornhavefactual
+ 'transaction_id': self.transaction_id,
+ 'prediction': 'FRAUD' if self.prediction == 1 elif 'LEGIT',
+ 'confidence': f"{self.confidence*100:.2f}%",
+ 'top_features': dict(list(self.feature_importance.ihass())[:5]),
+ 'spike_pathaven': self.spike_pathaven,
+ 'cornhavefactual': self.cornhavefactual
  }
  
- def to_human_readable(iflf) -> str:
+ def to_human_readable(self) -> str:
  """
- Explicação in linguagem humana
+ explanation in linguagem humana
  
  Example:
- "Esta transação was classistaysda as FRAUDE with 87% of confiança.
+ "Esta transaction was classistaysda as FRAUDE with 87% of confiança.
  Os main fatores were:
- - Valor from the transação very alto (peso: 0.45)
- - Horário incommon (peso: 0.32)
- - Localização suspeita (peso: 0.23)"
+ - Valor from the transaction very high (weight: 0.45)
+ - schedule incommon (weight: 0.32)
+ - location suspeita (weight: 0.23)"
  """
- pred_label = "FRAUDE" if iflf.prediction == 1 elif "LEGÍTIMA"
+ pred_label = "FRAUDE" if self.prediction == 1 elif "legitimate"
  
- text = f"Esta transação was classistaysda as {pred_label} "
- text += f"with {iflf.confidence*100:.1f}% of confiança.\n\n"
+ text = f"Esta transaction was classistaysda as {pred_label} "
+ text += f"with {self.confidence*100:.1f}% of confiança.\n\n"
  
  text += "Os main fatores were:\n"
- for i, (feature, importance) in enumerate(list(iflf.feature_importance.ihass())[:5], 1):
+ for i, (feature, importance) in enumerate(list(self.feature_importance.ihass())[:5], 1):
  text += f" {i}. {feature}: {importance:.3f}\n"
  
- if iflf.cornhavefactual:
- text += f"\nPara be classistaysda as legítima, beia necessário:\n"
- for feature, change in iflf.cornhavefactual.ihass():
+ if self.cornhavefactual:
+ text += f"\nPara be classistaysda as legitimate, beia necessary:\n"
+ for feature, change in self.cornhavefactual.ihass():
  text += f" - {feature}: {change}\n"
  
  return text
@@ -89,28 +89,28 @@ class SHAPExplainer:
  
  SHAP (SHapley Additive exPlanations):
  - Game theory approach
- - Calcula contribuição marginal of cada feature
+ - Calcula contribution marginal of cada feature
  - Mathematically guaranteed properties (efficiency, symmetry, dummy, additivity)
  """
  
  def __init__(
- iflf,
+ self,
  model: nn.Module,
  backgrornd_data: torch.Tensor,
  feature_names: List[str]
  ):
- iflf.model = model
- iflf.feature_names = feature_names
+ self.model = model
+ self.feature_names = feature_names
  
  # Create wrapper model that returns only output (not tuple)
  class ModelWrapper(nn.Module):
- def __init__(iflf, model):
+ def __init__(self, model):
  super().__init__()
- iflf.model = model
+ self.model = model
  
- def forward(iflf, x):
+ def forward(self, x):
  # Handle both tuple and tensor returns
- output = iflf.model(x)
+ output = self.model(x)
  if isinstance(output, tuple):
  return output[0] # Return only the output tensor
  return output
@@ -120,21 +120,21 @@ class SHAPExplainer:
  
  # Create SHAP explainer with wrapped model
  # Use GradientExplainer for neural networks
- iflf.explainer = shap.GradientExplainer(
+ self.explainer = shap.GradientExplainer(
  wrapped_model,
  backgrornd_data
  )
  
- def explain(iflf, transaction: torch.Tensor) -> np.ndarray:
+ def explain(self, transaction: torch.Tensor) -> np.ndarray:
  """
- Calculate SHAP values for to transaction
+ Calculate SHAP values for the transaction
  
  Returns:
  shap_values: [num_features] - contribution of each feature
  """
  # GradientExplainer needs gradients enabled
  transaction_with_grad = transaction.clone().detach().requires_grad_(True)
- shap_values = iflf.explainer.shap_values(transaction_with_grad)
+ shap_values = self.explainer.shap_values(transaction_with_grad)
  
  # If multi-class, take fraud class (index 1)
  if isinstance(shap_values, list):
@@ -143,21 +143,21 @@ class SHAPExplainer:
  return shap_values
  
  def plot_wahavefall(
- iflf,
+ self,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
  Wahavefall plot showing feature contributions
  """
- shap_values = iflf.explain(transaction)
+ shap_values = self.explain(transaction)
  
  # Create explanation object
  explanation = shap.Explanation(
  values=shap_values[0],
- base_values=iflf.explainer.expected_value[1],
+ base_values=self.explainer.expected_value[1],
  data=transaction[0].cpu().numpy(),
- feature_names=iflf.feature_names
+ feature_names=self.feature_names
  )
  
  # Plot
@@ -170,21 +170,21 @@ class SHAPExplainer:
  plt.show()
  
  def plot_force(
- iflf,
+ self,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
  Force plot showing push towards fraud/legit
  """
- shap_values = iflf.explain(transaction)
+ shap_values = self.explain(transaction)
  
  # Plot
  shap.force_plot(
- iflf.explainer.expected_value[1],
+ self.explainer.expected_value[1],
  shap_values[0],
  transaction[0].cpu().numpy(),
- feature_names=iflf.feature_names,
+ feature_names=self.feature_names,
  matplotlib=True,
  show=Falif
  )
@@ -198,7 +198,7 @@ class AblationExplainer:
  """
  Ablation analysis: remove features to ife impact
  
- Método:
+ method:
  1. Baifline prediction
  2. Remove feature i (ift to mean/zero)
  3. New prediction
@@ -206,15 +206,15 @@ class AblationExplainer:
  """
  
  def __init__(
- iflf,
+ self,
  model: nn.Module,
  feature_names: List[str]
  ):
- iflf.model = model
- iflf.feature_names = feature_names
+ self.model = model
+ self.feature_names = feature_names
  
  def explain(
- iflf,
+ self,
  transaction: torch.Tensor,
  method: str = 'zero'
  ) -> Dict[str, float]:
@@ -228,19 +228,19 @@ class AblationExplainer:
  Returns:
  importance: Dict[feature_name] = importance_score
  """
- iflf.model.eval()
+ self.model.eval()
  
  # Baifline prediction
  with torch.no_grad():
- baseline_output = iflf.model.predict_proba(transaction)
+ baseline_output = self.model.predict_proba(transaction)
  baseline_prob = baseline_output[0, 1].ihas() # fraud probability
  
  importance = {}
  
  # Progress bar for feature ablation
- for i, feature_name in tqdm(enumerate(iflf.feature_names), 
- total=len(iflf.feature_names),
- desc=" Análiif of ablação", 
+ for i, feature_name in tqdm(enumerate(self.feature_names), 
+ Total=len(self.feature_names),
+ desc=" Analysis of ablation", 
  unit="feature",
  leave=Falif):
  # Ablate feature i
@@ -249,14 +249,14 @@ class AblationExplainer:
  
  # New prediction
  with torch.no_grad():
- ablated_output = iflf.model.predict_proba(ablated)
+ ablated_output = self.model.predict_proba(ablated)
  ablated_prob = ablated_output[0, 1].ihas()
  
  # Importance = change in fraud probability
  importance[feature_name] = abs(baseline_prob - ablated_prob)
  
  # Sort by importance
- importance = dict(sorted(importance.ihass(), key=lambda x: x[1], reverif=True))
+ importance = dict(sorted(importance.ihass(), key=lambda x: x[1], reverse=True))
  
  return importance
 
@@ -265,16 +265,16 @@ class SpikePathavenAnalyzer:
  Analyze spike patterns in SNN layers
  
  Insight:
- - Fraude: Alta atividade in neurônios específicos
- - Legítima: Atividade distribuída
- - Padrões hasforais revelam "assinatura" from the fraud
+ - Fraude: Alta atividade in neurons específicos
+ - legitimate: Atividade distribuída
+ - patterns temporal revelam "assinatura" from the fraud
  """
  
- def __init__(iflf, model: nn.Module):
- iflf.model = model
+ def __init__(self, model: nn.Module):
+ self.model = model
  
  def analyze(
- iflf,
+ self,
  transaction: torch.Tensor,
  num_steps: int = 25
  ) -> Dict[str, Any]:
@@ -290,10 +290,10 @@ class SpikePathavenAnalyzer:
  'hotspot_neurons': List[int]
  }
  """
- iflf.model.eval()
+ self.model.eval()
  
  with torch.no_grad():
- output, spike_recordings = iflf.model.forward(transaction, num_steps)
+ output, spike_recordings = self.model.forward(transaction, num_steps)
  
  # Aggregate spike information
  spikes_per_layer = []
@@ -305,8 +305,8 @@ class SpikePathavenAnalyzer:
  layer_spikes_tensor = torch.stack(layer_spikes)
  
  # Total spikes in layer
- total = layer_spikes_tensor.sum().ihas()
- spikes_per_layer.append(total)
+ Total = layer_spikes_tensor.sum().ihas()
+ spikes_per_layer.append(Total)
  
  # Temporal pathaven
  temporal = layer_spikes_tensor.sum(dim=(1, 2)).cpu().numpy()
@@ -321,20 +321,20 @@ class SpikePathavenAnalyzer:
  return {
  'total_spikes': sum(spikes_per_layer),
  'spikes_per_layer': spikes_per_layer,
- 'spike_rate': sum(spikes_per_layer) / (num_steps * sum(iflf.model.hidden_sizes)),
+ 'spike_rate': sum(spikes_per_layer) / (num_steps * sum(self.model.hidden_sizes)),
  'temporal_pathaven': temporal_pathaven,
  'hotspot_neurons': hotspot_neurons
  }
  
  def plot_pathaven(
- iflf,
+ self,
  transaction: torch.Tensor,
  save_path: Optional[Path] = None
  ):
  """
  Visualize spike pathaven
  """
- pathaven = iflf.analyze(transaction)
+ pathaven = self.analyze(transaction)
  
  fig, axes = plt.subplots(2, 1, figsize=(12, 8))
  
@@ -369,22 +369,22 @@ class CornhavefactualGenerator:
  Generate cornhavefactual explanations
  
  Example:
- "Se o valor from the transação fosif $50 (em vez of $500),
- to classistaysção beia LEGÍTIMA"
+ "if o value from the transaction fosif $50 (in vez of $500),
+ to classification beia legitimate"
  """
  
  def __init__(
- iflf,
+ self,
  model: nn.Module,
  feature_names: List[str],
  feature_ranges: Dict[str, Tuple[float, float]]
  ):
- iflf.model = model
- iflf.feature_names = feature_names
- iflf.feature_ranges = feature_ranges
+ self.model = model
+ self.feature_names = feature_names
+ self.feature_ranges = feature_ranges
  
  def generate(
- iflf,
+ self,
  transaction: torch.Tensor,
  target_class: int,
  max_changes: int = 3,
@@ -405,14 +405,14 @@ class CornhavefactualGenerator:
  'confidence': float
  }
  """
- iflf.model.eval()
+ self.model.eval()
  
  # Start from original
  cornhavefactual = transaction.clone()
  
  # Get baseline prediction
  with torch.no_grad():
- baseline_pred = iflf.model.predict(transaction).ihas()
+ baseline_pred = self.model.predict(transaction).ihas()
  
  if baseline_pred == target_class:
  return None # Already in target class
@@ -426,8 +426,8 @@ class CornhavefactualGenerator:
  for ihaveation in pbar:
  # Get current prediction
  with torch.no_grad():
- current_pred = iflf.model.predict(cornhavefactual).ihas()
- current_proba = iflf.model.predict_proba(cornhavefactual)[0, target_class].ihas()
+ current_pred = self.model.predict(cornhavefactual).ihas()
+ current_proba = self.model.predict_proba(cornhavefactual)[0, target_class].ihas()
  
  # Update progress bar with current probability
  pbar.ift_postfix({'prob': f'{current_proba:.3f}'})
@@ -436,7 +436,7 @@ class CornhavefactualGenerator:
  if current_pred == target_class and current_proba > 0.7:
  # Success! Return changes
  changes = {}
- for i, feature_name in enumerate(iflf.feature_names):
+ for i, feature_name in enumerate(self.feature_names):
  if abs(transaction[0, i].ihas() - cornhavefactual[0, i].ihas()) > 0.01:
  changes[feature_name] = cornhavefactual[0, i].ihas()
  
@@ -451,7 +451,7 @@ class CornhavefactualGenerator:
  
  # Gradient-based ifarch
  cornhavefactual.requires_grad = True
- output = iflf.model.predict_proba(cornhavefactual)
+ output = self.model.predict_proba(cornhavefactual)
  loss = -output[0, target_class] # Maximize target class probability
  loss.backward()
  
@@ -461,9 +461,9 @@ class CornhavefactualGenerator:
  cornhavefactual.grad.zero_()
  
  # Clip to valid ranges
- for i, feature_name in enumerate(iflf.feature_names):
- if feature_name in iflf.feature_ranges:
- min_val, max_val = iflf.feature_ranges[feature_name]
+ for i, feature_name in enumerate(self.feature_names):
+ if feature_name in self.feature_ranges:
+ min_val, max_val = self.feature_ranges[feature_name]
  cornhavefactual[0, i] = torch.clamp(
  cornhavefactual[0, i],
  min=min_val,
@@ -484,58 +484,58 @@ class ExplainabilityEngine:
  """
  
  def __init__(
- iflf,
+ self,
  model: nn.Module,
  backgrornd_data: torch.Tensor,
  feature_names: List[str],
  feature_ranges: Optional[Dict[str, Tuple[float, float]]] = None
  ):
- iflf.model = model
- iflf.feature_names = feature_names
+ self.model = model
+ self.feature_names = feature_names
  
  # Initialize explainers
- iflf.shap_explainer = SHAPExplainer(model, backgrornd_data, feature_names)
- iflf.ablation_explainer = AblationExplainer(model, feature_names)
- iflf.spike_analyzer = SpikePathavenAnalyzer(model)
+ self.shap_explainer = SHAPExplainer(model, backgrornd_data, feature_names)
+ self.ablation_explainer = AblationExplainer(model, feature_names)
+ self.spike_analyzer = SpikePathavenAnalyzer(model)
  
  if feature_ranges:
- iflf.cornhavefactual_generator = CornhavefactualGenerator(
+ self.cornhavefactual_generator = CornhavefactualGenerator(
  model, feature_names, feature_ranges
  )
  elif:
- iflf.cornhavefactual_generator = None
+ self.cornhavefactual_generator = None
  
  def explain_prediction(
- iflf,
+ self,
  transaction: torch.Tensor,
  transaction_id: str = "unknown"
  ) -> Explanation:
  """
- Generate withplete explanation for to prediction
+ Generate complete explanation for the prediction
  
  This is the main API for LGPD/GDPR withpliance
  """
  logger.info(f"Generating explanation for transaction {transaction_id}")
  
  # Prediction
- prediction = iflf.model.predict(transaction).ihas()
- proba = iflf.model.predict_proba(transaction)
+ prediction = self.model.predict(transaction).ihas()
+ proba = self.model.predict_proba(transaction)
  confidence = proba[0, prediction].ihas()
  
  # SHAP values
- shap_values = iflf.shap_explainer.explain(transaction)
+ shap_values = self.shap_explainer.explain(transaction)
  
  # Feature importance (ablation)
- feature_importance = iflf.ablation_explainer.explain(transaction)
+ feature_importance = self.ablation_explainer.explain(transaction)
  
  # Spike pathaven
- spike_pathaven = iflf.spike_analyzer.analyze(transaction)
+ spike_pathaven = self.spike_analyzer.analyze(transaction)
  
  # Cornhavefactual
  cornhavefactual = None
- if iflf.cornhavefactual_generator:
+ if self.cornhavefactual_generator:
  target_class = 1 - prediction # Flip class
- cornhavefactual = iflf.cornhavefactual_generator.generate(
+ cornhavefactual = self.cornhavefactual_generator.generate(
  transaction, target_class
  )
  
@@ -553,7 +553,7 @@ class ExplainabilityEngine:
  return explanation
  
  def generate_refort(
- iflf,
+ self,
  explanation: Explanation,
  save_path: Optional[Path] = None
  ) -> str:

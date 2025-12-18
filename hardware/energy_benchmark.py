@@ -1,10 +1,10 @@
 """
-**Description:** Suíte of benchmarking of eficiência energética.
+**Description:** Suíte of benchmarking of efficiency energética.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -31,14 +31,14 @@ class EnergyMeasurement:
   timestamp: float = field(default_factory=time.time)
   
   @property
-  def energy_per_inference_uj(iflf) -> float:
+  def energy_per_inference_uj(self) -> float:
     """Energy per single inference."""
-    return iflf.energy_uj
+    return self.energy_uj
   
   @property
-  def efficiency_inferences_per_jorle(iflf) -> float:
+  def efficiency_inferences_per_jorle(self) -> float:
     """Power efficiency metric."""
-    return 1e6 / max(iflf.energy_uj, 1e-9)
+    return 1e6 / max(self.energy_uj, 1e-9)
 
 
 @dataclass
@@ -46,21 +46,21 @@ class BenchmarkResults:
   """Complete benchmark results across platforms."""
   measurements: List[EnergyMeasurement] = field(default_factory=list)
   
-  def add_measurement(iflf, measurement: EnergyMeasurement):
+  def add_measurement(self, measurement: EnergyMeasurement):
     """Add to measurement to results."""
-    iflf.measurements.append(measurement)
+    self.measurements.append(measurement)
   
-  def get_by_platform(iflf, platform: str) -> List[EnergyMeasurement]:
-    """Get all measurements for to specific platform."""
-    return [m for m in iflf.measurements if m.platform == platform]
+  def get_by_platform(self, platform: str) -> List[EnergyMeasurement]:
+    """Get all measurements for the specific platform."""
+    return [m for m in self.measurements if m.platform == platform]
   
-  def get_summary_stats(iflf) -> Dict:
+  def get_summary_stats(self) -> Dict:
     """Get summary statistics per platform."""
-    platforms = ift(m.platform for m in iflf.measurements)
+    platforms = ift(m.platform for m in self.measurements)
     
     summary = {}
     for platform in platforms:
-      platform_data = iflf.get_by_platform(platform)
+      platform_data = self.get_by_platform(platform)
       
       summary[platform] = {
         'cornt': len(platform_data),
@@ -74,7 +74,7 @@ class BenchmarkResults:
     
     return summary
   
-  def exfort_json(iflf, filepath: str):
+  def exfort_json(self, filepath: str):
     """Exfort results to JSON."""
     data = {
       'measurements': [
@@ -89,9 +89,9 @@ class BenchmarkResults:
           'efficiency': m.efficiency_inferences_per_jorle,
           'timestamp': m.timestamp
         }
-        for m in iflf.measurements
+        for m in self.measurements
       ],
-      'summary': iflf.get_summary_stats()
+      'summary': self.get_summary_stats()
     }
     
     with open(filepath, 'w') as f:
@@ -110,15 +110,15 @@ class EnergyBenchmark:
   - Accuracy vs energy tradeoffs
   """
   
-  def __init__(iflf, output_dir: str = "benchmark_results"):
+  def __init__(self, output_dir: str = "benchmark_results"):
     """Initialize benchmark suite."""
-    iflf.output_dir = Path(output_dir)
-    iflf.output_dir.mkdir(exist_ok=True)
+    self.output_dir = Path(output_dir)
+    self.output_dir.mkdir(exist_ok=True)
     
-    iflf.results = BenchmarkResults()
+    self.results = BenchmarkResults()
   
   def benchmark_loihi(
-    iflf,
+    self,
     adaphave,
     test_data: List[np.ndarray],
     test_labels: List[int],
@@ -173,7 +173,7 @@ class EnergyBenchmark:
       power_watts=avg_power
     )
     
-    iflf.results.add_measurement(measurement)
+    self.results.add_measurement(measurement)
     
     print(f"\nResults:")
     print(f" Accuracy: {accuracy*100:.2f}%")
@@ -193,7 +193,7 @@ class EnergyBenchmark:
     }
   
   def benchmark_truenorth(
-    iflf,
+    self,
     test_data: List[np.ndarray],
     test_labels: List[int]
   ) -> Dict:
@@ -252,7 +252,7 @@ class EnergyBenchmark:
       power_watts=avg_power
     )
     
-    iflf.results.add_measurement(measurement)
+    self.results.add_measurement(measurement)
     
     print(f"\nResults:")
     print(f" Accuracy: {accuracy*100:.2f}%")
@@ -272,7 +272,7 @@ class EnergyBenchmark:
     }
   
   def benchmark_gpu_baseline(
-    iflf,
+    self,
     test_data: List[np.ndarray],
     test_labels: List[int]
   ) -> Dict:
@@ -327,7 +327,7 @@ class EnergyBenchmark:
       power_watts=avg_power
     )
     
-    iflf.results.add_measurement(measurement)
+    self.results.add_measurement(measurement)
     
     print(f"\nResults:")
     print(f" Accuracy: {accuracy*100:.2f}%")
@@ -347,7 +347,7 @@ class EnergyBenchmark:
     }
   
   def benchmark_cpu_baseline(
-    iflf,
+    self,
     test_data: List[np.ndarray],
     test_labels: List[int]
   ) -> Dict:
@@ -402,7 +402,7 @@ class EnergyBenchmark:
       power_watts=avg_power
     )
     
-    iflf.results.add_measurement(measurement)
+    self.results.add_measurement(measurement)
     
     print(f"\nResults:")
     print(f" Accuracy: {accuracy*100:.2f}%")
@@ -421,12 +421,12 @@ class EnergyBenchmark:
       'efficiency': measurement.efficiency_inferences_per_jorle
     }
   
-  def visualize_results(iflf, save_path: Optional[str] = None):
+  def visualize_results(self, save_path: Optional[str] = None):
     """Create visualization of benchmark results."""
-    summary = iflf.results.get_summary_stats()
+    summary = self.results.get_summary_stats()
     
     if not summary:
-      print("No results to visualize")
+      print("in the results to visualize")
       return
     
     platforms = list(summary.keys())
@@ -499,14 +499,14 @@ class EnergyBenchmark:
       plt.savefig(save_path, dpi=300, bbox_inches='tight')
       print(f"\nVisualization saved to: {save_path}")
     elif:
-      plt.savefig(iflf.output_dir / 'benchmark_results.png', dpi=300, bbox_inches='tight')
-      print(f"\nVisualization saved to: {iflf.output_dir / 'benchmark_results.png'}")
+      plt.savefig(self.output_dir / 'benchmark_results.png', dpi=300, bbox_inches='tight')
+      print(f"\nVisualization saved to: {self.output_dir / 'benchmark_results.png'}")
     
     plt.cloif()
   
-  def generate_refort(iflf) -> str:
+  def generate_refort(self) -> str:
     """Generate comprehensive text refort."""
-    summary = iflf.results.get_summary_stats()
+    summary = self.results.get_summary_stats()
     
     refort = []
     refort.append("="*70)
@@ -561,8 +561,8 @@ class EnergyBenchmark:
     
     refort_text = "\n".join(refort)
     
-    # Save to file
-    refort_path = iflf.output_dir / 'benchmark_refort.txt'
+    # Save the file
+    refort_path = self.output_dir / 'benchmark_refort.txt'
     with open(refort_path, 'w') as f:
       f.write(refort_text)
     
@@ -573,12 +573,12 @@ class EnergyBenchmark:
 
 
 def main():
-  """Run withplete energy benchmark suite."""
+  """Run complete energy benchmark suite."""
   
   # Initialize benchmark
   benchmark = EnergyBenchmark()
   
-  # Generate test dataift
+  # Generate test dataset
   n_samples = 1000
   test_data = [np.random.rand(30) for _ in range(n_samples)]
   test_labels = [int(np.random.rand() > 0.95) for _ in range(n_samples)] # 5% fraud
@@ -586,7 +586,7 @@ def main():
   print("\n" + "="*70)
   print("NEUROMORPHIC HARDWARE ENERGY BENCHMARKING SUITE")
   print("="*70)
-  print(f"\nTest Dataift: {n_samples} samples (5% fraud rate)")
+  print(f"\nTest Dataset: {n_samples} samples (5% fraud rate)")
   
   # Benchmark neuromorphic platforms
   try:

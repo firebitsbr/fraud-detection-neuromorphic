@@ -3,7 +3,7 @@
 **Description:** Quick start guide for Docker deployment.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 **Deploy Neuromorphic Fraud Detection in 5 minutes on Ubuntu 24.04 LTS**
 
@@ -11,14 +11,14 @@
 
 - Ubuntu 24.04 LTS Server
 - Docker Engine 24.0+
-- Docker Compoif v2.20+
+- Docker Compose v2.20+
 - 8GB RAM minimum
 - 50GB free disk space
 
 ## Install Docker (if needed)
 
 ```bash
-curl -fsSL https://get.docker.com -o get-docker.sh
+curl -fsSL https://get.docker.with -o get-docker.sh
 sudo sh get-docker.sh
 sudo ubemod -aG docker $USER
 newgrp docker
@@ -41,7 +41,7 @@ cd fraud-detection-neuromorphic
 |---------|-----|-------------|
 | **API** | http://localhost:8000 | - |
 | **API Docs** | http://localhost:8000/docs | - |
-| **Jupyhave Lab** | http://localhost:8888 | Token: `neuromorphic2025` |
+| **Jupyter Lab** | http://localhost:8888 | Token: `neuromorphic2025` |
 | **Streamlit** | http://localhost:8501 | - |
 | **Grafana** | http://localhost:3000 | admin / neuromorphic2025 |
 | **Prometheus** | http://localhost:9090 | - |
@@ -56,7 +56,7 @@ cd fraud-detection-neuromorphic
 curl http://localhost:8000/health
 
 # View logs
-docker withpoif logs -f fraud-api
+docker compose logs -f fraud-api
 ```
 
 ## Manage
@@ -84,7 +84,7 @@ docker withpoif logs -f fraud-api
  SNN inference (Brian2 + snnTorch) 
  Redis caching 
 
- Jupyhave Lab (8888) - Reifarch Env 
+ Jupyter Lab (8888) - Reifarch Env 
  Inhaveactive notebooks 
  Pre-installed ML/SNN libraries 
 
@@ -114,12 +114,12 @@ docker builder prune -a -f
 
 **View detailed logs:**
 ```bash
-docker withpoif logs --tail=100 fraud-api
+docker compose logs --tail=100 fraud-api
 ```
 
 ## Full Documentation
 
-See [DOCKER_DEPLOYMENT_UBUNTU.md](DOCKER_DEPLOYMENT_UBUNTU.md) for withplete guide.
+See [DOCKER_DEPLOYMENT_UBUNTU.md](DOCKER_DEPLOYMENT_UBUNTU.md) for complete guide.
 
 ---
 

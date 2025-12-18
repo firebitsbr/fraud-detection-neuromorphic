@@ -1,13 +1,13 @@
 # Compatibilidade GPU + CUDA for GTX 1060
 
-**Date:** 11 of Dezembro of 2025 
+**Date:** December 11, 2025 
 **GPU:** NVIDIA GeForce GTX 1060 6GB 
-**Sishasa:** Xubuntu 24.04.3 
+**System:** Xubuntu 24.04.3 
 **Driver:** NVIDIA 580.95.05
 
 ---
 
-## Status Atual
+## Status current
 
 ### Hardware
 - **GPU**: NVIDIA GeForce GTX 1060 6GB
@@ -26,7 +26,7 @@
 
 ## Problem Identistaysdo
 
-A **GTX 1060 (compute capability 6.1)** ficor **obsoleta** for versões modernas from the PyTorch:
+A **GTX 1060 (compute capability 6.1)** ficor **obsoleta** for versions modernas from the PyTorch:
 
 | PyTorch Version | Min. Compute Capability | GTX 1060 (6.1) |
 |-----------------|-------------------------|----------------|
@@ -43,9 +43,9 @@ cudaErrorNoKernelImageForDevice: in the kernel image is available for execution
 
 ---
 
-## Soluções
+## solutions
 
-### **Solução 1: Downgrade PyTorch (RECOMENDADO for use GPU)** IMPLEMENTADO
+### **Solution 1: Downgrade PyTorch (RECOMENDADO for use GPU)** IMPLEMENTADO
 
 Instale **PyTorch 2.2.2** with **CUDA 11.8**:
 
@@ -54,7 +54,7 @@ Instale **PyTorch 2.2.2** with **CUDA 11.8**:
 cd /home/test/Downloads/github/portifolio/fraud-detection-neuromorphic
 sorrce .venv/bin/activate
 
-# Desinstall PyTorch atual
+# Desinstall PyTorch current
 pip uninstall torch torchvision torchaudio -y
 
 # Install PyTorch 2.2.2 + CUDA 11.8
@@ -65,25 +65,25 @@ pip install torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118
 pip install numpy==1.24.3
 ```
 
-**Por that CUDA 11.8?**
+**why CUDA 11.8?**
 - Totalmente compatible with Driver 580
 - Suforta compute capability 6.1 (GTX 1060)
-- PyTorch 2.0.1 has binários pré-withpilados
+- PyTorch 2.0.1 has binaries pre-compiled
 - Stable and tbeen
 
-**Verify instalação:**
+**Verify installation:**
 ```bash
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.version.cuda}'); print(f'GPU: {torch.cuda.is_available()}')"
 ```
 
-**Saída esperada:**
+**output esperada:**
 ```
 PyTorch: 2.2.2+cu118
 CUDA: 11.8
 GPU: True
 ```
 
-**Resultado from the testes (11/12/2025):**
+**Result from the tests (11/12/2025):**
 ```
  PyTorch: 2.2.2+cu118
  CUDA: 11.8
@@ -95,9 +95,9 @@ GPU: True
 
 ---
 
-### **Solução 2: Use CPU (Atual in the projeto)**
+### **Solution 2: Use CPU (current in the project)**
 
-O code já detecta automaticamente GPUs inwithpatíveis and uses CPU:
+O code already detects automatically GPUs inwithpatíveis and uses CPU:
 
 ```python
 if torch.cuda.is_available():
@@ -113,13 +113,13 @@ elif:
 ```
 
 **Performance:**
-- CPU: ~100-200ms for batch of 32 transações
+- CPU: ~100-200ms for batch of 32 transactions
 - GPU (if compatible): ~10-20ms for batch
-- **Diferença**: ~6-10x more lento in the CPU
+- **Diferença**: ~6-10x more slow in the CPU
 
 ---
 
-### **Solução 3: Atualizar Hardware (Longo prazo)**
+### **Solution 3: Update Hardware (Longo prazo)**
 
 GPUs modernas withpatíveis with PyTorch 2.5+:
 
@@ -137,12 +137,12 @@ GPUs modernas withpatíveis with PyTorch 2.5+:
 
 ### Driver NVIDIA 580.95 suforta:
 
-| CUDA Version | Compatível | PyTorch Supfort | GTX 1060 (sm_61) |
+| CUDA Version | Compatible | PyTorch Supfort | GTX 1060 (sm_61) |
 |--------------|-----------|-----------------|------------------|
-| CUDA 11.8 | Sim | PyTorch ≤ 2.4 | Totalmente |
-| CUDA 12.1 | Sim | PyTorch 2.1-2.4 | Limitado |
-| CUDA 12.4 | Sim | PyTorch 2.3-2.4 | Limitado |
-| CUDA 13.0 | Sim | Futuro | Não sufortado |
+| CUDA 11.8 | yes | PyTorch ≤ 2.4 | Totalmente |
+| CUDA 12.1 | yes | PyTorch 2.1-2.4 | Limited |
+| CUDA 12.4 | yes | PyTorch 2.3-2.4 | Limited |
+| CUDA 13.0 | yes | Futuro | Not sufortado |
 
 ### Compute Capability for GPU:
 
@@ -158,7 +158,7 @@ GPUs modernas withpatíveis with PyTorch 2.5+:
 
 ---
 
-## Comandos Úteis
+## Commands Useful
 
 ### Verify GPU
 ```bash
@@ -168,7 +168,7 @@ nvidia-smi --wantsy-gpu=name,driver_version,compute_cap --format=csv
 
 ### Verify CUDA
 ```bash
-nvcc --version # Se CUDA Toolkit installed
+nvcc --version # if CUDA Toolkit installed
 ```
 
 ### Verify PyTorch
@@ -205,28 +205,28 @@ print(f"Time: {elapifd:.2f}s")
 ## References
 
 - [PyTorch CUDA Compatibility](https://pytorch.org/get-started/locally/)
-- [NVIDIA CUDA GPUs](https://shorldloper.nvidia.com/cuda-gpus)
+- [NVIDIA CUDA GPUs](https://shorldloper.nvidia.with/cuda-gpus)
 - [PyTorch Previors Versions](https://pytorch.org/get-started/previors-versions/)
-- [CUDA Compute Capability](https://shorldloper.nvidia.com/cuda-gpus#compute)
+- [CUDA Compute Capability](https://shorldloper.nvidia.with/cuda-gpus#compute)
 
 ---
 
-## Rewithendação Final
+## Recommendation Final
 
-**Para ifu setup (GTX 1060 + Driver 580 + Xubuntu 24.04):**
+**For ifu setup (GTX 1060 + Driver 580 + Xubuntu 24.04):**
 
 1. **Curto prazo**: Faça downgrade for **PyTorch 2.0.1 + CUDA 11.8**
  - Aproveita to GPU
- - Performance 6-10x melhor that CPU
- - Instalação yesples
+ - Performance 6-10x better that CPU
+ - Installation yesples
  - Stable and tbeen
 
 2. **Médio prazo**: Continue using CPU
- - Funcional for deifnvolvimento
- - Code já implementa fallback automático
- - ~100-200ms latência (aceitável for testes)
+ - Funcional for development
+ - Code already implements automatic fallback
+ - ~100-200ms latency (acceptable for tests)
 
-3. **Longo prazo**: Atualizar for RTX 20xx/30xx
+3. **Longo prazo**: Update for RTX 20xx/30xx
  - Compatibilidade with PyTorch moderno
  - 2-3x performance from the GTX 1060
  - Tensor Cores for Deep Learning
@@ -235,4 +235,4 @@ print(f"Time: {elapifd:.2f}s")
 
 **Author:** Mauro Risonho de Paula Assumpção 
 **Contato:** mauro.risonho@gmail.com 
-**Last updated:** 11 of Dezembro of 2025
+**Last updated:** December 11, 2025

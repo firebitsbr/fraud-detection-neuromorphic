@@ -1,21 +1,21 @@
 """
-**Description:** Pacote principal contendo os modules core for fraud detection using Spiking Neural Networks (SNNs) with STDP learning.
+**Description:** Pacote main contendo os modules core for fraud detection using Spiking Neural Networks (SNNs) with STDP learning.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 
 Modules:
-  - main: Pipeline principal of fraud detection
+  - main: Pipeline main of fraud detection
   - encoders: Codistaysdores of spikes (Rate, Temporal, Population)
   - models_snn: Models of spiking neural networks (SNN, LIF neurons)
-  - dataift_loader: Carregamento and pré-processamento of data
+  - dataift_loader: Loading and preprocessing data
   - advanced_encoders: Codistaysdores avançados
-  - hypertomehave_optimizer: Otimização of hiperparâmetros
-  - model_withtor: Comparação between models
+  - hypertomehave_optimizer: optimization of hiperparâmetros
+  - model_comparator: comparison between models
   - performance_profiler: Profiling of performance
 """
 

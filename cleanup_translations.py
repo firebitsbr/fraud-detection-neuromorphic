@@ -8,7 +8,7 @@ from pathlib import Path
 
 # Fix over-translations
 CLEANUP_FIXES = {
-    # Fix "com" → "with" over-translations
+    # Fix "with" → "with" over-translations
     "compatibility": "compatibility",
     "compatible": "compatible",
     "compute": "compute",
@@ -17,7 +17,7 @@ CLEANUP_FIXES = {
     "completos": "completos",
     "completas": "completas",
     "comparison": "comparison",
-    "comparação": "comparação",
+    "comparison": "comparison",
     "compare": "compare",
     "comparing": "comparing",
     "comment": "comment",
@@ -31,9 +31,9 @@ CLEANUP_FIXES = {
     "complex": "complex",
     "complexity": "complexity",
     "comprehensive": "comprehensive",
-    "comparação": "comparação",
+    "comparison": "comparison",
     
-    # Fix "se" → "if" over-translations  
+    # Fix "if" → "if" over-translations  
     "License": "License",
     "license": "license",
     "Use": "Use",
@@ -50,7 +50,7 @@ CLEANUP_FIXES = {
     "response": "response",
     "processing": "processing",
     "processing": "processing",
-    "processamento": "processamento",
+    "processing": "processing",
     "Processamento": "Processamento",
     "second": "second",
     "seconds": "seconds",
@@ -64,25 +64,25 @@ CLEANUP_FIXES = {
     "setup": "setup",
     "Setup": "Setup",
     
-    # Fix "com" → "with" in URLs and emails
+    # Fix "with" → "with" in URLs and emails
     ".com/": ".com/",
     ".com": ".com",
     "github.com": "github.com",
     "linkedin.com": "linkedin.com",
     
-    # Fix "para" → "to" over-translations  
-    "separação": "separação",
+    # Fix "for" → "to" over-translations  
+    "separation": "separation",
     "prepare": "prepare",
-    "comparação": "comparação",
-    "Comparação": "Comparação",
+    "comparison": "comparison",
+    "Comparison": "Comparison",
     
-    # Fix "por" → "for" over-translations
+    # Fix "by" → "for" over-translations
     "import": "import",
     "Import": "Import",
     "important": "important",
     "Important": "Important",
     "Importante": "Importante",
-    "importante": "importante",
+    "important": "important",
     "support": "support",
     "Support": "Support",
     "portifolio": "portifolio",
@@ -133,7 +133,7 @@ CLEANUP_FIXES = {
     "to ensure": "to ensure",
     
     # Fix Portuguese that should stay
-    "Mauro Risonho de Paula Assumpção": "Mauro Risonho de Paula Assumpção",
+    "Mauro Risonho of Paula Assumpção": "Mauro Risonho of Paula Assumpção",
     
     # Fix broken anchors
     "#-overview": "#-overview",

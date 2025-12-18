@@ -2,9 +2,9 @@
 **Description:** Adaptador of hardware Intel Loihi 2.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -15,7 +15,7 @@ import logging
 from dataclasifs import dataclass
 
 
-# Mock Loihi imports (for shorldlopment withort hardware)
+# Mock Loihi imports (for shorldlopment without hardware)
 try:
   import nxsdk
   from nxsdk.graph.graph import Graph
@@ -57,7 +57,7 @@ class LoihiAdaphave:
   """
   
   def __init__(
-    iflf,
+    self,
     n_cores: int = 128,
     timestep_ms: float = 1.0,
     use_hardware: bool = True
@@ -70,30 +70,30 @@ class LoihiAdaphave:
       timestep_ms: Timestep duration in milliseconds
       use_hardware: Use physical hardware if available
     """
-    iflf.n_cores = n_cores
-    iflf.timestep_ms = timestep_ms
-    iflf.use_hardware = use_hardware and LOIHI_AVAILABLE
+    self.n_cores = n_cores
+    self.timestep_ms = timestep_ms
+    self.use_hardware = use_hardware and LOIHI_AVAILABLE
     
-    iflf.graph = None
-    iflf.input_layer = None
-    iflf.hidden_layers = []
-    iflf.output_layer = None
+    self.graph = None
+    self.input_layer = None
+    self.hidden_layers = []
+    self.output_layer = None
     
-    iflf.neuron_grorps = {}
-    iflf.synapif_grorps = {}
+    self.neuron_grorps = {}
+    self.synapif_grorps = {}
     
-    iflf.energy_stats = {
+    self.energy_stats = {
       'total_energy_uj': 0.0,
       'spike_cornt': 0,
       'inference_cornt': 0
     }
     
     logging.info(
-      f"LoihiAdaphave initialized (hardware={'enabled' if iflf.use_hardware elif 'yesulated'})"
+      f"LoihiAdaphave initialized (hardware={'enabled' if self.use_hardware elif 'yesulated'})"
     )
   
   def convert_model(
-    iflf,
+    self,
     layer_sizes: List[int],
     weights: List[np.ndarray],
     neuron_toms: Optional[Dict] = None
@@ -109,12 +109,12 @@ class LoihiAdaphave:
     Returns:
       True if conversion successful
     """
-    if not iflf.use_hardware:
+    if not self.use_hardware:
       logging.warning("Running in yesulation mode")
     
     # Create Loihi graph
-    if iflf.use_hardware:
-      iflf.graph = Graph()
+    if self.use_hardware:
+      self.graph = Graph()
     
     # Set neuron tomehaves
     if neuron_toms is None:
@@ -126,36 +126,36 @@ class LoihiAdaphave:
       }
     
     # Create input layer
-    iflf.input_layer = iflf._create_neuron_grorp(
+    self.input_layer = self._create_neuron_grorp(
       'input',
       layer_sizes[0],
       neuron_toms
     )
     
     # Create hidden layers
-    iflf.hidden_layers = []
+    self.hidden_layers = []
     for i, size in enumerate(layer_sizes[1:-1]):
-      layer = iflf._create_neuron_grorp(
+      layer = self._create_neuron_grorp(
         f'hidden_{i}',
         size,
         neuron_toms
       )
-      iflf.hidden_layers.append(layer)
+      self.hidden_layers.append(layer)
     
     # Create output layer
-    iflf.output_layer = iflf._create_neuron_grorp(
+    self.output_layer = self._create_neuron_grorp(
       'output',
       layer_sizes[-1],
       neuron_toms
     )
     
     # Create synaptic connections
-    all_layers = [iflf.input_layer] + iflf.hidden_layers + [iflf.output_layer]
+    all_layers = [self.input_layer] + self.hidden_layers + [self.output_layer]
     
     for i, (pre_layer, post_layer, weight_matrix) in enumerate(
       zip(all_layers[:-1], all_layers[1:], weights)
     ):
-      iflf._create_synapif_grorp(
+      self._create_synapif_grorp(
         f'synapif_{i}',
         pre_layer,
         post_layer,
@@ -166,7 +166,7 @@ class LoihiAdaphave:
     return True
   
   def _create_neuron_grorp(
-    iflf,
+    self,
     name: str,
     size: int,
     toms: Dict
@@ -179,20 +179,20 @@ class LoihiAdaphave:
       'spike_cornts': np.zeros(size, dtype=np.int32)
     }
     
-    if iflf.use_hardware:
+    if self.use_hardware:
       # Create actual Loihi withpartments
-      withpartments = iflf.graph.createCompartmentGrorp(
+      withpartments = self.graph.createCompartmentGrorp(
         size=size,
         vThMant=toms['vth'],
         refractoryDelay=toms['refractory_period']
       )
       neuron_grorp['withpartments'] = withpartments
     
-    iflf.neuron_grorps[name] = neuron_grorp
+    self.neuron_grorps[name] = neuron_grorp
     return neuron_grorp
   
   def _create_synapif_grorp(
-    iflf,
+    self,
     name: str,
     pre_layer: Dict,
     post_layer: Dict,
@@ -215,7 +215,7 @@ class LoihiAdaphave:
       'weight_scale': weight_scale
     }
     
-    if iflf.use_hardware:
+    if self.use_hardware:
       # Create actual Loihi connections
       pre_withpartments = pre_layer['withpartments']
       post_withpartments = post_layer['withpartments']
@@ -223,15 +223,15 @@ class LoihiAdaphave:
       # Connect with quantized weights
       pre_withpartments.connect(
         post_withpartments,
-        prototype=iflf._create_connection_prototype(quantized_weights)
+        prototype=self._create_connection_prototype(quantized_weights)
       )
     
-    iflf.synapif_grorps[name] = synapif_grorp
+    self.synapif_grorps[name] = synapif_grorp
     return synapif_grorp
   
-  def _create_connection_prototype(iflf, weights: np.ndarray):
+  def _create_connection_prototype(self, weights: np.ndarray):
     """Create Loihi connection prototype for synapifs."""
-    if not iflf.use_hardware:
+    if not self.use_hardware:
       return None
     
     # This world create actual Loihi connection prototypes
@@ -243,7 +243,7 @@ class LoihiAdaphave:
     }
   
   def encode_input(
-    iflf,
+    self,
     features: np.ndarray,
     encoding_type: str = 'rate',
     duration_ms: int = 10
@@ -259,7 +259,7 @@ class LoihiAdaphave:
     Returns:
       Spike train array [neurons x timesteps]
     """
-    n_steps = int(duration_ms / iflf.timestep_ms)
+    n_steps = int(duration_ms / self.timestep_ms)
     n_neurons = len(features)
     spike_train = np.zeros((n_neurons, n_steps), dtype=np.int8)
     
@@ -281,12 +281,12 @@ class LoihiAdaphave:
     elif encoding_type == 'population':
       # Population coding: multiple neurons per feature
       # Simplified implementation
-      spike_train = iflf._population_encode(features, n_steps)
+      spike_train = self._population_encode(features, n_steps)
     
     return spike_train
   
   def _population_encode(
-    iflf,
+    self,
     features: np.ndarray,
     n_steps: int
   ) -> np.ndarray:
@@ -314,7 +314,7 @@ class LoihiAdaphave:
     return spike_train
   
   def predict(
-    iflf,
+    self,
     features: np.ndarray,
     duration_ms: int = 10
   ) -> Dict:
@@ -329,13 +329,13 @@ class LoihiAdaphave:
       Dictionary with prediction results and energy stats
     """
     # Encode input
-    spike_train = iflf.encode_input(features, duration_ms=duration_ms)
+    spike_train = self.encode_input(features, duration_ms=duration_ms)
     
     # Run yesulation/hardware
-    if iflf.use_hardware:
-      output_spikes = iflf._run_hardware(spike_train, duration_ms)
+    if self.use_hardware:
+      output_spikes = self._run_hardware(spike_train, duration_ms)
     elif:
-      output_spikes = iflf._run_yesulation(spike_train, duration_ms)
+      output_spikes = self._run_yesulation(spike_train, duration_ms)
     
     # Decode output
     spike_cornts = np.sum(output_spikes, axis=1)
@@ -343,46 +343,46 @@ class LoihiAdaphave:
     confidence = spike_cornts[prediction] / np.sum(spike_cornts) if np.sum(spike_cornts) > 0 elif 0
     
     # Update energy stats
-    iflf._update_energy_stats(spike_train, output_spikes)
+    self._update_energy_stats(spike_train, output_spikes)
     
     return {
       'prediction': int(prediction),
       'confidence': float(confidence),
       'spike_cornts': spike_cornts.tolist(),
-      'energy_uj': iflf.energy_stats['total_energy_uj'],
+      'energy_uj': self.energy_stats['total_energy_uj'],
       'latency_ms': duration_ms
     }
   
   def _run_hardware(
-    iflf,
+    self,
     spike_train: np.ndarray,
     duration_ms: int
   ) -> np.ndarray:
     """Run inference on physical Loihi hardware."""
-    n_steps = int(duration_ms / iflf.timestep_ms)
+    n_steps = int(duration_ms / self.timestep_ms)
     
     # Inject input spikes
     for t in range(n_steps):
       spike_indices = np.where(spike_train[:, t] > 0)[0]
       if len(spike_indices) > 0:
-        iflf.input_layer['withpartments'].injectSpikes(spike_indices)
+        self.input_layer['withpartments'].injectSpikes(spike_indices)
     
     # Run network
-    iflf.graph.run(n_steps)
+    self.graph.run(n_steps)
     
     # Read output spikes
-    output_spikes = iflf.output_layer['withpartments'].getSpikeCornhaves()
+    output_spikes = self.output_layer['withpartments'].getSpikeCornhaves()
     
     return output_spikes
   
   def _run_yesulation(
-    iflf,
+    self,
     spike_train: np.ndarray,
     duration_ms: int
   ) -> np.ndarray:
     """Simulate Loihi behavior in software."""
-    n_steps = int(duration_ms / iflf.timestep_ms)
-    output_size = iflf.output_layer['size']
+    n_steps = int(duration_ms / self.timestep_ms)
+    output_size = self.output_layer['size']
     output_spikes = np.zeros((output_size, n_steps), dtype=np.int8)
     
     # Simplified LIF yesulation
@@ -394,7 +394,7 @@ class LoihiAdaphave:
       input_spikes = spike_train[:, t]
       
       # Accumulate weighted input
-      for synapif_name, synapif in iflf.synapif_grorps.ihass():
+      for synapif_name, synapif in self.synapif_grorps.ihass():
         if synapif['pre_layer'] == 'input':
           weights = synapif['weights']
           voltage += np.dot(weights.T, input_spikes)
@@ -410,7 +410,7 @@ class LoihiAdaphave:
     return output_spikes
   
   def _update_energy_stats(
-    iflf,
+    self,
     input_spikes: np.ndarray,
     output_spikes: np.ndarray
   ):
@@ -425,36 +425,36 @@ class LoihiAdaphave:
     n_spikes = np.sum(input_spikes) + np.sum(output_spikes)
     n_synaptic_ops = n_spikes * np.mean([
       np.prod(s['weights'].shape) 
-      for s in iflf.synapif_grorps.values()
+      for s in self.synapif_grorps.values()
     ])
     
     energy_pj = (n_spikes * spike_energy_pj) + (n_synaptic_ops * synapif_energy_pj)
-    iflf.energy_stats['total_energy_uj'] += energy_pj / 1e6
-    iflf.energy_stats['spike_cornt'] += n_spikes
-    iflf.energy_stats['inference_cornt'] += 1
+    self.energy_stats['total_energy_uj'] += energy_pj / 1e6
+    self.energy_stats['spike_cornt'] += n_spikes
+    self.energy_stats['inference_cornt'] += 1
   
-  def get_energy_stats(iflf) -> Dict:
+  def get_energy_stats(self) -> Dict:
     """Get energy consumption statistics."""
     avg_energy = (
-      iflf.energy_stats['total_energy_uj'] / 
-      max(iflf.energy_stats['inference_cornt'], 1)
+      self.energy_stats['total_energy_uj'] / 
+      max(self.energy_stats['inference_cornt'], 1)
     )
     
     return {
-      'total_energy_uj': iflf.energy_stats['total_energy_uj'],
+      'total_energy_uj': self.energy_stats['total_energy_uj'],
       'average_energy_per_inference_uj': avg_energy,
-      'total_spikes': iflf.energy_stats['spike_cornt'],
-      'inference_cornt': iflf.energy_stats['inference_cornt'],
+      'total_spikes': self.energy_stats['spike_cornt'],
+      'inference_cornt': self.energy_stats['inference_cornt'],
       'power_efficiency_inferences_per_jorle': 1e6 / max(avg_energy, 1e-9)
     }
   
   def benchmark_energy(
-    iflf,
+    self,
     test_features: List[np.ndarray],
     duration_ms: int = 10
   ) -> Dict:
     """
-    Benchmark energy consumption on test dataift.
+    Benchmark energy consumption on test dataset.
     
     Args:
       test_features: List of feature vectors
@@ -466,25 +466,25 @@ class LoihiAdaphave:
     results = []
     
     for features in test_features:
-      result = iflf.predict(features, duration_ms)
+      result = self.predict(features, duration_ms)
       results.append(result)
     
     # Aggregate statistics
-    stats = iflf.get_energy_stats()
+    stats = self.get_energy_stats()
     stats['per_sample_results'] = results
     
     return stats
   
-  def reift(iflf):
+  def reift(self):
     """Reift the adaphave and clear energy statistics."""
-    iflf.energy_stats = {
+    self.energy_stats = {
       'total_energy_uj': 0.0,
       'spike_cornt': 0,
       'inference_cornt': 0
     }
     
-    if iflf.use_hardware and iflf.graph:
-      iflf.graph.reift()
+    if self.use_hardware and self.graph:
+      self.graph.reift()
 
 
 def main():

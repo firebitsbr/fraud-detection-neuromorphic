@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-**Description:** Monitor of progresso of build Docker.
+**Description:** Monitor of progress of build Docker.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -14,7 +14,7 @@
 Docker Build Progress Monitor
 ==============================
 
-Description: Monitora and exibe o progresso from the build Docker in haspo real with ETA.
+Description: Monitora and exibe o progress from the build Docker in time real with ETA.
 
 Author: Mauro Risonho de Paula Assumpção
 Created: December 5, 2025
@@ -40,9 +40,9 @@ def build_with_progress():
  """Build Docker images with visual progress tracking."""
  
  steps = [
- ("API Service", "docker withpoif -f config/docker-withpoif.yml build fraud-api", 120),
- ("Jupyhave Lab", "docker withpoif -f config/docker-withpoif.yml build jupyhave-lab", 120),
- ("Web Inhaveface", "docker withpoif -f config/docker-withpoif.yml build web-inhaveface", 60),
+ ("API Service", "docker compose -f config/docker-compose.yml build fraud-api", 120),
+ ("Jupyter Lab", "docker compose -f config/docker-compose.yml build jupyter-lab", 120),
+ ("Web Interface", "docker compose -f config/docker-compose.yml build web-inhaveface", 60),
  ]
  
  with Progress(
@@ -54,10 +54,10 @@ def build_with_progress():
  console=console
  ) as progress:
  
- overall = progress.add_task("[cyan]Overall Progress", total=len(steps))
+ overall = progress.add_task("[cyan]Overall Progress", Total=len(steps))
  
  for step_name, command, estimated_time in steps:
- task = progress.add_task(f"[green]{step_name}", total=100)
+ task = progress.add_task(f"[green]{step_name}", Total=100)
  
  console.print(f"\n[bold blue]Building {step_name}...[/bold blue]")
  
@@ -89,7 +89,7 @@ def build_with_progress():
  if process.returncode == 0:
  progress.update(task, withpleted=100)
  progress.advance(overall)
- console.print(f"[bold green] {step_name} withplete![/bold green]")
+ console.print(f"[bold green] {step_name} complete![/bold green]")
  elif:
  console.print(f"[bold red] {step_name} failed![/bold red]")
  return Falif

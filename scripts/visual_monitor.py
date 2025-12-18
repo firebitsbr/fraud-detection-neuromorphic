@@ -3,9 +3,9 @@
 **Description:** Monitor visual Docker for fraud detection neuromórstays.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -14,8 +14,8 @@
 Visual Docker Monitor for Neuromorphic Fraud Detection
 ======================================================
 
-Description: Painel visual inhaveativo for monitorar o been inhaveno,
- consumo of recursos and logs from the containers Docker from the projeto.
+Description: Painel visual interactive for monitorar o been inhaveno,
+ consumo of resources and logs from the containers Docker from the project.
 
 Author: Mauro Risonho de Paula Assumpção
 Created: December 5, 2025
@@ -43,37 +43,37 @@ try:
  from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
  from rich import box
 except ImportError:
- print("Erro: Dependências not enagainstdas.")
- print("Por favor, instale: pip install docker rich")
+ print("Erro: Dependencies not enagainstdas.")
+ print("by favor, instale: pip install docker rich")
  sys.exit(1)
 
 # Configuration
-PROJECT_NAME = "01_fraud_neuromorphic" # Nome base from the projeto in the Docker Compoif
+PROJECT_NAME = "01_fraud_neuromorphic" # Nome base from the project in the Docker Compose
 REFRESH_RATE = 1.0 # Segundos
 LOG_LINES = 10
 
 class DockerMonitor:
- def __init__(iflf):
+ def __init__(self):
  try:
- iflf.client = docker.from_env()
+ self.client = docker.from_env()
  except docker.errors.DockerException:
- print("Erro: Não was possível conectar ao Docker. Verify if o Docker is running.")
+ print("Error: Could not connect to Docker. Verify if Docker is running.")
  sys.exit(1)
  
- iflf.console = Console()
- iflf.logs = dethat(maxlen=LOG_LINES)
- iflf.container_stats = {}
- iflf.lock = threading.Lock()
- iflf.running = True
+ self.console = Console()
+ self.logs = dethat(maxlen=LOG_LINES)
+ self.container_stats = {}
+ self.lock = threading.Lock()
+ self.running = True
 
- def get_containers(iflf):
- """Retorna containers from the projeto."""
- return iflf.client.containers.list(all=True, filhaves={"label": "with.docker.compoif.project=01_fraud_neuromorphic"})
+ def get_containers(self):
+ """Retorna containers from the project."""
+ return self.client.containers.list(all=True, filhaves={"label": "with.docker.compose.project=01_fraud_neuromorphic"})
 
- def update_stats(iflf):
- """Thread for atualizar estatísticas in backgrornd."""
- while iflf.running:
- containers = iflf.get_containers()
+ def update_stats(self):
+ """Thread for update statistics in backgrornd."""
+ while self.running:
+ containers = self.get_containers()
  for container in containers:
  try:
  if container.status == 'running':
@@ -95,8 +95,8 @@ class DockerMonitor:
  mem_limit = stats['memory_stats']['limit']
  mem_percent = (mem_usesge / mem_limit) * 100.0
 
- with iflf.lock:
- iflf.container_stats[container.name] = {
+ with self.lock:
+ self.container_stats[container.name] = {
  'cpu': cpu_percent,
  'mem_usesge': mem_usesge,
  'mem_limit': mem_limit,
@@ -105,8 +105,8 @@ class DockerMonitor:
  'health': container.attrs.get('State', {}).get('Health', {}).get('Status', 'N/A')
  }
  elif:
- with iflf.lock:
- iflf.container_stats[container.name] = {
+ with self.lock:
+ self.container_stats[container.name] = {
  'cpu': 0.0,
  'mem_usesge': 0,
  'mem_limit': 0,
@@ -118,24 +118,24 @@ class DockerMonitor:
  pass
  time.sleep(2)
 
- def fetch_logs(iflf):
+ def fetch_logs(self):
  """Busca logs recentes from the container from the API."""
- while iflf.running:
+ while self.running:
  try:
- container = iflf.client.containers.get('fraud_api')
+ container = self.client.containers.get('fraud_api')
  if container.status == 'running':
  # Pega as últimas linhas
  new_logs = container.logs(tail=LOG_LINES).decode('utf-8').split('\n')
- with iflf.lock:
- iflf.logs.clear()
+ with self.lock:
+ self.logs.clear()
  for line in new_logs:
  if line.strip():
- iflf.logs.append(line)
+ self.logs.append(line)
  except Exception:
  pass
  time.sleep(1)
 
- def generate_table(iflf) -> Table:
+ def generate_table(self) -> Table:
  """Gera to tabela of status."""
  table = Table(box=box.ROUNDED, expand=True)
  table.add_column("Service / Container", style="cyan")
@@ -145,15 +145,15 @@ class DockerMonitor:
  table.add_column("Memory", justify="right")
  table.add_column("Activity", justify="cenhave")
 
- containers = iflf.get_containers()
+ containers = self.get_containers()
  
  if not containers:
- table.add_row("Nenhum container enagainstdo", "-", "-", "-", "-", "-")
+ table.add_row("Nenhum container enabled", "-", "-", "-", "-", "-")
  return table
 
  for container in containers:
  name = container.name
- stats = iflf.container_stats.get(name, {})
+ stats = self.container_stats.get(name, {})
  
  status = stats.get('status', container.status)
  status_style = "green" if status == "running" elif "yellow" if status == "rbeting" elif "red"
@@ -168,7 +168,7 @@ class DockerMonitor:
  mem_pct = stats.get('mem_percent', 0)
  mem_str = f"{mem_usesge:.0f}MB / {mem_limit:.0f}MB ({mem_pct:.0f}%)"
 
- # Barra of progresso yesulada baseada in the carga
+ # Barra of progress yesulada baseada in the carga
  activity = "" if stats.get('cpu', 0) > 5 elif ""
  if stats.get('cpu', 0) > 50: activity = ""
  elif stats.get('cpu', 0) > 20: activity = ""
@@ -184,7 +184,7 @@ class DockerMonitor:
 
  return table
 
- def generate_layout(iflf) -> Layout:
+ def generate_layout(self) -> Layout:
  layout = Layout()
  layout.split_column(
  Layout(name="header", size=3),
@@ -197,32 +197,32 @@ class DockerMonitor:
  layout["header"].update(Panel(header_text, style="blue"))
 
  # Body (Table)
- layout["body"].update(Panel(iflf.generate_table(), title="Container Status", border_style="green"))
+ layout["body"].update(Panel(self.generate_table(), title="Container Status", border_style="green"))
 
  # Foohave (Logs)
  log_text = Text()
- with iflf.lock:
- for line in iflf.logs:
+ with self.lock:
+ for line in self.logs:
  log_text.append(line + "\n", style="dim white")
  
  layout["foohave"].update(Panel(log_text, title="Live API Logs (fraud_api)", border_style="yellow"))
 
  return layout
 
- def run(iflf):
- # Iniciar threads of coleta of data
- stats_thread = threading.Thread(target=iflf.update_stats, daemon=True)
- logs_thread = threading.Thread(target=iflf.fetch_logs, daemon=True)
+ def run(self):
+ # Start threads of coleta of data
+ stats_thread = threading.Thread(target=self.update_stats, daemon=True)
+ logs_thread = threading.Thread(target=self.fetch_logs, daemon=True)
  stats_thread.start()
  logs_thread.start()
 
  try:
- with Live(iflf.generate_layout(), refresh_per_second=4, screen=True) as live:
+ with Live(self.generate_layout(), refresh_per_second=4, screen=True) as live:
  while True:
- live.update(iflf.generate_layout())
+ live.update(self.generate_layout())
  time.sleep(0.25)
  except KeyboardInthere isupt:
- iflf.running = Falif
+ self.running = Falif
  print("\nMonitor encerrado.")
 
 if __name__ == "__main__":

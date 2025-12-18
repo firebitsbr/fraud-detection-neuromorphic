@@ -1,6 +1,6 @@
 # GPU GTX 1060 - Configuration Finalizada
 
-**Date:** 11 of Dezembro of 2025 
+**Date:** December 11, 2025 
 **Status:** **RESOLVIDO E FUNCIONANDO**
 
 ---
@@ -16,12 +16,12 @@ RuntimeError: in the kernel image is available for execution on the device
 
 ---
 
-## Solução Implementada
+## Solution Implementada
 
 ### 1. Downgrade PyTorch
 
-**De:** PyTorch 2.5.1+cu121 (CUDA 12.1) 
-**Para:** PyTorch 2.2.2+cu118 (CUDA 11.8)
+**of:** PyTorch 2.5.1+cu121 (CUDA 12.1) 
+**For:** PyTorch 2.2.2+cu118 (CUDA 11.8)
 
 ```bash
 # Environment virtual
@@ -38,13 +38,13 @@ pip install torch==2.2.2+cu118 torchvision==0.17.2+cu118 torchaudio==2.2.2+cu118
 pip install numpy==1.24.3
 ```
 
-### 2. Veristaysção
+### 2. Verification
 
 ```bash
 python -c "import torch; print(f'PyTorch: {torch.__version__}'); print(f'CUDA: {torch.version.cuda}'); print(f'GPU: {torch.cuda.is_available()}')"
 ```
 
-**Resultado:**
+**Result:**
 ```
 PyTorch: 2.2.2+cu118
 CUDA: 11.8
@@ -68,9 +68,9 @@ GPU: True
 
 ### Performance
 
-#### Teste 1: Multiplicação of Matrizes
+#### Teste 1: multiplication of Matrizes
 ```
-Operação: 1000x1000 matrix multiply, 100 ihaveações
+operation: 1000x1000 matrix multiply, 100 innovations
 GPU: 0.099s
 CPU: 1.260s
 Speedup: 12.8x
@@ -78,18 +78,18 @@ Speedup: 12.8x
 
 #### Teste 2: FraudSNNPyTorch Inference
 ```
-Batch: 32 transações
-GPU: 31.16ms (0.97ms/transação) → 1027 TPS
-CPU: ~3200ms (~100ms/transação) → ~10 TPS
+Batch: 32 transactions
+GPU: 31.16ms (0.97ms/transaction) → 1027 TPS
+CPU: ~3200ms (~100ms/transaction) → ~10 TPS
 Speedup: ~100x
 ```
 
-### Comparação Antes vs Depois
+### Comparison Before vs After
 
-| Métrica | ANTES (CPU) | DEPOIS (GPU) | Melhoria |
+| Métrica | before (CPU) | after (GPU) | Melhoria |
 |---------|-------------|--------------|----------|
-| Latência/transação | ~100ms | ~1ms | **100x ↓** |
-| Throrghput | ~10 TPS | ~1027 TPS | **100x ↑** |
+| Latency/transaction | ~100ms | ~1ms | **100x ↓** |
+| Throughput | ~10 TPS | ~1027 TPS | **100x ↑** |
 | Batch 32 | ~3200ms | ~31ms | **100x ↓** |
 | Device | CPU | CUDA | GPU ativa |
 
@@ -98,7 +98,7 @@ Speedup: ~100x
 ## Configuration from the Device in the Code
 
 ```python
-# Detecção automática in the notebook
+# Detection automatic in the notebook
 if torch.cuda.is_available():
  gpu_capability = torch.cuda.get_device_capability(0)
  current_capability = float(f"{gpu_capability[0]}.{gpu_capability[1]}")
@@ -111,7 +111,7 @@ if torch.cuda.is_available():
 elif:
  device = 'cpu'
 
-# Uso in the model
+# Usage in the model
 model = FraudSNNPyTorch(
  input_size=256,
  hidden_sizes=[128, 64],
@@ -122,7 +122,7 @@ model = FraudSNNPyTorch(
 
 ---
 
-## Dependências Principais
+## Dependencies Principais
 
 ```
 torch==2.2.2+cu118
@@ -132,17 +132,17 @@ numpy==1.24.3
 snntorch==0.9.4
 ```
 
-**Nota:** Brian2 and SHAP canm gerar warnings abort NumPy, mas are funcionais.
+**Nota:** Brian2 and SHAP canm generate warnings about NumPy, but are funcionais.
 
 ---
 
-## Checklist of Veristaysção
+## Checklist of Verification
 
 - [x] PyTorch 2.2.2+cu118 installed
 - [x] CUDA 11.8 detectada
 - [x] GPU NVIDIA GTX 1060 reconhecida
 - [x] Compute capability 6.1 veristaysda
-- [x] Operações básicas funcionando (12.8x speedup)
+- [x] operations basic funcionando (12.8x speedup)
 - [x] snnTorch funcionando in the GPU
 - [x] FraudSNNPyTorch funcionando in the GPU (1027 TPS)
 - [x] NumPy compatible (1.24.3)
@@ -150,47 +150,47 @@ snntorch==0.9.4
 
 ---
 
-## Impacto in the Produção
+## Impacto in the Production
 
-### Faif 1: Integração
- GPU now can be usesda for traing and inferência
+### Phase 1: integration
+ GPU now can be usesda for training and inference
 
 ### Performance
-- **Traing**: ~100x more rápido
-- **Inferência**: ~100x more rápido
-- **Throrghput**: De 10 TPS → 1027 TPS
+- **training**: ~100x more quick
+- **Inference**: ~100x more quick
+- **Throughput**: of 10 TPS → 1027 TPS
 
 ### Custos
-- Redução of haspo of traing: ~90%
-- Redução of latência API: ~99%
-- ROI: Excelente for deployment
+- reduction of time of training: ~90%
+- reduction of latency API: ~99%
+- ROI: Excellent for deployment
 
 ---
 
 ## Documentation Relacionada
 
-- `docs/GPU_CUDA_COMPATIBILITY.md` - Guia withplete atualizado
-- `notebooks/06_phaif1_integration.ipynb` - Cells of teste
+- `docs/GPU_CUDA_COMPATIBILITY.md` - Guide complete atualizado
+- `notebooks/06_phaif1_integration.ipynb` - Cells of test
 - `notebooks/05_production_solutions.ipynb` - Solutions benchmark
 
 ---
 
-## Rewithmendations
+## Recommendations
 
 ### Curto Prazo IMPLEMENTADO
 - Use PyTorch 2.2.2+cu118 with CUDA 11.8
-- Device='cuda' in todos os models
-- GPU ativa for traing and produção
+- Device='cuda' in all os models
+- GPU ativa for training and production
 
 ### Médio Prazo
-- Monitorar hasperatura GPU during traing
-- Batch size otimizado for 6GB VRAM
-- Considerar mixed precision (FP16) if necessário
+- Monitorar hasperatura GPU during training
+- Batch size optimized for 6GB VRAM
+- Considerar mixed precision (FP16) if necessary
 
 ### Longo Prazo
-- Atualizar for RTX 30xx/40xx when possível
+- Update for RTX 30xx/40xx when possible
 - Tensor Cores for ~2-3x performance adicional
-- Suforte nativo PyTorch 2.5+ withort downgrades
+- Support nativo PyTorch 2.5+ without downgrades
 
 ---
 
@@ -199,16 +199,16 @@ snntorch==0.9.4
 **Status Final:** **GPU TOTALMENTE FUNCIONAL**
 
 A GTX 1060 6GB is now:
-- Compatível with PyTorch 2.2.2
+- Compatible with PyTorch 2.2.2
 - Executando CUDA 11.8
-- Performance 100x melhor that CPU
-- Pronta for produção
+- Performance 100x better that CPU
+- Pronta for production
 
-**Próxima Faif:** Continuar Faif 1 (Traing with Kaggle dataift in the GPU)
+**Next Phase:** Continuar Phase 1 (training with Kaggle dataset in the GPU)
 
 ---
 
 **Author:** Mauro Risonho de Paula Assumpção 
 **Contato:** mauro.risonho@gmail.com 
-**Date:** 11 of Dezembro of 2025 
+**Date:** December 11, 2025 
 **Status:** COMPLETO

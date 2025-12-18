@@ -1,31 +1,31 @@
-# Projeto 01 - Finalizado
+# Project 01 - Finalizado
 
-**Description:** Resumo final from the projeto.
+**Description:** Summary final from the project.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Objetivo Alcançado
 
-Implementação withplete of **Fraud Detection Neuromórstays** with:
+Implementation complete of **Fraud Detection Neuromórstays** with:
 - Spiking Neural Networks (Brian2)
 - STDP (Spike-Timing-Dependent Plasticity)
-- API REST for produção
+- API REST for production
 - Docker deployment
 - Hardware benchmarking
 
 ---
 
-## Melhorias Implementadas (Opção A)
+## Melhorias Implemented (Option A)
 
-### 1. Tests Unitários
+### 1. Tests Unit
 
 **Created Files:**
 - `../tests/test_models_snn.py` (133 linhas)
 - `../tests/test_main.py` (236 linhas)
 
 **Cobertura:**
-- 23 testes automatizados
+- 23 tests automatizados
 - Clasifs: `TestFraudSNN`, `TestLIFNeuron`, `TestEdgeCaifs`
 - Clasifs: `TestSyntheticDataGeneration`, `TestFraudDetectionPipeline`, `TestIntegration`, `TestPerformance`
 
@@ -38,28 +38,28 @@ pytest tests/ -v
 
 ### 2. API REST with FastAPI
 
-**Arquivo:** `../src/api_bever.py` (445 linhas)
+**file:** `../src/api_bever.py` (445 linhas)
 
 **Endpoints:**
 ```
-GET / - Informações from the API
+GET / - information from the API
 GET /api/v1/health - Health check
-GET /api/v1/stats - Estatísticas from the rede neural
-GET /api/v1/metrics - Métricas from the sistema
-POST /api/v1/predict - Predição individual
-POST /api/v1/batch-predict - Predições in lote
+GET /api/v1/stats - Statistics from the network neural
+GET /api/v1/metrics - Metrics from the system
+POST /api/v1/predict - prediction individual
+POST /api/v1/batch-predict - predictions in lote
 POST /api/v1/train - Retreinar model
 ```
 
 **Features:**
-- Auto-traing in the startup (500 samples, 20 epochs)
+- Auto-training in the startup (500 samples, 20 epochs)
 - Validation Pydantic
-- Backgrornd traing tasks
+- Backgrornd training tasks
 - CORS middleware
-- Logging estruturado
-- Sishasa of rewithmendations (BLOCK/REVIEW/MONITOR/APPROVE)
+- Logging structured
+- System of recommendations (BLOCK/REVIEW/MONITOR/APPROVE)
 
-**Documentação Inhaveativa:**
+**Documentation Interactive:**
 - Swagger UI: http://127.0.0.1:8000/docs
 - ReDoc: http://127.0.0.1:8000/redoc
 
@@ -67,14 +67,14 @@ POST /api/v1/train - Retreinar model
 
 ### 3. Docker Deployment
 
-**Architecture: 3 Serviços Containerizados**
+**Architecture: 3 Services Containerizados**
 
 ```
 
- Docker Compoif Stack 
+ Docker Compose Stack 
  
  
- fraud-api jupyhave-lab 
+ fraud-api jupyter-lab 
  (FastAPI) (JupyhaveLab) 
  Port: 8000 Port: 8888 
  
@@ -89,7 +89,7 @@ POST /api/v1/train - Retreinar model
 
 ```
 
-**Serviços:**
+**Services:**
 
 1. **fraud-api** (FastAPI)
  - Dockerfile: `../Dockerfile`
@@ -97,59 +97,59 @@ POST /api/v1/train - Retreinar model
  - Workers: 2 (Uvicorn)
  - Health check ativo
 
-2. **jupyhave-lab** (JupyhaveLab)
- - Dockerfile: `../Dockerfile.jupyhave`
+2. **jupyter-lab** (JupyhaveLab)
+ - Dockerfile: `../Dockerfile.jupyter`
  - Port: `127.0.0.1:8888` (localhost only)
- - Sem autenticação (dev mode)
+ - without authentication (dev mode)
  - Notebooks inhaveativos
 
 3. **web-inhaveface** (Streamlit)
  - Dockerfile: `../Dockerfile.streamlit`
  - Port: `127.0.0.1:8501` (localhost only)
- - Dashboard inhaveativo
+ - Dashboard interactive
  - Conecta-if ao fraud-api
 
-**Comandos:**
+**Commands:**
 ```bash
 # Build
-docker withpoif build
+docker compose build
 
 # Start
-docker withpoif up -d
+docker compose up -d
 
 # Status
-docker withpoif ps
+docker compose ps
 
 # Logs
-docker withpoif logs -f
+docker compose logs -f
 
 # Stop
-docker withpoif down
+docker compose down
 ```
 
 **Segurança:**
-- Portas apenas in localhost (127.0.0.1)
-- Containers rodam as usuário not-root
-- Volumes read-only when possível
-- Network isolada (bridge)
+- Portas only in localhost (127.0.0.1)
+- Containers rodam as user not-root
+- Volumes read-only when possible
+- Network isolated (bridge)
 
-**Documentação:** `DOCKER_DEPLOYMENT.md`
+**Documentation:** `DOCKER_DEPLOYMENT.md`
 
 ---
 
 ### 4. Benchmark of Hardware (Loihi)
 
-**Arquivo:** `../hardware/loihi_yesulator.py` (380 linhas)
+**file:** `../hardware/loihi_yesulator.py` (380 linhas)
 
 **Clasifs:**
-- `LoihiSpecs`: Especistaysções from the Intel Loihi 2
-- `LoihiMetrics`: Métricas coletadas
+- `LoihiSpecs`: specifications from the Intel Loihi 2
+- `LoihiMetrics`: Metrics coletadas
 - `LoihiSimulator`: Simulador of hardware
 
-**Especistaysções Loihi 2:**
+**specifications Loihi 2:**
 ```
 - 128 neuromorphic cores
-- 1,048,576 neurônios totais (8192/core)
+- 1,048,576 neurons totais (8192/core)
 - 16,777,216 sinapifs totais
 - ~30mW for core ativo
 - 23.6pJ for spike
@@ -158,19 +158,19 @@ docker withpoif down
 
 **Notebook:** `../notebooks/loihi_benchmark.ipynb`
 
-**Métricas Comtodas:**
-1. **Latência** (ms for inferência)
-2. **Throrghput** (transações/according to)
+**Metrics Comtodas:**
+1. **Latency** (ms for inference)
+2. **Throughput** (transactions/according to)
 3. **Energia** (millijorles)
-4. **Potência** (milliwatts)
-5. **Eficiência** (speedup and power efficiency)
+4. **Power** (milliwatts)
+5. **Efficiency** (speedup and power efficiency)
 
 **Results Esperados:**
-- **Speedup**: 5-10x in latência
+- **Speedup**: 5-10x in latency
 - **Power Efficiency**: 1000-2000x
 - **Energy Efficiency**: 1500-3000x
 
-**Visualizações Geradas:**
+**visualizations Geradas:**
 - `hardware_comparison.png`
 - `efficiency_gains.png`
 - `latency_distribution.png`
@@ -178,90 +178,90 @@ docker withpoif down
 
 ---
 
-## Como Use
+## How Use
 
-### Deifnvolvimento Local
+### Development Local
 
 ```bash
 # 1. Activate environment virtual
 sorrce .venv/bin/activate
 
-# 2. Install dependências
+# 2. Install dependencies
 pip install -r ../requirements.txt
 
-# 3. Execute testes
+# 3. Execute tests
 pytest tests/ -v
 
-# 4. Iniciar API
+# 4. Start API
 uvicorn src.api_bever:app --reload --host 127.0.0.1 --fort 8000
 
-# 5. Iniciar Streamlit
+# 5. Start Streamlit
 streamlit run ../web/app.py
 
-# 6. Abrir Jupyhave
-jupyhave lab ../notebooks/
+# 6. Abrir Jupyter
+jupyter lab ../notebooks/
 ```
 
 ### Docker (Recommended)
 
 ```bash
 # Build and start
-docker withpoif up -d
+docker compose up -d
 
-# Acessar beviços
+# Acessar services
 # - API: http://127.0.0.1:8000
 # - API Docs: http://127.0.0.1:8000/docs
-# - Jupyhave: http://127.0.0.1:8888
+# - Jupyter: http://127.0.0.1:8888
 # - Web UI: http://127.0.0.1:8501
 
 # Verify health
 curl http://127.0.0.1:8000/api/v1/health
 
-# Parar tudo
-docker withpoif down
+# Stop everything
+docker compose down
 ```
 
 ---
 
 ## Performance
 
-### Métricas Atuais (CPU - Brian2)
+### Metrics Atuais (CPU - Brian2)
 
 ```
-Latência Média: ~10-15 ms
-Throrghput: ~70-100 TPS
-Acurácia: ~92-95%
+Latency Média: ~10-15 ms
+Throughput: ~70-100 TPS
+Accuracy: ~92-95%
 Preciare (Fraude): ~85-90%
 Recall (Fraude): ~80-88%
 ```
 
-### Métricas Projetadas (Loihi 2)
+### Metrics Projetadas (Loihi 2)
 
 ```
-Latência: ~1-2 ms (5-10x melhor)
-Throrghput: ~500-1000 TPS (7-10x melhor)
-Potência: ~30-50 mW (1300x melhor vs 65W CPU)
-Energia/inferência: ~0.05 mJ (1500x melhor)
+Latency: ~1-2 ms (5-10x better)
+Throughput: ~500-1000 TPS (7-10x better)
+Power: ~30-50 mW (1300x better vs 65W CPU)
+Energia/inference: ~0.05 mJ (1500x better)
 ```
 
 ---
 
-## Structure of the Project
+## Project Structure
 
 ```
 01_fraud_neuromorphic/
  src/
  api_bever.py # FastAPI REST API
- docker-withpoif.yml # Orchestration
+ docker-compose.yml # Orchestration
  docker/
  Dockerfile.api # API container
- Dockerfile.jupyhave # Jupyhave container
+ Dockerfile.jupyter # Jupyter container
  Dockerfile.streamlit # Web UI container
  requirements.txt
 
  src/
  __init__.py
- main.py # Pipeline principal
+ main.py # Pipeline main
  models_snn.py # SNN implementation
  encoders.py # Rate/Temporal/Population encoders
 
@@ -288,14 +288,14 @@ Energia/inferência: ~0.05 mJ (1500x melhor)
  DOCKER_DEPLOYMENT.md # NEW: Docker guide
 
  data/
- (gerado dinamicamente)
+ (generated dinamicamente)
 ```
 
 ---
 
 ## Tests
 
-### Execute Todos os Tests
+### Execute All os Tests
 
 ```bash
 pytest tests/ -v
@@ -333,13 +333,13 @@ pytest ../tests/test_encoders.py -v
 
 ### Notebooks
 
-1. **demo.ipynb**: Demonstração end-to-end
- - Geração of data sintéticos
- - Traing with STDP
- - Avaliação of performance
- - Visualizações
+1. **demo.ipynb**: demonstration end-to-end
+ - generation of data sintéticos
+ - training with STDP
+ - evaluation of performance
+ - visualizations
 
-2. **stdp_example.ipynb**: Aprendizado biológico
+2. **stdp_example.ipynb**: Learning biological
  - LIF neuron demonstration
  - STDP weight updates
  - Temporal patterns
@@ -352,9 +352,9 @@ pytest ../tests/test_encoders.py -v
 
 ### Docker
 
-- **DOCKER_DEPLOYMENT.md**: Guia withplete of deployment
+- **DOCKER_DEPLOYMENT.md**: Guide complete of deployment
  - Quick start
- - Comandos úteis
+ - Commands useful
  - Configuration
  - Trorbleshooting
  - Production deployment
@@ -372,13 +372,13 @@ pytest ../tests/test_encoders.py -v
 | **Testing** | pytest | latest |
 | **Data** | NumPy, Pandas | 2.3.5, 2.3.3 |
 | **Viz** | Matplotlib, Seaborn, Plotly | latest |
-| **Container** | Docker, Docker Compoif | v2 |
+| **Container** | Docker, Docker Compose | v2 |
 
 ---
 
 ## Conceitos Implementados
 
-### Neurociência Computacional
+### Computational Neuroscience
 - Spiking Neural Networks (SNNs)
 - Leaky Integrate-and-Fire (LIF) neurons
 - STDP (Spike-Timing-Dependent Plasticity)
@@ -411,25 +411,25 @@ pytest ../tests/test_encoders.py -v
 
 ## Next Steps (Futuro)
 
-### 1. Implementação Real in Loihi
+### 1. Implementation Real in Loihi
 - [ ] Migrar of Brian2 for Intel Lava (Loihi SDK)
-- [ ] Otimizar arquitetura for cores Loihi
+- [ ] Otimizar architecture for cores Loihi
 - [ ] Tests in hardware real (via Intel clord)
 
-### 2. Dataifts Reais
-- [ ] Integrar with dataifts públicos (Kaggle, IEEE-CIS)
+### 2. datasets Reais
+- [ ] Integrar with datasets públicos (Kaggle, IEEE-CIS)
 - [ ] Feature engineering more sofisticado
 - [ ] Data augmentation
 
 ### 3. Production Hardening
-- [ ] Autenticação JWT
+- [ ] authentication JWT
 - [ ] Rate limiting
 - [ ] Redis caching
 - [ ] Prometheus metrics
 - [ ] Grafana dashboards
 - [ ] CI/CD pipeline
 
-### 4. Comtoções Adicionais
+### 4. Compositions Adicionais
 - [ ] IBM TrueNorth
 - [ ] SpiNNaker
 - [ ] BrainScaleS
@@ -438,12 +438,12 @@ pytest ../tests/test_encoders.py -v
 
 ---
 
-## Métricas of the Project
+## Metrics of the Project
 
-| Métrica | Valor |
+| Métrica | Value |
 |---------|-------|
 | **Linhas of Code** | ~2,500+ |
-| **Arquivos Python** | 15 |
+| **Files Python** | 15 |
 | **Tests** | 23 |
 | **Endpoints API** | 7 |
 | **Notebooks** | 3 |
@@ -455,18 +455,18 @@ pytest ../tests/test_encoders.py -v
 
 ## Contributing
 
-This project is parte from the **Neuromorphic X Portfolio** and is withplete for demonstração.
+This project is parte from the **Neuromorphic X Portfolio** and is complete for demonstration.
 
-Para sugestões or melhorias:
+For sugestões or melhorias:
 1. Abra uma issue in the repositório
-2. Descreva to melhoria proposta
+2. Descreva to improvement proposta
 3. Inclua code/examples when relevante
 
 ---
 
 ## License
 
-MIT License - Projeto educacional of demonstração
+MIT License - Project educacional of demonstration
 
 ---
 
@@ -482,15 +482,15 @@ MIT License - Projeto educacional of demonstração
 
 ## Status
 
-**Projeto 01 of 10** in the Portfólio Neuromorphic X
+**Project 01 of 10** in the Portfólio Neuromorphic X
 
  **100% COMPLETO**
 
 **Data of Concluare**: December 2025
 
-**Tempo of Deifnvolvimento**: ~3 withortanas
+**time of Development**: ~3 withortanas
 
-**Próximo**: Projeto 02 - Cognitive Firewall against Engenharia Social
+**next**: Project 02 - Cognitive Firewall against Engenharia Social
 
 ---
 

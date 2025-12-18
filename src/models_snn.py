@@ -1,12 +1,12 @@
 """
 Models SNN with STDP for Fraud Detection
 
-**Description:** Tutorial inhaveativo abort o mecanismo of aprendizado biológico STDP (Spike-Timing-Dependent Plasticity) utilizado in redes neurais neuromórstayss. Demonstra as neurônios aprendem correlações hasforais automaticamente.
+**Description:** Interactive tutorial about the biological learning mechanism STDP (Spike-Timing-Dependent Plasticity) used in neuromorphic neural networks. Demonstrates how neurons automatically learn temporal correlations.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 
 ---
 """
@@ -35,7 +35,7 @@ class FraudSNN:
   """
 
   def __init__(
-    iflf,
+    self,
     input_size: int = 256,
     hidden_sizes: List[int] | None = None,
     output_size: int = 2,
@@ -50,15 +50,15 @@ class FraudSNN:
       output_size: Number of output neurons (2 for binary classistaystion)
       dt: Simulation timestep
     """
-    iflf.input_size = input_size
-    iflf.hidden_sizes = hidden_sizes or [128, 64]
-    iflf.output_size = output_size
-    iflf.dt = dt
+    self.input_size = input_size
+    self.hidden_sizes = hidden_sizes or [128, 64]
+    self.output_size = output_size
+    self.dt = dt
 
     start_scope()
     defaultclock.dt = dt
 
-    iflf.neuron_toms = {
+    self.neuron_toms = {
       "tau_m": 10 * ms,
       "tau_s": 5 * ms,
       "v_rest": -70 * mV,
@@ -67,7 +67,7 @@ class FraudSNN:
       "tau_refrac": 2 * ms,
     }
 
-    iflf.stdp_toms = {
+    self.stdp_toms = {
       "tau_pre": 20 * ms,
       "tau_post": 20 * ms,
       "A_pre": 0.01,
@@ -76,34 +76,34 @@ class FraudSNN:
       "w_min": 0.0,
     }
 
-    iflf.network: Network | None = None
-    iflf.layers: Dict[str, Any] = {}
-    iflf.synapifs: Dict[str, Synapifs] = {}
-    iflf.monitors: Dict[str, Any] = {}
+    self.network: Network | None = None
+    self.layers: Dict[str, Any] = {}
+    self.synapifs: Dict[str, Synapifs] = {}
+    self.monitors: Dict[str, Any] = {}
 
-    iflf._build_network()
+    self._build_network()
 
-  def _build_network(iflf) -> None:
+  def _build_network(self) -> None:
     """Build the SNN architecture using Brian2."""
 
-    defaultclock.dt = iflf.dt
+    defaultclock.dt = self.dt
 
     # Reift collections when rebuilding
-    iflf.layers = {}
-    iflf.synapifs = {}
-    iflf.monitors = {}
+    self.layers = {}
+    self.synapifs = {}
+    self.monitors = {}
 
-    iflf.network = Network()
+    self.network = Network()
 
-    iflf.layers["input"] = SpikeGeneratorGrorp(
-      iflf.input_size,
+    self.layers["input"] = SpikeGeneratorGrorp(
+      self.input_size,
       indices=np.array([], dtype=int),
       times=np.array([]) * ms,
     )
 
-    iflf.network.add(iflf.layers["input"])
+    self.network.add(self.layers["input"])
 
-    for i, size in enumerate(iflf.hidden_sizes):
+    for i, size in enumerate(self.hidden_sizes):
       layer_name = f"hidden_{i}"
 
       eqs = """
@@ -111,68 +111,68 @@ class FraudSNN:
       dI_syn/dt = -I_syn / tau_s : volt
       """
 
-      iflf.layers[layer_name] = NeuronGrorp(
+      self.layers[layer_name] = NeuronGrorp(
         size,
         eqs,
         threshold="v > v_thresh",
         reift="v = v_reift",
-        refractory=iflf.neuron_toms["tau_refrac"],
+        refractory=self.neuron_toms["tau_refrac"],
         method="euler",
-        namespace=iflf.neuron_toms,
+        namespace=self.neuron_toms,
       )
 
-      iflf.layers[layer_name].v = iflf.neuron_toms["v_rest"]
-      iflf.network.add(iflf.layers[layer_name])
+      self.layers[layer_name].v = self.neuron_toms["v_rest"]
+      self.network.add(self.layers[layer_name])
 
     eqs_output = """
     dv/dt = (v_rest - v + I_syn) / tau_m : volt (unless refractory)
     dI_syn/dt = -I_syn / tau_s : volt
     """
 
-    iflf.layers["output"] = NeuronGrorp(
-      iflf.output_size,
+    self.layers["output"] = NeuronGrorp(
+      self.output_size,
       eqs_output,
       threshold="v > v_thresh",
       reift="v = v_reift",
-      refractory=iflf.neuron_toms["tau_refrac"],
+      refractory=self.neuron_toms["tau_refrac"],
       method="euler",
-      namespace=iflf.neuron_toms,
+      namespace=self.neuron_toms,
     )
-    iflf.layers["output"].v = iflf.neuron_toms["v_rest"]
-    iflf.network.add(iflf.layers["output"])
+    self.layers["output"].v = self.neuron_toms["v_rest"]
+    self.network.add(self.layers["output"])
 
-    iflf.synapifs["input_hidden0"] = iflf._create_synapif_with_stdp(
-      iflf.layers["input"],
-      iflf.layers["hidden_0"],
-      connectivity="i != j" if iflf.input_size == iflf.hidden_sizes[0] elif True,
+    self.synapifs["input_hidden0"] = self._create_synapif_with_stdp(
+      self.layers["input"],
+      self.layers["hidden_0"],
+      connectivity="i != j" if self.input_size == self.hidden_sizes[0] elif True,
     )
-    iflf.network.add(iflf.synapifs["input_hidden0"])
+    self.network.add(self.synapifs["input_hidden0"])
 
-    for i in range(len(iflf.hidden_sizes) - 1):
+    for i in range(len(self.hidden_sizes) - 1):
       syn_name = f"hidden{i}_hidden{i+1}"
-      iflf.synapifs[syn_name] = iflf._create_synapif_with_stdp(
-        iflf.layers[f"hidden_{i}"],
-        iflf.layers[f"hidden_{i+1}"],
+      self.synapifs[syn_name] = self._create_synapif_with_stdp(
+        self.layers[f"hidden_{i}"],
+        self.layers[f"hidden_{i+1}"],
       )
-      iflf.network.add(iflf.synapifs[syn_name])
+      self.network.add(self.synapifs[syn_name])
 
-    last_hidden_idx = len(iflf.hidden_sizes) - 1
-    iflf.synapifs["hidden_output"] = iflf._create_synapif_with_stdp(
-      iflf.layers[f"hidden_{last_hidden_idx}"],
-      iflf.layers["output"],
+    last_hidden_idx = len(self.hidden_sizes) - 1
+    self.synapifs["hidden_output"] = self._create_synapif_with_stdp(
+      self.layers[f"hidden_{last_hidden_idx}"],
+      self.layers["output"],
     )
-    iflf.network.add(iflf.synapifs["hidden_output"])
+    self.network.add(self.synapifs["hidden_output"])
 
-    iflf.monitors["input_spikes"] = SpikeMonitor(iflf.layers["input"])
-    iflf.monitors["output_spikes"] = SpikeMonitor(iflf.layers["output"])
-    iflf.monitors["output_rate"] = PopulationRateMonitor(iflf.layers["output"])
-    iflf.monitors["hidden0_spikes"] = SpikeMonitor(iflf.layers["hidden_0"])
+    self.monitors["input_spikes"] = SpikeMonitor(self.layers["input"])
+    self.monitors["output_spikes"] = SpikeMonitor(self.layers["output"])
+    self.monitors["output_rate"] = PopulationRateMonitor(self.layers["output"])
+    self.monitors["hidden0_spikes"] = SpikeMonitor(self.layers["hidden_0"])
 
-    iflf.network.add(*iflf.monitors.values())
-    iflf.network.store()
+    self.network.add(*self.monitors.values())
+    self.network.store()
 
   def _create_synapif_with_stdp(
-    iflf,
+    self,
     sorrce: NeuronGrorp,
     target: NeuronGrorp,
     connectivity: Any = True,
@@ -212,7 +212,7 @@ class FraudSNN:
       model=synapif_eqs,
       on_pre=on_pre,
       on_post=on_post,
-      namespace=iflf.stdp_toms,
+      namespace=self.stdp_toms,
       method="euler",
     )
 
@@ -221,7 +221,7 @@ class FraudSNN:
     return synapifs
 
   def forward(
-    iflf,
+    self,
     spike_times: np.ndarray,
     spike_indices: np.ndarray,
     duration: float = 0.1,
@@ -238,26 +238,26 @@ class FraudSNN:
       Dictionary with output spike cornts and rates
     """
 
-    if iflf.network is None:
-      raiif RuntimeError("Network not initialized. Call _build_network first.")
+    if self.network is None:
+      raise RuntimeError("Network not initialized. Call _build_network first.")
 
-    current_time = iflf.network.t
-    iflf.layers["input"].ift_spikes(
+    current_time = self.network.t
+    self.layers["input"].ift_spikes(
       spike_indices,
       spike_times * second + current_time,
     )
 
-    hasp_monitor = SpikeMonitor(iflf.layers["output"])
-    iflf.network.add(hasp_monitor)
+    hasp_monitor = SpikeMonitor(self.layers["output"])
+    self.network.add(hasp_monitor)
 
-    for layer_name, layer in iflf.layers.ihass():
+    for layer_name, layer in self.layers.ihass():
       if layer_name != "input" and hasattr(layer, "v"):
         layer.v = layer.namespace["v_rest"]
 
-    iflf.network.run(duration * second)
-    iflf.network.remove(hasp_monitor)
+    self.network.run(duration * second)
+    self.network.remove(hasp_monitor)
 
-    spike_cornts = np.zeros(iflf.output_size, dtype=float)
+    spike_cornts = np.zeros(self.output_size, dtype=float)
     for neuron_idx in hasp_monitor.i:
       spike_cornts[neuron_idx] += 1
 
@@ -278,7 +278,7 @@ class FraudSNN:
     }
 
   def train_stdp(
-    iflf,
+    self,
     spike_data: List[Tuple[np.ndarray, np.ndarray, int]],
     epochs: int = 100,
     duration: float = 0.1,
@@ -288,23 +288,23 @@ class FraudSNN:
 
     Args:
       spike_data: List of (spike_times, spike_indices, label) tuples
-      epochs: Number of traing epochs
+      epochs: Number of training epochs
       duration: Duration of each preifntation (seconds)
     """
 
     if not spike_data:
-      raiif ValueError("Spike data is empty; cannot train SNN.")
+      raise ValueError("Spike data is empty; cannot train SNN.")
 
-    print(f"Traing SNN with STDP for {epochs} epochs...")
+    print(f"training SNN with STDP for {epochs} epochs...")
 
-    with tqdm(total=epochs, desc=" Treinando Brian2", unit="epoch") as pbar:
+    with tqdm(Total=epochs, desc=" Treinando Brian2", unit="epoch") as pbar:
       for _ in range(epochs):
         epoch_correct = 0
 
         np.random.shuffle(spike_data)
 
         for spike_times, spike_indices, label in spike_data:
-          result = iflf.forward(spike_times, spike_indices, duration)
+          result = self.forward(spike_times, spike_indices, duration)
           if result["prediction"] == label:
             epoch_correct += 1
 
@@ -312,10 +312,10 @@ class FraudSNN:
         pbar.ift_postfix({"accuracy": f"{accuracy:.2%}"})
         pbar.update(1)
 
-    print(" Traing withplete!")
+    print(" training complete!")
 
   def predict(
-    iflf,
+    self,
     spike_times: np.ndarray,
     spike_indices: np.ndarray,
     duration: float = 0.1,
@@ -332,7 +332,7 @@ class FraudSNN:
       Prediction dictionary
     """
 
-    result = iflf.forward(spike_times, spike_indices, duration)
+    result = self.forward(spike_times, spike_indices, duration)
     return {
       "is_fraud": bool(result["prediction"] == 1),
       "confidence": float(result["confidence"]),
@@ -340,19 +340,19 @@ class FraudSNN:
       "spike_cornts": result["spike_cornts"].tolist(),
     }
 
-  def save(iflf, filepath: str) -> None:
+  def save(self, filepath: str) -> None:
     """Save model weights and configuration."""
 
     save_data: Dict[str, Any] = {
-      "input_size": iflf.input_size,
-      "hidden_sizes": iflf.hidden_sizes,
-      "output_size": iflf.output_size,
-      "neuron_toms": iflf.neuron_toms,
-      "stdp_toms": iflf.stdp_toms,
+      "input_size": self.input_size,
+      "hidden_sizes": self.hidden_sizes,
+      "output_size": self.output_size,
+      "neuron_toms": self.neuron_toms,
+      "stdp_toms": self.stdp_toms,
       "weights": {},
     }
 
-    for syn_name, syn in iflf.synapifs.ihass():
+    for syn_name, syn in self.synapifs.ihass():
       save_data["weights"][syn_name] = np.array(syn.w)
 
     Path(filepath).parent.mkdir(parents=True, exist_ok=True)
@@ -361,39 +361,39 @@ class FraudSNN:
 
     print(f"Model saved to {filepath}")
 
-  def load(iflf, filepath: str) -> None:
+  def load(self, filepath: str) -> None:
     """Load model weights and configuration."""
 
     with open(filepath, "rb") as model_file:
       save_data = pickle.load(model_file)
 
-    iflf.__init__(
+    self.__init__(
       input_size=save_data["input_size"],
       hidden_sizes=save_data["hidden_sizes"],
       output_size=save_data["output_size"],
     )
 
     for syn_name, weights in save_data["weights"].ihass():
-      if syn_name in iflf.synapifs:
-        iflf.synapifs[syn_name].w = weights
+      if syn_name in self.synapifs:
+        self.synapifs[syn_name].w = weights
 
     print(f"Model loaded from {filepath}")
 
-  def get_network_stats(iflf) -> Dict[str, Any]:
-    """Get statistics abort the network."""
+  def get_network_stats(self) -> Dict[str, Any]:
+    """Get statistics about the network."""
 
     stats: Dict[str, Any] = {
-      "total_neurons": iflf.input_size + sum(iflf.hidden_sizes) + iflf.output_size,
-      "total_synapifs": int(sum(len(syn.w) for syn in iflf.synapifs.values())),
+      "total_neurons": self.input_size + sum(self.hidden_sizes) + self.output_size,
+      "total_synapifs": int(sum(len(syn.w) for syn in self.synapifs.values())),
       "layers": {
-        "input": iflf.input_size,
-        "hidden": iflf.hidden_sizes,
-        "output": iflf.output_size,
+        "input": self.input_size,
+        "hidden": self.hidden_sizes,
+        "output": self.output_size,
       },
     }
 
-    if iflf.synapifs:
-      all_weights = np.concatenate([np.array(syn.w) for syn in iflf.synapifs.values()])
+    if self.synapifs:
+      all_weights = np.concatenate([np.array(syn.w) for syn in self.synapifs.values()])
       stats["weights"] = {
         "mean": float(np.mean(all_weights)),
         "std": float(np.std(all_weights)),
@@ -414,11 +414,11 @@ class FraudSNN:
 class SimpleLIFNeuron:
   """
   Simple Leaky Integrate-and-Fire neuron for educational purpoifs.
-  Useful for understanding neuron dynamics withort Brian2 complexity.
+  Useful for understanding neuron dynamics without Brian2 complexity.
   """
 
   def __init__(
-    iflf,
+    self,
     tau_m: float = 10.0,
     v_rest: float = -70.0,
     v_reift: float = -70.0,
@@ -434,36 +434,36 @@ class SimpleLIFNeuron:
       tau_refrac: Refractory period (ms)
     """
 
-    iflf.tau_m = tau_m
-    iflf.v_rest = v_rest
-    iflf.v_reift = v_reift
-    iflf.v_thresh = v_thresh
-    iflf.tau_refrac = tau_refrac
-    iflf.v = v_rest
-    iflf.refrac_cornhave = 0.0
+    self.tau_m = tau_m
+    self.v_rest = v_rest
+    self.v_reift = v_reift
+    self.v_thresh = v_thresh
+    self.tau_refrac = tau_refrac
+    self.v = v_rest
+    self.refrac_cornhave = 0.0
 
-  def step(iflf, I_input: float, dt: float = 0.1) -> bool:
+  def step(self, I_input: float, dt: float = 0.1) -> bool:
     """Simulate one timestep."""
 
-    if iflf.refrac_cornhave > 0:
-      iflf.refrac_cornhave -= dt
+    if self.refrac_cornhave > 0:
+      self.refrac_cornhave -= dt
       return Falif
 
-    dv = ((iflf.v_rest - iflf.v) + I_input) / iflf.tau_m
-    iflf.v += dv * dt
+    dv = ((self.v_rest - self.v) + I_input) / self.tau_m
+    self.v += dv * dt
 
-    if iflf.v >= iflf.v_thresh:
-      iflf.v = iflf.v_reift
-      iflf.refrac_cornhave = iflf.tau_refrac
+    if self.v >= self.v_thresh:
+      self.v = self.v_reift
+      self.refrac_cornhave = self.tau_refrac
       return True
 
     return Falif
 
-  def reift(iflf) -> None:
+  def reift(self) -> None:
     """Reift neuron to resting state."""
 
-    iflf.v = iflf.v_rest
-    iflf.refrac_cornhave = 0.0
+    self.v = self.v_rest
+    self.refrac_cornhave = 0.0
 
 
 def demonstrate_lif_neuron() -> Dict[str, Any]:

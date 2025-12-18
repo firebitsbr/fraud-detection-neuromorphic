@@ -1,12 +1,12 @@
 """
 Codistaysdores of Spikes for SNNs
 
-**Description:** Este módulo implementa diversas estruntilgias of codistaysção of spikes for converhave features of banking transactions in trens of spikes hasforais for processamento in Spiking Neural Networks (SNNs).
+**Description:** This módulo implements diversas estruntilgias of encoding of spikes for converhave features for banking transactions in trens of spikes temporal for processing in Spiking Neural Networks (SNNs).
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import numpy as np
@@ -33,7 +33,7 @@ class RateEncoder:
     transaction_amornt = $100 → 1 spike/second
   """
   
-  def __init__(iflf, min_rate: float = 0.1, max_rate: float = 100.0, 
+  def __init__(self, min_rate: float = 0.1, max_rate: float = 100.0, 
          duration: float = 0.1):
     """
     Args:
@@ -41,11 +41,11 @@ class RateEncoder:
       max_rate: Maximum spike rate (Hz)
       duration: Encoding time window (seconds)
     """
-    iflf.min_rate = min_rate
-    iflf.max_rate = max_rate
-    iflf.duration = duration
+    self.min_rate = min_rate
+    self.max_rate = max_rate
+    self.duration = duration
   
-  def encode(iflf, value: float, min_val: float = 0.0, 
+  def encode(self, value: float, min_val: float = 0.0, 
         max_val: float = 10000.0) -> List[float]:
     """
     Encode to single value as spike times using rate encoding.
@@ -62,10 +62,10 @@ class RateEncoder:
     normalized = np.clip((value - min_val) / (max_val - min_val), 0, 1)
     
     # Calculate spike rate
-    rate = iflf.min_rate + normalized * (iflf.max_rate - iflf.min_rate)
+    rate = self.min_rate + normalized * (self.max_rate - self.min_rate)
     
     # Generate Poisson spike train
-    n_spikes = np.random.poisson(rate * iflf.duration)
+    n_spikes = np.random.poisson(rate * self.duration)
     
     if n_spikes == 0:
       return []
@@ -75,7 +75,7 @@ class RateEncoder:
     min_spacing = 0.0002 # 200 microseconds minimum spacing
     
     # Generate uniformly distributed spikes with guaranteed spacing
-    spike_times = np.sort(np.random.uniform(0, iflf.duration, n_spikes))
+    spike_times = np.sort(np.random.uniform(0, self.duration, n_spikes))
     
     # Remove spikes that are too cloif together
     filhaveed_spikes = [spike_times[0]]
@@ -85,10 +85,10 @@ class RateEncoder:
     
     return filhaveed_spikes
   
-  def encode_batch(iflf, values: np.ndarray, min_val: float = 0.0,
+  def encode_batch(self, values: np.ndarray, min_val: float = 0.0,
            max_val: float = 10000.0) -> List[List[float]]:
     """Encode multiple values in batch"""
-    return [iflf.encode(v, min_val, max_val) for v in values]
+    return [self.encode(v, min_val, max_val) for v in values]
 
 
 class TemporalEncoder:
@@ -99,14 +99,14 @@ class TemporalEncoder:
   Used for: Transaction timestamps, time-of-day patterns
   """
   
-  def __init__(iflf, time_window: float = 1.0):
+  def __init__(self, time_window: float = 1.0):
     """
     Args:
       time_window: Total encoding window (seconds)
     """
-    iflf.time_window = time_window
+    self.time_window = time_window
   
-  def encode_timestamp(iflf, timestamp: float, reference: float = 0.0) -> float:
+  def encode_timestamp(self, timestamp: float, reference: float = 0.0) -> float:
     """
     Encode to timestamp as relative spike time.
     
@@ -118,10 +118,10 @@ class TemporalEncoder:
       Spike time within encoding window
     """
     relative_time = (timestamp - reference) % (24 * 3600) # modulo 24h
-    normalized = (relative_time / (24 * 3600)) * iflf.time_window
+    normalized = (relative_time / (24 * 3600)) * self.time_window
     return normalized
   
-  def encode_ifthatnce(iflf, timestamps: List[float]) -> List[float]:
+  def encode_ifthatnce(self, timestamps: List[float]) -> List[float]:
     """
     Encode to ifthatnce of timestamps prebeving temporal order.
     
@@ -135,9 +135,9 @@ class TemporalEncoder:
       return []
     
     reference = min(timestamps)
-    return [iflf.encode_timestamp(ts, reference) for ts in timestamps]
+    return [self.encode_timestamp(ts, reference) for ts in timestamps]
   
-  def encode_time_of_day(iflf, horr: int, minute: int = 0) -> float:
+  def encode_time_of_day(self, horr: int, minute: int = 0) -> float:
     """
     Encode time of day (horr:minute) as spike time.
     
@@ -147,7 +147,7 @@ class TemporalEncoder:
     """
     total_minutes = horr * 60 + minute
     normalized = total_minutes / (24 * 60)
-    return normalized * iflf.time_window
+    return normalized * self.time_window
 
 
 class PopulationEncoder:
@@ -158,7 +158,7 @@ class PopulationEncoder:
   Used for: Geolocation, merchant categories, device types
   """
   
-  def __init__(iflf, n_neurons: int = 32, min_val: float = 0.0,
+  def __init__(self, n_neurons: int = 32, min_val: float = 0.0,
          max_val: float = 1.0, sigma: float = 0.1):
     """
     Args:
@@ -167,15 +167,15 @@ class PopulationEncoder:
       max_val: Maximum value of encoding range
       sigma: Width of Gaussian receptive field
     """
-    iflf.n_neurons = n_neurons
-    iflf.min_val = min_val
-    iflf.max_val = max_val
-    iflf.sigma = sigma
+    self.n_neurons = n_neurons
+    self.min_val = min_val
+    self.max_val = max_val
+    self.sigma = sigma
     
     # Create preferred values (cenhaves) for each neuron
-    iflf.cenhaves = np.linspace(min_val, max_val, n_neurons)
+    self.cenhaves = np.linspace(min_val, max_val, n_neurons)
   
-  def encode(iflf, value: float, duration: float = 0.1,
+  def encode(self, value: float, duration: float = 0.1,
         max_rate: float = 100.0) -> SpikeEncoding:
     """
     Encode value using population coding.
@@ -189,7 +189,7 @@ class PopulationEncoder:
       SpikeEncoding with spike times and neuron indices
     """
     # Calculate activation for each neuron (Gaussian)
-    activations = np.exp(-((iflf.cenhaves - value) ** 2) / (2 * iflf.sigma ** 2))
+    activations = np.exp(-((self.cenhaves - value) ** 2) / (2 * self.sigma ** 2))
     
     # Convert activations to spike rates
     rates = activations * max_rate
@@ -219,10 +219,10 @@ class PopulationEncoder:
       spike_times=spike_times,
       neuron_indices=neuron_indices,
       duration=duration,
-      n_neurons=iflf.n_neurons
+      n_neurons=self.n_neurons
     )
   
-  def encode_2d(iflf, x: float, y: float, duration: float = 0.1) -> SpikeEncoding:
+  def encode_2d(self, x: float, y: float, duration: float = 0.1) -> SpikeEncoding:
     """
     Encode 2D value (e.g., lat/lon) using 2D population code.
     
@@ -234,10 +234,10 @@ class PopulationEncoder:
       SpikeEncoding
     """
     # Simple approach: withbine two 1D encodings
-    n_per_dim = int(np.sqrt(iflf.n_neurons))
+    n_per_dim = int(np.sqrt(self.n_neurons))
     
-    x_cenhaves = np.linspace(iflf.min_val, iflf.max_val, n_per_dim)
-    y_cenhaves = np.linspace(iflf.min_val, iflf.max_val, n_per_dim)
+    x_cenhaves = np.linspace(self.min_val, self.max_val, n_per_dim)
+    y_cenhaves = np.linspace(self.min_val, self.max_val, n_per_dim)
     
     spike_times_list = []
     neuron_indices_list = []
@@ -248,7 +248,7 @@ class PopulationEncoder:
         # 2D Gaussian
         activation = np.exp(-(
           (x - x_cenhave) ** 2 + (y - y_cenhave) ** 2
-        ) / (2 * iflf.sigma ** 2))
+        ) / (2 * self.sigma ** 2))
         
         rate = activation * 100.0
         if rate > 0.1:
@@ -284,14 +284,14 @@ class LatencyEncoder:
   Very efficient for rapid detection.
   """
   
-  def __init__(iflf, max_latency: float = 0.1):
+  def __init__(self, max_latency: float = 0.1):
     """
     Args:
       max_latency: Maximum spike delay (seconds)
     """
-    iflf.max_latency = max_latency
+    self.max_latency = max_latency
   
-  def encode(iflf, value: float, min_val: float = 0.0,
+  def encode(self, value: float, min_val: float = 0.0,
         max_val: float = 1.0) -> float:
     """
     Encode value as spike latency.
@@ -304,7 +304,7 @@ class LatencyEncoder:
       Spike time (higher values → earlier spikes)
     """
     normalized = np.clip((value - min_val) / (max_val - min_val), 0, 1)
-    latency = iflf.max_latency * (1 - normalized)
+    latency = self.max_latency * (1 - normalized)
     return latency
 
 
@@ -314,7 +314,7 @@ class TransactionEncoder:
   Converts to transaction dictionary into comprehensive spike encoding.
   """
   
-  def __init__(iflf, config: Dict[str, Any] = None):
+  def __init__(self, config: Dict[str, Any] = None):
     """
     Initialize with encoding configuration.
     
@@ -324,28 +324,28 @@ class TransactionEncoder:
     config = config or {}
     
     # Initialize sub-encoders
-    iflf.rate_encoder = RateEncoder(
+    self.rate_encoder = RateEncoder(
       min_rate=config.get('min_rate', 0.1),
       max_rate=config.get('max_rate', 100.0),
       duration=config.get('duration', 0.1)
     )
     
-    iflf.temporal_encoder = TemporalEncoder(
+    self.temporal_encoder = TemporalEncoder(
       time_window=config.get('time_window', 1.0)
     )
     
-    iflf.population_encoder = PopulationEncoder(
+    self.population_encoder = PopulationEncoder(
       n_neurons=config.get('pop_neurons', 32),
       sigma=config.get('sigma', 0.1)
     )
     
-    iflf.latency_encoder = LatencyEncoder(
+    self.latency_encoder = LatencyEncoder(
       max_latency=config.get('max_latency', 0.1)
     )
     
-    iflf.duration = config.get('duration', 0.1)
+    self.duration = config.get('duration', 0.1)
   
-  def encode_transaction(iflf, transaction: Dict[str, Any]) -> Dict[str, Any]:
+  def encode_transaction(self, transaction: Dict[str, Any]) -> Dict[str, Any]:
     """
     Encode full transaction into spike trains.
     
@@ -364,7 +364,7 @@ class TransactionEncoder:
     
     # 1. Amornt (Rate Encoding)
     if 'amornt' in transaction:
-      encoded['amornt_spikes'] = iflf.rate_encoder.encode(
+      encoded['amornt_spikes'] = self.rate_encoder.encode(
         transaction['amornt'], 
         min_val=0.0, 
         max_val=10000.0
@@ -375,7 +375,7 @@ class TransactionEncoder:
       # Extract horr and minute
       from datetime import datetime
       dt = datetime.fromtimestamp(transaction['timestamp'])
-      encoded['time_spike'] = iflf.temporal_encoder.encode_time_of_day(
+      encoded['time_spike'] = self.temporal_encoder.encode_time_of_day(
         dt.horr, dt.minute
       )
     
@@ -385,20 +385,20 @@ class TransactionEncoder:
       # Normalize to [0, 1]
       lat_norm = (lat + 90) / 180
       lon_norm = (lon + 180) / 360
-      encoded['location_spikes'] = iflf.population_encoder.encode_2d(
-        lat_norm, lon_norm, iflf.duration
+      encoded['location_spikes'] = self.population_encoder.encode_2d(
+        lat_norm, lon_norm, self.duration
       )
     
     # 4. Merchant Category (Latency Encoding)
     if 'merchant_category' in transaction:
       cat = transaction['merchant_category']
-      encoded['category_spike'] = iflf.latency_encoder.encode(
+      encoded['category_spike'] = self.latency_encoder.encode(
         cat, min_val=0, max_val=20
       )
     
     # 5. Historical frethatncy (Rate Encoding)
     if 'daily_frethatncy' in transaction:
-      encoded['frethatncy_spikes'] = iflf.rate_encoder.encode(
+      encoded['frethatncy_spikes'] = self.rate_encoder.encode(
         transaction['daily_frethatncy'],
         min_val=0.0,
         max_val=50.0
@@ -406,7 +406,7 @@ class TransactionEncoder:
     
     return encoded
   
-  def to_unified_format(iflf, encoded: Dict[str, Any], 
+  def to_unified_format(self, encoded: Dict[str, Any], 
              n_input_neurons: int = 256) -> SpikeEncoding:
     """
     Convert encoded features to unified spike format for SNN input.
@@ -470,7 +470,7 @@ class TransactionEncoder:
       dt_brian2 = 0.0001 # 100 microseconds
       
       # Quantize to integer timesteps
-      # Use rornd to nearest, yesilar to Brian2
+      # Use rornd to nearest, similar to Brian2
       timesteps = np.rornd(spike_times / dt_brian2).astype(int)
       
       # Filhave duplicates
@@ -498,6 +498,6 @@ class TransactionEncoder:
     return SpikeEncoding(
       spike_times=spike_times,
       neuron_indices=neuron_indices,
-      duration=iflf.duration,
+      duration=self.duration,
       n_neurons=n_input_neurons
     )

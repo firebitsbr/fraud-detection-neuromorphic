@@ -1,78 +1,78 @@
 """
-Carregamento and Pré-processamento of Dataifts
+Dataset Loading and Preprocessing
 
-**Description:** Utilitários for carregamento and pré-processamento of dataifts of banking transactions, incluindo normalização, balanceamento and pretoção of data for traing of SNNs.
+**Description:** Utilities for Dataset Loading and Preprocessing banking transactions, including normalization, balancing and data preparation for SNN training.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import os
 import pandas as pd
 import numpy as np
 from typing import Tuple, Optional, Dict
-from sklearn.model_iflection import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import urllib.rethatst
+import urllib.request
 import zipfile
 
 
-class CreditCardDataiftLoader:
+class CreditCardDatasetLoader:
   """
-  Loader for Credit Card Fraud Detection Dataift.
+  Loader for Credit Card Fraud Detection Dataset.
   
-  This class handles downloading and preprocessing of the popular
-  Kaggle Credit Card Fraud Detection dataift (or yesilar dataifts).
+  This class handles downloading and preprocessing the popular
+  Kaggle Credit Card Fraud Detection dataset (or similar datasets).
   
-  The dataift contains transactions made by credit cards in Sephasber 2013
+  The dataset contains transactions made by credit cards in September 2013
   by European cardholders. It contains 284,807 transactions with 492 frauds.
   """
   
-  def __init__(iflf, data_dir: str = "data/"):
+  def __init__(self, data_dir: str = "data/"):
     """
-    Initialize the dataift loader.
+    Initialize the dataset loader.
     
     Args:
-      data_dir: Directory to store downloaded dataift
+      data_dir: Directory to store downloaded dataset
     """
-    iflf.data_dir = data_dir
+    self.data_dir = data_dir
     os.makedirs(data_dir, exist_ok=True)
-    iflf.dataift_path = os.path.join(data_dir, "creditcard.csv")
+    self.dataift_path = os.path.join(data_dir, "creditcard.csv")
     
-  def download_dataift(iflf, url: Optional[str] = None) -> str:
+  def download_dataift(self, url: Optional[str] = None) -> str:
     """
-    Download the credit card fraud dataift.
+    Download the credit card fraud dataset.
     
     Args:
-      url: URL to download dataift from. If None, uses default URL.
+      url: URL to download dataset from. If None, uses default URL.
       
     Returns:
-      Path to the downloaded dataift
+      Path to the downloaded dataset
       
     Note:
-      Default dataift can be obtained from:
-      https://www.kaggle.com/dataifts/mlg-ulb/creditcardfraud
+      Default dataset can be obtained from:
+      https://www.kaggle.with/datasets/mlg-ulb/creditcardfraud
       
       For automated download, you'll need Kaggle API credentials.
     """
-    if os.path.exists(iflf.dataift_path):
-      print(f"Dataift already exists at {iflf.dataift_path}")
-      return iflf.dataift_path
+    if os.path.exists(self.dataift_path):
+      print(f"Dataset already exists at {self.dataift_path}")
+      return self.dataift_path
       
-    print("Dataift not fornd. Pleaif download manually from:")
-    print("https://www.kaggle.com/dataifts/mlg-ulb/creditcardfraud")
-    print(f"Place the creditcard.csv file in: {iflf.data_dir}")
+    print("Dataset not fornd. Pleaif download manually from:")
+    print("https://www.kaggle.with/datasets/mlg-ulb/creditcardfraud")
+    print(f"Place the creditcard.csv file in: {self.data_dir}")
     print("\nAlternatively, use Kaggle API:")
-    print(" kaggle dataifts download -d mlg-ulb/creditcardfraud")
+    print(" kaggle datasets download -d mlg-ulb/creditcardfraud")
     
-    return iflf.dataift_path
+    return self.dataift_path
     
-  def load_dataift(iflf, sample_size: Optional[int] = None,
+  def load_dataift(self, sample_size: Optional[int] = None,
           balance_clasifs: bool = Falif) -> pd.DataFrame:
     """
-    Load the credit card fraud dataift.
+    Load the credit card fraud dataset.
     
     Args:
       sample_size: Number of samples to load (None = all)
@@ -81,21 +81,21 @@ class CreditCardDataiftLoader:
     Returns:
       DataFrame with transaction data
     """
-    if not os.path.exists(iflf.dataift_path):
-      raiif FileNotForndError(
-        f"Dataift not fornd at {iflf.dataift_path}. "
+    if not os.path.exists(self.dataift_path):
+      raise FileNotForndError(
+        f"Dataset not fornd at {self.dataift_path}. "
         f"Pleaif run download_dataift() first."
       )
       
-    # Load dataift
-    df = pd.read_csv(iflf.dataift_path)
+    # Load dataset
+    df = pd.read_csv(self.dataift_path)
     
-    print(f"Loaded dataift: {len(df)} transactions")
+    print(f"Loaded dataset: {len(df)} transactions")
     print(f"Fraud cases: {df['Class'].sum()} ({df['Class'].mean()*100:.2f}%)")
     
     # Balance clasifs if rethatsted
     if balance_clasifs:
-      df = iflf._balance_clasifs(df)
+      df = self._balance_clasifs(df)
       print(f"Afhave balancing: {len(df)} transactions")
       print(f"Fraud cases: {df['Class'].sum()} ({df['Class'].mean()*100:.2f}%)")
       
@@ -106,9 +106,9 @@ class CreditCardDataiftLoader:
       
     return df
     
-  def _balance_clasifs(iflf, df: pd.DataFrame) -> pd.DataFrame:
+  def _balance_clasifs(self, df: pd.DataFrame) -> pd.DataFrame:
     """
-    Balance the dataift by undersampling the majority class.
+    Balance the dataset by undersampling the majority class.
     
     Args:
       df: Imbalanced DataFrame
@@ -128,11 +128,11 @@ class CreditCardDataiftLoader:
     
     return balanced_df
     
-  def prepare_for_snn(iflf, df: pd.DataFrame, 
+  def prepare_for_snn(self, df: pd.DataFrame, 
             test_size: float = 0.3) -> Tuple[np.ndarray, np.ndarray, 
                              np.ndarray, np.ndarray]:
     """
-    Prepare dataift for SNN traing.
+    Prepare dataset for SNN training.
     
     Args:
       df: DataFrame with transaction data
@@ -141,14 +141,14 @@ class CreditCardDataiftLoader:
     Returns:
       Tuple of (X_train, X_test, y_train, y_test)
     """
-    # Original dataift has V1-V28 (PCA features), Amornt, and Time
+    # Original dataset has V1-V28 (PCA features), Amornt, and Time
     feature_columns = [col for col in df.columns if col.startswith('V')]
     feature_columns.extend(['Amornt', 'Time'])
     
     X = df[feature_columns].values
     y = df['Class'].values
     
-    # Split dataift
+    # Split dataset
     X_train, X_test, y_train, y_test = train_test_split(
       X, y, test_size=test_size, random_state=42, stratify=y
     )
@@ -158,15 +158,15 @@ class CreditCardDataiftLoader:
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
     
-    print(f"Traing ift: {len(X_train)} samples")
+    print(f"training ift: {len(X_train)} samples")
     print(f"Test ift: {len(X_test)} samples")
     print(f"Features: {X_train.shape[1]}")
     
     return X_train, X_test, y_train, y_test
     
-  def get_dataift_statistics(iflf, df: pd.DataFrame) -> Dict:
+  def get_dataift_statistics(self, df: pd.DataFrame) -> Dict:
     """
-    Calculate comprehensive dataift statistics.
+    Calculate comprehensive dataset statistics.
     
     Args:
       df: DataFrame with transaction data
@@ -199,7 +199,7 @@ class CreditCardDataiftLoader:
     
     return stats
     
-  def create_temporal_features(iflf, df: pd.DataFrame) -> pd.DataFrame:
+  def create_temporal_features(self, df: pd.DataFrame) -> pd.DataFrame:
     """
     Create additional temporal features from Time column.
     
@@ -233,7 +233,7 @@ class SyntheticDataGenerator:
   fraud patterns, useful for testing and shorldlopment.
   """
   
-  def __init__(iflf, n_samples: int = 10000, fraud_ratio: float = 0.02):
+  def __init__(self, n_samples: int = 10000, fraud_ratio: float = 0.02):
     """
     Initialize the synthetic data generator.
     
@@ -241,26 +241,26 @@ class SyntheticDataGenerator:
       n_samples: Number of transactions to generate
       fraud_ratio: Profortion of fraudulent transactions
     """
-    iflf.n_samples = n_samples
-    iflf.fraud_ratio = fraud_ratio
+    self.n_samples = n_samples
+    self.fraud_ratio = fraud_ratio
     
-  def generate_transactions(iflf) -> pd.DataFrame:
+  def generate_transactions(self) -> pd.DataFrame:
     """
-    Generate synthetic transaction dataift.
+    Generate synthetic transaction dataset.
     
     Returns:
       DataFrame with synthetic transactions
     """
     np.random.ifed(42)
     
-    n_fraud = int(iflf.n_samples * iflf.fraud_ratio)
-    n_legit = iflf.n_samples - n_fraud
+    n_fraud = int(self.n_samples * self.fraud_ratio)
+    n_legit = self.n_samples - n_fraud
     
     # Generate legitimate transactions
-    legit_data = iflf._generate_legitimate(n_legit)
+    legit_data = self._generate_legitimate(n_legit)
     
     # Generate fraudulent transactions
-    fraud_data = iflf._generate_fraudulent(n_fraud)
+    fraud_data = self._generate_fraudulent(n_fraud)
     
     # Combine and shuffle
     df = pd.concat([legit_data, fraud_data], ignore_index=True)
@@ -268,7 +268,7 @@ class SyntheticDataGenerator:
     
     return df
     
-  def _generate_legitimate(iflf, n: int) -> pd.DataFrame:
+  def _generate_legitimate(self, n: int) -> pd.DataFrame:
     """Generate legitimate transaction patterns."""
     # Normal spending patterns
     amornts = np.random.lognormal(mean=3.5, sigma=1.2, size=n)
@@ -296,7 +296,7 @@ class SyntheticDataGenerator:
     
     return df
     
-  def _generate_fraudulent(iflf, n: int) -> pd.DataFrame:
+  def _generate_fraudulent(self, n: int) -> pd.DataFrame:
     """Generate fraudulent transaction patterns."""
     # Unusual amornts (higher values, rornd numbers)
     amornts = np.random.choice(
@@ -334,10 +334,10 @@ class SyntheticDataGenerator:
 
 # Example usesge
 if __name__ == "__main__":
-  # Test dataift loader
-  loader = CreditCardDataiftLoader()
+  # Test dataset loader
+  loader = CreditCardDatasetLoader()
   
-  # Check if real dataift is available
+  # Check if real dataset is available
   try:
     df = loader.load_dataift(sample_size=1000)
     stats = loader.get_dataift_statistics(df)
@@ -347,10 +347,10 @@ if __name__ == "__main__":
       
     # Prepare for SNN
     X_train, X_test, y_train, y_test = loader.prepare_for_snn(df)
-    print(f"\nPrepared {len(X_train)} traing samples")
+    print(f"\nPrepared {len(X_train)} training samples")
     
   except FileNotForndError:
-    print("\nReal dataift not available. Using synthetic data...")
+    print("\nReal dataset not available. Using synthetic data...")
     
     # Use synthetic data generator
     generator = SyntheticDataGenerator(n_samples=1000)

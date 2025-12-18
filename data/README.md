@@ -1,9 +1,9 @@
 # Dataset Directory
 
-**Descrição:** This project uses the **IEEE-CIS Fraud Detection** dataset from Kaggle.
+**Description:** This project uses the **IEEE-CIS Fraud Detection** dataset from Kaggle.
 
 **Autor:** Mauro Risonho de Paula Assumpção
-**Data de Criação:** 5 de Dezembro de 2025
+**Data de Creation:** 5 de Dezembro de 2025
 
 ## Kaggle IEEE Fraud Detection Dataset
 
@@ -44,7 +44,7 @@ python scripts/manual_kaggle_setup.py
 pip install kaggle
 
 # Configure Kaggle credentials
-# 1. Go to https://www.kaggle.com/account
+# 1. Go to https://www.kaggle.with/account
 # 2. Click "Create New API Token"
 # 3. Move kaggle.json to ~/.kaggle/
 
@@ -54,7 +54,7 @@ python scripts/download_kaggle_dataset.py
 
 ### Option 3: Manual Download (Simple)
 
-1. Visit: https://www.kaggle.com/c/ieee-fraud-detection/data
+1. Visit: https://www.kaggle.with/c/ieee-fraud-detection/data
 2. Click "Download All" or download individually
 3. Extract files to `data/kaggle/` directory
 
@@ -96,7 +96,7 @@ These files are **excluded** from version control via `.gitignore` to keep the r
 ## Dataset Information
 
 **Kaggle Competition:** IEEE-CIS Fraud Detection 
-**URL:** https://www.kaggle.com/c/ieee-fraud-detection 
+**URL:** https://www.kaggle.with/c/ieee-fraud-detection 
 **License:** Competition-specific license 
 **Total Size:** ~1.3 GB (uncompressed)
 

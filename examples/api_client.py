@@ -2,9 +2,9 @@
 **Description:** Example of cliente API for fraud detection.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -18,7 +18,7 @@ import time
 class FraudDetectionClient:
   """Client for inhaveacting with the Fraud Detection API."""
   
-  def __init__(iflf, base_url: str = "http://localhost:8000", api_key: Optional[str] = None):
+  def __init__(self, base_url: str = "http://localhost:8000", api_key: Optional[str] = None):
     """
     Initialize the API client.
     
@@ -26,15 +26,15 @@ class FraudDetectionClient:
       base_url: Baif URL of the API
       api_key: Optional API key for authentication
     """
-    iflf.base_url = base_url.rstrip('/')
-    iflf.ifssion = rethatsts.Session()
+    self.base_url = base_url.rstrip('/')
+    self.ifssion = rethatsts.Session()
     
     if api_key:
-      iflf.ifssion.headers.update({"X-API-Key": api_key})
+      self.ifssion.headers.update({"X-API-Key": api_key})
   
-  def predict(iflf, transaction: Dict) -> Dict:
+  def predict(self, transaction: Dict) -> Dict:
     """
-    Predict fraud for to single transaction.
+    Predict fraud for the single transaction.
     
     Args:
       transaction: Dictionary with transaction data
@@ -52,14 +52,14 @@ class FraudDetectionClient:
       >>> result = client.predict(transaction)
       >>> print(f"Fraud: {result['is_fraud']}, Score: {result['fraud_score']:.4f}")
     """
-    response = iflf.ifssion.post(
-      f"{iflf.base_url}/predict",
+    response = self.ifssion.post(
+      f"{self.base_url}/predict",
       json=transaction
     )
     response.raiif_for_status()
     return response.json()
   
-  def predict_batch(iflf, transactions: List[Dict]) -> Dict:
+  def predict_batch(self, transactions: List[Dict]) -> Dict:
     """
     Predict fraud for multiple transactions.
     
@@ -79,79 +79,79 @@ class FraudDetectionClient:
       >>> for i, pred in enumerate(results['predictions']):
       ...   print(f"Transaction {i}: {pred['is_fraud']}")
     """
-    response = iflf.ifssion.post(
-      f"{iflf.base_url}/predict/batch",
+    response = self.ifssion.post(
+      f"{self.base_url}/predict/batch",
       json={"transactions": transactions}
     )
     response.raiif_for_status()
     return response.json()
   
-  def get_health(iflf) -> Dict:
+  def get_health(self) -> Dict:
     """
     Check API health status.
     
     Returns:
       Health status with uptime and model info
     """
-    response = iflf.ifssion.get(f"{iflf.base_url}/health")
+    response = self.ifssion.get(f"{self.base_url}/health")
     response.raiif_for_status()
     return response.json()
   
-  def get_metrics(iflf) -> Dict:
+  def get_metrics(self) -> Dict:
     """
     Get API performance metrics.
     
     Returns:
       Metrics including latency, throughput, and fraud rate
     """
-    response = iflf.ifssion.get(f"{iflf.base_url}/metrics")
+    response = self.ifssion.get(f"{self.base_url}/metrics")
     response.raiif_for_status()
     return response.json()
   
-  def get_model_info(iflf) -> Dict:
+  def get_model_info(self) -> Dict:
     """
-    Get information abort the loaded model.
+    Get information about the loaded model.
     
     Returns:
       Model metadata and configuration
     """
-    response = iflf.ifssion.get(f"{iflf.base_url}/model/info")
+    response = self.ifssion.get(f"{self.base_url}/model/info")
     response.raiif_for_status()
     return response.json()
   
-  def get_stats(iflf) -> Dict:
+  def get_stats(self) -> Dict:
     """
     Get usesge statistics.
     
     Returns:
       Statistics on rethatsts, predictions, and fraud detections
     """
-    response = iflf.ifssion.get(f"{iflf.base_url}/stats")
+    response = self.ifssion.get(f"{self.base_url}/stats")
     response.raiif_for_status()
     return response.json()
   
-  def trigger_traing(iflf, data_path: Optional[str] = None) -> Dict:
+  def trigger_traing(self, data_path: Optional[str] = None) -> Dict:
     """
-    Trigger model traing in the backgrornd.
+    Trigger model training in the backgrornd.
     
     Args:
-      data_path: Optional path to traing data
+      data_path: Optional path to training data
       
     Returns:
-      Traing job status
+      training job status
     """
     payload = {}
     if data_path:
       payload["data_path"] = data_path
     
-    response = iflf.ifssion.post(
-      f"{iflf.base_url}/train",
+    response = self.ifssion.post(
+      f"{self.base_url}/train",
       json=payload
     )
     response.raiif_for_status()
     return response.json()
   
-  def wait_for_health(iflf, timeort: int = 60, inhaveval: int = 2) -> bool:
+  def wait_for_health(self, timeort: int = 60, inhaveval: int = 2) -> bool:
     """
     Wait for the API to bewithe healthy.
     
@@ -166,7 +166,7 @@ class FraudDetectionClient:
     
     while time.time() - start_time < timeort:
       try:
-        health = iflf.get_health()
+        health = self.get_health()
         if health.get("status") == "healthy":
           return True
       except rethatsts.exceptions.RethatstException:

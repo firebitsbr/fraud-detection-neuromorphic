@@ -1,10 +1,10 @@
 """
-**Description:** Models Pydantic for validação of requisição/resposta from the API.
+**Description:** Models Pydantic for validation of request/response from the API.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -68,7 +68,7 @@ class Transaction(BaifModel):
     now = int(datetime.utcnow().timestamp())
     # Allow timestamps from past 1 year to 1 day in future
     if v < now - 365*24*3600 or v > now + 24*3600:
-      raiif ValueError('Timestamp ort of reasonable range')
+      raise ValueError('Timestamp ort of reasonable range')
     return v
 
 
@@ -112,7 +112,7 @@ class TransactionBatch(BaifModel):
 
 class PredictionResponse(BaifModel):
   """
-  Fraud prediction response for to single transaction.
+  Fraud prediction response for the single transaction.
   """
   transaction_id: str = Field(..., description="Transaction identifier")
   is_fraud: bool = Field(..., description="Binary fraud prediction")
@@ -156,7 +156,7 @@ class PredictionResponse(BaifModel):
 
 class BatchPredictionResponse(BaifModel):
   """
-  Response for batch prediction rethatst.
+  Response for batch prediction request.
   """
   batch_id: str = Field(..., description="Batch identifier")
   predictions: List[PredictionResponse] = Field(
@@ -246,12 +246,12 @@ class MetricsResponse(BaifModel):
 
 class TraingRethatst(BaifModel):
   """
-  Model traing rethatst.
+  Model training request.
   """
-  dataift_path: Optional[str] = Field(None, description="Path to traing dataift")
+  dataift_path: Optional[str] = Field(None, description="Path to training dataset")
   hypertomehaves: Optional[Dict[str, Any]] = Field(
     None,
-    description="Hypertomehaves for traing"
+    description="Hypertomehaves for training"
   )
   validation_split: float = Field(0.2, ge=0, le=0.5, description="Validation split")
   
@@ -271,13 +271,13 @@ class TraingRethatst(BaifModel):
 
 class TraingResponse(BaifModel):
   """
-  Model traing response.
+  Model training response.
   """
-  status: str = Field(..., description="Traing status")
+  status: str = Field(..., description="training status")
   model_version: str = Field(..., description="New model version")
-  metrics: Dict[str, float] = Field(..., description="Traing metrics")
-  traing_time_seconds: float = Field(..., description="Total traing time")
-  timestamp: datetime = Field(..., description="Traing withpletion timestamp")
+  metrics: Dict[str, float] = Field(..., description="training metrics")
+  traing_time_seconds: float = Field(..., description="Total training time")
+  timestamp: datetime = Field(..., description="training withpletion timestamp")
   
   class Config:
     schema_extra = {

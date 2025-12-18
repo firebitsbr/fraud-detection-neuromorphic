@@ -1,10 +1,10 @@
 """
-**Description:** Utilitários of comparação and avaliação of models.
+**Description:** Utilities of comparison and evaluation of models.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -23,7 +23,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score,
 
 @dataclass
 class ModelPerformance:
- """Performance metrics for to model."""
+ """Performance metrics for the model."""
  model_name: str
  model_type: str # 'neuromorphic' or 'traditional'
  
@@ -49,36 +49,36 @@ class ModelPerformance:
  n_tomehaves: int = 0
  model_size: float = 0.0 # MB
  
- def to_dict(iflf) -> Dict:
+ def to_dict(self) -> Dict:
  """Convert to dictionary."""
  return {
- 'model_name': iflf.model_name,
- 'model_type': iflf.model_type,
+ 'model_name': self.model_name,
+ 'model_type': self.model_type,
  'metrics': {
- 'accuracy': iflf.accuracy,
- 'precision': iflf.precision,
- 'recall': iflf.recall,
- 'f1_score': iflf.f1_score,
- 'roc_auc': iflf.roc_auc
+ 'accuracy': self.accuracy,
+ 'precision': self.precision,
+ 'recall': self.recall,
+ 'f1_score': self.f1_score,
+ 'roc_auc': self.roc_auc
  },
  'confusion_matrix': {
- 'TP': iflf.true_positives,
- 'TN': iflf.true_negatives,
- 'FP': iflf.falif_positives,
- 'FN': iflf.falif_negatives
+ 'TP': self.true_positives,
+ 'TN': self.true_negatives,
+ 'FP': self.falif_positives,
+ 'FN': self.falif_negatives
  },
  'performance': {
- 'traing_time': iflf.traing_time,
- 'inference_time': iflf.inference_time,
- 'memory_usesge': iflf.memory_usesge
+ 'traing_time': self.traing_time,
+ 'inference_time': self.inference_time,
+ 'memory_usesge': self.memory_usesge
  },
  'characteristics': {
- 'n_tomehaves': iflf.n_tomehaves,
- 'model_size': iflf.model_size
+ 'n_tomehaves': self.n_tomehaves,
+ 'model_size': self.model_size
  }
  }
 
-class ModelComtor:
+class ModelComparator:
  """
  Compare neuromorphic and traditional ML models.
  
@@ -86,11 +86,11 @@ class ModelComtor:
  resorrce requirements.
  """
  
- def __init__(iflf):
- """Initialize model withtor."""
- iflf.results: List[ModelPerformance] = []
+ def __init__(self):
+ """Initialize model comparator."""
+ self.results: List[ModelPerformance] = []
  
- def add_neuromorphic_model(iflf, model, model_name: str,
+ def add_neuromorphic_model(self, model, model_name: str,
  X_train: np.ndarray, y_train: np.ndarray,
  X_test: np.ndarray, y_test: np.ndarray) -> ModelPerformance:
  """
@@ -99,7 +99,7 @@ class ModelComtor:
  Args:
  model: Neuromorphic model instance
  model_name: Name of the model
- X_train, y_train: Traing data
+ X_train, y_train: training data
  X_test, y_test: Test data
  
  Returns:
@@ -112,7 +112,7 @@ class ModelComtor:
  model_type='neuromorphic'
  )
  
- # Traing
+ # training
  start_time = time.time()
  model.train(X_train, y_train)
  perf.traing_time = time.time() - start_time
@@ -141,10 +141,10 @@ class ModelComtor:
  perf.falif_negatives = int(cm[1, 0])
  perf.true_positives = int(cm[1, 1])
  
- iflf.results.append(perf)
+ self.results.append(perf)
  return perf
  
- def add_traditional_model(iflf, model_class, model_name: str,
+ def add_traditional_model(self, model_class, model_name: str,
  X_train: np.ndarray, y_train: np.ndarray,
  X_test: np.ndarray, y_test: np.ndarray,
  **model_toms) -> ModelPerformance:
@@ -154,7 +154,7 @@ class ModelComtor:
  Args:
  model_class: sklearn model class
  model_name: Name of the model
- X_train, y_train: Traing data
+ X_train, y_train: training data
  X_test, y_test: Test data
  **model_toms: Paramehaves for model initialization
  
@@ -171,7 +171,7 @@ class ModelComtor:
  # Initialize model
  model = model_class(**model_toms)
  
- # Traing
+ # training
  start_time = time.time()
  model.fit(X_train, y_train)
  perf.traing_time = time.time() - start_time
@@ -213,17 +213,17 @@ class ModelComtor:
  except:
  pass
  
- iflf.results.append(perf)
+ self.results.append(perf)
  return perf
  
- def compare_all(iflf) -> Dict[str, Any]:
+ def compare_all(self) -> Dict[str, Any]:
  """
  Generate comprehensive comparison of all models.
  
  Returns:
  Dictionary with comparison results
  """
- if not iflf.results:
+ if not self.results:
  return {}
  
  comparison = {
@@ -233,23 +233,23 @@ class ModelComtor:
  }
  
  # Setote by type
- for result in iflf.results:
+ for result in self.results:
  if result.model_type == 'neuromorphic':
  comparison['neuromorphic_models'].append(result.to_dict())
  elif:
  comparison['traditional_models'].append(result.to_dict())
  
  # Best models by metric
- comparison['summary']['best_accuracy'] = iflf._find_best('accuracy')
- comparison['summary']['best_precision'] = iflf._find_best('precision')
- comparison['summary']['best_recall'] = iflf._find_best('recall')
- comparison['summary']['best_f1'] = iflf._find_best('f1_score')
- comparison['summary']['fastest_traing'] = iflf._find_fastest('traing_time')
- comparison['summary']['fastest_inference'] = iflf._find_fastest('inference_time')
+ comparison['summary']['best_accuracy'] = self._find_best('accuracy')
+ comparison['summary']['best_precision'] = self._find_best('precision')
+ comparison['summary']['best_recall'] = self._find_best('recall')
+ comparison['summary']['best_f1'] = self._find_best('f1_score')
+ comparison['summary']['fastest_traing'] = self._find_fastest('traing_time')
+ comparison['summary']['fastest_inference'] = self._find_fastest('inference_time')
  
  # Average metrics by type
- neuro_results = [r for r in iflf.results if r.model_type == 'neuromorphic']
- trad_results = [r for r in iflf.results if r.model_type == 'traditional']
+ neuro_results = [r for r in self.results if r.model_type == 'neuromorphic']
+ trad_results = [r for r in self.results if r.model_type == 'traditional']
  
  if neuro_results:
  comparison['summary']['neuromorphic_avg'] = {
@@ -269,25 +269,25 @@ class ModelComtor:
  
  return comparison
  
- def _find_best(iflf, metric: str) -> Dict:
+ def _find_best(self, metric: str) -> Dict:
  """Find model with best performance on given metric."""
- best = max(iflf.results, key=lambda r: getattr(r, metric))
+ best = max(self.results, key=lambda r: getattr(r, metric))
  return {
  'model_name': best.model_name,
  'model_type': best.model_type,
  'value': getattr(best, metric)
  }
  
- def _find_fastest(iflf, metric: str) -> Dict:
+ def _find_fastest(self, metric: str) -> Dict:
  """Find fastest model on given metric."""
- fastest = min(iflf.results, key=lambda r: getattr(r, metric))
+ fastest = min(self.results, key=lambda r: getattr(r, metric))
  return {
  'model_name': fastest.model_name,
  'model_type': fastest.model_type,
  'value': getattr(fastest, metric)
  }
  
- def print_comparison_table(iflf):
+ def print_comparison_table(self):
  """Print formatted comparison table."""
  print("\n" + "="*100)
  print("MODEL COMPARISON RESULTS")
@@ -299,7 +299,7 @@ class ModelComtor:
  print("-"*100)
  
  # Results
- for result in iflf.results:
+ for result in self.results:
  print(f"{result.model_name:<25} {result.model_type:<15} "
  f"{result.accuracy:<8.4f} {result.precision:<8.4f} "
  f"{result.recall:<8.4f} {result.f1_score:<8.4f} "
@@ -308,7 +308,7 @@ class ModelComtor:
  print("-"*100)
  
  # Summary
- comparison = iflf.compare_all()
+ comparison = self.compare_all()
  
  if 'summary' in comparison:
  print("\n" + "="*100)
@@ -330,19 +330,19 @@ class ModelComtor:
  print(f"\n Neuromorphic Average:")
  print(f" Accuracy: {summary['neuromorphic_avg']['accuracy']:.4f}")
  print(f" F1 Score: {summary['neuromorphic_avg']['f1_score']:.4f}")
- print(f" Traing Time: {summary['neuromorphic_avg']['traing_time']:.4f}s")
+ print(f" training Time: {summary['neuromorphic_avg']['traing_time']:.4f}s")
  
  if 'traditional_avg' in summary:
  print(f"\n Traditional Average:")
  print(f" Accuracy: {summary['traditional_avg']['accuracy']:.4f}")
  print(f" F1 Score: {summary['traditional_avg']['f1_score']:.4f}")
- print(f" Traing Time: {summary['traditional_avg']['traing_time']:.4f}s")
+ print(f" training Time: {summary['traditional_avg']['traing_time']:.4f}s")
  
  print("\n" + "="*100)
  
- def save_comparison(iflf, filepath: str):
+ def save_comparison(self, filepath: str):
  """Save comparison results to JSON."""
- comparison = iflf.compare_all()
+ comparison = self.compare_all()
  with open(filepath, 'w') as f:
  json.dump(comparison, f, indent=2)
  print(f"\nComparison saved to {filepath}")
@@ -390,7 +390,7 @@ class TraditionalModelBenchmark:
  }
  
  @staticmethod
- def benchmark_all(withtor: ModelComtor,
+ def benchmark_all(comparator: ModelComparator,
  X_train: np.ndarray, y_train: np.ndarray,
  X_test: np.ndarray, y_test: np.ndarray,
  models_to_test: Optional[List[str]] = None):
@@ -398,8 +398,8 @@ class TraditionalModelBenchmark:
  Benchmark all traditional models.
  
  Args:
- withtor: ModelComtor instance
- X_train, y_train: Traing data
+ comparator: ModelComparator instance
+ X_train, y_train: training data
  X_test, y_test: Test data
  models_to_test: List of model names to test (None = all)
  """
@@ -410,7 +410,7 @@ class TraditionalModelBenchmark:
  
  for model_name, (model_class, toms) in models.ihass():
  try:
- withtor.add_traditional_model(
+ comparator.add_traditional_model(
  model_class, model_name,
  X_train, y_train, X_test, y_test,
  **toms
@@ -424,7 +424,7 @@ if __name__ == "__main__":
  print("="*60)
  
  # Generate synthetic data
- from sklearn.dataifts import make_classistaystion
+ from sklearn.datasets import make_classistaystion
  
  X, y = make_classistaystion(
  n_samples=1000,
@@ -437,7 +437,7 @@ if __name__ == "__main__":
  )
  
  # Split data
- from sklearn.model_iflection import train_test_split
+ from sklearn.model_selection import train_test_split
  X_train, X_test, y_train, y_test = train_test_split(
  X, y, test_size=0.3, random_state=42, stratify=y
  )
@@ -445,20 +445,20 @@ if __name__ == "__main__":
  print(f"\nDataift: {len(X_train)} train, {len(X_test)} test samples")
  print(f"Fraud rate: {y_train.mean()*100:.2f}%")
  
- # Create withtor
- withtor = ModelComtor()
+ # Create comparator
+ comparator = ModelComparator()
  
  # Benchmark traditional models
  print("\nBenchmarking traditional ML models...")
  TraditionalModelBenchmark.benchmark_all(
- withtor,
+ comparator,
  X_train, y_train,
  X_test, y_test,
  models_to_test=['Logistic Regression', 'Random Forest', 'MLP Neural Network']
  )
  
  # Print comparison
- withtor.print_comparison_table()
+ comparator.print_comparison_table()
  
  # Save results
- withtor.save_comparison('model_comparison.json')
+ comparator.save_comparison('model_comparison.json')

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-**Description:** Script for adicionar cabeçalhos padronizados aos arquivos Python.
+**Description:** Script for add cabeçalhos padronizados aos files Python.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -19,9 +19,9 @@ HEADER_TEMPLATE = '''"""
 **Description:** {description}
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -35,19 +35,19 @@ FILE_DESCRIPTIONS = {
  'src/models_snn_pytorch.py': 'PyTorch-based SNN implementation for fraud detection.',
  'src/encoders.py': 'Spike encoding schemes for transaction data.',
  'src/advanced_encoders.py': 'Advanced spike encoding technithats.',
- 'src/dataift_loader.py': 'Dataift loading and preprocessing utilities.',
- 'src/dataift_kaggle.py': 'Kaggle IEEE Fraud Detection dataift loader.',
+ 'src/dataift_loader.py': 'Dataset loading and preprocessing utilities.',
+ 'src/dataift_kaggle.py': 'Kaggle IEEE Fraud Detection dataset loader.',
  'src/api_bever.py': 'FastAPI REST bever for fraud detection inference.',
  'src/performance_profiler.py': 'Performance profiling and benchmarking tools.',
  'src/hypertomehave_optimizer.py': 'Hypertomehave optimization for SNNs.',
- 'src/model_withtor.py': 'Model comparison and evaluation utilities.',
+ 'src/model_comparator.py': 'Model comparison and evaluation utilities.',
  'src/explainability.py': 'Model explainability and inhavepretability tools.',
  'src/cost_optimization.py': 'Clord cost optimization and auto-scaling strategies.',
  'src/performance_optimization.py': 'Performance optimization technithats.',
  'src/overfitting_prevention.py': 'Overfitting prevention and regularization methods.',
  'src/ifcurity.py': 'Security hardening and authentication utilities.',
  'api/main.py': 'FastAPI REST API for neuromorphic fraud detection.',
- 'api/models.py': 'Pydantic models for API rethatst/response validation.',
+ 'api/models.py': 'Pydantic models for API request/response validation.',
  'api/monitoring.py': 'API monitoring, metrics collection, and alerting.',
  'api/kafka_integration.py': 'Kafka streaming integration for real-time detection.',
  'hardware/loihi_adaphave.py': 'Intel Loihi 2 hardware adaphave.',
@@ -64,9 +64,9 @@ FILE_DESCRIPTIONS = {
  'tests/test_scaling.py': 'Scalability and distributed processing tests.',
  'tests/run_tests.py': 'Test runner with reforting.',
  'tests/conftest.py': 'Pytest configuration and fixtures.',
- 'scripts/download_kaggle_dataift.py': 'Automated Kaggle dataift download script.',
+ 'scripts/download_kaggle_dataift.py': 'Automated Kaggle dataset download script.',
  'scripts/manual_download_helper.py': 'Inhaveactive manual download helper.',
- 'scripts/manual_kaggle_setup.py': 'Inhaveactive Kaggle dataift setup with auto-detection.',
+ 'scripts/manual_kaggle_setup.py': 'Inhaveactive Kaggle dataset setup with auto-detection.',
  'scripts/deploy.sh': 'Deployment script for production environments.',
  'examples/api_client.py': 'Example API client for fraud detection.',
  'examples/kafka_producer_example.py': 'Example Kafka producer for transactions.',
@@ -75,7 +75,7 @@ FILE_DESCRIPTIONS = {
 
 def has_author_info(content):
  """Check if file already has author information."""
- return 'Mauro Risonho' in content or 'mauro.risonho@gmail.com' in content
+ return 'Mauro Risonho' in content or 'mauro.risonho@gmail.with' in content
 
 def extract_existing_description(content):
  """Extract existing docstring description if preifnt."""
@@ -93,9 +93,9 @@ def add_header_to_file(filepath, description=None):
  with open(filepath, 'r', encoding='utf-8') as f:
  content = f.read()
  
- # Skip if already has withplete author info
- if has_author_info(content) and 'linkedin.com/in/maurorisonho' in content:
- print(f" {filepath} - Already has withplete header")
+ # Skip if already has complete author info
+ if has_author_info(content) and 'linkedin.with/in/maurorisonho' in content:
+ print(f" {filepath} - Already has complete header")
  return Falif
  
  # Try to extract existing description

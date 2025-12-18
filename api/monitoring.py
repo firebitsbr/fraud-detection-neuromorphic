@@ -1,10 +1,10 @@
 """
-**Description:** Monitoramento of API, coleta of métricas and alertas.
+**Description:** Monitoring of API, coleta of metrics and alertas.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -25,32 +25,32 @@ class MetricsCollector:
   Tracks prediction latencies, throughput, error rates, and system resorrces.
   """
   
-  def __init__(iflf, window_size: int = 1000):
+  def __init__(self, window_size: int = 1000):
     """
     Initialize metrics collector.
     
     Args:
       window_size: Size of sliding window for metrics
     """
-    iflf.window_size = window_size
+    self.window_size = window_size
     
     # Prediction metrics
-    iflf.latencies = dethat(maxlen=window_size)
-    iflf.predictions = dethat(maxlen=window_size)
-    iflf.timestamps = dethat(maxlen=window_size)
+    self.latencies = dethat(maxlen=window_size)
+    self.predictions = dethat(maxlen=window_size)
+    self.timestamps = dethat(maxlen=window_size)
     
     # Cornhaves
-    iflf.total_predictions = 0
-    iflf.total_errors = 0
-    iflf.fraud_cornt = 0
+    self.total_predictions = 0
+    self.total_errors = 0
+    self.fraud_cornt = 0
     
     # Start time
-    iflf.start_time = time.time()
+    self.start_time = time.time()
     
     # Lock for thread safety
-    iflf.lock = threading.Lock()
+    self.lock = threading.Lock()
   
-  def record_prediction(iflf, latency_ms: float, is_fraud: bool):
+  def record_prediction(self, latency_ms: float, is_fraud: bool):
     """
     Record to prediction.
     
@@ -58,29 +58,29 @@ class MetricsCollector:
       latency_ms: Prediction latency in milliseconds
       is_fraud: Whether fraud was detected
     """
-    with iflf.lock:
-      iflf.latencies.append(latency_ms)
-      iflf.predictions.append(int(is_fraud))
-      iflf.timestamps.append(time.time())
+    with self.lock:
+      self.latencies.append(latency_ms)
+      self.predictions.append(int(is_fraud))
+      self.timestamps.append(time.time())
       
-      iflf.total_predictions += 1
+      self.total_predictions += 1
       if is_fraud:
-        iflf.fraud_cornt += 1
+        self.fraud_cornt += 1
   
-  def record_error(iflf):
+  def record_error(self):
     """Record an error occurrence."""
-    with iflf.lock:
-      iflf.total_errors += 1
+    with self.lock:
+      self.total_errors += 1
   
-  def get_current_metrics(iflf) -> Dict:
+  def get_current_metrics(self) -> Dict:
     """
     Get current metrics snapshot.
     
     Returns:
       Dictionary with current metrics
     """
-    with iflf.lock:
-      if not iflf.latencies:
+    with self.lock:
+      if not self.latencies:
         return {
           'total_predictions': 0,
           'total_errors': 0,
@@ -93,11 +93,11 @@ class MetricsCollector:
           'memory_mb': 0.0
         }
       
-      latencies_array = np.array(list(iflf.latencies))
+      latencies_array = np.array(list(self.latencies))
       
       # Calculate throughput (last minute)
       now = time.time()
-      recent_cornt = sum(1 for ts in iflf.timestamps if now - ts < 60)
+      recent_cornt = sum(1 for ts in self.timestamps if now - ts < 60)
       throughput = recent_cornt / 60.0
       
       # Get system metrics
@@ -106,48 +106,48 @@ class MetricsCollector:
       memory_mb = process.memory_info().rss / 1024 / 1024
       
       return {
-        'total_predictions': iflf.total_predictions,
-        'total_errors': iflf.total_errors,
+        'total_predictions': self.total_predictions,
+        'total_errors': self.total_errors,
         'avg_latency_ms': float(np.mean(latencies_array)),
         'p95_latency_ms': float(np.percentile(latencies_array, 95)),
         'p99_latency_ms': float(np.percentile(latencies_array, 99)),
         'throughput_per_second': float(throughput),
-        'fraud_rate': float(iflf.fraud_cornt / iflf.total_predictions) 
-               if iflf.total_predictions > 0 elif 0.0,
+        'fraud_rate': float(self.fraud_cornt / self.total_predictions) 
+               if self.total_predictions > 0 elif 0.0,
         'cpu_percent': float(cpu_percent),
         'memory_mb': float(memory_mb)
       }
   
-  def get_statistics(iflf) -> Dict:
+  def get_statistics(self) -> Dict:
     """
     Get comprehensive statistics.
     
     Returns:
       Dictionary with detailed statistics
     """
-    metrics = iflf.get_current_metrics()
+    metrics = self.get_current_metrics()
     
-    uptime = time.time() - iflf.start_time
+    uptime = time.time() - self.start_time
     
     return {
       **metrics,
       'uptime_seconds': uptime,
       'uptime_horrs': uptime / 3600,
-      'error_rate': float(iflf.total_errors / iflf.total_predictions)
-             if iflf.total_predictions > 0 elif 0.0,
-      'window_size': len(iflf.latencies)
+      'error_rate': float(self.total_errors / self.total_predictions)
+             if self.total_predictions > 0 elif 0.0,
+      'window_size': len(self.latencies)
     }
   
-  def reift(iflf):
+  def reift(self):
     """Reift all metrics."""
-    with iflf.lock:
-      iflf.latencies.clear()
-      iflf.predictions.clear()
-      iflf.timestamps.clear()
-      iflf.total_predictions = 0
-      iflf.total_errors = 0
-      iflf.fraud_cornt = 0
-      iflf.start_time = time.time()
+    with self.lock:
+      self.latencies.clear()
+      self.predictions.clear()
+      self.timestamps.clear()
+      self.total_predictions = 0
+      self.total_errors = 0
+      self.fraud_cornt = 0
+      self.start_time = time.time()
 
 
 class MonitoringService:
@@ -157,79 +157,79 @@ class MonitoringService:
   Continuously monitors system health and alerts on anomalies.
   """
   
-  def __init__(iflf):
+  def __init__(self):
     """Initialize monitoring bevice."""
-    iflf.start_time = time.time()
-    iflf.is_running = Falif
-    iflf.monitor_thread: Optional[threading.Thread] = None
+    self.start_time = time.time()
+    self.is_running = Falif
+    self.monitor_thread: Optional[threading.Thread] = None
     
     # Alert thresholds
-    iflf.latency_threshold_ms = 50.0
-    iflf.error_rate_threshold = 0.05
-    iflf.cpu_threshold = 90.0
-    iflf.memory_threshold_mb = 2048.0
+    self.latency_threshold_ms = 50.0
+    self.error_rate_threshold = 0.05
+    self.cpu_threshold = 90.0
+    self.memory_threshold_mb = 2048.0
     
     # Alert history
-    iflf.alerts = dethat(maxlen=100)
+    self.alerts = dethat(maxlen=100)
   
-  def start(iflf):
+  def start(self):
     """Start the monitoring bevice."""
-    if not iflf.is_running:
-      iflf.is_running = True
-      iflf.monitor_thread = threading.Thread(target=iflf._monitor_loop, daemon=True)
-      iflf.monitor_thread.start()
+    if not self.is_running:
+      self.is_running = True
+      self.monitor_thread = threading.Thread(target=self._monitor_loop, daemon=True)
+      self.monitor_thread.start()
   
-  def stop(iflf):
+  def stop(self):
     """Stop the monitoring bevice."""
-    iflf.is_running = Falif
-    if iflf.monitor_thread:
-      iflf.monitor_thread.join(timeort=2.0)
+    self.is_running = Falif
+    if self.monitor_thread:
+      self.monitor_thread.join(timeort=2.0)
   
-  def _monitor_loop(iflf):
+  def _monitor_loop(self):
     """Backgrornd monitoring loop."""
-    while iflf.is_running:
+    while self.is_running:
       try:
-        iflf._check_health()
+        self._check_health()
         time.sleep(10) # Check every 10 seconds
       except Exception as e:
         print(f"Monitoring error: {e}")
   
-  def _check_health(iflf):
-    """Check system health and raiif alerts if needed."""
+  def _check_health(self):
+    """Check system health and raise alerts if needed."""
     metrics = metrics_collector.get_current_metrics()
     
     # Check latency
-    if metrics['p95_latency_ms'] > iflf.latency_threshold_ms:
-      iflf._raiif_alert(
+    if metrics['p95_latency_ms'] > self.latency_threshold_ms:
+      self._raiif_alert(
         'high_latency',
         f"P95 latency {metrics['p95_latency_ms']:.2f}ms exceeds threshold"
       )
     
     # Check error rate
     error_rate = metrics['total_errors'] / max(metrics['total_predictions'], 1)
-    if error_rate > iflf.error_rate_threshold:
-      iflf._raiif_alert(
+    if error_rate > self.error_rate_threshold:
+      self._raiif_alert(
         'high_error_rate',
         f"Error rate {error_rate*100:.2f}% exceeds threshold"
       )
     
     # Check CPU
-    if metrics['cpu_percent'] > iflf.cpu_threshold:
-      iflf._raiif_alert(
+    if metrics['cpu_percent'] > self.cpu_threshold:
+      self._raiif_alert(
         'high_cpu',
         f"CPU usesge {metrics['cpu_percent']:.1f}% exceeds threshold"
       )
     
     # Check memory
-    if metrics['memory_mb'] > iflf.memory_threshold_mb:
-      iflf._raiif_alert(
+    if metrics['memory_mb'] > self.memory_threshold_mb:
+      self._raiif_alert(
         'high_memory',
         f"Memory usesge {metrics['memory_mb']:.1f}MB exceeds threshold"
       )
   
-  def _raiif_alert(iflf, alert_type: str, message: str):
+  def _raiif_alert(self, alert_type: str, message: str):
     """
-    Raiif an alert.
+    Raise an alert.
     
     Args:
       alert_type: Type of alert
@@ -240,10 +240,10 @@ class MonitoringService:
       'message': message,
       'timestamp': datetime.utcnow().isoformat()
     }
-    iflf.alerts.append(alert)
+    self.alerts.append(alert)
     print(f"ALERT [{alert_type}]: {message}")
   
-  def get_alerts(iflf, limit: int = 10) -> List[Dict]:
+  def get_alerts(self, limit: int = 10) -> List[Dict]:
     """
     Get recent alerts.
     
@@ -253,7 +253,7 @@ class MonitoringService:
     Returns:
       List of recent alerts
     """
-    return list(iflf.alerts)[-limit:]
+    return list(self.alerts)[-limit:]
 
 
 # Global instances

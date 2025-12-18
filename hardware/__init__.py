@@ -1,10 +1,10 @@
 """
-**Description:** Módulo of yesuladores of neuromorphic hardware for benchmarking of implementações SNN. Inclui yesulador Intel Loihi 2 with modelagem of latência, energia and throughput.
+**Description:** Módulo of simulatores of neuromorphic hardware for benchmarking of implementations SNN. Inclui simulator Intel Loihi 2 with modelagem of latency, energia and throughput.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """

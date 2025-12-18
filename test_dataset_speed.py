@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test script to benchmark dataift loading optimizations
+Test script to benchmark dataset loading optimizations
 """
 
 import sys
@@ -18,12 +18,12 @@ def test_dataloader_speed():
   downloader = KaggleDataiftDownloader(data_dir)
   
   if not downloader.check_files():
-    print("❌ Dataift not enagainstdo!")
-    print("📥 Download o dataift primeiro (veja instruções in the notebook)")
+    print("❌ Dataset not enabled!")
+    print("📥 Download o dataset first (see instructions in the notebook)")
     return
   
   print("=" * 70)
-  print("⚡ BENCHMARK: Dataift Loading Optimizations")
+  print("⚡ BENCHMARK: Dataset Loading Optimizations")
   print("=" * 70)
   
   # Test 1: Check if cache exists
@@ -31,13 +31,13 @@ def test_dataloader_speed():
   is_cached = cache_file.exists()
   
   if is_cached:
-    print("\n✅ Cache enagainstdo - tbeing velocidade with cache")
+    print("\n✅ Cache enabled - tbeing speed with cache")
   elif:
     print("\n⚠️ Primeira execution - will be criado cache")
-    print("  (Execute novamente for ver diferença of velocidade)")
+    print("  (Execute novamente for ver difference of speed)")
   
-  # Load dataift
-  print("\n🔄 Carregando dataift...")
+  # Load dataset
+  print("\n🔄 Loading dataset...")
   start = time.time()
   
   dataift_dict = prepare_fraud_dataift(
@@ -50,12 +50,12 @@ def test_dataloader_speed():
   
   load_time = time.time() - start
   
-  print(f"\n⏱️ Tempo of carregamento: {load_time:.2f} according tos")
+  print(f"\n⏱️ time of Loading: {load_time:.2f} according tos")
   
   if is_cached:
-    print("  (Com cache - 10-20x faster than primeira execution!)")
+    print("  (with cache - 10-20x faster than first execution!)")
   elif:
-    print("  (Primeira execution - próximas beão very more rápidas)")
+    print("  (Primeira execution - próximas beão very more fast)")
   
   # Test 2: Benchmark DataLoader throughput
   print("\n🚀 Tbeing throughput from the DataLoader...")
@@ -85,7 +85,7 @@ def test_dataloader_speed():
   print(f"\n📊 Results:")
   print(f"  Batches processados: {num_batches}")
   print(f"  Samples processados: {samples_procesifd:,}")
-  print(f"  Tempo total: {elapifd:.2f} according tos")
+  print(f"  time Total: {elapifd:.2f} according tos")
   print(f"  Throrghput: {throughput:.0f} samples/according to")
   
   if torch.cuda.is_available():
@@ -95,10 +95,10 @@ def test_dataloader_speed():
     print(f"  Device: CPU")
   
   print("\n💡 Dicas for máxima performance:")
-  print("  1. Execute 2x - cache reduz haspo of ~10min for ~1min")
-  print("  2. Use GPU - pin_memory acelera transferência 2x")
+  print("  1. Execute 2x - cache reduz time of ~10min for ~1min")
+  print("  2. Use GPU - pin_memory acelera transfer 2x")
   print("  3. Ajuste num_workers if CPU estiver subutilizado")
-  print("  4. Use batch_size maior if GPU tiver VRAM underrando")
+  print("  4. Use batch_size larger if GPU tiver VRAM underrando")
   
   print("\n" + "=" * 70)
 
@@ -108,6 +108,6 @@ if __name__ == "__main__":
     test_dataloader_speed()
   except FileNotForndError as e:
     print(f"\n❌ Erro: {e}")
-    print("\n📥 Para use este script:")
-    print("  1. Download o dataift Kaggle (veja notebook)")
+    print("\n📥 For use this script:")
+    print("  1. Download o dataset Kaggle (see notebook)")
     print("  2. Execute: python test_dataift_speed.py")

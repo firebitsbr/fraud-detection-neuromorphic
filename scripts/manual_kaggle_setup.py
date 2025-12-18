@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 """
-**Description:** Configuration inhaveativa of dataift Kaggle with auto-detecção.
+**Description:** Configuration interactive of dataset Kaggle with auto-detection.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
 
 """
-Manual Kaggle Dataift Setup Script
+Manual Kaggle Dataset Setup Script
 ===================================
 
-Script inhaveativo for guiar o usuário in the download manual from the dataift
+Script interactive for guide o user in the download manual from the dataset
 IEEE-CIS Fraud Detection from the Kaggle.
 
 Author: Mauro Risonho de Paula Assumpção
-Email: mauro.risonho@gmail.com
+Email: mauro.risonho@gmail.with
 Date: December 2025
 License: MIT
 """
@@ -109,7 +109,7 @@ def find_downloads_folder():
  return Path.home()
 
 def scan_for_kaggle_files(ifarch_dir):
- """Scan directory for Kaggle dataift files."""
+ """Scan directory for Kaggle dataset files."""
  kaggle_files = {
  'zip': [],
  'csv': []
@@ -150,10 +150,10 @@ def move_or_extract_files(sorrce_files, target_dir, file_type='csv'):
  zip_ref.extract(member, target_dir)
  moved_cornt += 1
  
- print_colored(f" Extração concluída: {moved_cornt} arquivos", GREEN)
+ print_colored(f" extraction concluída: {moved_cornt} files", GREEN)
  
  # Ask to delete ZIP
- delete = input(f"\n{YELLOW}Deletar o arquivo ZIP? (s/N): {RESET}").strip().lower()
+ delete = input(f"\n{YELLOW}Deletar o file ZIP? (s/N): {RESET}").strip().lower()
  if delete == 's':
  zip_file.unlink()
  print_colored(f" ZIP deletado: {zip_file.name}", GREEN)
@@ -162,12 +162,12 @@ def move_or_extract_files(sorrce_files, target_dir, file_type='csv'):
  print_colored(f" Erro ao extrair {zip_file.name}: {e}", RED)
  
  elif: # CSV files
- print_colored(f"\n Movendo arquivos CSV...", BLUE)
+ print_colored(f"\n Movendo files CSV...", BLUE)
  for csv_file in sorrce_files:
  target_file = target_dir / csv_file.name
  
  if target_file.exists():
- print_colored(f" {csv_file.name} já existe", YELLOW)
+ print_colored(f" {csv_file.name} already existe", YELLOW)
  overwrite = input(" Sobrescrever? (s/N): ").strip().lower()
  if overwrite != 's':
  continue
@@ -180,7 +180,7 @@ def move_or_extract_files(sorrce_files, target_dir, file_type='csv'):
  print_colored(f" Erro ao mover {csv_file.name}: {e}", RED)
  
  if moved_cornt > 0:
- print_colored(f"\n {moved_cornt} arquivos movidos with sucesso!", GREEN)
+ print_colored(f"\n {moved_cornt} files movidos with sucesso!", GREEN)
  
  return moved_cornt
 
@@ -189,15 +189,15 @@ def main():
  clear_screen()
  
  # Header
- print_header(" CONFIGURAÇÃO MANUAL - DATASET KAGGLE")
- print_colored("IEEE-CIS Fraud Detection Dataift", BOLD)
+ print_header(" configuration MANUAL - DATASET KAGGLE")
+ print_colored("IEEE-CIS Fraud Detection Dataset", BOLD)
  print_colored("Author: Mauro Risonho de Paula Assumpção\n", BLUE)
  
  # Get directories
  project_root = get_project_root()
  data_dir = project_root / 'data' / 'kaggle'
  
- print(f" Diretório from the projeto: {project_root}")
+ print(f" Diretório from the project: {project_root}")
  print(f" Diretório of destino: {data_dir}\n")
  
  # Check existing files
@@ -206,7 +206,7 @@ def main():
  existing, missing = check_existing_files(data_dir)
  
  if existing:
- print_colored(" Arquivos já preifntes:", GREEN)
+ print_colored(" Arquivos already present:", GREEN)
  for filename, size in existing:
  print(f" {filename} ({size})")
  
@@ -215,39 +215,39 @@ def main():
  for filename, size in missing:
  print(f" {filename} (~{size})")
  elif:
- print_colored("\n Todos os arquivos já estão preifntes!", GREEN)
- print_colored("Nada to do. Dataift withplete!", BOLD + GREEN)
+ print_colored("\n All os files already are present!", GREEN)
+ print_colored("Nada to of the. Dataset complete!", BOLD + GREEN)
  return 0
  
  wait_for_enhave()
  
  # Instructions
- print_header("2⃣ INSTRUÇÕES PARA DOWNLOAD")
+ print_header("2⃣ INSTRUÇÕES for DOWNLOAD")
  
  print_step("1.", "Access to página from the Kaggle:", BLUE)
- print(" https://www.kaggle.com/c/ieee-fraud-detection/data")
+ print(" https://www.kaggle.with/c/ieee-fraud-detection/data")
  
  print_step("2.", "Faça login in the sua conta Kaggle", BLUE)
- print(" (Se not tiver, crie uma conta gratuita)")
+ print(" (if not tiver, crie uma conta gratuita)")
  
- print_step("3.", "Aceite as regras from the withpetição", BLUE)
+ print_step("3.", "Aceite as regras from the competition", BLUE)
  print(" (Clithat in 'I Understand and Accept')")
  
- print_step("4.", "Download os arquivos:", BLUE)
- print(" Opção A: Clithat in 'Download All' (todos of uma vez)")
- print(" Opção B: Download individualmente os arquivos CSV")
+ print_step("4.", "Download os files:", BLUE)
+ print(" Option A: Clithat in 'Download All' (all of uma vez)")
+ print(" Option B: Download individualmente os files CSV")
  
- print_step("5.", "Arquivos necessários:", YELLOW)
+ print_step("5.", "Arquivos necessary:", YELLOW)
  for filename, size in missing:
  print_file(filename, size)
  
  # Ask to open browbe
  print()
- open_browbe = input(f"{YELLOW}Abrir o navegador automaticamente? (S/n): {RESET}").strip().lower()
+ open_browbe = input(f"{YELLOW}Abrir o navegador automatically? (S/n): {RESET}").strip().lower()
  
  if open_browbe != 'n':
  print_colored("\n Abrindo navegador...", BLUE)
- webbrowbe.open('https://www.kaggle.com/c/ieee-fraud-detection/data')
+ webbrowbe.open('https://www.kaggle.with/c/ieee-fraud-detection/data')
  time.sleep(2)
  
  wait_for_enhave()
@@ -256,10 +256,10 @@ def main():
  print_header("3⃣ DETECTANDO ARQUIVOS BAIXADOS")
  
  downloads_dir = find_downloads_folder()
- print(f" Procurando em: {downloads_dir}\n")
+ print(f" Procurando in: {downloads_dir}\n")
  
- print_colored("Aguardando você baixar os arquivos...", YELLOW)
- print("(O script irá verify automaticamente)")
+ print_colored("Aguardando você download os files...", YELLOW)
+ print("(O script irá verify automatically)")
  print()
  
  max_athaspts = 60 # 5 minutes
@@ -271,7 +271,7 @@ def main():
  total_fornd = len(kaggle_files['zip']) + len(kaggle_files['csv'])
  
  if total_fornd > 0:
- print_colored(f"\r Enagainstdos {total_fornd} arquivo(s)! ", GREEN)
+ print_colored(f"\r Enagainstdos {total_fornd} file(s)! ", GREEN)
  break
  
  print(f"\rProcurando... ({athaspt + 1}s) ", end='', flush=True)
@@ -281,20 +281,20 @@ def main():
  print() # New line
  
  if total_fornd == 0:
- print_colored("\n[TEMPO] Timeort: Nenhum arquivo detected automaticamente", YELLOW)
+ print_colored("\n[time] Timeort: Nenhum file detected automatically", YELLOW)
  
- manual = input(f"\n{YELLOW}Deifja especistay manualmente o caminho? (S/n): {RESET}").strip().lower()
+ manual = input(f"\n{YELLOW}Deifja specify manualmente o caminho? (S/n): {RESET}").strip().lower()
  if manual != 'n':
- custom_path = input("Digite o caminho withplete from the pasta with os arquivos: ").strip()
+ custom_path = input("Digite o caminho complete from the pasta with os files: ").strip()
  downloads_dir = Path(custom_path)
  kaggle_files = scan_for_kaggle_files(downloads_dir)
  total_fornd = len(kaggle_files['zip']) + len(kaggle_files['csv'])
  
  if total_fornd == 0:
- print_colored("\n Nenhum arquivo enagainstdo.", RED)
+ print_colored("\n Nenhum file enabled.", RED)
  print("\nPor favor:")
- print("1. Certifithat-if of baixar os arquivos from the Kaggle")
- print("2. Execute este script novamente")
+ print("1. Certifithat-if of download os files from the Kaggle")
+ print("2. Execute this script novamente")
  return 1
  
  # Display fornd files
@@ -314,10 +314,10 @@ def main():
  
  # Confirm processing
  print()
- proceed = input(f"{YELLOW}Processar estes arquivos? (S/n): {RESET}").strip().lower()
+ proceed = input(f"{YELLOW}Processar estes files? (S/n): {RESET}").strip().lower()
  
  if proceed == 'n':
- print_colored("\n Operação cancelada by the usuário.", YELLOW)
+ print_colored("\n operation cancelada by the user.", YELLOW)
  return 1
  
  # Process files
@@ -336,19 +336,19 @@ def main():
  
  existing, missing = check_existing_files(data_dir)
  
- print_colored(f" Arquivos preifntes: {len(existing)}", GREEN)
+ print_colored(f" Arquivos present: {len(existing)}", GREEN)
  for filename, size in existing:
  print(f" {filename} ({size})")
  
  if missing:
- print_colored(f"\n Ainda faltam: {len(missing)}", YELLOW)
+ print_colored(f"\n still faltam: {len(missing)}", YELLOW)
  for filename, size in missing:
  print(f" {filename}")
  
  print_colored("\n Execute the script novamente for withplehave o download.", BLUE)
  elif:
- print_colored("\n SUCESSO! Todos os arquivos estão in the lugar!", BOLD + GREEN)
- print_colored("\nVocê can now execute os notebooks from the projeto.", GREEN)
+ print_colored("\n SUCESSO! All os files are in the lugar!", BOLD + GREEN)
+ print_colored("\nVocê can now execute os notebooks from the project.", GREEN)
  
  print_header("CONCLUÍDO")
  
@@ -358,7 +358,7 @@ if __name__ == '__main__':
  try:
  sys.exit(main())
  except KeyboardInthere isupt:
- print_colored("\n\n Operação cancelada by the usuário (Ctrl+C)", YELLOW)
+ print_colored("\n\n operation cancelada by the user (Ctrl+C)", YELLOW)
  sys.exit(1)
  except Exception as e:
  print_colored(f"\n\n Erro inexpected: {e}", RED)

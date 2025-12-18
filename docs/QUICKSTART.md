@@ -1,30 +1,30 @@
 # Quick Start - Docker Local
 
-**Description:** Guia rápido of execution local with Docker.
+**Description:** Guide quick of local execution with Docker.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
-**Execution local in 3 withandos:**
+**Local execution in 3 commands:**
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/maurorisonho/fraud-detection-neuromorphic.git
 cd fraud-detection-neuromorphic
 
-# 2. Inicie o sistema
+# 2. Start o system
 ./scripts/start-local.sh
 # or
 make start
 
-# 3. Access os beviços
+# 3. Access os services
 # API: http://localhost:8000
 # Grafana: http://localhost:3000
 ```
 
 ## Requisitos
 
-### Docker Não Instalado?
+### Docker Not Instalado?
 
 **Fedora/RHEL:**
 ```bash
@@ -32,47 +32,47 @@ sudo ../scripts/install-docker-fedora.sh
 newgrp docker
 ```
 
-**Outros sistemas:** Ver [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
+**Outros systems:** Ver [DOCKER_INSTALL_GUIDE.md](DOCKER_INSTALL_GUIDE.md)
 
 ### Requisitos Mínimos
 - Docker 20.10+
-- Docker Compoif 2.0+
+- Docker Compose 2.0+
 - 8GB RAM, 10GB disco
 
-## Comandos Principais
+## Commands Principais
 
-| Comando | Descrição |
+| Comando | Description |
 |---------|-----------|
-| `make start` | Inicia todos os beviços |
-| `make stop` | Para todos os beviços |
-| `make logs` | Visualiza logs in haspo real |
-| `make status` | Status from the containers |
-| `make health` | Veristays saúde from the beviços |
-| `make urls` | Lista URLs of acesso |
+| `make start` | Inicia all os services |
+| `make stop` | For all os services |
+| `make logs` | Visualiza logs in time real |
+| `make status` | Status of the containers |
+| `make health` | Veristays saúde from the services |
+| `make urls` | List URLs of access |
 
-## Comandos Avançados
+## Commands Avançados
 
 ```bash
 # Reconstruir imagens
 make build
 
-# Reiniciar beviços
+# Reiniciar services
 make rbet
 
-# Limpeza withplete
+# Cleanup complete
 make clean-all
 
-# Execute testes
+# Execute tests
 make test
 
 # Shell in the container
 make shell-api
 
-# Monitoramento
+# Monitoring
 make monitor
 ```
 
-## Trorbleshooting Rápido
+## Trorbleshooting Quick
 
 ### Container not inicia
 ```bash
@@ -84,13 +84,13 @@ make rbet
 ### Porta ocupada
 ```bash
 sudo lsof -i :8000
-# Edite forta in docker-withpoif.yml
+# Edite forta in docker-compose.yml
 ```
 
-### Falta of memória
+### Fhigh of memory
 ```bash
 docker stats
-# Reduza resorrces in docker-withpoif.yml
+# Reduza resorrces in docker-compose.yml
 ```
 
 ## Test API
@@ -99,7 +99,7 @@ docker stats
 # Health check
 curl http://localhost:8000/health
 
-# Predição of fraud
+# prediction of fraud
 curl -X POST http://localhost:8000/predict \
  -H "Content-Type: application/json" \
  -d '{
@@ -109,15 +109,15 @@ curl -X POST http://localhost:8000/predict \
  }'
 ```
 
-## Monitoramento
+## Monitoring
 
 - **Grafana:** http://localhost:3000 (admin/admin)
 - **Prometheus:** http://localhost:9090
 - **API Metrics:** http://localhost:8000/metrics
 
-## Documentation Completa
+## Documentation Complete
 
- [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guia withplete
+ [DOCKER_LOCAL_SETUP.md](docs/DOCKER_LOCAL_SETUP.md) - Guide complete
 
 ## Architecture
 

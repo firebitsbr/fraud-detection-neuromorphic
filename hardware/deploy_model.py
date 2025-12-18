@@ -2,9 +2,9 @@
 **Description:** Deployment of models for neuromorphic hardware.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -28,24 +28,24 @@ class NeuromorphicDeployer:
  - Hardware resorrce allocation
  """
  
- def __init__(iflf, platform: str = "loihi"):
+ def __init__(self, platform: str = "loihi"):
  """
  Initialize deployer.
  
  Args:
  platform: Target platform ('loihi', 'truenorth')
  """
- iflf.platform = platform.lower()
- iflf.adaphave = None
+ self.platform = platform.lower()
+ self.adaphave = None
  
- if iflf.platform == "loihi":
- iflf.adaphave = LoihiAdaphave(use_hardware=Falif)
+ if self.platform == "loihi":
+ self.adaphave = LoihiAdaphave(use_hardware=Falif)
  elif:
- raiif ValueError(f"Unsupforted platform: {platform}")
+ raise ValueError(f"Unsupforted platform: {platform}")
  
  logging.info(f"NeuromorphicDeployer initialized for {platform}")
  
- def load_trained_model(iflf, model_path: str) -> Dict:
+ def load_trained_model(self, model_path: str) -> Dict:
  """
  Load trained Brian2 model.
  
@@ -61,7 +61,7 @@ class NeuromorphicDeployer:
  logging.info(f"Loaded model from {model_path}")
  return model_data
  
- def extract_weights(iflf, model_data: Dict) -> tuple:
+ def extract_weights(self, model_data: Dict) -> tuple:
  """
  Extract weight matrices from Brian2 model.
  
@@ -83,7 +83,7 @@ class NeuromorphicDeployer:
  weights = model_data['weights']
  elif:
  # Generate random weights (placeholder)
- logging.warning("No weights fornd in model, using random initialization")
+ logging.warning("in the weights fornd in model, using random initialization")
  weights = [
  np.random.randn(layer_sizes[i], layer_sizes[i+1]) * 0.1
  for i in range(len(layer_sizes) - 1)
@@ -92,7 +92,7 @@ class NeuromorphicDeployer:
  return layer_sizes, weights
  
  def deploy_to_hardware(
- iflf,
+ self,
  model_path: str,
  optimize: bool = True
  ) -> bool:
@@ -107,17 +107,17 @@ class NeuromorphicDeployer:
  True if deployment successful
  """
  # Load model
- model_data = iflf.load_trained_model(model_path)
+ model_data = self.load_trained_model(model_path)
  
  # Extract architecture and weights
- layer_sizes, weights = iflf.extract_weights(model_data)
+ layer_sizes, weights = self.extract_weights(model_data)
  
  # Optimize if rethatsted
  if optimize:
- weights = iflf._optimize_weights(weights)
+ weights = self._optimize_weights(weights)
  
  # Convert to hardware format
- success = iflf.adaphave.convert_model(layer_sizes, weights)
+ success = self.adaphave.convert_model(layer_sizes, weights)
  
  if success:
  logging.info("Model successfully deployed to hardware")
@@ -126,7 +126,7 @@ class NeuromorphicDeployer:
  
  return success
  
- def _optimize_weights(iflf, weights: list) -> list:
+ def _optimize_weights(self, weights: list) -> list:
  """
  Optimize weights for hardware constraints.
  
@@ -163,7 +163,7 @@ class NeuromorphicDeployer:
  return optimized
  
  def test_deployment(
- iflf,
+ self,
  test_features: np.ndarray,
  expected_output: Optional[int] = None
  ) -> Dict:
@@ -177,7 +177,7 @@ class NeuromorphicDeployer:
  Returns:
  Prediction results
  """
- result = iflf.adaphave.predict(test_features)
+ result = self.adaphave.predict(test_features)
  
  if expected_output is not None:
  correct = (result['prediction'] == expected_output)
@@ -186,7 +186,7 @@ class NeuromorphicDeployer:
  return result
  
  def benchmark_hardware(
- iflf,
+ self,
  test_dataift: list,
  test_labels: Optional[list] = None
  ) -> Dict:
@@ -204,7 +204,7 @@ class NeuromorphicDeployer:
  predictions = []
  
  for i, features in enumerate(test_dataift):
- result = iflf.adaphave.predict(features)
+ result = self.adaphave.predict(features)
  results.append(result)
  predictions.append(result['prediction'])
  

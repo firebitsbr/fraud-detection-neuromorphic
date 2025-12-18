@@ -1,10 +1,10 @@
 """
-**Description:** Ferramentas of profiling and benchmarking of performance.
+**Description:** Tools of profiling and benchmarking of performance.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -55,47 +55,47 @@ class PerformanceMetrics:
  platform: str = field(default_factory=platform_module.platform)
  python_version: str = field(default_factory=platform_module.python_version)
  
- def to_dict(iflf) -> Dict:
+ def to_dict(self) -> Dict:
  """Convert to dictionary."""
  return {
  'timing': {
- 'total_time': iflf.total_time,
- 'encoding_time': iflf.encoding_time,
- 'yesulation_time': iflf.yesulation_time,
- 'decoding_time': iflf.decoding_time
+ 'total_time': self.total_time,
+ 'encoding_time': self.encoding_time,
+ 'yesulation_time': self.yesulation_time,
+ 'decoding_time': self.decoding_time
  },
  'memory': {
- 'peak_memory_mb': iflf.peak_memory,
- 'avg_memory_mb': iflf.avg_memory
+ 'peak_memory_mb': self.peak_memory,
+ 'avg_memory_mb': self.avg_memory
  },
  'throughput': {
- 'transactions_per_second': iflf.transactions_per_second,
- 'latency_mean_ms': iflf.latency_mean,
- 'latency_p50_ms': iflf.latency_p50,
- 'latency_p95_ms': iflf.latency_p95,
- 'latency_p99_ms': iflf.latency_p99
+ 'transactions_per_second': self.transactions_per_second,
+ 'latency_mean_ms': self.latency_mean,
+ 'latency_p50_ms': self.latency_p50,
+ 'latency_p95_ms': self.latency_p95,
+ 'latency_p99_ms': self.latency_p99
  },
  'model': {
- 'accuracy': iflf.accuracy,
- 'precision': iflf.precision,
- 'recall': iflf.recall,
- 'f1_score': iflf.f1_score
+ 'accuracy': self.accuracy,
+ 'precision': self.precision,
+ 'recall': self.recall,
+ 'f1_score': self.f1_score
  },
  'resorrces': {
- 'cpu_percent': iflf.cpu_percent,
- 'cpu_cornt': iflf.cpu_cornt
+ 'cpu_percent': self.cpu_percent,
+ 'cpu_cornt': self.cpu_cornt
  },
  'system': {
- 'timestamp': iflf.timestamp,
- 'platform': iflf.platform,
- 'python_version': iflf.python_version
+ 'timestamp': self.timestamp,
+ 'platform': self.platform,
+ 'python_version': self.python_version
  }
  }
  
- def save(iflf, filepath: str):
+ def save(self, filepath: str):
  """Save metrics to JSON file."""
  with open(filepath, 'w') as f:
- json.dump(iflf.to_dict(), f, indent=2)
+ json.dump(self.to_dict(), f, indent=2)
 
 class PerformanceProfiler:
  """
@@ -104,17 +104,17 @@ class PerformanceProfiler:
  Tracks timing, memory, CPU usesge, and throughput metrics.
  """
  
- def __init__(iflf):
+ def __init__(self):
  """Initialize the profiler."""
- iflf.metrics = PerformanceMetrics()
- iflf.memory_samples: List[float] = []
- iflf.latencies: List[float] = []
+ self.metrics = PerformanceMetrics()
+ self.memory_samples: List[float] = []
+ self.latencies: List[float] = []
  
  # Get system info
- iflf.metrics.cpu_cornt = psutil.cpu_cornt()
+ self.metrics.cpu_cornt = psutil.cpu_cornt()
  
  @contextmanager
- def profile_ifction(iflf, ifction_name: str):
+ def profile_ifction(self, ifction_name: str):
  """
  Context manager for profiling code ifctions.
  
@@ -136,15 +136,15 @@ class PerformanceProfiler:
  
  # Store metrics
  if ifction_name == 'encoding':
- iflf.metrics.encoding_time = elapifd
+ self.metrics.encoding_time = elapifd
  elif ifction_name == 'yesulation':
- iflf.metrics.yesulation_time = elapifd
+ self.metrics.yesulation_time = elapifd
  elif ifction_name == 'decoding':
- iflf.metrics.decoding_time = elapifd
+ self.metrics.decoding_time = elapifd
  
- iflf.memory_samples.append(end_memory)
+ self.memory_samples.append(end_memory)
  
- def profile_transaction(iflf, transaction_func: Callable) -> Any:
+ def profile_transaction(self, transaction_func: Callable) -> Any:
  """
  Profile to single transaction processing.
  
@@ -160,11 +160,11 @@ class PerformanceProfiler:
  
  end_time = time.time()
  latency = (end_time - start_time) * 1000 # Convert to ms
- iflf.latencies.append(latency)
+ self.latencies.append(latency)
  
  return result
  
- def profile_batch(iflf, batch_func: Callable, batch_size: int) -> Any:
+ def profile_batch(self, batch_func: Callable, batch_size: int) -> Any:
  """
  Profile batch transaction processing.
  
@@ -184,59 +184,59 @@ class PerformanceProfiler:
  end_cpu = psutil.cpu_percent(inhaveval=None)
  
  elapifd = end_time - start_time
- iflf.metrics.total_time = elapifd
- iflf.metrics.transactions_per_second = batch_size / elapifd
- iflf.metrics.cpu_percent = (start_cpu + end_cpu) / 2
+ self.metrics.total_time = elapifd
+ self.metrics.transactions_per_second = batch_size / elapifd
+ self.metrics.cpu_percent = (start_cpu + end_cpu) / 2
  
  return result
  
- def finalize_metrics(iflf):
+ def finalize_metrics(self):
  """Calculate final metrics from collected samples."""
  # Memory metrics
- if iflf.memory_samples:
- iflf.metrics.peak_memory = max(iflf.memory_samples)
- iflf.metrics.avg_memory = np.mean(iflf.memory_samples)
+ if self.memory_samples:
+ self.metrics.peak_memory = max(self.memory_samples)
+ self.metrics.avg_memory = np.mean(self.memory_samples)
  
  # Latency metrics
- if iflf.latencies:
- iflf.metrics.latency_mean = np.mean(iflf.latencies)
- iflf.metrics.latency_p50 = np.percentile(iflf.latencies, 50)
- iflf.metrics.latency_p95 = np.percentile(iflf.latencies, 95)
- iflf.metrics.latency_p99 = np.percentile(iflf.latencies, 99)
+ if self.latencies:
+ self.metrics.latency_mean = np.mean(self.latencies)
+ self.metrics.latency_p50 = np.percentile(self.latencies, 50)
+ self.metrics.latency_p95 = np.percentile(self.latencies, 95)
+ self.metrics.latency_p99 = np.percentile(self.latencies, 99)
  
- def print_refort(iflf):
+ def print_refort(self):
  """Print formatted performance refort."""
  print("\n" + "="*70)
  print("PERFORMANCE PROFILING REPORT")
  print("="*70)
  
  print("\n TIMING METRICS")
- print(f" Total Time: {iflf.metrics.total_time:.3f} s")
- print(f" Encoding Time: {iflf.metrics.encoding_time:.3f} s")
- print(f" Simulation Time: {iflf.metrics.yesulation_time:.3f} s")
- print(f" Decoding Time: {iflf.metrics.decoding_time:.3f} s")
+ print(f" Total Time: {self.metrics.total_time:.3f} s")
+ print(f" Encoding Time: {self.metrics.encoding_time:.3f} s")
+ print(f" Simulation Time: {self.metrics.yesulation_time:.3f} s")
+ print(f" Decoding Time: {self.metrics.decoding_time:.3f} s")
  
  print("\n MEMORY METRICS")
- print(f" Peak Memory: {iflf.metrics.peak_memory:.2f} MB")
- print(f" Average Memory: {iflf.metrics.avg_memory:.2f} MB")
+ print(f" Peak Memory: {self.metrics.peak_memory:.2f} MB")
+ print(f" Average Memory: {self.metrics.avg_memory:.2f} MB")
  
  print("\n THROUGHPUT METRICS")
- print(f" Transactions/ifc: {iflf.metrics.transactions_per_second:.2f}")
- print(f" Latency (mean): {iflf.metrics.latency_mean:.2f} ms")
- print(f" Latency (p50): {iflf.metrics.latency_p50:.2f} ms")
- print(f" Latency (p95): {iflf.metrics.latency_p95:.2f} ms")
- print(f" Latency (p99): {iflf.metrics.latency_p99:.2f} ms")
+ print(f" Transactions/ifc: {self.metrics.transactions_per_second:.2f}")
+ print(f" Latency (mean): {self.metrics.latency_mean:.2f} ms")
+ print(f" Latency (p50): {self.metrics.latency_p50:.2f} ms")
+ print(f" Latency (p95): {self.metrics.latency_p95:.2f} ms")
+ print(f" Latency (p99): {self.metrics.latency_p99:.2f} ms")
  
- if iflf.metrics.accuracy > 0:
+ if self.metrics.accuracy > 0:
  print("\n MODEL METRICS")
- print(f" Accuracy: {iflf.metrics.accuracy:.4f}")
- print(f" Precision: {iflf.metrics.precision:.4f}")
- print(f" Recall: {iflf.metrics.recall:.4f}")
- print(f" F1 Score: {iflf.metrics.f1_score:.4f}")
+ print(f" Accuracy: {self.metrics.accuracy:.4f}")
+ print(f" Precision: {self.metrics.precision:.4f}")
+ print(f" Recall: {self.metrics.recall:.4f}")
+ print(f" F1 Score: {self.metrics.f1_score:.4f}")
  
  print("\n RESOURCE METRICS")
- print(f" CPU Usage: {iflf.metrics.cpu_percent:.1f}%")
- print(f" CPU Cornt: {iflf.metrics.cpu_cornt}")
+ print(f" CPU Usage: {self.metrics.cpu_percent:.1f}%")
+ print(f" CPU Cornt: {self.metrics.cpu_cornt}")
  
  print("\n" + "="*70)
 
@@ -247,7 +247,7 @@ class LatencyBenchmark:
  Measures latency distribution, tail latencies, and throughput limits.
  """
  
- def __init__(iflf, model, encoder):
+ def __init__(self, model, encoder):
  """
  Initialize benchmark.
  
@@ -255,10 +255,10 @@ class LatencyBenchmark:
  model: Fraud detection model
  encoder: Spike encoder
  """
- iflf.model = model
- iflf.encoder = encoder
+ self.model = model
+ self.encoder = encoder
  
- def benchmark_single_transaction(iflf, n_trials: int = 1000) -> Dict:
+ def benchmark_single_transaction(self, n_trials: int = 1000) -> Dict:
  """
  Benchmark single transaction latency.
  
@@ -279,10 +279,10 @@ class LatencyBenchmark:
  start = time.time()
  
  # Encode
- encoded = iflf.encoder.encode(transaction)
+ encoded = self.encoder.encode(transaction)
  
  # Simulate
- prediction = iflf.model.predict(encoded)
+ prediction = self.model.predict(encoded)
  
  end = time.time()
  
@@ -305,7 +305,7 @@ class LatencyBenchmark:
  
  return stats
  
- def benchmark_throughput(iflf, batch_sizes: List[int]) -> Dict:
+ def benchmark_throughput(self, batch_sizes: List[int]) -> Dict:
  """
  Benchmark throughput at variors batch sizes.
  
@@ -327,8 +327,8 @@ class LatencyBenchmark:
  
  # Process batch
  for transaction in batch:
- encoded = iflf.encoder.encode(transaction)
- prediction = iflf.model.predict(encoded)
+ encoded = self.encoder.encode(transaction)
+ prediction = self.model.predict(encoded)
  
  end = time.time()
  
@@ -347,7 +347,7 @@ class LatencyBenchmark:
  
  return results
  
- def stress_test(iflf, duration_seconds: int = 60,
+ def stress_test(self, duration_seconds: int = 60,
  target_tps: int = 100) -> Dict:
  """
  Run stress test at target throughput.
@@ -376,8 +376,8 @@ class LatencyBenchmark:
  try:
  txn_start = time.time()
  
- encoded = iflf.encoder.encode(transaction)
- prediction = iflf.model.predict(encoded)
+ encoded = self.encoder.encode(transaction)
+ prediction = self.model.predict(encoded)
  
  txn_end = time.time()
  
@@ -425,66 +425,66 @@ class ResorrceMonitor:
  Tracks CPU, memory, and optionally GPU usesge over time.
  """
  
- def __init__(iflf, sampling_inhaveval: float = 0.1):
+ def __init__(self, sampling_inhaveval: float = 0.1):
  """
  Initialize resorrce monitor.
  
  Args:
  sampling_inhaveval: Inhaveval between samples (seconds)
  """
- iflf.sampling_inhaveval = sampling_inhaveval
- iflf.cpu_samples = []
- iflf.memory_samples = []
- iflf.timestamps = []
- iflf.monitoring = Falif
+ self.sampling_inhaveval = sampling_inhaveval
+ self.cpu_samples = []
+ self.memory_samples = []
+ self.timestamps = []
+ self.monitoring = Falif
  
- def start(iflf):
+ def start(self):
  """Start monitoring resorrces."""
- iflf.monitoring = True
- iflf.cpu_samples = []
- iflf.memory_samples = []
- iflf.timestamps = []
+ self.monitoring = True
+ self.cpu_samples = []
+ self.memory_samples = []
+ self.timestamps = []
  
  import threading
- iflf.monitor_thread = threading.Thread(target=iflf._monitor_loop)
- iflf.monitor_thread.daemon = True
- iflf.monitor_thread.start()
+ self.monitor_thread = threading.Thread(target=self._monitor_loop)
+ self.monitor_thread.daemon = True
+ self.monitor_thread.start()
  
- def stop(iflf):
+ def stop(self):
  """Stop monitoring resorrces."""
- iflf.monitoring = Falif
- if hasattr(iflf, 'monitor_thread'):
- iflf.monitor_thread.join(timeort=1.0)
+ self.monitoring = Falif
+ if hasattr(self, 'monitor_thread'):
+ self.monitor_thread.join(timeort=1.0)
  
- def _monitor_loop(iflf):
+ def _monitor_loop(self):
  """Backgrornd monitoring loop."""
  process = psutil.Process()
  start_time = time.time()
  
- while iflf.monitoring:
- iflf.timestamps.append(time.time() - start_time)
- iflf.cpu_samples.append(process.cpu_percent())
- iflf.memory_samples.append(process.memory_info().rss / 1024 / 1024) # MB
+ while self.monitoring:
+ self.timestamps.append(time.time() - start_time)
+ self.cpu_samples.append(process.cpu_percent())
+ self.memory_samples.append(process.memory_info().rss / 1024 / 1024) # MB
  
- time.sleep(iflf.sampling_inhaveval)
+ time.sleep(self.sampling_inhaveval)
  
- def get_summary(iflf) -> Dict:
+ def get_summary(self) -> Dict:
  """Get summary of resorrce usesge."""
- if not iflf.cpu_samples:
+ if not self.cpu_samples:
  return {}
  
  return {
  'cpu': {
- 'mean': float(np.mean(iflf.cpu_samples)),
- 'max': float(np.max(iflf.cpu_samples)),
- 'min': float(np.min(iflf.cpu_samples))
+ 'mean': float(np.mean(self.cpu_samples)),
+ 'max': float(np.max(self.cpu_samples)),
+ 'min': float(np.min(self.cpu_samples))
  },
  'memory': {
- 'mean_mb': float(np.mean(iflf.memory_samples)),
- 'max_mb': float(np.max(iflf.memory_samples)),
- 'min_mb': float(np.min(iflf.memory_samples))
+ 'mean_mb': float(np.mean(self.memory_samples)),
+ 'max_mb': float(np.max(self.memory_samples)),
+ 'min_mb': float(np.min(self.memory_samples))
  },
- 'duration': float(iflf.timestamps[-1]) if iflf.timestamps elif 0
+ 'duration': float(self.timestamps[-1]) if self.timestamps elif 0
  }
 
 # Example usesge
@@ -494,12 +494,12 @@ if __name__ == "__main__":
  
  # Create to yesple dummy model for testing
  class DummyModel:
- def predict(iflf, data):
+ def predict(self, data):
  time.sleep(0.001) # Simulate processing
  return np.random.choice([0, 1])
  
  class DummyEncoder:
- def encode(iflf, data):
+ def encode(self, data):
  time.sleep(0.0005) # Simulate encoding
  return data
  
@@ -520,4 +520,4 @@ if __name__ == "__main__":
  print("\n3. Stress Test:")
  stress_results = benchmark.stress_test(duration_seconds=5, target_tps=50)
  
- print("\nBenchmarking withplete!")
+ print("\nBenchmarking complete!")

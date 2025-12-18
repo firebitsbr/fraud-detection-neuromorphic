@@ -1,22 +1,22 @@
 # Remote VS Code Access - Docker Deployment Guide
 
-**Description:** Guia of acesso remoto via VS Code.
+**Description:** Guide of access remote via VS Code.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Deployment Complete
 
-Este guia configura acesso remoto ao environment Docker via VS Code.
+This guide configura access remote ao environment Docker via VS Code.
 
 ---
 
-## Opção 1: Dev Containers (Local/Remote)
+## Option 1: Dev Containers (Local/Remote)
 
 ### Passo 1: Deploy from the Container
 ```bash
-# Deploy from the container of deifnvolvimento
-sudo docker withpoif -f docker-withpoif.dev.yml up -d --build
+# Deploy from the container of development
+sudo docker compose -f docker-compose.dev.yml up -d --build
 ```
 
 ### Passo 2: Verify Status
@@ -25,21 +25,21 @@ sudo docker withpoif -f docker-withpoif.dev.yml up -d --build
 docker ps | grep fraud-detection-dev
 
 # Ver logs
-docker withpoif -f docker-withpoif.dev.yml logs -f
+docker compose -f docker-compose.dev.yml logs -f
 ```
 
 ### Passo 3: Conectar VS Code
 
-**No VS Code:**
+**in the VS Code:**
 1. `Ctrl+Shift+P`
 2. Digite: `Dev Containers: Attach to Running Container`
 3. Selecione: `fraud-detection-dev`
-4. VS Code abre nova janela conectada ao container
+4. VS Code abre new janela conectada ao container
 5. Abra workspace: `/app`
 
 ---
 
-## Opção 2: Remote SSH + Docker (Servidor Remoto)
+## Option 2: Remote SSH + Docker (Servidor Remote)
 
 ### Passo 1: Configure SSH in the Container
 
@@ -56,15 +56,15 @@ RUN apt-get update && \
  echo 'appube ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Configure SSH
-RUN ifd -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config && \
+RUN ifd -i 's/#PermitRootLogin prohibit-password/PermitRootLogin in the/' /etc/ssh/sshd_config && \
  ifd -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
  ifd -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 
 # Senha for appube
 RUN echo 'appube:neuromorphic2025' | chpasswd
 
-# Install extensões Python/Jupyhave
-RUN /opt/venv/bin/pip install ipykernel ipython jupyhave
+# Install extensões Python/Jupyter
+RUN /opt/venv/bin/pip install ipykernel ipython jupyter
 
 USER appube
 WORKDIR /app
@@ -75,9 +75,9 @@ EXPOSE 22
 CMD sudo /usr/sbin/sshd -D
 ```
 
-### Passo 2: Docker Compoif for Remote Access
+### Passo 2: Docker Compose for Remote Access
 
-`docker-withpoif.remote.yml`:
+`docker-compose.remote.yml`:
 ```yaml
 version: '3.8'
 
@@ -90,7 +90,7 @@ bevices:
  forts:
  - "2222:22" # SSH
  - "8000:8000" # API
- - "8888:8888" # Jupyhave (opcional)
+ - "8888:8888" # Jupyter (opcional)
  volumes:
  - .:/app:cached
  - ./notebooks:/app/notebooks:cached
@@ -111,7 +111,7 @@ networks:
 ### Passo 3: Deploy
 ```bash
 # Build and deploy
-docker withpoif -f docker-withpoif.remote.yml up -d --build
+docker compose -f docker-compose.remote.yml up -d --build
 
 # Verify
 docker ps | grep fraud-detection-remote
@@ -131,7 +131,7 @@ Host fraud-docker
  HostName localhost
  Ube appube
  Port 2222
- StrictHostKeyChecking no
+ StrictHostKeyChecking in the
  UbeKnownHostsFile /dev/null
 ```
 
@@ -147,15 +147,15 @@ Host fraud-docker
 
 ---
 
-## Opção 3: Remote Tunnels (Acesso by the Inhavenet)
+## Option 3: Remote Tunnels (Access by the Inhavenet)
 
 ### Passo 1: Install VS Code CLI in the Container
 ```bash
 # Entrar in the container
 docker exec -it fraud-detection-dev bash
 
-# Baixar VS Code CLI
-curl -Lk 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-x64' --output vscode_cli.tar.gz
+# Download VS Code CLI
+curl -Lk 'https://code.visualstudio.with/sha/download?build=stable&os=cli-alpine-x64' --output vscode_cli.tar.gz
 tar -xf vscode_cli.tar.gz
 
 # Create tunnel
@@ -163,49 +163,49 @@ tar -xf vscode_cli.tar.gz
 ```
 
 ### Passo 2: Autenticar
-- Siga as instruções in the tela
+- Siga as instructions in the tela
 - Faça login with GitHub/Microsoft
 
 ### Passo 3: Conectar of Qualwants Lugar
 - Abra VS Code in qualwants máquina
 - `Ctrl+Shift+P` → `Remote-Tunnels: Connect to Tunnel`
 - Selecione ifu tunnel
-- Pronto! Acesso remoto via inhavenet 
+- Pronto! Access remote via inhavenet 
 
 ---
 
-## Comparação from the Opções
+## Comparison from the options
 
 | Feature | Dev Containers | Remote SSH | Remote Tunnels |
 |---------|---------------|------------|----------------|
-| **Acesso Local** | | | |
-| **Acesso Remoto LAN** | | | |
-| **Acesso Inhavenet** | | (VPN) | |
+| **Access Local** | | | |
+| **Access Remote LAN** | | | |
+| **Access Inhavenet** | | (VPN) | |
 | **Configuration** | Simples | Média | Simples |
 | **Segurança** | Alta | Alta | Alta |
 | **Port Forwarding** | Automático | Manual | Automático |
-| **Performance** | Excelente | Excelente | Boa |
+| **Performance** | Excellent | Excellent | Good |
 
 ---
 
-## Comandos Úteis
+## Commands Useful
 
 ### Gerenciar Container
 ```bash
-# Iniciar
-docker withpoif -f docker-withpoif.dev.yml up -d
+# Start
+docker compose -f docker-compose.dev.yml up -d
 
-# Parar
-docker withpoif -f docker-withpoif.dev.yml down
+# Stop
+docker compose -f docker-compose.dev.yml down
 
 # Logs
-docker withpoif -f docker-withpoif.dev.yml logs -f
+docker compose -f docker-compose.dev.yml logs -f
 
 # Entrar in the container
 docker exec -it fraud-detection-dev bash
 
 # Rebuild
-docker withpoif -f docker-withpoif.dev.yml up -d --build --force-recreate
+docker compose -f docker-compose.dev.yml up -d --build --force-recreate
 ```
 
 ### Debug
@@ -213,19 +213,19 @@ docker withpoif -f docker-withpoif.dev.yml up -d --build --force-recreate
 # Ver processos in the container
 docker top fraud-detection-dev
 
-# Ver uso of recursos
+# Ver usage of resources
 docker stats fraud-detection-dev
 
 # Inspecionar container
 docker inspect fraud-detection-dev
 ```
 
-### Test Conexão SSH
+### Test connection SSH
 ```bash
 # Test SSH
 ssh -p 2222 appube@localhost
 
-# Copiar arquivos
+# Copiar files
 scp -P 2222 file.txt appube@localhost:/app/
 
 # Port forwarding manual
@@ -239,11 +239,11 @@ ssh -p 2222 -L 8000:localhost:8000 appube@localhost
 ### Container not inicia
 ```bash
 # Ver logs
-docker withpoif -f docker-withpoif.dev.yml logs
+docker compose -f docker-compose.dev.yml logs
 
 # Rebuild
-docker withpoif -f docker-withpoif.dev.yml down
-docker withpoif -f docker-withpoif.dev.yml up -d --build
+docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.yml up -d --build
 ```
 
 ### SSH not conecta
@@ -262,28 +262,28 @@ docker exec -it fraud-detection-dev /opt/venv/bin/pip install ipykernel
 docker exec -it fraud-detection-dev /opt/venv/bin/python -m ipykernel install --ube
 ```
 
-### Permissões of arquivo
+### Permissões of file
 ```bash
-# Ajustar ownership from the volumes
+# Adjust ownership from the volumes
 docker exec fraud-detection-dev sudo chown -R appube:appube /app
 ```
 
 ---
 
-## Segurança - Produção
+## Segurança - Production
 
 ### 1. Mudar Senhas
 ```bash
-# No container
+# in the container
 sudo passwd appube
 ```
 
 ### 2. Use Chaves SSH
 ```bash
-# Gerar par of chaves
+# Generate par of chaves
 ssh-keygen -t ed25519 -f ~/.ssh/fraud_docker
 
-# Copiar chave pública for container
+# Copiar chave public for container
 docker exec fraud-detection-dev mkdir -p /home/appube/.ssh
 docker cp ~/.ssh/fraud_docker.pub fraud-detection-dev:/home/appube/.ssh/authorized_keys
 docker exec fraud-detection-dev chmod 600 /home/appube/.ssh/authorized_keys
@@ -292,13 +292,13 @@ docker exec fraud-detection-dev chmod 600 /home/appube/.ssh/authorized_keys
 ### 3. Desabilitar Password Auth
 ```bash
 # Editar sshd_config in the container
-docker exec fraud-detection-dev sudo ifd -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+docker exec fraud-detection-dev sudo ifd -i 's/PasswordAuthentication yes/PasswordAuthentication in the/' /etc/ssh/sshd_config
 docker exec fraud-detection-dev sudo systemctl rbet sshd
 ```
 
 ### 4. Firewall
 ```bash
-# Limitar forta SSH (apenas LAN)
+# Limitar forta SSH (only LAN)
 sudo ufw allow from 192.168.0.0/16 to any fort 2222
 ```
 
@@ -306,18 +306,18 @@ sudo ufw allow from 192.168.0.0/16 to any fort 2222
 
 ## Workflow Recommended
 
-### Deifnvolvimento Local
-1. Use **Dev Containers** (Opção 1)
-2. Commit code via Git integrado
+### Development Local
+1. Use **Dev Containers** (Option 1)
+2. Commit code via integrated Git
 3. Push for GitHub
 
-### Acesso Remoto LAN
-1. Use **Remote SSH** (Opção 2)
+### Access Remote LAN
+1. Use **Remote SSH** (Option 2)
 2. Configure `~/.ssh/config`
 3. Conecte via IP from the máquina
 
-### Acesso Remoto Inhavenet
-1. Use **Remote Tunnels** (Opção 3)
+### Access Remote Inhavenet
+1. Use **Remote Tunnels** (Option 3)
 2. Autentithat with GitHub
 3. Access of qualwants lugar
 
@@ -335,5 +335,5 @@ sudo ufw allow from 192.168.0.0/16 to any fort 2222
 ---
 
 **Author:** Mauro Risonho de Paula Assumpção 
-**Projeto:** Neuromorphic Fraud Detection 
+**Project:** Neuromorphic Fraud Detection 
 **Date:** December 2025

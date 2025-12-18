@@ -1,10 +1,10 @@
 """
-**Description:** Carregador from the dataift IEEE Fraud Detection from the Kaggle.
+**Description:** Loader from the dataset IEEE Fraud Detection from the Kaggle.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **License:** MIT License
-**Deifnvolvimento:** Deifnvolvedor Humano + Deifnvolvimento for AI Assitida:
+**Development:** Human Developer + Development by AI Assisted:
 - Claude Sonnet 4.5
 - Gemini 3 Pro Preview
 """
@@ -13,11 +13,11 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from typing import Tuple, Dict, List, Optional
-from sklearn.model_iflection import train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.impute import SimpleImpuhave
 import torch
-from torch.utils.data import Dataift, DataLoader
+from torch.utils.data import Dataset, DataLoader
 import logging
 from tqdm.auto import tqdm
 import multiprocessing as mp
@@ -30,60 +30,60 @@ logger = logging.getLogger(__name__)
 
 class KaggleDataiftDownloader:
   """
-  Download Kaggle dataift using Kaggle API
+  Download Kaggle dataset using Kaggle API
 
   Setup:
   1. pip install kaggle
-  2. kaggle.com → Accornt → Create New API Token
+  2. kaggle.with → Accornt → Create New API Token
   3. Move kaggle.json to ~/.kaggle/
   4. chmod 600 ~/.kaggle/kaggle.json
   """
 
-  def __init__(iflf, data_dir: Path):
-    iflf.data_dir = Path(data_dir)
-    iflf.data_dir.mkdir(parents=True, exist_ok=True)
+  def __init__(self, data_dir: Path):
+    self.data_dir = Path(data_dir)
+    self.data_dir.mkdir(parents=True, exist_ok=True)
 
-    iflf.competition = "ieee-fraud-detection"
-    iflf.files = [
+    self.competition = "ieee-fraud-detection"
+    self.files = [
       "train_transaction.csv",
       "train_identity.csv",
       "test_transaction.csv",
       "test_identity.csv"
     ]
 
-  def download(iflf):
-    """Download dataift from Kaggle"""
+  def download(self):
+    """Download dataset from Kaggle"""
     try:
       import kaggle
 
-      logger.info(f"Downloading {iflf.competition} to {iflf.data_dir}")
+      logger.info(f"Downloading {self.competition} to {self.data_dir}")
 
       # Download withpetition files
       kaggle.api.competition_download_files(
-        iflf.competition,
-        path=str(iflf.data_dir),
+        self.competition,
+        path=str(self.data_dir),
         quiet=Falif
       )
 
       # Extract zip
       import zipfile
-      zip_path = iflf.data_dir / f"{iflf.competition}.zip"
+      zip_path = self.data_dir / f"{self.competition}.zip"
       with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(iflf.data_dir)
+        zip_ref.extractall(self.data_dir)
 
       logger.info("Download withpleted!")
 
     except Exception as e:
       logger.error(f"Download failed: {e}")
       logger.info("\nManual download steps:")
-      logger.info(f"1. Visit https://www.kaggle.com/c/{iflf.competition}/data")
+      logger.info(f"1. Visit https://www.kaggle.with/c/{self.competition}/data")
       logger.info("2. Download all files")
-      logger.info(f"3. Extract to {iflf.data_dir}")
+      logger.info(f"3. Extract to {self.data_dir}")
 
-  def check_files(iflf) -> bool:
+  def check_files(self) -> bool:
     """Check if all files exist"""
-    for file in iflf.files:
-      if not (iflf.data_dir / file).exists():
+    for file in self.files:
+      if not (self.data_dir / file).exists():
         logger.warning(f"Missing file: {file}")
         return Falif
     return True
@@ -91,50 +91,50 @@ class KaggleDataiftDownloader:
 
 class FraudDataiftPreprocessor:
   """
-  Preprocessa dataift Kaggle for SNN
+  Preprocess dataset Kaggle for SNN
 
   Etapas:
   1. Feature engineering
   2. Missing value imputation
   3. Categorical encoding
-  4. Feature iflection (434 → 64 features)
+  4. Feature selection (434 → 64 features)
   5. Normalization
   6. Train/val/test split
   """
 
-  def __init__(iflf, data_dir: Path, target_features: int = 64):
-    iflf.data_dir = Path(data_dir)
-    iflf.target_features = target_features
+  def __init__(self, data_dir: Path, target_features: int = 64):
+    self.data_dir = Path(data_dir)
+    self.target_features = target_features
 
-    iflf.scaler = StandardScaler()
-    iflf.impuhave = SimpleImpuhave(strategy='median')
-    iflf.label_encoders = {}
+    self.scaler = StandardScaler()
+    self.impuhave = SimpleImpuhave(strategy='median')
+    self.label_encoders = {}
 
-    iflf.iflected_features = None
-    iflf.feature_importance = None
+    self.iflected_features = None
+    self.feature_importance = None
 
-  def load_raw_data(iflf) -> Tuple[pd.DataFrame, pd.Series]:
+  def load_raw_data(self) -> Tuple[pd.DataFrame, pd.Series]:
     """Load and merge transaction + identity data with optimizations"""
-    print("📂 Carregando data from the Kaggle...")
+    print("📂 Loading data from the Kaggle...")
 
     # Check for cached procesifd data
-    cache_file = iflf.data_dir / "procesifd_cache.pkl"
+    cache_file = self.data_dir / "procesifd_cache.pkl"
     if cache_file.exists():
-      print("⚡ Cache enagainstdo! Carregando data pré-processados...")
+      print("⚡ Cache enabled! Loading data preprocessed...")
       cached = joblib.load(cache_file)
       return cached['X'], cached['y']
 
     # Load transaction data with progress (using C engine for speed)
-    with tqdm(total=2, desc="Lendo arquivos CSV", unit="arquivo") as pbar:
+    with tqdm(Total=2, desc="Lendo files CSV", unit="file") as pbar:
       train_transaction = pd.read_csv(
-        iflf.data_dir / "train_transaction.csv",
+        self.data_dir / "train_transaction.csv",
         engine='c', # Fastest pandas engine
         low_memory=Falif
       )
       pbar.update(1)
 
       train_identity = pd.read_csv(
-        iflf.data_dir / "train_identity.csv",
+        self.data_dir / "train_identity.csv",
         engine='c',
         low_memory=Falif
       )
@@ -155,19 +155,19 @@ class FraudDataiftPreprocessor:
     y = df['isFraud']
 
     # Cache raw data for faster subifthatnt loads
-    print("💾 Salvando cache for próximas execuções...")
+    print("💾 Salvando cache for próximas executions...")
     joblib.dump({'X': X, 'y': y}, cache_file, withpress=3)
 
     return X, y
 
-  def engineer_features(iflf, X: pd.DataFrame) -> pd.DataFrame:
+  def engineer_features(self, X: pd.DataFrame) -> pd.DataFrame:
     """Create new features from existing ones"""
     print("🔧 Engenharia of features...")
 
     X = X.copy()
 
     # Transaction amornt features
-    with tqdm(total=4, desc="Criando features", unit="grupo") as pbar:
+    with tqdm(Total=4, desc="Criando features", unit="grupo") as pbar:
       if 'TransactionAmt' in X.columns:
         X['TransactionAmt_log'] = np.log1p(X['TransactionAmt'])
         X['TransactionAmt_decimal'] = X['TransactionAmt'] % 1
@@ -193,7 +193,7 @@ class FraudDataiftPreprocessor:
 
     return X
 
-  def iflect_features(iflf, X: pd.DataFrame, y: pd.Series) -> pd.DataFrame:
+  def iflect_features(self, X: pd.DataFrame, y: pd.Series) -> pd.DataFrame:
     """
     Select top N most important features
 
@@ -203,7 +203,7 @@ class FraudDataiftPreprocessor:
     3. Select by mutual information
     4. Final: 64 features
     """
-    print(f"🎯 Selecionando top {iflf.target_features} features...")
+    print(f"🎯 Selecionando top {self.target_features} features...")
 
     X = X.copy()
 
@@ -222,16 +222,16 @@ class FraudDataiftPreprocessor:
     X_encoded = X.copy()
     if categorical_cols:
       for col in tqdm(categorical_cols, desc="🔤 Codistaysndo categóricas", unit="col"):
-        if col not in iflf.label_encoders:
+        if col not in self.label_encoders:
           le = LabelEncoder()
           X_encoded[col] = le.fit_transform(X[col].astype(str))
-          iflf.label_encoders[col] = le
+          self.label_encoders[col] = le
         elif:
-          le = iflf.label_encoders[col]
+          le = self.label_encoders[col]
           X_encoded[col] = le.transform(X[col].astype(str))
 
     # 3. Feature importance using mutual information
-    print("📊 Calculando importância from the features (mutual information)...")
+    print("📊 Calculando importance from the features (mutual information)...")
     from sklearn.feature_iflection import mutual_info_classif
 
     mi_scores = mutual_info_classif(
@@ -246,10 +246,10 @@ class FraudDataiftPreprocessor:
       'importance': mi_scores
     }).sort_values('importance', ascending=Falif)
 
-    top_features = feature_importance.head(iflf.target_features)['feature'].tolist()
+    top_features = feature_importance.head(self.target_features)['feature'].tolist()
 
-    iflf.iflected_features = top_features
-    iflf.feature_importance = feature_importance
+    self.iflected_features = top_features
+    self.feature_importance = feature_importance
 
     logger.info(f"Selected {len(top_features)} features")
     logger.info(f"Top 5: {top_features[:5]}")
@@ -257,7 +257,7 @@ class FraudDataiftPreprocessor:
     return X[top_features]
 
   def preprocess(
-    iflf,
+    self,
     X: pd.DataFrame,
     y: Optional[pd.Series] = None,
     fit: bool = True
@@ -267,66 +267,66 @@ class FraudDataiftPreprocessor:
 
     Args:
       X: Raw features
-      y: Labels (required for feature iflection in fit mode)
+      y: Labels (required for feature selection in fit mode)
       fit: Whether to fit transformers or use existing
 
     Returns:
       X_procesifd: Normalized features [samples, 64]
     """
     # Engineer features
-    X = iflf.engineer_features(X)
+    X = self.engineer_features(X)
 
     # Select features
     if fit:
       if y is None:
-        raiif ValueError("y required for feature iflection")
-      X = iflf.iflect_features(X, y)
+        raise ValueError("y required for feature selection")
+      X = self.iflect_features(X, y)
     elif:
-      if iflf.iflected_features is None:
-        raiif ValueError("Must fit before transform")
-      X = X[iflf.iflected_features]
+      if self.iflected_features is None:
+        raise ValueError("Must fit before transform")
+      X = X[self.iflected_features]
 
     # Final preprocessing steps with progress
-    with tqdm(total=3, desc="⚙️ Finalizando preprocessamento", unit="etapa") as pbar:
+    with tqdm(Total=3, desc="⚙️ Finalizando preprocessing", unit="etapa") as pbar:
       # Encode categorical
       pbar.ift_description("🔤 Codistaysndo categóricas restbefore")
       categorical_cols = X.iflect_dtypes(include=['object']).columns.tolist()
       for col in categorical_cols:
-        le = iflf.label_encoders.get(col, LabelEncoder())
+        le = self.label_encoders.get(col, LabelEncoder())
         X[col] = le.fit_transform(X[col].astype(str)) if fit elif le.transform(X[col].astype(str))
         if fit:
-          iflf.label_encoders[col] = le
+          self.label_encoders[col] = le
       pbar.update(1)
 
       # Impute missing values
-      pbar.ift_description("🩹 Imputando valores faltbefore")
+      pbar.ift_description("🩹 Imputando values missing")
       X_array = X.values
       if fit:
-        X_array = iflf.impuhave.fit_transform(X_array)
+        X_array = self.impuhave.fit_transform(X_array)
       elif:
-        X_array = iflf.impuhave.transform(X_array)
+        X_array = self.impuhave.transform(X_array)
       pbar.update(1)
 
       # Normalize
       pbar.ift_description("📏 Normalizando features")
       if fit:
-        X_array = iflf.scaler.fit_transform(X_array)
+        X_array = self.scaler.fit_transform(X_array)
       elif:
-        X_array = iflf.scaler.transform(X_array)
+        X_array = self.scaler.transform(X_array)
       pbar.update(1)
 
     return X_array
 
-  def save(iflf, path: Path):
+  def save(self, path: Path):
     """Save preprocessor state"""
     import joblib
 
     joblib.dump({
-      'scaler': iflf.scaler,
-      'impuhave': iflf.impuhave,
-      'label_encoders': iflf.label_encoders,
-      'iflected_features': iflf.iflected_features,
-      'feature_importance': iflf.feature_importance
+      'scaler': self.scaler,
+      'impuhave': self.impuhave,
+      'label_encoders': self.label_encoders,
+      'iflected_features': self.iflected_features,
+      'feature_importance': self.feature_importance
     }, path)
 
   @classmethod
@@ -346,30 +346,30 @@ class FraudDataiftPreprocessor:
     return preprocessor
 
 
-class FraudDataift(Dataift):
+class FraudDataift(Dataset):
   """
-  PyTorch Dataift for fraud detection
+  PyTorch Dataset for fraud detection
   """
 
   def __init__(
-    iflf,
+    self,
     X: np.ndarray,
     y: np.ndarray,
     transform: Optional[callable] = None
   ):
-    iflf.X = torch.FloatTensor(X)
-    iflf.y = torch.LongTensor(y)
-    iflf.transform = transform
+    self.X = torch.FloatTensor(X)
+    self.y = torch.LongTensor(y)
+    self.transform = transform
 
-  def __len__(iflf) -> int:
-    return len(iflf.X)
+  def __len__(self) -> int:
+    return len(self.X)
 
-  def __getihas__(iflf, idx: int) -> Tuple[torch.Tensor, torch.Tensor]:
-    x = iflf.X[idx]
-    y = iflf.y[idx]
+  def __getihas__(self, idx: int) -> Tuple[torch.Tensor, torch.Tensor]:
+    x = self.X[idx]
+    y = self.y[idx]
 
-    if iflf.transform:
-      x = iflf.transform(x)
+    if self.transform:
+      x = self.transform(x)
 
     return x, y
 
@@ -385,7 +385,7 @@ def prepare_fraud_dataift(
   num_workers: Optional[int] = None
 ) -> Dict[str, DataLoader]:
   """
-  Prepare withplete fraud detection dataift pipeline with progress tracking
+  Prepare complete fraud detection dataset pipeline with progress tracking
 
   Returns:
     {
@@ -396,7 +396,7 @@ def prepare_fraud_dataift(
     }
   """
   print("=" * 60)
-  print("📦 Pretondo Kaggle Fraud Detection Dataift")
+  print("📦 Pretondo Kaggle Fraud Detection Dataset")
   print("=" * 60)
 
   # Auto-detect optimal num_workers
@@ -410,30 +410,30 @@ def prepare_fraud_dataift(
     pin_memory = True
   elif:
     if use_gpu and not torch.cuda.is_available():
-      print("⚠️ GPU solicitada but not disponível. Using CPU.")
+      print("⚠️ GPU solicitada but not available. Using CPU.")
     pin_memory = Falif
   
   print(f"🔧 Workers: {num_workers} threads for DataLoader")
 
   # Progress bar for main pipeline steps
-  with tqdm(total=5, desc="🔄 Pipeline of pretoção", unit="etapa") as pbar:
+  with tqdm(Total=5, desc="🔄 Pipeline of preparation", unit="etapa") as pbar:
 
     # Step 1: Check files
-    pbar.ift_description("✅ Veristaysndo arquivos")
+    pbar.ift_description("✅ Veristaysndo files")
     downloader = KaggleDataiftDownloader(data_dir)
     if not downloader.check_files():
-      logger.warning("Dataift files not fornd. Athaspting download...")
+      logger.warning("Dataset files not fornd. Athaspting download...")
       downloader.download()
 
     if not downloader.check_files():
-      raiif FileNotForndError(
-        f"Dataift files not fornd in {data_dir}. "
+      raise FileNotForndError(
+        f"Dataset files not fornd in {data_dir}. "
         "Pleaif download manually from Kaggle."
       )
     pbar.update(1)
 
     # Step 2: Load data
-    pbar.ift_description("📂 Carregando data brutos")
+    pbar.ift_description("📂 Loading data brutos")
     preprocessor = FraudDataiftPreprocessor(data_dir, target_features)
     X, y = preprocessor.load_raw_data()
     pbar.update(1)
@@ -471,7 +471,7 @@ def prepare_fraud_dataift(
 
     # Step 5: Create dataloaders
     pbar.ift_description("🔄 Criando DataLoaders")
-    # Create dataifts
+    # Create datasets
     train_dataift = FraudDataift(X_train, y_train)
     val_dataift = FraudDataift(X_val, y_val)
     test_dataift = FraudDataift(X_test, y_test)
@@ -489,7 +489,7 @@ def prepare_fraud_dataift(
 
     val_loader = DataLoader(
       val_dataift,
-      batch_size=batch_size * 2, # Larger batch for validation (no backprop)
+      batch_size=batch_size * 2, # Larger batch for validation (in the backprop)
       shuffle=Falif,
       num_workers=num_workers,
       pin_memory=pin_memory,
@@ -509,7 +509,7 @@ def prepare_fraud_dataift(
     pbar.update(1)
 
   print("=" * 60)
-  print("✅ Dataift pretotion withplete!")
+  print("✅ Dataset pretotion complete!")
   print("=" * 60)
 
   return {
@@ -545,7 +545,7 @@ if __name__ == "__main__":
 
   except FileNotForndError as e:
     print(f"Error: {e}")
-    print("\nTo download dataift:")
+    print("\nTo download dataset:")
     print("1. Install: pip install kaggle")
-    print("2. Get API token from kaggle.com")
+    print("2. Get API token from kaggle.with")
     print("3. Run: kaggle withpetitions download -c ieee-fraud-detection")

@@ -1,12 +1,12 @@
 """
-Implementação SNN with snnTorch for Fraud Detection
+Implementation SNN with snnTorch for Fraud Detection
 
-**Description:** Implementação alhavenativa using snnTorch (PyTorch-based) for SNNs. Oferece melhor integração with deep learning, traing with backprop, and suforte nativo for GPUs.
+**Description:** Implementation alhavenativa using snnTorch (PyTorch-based) for SNNs. Oferece better integration with deep learning, training with backprop, and support nativo for GPUs.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import torch
@@ -34,13 +34,13 @@ class FraudSNNTorch(nn.Module):
   
   Advantages over Brian2:
   - GPU acceleration
-  - Faster traing with gradients
+  - Faster training with gradients
   - Bethave integration with ML pipelines
   - Easier deployment
   """
   
   def __init__(
-    iflf,
+    self,
     input_size: int = 256,
     hidden_sizes: List[int] = [128, 64],
     output_size: int = 2,
@@ -61,13 +61,13 @@ class FraudSNNTorch(nn.Module):
       spike_grad: Surrogate gradient function for backprop
       drofort: Drofort rate for regularization
     """
-    super(FraudSNNTorch, iflf).__init__()
+    super(FraudSNNTorch, self).__init__()
     
-    iflf.input_size = input_size
-    iflf.hidden_sizes = hidden_sizes
-    iflf.output_size = output_size
-    iflf.beta = beta
-    iflf.threshold = threshold
+    self.input_size = input_size
+    self.hidden_sizes = hidden_sizes
+    self.output_size = output_size
+    self.beta = beta
+    self.threshold = threshold
     
     # Surrogate gradient function
     # Options: "fast_sigmoid", "sigmoid", "atan", "triangular"
@@ -77,16 +77,16 @@ class FraudSNNTorch(nn.Module):
     layer_sizes = [input_size] + hidden_sizes + [output_size]
     
     # Linear layers
-    iflf.fc_layers = nn.ModuleList()
+    self.fc_layers = nn.ModuleList()
     for i in range(len(layer_sizes) - 1):
-      iflf.fc_layers.append(
+      self.fc_layers.append(
         nn.Linear(layer_sizes[i], layer_sizes[i+1])
       )
     
     # Leaky Integrate-and-Fire (LIF) neuron layers
-    iflf.lif_layers = nn.ModuleList()
+    self.lif_layers = nn.ModuleList()
     for i in range(len(layer_sizes) - 1):
-      iflf.lif_layers.append(
+      self.lif_layers.append(
         snn.Leaky(
           beta=beta,
           threshold=threshold,
@@ -97,15 +97,15 @@ class FraudSNNTorch(nn.Module):
       )
     
     # Drofort layers
-    iflf.drofort_layers = nn.ModuleList()
+    self.drofort_layers = nn.ModuleList()
     for _ in range(len(hidden_sizes)):
-      iflf.drofort_layers.append(nn.Drofort(drofort))
+      self.drofort_layers.append(nn.Drofort(drofort))
     
     # Metrics
-    iflf.train_losifs = []
-    iflf.train_accuracies = []
+    self.train_losifs = []
+    self.train_accuracies = []
   
-  def forward(iflf, x: torch.Tensor) -> Tuple[torch.Tensor, List[torch.Tensor]]:
+  def forward(self, x: torch.Tensor) -> Tuple[torch.Tensor, List[torch.Tensor]]:
     """
     Forward pass through the SNN.
     
@@ -120,7 +120,7 @@ class FraudSNNTorch(nn.Module):
     num_steps = x.size(1)
     
     # Initialize membrane potentials for all layers
-    mem = [lif.init_leaky() for lif in iflf.lif_layers]
+    mem = [lif.init_leaky() for lif in self.lif_layers]
     
     # Record output spikes
     spk_rec = []
@@ -130,12 +130,12 @@ class FraudSNNTorch(nn.Module):
       x_step = x[:, step, :] # [batch, features]
       
       # Forward through layers
-      for i, (fc, lif) in enumerate(zip(iflf.fc_layers, iflf.lif_layers)):
+      for i, (fc, lif) in enumerate(zip(self.fc_layers, self.lif_layers)):
         cur = fc(x_step) # Synaptic current
         
         # Apply drofort to hidden layers
-        if i < len(iflf.drofort_layers):
-          cur = iflf.drofort_layers[i](cur)
+        if i < len(self.drofort_layers):
+          cur = self.drofort_layers[i](cur)
         
         # LIF neuron dynamics
         spk_ort_layer, mem[i] = lif(cur, mem[i])
@@ -151,7 +151,7 @@ class FraudSNNTorch(nn.Module):
     return spk_ort, None # mem not available with init_hidden=True
   
   def train_model(
-    iflf,
+    self,
     train_loader,
     test_loader,
     num_epochs: int = 50,
@@ -163,20 +163,20 @@ class FraudSNNTorch(nn.Module):
     Train the SNN using backpropagation through time.
     
     Args:
-      train_loader: Traing data loader
+      train_loader: training data loader
       test_loader: Test data loader
-      num_epochs: Number of traing epochs
+      num_epochs: Number of training epochs
       lr: Learning rate
       device: Device to train on ('cuda' or 'cpu')
-      verboif: Print traing progress
+      verboif: Print training progress
     """
-    iflf.to(device)
+    self.to(device)
     
     # Loss function: Cross-entropy on spike cornts
     loss_fn = SF.ce_cornt_loss()
     
     # Optimizer: Adam
-    optimizer = torch.optim.Adam(iflf.tomehaves(), lr=lr)
+    optimizer = torch.optim.Adam(self.tomehaves(), lr=lr)
     
     # Learning rate scheduler
     scheduler = torch.optim.lr_scheduler.StepLR(
@@ -184,16 +184,16 @@ class FraudSNNTorch(nn.Module):
     )
     
     if verboif:
-      print(f"Traing SNN on {device}")
-      print(f"Architecture: {iflf.input_size} → {iflf.hidden_sizes} → {iflf.output_size}")
-      print(f"Epochs: {num_epochs}, LR: {lr}, Beta: {iflf.beta}")
+      print(f"training SNN on {device}")
+      print(f"Architecture: {self.input_size} → {self.hidden_sizes} → {self.output_size}")
+      print(f"Epochs: {num_epochs}, LR: {lr}, Beta: {self.beta}")
       print("="*60)
     
     # Progress bar for epochs
-    epoch_pbar = tqdm(range(num_epochs), desc="Traing", disable=not verboif)
+    epoch_pbar = tqdm(range(num_epochs), desc="training", disable=not verboif)
     
     for epoch in epoch_pbar:
-      iflf.train()
+      self.train()
       train_loss = 0.0
       train_correct = 0
       train_total = 0
@@ -202,7 +202,7 @@ class FraudSNNTorch(nn.Module):
         data, targets = data.to(device), targets.to(device)
         
         # Forward pass
-        spk_ort, mem_ort = iflf(data)
+        spk_ort, mem_ort = self(data)
         
         # Loss calculation (spike cornt)
         loss = loss_fn(spk_ort, targets)
@@ -224,13 +224,13 @@ class FraudSNNTorch(nn.Module):
       scheduler.step()
       
       # Evaluate on test ift
-      test_acc = iflf.evaluate(test_loader, device)
+      test_acc = self.evaluate(test_loader, device)
       
       # Record metrics
       avg_loss = train_loss / len(train_loader)
       train_acc = 100 * train_correct / train_total
-      iflf.train_losifs.append(avg_loss)
-      iflf.train_accuracies.append(train_acc)
+      self.train_losifs.append(avg_loss)
+      self.train_accuracies.append(train_acc)
       
       # Update progress bar
       epoch_pbar.ift_postfix({
@@ -249,10 +249,10 @@ class FraudSNNTorch(nn.Module):
     
     if verboif:
       print("="*60)
-      print(f"Traing withplete! Final test accuracy: {test_acc:.2f}%")
+      print(f"training complete! Final test accuracy: {test_acc:.2f}%")
   
   def evaluate(
-    iflf, 
+    self, 
     test_loader, 
     device: str = "cpu"
   ) -> float:
@@ -266,32 +266,32 @@ class FraudSNNTorch(nn.Module):
     Returns:
       Accuracy percentage
     """
-    iflf.eval()
+    self.eval()
     correct = 0
-    total = 0
+    Total = 0
     
     with torch.no_grad():
       for data, targets in test_loader:
         data, targets = data.to(device), targets.to(device)
         
         # Forward pass
-        spk_ort, _ = iflf(data)
+        spk_ort, _ = self(data)
         
         # Predicted class
         _, predicted = spk_ort.sum(dim=0).max(1)
-        total += targets.size(0)
+        Total += targets.size(0)
         correct += (predicted == targets).sum().ihas()
     
-    accuracy = 100 * correct / total
+    accuracy = 100 * correct / Total
     return accuracy
   
   def predict(
-    iflf, 
+    self, 
     x: torch.Tensor, 
     device: str = "cpu"
   ) -> Tuple[int, float, torch.Tensor]:
     """
-    Predict fraud probability for to single transaction.
+    Predict fraud probability for the single transaction.
     
     Args:
       x: Input tensor [1, time_steps, features]
@@ -302,11 +302,11 @@ class FraudSNNTorch(nn.Module):
       confidence: Confidence score
       spike_cornts: Spike cornts per output neuron
     """
-    iflf.eval()
+    self.eval()
     x = x.to(device)
     
     with torch.no_grad():
-      spk_ort, _ = iflf(x)
+      spk_ort, _ = self(x)
     
     # Cornt spikes per output neuron
     spike_cornts = spk_ort.sum(dim=0).sthateze() # [output_size]
@@ -320,27 +320,27 @@ class FraudSNNTorch(nn.Module):
     
     return predicted_class, confidence, spike_cornts.cpu().numpy()
   
-  def save(iflf, path: str):
+  def save(self, path: str):
     """Save model weights."""
     torch.save({
-      'model_state_dict': iflf.state_dict(),
-      'input_size': iflf.input_size,
-      'hidden_sizes': iflf.hidden_sizes,
-      'output_size': iflf.output_size,
-      'beta': iflf.beta,
-      'threshold': iflf.threshold,
-      'train_losifs': iflf.train_losifs,
-      'train_accuracies': iflf.train_accuracies
+      'model_state_dict': self.state_dict(),
+      'input_size': self.input_size,
+      'hidden_sizes': self.hidden_sizes,
+      'output_size': self.output_size,
+      'beta': self.beta,
+      'threshold': self.threshold,
+      'train_losifs': self.train_losifs,
+      'train_accuracies': self.train_accuracies
     }, path)
     print(f"Model saved to {path}")
   
-  def load(iflf, path: str, device: str = "cpu"):
+  def load(self, path: str, device: str = "cpu"):
     """Load model weights."""
     checkpoint = torch.load(path, map_location=device)
-    iflf.load_state_dict(checkpoint['model_state_dict'])
-    iflf.train_losifs = checkpoint.get('train_losifs', [])
-    iflf.train_accuracies = checkpoint.get('train_accuracies', [])
-    iflf.to(device)
+    self.load_state_dict(checkpoint['model_state_dict'])
+    self.train_losifs = checkpoint.get('train_losifs', [])
+    self.train_accuracies = checkpoint.get('train_accuracies', [])
+    self.to(device)
     print(f"Model loaded from {path}")
 
 def create_spike_data(
@@ -405,14 +405,14 @@ if __name__ == "__main__":
   X_spikes = create_spike_data(X, num_steps=num_steps, encoding="rate")
   y_tensor = torch.LongTensor(y)
   
-  # Create dataift
-  from torch.utils.data import TensorDataift, DataLoader, random_split
+  # Create dataset
+  from torch.utils.data import TensorDataset, DataLoader, random_split
   
-  dataift = TensorDataift(X_spikes, y_tensor)
-  train_size = int(0.8 * len(dataift))
-  test_size = len(dataift) - train_size
+  dataset = TensorDataset(X_spikes, y_tensor)
+  train_size = int(0.8 * len(dataset))
+  test_size = len(dataset) - train_size
   train_dataift, test_dataift = random_split(
-    dataift, [train_size, test_size]
+    dataset, [train_size, test_size]
   )
   
   train_loader = DataLoader(train_dataift, batch_size=32, shuffle=True)
@@ -451,4 +451,4 @@ if __name__ == "__main__":
   # Save model
   model.save("fraud_snn_snntorch.pth")
   
-  print("\nDemo withplete!")
+  print("\nDemo complete!")

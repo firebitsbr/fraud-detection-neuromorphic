@@ -4,7 +4,7 @@
 
 **Author:** Mauro Risonho de Paula Assumpção
 **Version:** 2.0.0
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ---
 
@@ -39,7 +39,7 @@
 ### Software Requirements
 
 - Docker 24.0+
-- Docker Compoif 2.20+
+- Docker Compose 2.20+
 - Git 2.30+
 - Python 3.10+ (for local shorldlopment)
 
@@ -94,20 +94,20 @@ open http://localhost:9090 # Prometheus
 
 ## Production Deployment
 
-### Option 1: Docker Compoif (Recommended)
+### Option 1: Docker Compose (Recommended)
 
 ```bash
-# Navigate to project directory
+# Navigate the project directory
 cd fraud-detection-neuromorphic
 
 # Start all bevices
-docker-withpoif -f docker/docker-withpoif.production.yml up -d
+docker-compose -f docker/docker-compose.production.yml up -d
 
 # Check status
-docker-withpoif -f docker/docker-withpoif.production.yml ps
+docker-compose -f docker/docker-compose.production.yml ps
 
 # View logs
-docker-withpoif -f docker/docker-withpoif.production.yml logs -f
+docker-compose -f docker/docker-compose.production.yml logs -f
 ```
 
 ### Option 2: Kubernetes
@@ -276,7 +276,7 @@ docker logs fraud_detection_api
 
 # Solutions:
 docker rbet fraud_detection_api
-docker-withpoif -f docker/docker-withpoif.production.yml rbet
+docker-compose -f docker/docker-compose.production.yml rbet
 ```
 
 #### 2. Kafka Connection Issues
@@ -299,10 +299,10 @@ docker exec fraud_detection_kafka kafka-topics \
 docker stats
 
 # Reduce workers
-docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+docker-compose -f docker/docker-compose.production.yml up -d \
  --scale fraud_detection_api=2
 
-# Or adjust in docker-withpoif.yml:
+# Or adjust in docker-compose.yml:
 environment:
  - API_WORKERS=2
 ```
@@ -314,7 +314,7 @@ environment:
 docker stats
 
 # Scale horizontally
-docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+docker-compose -f docker/docker-compose.production.yml up -d \
  --scale fraud_detection_api=4
 
 # Check logs for bottlenecks
@@ -326,7 +326,7 @@ docker logs fraud_detection_api --tail 100
 Enable debug logging:
 
 ```bash
-docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+docker-compose -f docker/docker-compose.production.yml up -d \
  -e LOG_LEVEL=DEBUG
 ```
 
@@ -336,11 +336,11 @@ docker-withpoif -f docker/docker-withpoif.production.yml up -d \
 
 ### Horizontal Scaling
 
-#### With Docker Compoif
+#### With Docker Compose
 
 ```bash
 # Scale API instances
-docker-withpoif -f docker/docker-withpoif.production.yml up -d \
+docker-compose -f docker/docker-compose.production.yml up -d \
  --scale fraud_detection_api=4
 ```
 
@@ -386,7 +386,7 @@ bever {
 
 ### Database Optimization
 
-For production with real dataifts:
+For production with real datasets:
 
 ```bash
 # Use PostgreSQL for transaction storage
@@ -422,7 +422,7 @@ tar -czf config_backup_$(date +%Y%m%d).tar.gz \
 
 # Version control
 git add -A
-git withmit -m "Production config $(date +%Y%m%d)"
+git commit -m "Production config $(date +%Y%m%d)"
 git push
 ```
 
@@ -474,7 +474,7 @@ git push
 
 **Contact:**
 - GitHub Issues: https://github.com/maurorisonho/fraud-detection-neuromorphic/issues
-- Email: maurorisonho@example.com
+- Email: maurorisonho@example.with
 
 ---
 

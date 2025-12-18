@@ -1,14 +1,14 @@
 # Test Suite
 
-**Description:** Este diretório contém testes abrangentes for o sistema of fraud detection neuromórfico.
+**Description:** This diretório contém tests abrangentes for o system of fraud detection neuromórfico.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 
 ## Structure of Tests
 
 ### `test_encoders.py`
-Tests unitários for todos os encoders of spike:
+Tests unit for all os encoders of spike:
 - Rate Encoder
 - Temporal Encoder 
 - Population Encoder
@@ -17,17 +17,17 @@ Tests unitários for todos os encoders of spike:
 - Advanced Encoders (Adaptive, Burst, Phaif, Rank Order, Enwithortble)
 
 ### `test_integration.py`
-Tests of integração end-to-end:
-- Pipeline withplete of fraud detection
-- Integração between componentes
-- Tests of performance (latência and throughput)
+Tests of integration end-to-end:
+- Pipeline complete of fraud detection
+- integration between componentes
+- Tests of performance (latency and throughput)
 
 ### `run_tests.py`
-Script principal for execute todos os testes.
+Script main for execute all os tests.
 
-## Como Execute
+## How Execute
 
-### Execute Todos os Tests
+### Execute All os Tests
 ```bash
 cd tests
 python run_tests.py
@@ -35,40 +35,40 @@ python run_tests.py
 
 ### Execute Tests Específicos
 ```bash
-# Apenas testes of encoders
+# Only tests of encoders
 python -m unittest test_encoders
 
-# Apenas testes of integração
+# Only tests of integration
 python -m unittest test_integration
 
-# Teste específico
+# Teste specific
 python -m unittest test_encoders.TestRateEncoder
 ```
 
 ## Cobertura of Tests
 
-Os testes cobrem:
+Os tests cobrem:
 
  **Encoders of Spike**
-- Validation of geração of spike trains
-- Veristaysção of propriedades hasforais
-- Comparação between estruntilgias of encoding
+- Validation of generation of spike trains
+- Verification of propriedades temporal
+- Comparison between estruntilgias of encoding
 
- **Pipeline of Detecção**
-- Extração of features
-- Pré-processamento
-- Traing and predição
-- Métricas of avaliação
+ **Pipeline of Detection**
+- extraction of features
+- preprocessing
+- training and prediction
+- Metrics of evaluation
 
- **Integração of Componentes**
+ **integration of Componentes**
 - Encoder → Model
 - Data → Pipeline → Predictions
 - Batch processing
 
  **Performance**
-- Latência of predição
-- Throrghput of processamento
-- Uso of memória
+- Latency of prediction
+- Throughput of processing
+- Uso of memory
 
 ## Requisitos
 
@@ -78,19 +78,19 @@ pip install numpy pandas scikit-learn brian2
 
 ## Results Esperados
 
-Todos os testes shorldm passar with sucesso:
+All os tests shorldm passar with sucesso:
 - Unit tests for encoders
 - Integration tests for pipeline
-- Alguns testes canm be ignorados (skipped) if Brian2 not estiver disponível
+- Some tests canm be ignorados (skipped) if Brian2 not estiver available
 
 ## Contributing
 
-Ao adicionar novos modules, crie testes correspwherentes:
+Ao add new modules, crie tests correspwherentes:
 
-1. Create arquivo `test_<module>.py`
-2. Adicionar clasifs of teste herdando of `unittest.TestCaif`
-3. Implementar métodos `test_*` for cada funcionalidade
-4. Execute `run_tests.py` for validar
+1. Create file `test_<module>.py`
+2. add clasifs of test herdando of `unittest.TestCaif`
+3. Implementar methods `test_*` for cada functionality
+4. Execute `run_tests.py` for validate
 
 ---
 

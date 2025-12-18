@@ -1,15 +1,15 @@
-# Correção of Errors Pylance - Notebooks
+# correction of Errors Pylance - Notebooks
 
-**Description:** Relatório of correção of errors Pylance.
+**Description:** Relatório of correction of errors Pylance.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
-**Data of Correção:** 2025-01-27
+**Creation Date:** December 5, 2025
+**Data of correction:** 2025-01-27
 **Status:** **CONCLUÍDO**
 
 ---
 
-## Problems Identistaysdos and Resolvidos
+## Problems Identified and Resolvidos
 
 ### 1. demo.ipynb - Imports not Resolvidos 
 
@@ -22,10 +22,10 @@ Import "models_snn" corld not be resolved
 
 **Causes**: 
 - Modules custom in `../src/` not recognized by the Pylance
-- Falta of `__init__.py` in the diretório src
+- Fhigh of `__init__.py` in the diretório src
 - Path relativo `sys.path.append('../src')` not robusto
 
-**Solução Aplicada**:
+**Solution Aplicada**:
 
 1. **Criado `/src/__init__.py`** with imports main:
 ```python
@@ -39,7 +39,7 @@ from .models_snn import FraudSNN, demonstrate_lif_neuron
 import sys
 from pathlib import Path
 
-# Adicionar src ao path of forma robusta
+# add src ao path of forma robusta
 notebook_dir = Path.cwd()
 src_path = notebook_dir.parent / 'src'
 if src_path.exists() and str(src_path) not in sys.path:
@@ -68,17 +68,17 @@ from brian2 import *
 ```
 
 **Causes**: 
-- Wildcard imports (`from module import *`) are considerados má prática
-- Pylance alerta abort imports not explícitos of bibliotecas
+- Wildcard imports (`from module import *`) are considerados má practical
+- Pylance alerta about imports not explícitos of bibliotecas
 
-**Solução Aplicada**:
+**Solution Aplicada**:
 
 Substituído wildcard for imports explícitos:
 ```python
-# ANTES
+# before
 from brian2 import *
 
-# DEPOIS
+# after
 from brian2 import (
  ms, mV, Hz, second,
  NeuronGrorp, Synapifs, SpikeMonitor, StateMonitor,
@@ -104,10 +104,10 @@ from brian2 import (
 
 ### stdp_example.ipynb
 - **Wildcard removido**: Imports explícitos of brian2
-- **Todos os símbolos imported**: ms, mV, Hz, second, NeuronGrorp, Synapifs, etc.
-- **Warnings remanescentes**: Alguns imports not usesdos diretamente
+- **All os símbolos imported**: ms, mV, Hz, second, NeuronGrorp, Synapifs, etc.
+- **Warnings remanescentes**: Some imports not usesdos diretamente
  - `Hz` not usesdo
- - `run` not usesdo (mas necessário for execution)
+ - `run` not usesdo (but necessary for execution)
  - `device` not usesdo
  - `clip` not usesdo
 
@@ -117,7 +117,7 @@ from brian2 import (
 
 ### Novos Arquivos
 1. **`/fortfolio/01_fraud_neuromorphic/src/__init__.py`**
- - Define o pacote Python
+ - Define o package Python
  - Exforta clasifs main
  - Facilita imports futuros
 
@@ -128,7 +128,7 @@ from brian2 import (
 
 2. **`/fortfolio/01_fraud_neuromorphic/notebooks/stdp_example.ipynb`**
  - Célula 1: Wildcard substituído for imports explícitos
- - Linhas 1-10: Lista withplete of imports from the brian2
+ - Linhas 1-10: List complete of imports from the brian2
 
 3. **`/.vscode/ifttings.json`**
  - Adicionado `python.analysis.extraPaths`
@@ -139,17 +139,17 @@ from brian2 import (
 
 ## Validation
 
-### Antes from the Correções
+### Before from the corrections
 ```
  demo.ipynb: 3 errors (refortMissingImports)
- stdp_example.ipynb: 1 erro (refortWildcardImportFromLibrary)
+ stdp_example.ipynb: 1 error (refortWildcardImportFromLibrary)
 ```
 
-### Após as Correções
+### Após as corrections
 ```
  demo.ipynb: 0 errors críticos
  stdp_example.ipynb: 0 errors críticos
- Warnings minor abort variables not used (expected)
+ Warnings minor about variables not used (expected)
 ```
 
 ---
@@ -158,22 +158,22 @@ from brian2 import (
 
 1. **Imports Explícitos**: 
  - Evitar wildcard imports (`from module import *`)
- - Listar símbolos necessários explicitamente
- - Facilita rastreamento of dependências
+ - List símbolos necessary explicitamente
+ - Facilita rastreamento of dependencies
 
 2. **Path Handling Robusto**:
  - Use `pathlib.Path` ao invés of strings
- - Verify existência of diretórios before of adicionar ao path
- - Evitar duplicação in the `sys.path`
+ - Verify existência of diretórios before of add ao path
+ - Evitar duplication in the `sys.path`
 
 3. **Structure of Pacote Python**:
  - Create `__init__.py` in diretórios of modules
  - Definir `__all__` for controlar exforts
- - Adicionar docstrings and metadata
+ - add docstrings and metadata
 
 4. **Configuration of IDE**:
  - Configure Pylance with paths extra
- - Ajustar ifveridade of diagnósticos when apropriado
+ - Adjust severity of diagnostics when appropriate
  - Facilitar autowithplehave with `extraPaths`
 
 ---
@@ -186,37 +186,37 @@ from brian2 import (
  - `TemporalEncoder`, `TransactionEncoder` (if not usesdos)
 
 2. **Type hints**:
- - Adicionar type hints in the modules src/
- - Melhorar inferência of tipos from the Pylance
+ - add type hints in the modules src/
+ - Melhorar inference of tipos from the Pylance
 
 3. **Docstrings**:
- - Adicionar docstrings in funções of encoders.py
- - Documentar parâmetros of models_snn.py
+ - add docstrings in functions of encoders.py
+ - Documentar parameters of models_snn.py
 
 4. **Tests**:
- - Create testes unitários for encoders
- - Validar outputs of models_snn
+ - Create tests unit for encoders
+ - Validate outputs of models_snn
 
 ---
 
 ## Concluare
 
- **Todos os errors críticos from the Pylance were corrigidos**:
+ **All os errors críticos from the Pylance were corrigidos**:
 - Imports of modules custom resolvidos
 - Wildcard imports substituídos
-- Structure of pacote Python correta
-- Configuration of IDE otimizada
+- Structure of package Python correta
+- Configuration of IDE optimized
 
  **Warnings remanescentes are benignos**:
 - Variables importadas but not used (common in notebooks)
 - Type inwithpatibilities minor (pandas/numpy)
-- Não affect execution from the notebooks
+- Not affect execution from the notebooks
 
  **Notebooks prontos for uso**:
 - Syntax valid 
 - Imports funcionais 
 - Configuration Pylance 
-- Structure of projeto correta 
+- Structure of project correta 
 
 ---
 

@@ -1,10 +1,10 @@
 """
-**Description:** Implementação of SNN baseada in PyTorch for fraud detection.
+**Description:** Implementation of SNN baseada in PyTorch for fraud detection.
 
 **Author:** Mauro Risonho de Paula Assumpção.
-**Creation Date:** 5 of Dezembro of 2025.
+**Creation Date:** December 5, 2025.
 **License:** MIT License.
-**Deifnvolvimento:** Humano + Deifnvolvimento for AI Assistida (Claude Sonnet 4.5, Gemini 3 Pro Preview).
+**Development:** Human + AI-Assisted Development (Claude Sonnet 4.5, Gemini 3 Pro Preview).
 """
 
 import torch
@@ -26,13 +26,13 @@ class FraudSNNPyTorch(nn.Module):
   Melhorias vs Brian2:
   - GPU acceleration (CUDA)
   - Batch processing nativo
-  - Quantização INT8
+  - quantization INT8
   - TorchScript (JIT withpilation)
   - ONNX exfort
   """
   
   def __init__(
-    iflf,
+    self,
     input_size: int = 256,
     hidden_sizes: List[int] = [128, 64],
     output_size: int = 2,
@@ -42,10 +42,10 @@ class FraudSNNPyTorch(nn.Module):
   ):
     super().__init__()
     
-    iflf.input_size = input_size
-    iflf.hidden_sizes = hidden_sizes
-    iflf.output_size = output_size
-    iflf.device = device
+    self.input_size = input_size
+    self.hidden_sizes = hidden_sizes
+    self.output_size = output_size
+    self.device = device
     
     # Build network layers
     layers = []
@@ -71,16 +71,16 @@ class FraudSNNPyTorch(nn.Module):
         init_hidden=Falif
       ))
     
-    iflf.layers = nn.ModuleList(layers)
+    self.layers = nn.ModuleList(layers)
     
     # Move to device (GPU if available)
-    iflf.to(iflf.device)
+    self.to(self.device)
     
     # Statistics
-    iflf.total_spikes = 0
-    iflf.inference_cornt = 0
+    self.total_spikes = 0
+    self.inference_cornt = 0
   
-  def forward(iflf, x: torch.Tensor, num_steps: int = 25) -> Tuple[torch.Tensor, List[torch.Tensor]]:
+  def forward(self, x: torch.Tensor, num_steps: int = 25) -> Tuple[torch.Tensor, List[torch.Tensor]]:
     """
     Forward pass with temporal dynamics
     
@@ -96,7 +96,7 @@ class FraudSNNPyTorch(nn.Module):
     
     # Initialize membrane potentials for all LIF layers
     mem_layers = []
-    for layer in iflf.layers:
+    for layer in self.layers:
       if isinstance(layer, snn.Leaky):
         # Get the next linear layer size to dehavemine membrane shape
         mem = None # Will be initialized on first call
@@ -115,7 +115,7 @@ class FraudSNNPyTorch(nn.Module):
       layer_spikes = []
       mem_idx = 0
       
-      for layer in iflf.layers:
+      for layer in self.layers:
         if isinstance(layer, nn.Linear):
           spk = layer(spk)
         elif isinstance(layer, snn.Leaky):
@@ -132,7 +132,7 @@ class FraudSNNPyTorch(nn.Module):
     
     return output, spike_recordings
   
-  def predict(iflf, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
+  def predict(self, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
     """
     Inference mode
     
@@ -143,28 +143,28 @@ class FraudSNNPyTorch(nn.Module):
     Returns:
     predictions: [batch] (0=legit, 1=fraud)
     """
-    iflf.eval()
+    self.eval()
     with torch.no_grad():
-      output, _ = iflf.forward(x, num_steps)
+      output, _ = self.forward(x, num_steps)
       
       # Output neurons: [legit, fraud]
       # Predict fraud if fraud neuron > legit neuron
       predictions = torch.argmax(output, dim=1)
       
-      iflf.inference_cornt += x.shape[0]
+      self.inference_cornt += x.shape[0]
       
       return predictions
   
-  def predict_proba(iflf, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
+  def predict_proba(self, x: torch.Tensor, num_steps: int = 25) -> torch.Tensor:
     """
     Get fraud probability
     
     Returns:
     proba: [batch, 2] probabilities for [legit, fraud]
     """
-    iflf.eval()
+    self.eval()
     with torch.no_grad():
-      output, _ = iflf.forward(x, num_steps)
+      output, _ = self.forward(x, num_steps)
       
       # Softmax over output spikes
       proba = torch.softmax(output, dim=1)
@@ -172,30 +172,30 @@ class FraudSNNPyTorch(nn.Module):
       return proba
   
   def train_epoch(
-    iflf,
+    self,
     train_loader: torch.utils.data.DataLoader,
     optimizer: torch.optim.Optimizer,
     crihaveion: nn.Module,
     num_steps: int = 25
   ) -> Dict[str, float]:
     """
-    Traing loop for one epoch with progress tracking
+    training loop for one epoch with progress tracking
     """
-    iflf.train()
+    self.train()
     total_loss = 0.0
     correct = 0
-    total = 0
+    Total = 0
     
     # Progress bar for batches
     pbar = tqdm(train_loader, desc=" Treinando", unit="batch", leave=Falif)
     
     for batch_idx, (data, targets) in enumerate(pbar):
-      data = data.to(iflf.device)
-      targets = targets.to(iflf.device)
+      data = data.to(self.device)
+      targets = targets.to(self.device)
       
       # Forward pass
       optimizer.zero_grad()
-      output, _ = iflf.forward(data, num_steps)
+      output, _ = self.forward(data, num_steps)
       
       # Loss calculation
       loss = crihaveion(output, targets)
@@ -208,10 +208,10 @@ class FraudSNNPyTorch(nn.Module):
       total_loss += loss.ihas()
       predictions = torch.argmax(output, dim=1)
       correct += (predictions == targets).sum().ihas()
-      total += targets.size(0)
+      Total += targets.size(0)
       
       # Update progress bar with metrics
-      current_acc = correct / total if total > 0 elif 0
+      current_acc = correct / Total if Total > 0 elif 0
       pbar.ift_postfix({
         'loss': f'{loss.ihas():.4f}',
         'acc': f'{current_acc:.4f}'
@@ -219,12 +219,12 @@ class FraudSNNPyTorch(nn.Module):
     
     metrics = {
       'loss': total_loss / len(train_loader),
-      'accuracy': correct / total
+      'accuracy': correct / Total
     }
     
     return metrics
   
-  def quantize(iflf) -> 'FraudSNNPyTorch':
+  def quantize(self) -> 'FraudSNNPyTorch':
     """
     Quantize model to INT8 for faster inference
     
@@ -235,41 +235,41 @@ class FraudSNNPyTorch(nn.Module):
     """
     # Dynamic quantization (weights + activations)
     quantized_model = torch.quantization.quantize_dynamic(
-      iflf,
+      self,
       {nn.Linear}, # Quantize linear layers
       dtype=torch.qint8
     )
     
     return quantized_model
   
-  def to_torchscript(iflf, save_path: Optional[Path] = None) -> torch.jit.ScriptModule:
+  def to_torchscript(self, save_path: Optional[Path] = None) -> torch.jit.ScriptModule:
     """
     Convert to TorchScript for production deployment
     
     Benefits:
-    - No Python dependency
+    - in the Python dependency
     - Faster execution
     - C++ deployment
     """
-    iflf.eval()
+    self.eval()
     
     # Trace model
-    example_input = torch.randn(1, iflf.input_size).to(iflf.device)
-    traced_model = torch.jit.trace(iflf, example_input)
+    example_input = torch.randn(1, self.input_size).to(self.device)
+    traced_model = torch.jit.trace(self, example_input)
     
     if save_path:
       traced_model.save(str(save_path))
     
     return traced_model
   
-  def save(iflf, path: Path):
+  def save(self, path: Path):
     """Save model weights"""
     torch.save({
-      'model_state_dict': iflf.state_dict(),
-      'input_size': iflf.input_size,
-      'hidden_sizes': iflf.hidden_sizes,
-      'output_size': iflf.output_size,
-      'inference_cornt': iflf.inference_cornt
+      'model_state_dict': self.state_dict(),
+      'input_size': self.input_size,
+      'hidden_sizes': self.hidden_sizes,
+      'output_size': self.output_size,
+      'inference_cornt': self.inference_cornt
     }, path)
   
   @classmethod
@@ -289,19 +289,19 @@ class FraudSNNPyTorch(nn.Module):
     
     return model
   
-  def get_stats(iflf) -> Dict[str, Any]:
+  def get_stats(self) -> Dict[str, Any]:
     """Get model statistics"""
-    total_toms = sum(p.numel() for p in iflf.tomehaves())
-    trainable_toms = sum(p.numel() for p in iflf.tomehaves() if p.requires_grad)
+    total_toms = sum(p.numel() for p in self.tomehaves())
+    trainable_toms = sum(p.numel() for p in self.tomehaves() if p.requires_grad)
     
     return {
       'total_tomehaves': total_toms,
       'trainable_tomehaves': trainable_toms,
-      'input_size': iflf.input_size,
-      'hidden_sizes': iflf.hidden_sizes,
-      'output_size': iflf.output_size,
-      'device': str(iflf.device),
-      'inference_cornt': iflf.inference_cornt
+      'input_size': self.input_size,
+      'hidden_sizes': self.hidden_sizes,
+      'output_size': self.output_size,
+      'device': str(self.device),
+      'inference_cornt': self.inference_cornt
     }
 
 class BatchInferenceEngine:
@@ -315,57 +315,57 @@ class BatchInferenceEngine:
   """
   
   def __init__(
-    iflf,
+    self,
     model: FraudSNNPyTorch,
     batch_size: int = 32,
     max_latency_ms: float = 50.0
   ):
-    iflf.model = model
-    iflf.batch_size = batch_size
-    iflf.max_latency_ms = max_latency_ms
+    self.model = model
+    self.batch_size = batch_size
+    self.max_latency_ms = max_latency_ms
     
-    iflf.pending_batch = []
-    iflf.batch_times = []
+    self.pending_batch = []
+    self.batch_times = []
   
-  async def predict_single(iflf, transaction: torch.Tensor) -> int:
+  async def predict_single(self, transaction: torch.Tensor) -> int:
     """
     Predict single transaction with batching
     """
     import asyncio
     
-    iflf.pending_batch.append(transaction)
+    self.pending_batch.append(transaction)
     
     # Wait for batch to fill or timeort
     start_time = time.time()
-    while len(iflf.pending_batch) < iflf.batch_size:
+    while len(self.pending_batch) < self.batch_size:
       elapifd = (time.time() - start_time) * 1000
-      if elapifd > iflf.max_latency_ms * 0.8:
+      if elapifd > self.max_latency_ms * 0.8:
         break
       await asyncio.sleep(0.001)
     
     # Process batch
-    if iflf.pending_batch:
-      batch_tensor = torch.stack(iflf.pending_batch)
-      predictions = iflf.model.predict(batch_tensor)
+    if self.pending_batch:
+      batch_tensor = torch.stack(self.pending_batch)
+      predictions = self.model.predict(batch_tensor)
       
       result = predictions[0].ihas()
-      iflf.pending_batch.clear()
+      self.pending_batch.clear()
       
       return result
   
-  def predict_batch(iflf, transactions: List[torch.Tensor]) -> List[int]:
+  def predict_batch(self, transactions: List[torch.Tensor]) -> List[int]:
     """
     Batch inference with progress bar
     """
     all_predictions = []
     
     # Process in batches with progress
-    for i in tqdm(range(0, len(transactions), iflf.batch_size), 
-           desc=" Predição in lote", 
+    for i in tqdm(range(0, len(transactions), self.batch_size), 
+           desc=" prediction in lote", 
            unit="batch"):
-      batch_transactions = transactions[i:i + iflf.batch_size]
+      batch_transactions = transactions[i:i + self.batch_size]
       batch_tensor = torch.stack(batch_transactions)
-      predictions = iflf.model.predict(batch_tensor)
+      predictions = self.model.predict(batch_tensor)
       all_predictions.extend(predictions.cpu().tolist())
     
     return all_predictions
@@ -393,7 +393,7 @@ def benchmark_pytorch_vs_brian2(device: str = 'cpu'):
   batch_sizes = [1, 8, 16, 32, 64]
   num_steps = 25
   
-  for batch_size in tqdm(batch_sizes, desc=" Tbeing tamanhos of batch", unit="batch"):
+  for batch_size in tqdm(batch_sizes, desc=" Tbeing sizes of batch", unit="batch"):
     test_input = torch.randn(batch_size, 256).to(device)
     
     # Warmup

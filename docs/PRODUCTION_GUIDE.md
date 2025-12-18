@@ -1,9 +1,9 @@
-# Guia of Produção - Fraud Detection Neuromórstays
+# Guide of Production - Fraud Detection Neuromórstays
 
-**Description:** Guia of produção for o sistema of fraud detection.
+**Description:** Guide of production for o system of fraud detection.
 
 **Author:** Mauro Risonho de Paula Assumpção
-**Creation Date:** 5 of Dezembro of 2025
+**Creation Date:** December 5, 2025
 **Version:** 1.0
 **License:** MIT
 
@@ -11,49 +11,49 @@
 
 ## Table of Contents
 
-1. [Overview of the Project](#-overview-do-projeto)
-2. [Architecture Técnica](#-arquitetura-técnica)
-3. [Roadmap of Implementação](#-roadmap-de-implementação)
-4. [Architecture of Produção](#-arquitetura-de-produção)
-5. [Dia to Dia from the Especialista in AI](#-dia-a-dia-do-especialista-em-ai)
+1. [Overview of the Project](#-overview-of the-project)
+2. [Architecture Technical](#-architecture-technical)
+3. [Roadmap of Implementation](#-roadmap-of-implementation)
+4. [Architecture of Production](#-architecture-of-production)
+5. [Dia to Dia from the Especialista in AI](#-dia-a-dia-of the-especialista-in-ai)
 6. [Custos and ROI](#-custos-e-roi)
-7. [Checklist of Produção](#-checklist-de-produção)
-8. [References](#-referências)
+7. [Checklist of Production](#-checklist-of-production)
+8. [References](#-references)
 
 ---
 
 ## Overview of the Project
 
-### O that is being feito?
+### What is being feito?
 
-Este projeto implementa um **sistema withplete of produção** for fraud detection in banking transactions using **Spiking Neural Networks (SNNs)**. Não é apenas criação of models - é uma solução production-ready end-to-end.
+This project implements um **system complete of production** for fraud detection in banking transactions using **Spiking Neural Networks (SNNs)**. Not é only creation of models - é uma solution production-ready end-to-end.
 
 ### Componentes Implementados
 
 #### 1. Reifarch & Development (30%)
 
 ```
- Criação of Models SNN
- models_snn.py: Neurônios LIF (Leaky Integrate-and-Fire)
- Aprendizado STDP (Spike-Timing-Dependent Plasticity)
+ Creation of Models SNN
+ models_snn.py: Neurons LIF (Leaky Integrate-and-Fire)
+ Learning STDP (Spike-Timing-Dependent Plasticity)
  Architecture: Input[256] → Hidden[128, 64] → Output[2]
- Acurácia: 97.8%
+ Accuracy: 97.8%
 
  Hypertomehave Tuning
  hypertomehave_optimizer.py
  Grid Search, Random Search, Bayesian Optimization
- Otimização de: tau_m, v_thresh, STDP rates, encoding toms
+ optimization of: tau_m, v_thresh, STDP rates, encoding toms
  557 linhas of code
 
  Fine-Tuning (Transfer Learning)
- SNNs use STDP (aprendizado not-supervisionado continuous)
- Não rewantwithort fine-tuning traditional as DNNs
+ SNNs use STDP (learning not-supervisionado continuous)
+ Not rewantwithort fine-tuning traditional as DNNs
 ```
 
 #### 2. MLOps & Production (70%)
 
 ```
- API REST Completa
+ API REST Complete
  api/main.py (364 linhas)
  FastAPI + Uvicorn + Pydantic
  Endpoints: /predict, /batch, /health, /metrics
@@ -63,7 +63,7 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
  Monitoring & Obbevability
  api/monitoring.py
  Prometheus metrics
- Métricas: latência, throughput, error rate, CPU, RAM
+ Metrics: latency, throughput, error rate, CPU, RAM
  Grafana dashboards
 
  Hardware Deployment
@@ -76,13 +76,13 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
  .github/workflows/ci-cd.yml
  Tests automatizados (pytest)
  Build Docker multi-stage
- Deploy automático
+ Deploy automatic
  GitHub Actions
 
- Containerização & Orthatstração
- docker-withpoif.yml
- 8+ Dockerfiles (api, edge, production, jupyhave, etc)
- Múltiplos environments (dev, staging, prod)
+ Containerization & Orchestration
+ docker-compose.yml
+ 8+ Dockerfiles (api, edge, production, jupyter, etc)
+ multiple environments (dev, staging, prod)
  Kubernetes ready
 
  Distributed Computing
@@ -92,27 +92,27 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
  Horizontal scaling
 ```
 
-### Comparação: Model vs Produção
+### Comparison: Model vs Production
 
-| Componente | Implementado | % of the Project |
+| Componente | Implemented | % of the Project |
 |------------|--------------|--------------|
-| **Criação of Models** | SIM | 15% |
-| **Hypertomehave Tuning** | SIM | 10% |
-| **Fine-tuning** | NÃO (n/a for SNNs) | 5% |
-| **API REST** | SIM | 20% |
-| **Monitoring** | SIM | 10% |
-| **Hardware Deploy** | SIM | 15% |
-| **CI/CD** | SIM | 10% |
-| **Docker/K8s** | SIM | 10% |
-| **Documentação** | SIM | 5% |
+| **Creation of Models** | yes | 15% |
+| **Hypertomehave Tuning** | yes | 10% |
+| **Fine-tuning** | NOT (n/a for SNNs) | 5% |
+| **API REST** | yes | 20% |
+| **Monitoring** | yes | 10% |
+| **Hardware Deploy** | yes | 15% |
+| **CI/CD** | yes | 10% |
+| **Docker/K8s** | yes | 10% |
+| **Documentation** | yes | 5% |
 
-**Conclusion:** Este projeto is **70% focado in produção**, not apenas research.
+**Conclusion:** This project is **70% focused in production**, not only research.
 
 ---
 
-## Architecture Técnica
+## Architecture Technical
 
-### Pipeline of Inferência
+### Pipeline of Inference
 
 ```python
 
@@ -123,18 +123,18 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
  
 
  1. FEATURE EXTRACTION (encoders.py) 
- Normalização: MinMaxScaler 
+ normalization: MinMaxScaler 
  Feature engineering: time_of_day, distance, velocity 
- Saída: vetor 8D normalizado 
+ output: vetor 8D normalizado 
 
  
  
 
  2. SPIKE ENCODING (encoders.py) 
- Rate Coding: valor → frequência of spikes 
- Temporal Coding: valor → latência from the spike 
- Population Coding: valor → padrão of população 
- Saída: spike train [256 neurônios × 100ms] 
+ Rate Coding: value → frequency of spikes 
+ Temporal Coding: value → latency from the spike 
+ Population Coding: value → pattern of population 
+ output: spike train [256 neurons × 100ms] 
 
  
  
@@ -149,7 +149,7 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
  ↓ 
  Output Layer [2 neurons: Legit | Fraud] 
  
- Simulação: Brian2 (100ms) 
+ simulation: Brian2 (100ms) 
 
  
  
@@ -168,37 +168,37 @@ Este projeto implementa um **sistema withplete of produção** for fraud detecti
 
 ```
 
-### Parâmetros from the Model SNN
+### Parameters from the Model SNN
 
 ```python
-# Neurônio LIF (Leaky Integrate-and-Fire)
-tau_m = 10 ms # Constante of haspo from the membrana
+# Neuron LIF (Leaky Integrate-and-Fire)
+tau_m = 10 ms # Constant of time from the membrana
 v_rest = -70 mV # Potencial of reforso
 v_reift = -70 mV # Potencial of reift afhave spike
 v_thresh = -50 mV # Limiar of disparo
-tau_refrac = 2 ms # Período refratário
+tau_refrac = 2 ms # Período refractory
 
 # STDP (Spike-Timing-Dependent Plasticity)
-tau_pre = 20 ms # Constante pré-sináptica
-tau_post = 20 ms # Constante pós-sináptica
-A_pre = 0.01 # Taxa of potenciação
+tau_pre = 20 ms # Constant pre-synaptic
+tau_post = 20 ms # Constant pós-sináptica
+A_pre = 0.01 # Taxa of potentiation
 A_post = -0.012 # Taxa of depresare
-w_max = 1.0 # Peso sináptico máximo
-w_min = 0.0 # Peso sináptico mínimo
+w_max = 1.0 # Peso sináptico maximum
+w_min = 0.0 # Peso sináptico minimum
 
 # Encoding
 max_rate = 100 Hz # Taxa máxima of spikes
-duration = 100 ms # Duração from the yesulação
-pop_neurons = 32 # Neurônios for população
+duration = 100 ms # duration from the simulation
+pop_neurons = 32 # Neurons for population
 ```
 
 ---
 
-## Roadmap of Implementação
+## Roadmap of Implementation
 
-### Faif 1: PROOF OF CONCEPT (3-6 meifs)
+### Phase 1: PROOF OF CONCEPT (3-6 months)
 
-**Objetivo:** Validar viabilidade técnica and business case
+**Objective:** Validate viabilidade technical and business case
 
 #### 1.1 Setup from the Environment
 
@@ -207,20 +207,20 @@ pop_neurons = 32 # Neurônios for população
  Compute: 4 vCPUs, 16GB RAM
  Storage: 100GB SSD
  Network: VPC privada + Load Balancer
- Custo: ~$500/mês
+ Custo: ~$500/month
 
 # Stack tecnológico
  Backend: FastAPI + Brian2
- Database: PostgreSQL (transações)
+ Database: PostgreSQL (transactions)
  Cache: Redis (features)
  Monitoring: Prometheus + Grafana
  CI/CD: GitHub Actions
 ```
 
-#### 1.2 Dataift Real
+#### 1.2 Dataset Real
 
 ```python
-# Obhave data anonimizados from the banco
+# Obtain data anonimizados from the banco
 required_features = [
  'transaction_id',
  'amornt',
@@ -233,13 +233,13 @@ required_features = [
  'is_fraud' # Label
 ]
 
-# Volume mínimo
+# Volume minimum
 min_transactions = 100_000
 min_fraud_cases = 1_000 # ~1% fraud rate
 time_span = '6 months'
 ```
 
-#### 1.3 Métricas of Validation
+#### 1.3 Metrics of Validation
 
 ```yaml
 Business Metrics:
@@ -250,28 +250,28 @@ Business Metrics:
  - Falif Positive Rate: < 2% (UX impact)
 
 Technical Metrics:
- - Latência p50: < 50ms
- - Latência p99: < 100ms
- - Throrghput: > 1000 TPS
+ - Latency p50: < 50ms
+ - Latency p99: < 100ms
+ - Throughput: > 1000 TPS
  - Uptime: > 99.9%
 
 Financial Metrics:
- - Fraudes detectadas: + 30% vs sistema atual
- - Falsos positivos: - 20% vs sistema atual
- - ROI estimado: 5-10x (economia with frauds)
+ - Fraudes detectadas: + 30% vs system current
+ - Falsos positivos: - 20% vs system current
+ - ROI estimated: 5-10x (economia with frauds)
 ```
 
 #### 1.4 A/B Testing
 
 ```python
-# Comparação with sistema atual
+# Comparison with system current
 test_duration = 90 # days
 traffic_split = {
- 'control': 0.90, # Sishasa atual
+ 'control': 0.90, # System current
  'treatment': 0.10 # SNN system
 }
 
-# Métricas withtotivas
+# Metrics withtotivas
 metrics_to_compare = [
  'fraud_detection_rate',
  'falif_positive_rate',
@@ -282,37 +282,37 @@ metrics_to_compare = [
 ```
 
 **Deliverables:**
-- Relatório técnico of viabilidade
-- Dashboard of métricas withtotivas
+- Relatório technical of viabilidade
+- Dashboard of metrics withtotivas
 - Business case with ROI projetado
-- Documentação of arquitetura
+- Documentation of architecture
 
-**Custo Estimado:** $50k - $150k
+**Custo estimated:** $50k - $150k
 
 ---
 
-### Faif 2: PILOT (6-12 meifs)
+### Phase 2: PILOT (6-12 months)
 
-**Objetivo:** Test in produção with tráfego real limitado
+**Objective:** Test in production with traffic real limited
 
 #### 2.1 Shadow Mode (Meifs 1-3)
 
 ```python
-# Run in tolelo SEM impactar usuários
+# Run in tolelo without impactar usuários
 async def process_transaction(txn):
- # Sishasa atual (produção)
+ # System current (production)
  legacy_result = await legacy_fraud_detection(txn)
  
- # SNN in shadow mode (apenas log)
+ # SNN in shadow mode (only log)
  snn_result = await snn_fraud_detection(txn)
  
- # Comtor resultados
+ # Comtor results
  log_comparison(legacy_result, snn_result)
  
- # Retornar APENAS resultado from the sistema atual
+ # Retornar APENAS result from the system current
  return legacy_result
 
-# Análiif of discrepâncias
+# Analysis of discrepâncias
 analyze_differences = {
  'snn_detected_but_legacy_misifd': cornt,
  'legacy_detected_but_snn_misifd': cornt,
@@ -324,11 +324,11 @@ analyze_differences = {
 #### 2.2 Canary Deployment (Meifs 4-6)
 
 ```python
-# Processar 1-5% from the tráfego real
+# Processar 1-5% from the traffic real
 async def rorte_transaction(txn):
  customer_id = txn['customer_id']
  
- # Seleção of grupo pilot
+ # selection of grupo pilot
  if customer_id in PILOT_GROUP: # 5% from the clientes
  result = await snn_fraud_detection(txn)
  log_metric('snn_production', result)
@@ -338,7 +338,7 @@ async def rorte_transaction(txn):
  log_metric('legacy_production', result)
  return result
 
-# Critérios of sucesso for aumentar tráfego
+# Critérios of sucesso for aumentar traffic
 success_crihaveia = {
  'error_rate': < 0.1%,
  'latency_p99': < 100ms,
@@ -378,22 +378,22 @@ loihi_model = adaphave.convert_brian2_model(snn_model)
 adaphave.deploy_to_chip(loihi_model, chip_id=0)
 ```
 
-**KPIs from the Faif Pilot:**
+**KPIs from the Phase Pilot:**
 - Uptime: > 99.9%
-- Fraudes detectadas: ≥ Sishasa atual
-- Latência p95: < 50ms
+- Fraudes detectadas: ≥ System current
+- Latency p95: < 50ms
 - Zero incidentes críticos
-- Satisfação from the clientes: withort degradação
+- satisfaction from the clientes: without degradation
 
-**Custo Estimado:** $200k - $500k
+**Custo estimated:** $200k - $500k
 
 ---
 
-### Faif 3: PRODUÇÃO FULL (12-24 meifs)
+### Phase 3: PRODUCTION FULL (12-24 months)
 
-**Objetivo:** Scale for 100% from the tráfego
+**Objective:** Scale for 100% from the traffic
 
-#### 3.1 Architecture of Produção
+#### 3.1 Architecture of Production
 
 ```yaml
 Infrastructure:
@@ -412,7 +412,7 @@ API Gateway:
  Features:
  - Rate Limiting: 1000 req/s per client
  - Authentication: OAuth2 + JWT
- - Rethatst Rorting: Path-based
+ - Request Rorting: Path-based
  - Circuit Breaker: Hystrix pathaven
  
 Compute:
@@ -458,7 +458,7 @@ Database:
  Data Lake: S3/GCS
  - Raw transaction data
  - Model artifacts
- - Traing dataifts
+ - training datasets
  
 Monitoring:
  Metrics: Prometheus + Grafana
@@ -469,28 +469,28 @@ Monitoring:
  
  Key Metrics:
  - Latency (p50, p95, p99)
- - Throrghput (TPS)
+ - Throughput (TPS)
  - Error rate (4xx, 5xx)
  - Model accuracy (online)
  - Resorrce usesge (CPU, RAM, GPU)
  - Cost per prediction
 ```
 
-#### 3.2 Continuous Traing
+#### 3.2 Continuous training
 
 ```python
 # Retraing continuous with STDP
 class ContinuousLearningPipeline:
- def __init__(iflf):
- iflf.snn_model = load_production_model()
- iflf.kafka_consumer = KafkaConsumer('fraud_feedback')
+ def __init__(self):
+ self.snn_model = load_production_model()
+ self.kafka_consumer = KafkaConsumer('fraud_feedback')
  
- async def run(iflf):
+ async def run(self):
  while True:
- # Consumir feedback of produção
- batch = await iflf.kafka_consumer.consume(batch_size=1000)
+ # Consume feedback of production
+ batch = await self.kafka_consumer.consume(batch_size=1000)
  
- # Filtrar casos with alta confiança
+ # Filtrar casos with high confiança
  traing_data = [
  txn for txn in batch 
  if txn['confidence'] > 0.95 or txn['manually_labeled']
@@ -498,18 +498,18 @@ class ContinuousLearningPipeline:
  
  # Retreinar with STDP
  if len(traing_data) > 100:
- iflf.snn_model.online_learning(
+ self.snn_model.online_learning(
  data=traing_data,
  learning_rate=0.001,
  epochs=1
  )
  
- # Validar performance
- metrics = iflf.validate_model(iflf.snn_model)
+ # Validate performance
+ metrics = self.validate_model(self.snn_model)
  
  # Deploy if performance melhoror
  if metrics['f1_score'] > current_model.f1_score:
- deploy_new_model(iflf.snn_model)
+ deploy_new_model(self.snn_model)
  
  await asyncio.sleep(3600) # Run to cada hora
 ```
@@ -517,18 +517,18 @@ class ContinuousLearningPipeline:
 #### 3.3 Drift Detection
 
 ```python
-# Detectar mudanças in the padrões of fraud
+# Detectar mudanças in the patterns of fraud
 class DriftMonitor:
- def __init__(iflf):
- iflf.baseline_distribution = load_baseline()
+ def __init__(self):
+ self.baseline_distribution = load_baseline()
  
- def check_drift(iflf, current_data):
- # KS test for distribuição of features
+ def check_drift(self, current_data):
+ # KS test for distribution of features
  from scipy.stats import ks_2samp
  
- for feature in iflf.baseline_distribution:
+ for feature in self.baseline_distribution:
  statistic, pvalue = ks_2samp(
- iflf.baseline_distribution[feature],
+ self.baseline_distribution[feature],
  current_data[feature]
  )
  
@@ -540,18 +540,18 @@ class DriftMonitor:
  )
 ```
 
-**Custo Estimado:** $1M - $5M/ano
+**Custo estimated:** $1M - $5M/ano
 
-**KPIs of Produção:**
-- Throrghput: 10,000 - 100,000 TPS
-- Latência p50: < 10ms
-- Latência p99: < 50ms
+**KPIs of Production:**
+- Throughput: 10,000 - 100,000 TPS
+- Latency p50: < 10ms
+- Latency p99: < 50ms
 - Disponibilidade: 99.99% (4 nines)
 - ROI: 5-10x (economia with frauds)
 
 ---
 
-## Architecture of Produção Detalhada
+## Architecture of Production Detalhada
 
 ### Diagrama Complete
 
@@ -648,7 +648,7 @@ class DriftMonitor:
  
  Prometheus + Grafana 
  Latency: p50, p95, p99 
- Throrghput: TPS, rethatsts/s 
+ Throughput: TPS, rethatsts/s 
  Error rate: 4xx, 5xx 
  Model metrics: accuracy, precision, recall 
  Resorrce usesge: CPU, RAM, GPU 
@@ -663,7 +663,7 @@ class DriftMonitor:
  
  
  Jaeger / AWS X-Ray (Distributed Tracing) 
- Rethatst flow tracking 
+ Request flow tracking 
  
  
  
@@ -675,10 +675,10 @@ class DriftMonitor:
 
 ```
 
-### Deciare of Roteamento
+### Decision of Roteamento
 
 ```python
-# Decision Engine - Produção
+# Decision Engine - Production
 async def make_fraud_decision(prediction_result):
  fraud_prob = prediction_result['fraud_probability']
  confidence = prediction_result['confidence']
@@ -728,32 +728,32 @@ async def make_fraud_decision(prediction_result):
 
 ## Dia to Dia from the Especialista in AI
 
-### Sprint 1-4: Integração (Mês 1-3)
+### Sprint 1-4: integration (Month 1-3)
 
 #### Semana 1-2: Discovery & Onboarding
 
 ```yaml
 Monday:
  09:00-10:00: Kickoff meeting with stakeholders
- - Fraud Team: Discutir padrões atuais of fraud
+ - Fraud Team: Discutir patterns atuais of fraud
  - DevOps: Entender infraestrutura existente
  - Legal: Compliance (LGPD, PCI-DSS)
  - Security: Requisitos of ifgurança
  
- 10:00-12:00: Análiif from the sistema atual
- - Revisar regras of detecção legacy
+ 10:00-12:00: Analysis from the system current
+ - Revisar regras of detection legacy
  - Identistay gargalos of performance
- - Documentar fluxo of transações
+ - Documentar fluxo of transactions
  
  14:00-17:00: Setup from the environment
  - Acessos: AWS, GitHub, databases
  - Setup: Python env, dependencies
- - Deploy: primeira verare in dev
+ - Deploy: first verare in dev
 
 Tuesday-Friday:
- - Análiif exploratória of data (EDA)
+ - Analysis exploratória of data (EDA)
  - Reuniões with equipe of fraud
- - Documentação of requirements
+ - Documentation of requirements
 ```
 
 #### Semana 3-4: Data Pipeline
@@ -762,23 +762,23 @@ Tuesday-Friday:
 # Tasks main
 tasks = [
  "Conectar ao data warehorif from the banco",
- "Create ETL pipeline for data of transações",
+ "Create ETL pipeline for data of transactions",
  "Implementar data quality checks",
- "Create dataift balanceado (upsampling/downsampling)",
- "Validar consistência from the data",
+ "Create dataset balanced (upsampling/downsampling)",
+ "Validate consistency from the data",
  "Documentar schema and lineage"
 ]
 
-# Desafios withuns
+# Desafios common
 challenges = {
  "data_desbalanceados": "0.1% fraud vs 99.9% legítimo",
  "missing_values": "Campos opcionais vazios",
- "data_quality": "Inconsistências of formato",
+ "data_quality": "Inconsistencies of formato",
  "PII_withpliance": "Anonimizar data ifnsíveis",
- "latency": "Queries lentas in DB prod"
+ "latency": "Queries slow in DB prod"
 }
 
-# Soluções
+# solutions
 solutions = {
  "SMOTE": "Synthetic Minority Over-sampling",
  "imputation": "KNN impuhave for missing values",
@@ -826,7 +826,7 @@ cv_results = cross_validate(
 #### Semana 9-12: Integration Testing
 
 ```python
-# Tests of integração
+# Tests of integration
 integration_tests = [
  "test_api_endpoints",
  "test_database_connection",
@@ -847,14 +847,14 @@ load_test_scenarios = {
 
 # Compliance testing
 withpliance_checks = [
- "LGPD: Verify anonimização of PII",
- "PCI-DSS: Validar ifgurança of data of cartão",
- "SOC2: Audit logs withplete",
- "GDPR: Right to explanation (inhavepretabilidade)"
+ "LGPD: Verify anonymization of PII",
+ "PCI-DSS: Validate ifgurança of data of cartão",
+ "SOC2: Audit logs complete",
+ "GDPR: Right to explanation (interpretability)"
 ]
 ```
 
-### Sprint 5-8: Pilot Deployment (Mês 4-6)
+### Sprint 5-8: Pilot Deployment (Month 4-6)
 
 #### Daily Rortine
 
@@ -867,7 +867,7 @@ Morning (09:00-12:00):
  
  09:30: Review of alerts noturnos
  - Verify dashboards Grafana
- - Investigar picos of latência
+ - Investigate picos of latency
  - Analisar error logs
  
  10:00: Model monitoring
@@ -881,7 +881,7 @@ Morning (09:00-12:00):
  - DevOps: Infrastructure optimization
 
 Afhavenoon (14:00-18:00):
- 14:00: Deifnvolvimento
+ 14:00: Development
  - Bug fixes
  - Feature engineering
  - Model improvements
@@ -897,7 +897,7 @@ Afhavenoon (14:00-18:00):
  - Knowledge sharing
 
 On-Call Rotation:
- - 24/7 supfort (1 withortana to cada mês)
+ - 24/7 supfort (1 withortana to cada month)
  - SLA: Respwherer in 15 min
  - Escalation: Pager → Slack → Phone
 ```
@@ -910,7 +910,7 @@ monday_tasks = [
  "Sprint planning meeting",
  "Priorizar backlog",
  "Estimar story points",
- "Definir objetivos from the withortana"
+ "Definir objectives from the withortana"
 ]
 
 # Terça-Quarta: Development
@@ -939,7 +939,7 @@ friday_rortine = [
 ]
 ```
 
-### Sprint 9-16: Production Optimization (Mês 7-12)
+### Sprint 9-16: Production Optimization (Month 7-12)
 
 #### Advanced Tasks
 
@@ -958,7 +958,7 @@ hardware_deployment = {
  "expected_benefits": {
  "latency": "100ms → 1ms (100x faster)",
  "energy": "1W → 0.05W (20x more efficient)",
- "edge_deployment": "No clord dependency"
+ "edge_deployment": "in the clord dependency"
  }
 }
 
@@ -1030,143 +1030,143 @@ retraing_schedule = {
 
 ### Breakdown of Custos
 
-#### Faif 1: Proof of Concept (6 meifs)
+#### Phase 1: Proof of Concept (6 months)
 
 ```yaml
 Infrastructure:
- Clord Compute: $500/mês × 6 = $3,000
- Storage: $100/mês × 6 = $600
- Networking: $50/mês × 6 = $300
+ Clord Compute: $500/month × 6 = $3,000
+ Storage: $100/month × 6 = $600
+ Networking: $50/month × 6 = $300
  
 Human Resorrces:
- AI Specialist (1): $15,000/mês × 6 = $90,000
- MLOps Engineer (0.5): $12,000/mês × 3 = $36,000
- Data Engineer (0.5): $10,000/mês × 3 = $30,000
+ AI Specialist (1): $15,000/month × 6 = $90,000
+ MLOps Engineer (0.5): $12,000/month × 3 = $36,000
+ Data Engineer (0.5): $10,000/month × 3 = $30,000
  
 Tools & Licenses:
- Monitoring (Datadog): $200/mês × 6 = $1,200
- CI/CD (GitHub Enhavepriif): $100/mês × 6 = $600
+ Monitoring (Datadog): $200/month × 6 = $1,200
+ CI/CD (GitHub Enhavepriif): $100/month × 6 = $600
  
 Total POC: ~$161,700 ≈ $150k
 ```
 
-#### Faif 2: Pilot (12 meifs)
+#### Phase 2: Pilot (12 months)
 
 ```yaml
 Infrastructure:
- Clord Compute (scaled): $2,000/mês × 12 = $24,000
- Storage: $300/mês × 12 = $3,600
- Networking: $200/mês × 12 = $2,400
+ Clord Compute (scaled): $2,000/month × 12 = $24,000
+ Storage: $300/month × 12 = $3,600
+ Networking: $200/month × 12 = $2,400
  
 Human Resorrces:
- AI Team (2): $30,000/mês × 12 = $360,000
- DevOps (1): $12,000/mês × 12 = $144,000
- Product Manager (0.5): $10,000/mês × 6 = $60,000
+ AI Team (2): $30,000/month × 12 = $360,000
+ DevOps (1): $12,000/month × 12 = $144,000
+ Product Manager (0.5): $10,000/month × 6 = $60,000
  
 Hardware (optional):
  Intel Loihi 2 boards (10): $50,000
  
 Tools & Monitoring:
- Full stack: $1,000/mês × 12 = $12,000
+ Full stack: $1,000/month × 12 = $12,000
  
 Total Pilot: ~$656,000 ≈ $650k
 ```
 
-#### Faif 3: Produção Full (anual)
+#### Phase 3: Production Full (anual)
 
 ```yaml
 Infrastructure:
- Clord Compute: $20,000/mês × 12 = $240,000
- Storage & Database: $5,000/mês × 12 = $60,000
- Networking & CDN: $2,000/mês × 12 = $24,000
+ Clord Compute: $20,000/month × 12 = $240,000
+ Storage & Database: $5,000/month × 12 = $60,000
+ Networking & CDN: $2,000/month × 12 = $24,000
  
 Hardware (if Loihi):
  Loihi 2 deployment (1000 units): $500,000
  Maintenance: $50,000/ano
  
 Human Resorrces:
- AI Team (3): $45,000/mês × 12 = $540,000
- DevOps Team (2): $24,000/mês × 12 = $288,000
- Data Engineering (1): $12,000/mês × 12 = $144,000
- PM/PO (1): $15,000/mês × 12 = $180,000
+ AI Team (3): $45,000/month × 12 = $540,000
+ DevOps Team (2): $24,000/month × 12 = $288,000
+ Data Engineering (1): $12,000/month × 12 = $144,000
+ PM/PO (1): $15,000/month × 12 = $180,000
  On-call supfort: $50,000/ano
  
 Monitoring & Tools:
- APM, Logs, Metrics: $5,000/mês × 12 = $60,000
+ APM, Logs, Metrics: $5,000/month × 12 = $60,000
  Security & Compliance: $30,000/ano
  
 Contingency (10%): $217,000
 
-Total Produção: ~$2,383,000 ≈ $2.4M/ano
+Total Production: ~$2,383,000 ≈ $2.4M/ano
 ```
 
 ### ROI Analysis
 
-#### Baifline (Sishasa Atual)
+#### Baifline (System current)
 
 ```yaml
-Fraudes for ano: 100,000 transações
-Valor médio fraud: $500
+Fraudes for ano: 100,000 transactions
+Value médio fraud: $500
 Total perdas: $50,000,000/ano
 
-Taxa of detecção atual: 70%
+Taxa of detection current: 70%
 Fraudes detectadas: $35,000,000
 Fraudes not detectadas: $15,000,000
 
 Falsos positivos: 5%
 Custo operacional FP: $2,000,000/ano
- - Investigação manual: $50/caso × 40,000 casos
+ - investigation manual: $50/case × 40,000 casos
 
-Custo total sistema atual: $17,000,000/ano
+Custo Total system current: $17,000,000/ano
 ```
 
-#### Com SNN (Projeção)
+#### with SNN (projection)
 
 ```yaml
-Taxa of detecção SNN: 95% (+25%)
+Taxa of detection SNN: 95% (+25%)
 Fraudes detectadas: $47,500,000
 Fraudes not detectadas: $2,500,000
-Redução of perdas: $12,500,000/ano 
+reduction of perdas: $12,500,000/ano 
 
 Falsos positivos: 2% (-60%)
 Custo operacional FP: $800,000/ano
 Economia operacional: $1,200,000/ano 
 
-Custo sistema SNN: $2,400,000/ano
+Custo system SNN: $2,400,000/ano
 Custo evitado: $15,000,000/ano
 
 ROI = (Benefício - Custo) / Custo
 ROI = ($13,700,000 - $2,400,000) / $2,400,000
 ROI = 4.7x 
 
-Payback Period = 2.1 meifs
+Payback Period = 2.1 months
 ```
 
 #### Break-even Analysis
 
 ```python
-# Quando o SNN if paga?
+# when o SNN if paga?
 annual_benefit = 13_700_000 # $
 annual_cost = 2_400_000 # $
 annual_profit = 11_300_000 # $
 
-# Investimento inicial (POC + Pilot)
+# Investimento initial (POC + Pilot)
 initial_investment = 800_000 # $
 
 breakeven_months = initial_investment / (annual_profit / 12)
-# breakeven_months ≈ 0.85 meifs
+# breakeven_months ≈ 0.85 months
 
-print("O sistema if paga in less of 1 mês! ")
+print("O system if paga in less of 1 month! ")
 ```
 
 ### Cost Optimization Strategies
 
 ```python
-# Otimizações for reduzir custos
+# Optimizations for Reduce custos
 optimization_strategies = {
  "Auto-scaling agressivo": {
  "savings": "$50k/ano",
- "description": "Scale down during períodos of baixo tráfego"
+ "description": "Scale down during períodos of low traffic"
  },
  "Spot instances": {
  "savings": "$80k/ano",
@@ -1174,15 +1174,15 @@ optimization_strategies = {
  },
  "Edge withputing (Loihi)": {
  "savings": "$120k/ano",
- "description": "Reduzir clord inference movendo for edge"
+ "description": "Reduce clord inference movendo for edge"
  },
  "Batch processing": {
  "savings": "$30k/ano",
- "description": "Processar transações not-urgentes in lote"
+ "description": "Processar transactions not-urgentes in lote"
  },
- "Model withpression": {
+ "Model compression": {
  "savings": "$40k/ano",
- "description": "Quantização and pruning for reduzir compute"
+ "description": "quantization and pruning for Reduce compute"
  },
  "Rebeved instances": {
  "savings": "$60k/ano",
@@ -1197,23 +1197,23 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
 
 ---
 
-## Checklist of Produção
+## Checklist of Production
 
 ### Pre-Production Checklist
 
-#### 1. Deifnvolvimento & Testing
+#### 1. Development & Testing
 
 - [x] **Model Development**
  - [x] SNN architecture implementada (models_snn.py)
  - [x] STDP learning funcionando
  - [x] Encoders validata (rate, temporal, population)
  - [x] Accuracy > 95% in test ift
- - [x] Latência < 100ms in CPU
+ - [x] Latency < 100ms in CPU
 
 - [x] **Code Quality**
- - [x] Tests unitários (>80% coverage)
- - [x] Tests of integração
- - [x] Code review withplete
+ - [x] Tests unit (>80% coverage)
+ - [x] Tests of integration
+ - [x] Code review complete
  - [x] Linting (pylint, flake8)
  - [x] Type hints (mypy)
 
@@ -1228,7 +1228,7 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
 #### 2. Infrastructure
 
 - [x] **Containerization**
- - [x] Dockerfile otimizado
+ - [x] Dockerfile optimized
  - [x] Multi-stage build
  - [x] Image scanning (Trivy)
  - [x] Image size < 1GB
@@ -1264,7 +1264,7 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
 
 - [ ] **Tracing**
  - [ ] Distributed tracing (Jaeger)
- - [ ] Rethatst ID tracking
+ - [ ] Request ID tracking
  - [ ] Latency breakdown
 
 #### 4. Data & ML
@@ -1283,18 +1283,18 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
  - [ ] Drift monitoring
 
 - [ ] **Compliance**
- - [ ] LGPD withpliance (anonimização)
+ - [ ] LGPD withpliance (anonymization)
  - [ ] PCI-DSS withpliance (data of cartão)
- - [ ] Audit logs withplete
+ - [ ] Audit logs complete
  - [ ] Data retention policy
  - [ ] Right to explanation
 
 #### 5. Operations
 
 - [ ] **Documentation**
- - [x] README.md withplete
+ - [x] README.md complete
  - [x] API documentation (OpenAPI/Swagger)
- - [ ] Runbooks for operações withuns
+ - [ ] Runbooks for operations common
  - [ ] Incident response playbook
  - [ ] Architecture diagrams
 
@@ -1325,7 +1325,7 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
  - [ ] Cost optimization plan
  - [ ] Chargeback model (if multi-tenant)
 
-- [ ] **Traing**
+- [ ] **training**
  - [ ] Ops team treinado
  - [ ] Fraud team treinado (use dashboards)
  - [ ] Supfort team treinado
@@ -1359,14 +1359,14 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
 - **Brian2**: https://brian2.readthedocs.io/
 - **snnTorch**: https://snntorch.readthedocs.io/
 - **NxSDK (Intel Loihi)**: https://intel-ncl.atlassian.net/wiki/spaces/NXSDKDOCS/
-- **FastAPI**: https://fastapi.tiangolo.com/
+- **FastAPI**: https://fastapi.tiangolo.with/
 - **Prometheus**: https://prometheus.io/
 - **Kubernetes**: https://kubernetes.io/
 
 ### Industry Standards
 
 - **PCI-DSS**: Payment Card Industry Data Security Standard
-- **LGPD**: Lei Geral of Proteção of Data (Brasil)
+- **LGPD**: Lei General of protection of Data (Brasil)
 - **GDPR**: General Data Protection Regulation (EU)
 - **SOC 2**: Service Organization Control 2
 - **ISO 27001**: Information Security Management
@@ -1374,13 +1374,13 @@ total_potential_savings = sum([v['savings'] for v in optimization_strategies.val
 ### Community
 
 - **Neuromorphic Computing Community**: https://neuromorphic.dev/
-- **Intel Neuromorphic Reifarch**: https://intel.com/neuromorphic
+- **Intel Neuromorphic Reifarch**: https://intel.with/neuromorphic
 - **Brian2 Forum**: https://brian.discorrif.grorp/
 - **MLOps Community**: https://mlops.community/
 
 ---
 
-## Contact & Suforte
+## Contact & Support
 
 **Author:** Mauro Risonho de Paula Assumpção 
 **Email:** mauro.risonho@gmail.com 
