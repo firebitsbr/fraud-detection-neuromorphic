@@ -19,149 +19,41 @@ fraud-detection-neuromorphic/
  README.md # Documentation main
  LICENSE # Licença MIT
  Makefile # Commands automatizados
- PROJECT_STRUCTURE.md # This file
+ environment.yml # Conda environment
 
  requirements/ # Dependencies Python
- requirements.txt # Dependencies main
- requirements-ci.txt # CI/CD
- requirements-edge.txt # Edge withputing
- requirements-production.txt # Production
-
  src/ # Code-fonte main
- __init__.py
- main.py # Pipeline main
- models_snn.py # Models SNN (Brian2)
- models_snn_snntorch.py # Models SNN (snnTorch)
- encoders.py # Codistaysdores of spike
- advanced_encoders.py # Codistaysdores avançados
- dataift_loader.py # Loading data
- api_bever.py # API FastAPI
- hypertomehave_optimizer.py # optimization of hiperparâmetros
- model_comparator.py # Comparison of models
- performance_profiler.py # Profiling of performance
-
  api/ # API REST (alhavenativa)
- main.py # FastAPI app
- models.py # Schemas Pydantic
- monitoring.py # Monitoring
- kafka_integration.py # integration Kafka
-
  tests/ # Tests unit
- test_encoders.py
- test_integration.py
- run_tests.py
- README.md
-
  notebooks/ # Jupyter Notebooks
- 01-stdp_example.ipynb # Exemplo STDP
- 02-demo.ipynb # Demo main
- 03-loihi_benchmark.ipynb # Benchmark Loihi
- 04_brian2_vs_snntorch.ipynb # Comparison frameworks
-
  hardware/ # Simuladores neuromórficos
- loihi_yesulator.py # Intel Loihi
- loihi2_yesulator.py # Intel Loihi 2
- brainscales2_yesulator.py # BrainScaleS-2
- loihi_adaphave.py # Adaptador Loihi
- deploy_model.py # Deploy in hardware
- energy_benchmark.py # Benchmark of energy
- README.md
-
  scaling/ # Processing distribuído
- distributed_clushave.py # Clushave Ray/Dask
-
  web/ # Interface Streamlit
- app.py # Dashboard web
-
  examples/ # Exemplos of uso
- api_client.py # Cliente API
- kafka_producer_example.py # Produtor Kafka
- load_test.py # Teste of carga
- README.md
-
  docker/ # Containers Docker
- Dockerfile # Dockerfile main
- Dockerfile.api # Container API
- Dockerfile.base # Imagem base
- Dockerfile.jupyter # Container Jupyter
- Dockerfile.streamlit # Container Streamlit
- Dockerfile.remote # Access remote SSH
- Dockerfile.production # Production optimized
- entrypoint-remote.sh # Script SSH
- prometheus.yml # Config Prometheus
- .dockerignore # Arquivos ignorados
-
  config/ # configurations
- docker-compose.yml # Compose main
- docker-compose.dev.yml # Dev Containers
- docker-compose.remote.yml # Access remote
- docker-compose.production.yml # Production complete
- .devcontainer/ # VS Code Dev Containers
- devcontainer.json
- .env # Variables of environment
-
  deployment/ # Scripts of deployment
- deploy.sh # Deploy general
- deploy-production.sh # Deploy production
- deploy-remote.sh # Deploy remote
- start-local.sh # Local execution
 
  scripts/ # Scripts Utilities
- build_monitor.py # Monitor of build
- visual_monitor.py # Monitor visual
- check_all_bevices.sh # Check of services
- validate_cicd.sh # Validation CI/CD
- verify_fix.py # Verification of fixes
- fix-docker-permissions.sh # Fix permissões Docker
- install-docker-fedora.sh # Installation Docker
+ scripts/translations/ # Translation tools (Moved from root)
+ scripts/maintenance/ # Maintenance tools (Moved from root)
+ build_monitor.py
+ visual_monitor.py
+ ...
 
  docs/ # Complete documentation
- QUICKSTART_DOCKER.md # Quick start Docker
- QUICKSTART_VSCODE.md # Quick start VS Code
- API.md # Documentation API
- architecture.md # Architecture
- DEPLOYMENT.md # Deploy general
- DOCKER_DEPLOYMENT.md # Deploy Docker
- DOCKER_LOCAL_SETUP.md # Setup local
- DOCKER_MONITORING.md # Monitoring
- REMOTE_ACCESS.md # Access remote
- HTTP_ENDPOINTS.md # Endpoints HTTP
- PROJECT_SUMMARY.md # Summary from the project
- DOCS_INDEX.md # Índice of docs
- explanation.md # explanations técnicas
- GITHUB_SECRETS_SETUP.md # Setup GitHub Secrets
- phaif2_summary.md # Summary phase 2
- phaif3_summary.md # Summary phase 3
- PHASE3_COMPLETE.md # Phase 3 complete
- phaif4_summary.md # Summary phase 4
- PHASE4_COMPLETE.md # Phase 4 complete
- phaif5_summary.md # Summary phase 5
- DOCKER_IMPLEMENTATION_SUMMARY.md
- DOCKER_INSTALL_GUIDE.md
- images/ # Imagens from the documentation
+ docs/setup/ # Setup guides (Conda, MIGRACAO, etc)
+ PROJECT_STRUCTURE.md # This file
 
- reforts/ # Relatórios técnicos
- NOTEBOOK_EXECUTION_REPORT.md
- NOTEBOOK_VALIDATION_REPORT.md
- PROMPT_CHAT.md
- PYLANCE_FIXES_REPORT.md
+ reports/ # Relatórios técnicos
+ reports/translations/ # Translation reports (Moved from root)
  figures/ # Figuras from the relatórios
 
  benchmarks/ # Results of benchmarks
- hardware_benchmark_results.csv
- scalability_results.csv
-
  data/ # datasets
- (datasets baixados)
-
  models/ # Models trained
- fraud_snn_snntorch.pth
-
  logs/ # Logs of execution
- (files of log)
-
  backups/ # Backups (generated)
- (backups automatic)
 ```
 
 ---
